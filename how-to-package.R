@@ -1,4 +1,9 @@
 
+# Load packages
+library(devtools)
+document()
+install()
+
 # README ------------------------------------------------------------------
 
 knitr::knit("README.Rmd")

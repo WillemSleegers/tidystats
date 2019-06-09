@@ -1,13 +1,13 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/WillemSleegers/tidystats/master/docs/img/hex.png" width = 150 align = center alt="tidystats logo"/>
+  <img src="https://github.com/WillemSleegers/tidystats/blob/master/docs/img/hex.png" width = 150 align = center alt="tidystats logo"/>
 </p>
 
 tidystats
 ---------------
 
-**Authors:** [Willem Sleegers](http://willemsleegers.com/)
+**Author:** [Willem Sleegers](http://willemsleegers.com/)
 **License:** [MIT](https://opensource.org/licenses/MIT)
 
 `tidystats` is an R package to easily create a text file containing the output of 
