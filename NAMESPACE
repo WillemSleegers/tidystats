@@ -2,6 +2,7 @@
 
 S3method(add_stats,default)
 S3method(tidy_stats,htest)
+S3method(tidy_stats,lm)
 export(add_stats)
 export(tidy_stats)
 export(write_stats)

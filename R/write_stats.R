@@ -19,5 +19,5 @@ write_stats <- function(results, path) {
   }
 
   # Write to disk
-  jsonlite::write_json(results, path = path)
+  jsonlite::write_json(results, path = path, pretty = TRUE)
 }

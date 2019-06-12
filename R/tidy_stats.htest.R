@@ -26,10 +26,21 @@ tidy_stats.htest <- function(model) {
     hybridPars$Emin = readr::parse_number(stringr::str_extract(model$method,
       "exp=[0-9+]"))
 
-    output$hybridPars <- hybridPars
+    output$hybrid_parameters <- hybridPars
   } else if (stringr::str_detect(model$method, "Two Sample t-test")) {
     # (use trimws to remove the leading space from a Two Sample t-test)
     output$method <- trimws(model$method)
+    
+    if (stringr::str_detect(model$method, "Welch")) {
+      output$var_equal <- FALSE
+    } else {
+      output$var_equal <- TRUE
+    }
+    
+  } else if (stringr::str_detect(model$method, 
+    "One-way analysis of means (not assuming equal variances)")) {
+    output$method <- "One-way analysis of means"
+    output$var_equal <- FALSE
   } else {
     output$method <- model$method
   }
@@ -37,27 +48,41 @@ tidy_stats.htest <- function(model) {
   # Extract statistics
   statistics <- list()
 
-  if ("statistic" %in% names(model)) {
-    statistics[names(model$statistic)] <- model$statistic
+  # Estimate
+  # Special case: Calculate estimate for Two Sample t-tests
+    if (length(model$estimate) > 1) {
+      statistics$estimate <- model$estimate[[1]] - model$estimate[[2]]
+    } else {
+      statistics$estimate <- model$estimate[[1]]
+    }
+  
+  # SE
+  if (!is.null(model$stderr)) {
+    statistics$SE <- model$stderr
   }
-  if ("parameter" %in% names(model)) {
-    statistics[names(model$parameter)] <- model$parameter
+  
+  # Test statistic
+  statistic <- list()
+  statistic$name <- names(model$statistic)
+  statistic$value <- model$statistic[[1]]
+  statistics$statistic <- statistic
+  
+  # Degrees of freedom
+  # Special case: One-way analysis of means without equal variance assumption
+  if (length(model$parameter) > 1) {
+    dfs <- list()
+    dfs$numerator_df <- model$parameter[[1]]
+    dfs$denominator_df <- model$parameter[[2]]
+    statistics$dfs <- dfs
+  } else {
+    statistics$df <- model$parameter[[1]]
   }
-  if ("p.value" %in% names(model)) {
-    statistics$p.value <- model$p.value
-  }
-  if ("estimate" %in% names(model)) {
-    statistics[names(model$estimate)] <- model$estimate
-  }
-  if ("cor" %in% names(model)) {
-    statistics[names(model$cor)] <- model$cor
-  }
-  if ("stderr" %in% names(model)) {
-    statistics$stderr <- model$stderr
-  }
-
+  
+  # p-value
+  statistics$p <- model$p.value
+  
   # Extract confidence intervals
-  if ("conf.int" %in% names(model)) {
+  if (!is.null(model$conf.int)) {
     CIs <- list()
 
     CIs$level <- attr(model$conf.int, "conf.level")
@@ -69,9 +94,9 @@ tidy_stats.htest <- function(model) {
 
   # Add statistics to output
   output$statistics <- statistics
-
+  
   # Add alternative hypothesis information
-  if ("alternative" %in% names(model)) {
+  if (!is.null(model$alternative)) {
     alternative <- list()
 
     alternative$direction <- model$alternative
@@ -80,9 +105,9 @@ tidy_stats.htest <- function(model) {
     # Add alternative hypothesis information to output
     output$alternative <- alternative
   }
-
+  
   # Add data information
-  output$data.name <- model$data.name
+  output$data_name <- model$data.name
 
   # Add package information
   package <- list()

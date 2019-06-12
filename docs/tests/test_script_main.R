@@ -40,8 +40,8 @@ tidy_stats(t_test_paired)
 
 # Add stats
 results <- results %>%
-  add_stats(t_test_one_sample, identifier = "t_test_one_sample") %>%
-  add_stats(t_test_two_sample) %>%
+  add_stats(t_test_one_sample, notes = "A one-sample t-test on call_parent") %>%
+  add_stats(t_test_two_sample, notes = "Main hypothesis test") %>%
   add_stats(t_test_welch) %>%
   add_stats(t_test_paired)
 
@@ -187,6 +187,50 @@ results <- results %>%
   add_stats(fisher_test_simulated_p) %>%
   add_stats(fisher_test_hybrid)
 
+# Oneway test
+# Run oneway tests
+oneway_test <- oneway.test(extra ~ group, data = sleep)
+oneway_test_equal_var <- oneway.test(extra ~ group, data = sleep, 
+  var.equal = TRUE)
+
+oneway_test
+oneway_test_equal_var
+
+# Tidy stats
+tidy_stats(oneway_test)
+tidy_stats(oneway_test_equal_var)
+
+# Add stats
+results <- results %>%
+  add_stats(oneway_test) %>%
+  add_stats(oneway_test_equal_var)
+
+# Analysis: lm() ----------------------------------------------------------
+
+# Run regressions
+lm_simple <- lm(call_parent ~ condition, data = cox)
+lm_multiple <- lm(call_parent ~ condition + anxiety, data = cox)
+lm_interaction <- lm(call_parent ~ condition * anxiety, data = cox)
+
+summary(lm_simple)
+summary(lm_multiple)
+summary(lm_interaction)
+
+# Tidy results
+tidy_stats(lm_simple)
+tidy_stats(lm_multiple)
+tidy_stats(lm_interaction)
+
+# Add stats
+results <- results %>%
+  add_stats(lm_simple) %>%
+  add_stats(lm_multiple) %>%
+  add_stats(lm_interaction)
+
+# write_stats() -----------------------------------------------------------
+
+write_stats(results, path = "docs/tests/test_results.json")
+
 # Analysis: aov() ---------------------------------------------------------
 
 # Convert condition and sex in the cox data frame to a factor
@@ -250,27 +294,6 @@ results <- results %>%
   add_stats(aov_mixed) %>%
   add_stats(aov_ancova_with_within)
 
-# Analysis: lm() ----------------------------------------------------------
-
-# Run regressions
-lm_simple <- lm(call_parent ~ condition, data = cox)
-lm_multiple <- lm(call_parent ~ condition + anxiety, data = cox)
-lm_interaction <- lm(call_parent ~ condition * anxiety, data = cox)
-
-summary(lm_simple)
-summary(lm_multiple)
-summary(lm_interaction)
-
-# Tidy results
-tidy_stats(lm_simple)
-tidy_stats(lm_multiple)
-tidy_stats(lm_interaction)
-
-# Add stats
-results <- results %>%
-  add_stats(lm_simple) %>%
-  add_stats(lm_multiple) %>%
-  add_stats(lm_interaction)
 
 # Analysis: glm() ---------------------------------------------------------
 
@@ -581,9 +604,6 @@ cox %>%
 results_data <- stats_list_to_df(results)
 View(results_data)
 
-# write_stats() -----------------------------------------------------------
-
-write_stats(results, path = "docs/tests/test_results.json")
 
 # In progress -------------------------------------------------------------
 
