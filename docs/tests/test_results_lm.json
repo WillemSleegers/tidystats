@@ -1,0 +1,182 @@
+{
+  "lm_simple": {
+    "method": ["Linear regression"],
+    "coefficients": [
+      {
+        "name": ["(Intercept)"],
+        "statistics": {
+          "estimate": [24.39],
+          "SE": [1.5021],
+          "statistic": {
+            "name": ["t"],
+            "value": [16.2376]
+          },
+          "df": [198],
+          "p": [2.9867e-38]
+        }
+      },
+      {
+        "name": ["conditionmortality salience"],
+        "statistics": {
+          "estimate": [2.77],
+          "SE": [2.1243],
+          "statistic": {
+            "name": ["t"],
+            "value": [1.304]
+          },
+          "df": [198],
+          "p": [0.1938]
+        }
+      }
+    ],
+    "model": {
+      "statistics": {
+        "r_squared": [0.0085],
+        "adjusted_r_squared": [0.0035],
+        "statistic": {
+          "name": ["F"],
+          "value": [1.7004]
+        },
+        "dfs": {
+          "numerator_df": [1],
+          "denominator_df": [198]
+        },
+        "p": [0.1938],
+        "sigma": [15.0207]
+      }
+    }
+  },
+  "lm_multiple": {
+    "method": ["Linear regression"],
+    "coefficients": [
+      {
+        "name": ["(Intercept)"],
+        "statistics": {
+          "estimate": [38.3071],
+          "SE": [7.1923],
+          "statistic": {
+            "name": ["t"],
+            "value": [5.3261]
+          },
+          "df": [197],
+          "p": [2.7245e-07]
+        }
+      },
+      {
+        "name": ["conditionmortality salience"],
+        "statistics": {
+          "estimate": [2.3965],
+          "SE": [2.1172],
+          "statistic": {
+            "name": ["t"],
+            "value": [1.1319]
+          },
+          "df": [197],
+          "p": [0.2591]
+        }
+      },
+      {
+        "name": ["anxiety"],
+        "statistics": {
+          "estimate": [-4.269],
+          "SE": [2.1583],
+          "statistic": {
+            "name": ["t"],
+            "value": [-1.978]
+          },
+          "df": [197],
+          "p": [0.0493]
+        }
+      }
+    ],
+    "model": {
+      "statistics": {
+        "r_squared": [0.0278],
+        "adjusted_r_squared": [0.018],
+        "statistic": {
+          "name": ["F"],
+          "value": [2.8189]
+        },
+        "dfs": {
+          "numerator_df": [2],
+          "denominator_df": [197]
+        },
+        "p": [0.0621],
+        "sigma": [14.9115]
+      }
+    }
+  },
+  "lm_interaction": {
+    "method": ["Linear regression"],
+    "coefficients": [
+      {
+        "name": ["(Intercept)"],
+        "statistics": {
+          "estimate": [29.4467],
+          "SE": [9.9311],
+          "statistic": {
+            "name": ["t"],
+            "value": [2.9651]
+          },
+          "df": [196],
+          "p": [0.0034]
+        }
+      },
+      {
+        "name": ["conditionmortality salience"],
+        "statistics": {
+          "estimate": [20.2946],
+          "SE": [14.0194],
+          "statistic": {
+            "name": ["t"],
+            "value": [1.4476]
+          },
+          "df": [196],
+          "p": [0.1493]
+        }
+      },
+      {
+        "name": ["anxiety"],
+        "statistics": {
+          "estimate": [-1.5511],
+          "SE": [3.0119],
+          "statistic": {
+            "name": ["t"],
+            "value": [-0.515]
+          },
+          "df": [196],
+          "p": [0.6071]
+        }
+      },
+      {
+        "name": ["conditionmortality salience:anxiety"],
+        "statistics": {
+          "estimate": [-5.5667],
+          "SE": [4.3105],
+          "statistic": {
+            "name": ["t"],
+            "value": [-1.2914]
+          },
+          "df": [196],
+          "p": [0.1981]
+        }
+      }
+    ],
+    "model": {
+      "statistics": {
+        "r_squared": [0.036],
+        "adjusted_r_squared": [0.0213],
+        "statistic": {
+          "name": ["F"],
+          "value": [2.4416]
+        },
+        "dfs": {
+          "numerator_df": [3],
+          "denominator_df": [196]
+        },
+        "p": [0.0655],
+        "sigma": [14.8863]
+      }
+    }
+  }
+}

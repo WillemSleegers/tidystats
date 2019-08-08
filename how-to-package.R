@@ -32,3 +32,7 @@ devtools::check_win_release()
 
 # Build tar
 devtools::build()
+
+# Add a data set ----------------------------------------------------------
+
+usethis::use_data(quote_source, overwrite = TRUE)

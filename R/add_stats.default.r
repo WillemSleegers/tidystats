@@ -26,7 +26,7 @@ add_stats.default <- function(results, output, identifier = NULL, notes = NULL,
   if (is.null(identifier)) {
 
     if (deparse(substitute(output)) == ".") {
-      identifier <- paste0("M", formatC(length(results)+1, width = "1",
+      identifier <- paste0("M", formatC(length(results) + 1, width = "1",
         format = "d"))
     } else {
       identifier <- deparse(substitute(output))

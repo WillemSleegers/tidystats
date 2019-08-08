@@ -6,45 +6,51 @@ tidy_stats.htest <- function(model) {
   output <- list()
 
   # Extract method
+  method <- model$method
+  
   # Extract number of simulations from Fisher's test based on simulated p-values
-  if (stringr::str_detect(model$method, "simulated p-value")) {
+  if (stringr::str_detect(method, "simulated p-value")) {
     output$method <- "Fisher's Exact Test for Count Data with simulated p-value"
 
-    output$sim <- as.numeric(stringr::str_extract(model$method,
+    output$sim <- as.numeric(stringr::str_extract(method, 
       "[0-9](e\\+)?([0-9].)?"))
   # Extract parameters from Fisher's test using sym. chisq
-  } else if (stringr::str_detect(model$method, "hybrid using asym")) {
+  } else if (stringr::str_detect(method, "hybrid using asym")) {
     output$method <- paste("Fisher's Exact Test for Count Data",
       "hybrid using asym.chisq")
 
     hybridPars <- list()
 
-    hybridPars$expect = readr::parse_number(stringr::str_extract(model$method,
+    hybridPars$expect = readr::parse_number(stringr::str_extract(method,
       "exp=[0-9+]"))
-    hybridPars$percent = readr::parse_number(stringr::str_extract(model$method,
+    hybridPars$percent = readr::parse_number(stringr::str_extract(method,
       "perc=[0-9+]"))
-    hybridPars$Emin = readr::parse_number(stringr::str_extract(model$method,
+    hybridPars$Emin = readr::parse_number(stringr::str_extract(method,
       "exp=[0-9+]"))
 
     output$hybrid_parameters <- hybridPars
-  } else if (stringr::str_detect(model$method, "Two Sample t-test")) {
+  } else if (stringr::str_detect(method, "Two Sample t-test")) {
     # (use trimws to remove the leading space from a Two Sample t-test)
-    output$method <- trimws(model$method)
+    method <- trimws(method)
+    output$method <- method
     
-    if (stringr::str_detect(model$method, "Welch")) {
+    if (stringr::str_detect(method, "Welch")) {
       output$var_equal <- FALSE
     } else {
       output$var_equal <- TRUE
     }
     
-  } else if (stringr::str_detect(model$method, 
-    "One-way analysis of means (not assuming equal variances)")) {
+  } else if (stringr::str_detect(method, 
+      "One-way analysis of means \\(not assuming equal variances\\)")) {
     output$method <- "One-way analysis of means"
     output$var_equal <- FALSE
   } else {
-    output$method <- model$method
+    output$method <- method
   }
 
+  # Extract DV and IV information
+  output$data_name <- model$data.name
+  
   # Extract statistics
   statistics <- list()
 
@@ -62,10 +68,12 @@ tidy_stats.htest <- function(model) {
   }
   
   # Test statistic
-  statistic <- list()
-  statistic$name <- names(model$statistic)
-  statistic$value <- model$statistic[[1]]
-  statistics$statistic <- statistic
+  if (!is.null(model$statistic)) {
+    statistic <- list()
+    statistic$name <- names(model$statistic)
+    statistic$value <- model$statistic[[1]]
+    statistics$statistic <- statistic
+  }
   
   # Degrees of freedom
   # Special case: One-way analysis of means without equal variance assumption
@@ -105,9 +113,6 @@ tidy_stats.htest <- function(model) {
     # Add alternative hypothesis information to output
     output$alternative <- alternative
   }
-  
-  # Add data information
-  output$data_name <- model$data.name
 
   # Add package information
   package <- list()

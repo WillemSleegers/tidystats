@@ -2,9 +2,10 @@
 
 ## Changes
 * Added the *args* argument to `add_stats()` and `tidy_stats()`. This argument allows you to request a different set of statistics, if the particular statistical function allows it.
+* Changed the sorting done in describe_data(). The function now returns a data frame sorted by the order in which the columns were entered as arguments.
 
-## Features
-* Added support for the afex package.
+## New
+* Added an example dataset called 'quote_source' containing data of a replication of Lorge & Curtiss (1936) that was part of the Many Labs project (Klein et al., 2014)
 
 # tidystats 0.3
 

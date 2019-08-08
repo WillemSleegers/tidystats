@@ -16,6 +16,60 @@ library(tidyverse)
 # Create empty tidy stats data frame
 results <- list()
 
+# Descriptives ------------------------------------------------------------
+
+# Single variable descriptives 
+single_var <- describe_data(cox, call_parent)
+single_var
+
+temp <- tidy_stats(single_var)
+
+# Multiple variables descriptives
+multiple_vars <- describe_data(cox, call_parent, call_friend)
+multiple_vars
+
+temp <- tidy_stats(multiple_vars)
+
+# Single variable with group descriptives
+single_var_w_group <- cox %>%
+  group_by(condition) %>%
+  describe_data(call_parent)
+single_var_w_group
+
+temp <- tidy_stats(single_var_w_group)
+
+# Single variable with multiple group descriptives
+single_var_w_groups <- cox %>%
+  group_by(condition, sex) %>%
+  describe_data(call_parent)
+single_var_w_groups
+
+temp <- tidy_stats(single_var_w_groups)
+
+# Multiple variables with multiple group descriptives
+multiple_var_w_groups <- cox %>%
+  group_by(condition, sex) %>%
+  describe_data(call_parent, call_friend)
+multiple_var_w_groups
+
+temp <- tidy_stats(multiple_var_w_groups)
+
+# Subset of descriptives
+means_and_SDs <- single_var_w_groups %>%
+  select(variable, condition, sex, M, SD)
+means_and_SDs
+
+temp <- tidy_stats(means_and_SDs)
+
+# Add stats
+results <- results %>%
+  add_stats(single_var) %>%
+  add_stats(multiple_vars) %>%
+  add_stats(single_var_w_group) %>%
+  add_stats(single_var_w_groups) %>%
+  add_stats(multiple_var_w_groups) %>%
+  add_stats(means_and_SDs)
+
 # Analysis: htest ---------------------------------------------------------
 
 # Run t-tests
@@ -33,10 +87,10 @@ t_test_welch
 t_test_paired
 
 # Tidy results
-tidy_stats(t_test_one_sample)
-tidy_stats(t_test_two_sample)
-tidy_stats(t_test_welch)
-tidy_stats(t_test_paired)
+temp <- tidy_stats(t_test_one_sample)
+temp <- tidy_stats(t_test_two_sample)
+temp <- tidy_stats(t_test_welch)
+temp <- tidy_stats(t_test_paired)
 
 # Add stats
 results <- results %>%
@@ -44,6 +98,9 @@ results <- results %>%
   add_stats(t_test_two_sample, notes = "Main hypothesis test") %>%
   add_stats(t_test_welch) %>%
   add_stats(t_test_paired)
+
+# Extra t-tests
+t_test_extra <- t.test(1:10, y = c(7:20))
 
 # Run correlations
 correlation_pearson <- cor.test(cox$call_parent, cox$anxiety,
@@ -227,10 +284,6 @@ results <- results %>%
   add_stats(lm_multiple) %>%
   add_stats(lm_interaction)
 
-# write_stats() -----------------------------------------------------------
-
-write_stats(results, path = "docs/tests/test_results.json")
-
 # Analysis: aov() ---------------------------------------------------------
 
 # Convert condition and sex in the cox data frame to a factor
@@ -294,6 +347,13 @@ results <- results %>%
   add_stats(aov_mixed) %>%
   add_stats(aov_ancova_with_within)
 
+# stats_list_to_data_frame ------------------------------------------------
+
+df <- tidy_stats_to_data_frame(results)
+
+# write_stats() -----------------------------------------------------------
+
+write_stats(results, path = "docs/tests/test.json")
 
 # Analysis: glm() ---------------------------------------------------------
 
@@ -864,3 +924,52 @@ pcor_correlation
 inspect(results)
 inspect(lm_)
 inspect(results, glm_gamma)
+
+
+
+
+cox
+
+cox <- mutate(cox, MS = if_else(condition == "mortality salience", 1, 0))
+
+lm_simple <- lm(call_parent ~ condition, data = cox)
+summary(lm_simple)
+
+library(psych)
+
+model <- lm(PA2 ~ factor(Film), data = affect)
+summary(model)
+
+
+
+
+
+# Test updating -----------------------------------------------------------
+
+# Create two empty tidystats lists
+results_wrong <- list()
+results_good <- list()
+
+# Perform a wrond and incorrect test
+main_test_wrong <- t.test(extra ~ group, data = sleep)
+main_test_good <- t.test(extra ~ group, data = sleep, paired = TRUE)
+
+# Add analysis to the first tidystats list
+results_wrong <- add_stats(results_wrong, main_test_wrong, 
+  identifier = "main_test")
+
+# And to the second, making sure the identifier is the same between the lists
+results_good <- add_stats(results_good, main_test_good, 
+  identifier = "main_test")
+
+# Save the results
+write_stats(results_wrong, "docs/tests/results_wrong.json")
+write_stats(results_good, "docs/tests/results_good.json")
+
+
+temp <- jsonlite::read_json("docs/tests/test_correct.json")
+temp2 <- jsonlite::fromJSON("docs/tests/test_correct.json")
+
+
+jsonlite::fromJSON("docs/tests/test_correct.json") %>%
+  map_df(as.data.frame)
