@@ -5,28 +5,44 @@
 \title{add_stats default function}
 \usage{
 \method{add_stats}{default}(results, output, identifier = NULL,
-  notes = NULL, class = NULL, args = NULL)
+  type = NULL, preregistered = NULL, notes = NULL, class = NULL,
+  args = NULL)
 }
 \arguments{
-\item{results}{A tidy stats list.}
+\item{results}{A tidystats list.}
 
 \item{output}{Output of a statistical test.}
 
 \item{identifier}{A character string identifying the model. Automatically
 created if not provided.}
 
-\item{notes}{A character string to add additional information. Some
-statistical tests produce notes information, which will be overwritten if
-notes are provided.}
+\item{type}{A character string specifying the type of analysis: primary, 
+secondary, or exploratory.}
 
-\item{class}{A character string to indicate which function was used to
-produce the output. See 'Details' for a list of supported functions.}
+\item{preregistered}{A boolean specifying whether the analysis was 
+preregistered or not.}
 
-\item{args}{An optional list of additional arguments. Can be used to specify
-how model results should be summarized.}
+\item{notes}{A character string specifying additional information.}
 }
 \description{
-\code{add_stats.default} is the default add_stats function, which takes the
-output of a statistical test, organizes the output, and adds it to a tidystats
-list.
+\code{add_stats.default} is the default add_stats() function. It takes the
+output of a statistical test, organizes the output, and adds it to a 
+tidystats list. While adding the output, additional information about the 
+test can be supplied, including the type of test (primary, secondary, or 
+exploratory), whether the test was preregistered, and additional notes.
+}
+\details{
+Please note that not all statistical tests are currently supported. See 
+'Details' below for a list of supported statistical tests.
+
+
+Currently supported functions:
+- t.test()
+- cor.test()
+- chisq.test()
+- wilcox.test()
+- fisher.test()
+- oneway.test()
+- aov()
+- lm()
 }

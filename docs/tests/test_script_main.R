@@ -16,6 +16,19 @@ library(tidyverse)
 # Create empty tidy stats data frame
 results <- list()
 
+# add_stats() -------------------------------------------------------------
+
+# Perform a simple analysis
+sleep_test <- t.test(extra ~ group, data = sleep)
+sleep_test
+
+# Add the stats
+add_stats(results, sleep_test)
+
+# Add the stats and specify additional information
+add_stats(results, sleep_test, type = "primary", preregistered = TRUE, 
+  notes = "This is me testing add_stats()")
+
 # Descriptives ------------------------------------------------------------
 
 # Single variable descriptives 
@@ -205,7 +218,7 @@ MP6 <- rbind(
   c(0,1,1,1,2,7,3),
   c(1,1,2,0,0,0,1),
   c(0,1,1,1,1,0,0)
-  )
+)
 
 # Run Fisher tests
 fisher_test <- fisher.test(TeaTasting)
@@ -284,13 +297,15 @@ results <- results %>%
   add_stats(lm_multiple) %>%
   add_stats(lm_interaction)
 
+
+
 # Analysis: aov() ---------------------------------------------------------
 
 # Convert condition and sex in the cox data frame to a factor
 cox <- mutate(cox,
   condition = factor(condition),
   sex = factor(sex)
-  )
+)
 
 # Prepare data for repeated measures ANOVAs
 cox_long <- cox %>%
@@ -797,7 +812,7 @@ output <- bind_rows(r, n) %>%
   mutate(
     term_nr = 1:nrow(.),
     method = "rcorr() correlation {Hmisc}"
-    ) %>%
+  ) %>%
   select(term, term_nr, statistic, value, method)
 
 output <- output %>%
@@ -812,8 +827,8 @@ if (TRUE) {
 
 output <- select(output, -term_nr, -statistic, -method)
 output <- select(output, c("var",
-                           names(sort(colSums(is.na(select(output, -var))),
-                                      decreasing = T))))
+  names(sort(colSums(is.na(select(output, -var))),
+    decreasing = T))))
 
 # Analysis: anova()
 anova(model3_1)
@@ -830,14 +845,14 @@ anova(model5_1, model5_2)
 data <- iris
 
 model7_1 <- summary(manova(cbind(Sepal.Length, Petal.Length) ~ Species,
-                           data = iris), test = "Roy")
+  data = iris), test = "Roy")
 model7_2 <- summary(manova(cbind(Sepal.Length, Petal.Length) ~ Species,
-                           data = iris), test = "")
+  data = iris), test = "")
 model7_3 <- summary(manova(cbind(Sepal.Length, Petal.Length) ~ Species,
-                           data = iris), test = "Roy")
+  data = iris), test = "Roy")
 
 model7_4 <- summary(manova(cbind(Sepal.Length, Petal.Length) ~ Species *
-                             Petal.Width , data = iris), test = "Roy")
+    Petal.Width , data = iris), test = "Roy")
 
 # tidyversity
 # Install and load tidyversity
@@ -869,16 +884,16 @@ polcom %>%
 polcom %>%
   dplyr::mutate(polarize = abs(therm_1 - therm_2)) %>%
   tidy_regression(polarize ~ news_1 + ambiv_sexism_1, type = "quasipoisson",
-                  robust = TRUE) %>%
+    robust = TRUE) %>%
   tidy_summary()
 
 # ANOVA
 polcom %>%
   dplyr::mutate(sex = ifelse(sex == 1, "Male", "Female"),
-                vote_choice = dplyr::case_when(
-                  vote_2016_choice == 1 ~ "Clinton",
-                  vote_2016_choice == 2 ~ "Trump",
-                  TRUE ~ "Other")) %>%
+    vote_choice = dplyr::case_when(
+      vote_2016_choice == 1 ~ "Clinton",
+      vote_2016_choice == 2 ~ "Trump",
+      TRUE ~ "Other")) %>%
   tidy_anova(pp_party ~ sex * vote_choice) %>%
   tidy_summary()
 
@@ -890,12 +905,12 @@ polcom %>%
 # Structural equation modeling (SEM)
 polcom %>%
   dplyr::mutate(therm_2 = 10 - therm_2 / 10,
-                therm_1 = therm_1 / 10) %>%
+    therm_1 = therm_1 / 10) %>%
   tidy_sem(news =~ news_1 + news_2 + news_3 + news_4 + news_5 + news_6,
-           ambiv_sexism =~ ambiv_sexism_1 + ambiv_sexism_2 + ambiv_sexism_3 +
-             ambiv_sexism_4 + ambiv_sexism_5 + ambiv_sexism_6,
-           partisan =~ a*therm_1 + a*therm_2,
-           ambiv_sexism ~ age + hhinc + edu + news + partisan) %>%
+    ambiv_sexism =~ ambiv_sexism_1 + ambiv_sexism_2 + ambiv_sexism_3 +
+      ambiv_sexism_4 + ambiv_sexism_5 + ambiv_sexism_6,
+    partisan =~ a*therm_1 + a*therm_2,
+    ambiv_sexism ~ age + hhinc + edu + news + partisan) %>%
   tidy_summary()
 
 # Cronbach's alpha
@@ -973,3 +988,43 @@ temp2 <- jsonlite::fromJSON("docs/tests/test_correct.json")
 
 jsonlite::fromJSON("docs/tests/test_correct.json") %>%
   map_df(as.data.frame)
+
+# Covariance matrix
+
+vcov(lm_multiple)
+
+summary(lm_simple)
+vcov(lm_simple, complete = F)
+
+summary_simple <- summary(lm_simple)
+
+cox %>%
+  mutate(
+    condition2 = if_else(condition == "mortality salience", 1, 0),
+    intercept = mean(call_parent)) %>%
+  select(call_parent, intercept, condition2) %>%
+  cov()
+
+summary_simple$cov
+
+
+summary_simple$cov.unscaled * summary_simple$sigma^2
+tidy_vcov <- vcov(lm_interaction) %>%
+  as_tibble(rownames = "coefficient1") %>%
+  gather("coefficient2", "value", -coefficient1) %>%
+  mutate(
+    statistic = if_else(coefficient1 == coefficient2, "variance", 
+      "covariance"),
+    coefficient2 = if_else(statistic == "variance", NA_character_, 
+      coefficient2)
+  ) %>%
+  unite(term, coefficient1, coefficient2, sep = " * ") %>%
+  mutate(term = str_remove(term, " \\* NA"))
+
+tidy_vcov %>%
+  separate(term, into = c("coefficient1", "coefficient2"), sep = " \\* ", 
+    fill = "right") %>%
+  select(-statistic) %>%
+  mutate(coefficient2 = if_else(is.na(coefficient2), coefficient1, 
+    coefficient2)) %>%
+  spread(coefficient2, value)

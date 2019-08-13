@@ -16,7 +16,7 @@
 #' functions of the \strong{moments} package (Komsta & Novomestky, 2015).
 #'
 #' @examples
-#' # Load the dplyr package for access to the %>% operator
+#' # Load the dplyr package for access to the %>% operator and group_by()
 #' library(dplyr)
 #'
 #' # 1 variable

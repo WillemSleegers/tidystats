@@ -2,41 +2,45 @@
 % Please edit documentation in R/add_stats.R
 \name{add_stats}
 \alias{add_stats}
-\title{Add statistical output to a tidy stats list}
+\title{Add statistical output to a tidystats list}
 \usage{
-add_stats(results, output, identifier = NULL, notes = NULL,
-  class = NULL, args = NULL)
+add_stats(results, output, identifier = NULL, type = NULL,
+  preregistered = NULL, notes = NULL)
 }
 \arguments{
 \item{results}{A tidystats list.}
 
-\item{output}{Output of a statistical test or a data frame. If a data frame
-is provided, it must already be in a tidy format.}
+\item{output}{Output of a statistical test.}
 
 \item{identifier}{A character string identifying the model. Automatically
 created if not provided.}
 
-\item{notes}{A character string to add additional information. Some
-statistical tests produce notes information, which will be overwritten if
-notes are provided.}
+\item{type}{A character string specifying the type of analysis: primary, 
+secondary, or exploratory.}
 
-\item{class}{A character string to indicate which function was used to
-produce the output. See 'Details' for a list of supported functions.}
+\item{preregistered}{A boolean specifying whether the analysis was 
+preregistered or not.}
 
-\item{args}{An optional list of additional arguments. Can be used to specify
-how model results should be summarized.}
+\item{notes}{A character string specifying additional information.}
 }
 \description{
-\code{add_stats} adds output to a tidystats list. It can take either the
-output of a statistical test as input or a data frame. See Details for more
-information on adding data frames.
+\code{add_stats} is used to add the output of a statistical test to a 
+tidystats list. While adding the output, additional information about the 
+test can be supplied, including the type of test (primary, secondary, or 
+exploratory), whether the test was preregistered, and additional notes.
 }
 \details{
-Some statistical functions produce unidentifiable output, which
-means \code{tidystats} cannot figure out how to parse the data. To add these
-results, you can provide a class via the class argument or you can manually
-tidy the results yourself and add the resulting data frame via add_stats().
+Please note that not all statistical tests are currently supported. See 
+'Details' below for a list of supported statistical tests.
 
-A list of supported classes are:
-- \code{confint}
+
+Currently supported functions:
+- t.test()
+- cor.test()
+- chisq.test()
+- wilcox.test()
+- fisher.test()
+- oneway.test()
+- aov()
+- lm()
 }
