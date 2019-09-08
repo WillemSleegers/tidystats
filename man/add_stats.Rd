@@ -26,21 +26,49 @@ preregistered or not.}
 \description{
 \code{add_stats} is used to add the output of a statistical test to a 
 tidystats list. While adding the output, additional information about the 
-test can be supplied, including the type of test (primary, secondary, or 
-exploratory), whether the test was preregistered, and additional notes.
+test can be added, including the type of test (primary, secondary, or 
+exploratory), whether the test was preregistered, and additional notes. 
+Please note that not all statistical tests are supported. See 'Details' below
+for a list of supported statistical tests.
 }
 \details{
-Please note that not all statistical tests are currently supported. See 
-'Details' below for a list of supported statistical tests.
-
-
 Currently supported functions:
-- t.test()
-- cor.test()
-- chisq.test()
-- wilcox.test()
-- fisher.test()
-- oneway.test()
-- aov()
-- lm()
+\itemize{
+  \item \code{t.test()}
+  \item \code{cor.test()}
+  \item \code{chisq.test()}
+  \item \code{wilcox.test()}
+  \item \code{fisher.test()}
+  \item \code{oneway.test()}
+  \item \code{aov()}
+  \item \code{lm()}
+}
+}
+\examples{
+# Load dplyr for access to the piping operator
+library(dplyr)
+
+# Conduct statistical tests
+# t-test:
+sleep_test <- t.test(extra ~ group, data = sleep, paired = TRUE)
+
+# lm:
+ctl <- c(4.17,5.58,5.18,6.11,4.50,4.61,5.17,4.53,5.33,5.14)
+trt <- c(4.81,4.17,4.41,3.59,5.87,3.83,6.03,4.89,4.32,4.69)
+group <- gl(2, 10, 20, labels = c("Ctl","Trt"))
+weight <- c(ctl, trt)
+lm_D9 <- lm(weight ~ group)
+
+# ANOVA:
+npk_aov <- aov(yield ~ block + N*P*K, npk)
+
+#' # Create an empty list
+results <- list()
+
+# Add output to the results list
+results <- results \%>\%
+  add_stats(sleep_test) \%>\%
+  add_stats(lm_D9, type = "primary", preregistered = TRUE) \%>\%
+  add_stats(npk_aov, notes = "An ANOVA example")
+
 }

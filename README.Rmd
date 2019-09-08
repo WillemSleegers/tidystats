@@ -10,8 +10,8 @@ tidystats
 **Author:** [Willem Sleegers](http://willemsleegers.com/)
 **License:** [MIT](https://opensource.org/licenses/MIT)
 
-`tidystats` is an R package to easily create a text file containing the output of 
-statistical models. The goal of this package is to help researchers accompany 
+`tidystats` is an R package to easily create a text file containing the output 
+of statistical models. The goal of this package is to help researchers accompany 
 their manuscript with an organized data file of statistical results in order to 
 greatly improve the reliability of meta-research and to reduce statistical 
 reporting errors.
@@ -51,7 +51,8 @@ The main function is `add_stats()`. The function has 2 necessary arguments:
 - `output`: The output of a statistical test you want to add to the list (e.g., 
 the output of `t.test()` or `lm()`)
 
-Optionally you can also add an identifier and additional notes using the `identifier` and `notes` arguments.
+Optionally you can also add an identifier and additional notes using the 
+`identifier` and `notes` arguments.
 
 The `identifier` is used to identify the model 
 (e.g., 'weight_height_correlation'). If you do not provide one, one is 

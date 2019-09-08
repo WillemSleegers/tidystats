@@ -159,7 +159,7 @@
     "method": ["ANOVA"],
     "groups": [
       {
-        "name": ["Error: ID"],
+        "name": ["ID"],
         "coefficients": [
           {
             "name": ["Residuals"],
@@ -172,7 +172,7 @@
         ]
       },
       {
-        "name": ["Error: ID:affect"],
+        "name": ["ID:affect"],
         "coefficients": [
           {
             "name": ["affect"],
@@ -203,7 +203,7 @@
     "method": ["ANOVA"],
     "groups": [
       {
-        "name": ["Error: ID"],
+        "name": ["ID"],
         "coefficients": [
           {
             "name": ["condition"],
@@ -229,7 +229,7 @@
         ]
       },
       {
-        "name": ["Error: ID:affect"],
+        "name": ["ID:affect"],
         "coefficients": [
           {
             "name": ["affect"],
@@ -273,7 +273,7 @@
     "method": ["ANOVA"],
     "groups": [
       {
-        "name": ["Error: ID"],
+        "name": ["ID"],
         "coefficients": [
           {
             "name": ["anxiety"],
@@ -299,7 +299,7 @@
         ]
       },
       {
-        "name": ["Error: ID:affect"],
+        "name": ["ID:affect"],
         "coefficients": [
           {
             "name": ["affect"],

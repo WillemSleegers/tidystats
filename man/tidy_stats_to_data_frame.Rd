@@ -2,13 +2,42 @@
 % Please edit documentation in R/tidy_stats_to_data_frame.R
 \name{tidy_stats_to_data_frame}
 \alias{tidy_stats_to_data_frame}
-\title{Convert a tidy stats list to a data frame}
+\title{Convert a tidystats list to a data frame}
 \usage{
 tidy_stats_to_data_frame(x)
 }
 \arguments{
-\item{results}{A tidy stats list.}
+\item{x}{A tidystats list.}
 }
 \description{
-\code{tidy_stats_to_data_frame} converts a tidy stats list to a data frame.
+\code{tidy_stats_to_data_frame} converts a tidystats list to a data frame, 
+which can then be used to easily extract specific statistics using standard
+subsetting functions (e.g., \code{dplyr::filter}).
+}
+\examples{
+# Load dplyr for access to the piping operator
+library(dplyr)
+  
+# Conduct statistical tests
+t_test_1 <- t.test(1:10, y = c(7:20))
+t_test_2 <- t.test(1:10, y = c(7:20, 200))
+t_test_3 <- t.test(extra ~ group, data = sleep)
+
+#' # Create an empty list
+results <- list()
+
+# Add tests to the empty list
+results <- results \%>\%
+  add_stats(t_test_1) \%>\%
+  add_stats(t_test_2) \%>\%
+  add_stats(t_test_3)
+  
+# Convert the list to a data frame
+results_df <- tidy_stats_to_data_frame(results)
+
+# Select all the p-values
+results_df \%>\%
+  filter(statistic == "p") \%>\%
+  pull(value)
+
 }

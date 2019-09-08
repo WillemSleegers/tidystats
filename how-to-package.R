@@ -20,12 +20,21 @@ test_file("tests/testthat/test-psych.R")
 
 # CRAN submission ---------------------------------------------------------
 
+# Check dependencies
+usethis::use_package("dplyr")
+usethis::use_package("tidyr")
+usethis::use_package("purrr")
+usethis::use_package("stringr")
+usethis::use_package("readr")
+usethis::use_package("tibble")
+usethis::use_package("jsonlite")
+
 # Check examples
 devtools::run_examples()
 
 # Check package
 devtools::check()
-devtools::check(args = c('--run-donttest'))
+devtools::check(args = c('--run-donttest')) # Without examples test
 
 # run R CMD check on CRAN’s servers
 devtools::check_win_release()

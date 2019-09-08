@@ -26,8 +26,8 @@ sleep_test
 add_stats(results, sleep_test)
 
 # Add the stats and specify additional information
-add_stats(results, sleep_test, type = "primary", preregistered = TRUE, 
-  notes = "This is me testing add_stats()")
+results <- add_stats(results, sleep_test, type = "primary", 
+  preregistered = TRUE, notes = "This is me testing add_stats()")
 
 # Descriptives ------------------------------------------------------------
 
@@ -35,19 +35,41 @@ add_stats(results, sleep_test, type = "primary", preregistered = TRUE,
 single_var <- describe_data(cox, call_parent)
 single_var
 
+single_var_cat <- count_data(cox, condition)
+single_var_cat
+
 temp <- tidy_stats(single_var)
+temp <- tidy_stats(single_var_cat)
+
+cox %>%
+  group_by(condition) %>%
+  count(sex)
+
+cox %>%
+  group_by(condition, sex) %>%
+  describe_data(call_parent)
+
 
 # Multiple variables descriptives
 multiple_vars <- describe_data(cox, call_parent, call_friend)
 multiple_vars
 
+multiple_vars_cat <- count_data(cox, condition, sex)
+multiple_vars_cat
+
 temp <- tidy_stats(multiple_vars)
+temp <- tidy_stats(multiple_vars_cat)
 
 # Single variable with group descriptives
 single_var_w_group <- cox %>%
   group_by(condition) %>%
   describe_data(call_parent)
 single_var_w_group
+
+single_var_w_group_cat <- cox %>%
+  group_by(condition) %>%
+  count_data(sex)
+single_var_w_group_cat
 
 temp <- tidy_stats(single_var_w_group)
 
@@ -63,6 +85,11 @@ temp <- tidy_stats(single_var_w_groups)
 multiple_var_w_groups <- cox %>%
   group_by(condition, sex) %>%
   describe_data(call_parent, call_friend)
+multiple_var_w_groups
+
+multiple_var_w_groups <- cox %>%
+  group_by(condition) %>%
+  describe_data(sex)
 multiple_var_w_groups
 
 temp <- tidy_stats(multiple_var_w_groups)
@@ -297,8 +324,6 @@ results <- results %>%
   add_stats(lm_multiple) %>%
   add_stats(lm_interaction)
 
-
-
 # Analysis: aov() ---------------------------------------------------------
 
 # Convert condition and sex in the cox data frame to a factor
@@ -368,7 +393,7 @@ df <- tidy_stats_to_data_frame(results)
 
 # write_stats() -----------------------------------------------------------
 
-write_stats(results, path = "docs/tests/test.json")
+write_stats(results, path = "docs/tests/test_lm.json")
 
 # Analysis: glm() ---------------------------------------------------------
 
@@ -966,15 +991,15 @@ results_wrong <- list()
 results_good <- list()
 
 # Perform a wrond and incorrect test
-main_test_wrong <- t.test(extra ~ group, data = sleep)
-main_test_good <- t.test(extra ~ group, data = sleep, paired = TRUE)
+t_test_wrong <- t.test(extra ~ group, data = sleep)
+t_test_good <- t.test(extra ~ group, data = sleep, paired = TRUE)
 
 # Add analysis to the first tidystats list
-results_wrong <- add_stats(results_wrong, main_test_wrong, 
+results_wrong <- add_stats(results_wrong, t_test_wrong, 
   identifier = "main_test")
 
 # And to the second, making sure the identifier is the same between the lists
-results_good <- add_stats(results_good, main_test_good, 
+results_good <- add_stats(results_good, t_test_good, 
   identifier = "main_test")
 
 # Save the results
@@ -1028,3 +1053,46 @@ tidy_vcov %>%
   mutate(coefficient2 = if_else(is.na(coefficient2), coefficient1, 
     coefficient2)) %>%
   spread(coefficient2, value)
+
+
+
+lm_interaction <- lm(call_parent ~ condition, data = cox)
+summary(lm_interaction)
+
+data <- cox %>%
+  mutate(condition2 = if_else(condition == "mortality salience", 1, 0)) %>%
+  select(call_parent, condition2)
+  
+
+cov(data)
+
+b <- 0.6959799 / 0.25125628
+a <- mean(data$call_parent) - b * mean(data$condition2)
+
+a
+b
+
+#
+# 1. Generate some data.
+#
+n <- 10        # Data set size
+p <- 2         # Number of regressors
+set.seed(17)
+z <- matrix(rnorm(n*(p+1)), nrow=n, dimnames=list(NULL, paste0("x", 1:(p+1))))
+y <- z[, p+1]
+x <- z[, -(p+1), drop=FALSE]; 
+#
+# 2. Find the OLS coefficients from the covariances only.
+#
+a <- cov(x)
+b <- cov(x,y)
+beta.hat <- solve(a, b)[, 1]  # Coefficients from the covariance matrix
+
+lm(x3 ~ x1 + x2, data = data.frame(z))
+
+#
+# 2a. Find the intercept from the means and coefficients.
+#
+y.bar <- mean(y)
+x.bar <- colMeans(x)
+intercept <- y.bar - x.bar %*% beta.hat  

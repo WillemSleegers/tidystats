@@ -4,7 +4,7 @@
 \alias{describe_data}
 \title{Calculate common descriptive statistics}
 \usage{
-describe_data(data, ..., na.rm = TRUE)
+describe_data(data, ..., na.rm = TRUE, short = FALSE)
 }
 \arguments{
 \item{data}{A data frame.}
@@ -13,47 +13,45 @@ describe_data(data, ..., na.rm = TRUE)
 separated by commas.}
 
 \item{na.rm}{Logical. Should missing values (including NaN) be excluded in
-calculating the descriptives?}
+calculating the descriptives? The default is TRUE.}
+
+\item{short}{Logical. Should only a subset of descriptives be reported? If 
+set to TRUE, only the N, M, and SD will be returned. The default is FALSE.}
 }
 \description{
 \code{describe_data} returns a set of common descriptive statistics
 (e.g., n, mean, sd) for numeric variables.
 }
 \details{
-The data set can be grouped using \strong{dplyr}'s \code{group_by}
-so that descriptives will be calculated for each group level.
+The data can be grouped using \code{dplyr::group_by} so that 
+descriptives will be calculated for each group level.
 
 Skew and kurtosis are based on the \code{skewness} and \code{kurtosis}
-functions of the \strong{moments} package (Komsta & Novomestky, 2015).
+functions of the \code{moments} package (Komsta & Novomestky, 2015).
+
+Percentages are calculated based on the total of non-missing observations. 
+When na.rm is set to FALSE, percentages are based on the total of missing and
+non-missing observations.
 }
 \examples{
 # Load the dplyr package for access to the \%>\% operator and group_by()
 library(dplyr)
 
-# 1 variable
-describe_data(cox, avoidance)
+# Inspect descriptives of the response column from the 'quote_source' data
+# frame included in tidystats
+describe_data(quote_source, response)
 
-# 1 variable, 1 group
-cox \%>\%
-  group_by(condition) \%>\%
-  describe_data(avoidance)
+# Repeat the former, now for each level of the source column
+quote_source \%>\%
+  group_by(source) \%>\%
+  describe_data(response)
+  
+# Only inspect the total N, mean, and standard deviation
+quote_source \%>\%
+  group_by(source) \%>\%
+  describe_data(response, short = TRUE)
 
-# 2 variables
-describe_data(cox, avoidance, anxiety)
-
-# 2 variables, 1 group
-cox \%>\%
-  group_by(condition) \%>\%
-  describe_data(avoidance, anxiety)
-
-# 1 variable, 2 groups
-cox \%>\%
-  group_by(condition, sex) \%>\%
-  describe_data(avoidance)
-
-# 2 variables, 2 groups
-cox \%>\%
-  group_by(condition, sex) \%>\%
-  describe_data(avoidance, anxiety)
+# Inspect multiple columns
+describe_data(quote_source, response, age)
 
 }
