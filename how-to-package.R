@@ -1,33 +1,16 @@
 
-# Load packages
-library(devtools)
-document()
-install()
+# Update ------------------------------------------------------------------
+
+# Document and install the package
+devtools::document()
+devtools::install()
 
 # README ------------------------------------------------------------------
 
+# Knit the README.Rmd file to a README.md file for Github
 knitr::knit("README.Rmd")
 
-# Testing -----------------------------------------------------------------
-
-# Test all tests
-devtools::test()
-
-# Test specific tests
-library(testthat)
-test_results <- read_stats("tests/testthat/test_results.csv")
-test_file("tests/testthat/test-psych.R")
-
 # CRAN submission ---------------------------------------------------------
-
-# Check dependencies
-usethis::use_package("dplyr")
-usethis::use_package("tidyr")
-usethis::use_package("purrr")
-usethis::use_package("stringr")
-usethis::use_package("readr")
-usethis::use_package("tibble")
-usethis::use_package("jsonlite")
 
 # Check examples
 devtools::run_examples()
@@ -45,3 +28,13 @@ devtools::build()
 # Add a data set ----------------------------------------------------------
 
 usethis::use_data(quote_source, overwrite = TRUE)
+
+# Testing -----------------------------------------------------------------
+
+# Test all tests
+devtools::test()
+
+# Test specific tests
+library(testthat)
+test_results <- read_stats("tests/testthat/test_results.csv")
+test_file("tests/testthat/test-psych.R")
