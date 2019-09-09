@@ -41,6 +41,8 @@
 #'   group_by(source) %>%
 #'   describe_data(response, short = TRUE)
 #'
+#' @importFrom dplyr %>%
+#'
 #' @export
 describe_data <- function(data, column, na.rm = TRUE, short = FALSE) {
 
