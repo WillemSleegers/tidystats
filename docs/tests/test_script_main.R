@@ -35,41 +35,13 @@ results <- add_stats(results, sleep_test, type = "primary",
 single_var <- describe_data(cox, call_parent)
 single_var
 
-single_var_cat <- count_data(cox, condition)
-single_var_cat
-
 temp <- tidy_stats(single_var)
-temp <- tidy_stats(single_var_cat)
-
-cox %>%
-  group_by(condition) %>%
-  count(sex)
-
-cox %>%
-  group_by(condition, sex) %>%
-  describe_data(call_parent)
-
-
-# Multiple variables descriptives
-multiple_vars <- describe_data(cox, call_parent, call_friend)
-multiple_vars
-
-multiple_vars_cat <- count_data(cox, condition, sex)
-multiple_vars_cat
-
-temp <- tidy_stats(multiple_vars)
-temp <- tidy_stats(multiple_vars_cat)
 
 # Single variable with group descriptives
 single_var_w_group <- cox %>%
   group_by(condition) %>%
   describe_data(call_parent)
 single_var_w_group
-
-single_var_w_group_cat <- cox %>%
-  group_by(condition) %>%
-  count_data(sex)
-single_var_w_group_cat
 
 temp <- tidy_stats(single_var_w_group)
 
@@ -81,34 +53,29 @@ single_var_w_groups
 
 temp <- tidy_stats(single_var_w_groups)
 
-# Multiple variables with multiple group descriptives
-multiple_var_w_groups <- cox %>%
-  group_by(condition, sex) %>%
-  describe_data(call_parent, call_friend)
-multiple_var_w_groups
-
-multiple_var_w_groups <- cox %>%
-  group_by(condition) %>%
-  describe_data(sex)
-multiple_var_w_groups
-
-temp <- tidy_stats(multiple_var_w_groups)
-
 # Subset of descriptives
-means_and_SDs <- single_var_w_groups %>%
-  select(variable, condition, sex, M, SD)
-means_and_SDs
+single_var_subset <- describe_data(cox, call_parent, short = TRUE)
+single_var_subset
 
-temp <- tidy_stats(means_and_SDs)
+temp <- tidy_stats(single_var_subset)
 
 # Add stats
 results <- results %>%
   add_stats(single_var) %>%
-  add_stats(multiple_vars) %>%
   add_stats(single_var_w_group) %>%
   add_stats(single_var_w_groups) %>%
-  add_stats(multiple_var_w_groups) %>%
-  add_stats(means_and_SDs)
+  add_stats(single_var_subset)
+
+# Quote source examples
+response <- describe_data(quote_source, response)
+
+response_by_condition <- quote_source %>%
+  group_by(source) %>%
+  describe_data(response)
+
+results <- results %>%
+  add_stats(response) %>%
+  add_stats(response_by_condition)
 
 # Analysis: htest ---------------------------------------------------------
 
@@ -393,7 +360,7 @@ df <- tidy_stats_to_data_frame(results)
 
 # write_stats() -----------------------------------------------------------
 
-write_stats(results, path = "docs/tests/test_lm.json")
+write_stats(results, path = "docs/tests/test_descriptives.json")
 
 # Analysis: glm() ---------------------------------------------------------
 

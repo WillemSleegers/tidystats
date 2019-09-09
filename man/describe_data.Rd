@@ -4,13 +4,12 @@
 \alias{describe_data}
 \title{Calculate common descriptive statistics}
 \usage{
-describe_data(data, ..., na.rm = TRUE, short = FALSE)
+describe_data(data, column, na.rm = TRUE, short = FALSE)
 }
 \arguments{
 \item{data}{A data frame.}
 
-\item{...}{One or more unquoted (numerical) column names from the data frame,
-separated by commas.}
+\item{column}{An unquoted (numerical) column name from the data frame.}
 
 \item{na.rm}{Logical. Should missing values (including NaN) be excluded in
 calculating the descriptives? The default is TRUE.}
@@ -25,6 +24,9 @@ set to TRUE, only the N, M, and SD will be returned. The default is FALSE.}
 \details{
 The data can be grouped using \code{dplyr::group_by} so that 
 descriptives will be calculated for each group level.
+
+When na.rm is set to FALSE, a percentage column will be added to the output
+that contains the percentage of non-missing data.
 
 Skew and kurtosis are based on the \code{skewness} and \code{kurtosis}
 functions of the \code{moments} package (Komsta & Novomestky, 2015).
@@ -50,8 +52,5 @@ quote_source \%>\%
 quote_source \%>\%
   group_by(source) \%>\%
   describe_data(response, short = TRUE)
-
-# Inspect multiple columns
-describe_data(quote_source, response, age)
 
 }

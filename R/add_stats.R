@@ -119,3 +119,5 @@ add_stats.default <- function(results, output, identifier = NULL, type = NULL,
   # Return the new results list
   return(results)
 }
+
+#TODO Check for duplicate identifiers

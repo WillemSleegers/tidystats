@@ -4,8 +4,7 @@
 #' (e.g., n, mean, sd) for numeric variables.
 #'
 #' @param data A data frame.
-#' @param ... One or more unquoted (numerical) column names from the data frame,
-#' separated by commas.
+#' @param column An unquoted (numerical) column name from the data frame.
 #' @param na.rm Logical. Should missing values (including NaN) be excluded in
 #' calculating the descriptives? The default is TRUE.
 #' @param short Logical. Should only a subset of descriptives be reported? If 
@@ -13,6 +12,9 @@
 #'
 #' @details The data can be grouped using \code{dplyr::group_by} so that 
 #' descriptives will be calculated for each group level.
+#' 
+#' When na.rm is set to FALSE, a percentage column will be added to the output
+#' that contains the percentage of non-missing data.
 #'
 #' Skew and kurtosis are based on the \code{skewness} and \code{kurtosis}
 #' functions of the \code{moments} package (Komsta & Novomestky, 2015).
@@ -39,100 +41,82 @@
 #'   group_by(source) %>%
 #'   describe_data(response, short = TRUE)
 #'
-#' # Inspect multiple columns
-#' describe_data(quote_source, response, age)
-#'
 #' @export
-describe_data <- function(data, ..., na.rm = TRUE, short = FALSE) {
+describe_data <- function(data, column, na.rm = TRUE, short = FALSE) {
 
-  # Get variables
-  vars <- dplyr::quos(...)
-  var_names <- unlist(purrr::map(vars, dplyr::quo_name))
-
-  # Throw an error if no vars are supplied
-  if (length(vars) == 0) {
-    stop("No variables found")
+  # Check if 'data' is actually a data frame
+  if (!"data.frame" %in% class(data)) {
+    stop("'data' is not a data frame.")
+  }
+  
+  # Check if the user specified a column
+  if (missing(column)) {
+    stop("No column found; please provide one.")
   }
 
-  # Check whether all variables are numeric
-  if (sum(!sapply(data[, var_names],
-      class) %in% c("numeric", "integer")) > 0) {
-    stop("Not all variables are numeric.")
+  # Unquote the column
+  var <- dplyr::enquo(column)
+  
+  # Check if the column is a column in 'data'
+  if (!dplyr::quo_name(var) %in% names(data)) {
+    stop("Column not found in the data frame.")
+  }
+  
+  # Check whether the values in var are numeric
+  if (sum(!class(dplyr::pull(data, !!var)) %in% c("numeric", "integer")) > 0) {
+    stop("The column does not contain numeric values.")
   }
 
   # Get grouping
   grouping <- dplyr::group_vars(data)
 
-  # Select only the variables and grouping columns from the data
-  data <- dplyr::select(data, dplyr::group_vars(data), !!! vars)
-
-  # If there are multiple variables, restructure them into 'variable' and their
-  # values into 'value'
-  # Else add a 'variable' column and rename the one variable to 'value'
-  if (length(vars) > 1) {
-    data <- tidyr::gather(data, "variable", "value", !!! vars)
-  } else {
-    data$variable <- dplyr::quo_name(vars[[1]])
-    data <- data %>%
-      dplyr::ungroup() %>% # Temporary fix for a bug
-      dplyr::rename_at(vars(!!! vars), ~"value")
-  }
-
-  # Re-group the data frame
-  data <- data %>%
-    dplyr::ungroup() %>%
-    dplyr::group_by_at(vars(variable, grouping))
-
+  # Select only the variable and grouping columns from the data
+  data <- dplyr::select(data, dplyr::group_vars(data), !!var)
+  
+  # Add a column called 'variable'
+  data$variable <- dplyr::quo_name(var)
+  
   # Calculate descriptives
   output <- data %>%
     dplyr::summarize(
-      missing  = sum(is.na(value)),
+      missing  = sum(is.na(!!var)),
       N        = dplyr::n() - missing,
-      M        = mean(value, na.rm = na.rm),
-      SD       = sd(value, na.rm = na.rm),
+      M        = mean(!!var, na.rm = na.rm),
+      SD       = sd(!!var, na.rm = na.rm),
       SE       = SD / sqrt(N),
-      min      = min(value, na.rm = na.rm),
-      max      = max(value, na.rm = na.rm),
-      range    = diff(range(value, na.rm = na.rm)),
-      median   = median(value, na.rm = na.rm),
-      mode     = unique(value)[which.max(tabulate(match(value,
-                   unique(value))))],
-      skew     = (sum((value - mean(value, na.rm = na.rm))^3, na.rm = na.rm) /
-                  N) / (sum((value - mean(value, na.rm = na.rm))^2,
+      min      = min(!!var, na.rm = na.rm),
+      max      = max(!!var, na.rm = na.rm),
+      range    = diff(range(!!var, na.rm = na.rm)),
+      median   = median(!!var, na.rm = na.rm),
+      mode     = unique(!!var)[which.max(tabulate(match(!!var,
+                   unique(!!var))))],
+      skew     = (sum((!!var - mean(!!var, na.rm = na.rm))^3, na.rm = na.rm) /
+                  N) / (sum((!!var - mean(!!var, na.rm = na.rm))^2,
                   na.rm = na.rm) / N)^(3 / 2),
-      kurtosis = N * sum((value - mean(value, na.rm = na.rm))^4, na.rm = na.rm)/
-                  (sum((value - mean(value, na.rm = na.rm))^2, na.rm = na.rm)^2)
+      kurtosis = N * sum((!!var - mean(!!var, na.rm = na.rm))^4, na.rm = na.rm)/
+                  (sum((!!var - mean(!!var, na.rm = na.rm))^2, na.rm = na.rm)^2)
     )
-
-  # Add percentage
+  
+  output <- dplyr::mutate(output, variable = dplyr::quo_name(var))
+  
+  # Add percentage if na.rm = FALSE (if na.rm = TRUE it would always be 100)
   # Note that depending on the value of na.rm, we either ignore or include the
   # number of missing observations
-  output <- dplyr::group_by(output, variable)
-  if (na.rm) {
-    output <- dplyr::mutate(output, pct = N / sum(N) * 100)
-  } else {
+  if (!na.rm) {
     output <- dplyr::mutate(output, pct = N / sum(N + missing) * 100)
   }
-    
+  
   # Reorder the columns and return only a subset if short was set to TRUE
   if (short) {
     output <- dplyr::select(output, variable, grouping, N, M, SD)
   } else {
-    output <- dplyr::select(output, variable, grouping, missing, N, pct, 
-      dplyr::everything())
+    output <- dplyr::select_at(output, dplyr::vars(dplyr::contains("variable"), 
+      dplyr::contains("missing"), dplyr::starts_with("N"), 
+      dplyr::contains("pct"), dplyr::everything()))
   }
   
   # Group the output by the original grouping columns
-  output <- dplyr::group_by_at(output, vars(grouping))
-  
-  # Sort the variable column by the argument order of the variables, rather than
-  # alphabetically
-  if (length(var_names) > 1) {
-    output <- output %>%
-      dplyr::mutate(variable = factor(variable, levels = var_names)) %>%
-      dplyr::arrange(variable) %>%
-      dplyr::mutate(variable = as.character(variable))
-  }
+  output <- dplyr::group_by_at(output, dplyr::vars(grouping))
   
   # Add a tidystats class so we can use the tidy_stats() function to parse the
   # the output
