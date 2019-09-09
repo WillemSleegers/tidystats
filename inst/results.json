@@ -24,7 +24,8 @@
     "package": {
       "name": "stats",
       "version": "3.6.1"
-    }
+    },
+    "type": "primary"
   },
   "lm_D9": {
     "method": "Linear regression",
@@ -71,7 +72,8 @@
         "p": 0.249,
         "sigma": 0.6964
       }
-    }
+    },
+    "preregistered": "no"
   },
   "npk_aov": {
     "method": "ANOVA",
@@ -175,6 +177,7 @@
           "df": 12
         }
       }
-    ]
+    ],
+    "notes": "An ANOVA example"
   }
 }
