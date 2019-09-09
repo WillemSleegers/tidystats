@@ -7,7 +7,7 @@
 #' @param file Path to the tidy stats data file
 #'
 #' @examples
-#' results <- read_stats(system.file("results.csv", package = "tidystats"))
+#' results <- read_stats(system.file("results.json", package = "tidystats"))
 #'
 #' @export
 read_stats <- function(file) {

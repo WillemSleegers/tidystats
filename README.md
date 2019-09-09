@@ -1,7 +1,7 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 <p align="center">
-  <img src="https://github.com/WillemSleegers/tidystats/blob/master/docs/img/hex.png" width = 150 align = center alt="tidystats logo"/>
+  <img src="https://github.com/WillemSleegers/tidystats/blob/master/inst/hex.png" width = 150 align = center alt="tidystats logo"/>
 </p>
 
 tidystats
@@ -16,10 +16,10 @@ and saves these in a file. This file can then be shared with others or used to
 report the statistics in a manuscript.
 
 Please see below for instructions on how to install and use this package. 
-<Warning>**Do note that the package is currently in development. This means the 
-package may contain bugs and is subject to significant changes.**</Warning> 
-If you find any bugs or if you have any feedback, please let me know by creating
-an issue here on Github (it's really easy to do!).
+**Do note that the package is currently in development. This means the 
+package may contain bugs and is subject to significant changes.** If you find 
+any bugs or if you have any feedback, please let me know by creating an issue 
+here on Github (it's really easy to do!).
 
 ### Installation
 
@@ -36,7 +36,7 @@ install_github("willemsleegers/tidystats")
 
 Load the package and start by creating an empty list to store the results of 
 statistical models in. You can name the list whatever you want (in the 
-example below I create an empty list called 'results').
+example below I create an empty list called `results`).
 
 
 ```r
@@ -116,7 +116,7 @@ write_stats(results, "results.json")
 ```
 
 This results in a .json file that contains all the statistics from the three 
-models. If you want to see what this file looks like, you can download it [here](https://github.com/WillemSleegers/tidystats/blob/master/docs/tests/example.json).
+models. If you want to see what this file looks like, you can inspect it [here](https://github.com/WillemSleegers/tidystats/blob/master/docs/tests/example.json).
 
 ## Reporting statistics
 
@@ -127,7 +127,7 @@ Word add-in that is currently in development.
 
 An additional usage of the tidystats-produced file is that it can be read back
 into R and converted into a data frame. This enables researchers to then 
-easily extract specific statistics to perform additional analyses with 
+extract specific statistics to perform additional analyses with 
 (e.g., meta-analyses). Below is an example.
 
 
@@ -247,10 +247,7 @@ With the current example, this results in the following data frame:
 </tbody>
 </table>
 
-Together with some additional information (hopefully provided by the researcher)
-this could then be used to perform a p-curve analysis.
-
 ## More resources
 
-For more information on this package, see the `tidystats` project page on my 
-website.
+For more information on this package, see the `tidystats` project page on [my 
+website](https://www.willemsleegers.com/tidystats.html).

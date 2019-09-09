@@ -1,8 +1,15 @@
 # tidystats 0.4
 
+## Breaking changes
+* `tidystats` has been completely redesigned in terms of how statistics are combined together. While previously the output of statistical models was converted to a tidy data frame, the output is now converted to a list, with an entirely different structure. The reason for this change is that lists are more machine-readable, enabling more interesting features down the line. It is still possible to convert the list of statistics to a single data frame with a new function called `tidy_stats_to_data_frame()`.
+* The significant changes made to `tidystats` has resulted in the loss of some previously supported statistical functions. For a list of currently supported statistical functions, see the help document of `add_stats()` or the README.
+* All `report` functions have been removed for now. These may return (if I get the impression these are liked) but for now I am focusing my development time on creating a Word add-in that will enable researchers to use a `tidystats`-produced file for reporting statistics in Microsoft Word.
+* `describe_data()` no longer accepts multiple column names. The goal of the function is now to calculate the descriptives of a single column (which can still be grouped to calculate the descriptives for each group level).
+* `count_data()` has been removed.
+
 ## Changes
-* Added the *args* argument to `add_stats()` and `tidy_stats()`. This argument allows you to request a different set of statistics, if the particular statistical function allows it.
-* Changed the sorting done in describe_data(). The function now returns a data frame sorted by the order in which the columns were entered as arguments.
+* `add_stats()` now has a `type` argument to specify whether an analysis was a primary analysis, secondary analysis, or exploratory analysis.
+* `add_stats()` now has a `preregistered` argument to specify whether an analysis was preregistered or not.
 
 ## New
 * Added an example dataset called 'quote_source' containing data of a replication of Lorge & Curtiss (1936) that was part of the Many Labs project (Klein et al., 2014)
