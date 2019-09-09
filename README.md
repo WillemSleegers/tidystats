@@ -116,7 +116,7 @@ write_stats(results, "results.json")
 ```
 
 This results in a .json file that contains all the statistics from the three 
-models. If you want to see what this file looks like, you can download it here.
+models. If you want to see what this file looks like, you can download it [here](https://github.com/WillemSleegers/tidystats/blob/master/docs/tests/example.json).
 
 ## Reporting statistics
 
