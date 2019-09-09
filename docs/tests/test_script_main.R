@@ -360,7 +360,7 @@ df <- tidy_stats_to_data_frame(results)
 
 # write_stats() -----------------------------------------------------------
 
-write_stats(results, path = "docs/tests/test_descriptives.json")
+write_stats(results, path = "docs/tests/test_htest.json")
 
 # Analysis: glm() ---------------------------------------------------------
 
