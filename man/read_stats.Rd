@@ -15,6 +15,6 @@ that was produced with \code{write_stats}. It returns a list containing the
 results, with the identifier as the name for each list element.
 }
 \examples{
-results <- read_stats(system.file("results.csv", package = "tidystats"))
+results <- read_stats(system.file("results.json", package = "tidystats"))
 
 }
