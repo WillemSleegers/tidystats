@@ -153,6 +153,8 @@ With the current example, this results in the following data frame:
    <th style="text-align:left;"> term </th>
    <th style="text-align:left;"> statistic </th>
    <th style="text-align:right;"> value </th>
+   <th style="text-align:left;"> type </th>
+   <th style="text-align:left;"> preregistered </th>
   </tr>
  </thead>
 <tbody>
@@ -163,6 +165,8 @@ With the current example, this results in the following data frame:
    <td style="text-align:left;">  </td>
    <td style="text-align:left;"> p </td>
    <td style="text-align:right;"> 0.0028 </td>
+   <td style="text-align:left;"> primary </td>
+   <td style="text-align:left;">  </td>
   </tr>
   <tr>
    <td style="text-align:left;"> lm_D9 </td>
@@ -171,6 +175,8 @@ With the current example, this results in the following data frame:
    <td style="text-align:left;"> (Intercept) </td>
    <td style="text-align:left;"> p </td>
    <td style="text-align:right;"> 0.0000 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;"> no </td>
   </tr>
   <tr>
    <td style="text-align:left;"> lm_D9 </td>
@@ -179,6 +185,8 @@ With the current example, this results in the following data frame:
    <td style="text-align:left;"> groupTrt </td>
    <td style="text-align:left;"> p </td>
    <td style="text-align:right;"> 0.2490 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;"> no </td>
   </tr>
   <tr>
    <td style="text-align:left;"> lm_D9 </td>
@@ -187,6 +195,8 @@ With the current example, this results in the following data frame:
    <td style="text-align:left;">  </td>
    <td style="text-align:left;"> p </td>
    <td style="text-align:right;"> 0.2490 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;"> no </td>
   </tr>
   <tr>
    <td style="text-align:left;"> npk_aov </td>
@@ -195,6 +205,8 @@ With the current example, this results in the following data frame:
    <td style="text-align:left;"> block </td>
    <td style="text-align:left;"> p </td>
    <td style="text-align:right;"> 0.0159 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;">  </td>
   </tr>
   <tr>
    <td style="text-align:left;"> npk_aov </td>
@@ -203,6 +215,8 @@ With the current example, this results in the following data frame:
    <td style="text-align:left;"> N </td>
    <td style="text-align:left;"> p </td>
    <td style="text-align:right;"> 0.0044 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;">  </td>
   </tr>
   <tr>
    <td style="text-align:left;"> npk_aov </td>
@@ -211,6 +225,8 @@ With the current example, this results in the following data frame:
    <td style="text-align:left;"> P </td>
    <td style="text-align:left;"> p </td>
    <td style="text-align:right;"> 0.4749 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;">  </td>
   </tr>
   <tr>
    <td style="text-align:left;"> npk_aov </td>
@@ -219,6 +235,8 @@ With the current example, this results in the following data frame:
    <td style="text-align:left;"> K </td>
    <td style="text-align:left;"> p </td>
    <td style="text-align:right;"> 0.0288 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;">  </td>
   </tr>
   <tr>
    <td style="text-align:left;"> npk_aov </td>
@@ -227,6 +245,8 @@ With the current example, this results in the following data frame:
    <td style="text-align:left;"> N:P </td>
    <td style="text-align:left;"> p </td>
    <td style="text-align:right;"> 0.2632 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;">  </td>
   </tr>
   <tr>
    <td style="text-align:left;"> npk_aov </td>
@@ -235,6 +255,8 @@ With the current example, this results in the following data frame:
    <td style="text-align:left;"> N:K </td>
    <td style="text-align:left;"> p </td>
    <td style="text-align:right;"> 0.1686 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;">  </td>
   </tr>
   <tr>
    <td style="text-align:left;"> npk_aov </td>
@@ -243,6 +265,8 @@ With the current example, this results in the following data frame:
    <td style="text-align:left;"> P:K </td>
    <td style="text-align:left;"> p </td>
    <td style="text-align:right;"> 0.8628 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;">  </td>
   </tr>
 </tbody>
 </table>

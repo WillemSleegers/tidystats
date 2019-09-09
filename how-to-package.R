@@ -20,6 +20,7 @@ devtools::check()
 devtools::check(args = c('--run-donttest')) # Without examples test
 
 # run R CMD check on CRAN’s servers
+devtools::check_win_devel()
 devtools::check_win_release()
 
 # Build tar
