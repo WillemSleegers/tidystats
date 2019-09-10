@@ -18,6 +18,7 @@ devtools::run_examples()
 # Check package
 devtools::check()
 devtools::check(args = c('--run-donttest')) # Without examples test
+devtools::check(args = c('--as-cran'))
 
 # run R CMD check on CRAN’s servers
 devtools::check_win_devel()

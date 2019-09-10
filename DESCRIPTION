@@ -4,7 +4,7 @@ Title: Combine Output of Statistical Tests
 Version: 0.4
 Author: Willem Sleegers
 Maintainer: Willem Sleegers <w.sleegers@me.com>
-Description: Produce a JSON file containing the output of statistical models 
+Description: Produce a file containing the output of statistical tests
     that can be shared or used to report statistics in scientific papers.
 License: MIT + file LICENSE
 Encoding: UTF-8

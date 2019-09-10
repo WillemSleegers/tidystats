@@ -7,7 +7,7 @@
 tidystats
 ---------------
 
-**Author:** [Willem Sleegers](http://willemsleegers.com/)
+**Author:** [Willem Sleegers](https://www.willemsleegers.com/)
 **License:** [MIT](https://opensource.org/licenses/MIT)
 
 `tidystats` is an R package aimed at sharing the output of statistical models. 
