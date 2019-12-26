@@ -4,8 +4,14 @@
 \alias{add_stats}
 \title{Add statistical output to a tidystats list}
 \usage{
-add_stats(results, output, identifier = NULL, type = NULL,
-  preregistered = NULL, notes = NULL)
+add_stats(
+  results,
+  output,
+  identifier = NULL,
+  type = NULL,
+  preregistered = NULL,
+  notes = NULL
+)
 }
 \arguments{
 \item{results}{A tidystats list.}

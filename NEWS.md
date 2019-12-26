@@ -1,3 +1,9 @@
+# tidystats 0.5
+
+## New
+
+* Added support for `anova()`.
+
 # tidystats 0.4
 
 ## Breaking changes

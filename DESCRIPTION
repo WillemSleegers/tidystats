@@ -8,7 +8,7 @@ Description: Produce a file containing the output of statistical tests
     that can be shared or used to report statistics in scientific papers.
 License: MIT + file LICENSE
 Encoding: UTF-8
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 LazyData: true
 Depends: R (>= 2.10)
 Imports: 

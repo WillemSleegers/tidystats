@@ -79,6 +79,7 @@ find fruitful.
 - `oneway.test()`
 - `aov()`
 - `lm()`
+- `anova()`
 
 ### Example
 
