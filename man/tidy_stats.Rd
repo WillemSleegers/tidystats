@@ -5,6 +5,7 @@
 \alias{tidy_stats.htest}
 \alias{tidy_stats.lm}
 \alias{tidy_stats.lmerMod}
+\alias{tidy_stats.lmerModLmerTest}
 \alias{tidy_stats.aov}
 \alias{tidy_stats.aovlist}
 \alias{tidy_stats.tidystats_descriptives}
@@ -19,6 +20,8 @@ tidy_stats(x)
 \method{tidy_stats}{lm}(x)
 
 \method{tidy_stats}{lmerMod}(x)
+
+\method{tidy_stats}{lmerModLmerTest}(x)
 
 \method{tidy_stats}{aov}(x)
 
@@ -63,6 +66,8 @@ Currently supported functions:
 \item \code{lm}: tidy_stats method for class 'lm'
 
 \item \code{lmerMod}: tidy_stats method for class 'lmerMod'
+
+\item \code{lmerModLmerTest}: tidy_stats method for class 'lmerModLmerTest'
 
 \item \code{aov}: tidy_stats method for class 'aov'
 

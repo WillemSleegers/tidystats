@@ -357,7 +357,7 @@ tidy_stats.lmerMod <- function(x) {
         names[[2]] <- random_cors$name2[k]
         
         pair$names <- names
-        pair$r <- random_cors$value[k]
+        pair$statistics$r <- random_cors$value[k]
         
         pairs[[k]] <- pair
       }
@@ -371,8 +371,8 @@ tidy_stats.lmerMod <- function(x) {
   
   # Add residual statistics to the group
   statistics <- list()
-  statistics$var <- attr(random_effects, "sc")^2
-  statistics$SD <- attr(random_effects, "sc")
+  statistics$var <- attr(varcor, "sc")^2
+  statistics$SD <- attr(varcor, "sc")
   
   group <- list()
   group$name <- "Residual"
@@ -439,7 +439,7 @@ tidy_stats.lmerMod <- function(x) {
       value <- fixed_cors$value[i]
       
       pair$names <- names
-      pair$r <- value
+      pair$statistics$r <- value
       
       pairs[[i]] <- pair
     }
@@ -459,7 +459,7 @@ tidy_stats.lmerMod <- function(x) {
   return(output)
 }
 
-#' @describeIn tidy_stats tidy_stats method for class 'lmerMod'
+#' @describeIn tidy_stats tidy_stats method for class 'lmerModLmerTest'
 #' @export
 tidy_stats.lmerModLmerTest <- function(x) {
   
@@ -551,7 +551,7 @@ tidy_stats.lmerModLmerTest <- function(x) {
         names[[2]] <- random_cors$name2[k]
         
         pair$names <- names
-        pair$r <- random_cors$value[k]
+        pair$statistics$r <- random_cors$value[k]
         
         pairs[[k]] <- pair
       }
@@ -565,8 +565,8 @@ tidy_stats.lmerModLmerTest <- function(x) {
   
   # Add residual statistics to the group
   statistics <- list()
-  statistics$var <- attr(random_effects, "sc")^2
-  statistics$SD <- attr(random_effects, "sc")
+  statistics$var <- attr(varcor, "sc")^2
+  statistics$SD <- attr(varcor, "sc")
   
   group <- list()
   group$name <- "Residual"
@@ -636,7 +636,7 @@ tidy_stats.lmerModLmerTest <- function(x) {
       value <- fixed_cors$value[i]
       
       pair$names <- names
-      pair$r <- value
+      pair$statistics$r <- value
       
       pairs[[i]] <- pair
     }
@@ -647,8 +647,8 @@ tidy_stats.lmerModLmerTest <- function(x) {
   # Add package information
   package <- list()
 
-  package$name <- "lmerTest"
-  package$version <- getNamespaceVersion("lmerTest")[[1]]
+  package$name <- "lme4"
+  package$version <- getNamespaceVersion("lme4")[[1]]
 
   # Add package information to output
   output$package <- package
