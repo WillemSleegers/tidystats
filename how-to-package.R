@@ -40,3 +40,11 @@ devtools::test()
 library(testthat)
 test_results <- read_stats("tests/testthat/test_results.csv")
 test_file("tests/testthat/test-psych.R")
+
+# Create a vignette -------------------------------------------------------
+
+usethis::use_vignette("introduction-to-tidystats")
+
+# Build website -----------------------------------------------------------
+
+pkgdown::build_site()

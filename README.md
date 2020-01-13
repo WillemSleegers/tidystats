@@ -1,45 +1,41 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-<p align="center">
-  <img src="https://github.com/WillemSleegers/tidystats/blob/master/inst/hex.png" width = 150 align = center alt="tidystats logo"/>
-</p>
+<img src="man/figures/hex.png" width=150 alt="tidystats Logo"/>
 
-tidystats
----------------
+## tidystats
 
 **Author:** [Willem Sleegers](https://www.willemsleegers.com/)
 **License:** [MIT](https://opensource.org/licenses/MIT)
 
-`tidystats` is an R package aimed at sharing the output of statistical models. 
-To achieve this, `tidystats` combines the output of multiple statistical models 
-and saves these in a file. This file can then be shared with others or used to 
-report the statistics in a manuscript.
+`tidystats` is an R package aimed at sharing the output of statistical
+models. To achieve this, `tidystats` combines the output of multiple
+statistical models and saves these in a file. This file can then be
+shared with others or used to report the statistics in a manuscript.
 
-Please see below for instructions on how to install and use this package. 
-**Do note that the package is currently in development. This means the 
-package may contain bugs and is subject to significant changes.** If you find 
-any bugs or if you have any feedback, please let me know by creating an issue 
-here on Github (it's really easy to do!).
+Please see below for instructions on how to install and use this
+package. **Do note that the package is currently in development. This
+means the package may contain bugs and is subject to significant
+changes.** If you find any bugs or if you have any feedback, please let
+me know by creating an issue here on Github (it’s really easy to do\!).
 
 ### Installation
 
-`tidystats` can be installed from CRAN and the latest version can be installed 
-from Github using [devtools](https://github.com/hadley/devtools). 
+`tidystats` can be installed from CRAN and the latest version can be
+installed from Github using
+[devtools](https://github.com/hadley/devtools).
 
-
-```r
+``` r
 library(devtools)
 install_github("willemsleegers/tidystats")
 ```
 
 ### Setup
 
-Load the package and start by creating an empty list to store the results of 
-statistical models in. You can name the list whatever you want (in the 
-example below I create an empty list called `results`).
+Load the package and start by creating an empty list to store the
+results of statistical models in. You can name the list whatever you
+want (in the example below I create an empty list called `results`).
 
-
-```r
+``` r
 library(tidystats)
 
 results <- list()
@@ -47,50 +43,50 @@ results <- list()
 
 ### Usage
 
-The main function is `add_stats()`. The function has 2 necessary arguments:
+The main function is `add_stats()`. The function has 2 necessary
+arguments:
 
-- `results`: The list you want to add the statistical output to.
-- `output`: The output of a statistical test you want to add to the list (e.g., 
-the output of `t.test()` or `lm()`)
+  - `results`: The list you want to add the statistical output to.
+  - `output`: The output of a statistical test you want to add to the
+    list (e.g., the output of `t.test()` or `lm()`)
 
-Optionally you can also specify an `identifier` and add the `type` of analysis, 
-whether the analysis was `preregistered`, and/or additional `notes`.  
+Optionally you can also specify an `identifier` and add the `type` of
+analysis, whether the analysis was `preregistered`, and/or additional
+`notes`.
 
-The `identifier` is used to identify the model 
-(e.g., 'weight_height_correlation'). If you do not provide one, one is 
+The `identifier` is used to identify the model (e.g.,
+‘weight\_height\_correlation’). If you do not provide one, one is
 automatically created for you.
 
-The `type` argument specifies the type of analysis as primary, secondary, or 
-exploratory.
+The `type` argument specifies the type of analysis as primary,
+secondary, or exploratory.
 
-The `preregistered` argument is used to indicate whether the analysis was
-preregistered or not.
+The `preregistered` argument is used to indicate whether the analysis
+was preregistered or not.
 
-Finally the `notes` argument is used to add additional information which you may
-find fruitful.
+Finally the `notes` argument is used to add additional information which
+you may find fruitful.
 
 ### Supported statistical functions
 
 **Package:** stats
 
-- `t.test()`
-- `cor.test()`
-- `chisq.test()`
-- `wilcox.test()`
-- `fisher.test()`
-- `oneway.test()`
-- `aov()`
-- `lm()`
+  - `t.test()`
+  - `cor.test()`
+  - `chisq.test()`
+  - `wilcox.test()`
+  - `fisher.test()`
+  - `oneway.test()`
+  - `aov()`
+  - `lm()`
+  - `anova()`
 
 ### Example
 
+In the following example we perform several tests, add them to a list,
+and save the list to a file.
 
-
-In the following example we perform several tests, add them to a list, and save
-the list to a file.
-
-
-```r
+``` r
 # Conduct three different analyses
 # t-test:
 sleep_test <- t.test(extra ~ group, data = sleep, paired = TRUE)
@@ -115,23 +111,24 @@ results <- results %>%
 write_stats(results, "results.json")
 ```
 
-This results in a .json file that contains all the statistics from the three 
-models. If you want to see what this file looks like, you can inspect it [here](https://github.com/WillemSleegers/tidystats/blob/master/inst/results.json).
+This results in a .json file that contains all the statistics from the
+three models. If you want to see what this file looks like, you can
+inspect it
+[here](https://github.com/WillemSleegers/tidystats/blob/master/inst/results.json).
 
 ## Reporting statistics
 
-If you want to report the statistics in a manuscript, you can soon do so with a
-Word add-in that is currently in development.
+If you want to report the statistics in a manuscript, you can soon do so
+with a Word add-in that is currently in development.
 
 ## Reading in a tidystats file
 
-An additional usage of the tidystats-produced file is that it can be read back
-into R and converted into a data frame. This enables researchers to then 
-extract specific statistics to perform additional analyses with 
-(e.g., meta-analyses). Below is an example.
+An additional usage of the tidystats-produced file is that it can be
+read back into R and converted into a data frame. This enables
+researchers to then extract specific statistics to perform additional
+analyses with (e.g., meta-analyses). Below is an example.
 
-
-```r
+``` r
 # Read in a tidystats-produced .json file
 results <- read_stats("results.json")
 
@@ -142,136 +139,24 @@ results_df <- tidy_stats_to_data_frame(results)
 p_values <- filter(results_df, statistic == "p")
 ```
 
-With the current example, this results in the following data frame:
+With the current example, this results in the following data
+frame:
 
-<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;"> identifier </th>
-   <th style="text-align:left;"> method </th>
-   <th style="text-align:left;"> group </th>
-   <th style="text-align:left;"> term </th>
-   <th style="text-align:left;"> statistic </th>
-   <th style="text-align:right;"> value </th>
-   <th style="text-align:left;"> type </th>
-   <th style="text-align:left;"> preregistered </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> sleep_test </td>
-   <td style="text-align:left;"> Paired t-test </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> p </td>
-   <td style="text-align:right;"> 0.0028 </td>
-   <td style="text-align:left;"> primary </td>
-   <td style="text-align:left;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> lm_D9 </td>
-   <td style="text-align:left;"> Linear regression </td>
-   <td style="text-align:left;"> coefficients </td>
-   <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:left;"> p </td>
-   <td style="text-align:right;"> 0.0000 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> no </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> lm_D9 </td>
-   <td style="text-align:left;"> Linear regression </td>
-   <td style="text-align:left;"> coefficients </td>
-   <td style="text-align:left;"> groupTrt </td>
-   <td style="text-align:left;"> p </td>
-   <td style="text-align:right;"> 0.2490 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> no </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> lm_D9 </td>
-   <td style="text-align:left;"> Linear regression </td>
-   <td style="text-align:left;"> model </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> p </td>
-   <td style="text-align:right;"> 0.2490 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> no </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> npk_aov </td>
-   <td style="text-align:left;"> ANOVA </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> block </td>
-   <td style="text-align:left;"> p </td>
-   <td style="text-align:right;"> 0.0159 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> npk_aov </td>
-   <td style="text-align:left;"> ANOVA </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> N </td>
-   <td style="text-align:left;"> p </td>
-   <td style="text-align:right;"> 0.0044 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> npk_aov </td>
-   <td style="text-align:left;"> ANOVA </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> P </td>
-   <td style="text-align:left;"> p </td>
-   <td style="text-align:right;"> 0.4749 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> npk_aov </td>
-   <td style="text-align:left;"> ANOVA </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> K </td>
-   <td style="text-align:left;"> p </td>
-   <td style="text-align:right;"> 0.0288 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> npk_aov </td>
-   <td style="text-align:left;"> ANOVA </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> N:P </td>
-   <td style="text-align:left;"> p </td>
-   <td style="text-align:right;"> 0.2632 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> npk_aov </td>
-   <td style="text-align:left;"> ANOVA </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> N:K </td>
-   <td style="text-align:left;"> p </td>
-   <td style="text-align:right;"> 0.1686 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> npk_aov </td>
-   <td style="text-align:left;"> ANOVA </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> P:K </td>
-   <td style="text-align:left;"> p </td>
-   <td style="text-align:right;"> 0.8628 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-  </tr>
-</tbody>
-</table>
+| identifier  | method            | group        | term        | statistic |  value | type    | preregistered |
+| :---------- | :---------------- | :----------- | :---------- | :-------- | -----: | :------ | :------------ |
+| sleep\_test | Paired t-test     |              |             | p         | 0.0028 | primary |               |
+| lm\_D9      | Linear regression | coefficients | (Intercept) | p         | 0.0000 |         | no            |
+| lm\_D9      | Linear regression | coefficients | groupTrt    | p         | 0.2490 |         | no            |
+| lm\_D9      | Linear regression | model        |             | p         | 0.2490 |         | no            |
+| npk\_aov    | ANOVA             |              | block       | p         | 0.0159 |         |               |
+| npk\_aov    | ANOVA             |              | N           | p         | 0.0044 |         |               |
+| npk\_aov    | ANOVA             |              | P           | p         | 0.4749 |         |               |
+| npk\_aov    | ANOVA             |              | K           | p         | 0.0288 |         |               |
+| npk\_aov    | ANOVA             |              | N:P         | p         | 0.2632 |         |               |
+| npk\_aov    | ANOVA             |              | N:K         | p         | 0.1686 |         |               |
+| npk\_aov    | ANOVA             |              | P:K         | p         | 0.8628 |         |               |
 
 ## More resources
 
-For more information on this package, see the `tidystats` project page on [my 
-website](https://www.willemsleegers.com/tidystats.html).
+For more information on this package, see the `tidystats` project page
+on [my website](https://www.willemsleegers.com/tidystats.html).

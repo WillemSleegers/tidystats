@@ -1,8 +1,12 @@
+---
+output:
+  md_document:
+    variant: gfm
+---
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-<p align="center">
-  <img src="https://github.com/WillemSleegers/tidystats/blob/master/inst/hex.png" width = 150 align = center alt="tidystats logo"/>
-</p>
+<img src="man/figures/hex.png" width=150 alt="tidystats Logo"/>
 
 tidystats
 ---------------
@@ -83,6 +87,7 @@ find fruitful.
 
 ### Example
 
+
 ```{r example-setup, echo = FALSE, message = FALSE}
 library(dplyr)
 ```
@@ -145,7 +150,6 @@ With the current example, this results in the following data frame:
 
 ```{r read-example-table, message = FALSE, echo = FALSE}
 library(knitr)
-library(kableExtra)
 
 results <- read_stats("inst/results.json")
 results_df <- tidy_stats_to_data_frame(results)
@@ -156,8 +160,7 @@ options(knitr.kable.NA = '')
 
 p_values %>%
   select(-extra) %>%
-  kable() %>%
-  kable_styling(full_width = FALSE)
+  kable(format = "markdown")
 ```
 
 ## More resources
