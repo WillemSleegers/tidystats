@@ -2,6 +2,7 @@
 output:
   md_document:
     variant: gfm
+permalink: /index.html
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
