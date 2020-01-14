@@ -1,5 +1,5 @@
 ---
-title: "introduction-to-tidystats"
+title: "Introduction to tidystats"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{introduction-to-tidystats}
