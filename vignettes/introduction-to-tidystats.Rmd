@@ -1,5 +1,6 @@
 ---
 title: "Introduction to tidystats"
+date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{introduction-to-tidystats}
@@ -13,6 +14,12 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
+
+## Why use tidystats? 
+
+The tidystats package is designed to address two problems common in scientific research: incomplete and incorrect statistics reporting. The problem of incomplete statistics reporting likely stems from a fundamental trade-off between wanting to be comprehensive on the one hand, and providing a clear narrative on the other. The problem of incorrect statistics reporting is likely caused by manually copy-pasting statistical output from the output window into a text editor. tidystats addressed these two problems by enabling researchers to combine their statistical analyses into a single file, which can subsequently be used for statistical reporting using a Microsoft Word add-in. 
+
+## How to use tidystats?
 
 ```{r setup}
 library(tidystats)

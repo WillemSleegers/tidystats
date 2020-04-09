@@ -1085,3 +1085,115 @@ tidy_stats.anova <- function(x) {
   
   return(output)
 }
+
+#' @describeIn tidy_stats tidy_stats method for class 'BayesFactor'
+#' @export
+tidy_stats.BFBayesFactor <- function(x) {
+  
+  output <- list()
+  
+  # Determine the method
+  numerator <- x@numerator[[1]]
+  class <- class(numerator)[1]
+  output$method <- case_when(
+    class == "BFoneSample" ~ "Bayesian t-test",
+    class == "BFlinearModel" ~ "Bayesian linear regression"
+  )
+  
+  # Create a statistics list
+  statistics <- list()
+  
+  # Create a bayes factor list and loop over the bayes factors, extract the 
+  # relevant statistics, and store them in separate lists
+  bayes_factors <- list()
+  bayes_factors_df <- as.data.frame(extractBF(x))
+  
+  for (i in 1:nrow(bayes_factors_df)) {
+    bayes_factor <- list()
+    bayes_factor$name <- rownames(bayes_factors_df)[i]
+    
+    statistics <- list()
+    statistics$BF_01 <- bayes_factors_df$bf[i]
+    statistics$BF_10 <- 1/bayes_factors_df$bf[i]
+    statistics$error <- bayes_factors_df$error[i]
+    
+    bayes_factor$statistics <- statistics
+    bayes_factors[[i]] <- bayes_factor
+  }
+  
+  # Add bayes factors to the output
+  output$bayes_factors <- bayes_factors
+  
+  # Add package information
+  package <- list()
+
+  package$name <- "BayesFactor"
+  package$version <- getNamespaceVersion("BayesFactor")[[1]]
+
+  # Add package information to output
+  output$package <- package
+  
+  return(output)
+}
+
+#' @describeIn tidy_stats tidy_stats method for class 'afex_aov'
+#' @export
+tidy_stats.afex_aov <- function(x) {
+
+  output <- list()
+  
+  # Set method
+  output$method <- "ANOVA"
+  
+  # Set the DV
+  output$DV <- attr(x, "dv")
+  
+  # Create an empty coefficients list
+  coefficients <- list()
+  
+  # Convert the results to a data frame
+  effects <- as_tibble(x$anova_table, rownames = "effect")
+  
+  for (i in 1:nrow(effects)) {
+    
+    # Create a new coefficient list
+    coefficient <- list()
+    
+    # Add the name of the coefficient
+    name <- effects$effect[i]
+    coefficient$name <- name
+    
+    # Create a new statistics list and add the coefficient's statistics
+    statistics <- list()
+    
+    statistics$dfs <- list(numerator_df = effects$`num Df`[i], 
+      denominator_df = effects$`den Df`[i])
+    statistics$MS <- effects$MSE[i]
+    statistics$statistic <- list(name = "F", value = effects$`F`[i])
+    statistics$p <- effects$`Pr(>F)`[i]
+    statistics$ges <- effects$ges[i]
+    
+    coefficient$statistics <- statistics
+    
+    # Add the coefficient data to the coefficients list
+    coefficients[[i]] <- coefficient
+  }
+  
+  # Add coefficients to the output
+  output$coefficients <- coefficients
+  
+  # Add additional information
+  output$type <- attr(x, "type")
+  output$sphericity_correction_method <- attr(x$anova_table, "correction")
+  
+  # Add package information
+  package <- list()
+
+  package$name <- "afex"
+  package$version <- getNamespaceVersion("afex")[[1]]
+
+  # Add package information to output
+  output$package <- package
+  
+  return(output)
+}

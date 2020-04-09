@@ -11,6 +11,8 @@
 \alias{tidy_stats.tidystats_descriptives}
 \alias{tidy_stats.tidystats_counts}
 \alias{tidy_stats.anova}
+\alias{tidy_stats.BFBayesFactor}
+\alias{tidy_stats.afex_aov}
 \title{Tidy the output of a statistics object}
 \usage{
 tidy_stats(x)
@@ -32,6 +34,10 @@ tidy_stats(x)
 \method{tidy_stats}{tidystats_counts}(x)
 
 \method{tidy_stats}{anova}(x)
+
+\method{tidy_stats}{BFBayesFactor}(x)
+
+\method{tidy_stats}{afex_aov}(x)
 }
 \arguments{
 \item{x}{The output of a statistical test.}
@@ -78,6 +84,10 @@ Currently supported functions:
 \item \code{tidystats_counts}: tidy_stats method for class 'tidystats_counts'
 
 \item \code{anova}: tidy_stats method for class 'anova'
+
+\item \code{BFBayesFactor}: tidy_stats method for class 'BayesFactor'
+
+\item \code{afex_aov}: tidy_stats method for class 'afex_aov'
 }}
 
 \examples{
