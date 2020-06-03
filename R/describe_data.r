@@ -55,17 +55,9 @@ describe_data <- function(data, column, na.rm = TRUE, short = FALSE) {
   if (missing(column)) {
     stop("No column found; please provide one.")
   }
-
-  # Unquote the column
-  var <- dplyr::enquo(column)
-  
-  # Check if the column is a column in 'data'
-  if (!dplyr::quo_name(var) %in% names(data)) {
-    stop("Column not found in the data frame.")
-  }
   
   # Check whether the values in var are numeric
-  if (sum(!class(dplyr::pull(data, !!var)) %in% c("numeric", "integer")) > 0) {
+  if (sum(!class(dplyr::pull(data, {{ column }})) %in% c("numeric", "integer")) > 0) {
     stop("The column does not contain numeric values.")
   }
 
@@ -73,33 +65,34 @@ describe_data <- function(data, column, na.rm = TRUE, short = FALSE) {
   grouping <- dplyr::group_vars(data)
 
   # Select only the variable and grouping columns from the data
-  data <- dplyr::select(data, dplyr::group_vars(data), !!var)
-  
-  # Add a column called 'variable'
-  data$variable <- dplyr::quo_name(var)
+  data <- dplyr::select(data, dplyr::group_vars(data), {{ column }})
   
   # Calculate descriptives
   output <- data %>%
     dplyr::summarize(
-      missing  = sum(is.na(!!var)),
+      missing  = sum(is.na({{ column }})),
       N        = dplyr::n() - missing,
-      M        = mean(!!var, na.rm = na.rm),
-      SD       = sd(!!var, na.rm = na.rm),
+      M        = mean({{ column }}, na.rm = na.rm),
+      SD       = sd({{ column }}, na.rm = na.rm),
       SE       = SD / sqrt(N),
-      min      = min(!!var, na.rm = na.rm),
-      max      = max(!!var, na.rm = na.rm),
-      range    = diff(range(!!var, na.rm = na.rm)),
-      median   = median(!!var, na.rm = na.rm),
-      mode     = unique(!!var)[which.max(tabulate(match(!!var,
-                   unique(!!var))))],
-      skew     = (sum((!!var - mean(!!var, na.rm = na.rm))^3, na.rm = na.rm) /
-                  N) / (sum((!!var - mean(!!var, na.rm = na.rm))^2,
-                  na.rm = na.rm) / N)^(3 / 2),
-      kurtosis = N * sum((!!var - mean(!!var, na.rm = na.rm))^4, na.rm = na.rm)/
-                  (sum((!!var - mean(!!var, na.rm = na.rm))^2, na.rm = na.rm)^2)
+      min      = min({{ column }}, na.rm = na.rm),
+      max      = max({{ column }}, na.rm = na.rm),
+      range    = diff(range({{ column }}, na.rm = na.rm)),
+      median   = median({{ column }}, na.rm = na.rm),
+      mode     = unique({{ column }})[which.max(tabulate(match({{ column }},
+        unique({{ column }}))))],
+      skew     = (sum(({{ column }} - mean({{ column }}, na.rm = na.rm))^3, 
+        na.rm = na.rm) / N) / (sum(({{ column }} - 
+            mean({{ column }}, na.rm = na.rm))^2, na.rm = na.rm) / 
+            N)^(3 / 2),
+      kurtosis = N * sum(({{ column }} - mean({{ column }}, na.rm = na.rm))^4, 
+        na.rm = na.rm) / (sum(({{ column }} - mean({{ column }}, 
+          na.rm = na.rm))^2, na.rm = na.rm)^2),
+      .groups = "keep"
     )
   
-  output <- dplyr::mutate(output, variable = dplyr::quo_name(var))
+  output <- dplyr::mutate(output, variable = dplyr::quo_name(enquo(column)))
+  # TODO: See if this can be done differently
   
   # Add percentage if na.rm = FALSE (if na.rm = TRUE it would always be 100)
   # Note that depending on the value of na.rm, we either ignore or include the
@@ -110,19 +103,18 @@ describe_data <- function(data, column, na.rm = TRUE, short = FALSE) {
   
   # Reorder the columns and return only a subset if short was set to TRUE
   if (short) {
-    output <- dplyr::select(output, variable, grouping, N, M, SD)
+    output <- dplyr::select(output, dplyr::all_of(c("variable", grouping, "N", "M", "SD")))
   } else {
     output <- dplyr::select_at(output, dplyr::vars(dplyr::contains("variable"), 
       dplyr::contains("missing"), dplyr::starts_with("N"), 
       dplyr::contains("pct"), dplyr::everything()))
   }
   
-  # Group the output by the original grouping columns
-  output <- dplyr::group_by_at(output, dplyr::vars(grouping))
-  
   # Add a tidystats class so we can use the tidy_stats() function to parse the
   # the output
-  class(output) <- append(class(output), "tidystats_descriptives")
+  # Put it at the beginning otherwise we get an error when printing the tibble
+  class(output) <- c("tidystats_descriptives", class(output))
 
   return(output)
 }
+
