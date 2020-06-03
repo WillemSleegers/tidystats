@@ -5,7 +5,8 @@
 \alias{cox}
 \title{Data of a replication study of C.R. Cox, J. Arndt, T. Pyszczynski, 
 J. Greenberg, A. Abdollahi, S. Solomon (2008, JPSP, 94(4), Exp. 6)}
-\format{A data frame with 200 rows and 67 variables.
+\format{
+A data frame with 200 rows and 67 variables.
 \describe{
  \item{ID}{Participant identifier}
  \item{sex}{The participant's sex}
@@ -19,7 +20,8 @@ J. Greenberg, A. Abdollahi, S. Solomon (2008, JPSP, 94(4), Exp. 6)}
  \item{call_siblings}{Minutes allocated (out of 100) to call a sibling}
  \item{call_partner}{Minutes allocated (out of 100) to call a romantic partner}
  \item{call_friend}{Minutes allocated (out of 100) to call a close friend}
- }}
+ }
+}
 \source{
 \url{https://osf.io/5tbxf/}
 }

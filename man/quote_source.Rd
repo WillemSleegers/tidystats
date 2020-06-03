@@ -4,7 +4,8 @@
 \name{quote_source}
 \alias{quote_source}
 \title{A many labs replication of Lorge & Curtiss (1936)}
-\format{A data frame with 6343 rows and 15 columns:
+\format{
+A data frame with 6343 rows and 15 columns:
 \describe{
   \item{ID}{participant number}
   \item{source}{attributed source of the quote: Washington or Bin 
@@ -26,7 +27,8 @@
   \item{us_or_international}{whether the study was conducted in the US or 
    outside of the US (international)}
   \item{lab_or_online}{whether the study was conducted in the lab or online}   
-}}
+}
+}
 \usage{
 quote_source
 }
