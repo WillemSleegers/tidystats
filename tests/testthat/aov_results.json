@@ -1,0 +1,253 @@
+{
+  "aov_one_way": {
+    "method": "ANOVA",
+    "coefficients": [
+      {
+        "name": "condition",
+        "statistics": {
+          "SS": 383.645,
+          "MS": 383.645,
+          "statistic": {
+            "name": "F",
+            "value": 1.700385
+          },
+          "df": 1,
+          "p": 0.193752
+        }
+      },
+      {
+        "name": "Residuals",
+        "statistics": {
+          "SS": 44673.23,
+          "MS": 225.622374,
+          "df": 198
+        }
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.0.1"
+    }
+  },
+  "aov_interaction": {
+    "method": "ANOVA",
+    "coefficients": [
+      {
+        "name": "condition",
+        "statistics": {
+          "SS": 383.645,
+          "MS": 383.645,
+          "statistic": {
+            "name": "F",
+            "value": 1.729936
+          },
+          "df": 1,
+          "p": 0.189956
+        }
+      },
+      {
+        "name": "sex",
+        "statistics": {
+          "SS": 1140.486133,
+          "MS": 1140.486133,
+          "statistic": {
+            "name": "F",
+            "value": 5.142692
+          },
+          "df": 1,
+          "p": 0.024435
+        }
+      },
+      {
+        "name": "condition:sex",
+        "statistics": {
+          "SS": 66.152962,
+          "MS": 66.152962,
+          "statistic": {
+            "name": "F",
+            "value": 0.298298
+          },
+          "df": 1,
+          "p": 0.585573
+        }
+      },
+      {
+        "name": "Residuals",
+        "statistics": {
+          "SS": 43466.590905,
+          "MS": 221.768321,
+          "df": 196
+        }
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.0.1"
+    }
+  },
+  "aov_ancova": {
+    "method": "ANOVA",
+    "coefficients": [
+      {
+        "name": "condition",
+        "statistics": {
+          "SS": 383.645,
+          "MS": 383.645,
+          "statistic": {
+            "name": "F",
+            "value": 1.693076
+          },
+          "df": 1,
+          "p": 0.194716
+        }
+      },
+      {
+        "name": "affect_negative",
+        "statistics": {
+          "SS": 33.728038,
+          "MS": 33.728038,
+          "statistic": {
+            "name": "F",
+            "value": 0.148846
+          },
+          "df": 1,
+          "p": 0.700057
+        }
+      },
+      {
+        "name": "Residuals",
+        "statistics": {
+          "SS": 44639.501962,
+          "MS": 226.596457,
+          "df": 197
+        }
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.0.1"
+    }
+  },
+  "aov_within": {
+    "method": "ANOVA",
+    "groups": [
+      {
+        "name": "ID",
+        "coefficients": [
+          {
+            "name": "Residuals",
+            "statistics": {
+              "SS": 6685.76,
+              "MS": 33.596784,
+              "df": 199
+            }
+          }
+        ]
+      },
+      {
+        "name": "ID:affect",
+        "coefficients": [
+          {
+            "name": "affect",
+            "statistics": {
+              "SS": 6839.29,
+              "MS": 6839.29,
+              "statistic": {
+                "name": "F",
+                "value": 200.956295
+              },
+              "df": 1,
+              "p": 5.431789e-32
+            }
+          },
+          {
+            "name": "Residuals",
+            "statistics": {
+              "SS": 6772.71,
+              "MS": 34.033719,
+              "df": 199
+            }
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.0.1"
+    }
+  },
+  "aov_mixed": {
+    "method": "ANOVA",
+    "groups": [
+      {
+        "name": "ID",
+        "coefficients": [
+          {
+            "name": "condition",
+            "statistics": {
+              "SS": 64,
+              "MS": 64,
+              "statistic": {
+                "name": "F",
+                "value": 1.913691
+              },
+              "df": 1,
+              "p": 0.168112
+            }
+          },
+          {
+            "name": "Residuals",
+            "statistics": {
+              "SS": 6621.76,
+              "MS": 33.443232,
+              "df": 198
+            }
+          }
+        ]
+      },
+      {
+        "name": "ID:affect",
+        "coefficients": [
+          {
+            "name": "affect",
+            "statistics": {
+              "SS": 6839.29,
+              "MS": 6839.29,
+              "statistic": {
+                "name": "F",
+                "value": 205.144509
+              },
+              "df": 1,
+              "p": 2.122891e-32
+            }
+          },
+          {
+            "name": "condition:affect",
+            "statistics": {
+              "SS": 171.61,
+              "MS": 171.61,
+              "statistic": {
+                "name": "F",
+                "value": 5.147442
+              },
+              "df": 1,
+              "p": 0.024359
+            }
+          },
+          {
+            "name": "Residuals",
+            "statistics": {
+              "SS": 6601.1,
+              "MS": 33.338889,
+              "df": 198
+            }
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.0.1"
+    }
+  }
+}

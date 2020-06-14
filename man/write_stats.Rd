@@ -4,7 +4,7 @@
 \alias{write_stats}
 \title{Write a tidystats list to a file}
 \usage{
-write_stats(x, path)
+write_stats(x, path, digits = 6)
 }
 \arguments{
 \item{x}{A tidystats list.}

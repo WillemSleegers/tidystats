@@ -1,8 +1,17 @@
-# tidystats 0.5
+# tidystats 0.4.1
 
 ## New
 
 * Added support for `anova()`.
+
+## Improvements
+
+* `read_stats()` now converts Inf character strings to numeric. 
+* `write_stats()` now has a digits argument that determines the number of decimals for saved numbers (default: 6).
+
+## Misc
+
+* Added tests to minimize bugs
 
 # tidystats 0.4
 

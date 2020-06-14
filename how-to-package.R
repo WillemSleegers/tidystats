@@ -10,36 +10,20 @@ devtools::install()
 # Knit the README.Rmd file to a README.md file for Github
 knitr::knit("README.Rmd")
 
-# CRAN submission ---------------------------------------------------------
-
-# Check examples
-devtools::run_examples()
-
-# Check package
-devtools::check()
-devtools::check(args = c('--run-donttest')) # Without examples test
-devtools::check(args = c('--as-cran'))
-
-# run R CMD check on CRAN’s servers
-devtools::check_win_devel()
-devtools::check_win_release()
-
-# Build tar
-devtools::build()
-
 # Add a data set ----------------------------------------------------------
 
 usethis::use_data(quote_source, overwrite = TRUE)
 
 # Testing -----------------------------------------------------------------
 
+# Add a test
+usethis::use_test("lm")
+
 # Test all tests
 devtools::test()
 
 # Test specific tests
-library(testthat)
-test_results <- read_stats("tests/testthat/test_results.csv")
-test_file("tests/testthat/test-psych.R")
+testthat::test_file("tests/testthat/test_t_tests.R")
 
 # Create a vignette -------------------------------------------------------
 
@@ -52,3 +36,29 @@ usethis::use_vignette("introduction-to-tidystats")
 
 # Run to build the website
 pkgdown::build_site()
+
+# Preview the site
+pkgdown::preview_site()
+
+# Delete website files
+pkgdown::clean_site()
+
+# CRAN submission ---------------------------------------------------------
+
+# Check examples
+devtools::run_examples()
+
+# Check tests
+devtools::test()
+
+# Check package
+devtools::check()
+devtools::check(args = c('--run-donttest')) # Without examples test
+devtools::check(args = c('--as-cran'))
+
+# run R CMD check on CRAN’s servers
+devtools::check_win_devel()
+devtools::check_win_release()
+
+# Build tar
+devtools::build()

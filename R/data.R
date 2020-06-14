@@ -46,6 +46,7 @@
 #' Klein, R.A. et al. (2014) Investigating Variation in Replicability: A "Many 
 #' Labs" Replication Project. Social Psychology, 45(3), 142-152. 
 #' \url{https://dx.doi.org/10.1027/1864-9335/a000178}
+#' 
 "quote_source"
 
 #' Data of a replication study of C.R. Cox, J. Arndt, T. Pyszczynski, 

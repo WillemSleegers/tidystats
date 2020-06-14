@@ -37,7 +37,7 @@
 #' write_stats(results, file.path(dir, "results.json"))
 #'
 #' @export
-write_stats <- function(x, path) {
+write_stats <- function(x, path, digits = 6) {
 
   # Check whether the arguments are supplied
   if (!is.list(x)) {
@@ -48,5 +48,6 @@ write_stats <- function(x, path) {
   }
 
   # Write to disk
-  jsonlite::write_json(x, path = path, pretty = TRUE, auto_unbox = TRUE)
+  jsonlite::write_json(x, path = path, pretty = TRUE, auto_unbox = TRUE, 
+    digits = digits)
 }

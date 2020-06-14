@@ -1,0 +1,393 @@
+{
+  "t_test_one_sample": {
+    "method": "One Sample t-test",
+    "data_name": "cox$call_parent",
+    "statistics": {
+      "estimate": 25.775,
+      "SE": 1.063994,
+      "statistic": {
+        "name": "t",
+        "value": 24.224771
+      },
+      "df": 199,
+      "p": 1.458065e-61,
+      "CI": {
+        "level": 0.95,
+        "lower": 24.016701,
+        "upper": "Inf"
+      }
+    },
+    "alternative": {
+      "direction": "greater",
+      "mean": 0
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.0.1"
+    }
+  },
+  "t_test_two_sample": {
+    "method": "Two Sample t-test",
+    "var_equal": true,
+    "data_name": "call_parent by condition",
+    "statistics": {
+      "estimate": -2.77,
+      "SE": 2.124252,
+      "statistic": {
+        "name": "t",
+        "value": -1.303988
+      },
+      "df": 198,
+      "p": 0.193752,
+      "CI": {
+        "level": 0.95,
+        "lower": -6.959062,
+        "upper": 1.419062
+      }
+    },
+    "alternative": {
+      "direction": "two.sided",
+      "difference in means": 0
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.0.1"
+    }
+  },
+  "t_test_welch": {
+    "method": "Welch Two Sample t-test",
+    "var_equal": false,
+    "data_name": "call_parent by condition",
+    "statistics": {
+      "estimate": -2.77,
+      "SE": 2.124252,
+      "statistic": {
+        "name": "t",
+        "value": -1.303988
+      },
+      "df": 183.483181,
+      "p": 0.193871,
+      "CI": {
+        "level": 0.95,
+        "lower": -6.961101,
+        "upper": 1.421101
+      }
+    },
+    "alternative": {
+      "direction": "two.sided",
+      "difference in means": 0
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.0.1"
+    }
+  },
+  "t_test_paired": {
+    "method": "Paired t-test",
+    "data_name": "cox$affect_positive and cox$affect_negative",
+    "statistics": {
+      "estimate": 8.27,
+      "SE": 0.583384,
+      "statistic": {
+        "name": "t",
+        "value": 14.175905
+      },
+      "df": 199,
+      "p": 5.431789e-32,
+      "CI": {
+        "level": 0.9,
+        "lower": 7.30593,
+        "upper": 9.23407
+      }
+    },
+    "alternative": {
+      "direction": "two.sided",
+      "difference in means": 0
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.0.1"
+    }
+  },
+  "correlation_pearson": {
+    "method": "Pearson's product-moment correlation",
+    "data_name": "cox$call_parent and cox$anxiety",
+    "statistics": {
+      "estimate": -0.146627,
+      "statistic": {
+        "name": "t",
+        "value": -2.085774
+      },
+      "df": 198,
+      "p": 0.038281,
+      "CI": {
+        "level": 0.95,
+        "lower": -0.279679,
+        "upper": -0.00805
+      }
+    },
+    "alternative": {
+      "direction": "two.sided",
+      "correlation": 0
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.0.1"
+    }
+  },
+  "correlation_kendall": {
+    "method": "Kendall's rank correlation tau",
+    "data_name": "cox$call_parent and cox$anxiety",
+    "statistics": {
+      "estimate": -0.088082,
+      "statistic": {
+        "name": "z",
+        "value": -1.683931
+      },
+      "p": 0.092195
+    },
+    "alternative": {
+      "direction": "two.sided",
+      "tau": 0
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.0.1"
+    }
+  },
+  "correlation_spearman": {
+    "method": "Spearman's rank correlation rho",
+    "data_name": "cox$call_parent and cox$anxiety",
+    "statistics": {
+      "estimate": -0.119907,
+      "statistic": {
+        "name": "S",
+        "value": 1493171.479434
+      },
+      "p": 0.090796
+    },
+    "alternative": {
+      "direction": "two.sided",
+      "rho": 0
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.0.1"
+    }
+  },
+  "chi_squared": {
+    "method": "Pearson's Chi-squared test",
+    "data_name": "M",
+    "statistics": {
+      "statistic": {
+        "name": "X-squared",
+        "value": 30.070149
+      },
+      "df": 2,
+      "p": 2.953589e-07
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.0.1"
+    }
+  },
+  "chi_squared_yates": {
+    "method": "Pearson's Chi-squared test with Yates' continuity correction",
+    "data_name": "cox$condition and cox$sex",
+    "statistics": {
+      "statistic": {
+        "name": "X-squared",
+        "value": 1.104464
+      },
+      "df": 1,
+      "p": 0.293289
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.0.1"
+    }
+  },
+  "chi_squared_prob": {
+    "method": "Chi-squared test for given probabilities",
+    "data_name": "x",
+    "statistics": {
+      "statistic": {
+        "name": "X-squared",
+        "value": 2.5
+      },
+      "df": 2,
+      "p": 0.286505
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.0.1"
+    }
+  },
+  "wilcoxon_signed_rank": {
+    "method": "Wilcoxon signed rank exact test",
+    "data_name": "x and y",
+    "statistics": {
+      "statistic": {
+        "name": "V",
+        "value": 40
+      },
+      "p": 0.019531
+    },
+    "alternative": {
+      "direction": "greater",
+      "location shift": 0
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.0.1"
+    }
+  },
+  "wilcoxon_rank_sum_continuity": {
+    "method": "Wilcoxon rank sum test with continuity correction",
+    "data_name": "Ozone by Month",
+    "statistics": {
+      "statistic": {
+        "name": "W",
+        "value": 127.5
+      },
+      "p": 0.000121
+    },
+    "alternative": {
+      "direction": "two.sided",
+      "location shift": 0
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.0.1"
+    }
+  },
+  "wilcoxon_rank_sum": {
+    "method": "Wilcoxon rank sum test",
+    "data_name": "x and y",
+    "statistics": {
+      "statistic": {
+        "name": "W",
+        "value": 35
+      },
+      "p": 0.110336
+    },
+    "alternative": {
+      "direction": "greater",
+      "location shift": 0
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.0.1"
+    }
+  },
+  "wilcoxon_rank_sum_conf": {
+    "method": "Wilcoxon rank sum exact test",
+    "data_name": "x and y",
+    "statistics": {
+      "estimate": 0.305,
+      "statistic": {
+        "name": "W",
+        "value": 35
+      },
+      "p": 0.254412,
+      "CI": {
+        "level": 0.9,
+        "lower": -0.08,
+        "upper": 0.72
+      }
+    },
+    "alternative": {
+      "direction": "two.sided",
+      "location shift": 0
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.0.1"
+    }
+  },
+  "fisher_test": {
+    "method": "Fisher's Exact Test for Count Data",
+    "data_name": "TeaTasting",
+    "statistics": {
+      "estimate": 6.408309,
+      "p": 0.242857,
+      "CI": {
+        "level": 0.95,
+        "lower": 0.313569,
+        "upper": "Inf"
+      }
+    },
+    "alternative": {
+      "direction": "greater",
+      "odds ratio": 1
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.0.1"
+    }
+  },
+  "fisher_test_no_CI": {
+    "method": "Fisher's Exact Test for Count Data",
+    "data_name": "Convictions",
+    "statistics": {
+      "estimate": 0.046937,
+      "p": 0.000537
+    },
+    "alternative": {
+      "direction": "two.sided",
+      "odds ratio": 1
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.0.1"
+    }
+  },
+  "fisher_test_r_by_c": {
+    "method": "Fisher's Exact Test for Count Data",
+    "data_name": "Job",
+    "statistics": {
+      "p": 0.782685
+    },
+    "alternative": {
+      "direction": "two.sided"
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.0.1"
+    }
+  },
+  "fisher_test_simulated_p": {
+    "method": "Fisher's Exact Test for Count Data with simulated p-value",
+    "sim": 100000,
+    "data_name": "Job",
+    "statistics": {
+      "p": 0.783322
+    },
+    "alternative": {
+      "direction": "two.sided"
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.0.1"
+    }
+  },
+  "fisher_test_hybrid": {
+    "method": "Fisher's Exact Test for Count Data hybrid using asym.chisq",
+    "hybrid_parameters": {
+      "expect": 5,
+      "percent": 8,
+      "Emin": 5
+    },
+    "data_name": "MP6",
+    "statistics": {
+      "p": 0.03929
+    },
+    "alternative": {
+      "direction": "two.sided"
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.0.1"
+    }
+  }
+}

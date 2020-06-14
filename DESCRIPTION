@@ -1,11 +1,13 @@
 Package: tidystats
 Type: Package
-Title: Combine Output of Statistical Tests 
-Version: 0.4
+Title: Save Output of Statistical Tests 
+Version: 0.4.1
 Author: Willem Sleegers
 Maintainer: Willem Sleegers <w.sleegers@me.com>
 Description: Produce a file containing the output of statistical tests
     that can be shared or used to report statistics in scientific papers.
+URL: https://willemsleegers.github.io/tidystats/
+BugReports: https://github.com/WillemSleegers/tidystats/issues
 License: MIT + file LICENSE
 Encoding: UTF-8
 RoxygenNote: 7.1.0
@@ -21,5 +23,6 @@ Imports:
     tibble
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    testthat
 VignetteBuilder: knitr

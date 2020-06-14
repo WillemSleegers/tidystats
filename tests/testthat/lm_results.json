@@ -1,0 +1,194 @@
+{
+  "lm_simple": {
+    "method": "Linear regression",
+    "coefficients": [
+      {
+        "name": "(Intercept)",
+        "statistics": {
+          "estimate": 24.39,
+          "SE": 1.502073,
+          "statistic": {
+            "name": "t",
+            "value": 16.237558
+          },
+          "df": 198,
+          "p": 2.986711e-38
+        }
+      },
+      {
+        "name": "conditionmortality salience",
+        "statistics": {
+          "estimate": 2.77,
+          "SE": 2.124252,
+          "statistic": {
+            "name": "t",
+            "value": 1.303988
+          },
+          "df": 198,
+          "p": 0.193752
+        }
+      }
+    ],
+    "model": {
+      "statistics": {
+        "r_squared": 0.008515,
+        "adjusted_r_squared": 0.003507,
+        "statistic": {
+          "name": "F",
+          "value": 1.700385
+        },
+        "dfs": {
+          "numerator_df": 1,
+          "denominator_df": 198
+        },
+        "p": 0.193752,
+        "sigma": 15.020731
+      }
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.0.1"
+    }
+  },
+  "lm_multiple": {
+    "method": "Linear regression",
+    "coefficients": [
+      {
+        "name": "(Intercept)",
+        "statistics": {
+          "estimate": 38.307096,
+          "SE": 7.192309,
+          "statistic": {
+            "name": "t",
+            "value": 5.326119
+          },
+          "df": 197,
+          "p": 2.724486e-07
+        }
+      },
+      {
+        "name": "conditionmortality salience",
+        "statistics": {
+          "estimate": 2.396458,
+          "SE": 2.117239,
+          "statistic": {
+            "name": "t",
+            "value": 1.131879
+          },
+          "df": 197,
+          "p": 0.259061
+        }
+      },
+      {
+        "name": "anxiety",
+        "statistics": {
+          "estimate": -4.269048,
+          "SE": 2.158293,
+          "statistic": {
+            "name": "t",
+            "value": -1.977974
+          },
+          "df": 197,
+          "p": 0.049326
+        }
+      }
+    ],
+    "model": {
+      "statistics": {
+        "r_squared": 0.027822,
+        "adjusted_r_squared": 0.017952,
+        "statistic": {
+          "name": "F",
+          "value": 2.818889
+        },
+        "dfs": {
+          "numerator_df": 2,
+          "denominator_df": 197
+        },
+        "p": 0.062082,
+        "sigma": 14.911465
+      }
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.0.1"
+    }
+  },
+  "lm_interaction": {
+    "method": "Linear regression",
+    "coefficients": [
+      {
+        "name": "(Intercept)",
+        "statistics": {
+          "estimate": 29.446653,
+          "SE": 9.931119,
+          "statistic": {
+            "name": "t",
+            "value": 2.965089
+          },
+          "df": 196,
+          "p": 0.003402
+        }
+      },
+      {
+        "name": "conditionmortality salience",
+        "statistics": {
+          "estimate": 20.294597,
+          "SE": 14.019396,
+          "statistic": {
+            "name": "t",
+            "value": 1.447609
+          },
+          "df": 196,
+          "p": 0.149324
+        }
+      },
+      {
+        "name": "anxiety",
+        "statistics": {
+          "estimate": -1.551121,
+          "SE": 3.011938,
+          "statistic": {
+            "name": "t",
+            "value": -0.514991
+          },
+          "df": 196,
+          "p": 0.60714
+        }
+      },
+      {
+        "name": "conditionmortality salience:anxiety",
+        "statistics": {
+          "estimate": -5.566689,
+          "SE": 4.310479,
+          "statistic": {
+            "name": "t",
+            "value": -1.291432
+          },
+          "df": 196,
+          "p": 0.198075
+        }
+      }
+    ],
+    "model": {
+      "statistics": {
+        "r_squared": 0.036025,
+        "adjusted_r_squared": 0.02127,
+        "statistic": {
+          "name": "F",
+          "value": 2.441562
+        },
+        "dfs": {
+          "numerator_df": 3,
+          "denominator_df": 196
+        },
+        "p": 0.065515,
+        "sigma": 14.886256
+      }
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.0.1"
+    }
+  }
+}
