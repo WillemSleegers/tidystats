@@ -1,12 +1,9 @@
----
-output: md_document
----
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 <img src="man/figures/hex.png" width=150 alt="tidystats Logo"/>
 
-tidystats
+## tidystats
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/tidystats)](https://cran.r-project.org/package=tidystats)

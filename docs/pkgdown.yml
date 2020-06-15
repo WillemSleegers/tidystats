@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   introduction-to-tidystats: introduction-to-tidystats.html
   read-and-use-a-tidystats-file: read-and-use-a-tidystats-file.html
-last_built: 2020-06-14T20:21Z
+last_built: 2020-06-15T00:07Z
 urls:
   reference: https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/reference
   article: https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/articles
