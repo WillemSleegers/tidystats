@@ -1,8 +1,5 @@
 ---
-output:
-  md_document:
-    variant: gfm
-permalink: /index.html
+output: md_document
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -13,7 +10,6 @@ tidystats
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/tidystats)](https://cran.r-project.org/package=tidystats)
-[![R build status](https://github.com/willemsleegers/tidystats/workflows/R-CMD-check/badge.svg)](https://github.com/willemsleegers/tidystats/actions?workflow=R-CMD-check)
 
 <!-- badges: end -->
 ---------------
