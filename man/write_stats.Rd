@@ -10,6 +10,8 @@ write_stats(x, path, digits = 6)
 \item{x}{A tidystats list.}
 
 \item{path}{Path or connection to write to.}
+
+\item{digits}{The number of decimal places to use.}
 }
 \description{
 \code{write_stats} writes a tidystats list to a .json file.

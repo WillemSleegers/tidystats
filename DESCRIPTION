@@ -24,5 +24,6 @@ Imports:
 Suggests: 
     knitr,
     rmarkdown,
-    testthat
+    testthat,
+    BayesFactor
 VignetteBuilder: knitr

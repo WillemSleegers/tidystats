@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidystats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
       </span>
     </div>
 
@@ -93,10 +93,10 @@
     <li>
       <a href="../articles/introduction-to-tidystats.html">Introduction to tidystats</a>
     </li>
+    <li>
+      <a href="../articles/read-and-use-a-tidystats-file.html">Reading and using a tidystats file</a>
+    </li>
   </ul>
-</li>
-<li>
-  <a href="../articles/supported-analyses.html">Supported analyses</a>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -129,15 +129,32 @@
       <small>Source: <a href='https://github.com/WillemSleegers/tidystats/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="tidystats-05" class="section level1">
-<h1 class="page-header" data-toc-text="0.5">
-<a href="#tidystats-05" class="anchor"></a>tidystats 0.5<small> Unreleased </small>
+    <div id="tidystats-041" class="section level1">
+<h1 class="page-header" data-toc-text="0.4.1">
+<a href="#tidystats-041" class="anchor"></a>tidystats 0.4.1<small> Unreleased </small>
 </h1>
 <div id="new" class="section level2">
 <h2 class="hasAnchor">
 <a href="#new" class="anchor"></a>New</h2>
 <ul>
 <li>Added support for <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code>.</li>
+</ul>
+</div>
+<div id="improvements" class="section level2">
+<h2 class="hasAnchor">
+<a href="#improvements" class="anchor"></a>Improvements</h2>
+<ul>
+<li>
+<code><a href="../reference/read_stats.html">read_stats()</a></code> now converts Inf character strings to numeric.</li>
+<li>
+<code><a href="../reference/write_stats.html">write_stats()</a></code> now has a digits argument that determines the number of decimals for saved numbers (default: 6).</li>
+</ul>
+</div>
+<div id="misc" class="section level2">
+<h2 class="hasAnchor">
+<a href="#misc" class="anchor"></a>Misc</h2>
+<ul>
+<li>Added tests to minimize bugs</li>
 </ul>
 </div>
 </div>
@@ -205,9 +222,9 @@
 <li>Added support for stats’ <code><a href="https://rdrr.io/r/stats/confint.html">confint()</a></code> via the new <code>class</code> argument in <code><a href="../reference/add_stats.html">add_stats()</a></code> and <code>add_stats_to_model()</code>.</li>
 </ul>
 </div>
-<div id="improvements" class="section level2">
+<div id="improvements-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#improvements" class="anchor"></a>Improvements</h2>
+<a href="#improvements-1" class="anchor"></a>Improvements</h2>
 <ul>
 <li>Added check for an existing identifier in <code>add_stats_to_model()</code>.</li>
 <li>Added a <code>class</code> argument to <code><a href="../reference/add_stats.html">add_stats()</a></code> and <code>add_stats_to_model()</code>. Some statistical tests return a normal data.frame or matrix, which does not specify which test produced the results. This makes it difficult for tidystats to figure out how to tidy the result. Previously, we solved this by <code><a href="../reference/add_stats.html">add_stats()</a></code> accepting pre-tidied data frames. Now we added a the <code>class</code> argument to specify the name of the function that produced the results, so that we can then tidy it for you.</li>
@@ -225,9 +242,9 @@
 <li>Prepared for <code>dplyr</code> 0.8</li>
 </ul>
 </div>
-<div id="misc" class="section level2">
+<div id="misc-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#misc" class="anchor"></a>Misc</h2>
+<a href="#misc-1" class="anchor"></a>Misc</h2>
 <ul>
 <li>Added tests to the R package to minimize bugs.</li>
 <li>Made the code and documentation more consistent</li>
@@ -265,9 +282,9 @@
 <li>Added a better default <code>identifier</code> to <code><a href="../reference/add_stats.html">add_stats()</a></code>. If you supply a variable to be added to the tidystats list, and no identifier is provided, it will take the variable name as the identifier. If you pipe the results into <code><a href="../reference/add_stats.html">add_stats()</a></code> then the old default identifier will be used (e.g., “M1”).</li>
 </ul>
 </div>
-<div id="improvements-1" class="section level2">
+<div id="improvements-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#improvements-1" class="anchor"></a>Improvements</h2>
+<a href="#improvements-2" class="anchor"></a>Improvements</h2>
 <ul>
 <li>Added identifier check to <code>report()</code>. The function will now throw an error when the identifier does not exist.</li>
 <li>Added statistic check to all report functions. The function will now throw an error when the statistic does not exist.</li>

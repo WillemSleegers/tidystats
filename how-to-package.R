@@ -10,10 +10,6 @@ devtools::install()
 # Knit the README.Rmd file to a README.md file for Github
 knitr::knit("README.Rmd")
 
-# Add a data set ----------------------------------------------------------
-
-usethis::use_data(quote_source, overwrite = TRUE)
-
 # Testing -----------------------------------------------------------------
 
 # Add a test
@@ -23,11 +19,15 @@ usethis::use_test("lm")
 devtools::test()
 
 # Test specific tests
-testthat::test_file("tests/testthat/test_t_tests.R")
+testthat::test_file("tests/testthat/test_htest.R")
+
+# Add a data set ----------------------------------------------------------
+
+usethis::use_data(quote_source, overwrite = TRUE)
 
 # Create a vignette -------------------------------------------------------
 
-usethis::use_vignette("introduction-to-tidystats")
+usethis::use_vignette("read-and-use-a-tidystats-file")
 
 # Build website -----------------------------------------------------------
 

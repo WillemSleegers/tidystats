@@ -1,0 +1,55 @@
+---
+title: "Read and use a tidystats file"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Read and use a tidystats file}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+An additional usage of the tidystats-produced file is that it can be read back
+into R and converted into a data frame. This enables researchers to then 
+extract specific statistics to perform additional analyses with 
+(e.g., meta-analyses). Below is an example.
+
+```{r read-example, eval = FALSE, message = FALSE}
+# Load packages
+library(tidystats)
+library(dplyr)
+
+# Read in a tidystats-produced .json file
+results <- read_stats("results.json")
+
+# Convert the list to a data frame
+results_df <- tidy_stats_to_data_frame(results)
+
+# Select the p-values
+p_values <- filter(results_df, statistic == "p")
+```
+
+With the current example, this results in the following data frame:
+
+```{r read-example-table, message = FALSE, echo = FALSE}
+library(tidystats)
+library(dplyr)
+library(knitr)
+
+results <- read_stats("../inst/results.json")
+results_df <- tidy_stats_to_data_frame(results)
+
+p_values <- filter(results_df, statistic == "p")
+
+options(knitr.kable.NA = '')
+
+p_values %>%
+  select(-extra) %>%
+  kable(format = "markdown")
+```

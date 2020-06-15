@@ -91,7 +91,9 @@ describe_data <- function(data, column, na.rm = TRUE, short = FALSE) {
       .groups = "keep"
     )
   
-  output <- dplyr::mutate(output, variable = dplyr::quo_name(enquo(column)))
+  output <- dplyr::mutate(output, 
+      variable = dplyr::quo_name(dplyr::enquo(column))
+    )
   # TODO: See if this can be done differently
   
   # Add percentage if na.rm = FALSE (if na.rm = TRUE it would always be 100)
@@ -103,7 +105,8 @@ describe_data <- function(data, column, na.rm = TRUE, short = FALSE) {
   
   # Reorder the columns and return only a subset if short was set to TRUE
   if (short) {
-    output <- dplyr::select(output, dplyr::all_of(c("variable", grouping, "N", "M", "SD")))
+    output <- dplyr::select(output, dplyr::all_of(c("variable", grouping, "N", 
+      "M", "SD")))
   } else {
     output <- dplyr::select_at(output, dplyr::vars(dplyr::contains("variable"), 
       dplyr::contains("missing"), dplyr::starts_with("N"), 

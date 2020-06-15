@@ -924,87 +924,41 @@ tidy_stats.tidystats_counts <- function(x) {
   # Add method
   output$method <- "Counts"
   
-  # Extract groups
-  cols <- c("n", "pct")
+  # Extract grouping variables
+  group_names <- names(x)[!names(x) %in% c("n", "pct")]
+  output$group_by <- paste(group_names, collapse = " - ")
   
-  names(x) %>%
-    
+  # Combine grouping variables into a single column
+  x <- tidyr::unite(x, col = "group", dplyr::all_of(group_names), sep = " - ")
   
-  group_names <- x %>%
-    select(-one_of(cols)) %>%
-    names()
-  n_groups <- length(group_names)
+  # Create an empty groups list
+  groups <- list()
   
-  # Set the name property
-  output$name <- var_name
-  
-  # Check whether there are any grouping variables and select the relevant
-  # row of descriptives
-  if (n_groups > 0) {
+  # Loop over each row in the data frame and extract the statistics
+  for (i in 1:nrow(x)) {
+    # Create an empty group list
+    group <- list()
     
-    # Set the grouping name
-    # If there is more than 1 grouping variable, combine them together
-    output$group_by = paste(group_names, collapse = " by ")
+    # Select the current row
+    row <- x[i, ]
     
-    # Create an empty groups list
-    groups <- list()
+    # Set the group name
+    group$name <- row$group
+      
+    # Extract statistics
+    statistics <- list()
     
-    # Loop over the groups
-    for (i in 1:nrow(x)) {
-      # Create an empty group list
-      group <- list()
-      
-      # Select the current row
-      row <- x[i, ]
-      
-      # Set the group name
-      group$name <- paste(unlist(row[group_names]), collapse = " - ")
-      
-      # Extract statistics
-      statistics <- list()
+    if ("n" %in% names(row)) statistics$n <- row$n
+    if ("pct" %in% names(row)) statistics$pct <- row$pct
     
-      if ("missing" %in% names(row)) statistics$missing <- row$missing
-      if ("N" %in% names(row)) statistics$N <- row$N
-      if ("M" %in% names(row)) statistics$M <- row$M
-      if ("SD" %in% names(row)) statistics$SD <- row$SD
-      if ("SE" %in% names(row)) statistics$SE <- row$SE
-      if ("min" %in% names(row)) statistics$min <- row$min
-      if ("max" %in% names(row)) statistics$max <- row$max
-      if ("range" %in% names(row)) statistics$range <- row$range
-      if ("median" %in% names(row)) statistics$median <- row$median
-      if ("mode" %in% names(row)) statistics$mode <- row$mode
-      if ("skew" %in% names(row)) statistics$skew <- row$skew
-      if ("kurtosis" %in% names(row)) statistics$kurtosis <- row$kurtosis
+    # Add the statistics to the variable's statistics property
+    group$statistics <- statistics    
       
-      # Add the statistics to the variable's statistics property
-      group$statistics <- statistics    
-      
-      # Add the group to the groups list
-      groups[[i]] <- group
-    }
+    # Add the group to the groups list
+    groups[[i]] <- group
     
     # Add the groups list to the variable list
     output$groups <- groups
-    
-  } else {
-    # Extract statistics
-    statistics <- list()
-  
-    if ("missing" %in% names(x)) statistics$missing <- x$missing
-    if ("N" %in% names(x)) statistics$N <- x$N
-    if ("M" %in% names(x)) statistics$M <- x$M
-    if ("SD" %in% names(x)) statistics$SD <- x$SD
-    if ("SE" %in% names(x)) statistics$SE <- x$SE
-    if ("min" %in% names(x)) statistics$min <- x$min
-    if ("max" %in% names(x)) statistics$max <- x$max
-    if ("range" %in% names(x)) statistics$range <- x$range
-    if ("median" %in% names(x)) statistics$median <- x$median
-    if ("mode" %in% names(x)) statistics$mode <- x$mode
-    if ("skew" %in% names(x)) statistics$skew <- x$skew
-    if ("kurtosis" %in% names(x)) statistics$kurtosis <- x$kurtosis
-    
-    # Add the statistics to the variable's statistics property
-    output$statistics <- statistics
   }
   
   # Add package information
@@ -1095,7 +1049,7 @@ tidy_stats.BFBayesFactor <- function(x) {
   # Determine the method
   numerator <- x@numerator[[1]]
   class <- class(numerator)[1]
-  output$method <- case_when(
+  output$method <- dplyr::case_when(
     class == "BFoneSample" ~ "Bayesian t-test",
     class == "BFlinearModel" ~ "Bayesian linear regression"
   )
@@ -1106,7 +1060,7 @@ tidy_stats.BFBayesFactor <- function(x) {
   # Create a bayes factor list and loop over the bayes factors, extract the 
   # relevant statistics, and store them in separate lists
   bayes_factors <- list()
-  bayes_factors_df <- as.data.frame(extractBF(x))
+  bayes_factors_df <- as.data.frame(BayesFactor::extractBF(x))
   
   for (i in 1:nrow(bayes_factors_df)) {
     bayes_factor <- list()
@@ -1152,7 +1106,7 @@ tidy_stats.afex_aov <- function(x) {
   coefficients <- list()
   
   # Convert the results to a data frame
-  effects <- as_tibble(x$anova_table, rownames = "effect")
+  effects <- tibble::as_tibble(x$anova_table, rownames = "effect")
   
   for (i in 1:nrow(effects)) {
     

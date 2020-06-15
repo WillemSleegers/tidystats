@@ -31,12 +31,9 @@
     <loc>https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/reference/write_stats.html</loc>
   </url>
   <url>
-    <loc>https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/articles/analyses/introduction-to-tidystats.html</loc>
-  </url>
-  <url>
-    <loc>https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/articles/analyses/supported-analyses.html</loc>
-  </url>
-  <url>
     <loc>https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/articles/introduction-to-tidystats.html</loc>
+  </url>
+  <url>
+    <loc>https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/articles/read-and-use-a-tidystats-file.html</loc>
   </url>
 </urlset>

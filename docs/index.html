@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Combine Output of Statistical Tests  • tidystats</title>
+<title>Save Output of Statistical Tests  • tidystats</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Combine Output of Statistical Tests ">
+<script src="pkgdown.js"></script><meta property="og:title" content="Save Output of Statistical Tests ">
 <meta property="og:description" content="Produce a file containing the output of statistical tests
     that can be shared or used to report statistics in scientific papers.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">tidystats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
       </span>
     </div>
 
@@ -54,10 +54,10 @@
 <li>
       <a href="articles/introduction-to-tidystats.html">Introduction to tidystats</a>
     </li>
+    <li>
+      <a href="articles/read-and-use-a-tidystats-file.html">Reading and using a tidystats file</a>
+    </li>
   </ul>
-</li>
-<li>
-  <a href="articles/supported-analyses.html">Supported analyses</a>
 </li>
 <li>
   <a href="news/index.html">Changelog</a>
@@ -86,6 +86,9 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
+<hr>
+<p>output: md_document: variant: gfm permalink: /index.html —</p>
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 <p><img src="reference/figures/hex.png" width="150" alt="tidystats Logo"></p>
 <div id="tidystats" class="section level2">
 <h2 class="hasAnchor">
@@ -173,144 +176,6 @@
 <h2 class="hasAnchor">
 <a href="#reporting-statistics" class="anchor"></a>Reporting statistics</h2>
 <p>If you want to report the statistics in a manuscript, you can soon do so with a Word add-in that is currently in development.</p>
-</div>
-<div id="reading-in-a-tidystats-file" class="section level2">
-<h2 class="hasAnchor">
-<a href="#reading-in-a-tidystats-file" class="anchor"></a>Reading in a tidystats file</h2>
-<p>An additional usage of the tidystats-produced file is that it can be read back into R and converted into a data frame. This enables researchers to then extract specific statistics to perform additional analyses with (e.g., meta-analyses). Below is an example.</p>
-<div class="sourceCode" id="cb4"><pre class="r"><span class="co"># Read in a tidystats-produced .json file</span>
-<span class="no">results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/read_stats.html">read_stats</a></span>(<span class="st">"results.json"</span>)
-
-<span class="co"># Convert the list to a data frame</span>
-<span class="no">results_df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/tidy_stats_to_data_frame.html">tidy_stats_to_data_frame</a></span>(<span class="no">results</span>)
-
-<span class="co"># Select the p-values</span>
-<span class="no">p_values</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">results_df</span>, <span class="no">statistic</span> <span class="kw">==</span> <span class="st">"p"</span>)</pre></div>
-<p>With the current example, this results in the following data frame:</p>
-<table class="table">
-<thead><tr class="header">
-<th align="left">identifier</th>
-<th align="left">method</th>
-<th align="left">group</th>
-<th align="left">term</th>
-<th align="left">statistic</th>
-<th align="right">value</th>
-<th align="left">type</th>
-<th align="left">preregistered</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">sleep_test</td>
-<td align="left">Paired t-test</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">p</td>
-<td align="right">0.0028</td>
-<td align="left">primary</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">lm_D9</td>
-<td align="left">Linear regression</td>
-<td align="left">coefficients</td>
-<td align="left">(Intercept)</td>
-<td align="left">p</td>
-<td align="right">0.0000</td>
-<td align="left"></td>
-<td align="left">no</td>
-</tr>
-<tr class="odd">
-<td align="left">lm_D9</td>
-<td align="left">Linear regression</td>
-<td align="left">coefficients</td>
-<td align="left">groupTrt</td>
-<td align="left">p</td>
-<td align="right">0.2490</td>
-<td align="left"></td>
-<td align="left">no</td>
-</tr>
-<tr class="even">
-<td align="left">lm_D9</td>
-<td align="left">Linear regression</td>
-<td align="left">model</td>
-<td align="left"></td>
-<td align="left">p</td>
-<td align="right">0.2490</td>
-<td align="left"></td>
-<td align="left">no</td>
-</tr>
-<tr class="odd">
-<td align="left">npk_aov</td>
-<td align="left">ANOVA</td>
-<td align="left"></td>
-<td align="left">block</td>
-<td align="left">p</td>
-<td align="right">0.0159</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">npk_aov</td>
-<td align="left">ANOVA</td>
-<td align="left"></td>
-<td align="left">N</td>
-<td align="left">p</td>
-<td align="right">0.0044</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">npk_aov</td>
-<td align="left">ANOVA</td>
-<td align="left"></td>
-<td align="left">P</td>
-<td align="left">p</td>
-<td align="right">0.4749</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">npk_aov</td>
-<td align="left">ANOVA</td>
-<td align="left"></td>
-<td align="left">K</td>
-<td align="left">p</td>
-<td align="right">0.0288</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">npk_aov</td>
-<td align="left">ANOVA</td>
-<td align="left"></td>
-<td align="left">N:P</td>
-<td align="left">p</td>
-<td align="right">0.2632</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">npk_aov</td>
-<td align="left">ANOVA</td>
-<td align="left"></td>
-<td align="left">N:K</td>
-<td align="left">p</td>
-<td align="right">0.1686</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">npk_aov</td>
-<td align="left">ANOVA</td>
-<td align="left"></td>
-<td align="left">P:K</td>
-<td align="left">p</td>
-<td align="right">0.8628</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-</tbody>
-</table>
 </div>
 <div id="more-resources" class="section level2">
 <h2 class="hasAnchor">

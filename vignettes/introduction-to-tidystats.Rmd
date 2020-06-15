@@ -38,8 +38,8 @@ We start with a bit of setup.
 
 ```{r setup, message = FALSE}
 # Load packages
-library(tidyverse)
 library(tidystats)
+library(dplyr)
 
 # Load data
 data <- tidystats::quote_source

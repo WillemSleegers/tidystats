@@ -32,8 +32,8 @@ navbar:
       menu:
       - text: Introduction to tidystats
         href: articles/introduction-to-tidystats.html
-    - text: Supported analyses
-      href: articles/supported-analyses.html
+      - text: Reading and using a tidystats file
+        href: articles/read-and-use-a-tidystats-file.html
     - text: "Changelog"
       href: news/index.html
     - text: 

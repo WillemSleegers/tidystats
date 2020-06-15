@@ -4,6 +4,7 @@
 #'
 #' @param x A tidystats list.
 #' @param path Path or connection to write to.
+#' @param digits The number of decimal places to use.
 #' 
 #' @examples 
 #' # Load dplyr for access to the piping operator

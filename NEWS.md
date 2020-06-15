@@ -3,15 +3,21 @@
 ## New
 
 * Added support for `anova()`.
+* Added `count_data()` again.
 
 ## Improvements
 
 * `read_stats()` now converts Inf character strings to numeric. 
 * `write_stats()` now has a digits argument that determines the number of decimals for saved numbers (default: 6).
 
+## Bug fixes
+
+* Fixed a bug in `describe_data()` caused by the `dplyr` 1.0.0 update. 
+
 ## Misc
 
 * Added tests to minimize bugs
+* Added two vignettes
 
 # tidystats 0.4
 

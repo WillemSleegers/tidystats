@@ -20,9 +20,13 @@ tidy_matrix <- function(m) {
   # Tidy the matrix into a data frame
   df <- m %>%
     as.matrix() %>%
-    as_tibble(rownames = "name1") %>%
-    pivot_longer(-name1, names_to = "name2", values_to = "value") %>%
-    filter(!is.na(value) & name1 != name2)
+    tibble::as_tibble(rownames = "row") %>%
+    tidyr::pivot_longer(-row, names_to = "column", values_to = "value") %>%
+    dplyr::mutate(
+        row = as.numeric(row), 
+        column = readr::parse_number(column)
+      ) %>%
+    dplyr::filter(row != column)
  
   return(df)   
 }

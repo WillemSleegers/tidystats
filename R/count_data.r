@@ -37,20 +37,12 @@ count_data <- function(data, ..., na.rm = FALSE) {
     stop("'data' is not a data frame.")
   }
   
-  # Get variables
-  vars <- quos(...)
-  
-  # Check if the user supplied any columns
-  if (length(vars) == 0) {
-    stop("No columns specified.")
-  }
-
-  # Calculate descriptives
-  output <- dplyr::count(data, !!! vars)
+  # Calculate descriptive statistics
+  output <- dplyr::count(data, ...)
   
   # Remove missing observations if na.rm is set to TRUE
   if (na.rm) {
-    output <- filter_all(output, all_vars(!is.na(.)))
+    output <- dplyr::filter_all(output, dplyr::all_vars(!is.na(.)))
   }
 
   # Calculate percentage of each group per var
@@ -59,7 +51,7 @@ count_data <- function(data, ..., na.rm = FALSE) {
   
   # Add a tidystats class so we can use the tidy_stats() function to parse the
   # the output
-  class(output) <- append(class(output), "tidystats_counts")
+  class(output) <- c("tidystats_counts", class(output))
   
   return(output)
 }
