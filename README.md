@@ -3,7 +3,7 @@
 [![](http://cranlogs.r-pkg.org/badges/last-month/tidystats?color=green)](https://cran.r-project.org/package=tidystats)
 [![](http://cranlogs.r-pkg.org/badges/last-week/tidystats?color=green)](https://cran.r-project.org/package=tidystats)
 
-<img src="man/figures/hex.png" width=150 alt="tidystats Logo"/>
+<img src="man/figures/hex.png" width=150 alt="tidystats logo"/>
 
 ## tidystats
 
@@ -11,9 +11,11 @@
 **License:** [MIT](https://opensource.org/licenses/MIT)
 
 `tidystats` is an R package aimed at sharing the output of statistical
-models. To achieve this, `tidystats` combines the output of multiple
-statistical models and saves these in a file. This file can then be
-shared with others or used to report the statistics in a manuscript.
+models. `tidystats` extracts the output of statistical models (e.g.,
+*t*-tests, regression models) and combines them into a structured file.
+This file can then used to report the statistics in a manuscript or
+shared with others so that they can extract the statistics (e.g., for
+meta-analyses).
 
 Please see below for instructions on how to install and use this
 package. **Do note that the package is currently in development. This
@@ -133,7 +135,7 @@ results <- results %>%
 write_stats(results, "results.json")
 ```
 
-This results in a .json file that contains all the statistics from the
+This results is a .json file that contains all the statistics from the
 three models. If you want to see what this file looks like, you can
 inspect it
 [here](https://github.com/WillemSleegers/tidystats/blob/master/inst/results.json).
