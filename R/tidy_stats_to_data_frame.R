@@ -1,7 +1,7 @@
 #' Convert a tidystats list to a data frame
 #'
 #' \code{tidy_stats_to_data_frame} converts a tidystats list to a data frame, 
-#' which can then be used to easily extract specific statistics using standard
+#' which can then be used to extract specific statistics using standard
 #' subsetting functions (e.g., \code{dplyr::filter}).
 #'
 #' @param x A tidystats list.
@@ -10,67 +10,76 @@
 #' # Load dplyr for access to the piping operator
 #' library(dplyr)
 #'   
-#' # Conduct statistical tests
-#' t_test_1 <- t.test(1:10, y = c(7:20))
-#' t_test_2 <- t.test(1:10, y = c(7:20, 200))
-#' t_test_3 <- t.test(extra ~ group, data = sleep)
+# Conduct statistical tests
+#' # t-test:
+#' sleep_test <- t.test(extra ~ group, data = sleep, paired = TRUE)
+#' 
+#' # lm:
+#' ctl <- c(4.17,5.58,5.18,6.11,4.50,4.61,5.17,4.53,5.33,5.14)
+#' trt <- c(4.81,4.17,4.41,3.59,5.87,3.83,6.03,4.89,4.32,4.69)
+#' group <- gl(2, 10, 20, labels = c("Ctl","Trt"))
+#' weight <- c(ctl, trt)
+#' lm_D9 <- lm(weight ~ group)
+#' 
+#' # ANOVA:
+#' npk_aov <- aov(yield ~ block + N*P*K, npk)
 #' 
 #' #' # Create an empty list
 #' results <- list()
 #' 
-#' # Add tests to the empty list
+#' # Add output to the results list
 #' results <- results %>%
-#'   add_stats(t_test_1) %>%
-#'   add_stats(t_test_2) %>%
-#'   add_stats(t_test_3)
+#'   add_stats(sleep_test) %>%
+#'   add_stats(lm_D9, type = "primary", preregistered = TRUE) %>%
+#'   add_stats(npk_aov, notes = "An ANOVA example")
 #'   
 #' # Convert the list to a data frame
 #' results_df <- tidy_stats_to_data_frame(results)
 #' 
 #' # Select all the p-values
-#' results_df %>%
-#'   filter(statistic == "p") %>%
-#'   pull(value)
+#' filter(results_df, statistic == "p")
 #'
 #' @export
-
-#TODO: Simply the methods (e.g., get rid of simulated p value description)
-
 tidy_stats_to_data_frame <- function(x) {
-
-  # Create a vector with names of each list element (which are the identifiers)
-  identifiers <- names(x)
-
   # Loop over each analysis and convert each to a data frame
-  output <- purrr::map_df(x, analysis_to_data_frame, .id = "identifier")
+  output <- purrr::map2_dfr(x, names(x), analysis_to_data_frame)
   
   # Re-order output
-  output <- dplyr::select_at(output, dplyr::vars(identifier, method, 
-    dplyr::contains("DV"), dplyr::contains("group"), dplyr::contains("term"), 
+  output <- dplyr::select_at(output, vars(identifier, dplyr::contains("group"), 
+    dplyr::contains("term"), statistic, value, dplyr::contains("extra"), method, 
     dplyr::everything()))
   
   return(output)
 }
 
-analysis_to_data_frame <- function(x) {
-
-  # Extract the method information
-  method <- x$method
-
-  # Extract the statistics
-  # Depending on the method used, group the statistics in a group column
-  if (method == "Linear regression") {
-    output <- lm_to_data_frame(x)
-  } else if (method == "ANOVA") {
-    output <- aov_to_data_frame(x)
-  } else if (method == "Descriptives") {
-    output <- descriptives_to_data_frame(x)
-  } else {
-    output <- htest_to_data_frame(x)
+analysis_to_data_frame <- function(x, y) {
+  output <- tibble()
+  
+  if ("statistics" %in% names(x)) {
+    output <- statistics_to_data_frame(x$statistics)
   }
+  if ("terms" %in% names(x)) {
+    output <- bind_rows(output, terms_to_data_frame(x$terms))
+  }
+  if ("model" %in% names(x)) {
+    output <- bind_rows(output, statistics_to_data_frame(x$model$statistics))
+  }
+  if ("groups" %in% names(x)) {
+    output <- bind_rows(output, groups_to_data_frame(x$groups))
+  }
+  if ("effects" %in% names(x)) {
+    output <- bind_rows(
+      output, 
+      random_effects_to_data_frame(x$effects$random_effects),
+      fixed_effects_to_data_frame(x$effects$fixed_effects)
+    )
+  }
+  
+  # Add identifier 
+  output$identifier <- y
 
   # Add the method
-  output$method <- method
+  output$method <- x$method
   
   # Add additional information, if present
   if ("type" %in% names(x)) {
@@ -83,134 +92,107 @@ analysis_to_data_frame <- function(x) {
   return(output)
 }
 
-descriptives_to_data_frame <- function(x) {
-  # Loop over the variables and possibly the groups, and extract the statistics
-  df <- purrr::map_df(x$variables, function(x) {
-    if ("groups" %in% names(x)) {
-        df <- purrr::map_df(x$groups, function(x) {
-        df <- purrr::map2_df(x$statistics, names(x$statistics), 
-          statistics_to_data_frame)
-        df$group <- x$name
-      
-        return(df)
-      })
-    } else {
-      df <- purrr::map2_df(x$statistics, names(x$statistics), 
-        statistics_to_data_frame)
-    }
-    
-    df$DV <- x$name
-    
-    return(df)
-  })
+random_effects_to_data_frame <- function(x) {
+  df_statistics <- statistics_to_data_frame(x$statistics)
+  df_groups <- groups_to_data_frame(x$groups)
+  
+  return(bind_rows(df_statistics, df_groups))
+}
 
-  # Re-order the columns
-  df <- dplyr::select_at(df, dplyr::vars(DV, dplyr::contains("group"), 
-    dplyr::everything()))
+fixed_effects_to_data_frame <- function(x) {
+  df_terms <- terms_to_data_frame(x$terms)
+  df_pairs <- pairs_to_data_frame(x$pairs)
+  
+  return(bind_rows(df_terms, df_pairs))
+}
+
+groups_to_data_frame <- function(x) {
+  df <- map_df(x, group_to_data_frame)
+  
+  return(df)
+}
+
+group_to_data_frame <- function(x) {
+  
+  df <- tibble()
+  
+  if ("statistics" %in% names(x)) {
+    df_statistics <- statistics_to_data_frame(x$statistics)
+    df_statistics$group <- x$name
+    df <- bind_rows(df, df_statistics)
+  }
+  
+  if ("terms" %in% names(x)) {
+    df_terms <- terms_to_data_frame(x$terms)
+    df_terms$group <- x$name
+    df <- bind_rows(df, df_terms)
+  }
+  
+  if ("pairs" %in% names(x)) {
+    df_pairs <- pairs_to_data_frame(x$pairs)
+    df_pairs$group <- x$name
+    df <- bind_rows(df, df_pairs)
+  }
+  
+  return(df)
+}
+
+terms_to_data_frame <- function(x) {
+  df <- map_df(x, term_to_data_frame)
+  
+  return(df)
+}
+
+term_to_data_frame <- function(x) {
+  df <- statistics_to_data_frame(x$statistics)
+  df$term <- x$name
+  
+  return(df)
+}
+
+pairs_to_data_frame <- function(x) {
+  df <- map_df(x, pair_to_data_frame)
+  
+  return(df)
+}
+
+pair_to_data_frame <- function(x) {
+  df <- statistics_to_data_frame(x$statistics)
+  df$term <- paste(x$names[[1]], "-", x$names[[2]])
+  
+  return(df)
+}
+
+statistics_to_data_frame <- function(x) {
+  df <- map2_dfr(x, names(x), statistic_to_data_frame)
+  
+  return(df)
+}
+
+statistic_to_data_frame <- function(x, y) {
+  if (class(x) == "numeric" | class(x) == "integer") {
+    df <- tibble(
+      statistic = y,
+      value = x
+    )
+  } else {
+    if (y == "CI") {
+      df <- CI_to_data_frame(x)
+    } else if (y == "dfs") {
+      df <- dfs_to_data_frame(x)
+    } else if (y == "estimate" | y == "statistic") {
+      df <- named_statistic_to_data_frame(x)
+    }
+  }
 
   return(df)
 }
 
-lm_to_data_frame <- function(x) {
-  # Convert the coefficient-related statistics to a data frame
-  coefficients <- purrr::map_df(x$coefficients, function(x) {
-    coefficient <- x$name
-    statistics <- purrr::map2_df(x$statistics, names(x$statistics), 
-      statistics_to_data_frame)
-    output <- dplyr::mutate(statistics, term = coefficient)
-
-    return(output)
-  })
-  
-  # Add coefficients
-  coefficients <- dplyr::mutate(coefficients, group = "coefficients")
-  
-  # Convert the model fit statistics to a data frame
-  model <- purrr::map2_df(x$model$statistics, names(x$model$statistics),
-    statistics_to_data_frame)
-  model <- dplyr::mutate(model, group = "model", )
-  
-  # Combine both the coefficients and model data frames
-  output <- dplyr::bind_rows(coefficients, model)
-  
-  # Re-order columns
-  output <- dplyr::select(output, group, term, dplyr::everything())
-  
-  return(output)
-}
-
-aov_to_data_frame <- function(x) {
-  
-  # Check whether the ANOVA has a within-subjects factor
-  if ("groups" %in% names(x)) {
-      output <- purrr::map_df(x$groups, function(x) {
-        group <- stringr::str_remove(x$name, "Error: ")
-        coefficients <- purrr::map_df(x$coefficients, function(x) {
-          coefficient <- x$name
-          statistics <- purrr::map2_df(x$statistics, names(x$statistics),
-          statistics_to_data_frame)
-          
-          output <- dplyr::mutate(statistics, term = coefficient)
-
-          return(output)
-        })
-
-        output <- dplyr::mutate(coefficients, group = group)
-
-        return(output)
-      })
-    } else {
-      output <- purrr::map_df(x$coefficients, function(x) {
-        coefficient <- x$name
-        statistics <- purrr::map2_df(x$statistics, names(x$statistics), 
-          statistics_to_data_frame)
-        output <- dplyr::mutate(statistics, term = coefficient)
-
-        return(output)
-      })
-    }
-  
-  return(output)
-}
-
-htest_to_data_frame <- function(x) {
-  statistics <- x$statistics
-    statistics_df <- purrr::map2_df(statistics, names(statistics),
-      statistics_to_data_frame)
-    output <- statistics_df
-    
-  return(output)
-}
-
-statistics_to_data_frame <- function(x, name) {
-  if (name == "statistic") {
-    output <- statistic_to_data_frame(x)
-  } else if (name == "CI") {
-    output <- CI_to_data_frame(x)
-  } else if (name == "dfs") {
-    output <- dfs_to_data_frame(x)
-  } else {
-    output <- value_to_data_frame(x, name)
-  }
-
-  return(output)
-}
-
-value_to_data_frame <- function(x, name) {
+named_statistic_to_data_frame <- function(x) {
   return(
-    tibble::tibble(
-      statistic = name,
-      value = x
-    )
-  )
-}
-
-statistic_to_data_frame <- function(x) {
-  return(
-    tibble::tibble(
-      statistic = "statistic",
-      value = x$value,
-      extra = paste(x$name, "statistic", sep = "-")
+    tibble::tribble(
+      ~"statistic", ~"value",
+      x$name, x$value
     )
   )
 }
@@ -219,8 +201,8 @@ dfs_to_data_frame <- function(x) {
   return(
     tibble::tribble(
       ~"statistic", ~"value",
-      "numerator df", x$numerator_df,
-      "denominator df", x$denominator_df,
+      names(x)[1], x[[1]],
+      names(x)[2], x[[2]],
     )
   )
 }
@@ -229,8 +211,8 @@ CI_to_data_frame <- function(x) {
   return(
     tibble::tribble(
       ~"statistic", ~"value", ~"extra",
-      "CI lower", x$lower, paste0(x$level * 100, "% CI"),
-      "CI upper", x$upper, paste0(x$level * 100, "% CI"),
+      "CI_lower", x$CI_lower, paste0(x$CI_level * 100, "% CI"),
+      "CI_upper", x$CI_upper, paste0(x$CI_level * 100, "% CI"),
     )
   )
 }

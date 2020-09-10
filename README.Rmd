@@ -1,13 +1,26 @@
+---
+output:
+  md_document:
+    variant: gfm
+html_preview: false
+---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+```{r echo=FALSE, results="hide", message=FALSE}
+library(badger)
+```
+
+```{r, echo = FALSE, results='asis'}
+cat(
+	badge_cran_release("badger", "green"),
+	badge_cran_download("badger", "grand-total", "green"),
+	badge_cran_download("badger", "last-month", "green"),
+	badge_cran_download("badger", "last-week", "green")
+)
+```
 
 <img src="man/figures/hex.png" width=150 alt="tidystats Logo"/>
 
 ## tidystats
-
-<!-- badges: start -->
-[![CRAN status](https://www.r-pkg.org/badges/version/tidystats)](https://cran.r-project.org/package=tidystats)
-<!-- badges: end -->
 
 **Author:** [Willem Sleegers](https://www.willemsleegers.com/)
 **License:** [MIT](https://opensource.org/licenses/MIT)
@@ -36,7 +49,7 @@ install_github("willemsleegers/tidystats")
 ### Setup
 
 Load the package and start by creating an empty list to store the results of 
-statistical models in. You can name the list whatever you want (in the 
+statistical models. You can name the list whatever you want (in the 
 example below I create an empty list called `results`).
 
 ```{r setup, warning = FALSE, message = FALSE}
@@ -53,7 +66,7 @@ The main function is `add_stats()`. The function has 2 necessary arguments:
 - `output`: The output of a statistical test you want to add to the list (e.g., 
 the output of `t.test()` or `lm()`)
 
-Optionally you can also specify an `identifier` and add the `type` of analysis, 
+Optionally you can also specify an `identifier`, the `type` of analysis, 
 whether the analysis was `preregistered`, and/or additional `notes`.  
 
 The `identifier` is used to identify the model 
@@ -83,8 +96,27 @@ find fruitful.
 - `lm()`
 - `anova()`
 
-### Example
+**Package:** lme4
 
+- `lmer()`
+
+**Package:** lmerTest
+
+- `lmer()`
+
+**Package:** BayesFactor
+
+- `generalTestBF()`
+- `lmBF()`
+- `regressionBF()`
+- `ttestBF()`
+- `anovaBF()`
+- `correlationBF()`
+- `contingencyTableBF()`
+- `proportionBF()`
+- `meta.ttestBF()`
+
+### Example
 
 ```{r example-setup, echo = FALSE, message = FALSE}
 library(dplyr)
@@ -123,10 +155,10 @@ models. If you want to see what this file looks like, you can inspect it [here](
 
 ## Reporting statistics
 
-If you want to report the statistics in a manuscript, you can soon do so with a
-Word add-in that is currently in development.
+If you want to report the statistics in a manuscript, you can do so with a
+Word add-in that is currently in development [here](https://github.com/WillemSleegers/tidystats-Word-add-in).
 
 ## More resources
 
-For more information on this package, see the `tidystats` project page on [my 
-website](https://www.willemsleegers.com/tidystats.html).
+Do you have questions or comments about `tidystats`? Create an issue here on
+Github or contact me via [Twitter](https://twitter.com/willemsleegers).

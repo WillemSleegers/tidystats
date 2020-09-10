@@ -1,0 +1,15 @@
+---
+title: "tidystats taxonomy"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{tidystats taxonomy}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Probably the most difficult aspect of `tidystats` was (and still is) designing a
+taxonomy of statistics that can cover all statistical tests. 
+
+The tidystats taxonomy consists of the following components:
+

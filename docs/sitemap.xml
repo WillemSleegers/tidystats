@@ -22,6 +22,9 @@
     <loc>https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/reference/read_stats.html</loc>
   </url>
   <url>
+    <loc>https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/reference/tidy_matrix.html</loc>
+  </url>
+  <url>
     <loc>https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/reference/tidy_stats.html</loc>
   </url>
   <url>
@@ -35,5 +38,8 @@
   </url>
   <url>
     <loc>https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/articles/read-and-use-a-tidystats-file.html</loc>
+  </url>
+  <url>
+    <loc>https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/articles/tidystats-taxonomy.html</loc>
   </url>
 </urlset>

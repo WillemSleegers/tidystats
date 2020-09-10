@@ -1,3 +1,19 @@
+# tidystats 0.5
+
+## Breaking changes
+
+* Changed the way certain model results are parsed. The estimate is now parsed as a list containing the name of the estimate and the value of the estimate. Models are now parsed to extract the following types of lists: statistics, terms, pairs, groups, and effects. This new parsing unites t-tests, ANOVA, and regression, including multilevel regression. 
+
+## New
+
+* Added support for generic tests. If `tidystats` does not support a particular analysis, you can create your own generic test by providing a list of statistics.
+* Improved support for `anova()`.
+* Added support for more `BayesFactor` functions.
+
+## Misc
+
+* Removed the `cox` dataset.
+
 # tidystats 0.4.1
 
 ## New

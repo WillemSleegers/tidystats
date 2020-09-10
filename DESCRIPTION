@@ -10,7 +10,7 @@ URL: https://willemsleegers.github.io/tidystats/
 BugReports: https://github.com/WillemSleegers/tidystats/issues
 License: MIT + file LICENSE
 Encoding: UTF-8
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 LazyData: true
 Depends: R (>= 2.10)
 Imports: 

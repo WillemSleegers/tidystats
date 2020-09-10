@@ -18,7 +18,7 @@ A data frame with 6343 rows and 15 columns:
   \item{race}{participant's race}
   \item{major}{participant's major}
   \item{native_language}{participant's native language}
-  \item{referrer}{location of where the study was conducated}
+  \item{referrer}{location of where the study was conducted}
   \item{compensation}{how the participant was compensated for their 
     participation}
   \item{recruitment}{how the participant was recruited}
@@ -39,12 +39,13 @@ Labs project (Klein et al., 2014).
 \details{
 Lorge and Curtiss (1936) examined how a quotation is perceived when 
 it is attributed to a liked or disliked individual. The quotation of interest 
-was, ‘‘I hold it that a little rebellion, now and then, is a good thing, and 
-as necessary in the political world as storms are in the physical world.’’ 
+was, "I hold it that a little rebellion, now and then, is a good thing, and 
+as necessary in the political world as storms are in the physical world." 
 In one condition the quotation was attributed to Thomas Jefferson, a liked 
 individual, and in the other it was attributed to Vladimir Lenin, a disliked 
 individual. More agreement was observed when the quotation was attributed to 
-Jefferson than Lenin. In the replication studies, the quotation was 
+Jefferson than Lenin. In the replication studies, the quotation was ""I have 
+sworn to only live free, even if I find bitter the taste of death." and was
 attributed to either George Washington, the liked individual, or Osama Bin 
 Laden, the disliked individual.
 }

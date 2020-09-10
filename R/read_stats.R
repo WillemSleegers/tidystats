@@ -12,8 +12,10 @@
 #' @export
 read_stats <- function(file) {
 
-  # Read a tidystats .json file
+  # Read a tidystats-produced .json file
   results <- jsonlite::read_json(file)
+  
+  #TODO: Add checks to see whether the file has the correct structure
 
   # Look for character Inf's and convert them to numeric
   results <- rapply(results, function(x) if(x == "Inf") Inf else x, 

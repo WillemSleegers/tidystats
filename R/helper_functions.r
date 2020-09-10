@@ -1,3 +1,5 @@
+#' Helper functions in tidystats
+#' 
 
 tidy_matrix <- function(m) {
   
@@ -15,18 +17,14 @@ tidy_matrix <- function(m) {
   }
   
   # Remove one half of the matrix because these are duplicate values
-  m[lower.tri(m)] <- NA
+  m[lower.tri(m, diag = TRUE)] <- NA
   
   # Tidy the matrix into a data frame
   df <- m %>%
     as.matrix() %>%
-    tibble::as_tibble(rownames = "row") %>%
-    tidyr::pivot_longer(-row, names_to = "column", values_to = "value") %>%
-    dplyr::mutate(
-        row = as.numeric(row), 
-        column = readr::parse_number(column)
-      ) %>%
-    dplyr::filter(row != column)
+    tibble::as_tibble(rownames = "name1") %>%
+    tidyr::pivot_longer(-name1, names_to = "name2", values_to = "value") %>%
+    dplyr::filter(!is.na(value))
  
   return(df)   
 }
