@@ -98,6 +98,7 @@ tidy_stats.htest <- function(x) {
     output$var_equal <- FALSE
   } else {
     output$method <- method
+    output$var_equal <- TRUE
   }
 
   # Extract DV and IV information
@@ -205,8 +206,31 @@ tidy_stats.lm <- function(x) {
   # Extract method
   output$method <- "Linear regression"
   
+  # Extract model statistics
+  statistics <- list()
+  
+  statistics$r_squared <- summary$r.squared
+  statistics$adjusted_r_squared <- summary$adj.r.squared
+  
+  statistic <- list()
+  statistic$name <- "F"
+  statistic$value <- summary$fstatistic[[1]]
+  statistics$statistic <- statistic
+  
+  dfs <- list()
+  dfs$df_numerator <- summary$fstatistic[[2]]
+  dfs$df_denominator <- summary$fstatistic[[3]]
+  statistics$dfs <- dfs
+  
+  statistics$p <- stats::pf(summary$fstatistic[[1]], summary$fstatistic[[2]], 
+    summary$fstatistic[[3]], lower.tail = FALSE)
+  statistics$sigma <- summary$sigma
+  
+  # Add statistics to output
+  output$statistics <- statistics
+  
   # Extract statistics of the coefficients, although we will call them 'terms'
-  coefficients <- coef(summary)
+  coefficients <- stats::coef(summary)
   
   # Create an empty terms list
   terms <- list()
@@ -237,7 +261,7 @@ tidy_stats.lm <- function(x) {
     
     statistics$df <- summary$df[2]
     
-    statistics$p <- coefficients[1, "Pr(>|t|)"]
+    statistics$p <- coefficients[i, "Pr(>|t|)"]
     
     term$statistics <- statistics
     
@@ -247,29 +271,6 @@ tidy_stats.lm <- function(x) {
   
   # Add terms to output
   output$terms <- terms
-  
-  # Extract model statistics
-  statistics <- list()
-  
-  statistics$r_squared <- summary$r.squared
-  statistics$adjusted_r_squared <- summary$adj.r.squared
-  
-  statistic <- list()
-  statistic$name <- "F"
-  statistic$value <- summary$fstatistic[[1]]
-  statistics$statistic <- statistic
-  
-  dfs <- list()
-  dfs$df_numerator <- summary$fstatistic[[2]]
-  dfs$df_denominator <- summary$fstatistic[[3]]
-  statistics$dfs <- dfs
-  
-  statistics$p <- stats::pf(summary$fstatistic[[1]], summary$fstatistic[[2]], 
-    summary$fstatistic[[3]], lower.tail = FALSE)
-  statistics$sigma <- summary$sigma
-  
-  # Add statistics to output
-  output$statistics <- statistics
   
   # Add package information
   package <- list()
@@ -295,8 +296,24 @@ tidy_stats.glm <- function(x) {
   # Extract method
   output$method <- "Linear regression"
   
+  # Extract model statistics
+  statistics <- list()
+  
+  statistics$deviance_null <- summary$null.deviance
+  statistics$deviance_residual <- summary$deviance
+  
+  dfs <- list()
+  dfs$df_null <- summary$df.null
+  dfs$df_residual <- summary$df.residual
+  statistics$dfs <- dfs
+  
+  statistics$AIC <- summary$aic
+  
+  # Add model fit statistics to output
+  output$statistics <- statistics
+  
   # Extract statistics of the coefficients, although we will call them 'terms'
-  coefficients <- coef(summary)
+  coefficients <- stats::coef(summary)
   
   # Create an empty terms list
   terms <- list()
@@ -335,23 +352,7 @@ tidy_stats.glm <- function(x) {
   }
   
   # Add terms to output
-  output$terms
-  
-  # Extract model statistics
-  statistics <- list()
-  
-  statistics$deviance_null <- summary$null.deviance
-  statistics$deviance_residual <- summary$deviance
-  
-  dfs <- list()
-  dfs$df_null <- summary$df.null
-  dfs$df_residual <- summary$df.residual
-  statistics$dfs <- dfs
-  
-  statistics$AIC <- summary$aic
-  
-  # Add model fit statistics to output
-  output$statistics <- statistics
+  output$terms <- terms
   
   # Add additional information
   if (!is.null(summary$iter)) {
@@ -385,20 +386,18 @@ tidy_stats.anova <- function(x) {
   
   # Figure out whether it's an ANOVA or ANODE
   heading = attr(x, "heading")
-  
-  if (heading[1] == "Analysis of Variance Table\n") {
-    output$method <- "ANOVA"
-  } else {
-    output$method <- "ANODE"
-    if (length(heading) == 1) {
-      output$error_distribution <- stringr::str_extract(heading, 
-        "(?<=Model: )[a-z]+")
-      output$link_function <- stringr::str_extract(heading, "(?<=link: )[a-z]+")  
-    }
-  }
+  #TODO: Extract error distribution
+  #TODO: Extract link function
   
   # Convert the summary statistics format to a data frame
   x <- tibble::as_tibble(x, rownames = "terms")
+  
+  # Determine method
+  if ("deviance" %in% tolower(names(x))) {
+    output$method <- "ANODE"
+  } else {
+    output$method <- "ANOVA"
+  }
   
   # Trim spaces from the names of the terms
   x <- dplyr::mutate(x, terms = stringr::str_trim(terms))
@@ -414,14 +413,15 @@ tidy_stats.anova <- function(x) {
     # Create a new statistics list and add the term's statistics
     statistics <- list()
     
-    if ("Sum Sq" %in% colnames(x)) {statistics$SS <- x$`Sum Sq`[i]}
-    if ("Sum of Sq" %in% colnames(x)) {
-      if (!is.na(x$`Sum of Sq`[i])) {
-        statistics$SS <- x$`Sum of Sq`[i]
+    if ("npar" %in% colnames(x)) {statistics$n_parameters <- x$npar[i]}
+    if ("AIC" %in% colnames(x)) {statistics$AIC <- x$AIC[i]}
+    if ("BIC" %in% colnames(x)) {statistics$BIC <- x$BIC[i]}
+    if ("logLik" %in% colnames(x)) {statistics$log_likelihood <- x$logLik[i]}
+    if ("deviance" %in% colnames(x)) {
+      if (!is.na(x$deviance[i])) {
+        statistics$deviance = x$deviance[i]  
       }
     }
-    if ("Mean Sq" %in% colnames(x)) {statistics$MS <- x$`Mean Sq`[i]}
-    if ("RSS" %in% colnames(x)) {statistics$RSS <- x$RSS[i]}
     if ("Deviance" %in% colnames(x)) {
       if (!is.na(x$Deviance[i])) {
         statistics$deviance = x$Deviance[i]  
@@ -430,6 +430,22 @@ tidy_stats.anova <- function(x) {
     if ("Resid. Dev" %in% colnames(x)) {
       if (!is.na(x$`Resid. Dev`[i])) {
         statistics$deviance_residual = x$`Resid. Dev`[i]
+      }
+    }
+    if ("RSS" %in% colnames(x)) {statistics$RSS <- x$RSS[i]}
+    if ("Sum Sq" %in% colnames(x)) {statistics$SS <- x$`Sum Sq`[i]}
+    if ("Sum of Sq" %in% colnames(x)) {
+      if (!is.na(x$`Sum of Sq`[i])) {
+        statistics$SS <- x$`Sum of Sq`[i]
+      }
+    }
+    if ("Mean Sq" %in% colnames(x)) {statistics$MS <- x$`Mean Sq`[i]}
+    if ("Chisq" %in% colnames(x)) {
+      if (!is.na(x$Chisq[i])) {
+        statistic <- list()
+        statistic$name <- "chi-squared"
+        statistic$value <- x$Chisq[i]
+        statistics$statistic <- statistic
       }
     }
     if ("F value" %in% colnames(x)) {
@@ -455,23 +471,37 @@ tidy_stats.anova <- function(x) {
         dfs$df_denominator <- x$Df[nrow(x)]
         statistics$dfs <- dfs
       } else {
-        if (!is.na(x$Df[i])) {
-          dfs <- list()
-          dfs$df <- x$Df[i] # Call this df_numerator?
-          if ("Res.Df" %in% colnames(x)) {
-            dfs$df_residual <- x$Res.Df[i] # Call this df_denominator?
-          }
-          if ("Resid. Df" %in% colnames(x)) {
-            dfs$df_residual <- x$`Resid. Df`[i] # Call this df_denominator?
-          }
-          statistics$dfs <- dfs
-        } else {
-          if ("Res.Df" %in% colnames(x)) {statistics$df <- x$Res.Df[i]}
-          if ("Resid. Df" %in% colnames(x)) {statistics$df <- x$`Resid. Df`[i]}
+        if ("Df" %in% colnames(x)) {
+          if (!is.na(x$Df[i])) {
+            if (!"Res.Df" %in% colnames(x) & !"Resid. Df" %in% colnames(x)) {
+              statistics$df <- x$Df[i]
+            } else {
+              dfs <- list()
+              dfs$df <- x$Df[i] # Call this df_numerator?
+              if ("Res.Df" %in% colnames(x)) {
+                dfs$df_residual <- x$Res.Df[i] # Call this df_denominator?
+              }
+              if ("Resid. Df" %in% colnames(x)) {
+                dfs$df_residual <- x$`Resid. Df`[i] # Call this df_denominator?
+              }
+              statistics$dfs <- dfs 
+            }
+          } else {
+            if ("Res.Df" %in% colnames(x)) {statistics$df <- x$Res.Df[i]}
+            if ("Resid. Df" %in% colnames(x)) {
+              statistics$df <- x$`Resid. Df`[i]
+            }
+          } 
+        }
+        if ("NumDF" %in% colnames(x)) {
+          statistics$dfs$df_numerator <- x$NumDF[i]
+          statistics$dfs$df_denominator <- x$DenDF[i]
         }
       }
     } else {
-      statistics$df <- x$Df[i]
+      if ("Df" %in% colnames(x)) {
+        statistics$df <- x$Df[i]
+      }
     }
     if ("Rao" %in% colnames(x)) {
       if (!is.na(x$Rao[i])) {
@@ -486,6 +516,11 @@ tidy_stats.anova <- function(x) {
     if ("Pr(>Chi)" %in% colnames(x)) {
       if (!is.na(x$`Pr(>Chi)`[i])) {
         statistics$p <- x$`Pr(>Chi)`[i]
+      }
+    }
+    if ("Pr(>Chisq)" %in% colnames(x)) {
+      if (!is.na(x$`Pr(>Chisq)`[i])) {
+        statistics$p <- x$`Pr(>Chisq)`[i]
       }
     }
     if ("Cp" %in% colnames(x)) {
@@ -551,13 +586,14 @@ tidy_stats.aov <- function(x) {
     statistics$MS <- summary$`Mean Sq`[i]
     
     if (name != "Residuals") {
-      statistic <- list()
-      statistic$name <- "F"
-      statistic$value <- summary$`F value`[i]
-      statistics$statistic <- statistic
+      statistics$statistic$name <- "F"
+      statistics$statistic$value <- summary$`F value`[i]
+      
+      statistics$dfs$df_numerator <- summary$Df[i]
+      statistics$dfs$df_denominator <- summary$Df[nrow(summary)]
+    } else {
+      statistics$df <- summary$Df[i]
     }
-    
-    statistics$df <- summary$Df[i]
     
     if (name != "Residuals") {
       statistics$p <- summary$`Pr(>F)`[i]
@@ -784,7 +820,7 @@ tidy_stats.tidystats_counts <- function(x) {
   
   # Extract grouping variables
   group_names <- names(x)[!names(x) %in% c("n", "pct")]
-  output$group_by <- paste(group_names, collapse = " - ")
+  output$name <- paste(group_names, collapse = " - ")
   
   # Combine grouping variables into a single column
   x <- tidyr::unite(x, col = "group", dplyr::all_of(group_names), sep = " - ")
@@ -843,12 +879,18 @@ tidy_stats.lmerMod <- function(x) {
   # Extract method
   output$method <- "Linear mixed model"
   
-  # Extract REML criterion at convergence
-  output$REML_criterion_at_convergence <- summary$AICtab
-  
-  # Add additional convergence information
-  output$convergence_code = summary$optinfo$conv$opt
-  output$convergence_message = summary$optinfo$conv$lme4$messages
+  # Add model fit statistics, if we have them
+  if ("AIC" %in% names(summary$AICtab)) {
+    statistics <- list()
+    
+    statistics$AIC <- summary$AICtab[[1]]
+    statistics$BIC <- summary$AICtab[[2]]
+    statistics$log_likelihood <- summary$AICtab[[3]]
+    statistics$deviance <- summary$AICtab[[4]]
+    statistics$df <- summary$AICtab[[5]]
+    
+    output$statistics <- statistics
+  }
   
   # We create the following nested structure:
   # effects:
@@ -866,7 +908,7 @@ tidy_stats.lmerMod <- function(x) {
   random_effects <- list()
   
   # Set N to number of observations
-  random_effects$statistics$N <- summary[[3]]$dims[1]
+  random_effects$statistics$N <- summary[[3]]$dims[[1]]
   
   # Get variance-covariance matrix
   varcor <- summary$varcor
@@ -881,7 +923,7 @@ tidy_stats.lmerMod <- function(x) {
   
     # Set N for the group, if there is an N  
     if (group$name %in% names(summary$ngrps)) {
-      group$statistics$N <- summary$ngrps[names(summary$ngrps) == group$name]
+      group$statistics$N <- summary$ngrps[[names(summary$ngrps) == group$name]]
     }
     
     random_statistics <- varcor[[i]]
@@ -900,8 +942,8 @@ tidy_stats.lmerMod <- function(x) {
       # Extract statistics
       statistics <- list()
 
-      statistics$var <- vars[j] 
-      statistics$SD <- SDs[j] 
+      statistics$var <- vars[[j]]
+      statistics$SD <- SDs[[j]] 
 
       term$statistics <- statistics
       
@@ -963,7 +1005,7 @@ tidy_stats.lmerMod <- function(x) {
   
   # Get coefficient statistics, which we call terms
   terms <- list()
-  coefficients <- coef(summary)
+  coefficients <- stats::coef(summary)
 
   # Loop over the terms
   for (i in 1:nrow(coefficients)) {
@@ -1026,6 +1068,15 @@ tidy_stats.lmerMod <- function(x) {
   # Add effects to output
   output$effects <- effects
   
+    # Extract REML criterion at convergence
+  if ("REML" %in% names(summary$AICtab)) {
+    output$REML_criterion_at_convergence <- summary$AICtab[[1]]
+  }
+  
+  # Add additional convergence information
+  output$convergence_code = summary$optinfo$conv$opt
+  output$convergence_message = summary$optinfo$conv$lme4$messages
+  
   # Add package information
   package <- list()
 
@@ -1050,12 +1101,18 @@ tidy_stats.lmerModLmerTest <- function(x) {
   # Extract method
   output$method <- "Linear mixed model"
   
-  # Extract REML criterion at convergence
-  output$REML_criterion_at_convergence <- summary$AICtab
-  
-  # Add additional convergence information
-  output$convergence_code = summary$optinfo$conv$opt
-  output$convergence_message = summary$optinfo$conv$lme4$messages
+  # Add model fit statistics, if we have them
+  if ("AIC" %in% names(summary$AICtab)) {
+    statistics <- list()
+    
+    statistics$AIC <- summary$AICtab[[1]]
+    statistics$BIC <- summary$AICtab[[2]]
+    statistics$log_likelihood <- summary$AICtab[[3]]
+    statistics$deviance <- summary$AICtab[[4]]
+    statistics$df <- summary$AICtab[[5]]
+    
+    output$statistics <- statistics
+  }
   
   # We create the following nested structure:
   # effects:
@@ -1073,7 +1130,7 @@ tidy_stats.lmerModLmerTest <- function(x) {
   random_effects <- list()
   
   # Set N to number of observations
-  random_effects$statistics$N <- summary[[3]]$dims[1]
+  random_effects$statistics$N <- summary[[3]]$dims[[1]]
   
   # Get variance-covariance matrix
   varcor <- summary$varcor
@@ -1088,7 +1145,7 @@ tidy_stats.lmerModLmerTest <- function(x) {
   
     # Set N for the group, if there is an N  
     if (group$name %in% names(summary$ngrps)) {
-      group$statistics$N <- summary$ngrps[names(summary$ngrps) == group$name]
+      group$statistics$N <- summary$ngrps[names(summary$ngrps) == group$name][[1]]
     }
     
     random_statistics <- varcor[[i]]
@@ -1107,8 +1164,8 @@ tidy_stats.lmerModLmerTest <- function(x) {
       # Extract statistics
       statistics <- list()
 
-      statistics$var <- vars[j] 
-      statistics$SD <- SDs[j] 
+      statistics$var <- vars[[j]]
+      statistics$SD <- SDs[[j]] 
 
       term$statistics <- statistics
       
@@ -1170,7 +1227,7 @@ tidy_stats.lmerModLmerTest <- function(x) {
   
   # Get coefficient statistics, which we call terms
   terms <- list()
-  coefficients <- coef(summary)
+  coefficients <- stats::coef(summary)
 
   # Loop over the terms
   for (i in 1:nrow(coefficients)) {
@@ -1236,6 +1293,13 @@ tidy_stats.lmerModLmerTest <- function(x) {
   # Add effects to output
   output$effects <- effects
   
+   # Extract REML criterion at convergence
+  output$REML_criterion_at_convergence <- summary$AICtab[[1]]
+  
+  # Add additional convergence information
+  output$convergence_code = summary$optinfo$conv$opt
+  output$convergence_message = summary$optinfo$conv$lme4$messages
+  
   # Add package information
   package <- list()
 
@@ -1266,7 +1330,7 @@ tidy_stats.BFBayesFactor <- function(x) {
   )
   
   # Extract bayes factors
-  bayes_factors <- extractBF(x)
+  bayes_factors <- BayesFactor::extractBF(x)
   
   # Check whether the test contains one or more models
   if (nrow(bayes_factors) > 1) {

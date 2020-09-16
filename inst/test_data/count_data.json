@@ -1,0 +1,168 @@
+{
+  "single_group": {
+    "method": "Counts",
+    "name": "source",
+    "groups": [
+      {
+        "name": "Bin Laden",
+        "statistics": {
+          "n": 3101,
+          "pct": 48.888539
+        }
+      },
+      {
+        "name": "Washington",
+        "statistics": {
+          "n": 3242,
+          "pct": 51.111461
+        }
+      }
+    ],
+    "package": {
+      "name": "tidystats",
+      "version": "0.4.1"
+    }
+  },
+  "two_groups": {
+    "method": "Counts",
+    "name": "source - sex",
+    "groups": [
+      {
+        "name": "Bin Laden - female",
+        "statistics": {
+          "n": 2067,
+          "pct": 32.587104
+        }
+      },
+      {
+        "name": "Bin Laden - male",
+        "statistics": {
+          "n": 1029,
+          "pct": 16.222608
+        }
+      },
+      {
+        "name": "Bin Laden - NA",
+        "statistics": {
+          "n": 5,
+          "pct": 0.078827
+        }
+      },
+      {
+        "name": "Washington - female",
+        "statistics": {
+          "n": 2206,
+          "pct": 34.778496
+        }
+      },
+      {
+        "name": "Washington - male",
+        "statistics": {
+          "n": 1031,
+          "pct": 16.254138
+        }
+      },
+      {
+        "name": "Washington - NA",
+        "statistics": {
+          "n": 5,
+          "pct": 0.078827
+        }
+      }
+    ],
+    "package": {
+      "name": "tidystats",
+      "version": "0.4.1"
+    }
+  },
+  "grouped_group": {
+    "method": "Counts",
+    "name": "source - sex",
+    "groups": [
+      {
+        "name": "Bin Laden - female",
+        "statistics": {
+          "n": 2067,
+          "pct": 66.655917
+        }
+      },
+      {
+        "name": "Bin Laden - male",
+        "statistics": {
+          "n": 1029,
+          "pct": 33.182844
+        }
+      },
+      {
+        "name": "Bin Laden - NA",
+        "statistics": {
+          "n": 5,
+          "pct": 0.161238
+        }
+      },
+      {
+        "name": "Washington - female",
+        "statistics": {
+          "n": 2206,
+          "pct": 68.044417
+        }
+      },
+      {
+        "name": "Washington - male",
+        "statistics": {
+          "n": 1031,
+          "pct": 31.801357
+        }
+      },
+      {
+        "name": "Washington - NA",
+        "statistics": {
+          "n": 5,
+          "pct": 0.154226
+        }
+      }
+    ],
+    "package": {
+      "name": "tidystats",
+      "version": "0.4.1"
+    }
+  },
+  "grouped_group_na_rm": {
+    "method": "Counts",
+    "name": "source - sex",
+    "groups": [
+      {
+        "name": "Bin Laden - female",
+        "statistics": {
+          "n": 2067,
+          "pct": 66.763566
+        }
+      },
+      {
+        "name": "Bin Laden - male",
+        "statistics": {
+          "n": 1029,
+          "pct": 33.236434
+        }
+      },
+      {
+        "name": "Washington - female",
+        "statistics": {
+          "n": 2206,
+          "pct": 68.149521
+        }
+      },
+      {
+        "name": "Washington - male",
+        "statistics": {
+          "n": 1031,
+          "pct": 31.850479
+        }
+      }
+    ],
+    "package": {
+      "name": "tidystats",
+      "version": "0.4.1"
+    }
+  }
+}

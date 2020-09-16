@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidystats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5</span>
       </span>
     </div>
 
@@ -132,13 +132,41 @@
       <small>Source: <a href='https://github.com/WillemSleegers/tidystats/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="tidystats-05" class="section level1">
+<h1 class="page-header" data-toc-text="0.5">
+<a href="#tidystats-05" class="anchor"></a>tidystats 0.5<small> Unreleased </small>
+</h1>
+<div id="breaking-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
+<ul>
+<li>Changed the way certain model results are parsed. The estimate is now parsed as a list containing the name of the estimate and the value of the estimate. Models are now parsed to extract the following types of lists: statistics, terms, pairs, groups, and effects. This new parsing unites t-tests, ANOVA, and regression, including multilevel regression.</li>
+</ul>
+</div>
+<div id="new" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new" class="anchor"></a>New</h2>
+<ul>
+<li>Added support for generic tests. If <code>tidystats</code> does not support a particular analysis, you can create your own generic test by providing a list of statistics.</li>
+<li>Improved support for <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code>.</li>
+<li>Added support for more <code>BayesFactor</code> functions.</li>
+</ul>
+</div>
+<div id="misc" class="section level2">
+<h2 class="hasAnchor">
+<a href="#misc" class="anchor"></a>Misc</h2>
+<ul>
+<li>Removed the <code>cox</code> dataset.</li>
+</ul>
+</div>
+</div>
     <div id="tidystats-041" class="section level1">
 <h1 class="page-header" data-toc-text="0.4.1">
 <a href="#tidystats-041" class="anchor"></a>tidystats 0.4.1<small> 2020-06-15 </small>
 </h1>
-<div id="new" class="section level2">
+<div id="new-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new" class="anchor"></a>New</h2>
+<a href="#new-1" class="anchor"></a>New</h2>
 <ul>
 <li>Added support for <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code>.</li>
 <li>Added <code><a href="../reference/count_data.html">count_data()</a></code> again.</li>
@@ -161,9 +189,9 @@
 <li>Fixed a bug in <code><a href="../reference/describe_data.html">describe_data()</a></code> caused by the <code>dplyr</code> 1.0.0 update.</li>
 </ul>
 </div>
-<div id="misc" class="section level2">
+<div id="misc-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#misc" class="anchor"></a>Misc</h2>
+<a href="#misc-1" class="anchor"></a>Misc</h2>
 <ul>
 <li>Added tests to minimize bugs</li>
 <li>Added two vignettes</li>
@@ -174,9 +202,9 @@
 <h1 class="page-header" data-toc-text="0.4">
 <a href="#tidystats-04" class="anchor"></a>tidystats 0.4<small> 2019-09-12 </small>
 </h1>
-<div id="breaking-changes" class="section level2">
+<div id="breaking-changes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
+<a href="#breaking-changes-1" class="anchor"></a>Breaking changes</h2>
 <ul>
 <li>
 <code>tidystats</code> has been completely redesigned in terms of how statistics are combined together. While previously the output of statistical models was converted to a tidy data frame, the output is now converted to a list, with an entirely different structure. The reason for this change is that lists are more machine-readable, enabling more interesting features down the line. It is still possible to convert the list of statistics to a single data frame with a new function called <code><a href="../reference/tidy_stats_to_data_frame.html">tidy_stats_to_data_frame()</a></code>.</li>
@@ -198,9 +226,9 @@
 <code><a href="../reference/add_stats.html">add_stats()</a></code> now has a <code>preregistered</code> argument to specify whether an analysis was preregistered or not.</li>
 </ul>
 </div>
-<div id="new-1" class="section level2">
+<div id="new-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-1" class="anchor"></a>New</h2>
+<a href="#new-2" class="anchor"></a>New</h2>
 <ul>
 <li>Added an example dataset called ‘quote_source’ containing data of a replication of Lorge &amp; Curtiss (1936) that was part of the Many Labs project (Klein et al., 2014)</li>
 </ul>
@@ -219,7 +247,7 @@
 <li>Added the <em>class</em> argument to <code><a href="../reference/add_stats.html">add_stats()</a></code> and <code>add_stats_to_model()</code>. Rather than having to manually tidy the data first, you can make use of some custom <code><a href="../reference/tidy_stats.html">tidy_stats()</a></code> functions by specifying the class argument. Run <code><a href="../reference/add_stats.html">?add_stats</a></code> to see a list of supported classes and see the help document of <code>tidy_stats.confint()</code> for an example.</li>
 <li>Under the hood: Added a generic report function for single values called <code>report_statistic()</code>. Consequently, all report functions have been updated to use this new generic function.</li>
 <li>Removed the <code>identifier</code> column from each list element when using <code><a href="../reference/read_stats.html">read_stats()</a></code>.</li>
-<li>Reordered the columns of <code><a href="../reference/tidy_stats.html">tidy_stats.lm()</a></code> and <code>tidy_stats.glm()</code> to be consistent with the other <code><a href="../reference/tidy_stats.html">tidy_stats()</a></code> functions.</li>
+<li>Reordered the columns of <code><a href="../reference/tidy_stats.html">tidy_stats.lm()</a></code> and <code><a href="../reference/tidy_stats.html">tidy_stats.glm()</a></code> to be consistent with the other <code><a href="../reference/tidy_stats.html">tidy_stats()</a></code> functions.</li>
 </ul>
 </div>
 <div id="features" class="section level2">
@@ -254,9 +282,9 @@
 <li>Prepared for <code>dplyr</code> 0.8</li>
 </ul>
 </div>
-<div id="misc-1" class="section level2">
+<div id="misc-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#misc-1" class="anchor"></a>Misc</h2>
+<a href="#misc-2" class="anchor"></a>Misc</h2>
 <ul>
 <li>Added tests to the R package to minimize bugs.</li>
 <li>Made the code and documentation more consistent</li>

@@ -2,7 +2,6 @@
 output:
   md_document:
     variant: gfm
-html_preview: false
 ---
 
 ```{r echo=FALSE, results="hide", message=FALSE}
@@ -11,7 +10,7 @@ library(badger)
 
 ```{r, echo = FALSE, results='asis'}
 cat(
-	badge_cran_release("tidystats", "green"),
+	badge_cran_release("tidystats", "blue"),
 	badge_cran_download("tidystats", "grand-total", "green"),
 	badge_cran_download("tidystats", "last-month", "green"),
 	badge_cran_download("tidystats", "last-week", "green")
@@ -28,8 +27,8 @@ cat(
 `tidystats` is an R package aimed at sharing the output of statistical models. 
 `tidystats` extracts the output of statistical models (e.g., *t*-tests,
 regression models) and combines them into a structured file. This file can then 
-used to report the statistics in a manuscript or shared with others so that they
-can extract the statistics (e.g., for meta-analyses).
+be used to report the statistics in a manuscript or shared with others so that 
+they can extract the statistics (e.g., for meta-analyses).
 
 Please see below for instructions on how to install and use this package. 
 **Do note that the package is currently in development. This means the 
@@ -141,7 +140,10 @@ lm_D9 <- lm(weight ~ group)
 # ANOVA:
 npk_aov <- aov(yield ~ block + N*P*K, npk)
 
-# Add the analyses to an empty list
+# Create an empty list
+results <- list()
+
+# Add the analyses to the empty list
 results <- results %>%
   add_stats(sleep_test, type = "primary") %>%
   add_stats(lm_D9, preregistered = FALSE) %>%

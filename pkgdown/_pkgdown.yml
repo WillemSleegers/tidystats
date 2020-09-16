@@ -14,11 +14,14 @@ reference:
     contents:
       - count_data
       - describe_data
+  - title: Helper functions
+    desc:  Functions used under the hood
+    contents:
+      - tidy_matrix
   - title: Data sets
     desc: Data sets that come with the package
     contents:
       - quote_source
-      - cox
 
 navbar:
   title: ~

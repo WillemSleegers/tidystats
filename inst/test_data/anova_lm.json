@@ -1,0 +1,292 @@
+{
+  "anova_lm": {
+    "method": "ANOVA",
+    "terms": [
+      {
+        "name": "pop15",
+        "statistics": {
+          "SS": 204.117565,
+          "MS": 204.117565,
+          "statistic": {
+            "name": "F",
+            "value": 14.115732
+          },
+          "dfs": {
+            "df_numerator": 1,
+            "df_denominator": 45
+          },
+          "p": 0.000492
+        }
+      },
+      {
+        "name": "pop75",
+        "statistics": {
+          "SS": 53.34271,
+          "MS": 53.34271,
+          "statistic": {
+            "name": "F",
+            "value": 3.68891
+          },
+          "dfs": {
+            "df_numerator": 1,
+            "df_denominator": 45
+          },
+          "p": 0.061125
+        }
+      },
+      {
+        "name": "dpi",
+        "statistics": {
+          "SS": 12.400946,
+          "MS": 12.400946,
+          "statistic": {
+            "name": "F",
+            "value": 0.857586
+          },
+          "dfs": {
+            "df_numerator": 1,
+            "df_denominator": 45
+          },
+          "p": 0.359355
+        }
+      },
+      {
+        "name": "ddpi",
+        "statistics": {
+          "SS": 63.054031,
+          "MS": 63.054031,
+          "statistic": {
+            "name": "F",
+            "value": 4.360496
+          },
+          "dfs": {
+            "df_numerator": 1,
+            "df_denominator": 45
+          },
+          "p": 0.042471
+        }
+      },
+      {
+        "name": "Residuals",
+        "statistics": {
+          "SS": 650.712998,
+          "MS": 14.460289,
+          "df": 45
+        }
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.0.2"
+    }
+  },
+  "anova_lm_fits": {
+    "method": "ANOVA",
+    "terms": [
+      {
+        "name": "1",
+        "statistics": {
+          "RSS": 983.62825,
+          "df": 49
+        }
+      },
+      {
+        "name": "2",
+        "statistics": {
+          "RSS": 779.510685,
+          "SS": 204.117565,
+          "statistic": {
+            "name": "F",
+            "value": 14.115732
+          },
+          "dfs": {
+            "df": 1,
+            "df_residual": 48
+          },
+          "p": 0.000492
+        }
+      },
+      {
+        "name": "3",
+        "statistics": {
+          "RSS": 726.167975,
+          "SS": 53.34271,
+          "statistic": {
+            "name": "F",
+            "value": 3.68891
+          },
+          "dfs": {
+            "df": 1,
+            "df_residual": 47
+          },
+          "p": 0.061125
+        }
+      },
+      {
+        "name": "4",
+        "statistics": {
+          "RSS": 713.767029,
+          "SS": 12.400946,
+          "statistic": {
+            "name": "F",
+            "value": 0.857586
+          },
+          "dfs": {
+            "df": 1,
+            "df_residual": 46
+          },
+          "p": 0.359355
+        }
+      },
+      {
+        "name": "5",
+        "statistics": {
+          "RSS": 650.712998,
+          "SS": 63.054031,
+          "statistic": {
+            "name": "F",
+            "value": 4.360496
+          },
+          "dfs": {
+            "df": 1,
+            "df_residual": 45
+          },
+          "p": 0.042471
+        }
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.0.2"
+    }
+  },
+  "anova_lm_order": {
+    "method": "ANOVA",
+    "terms": [
+      {
+        "name": "1",
+        "statistics": {
+          "RSS": 650.712998,
+          "df": 45
+        }
+      },
+      {
+        "name": "2",
+        "statistics": {
+          "RSS": 726.167975,
+          "SS": -75.454977,
+          "statistic": {
+            "name": "F",
+            "value": 2.609041
+          },
+          "dfs": {
+            "df": -2,
+            "df_residual": 47
+          },
+          "p": 0.084709
+        }
+      },
+      {
+        "name": "3",
+        "statistics": {
+          "RSS": 983.62825,
+          "SS": -257.460275,
+          "statistic": {
+            "name": "F",
+            "value": 8.902321
+          },
+          "dfs": {
+            "df": -2,
+            "df_residual": 49
+          },
+          "p": 0.000553
+        }
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.0.2"
+    }
+  },
+  "anova_lm_chisq": {
+    "method": "ANOVA",
+    "terms": [
+      {
+        "name": "1",
+        "statistics": {
+          "RSS": 650.712998,
+          "df": 45
+        }
+      },
+      {
+        "name": "2",
+        "statistics": {
+          "RSS": 726.167975,
+          "SS": -75.454977,
+          "dfs": {
+            "df": -2,
+            "df_residual": 47
+          },
+          "p": 0.073605
+        }
+      },
+      {
+        "name": "3",
+        "statistics": {
+          "RSS": 983.62825,
+          "SS": -257.460275,
+          "dfs": {
+            "df": -2,
+            "df_residual": 49
+          },
+          "p": 0.000136
+        }
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.0.2"
+    }
+  },
+  "anova_lm_cp": {
+    "method": "ANOVA",
+    "terms": [
+      {
+        "name": "1",
+        "statistics": {
+          "RSS": 650.712998,
+          "df": 45,
+          "cp": 795.315887
+        }
+      },
+      {
+        "name": "2",
+        "statistics": {
+          "RSS": 726.167975,
+          "SS": -75.454977,
+          "dfs": {
+            "df": -2,
+            "df_residual": 47
+          },
+          "cp": 812.929708
+        }
+      },
+      {
+        "name": "3",
+        "statistics": {
+          "RSS": 983.62825,
+          "SS": -257.460275,
+          "dfs": {
+            "df": -2,
+            "df_residual": 49
+          },
+          "cp": 1012.548828
+        }
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.0.2"
+    }
+  }
+}

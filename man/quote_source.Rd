@@ -3,7 +3,7 @@
 \docType{data}
 \name{quote_source}
 \alias{quote_source}
-\title{A many labs replication of Lorge & Curtiss (1936)}
+\title{A Many Labs replication of Lorge & Curtiss (1936)}
 \format{
 A data frame with 6343 rows and 15 columns:
 \describe{
@@ -22,7 +22,7 @@ A data frame with 6343 rows and 15 columns:
   \item{compensation}{how the participant was compensated for their 
     participation}
   \item{recruitment}{how the participant was recruited}
-  \item{separated_or_not}{description of how the study was administered in 
+  \item{separation}{description of how the study was administered in 
     terms of participant isolation}
   \item{us_or_international}{whether the study was conducted in the US or 
    outside of the US (international)}
@@ -33,21 +33,21 @@ A data frame with 6343 rows and 15 columns:
 quote_source
 }
 \description{
-Data of multiple replication studies of Lorge & Curtiss (1936) from the Many 
-Labs project (Klein et al., 2014).
+Data of multiple studies from the Many Labs project (Klein et al., 2014) 
+replicating Lorge & Curtiss (1936).
 }
 \details{
 Lorge and Curtiss (1936) examined how a quotation is perceived when 
 it is attributed to a liked or disliked individual. The quotation of interest 
-was, "I hold it that a little rebellion, now and then, is a good thing, and 
+was: "I hold it that a little rebellion, now and then, is a good thing, and 
 as necessary in the political world as storms are in the physical world." 
 In one condition the quotation was attributed to Thomas Jefferson, a liked 
-individual, and in the other it was attributed to Vladimir Lenin, a disliked 
-individual. More agreement was observed when the quotation was attributed to 
-Jefferson than Lenin. In the replication studies, the quotation was ""I have 
-sworn to only live free, even if I find bitter the taste of death." and was
-attributed to either George Washington, the liked individual, or Osama Bin 
-Laden, the disliked individual.
+individual, and in the other condition it was attributed to Vladimir Lenin, a 
+disliked individual. More agreement was observed when the quotation was 
+attributed to Jefferson than Lenin. In the replication studies, the quotation
+was: "I have sworn to only live free, even if I find bitter the taste of 
+death." This quotation was attributed to either George Washington, the 
+liked individual, or Osama Bin Laden, the disliked individual.
 }
 \references{
 Lorge, I., & Curtiss, C. C. (1936). Prestige, suggestion, and attitudes. 

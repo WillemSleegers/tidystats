@@ -1,4 +1,4 @@
-[![](https://www.r-pkg.org/badges/version/tidystats?color=green)](https://cran.r-project.org/package=tidystats)
+[![](https://www.r-pkg.org/badges/version/tidystats?color=blue)](https://cran.r-project.org/package=tidystats)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/tidystats?color=green)](https://cran.r-project.org/package=tidystats)
 [![](http://cranlogs.r-pkg.org/badges/last-month/tidystats?color=green)](https://cran.r-project.org/package=tidystats)
 [![](http://cranlogs.r-pkg.org/badges/last-week/tidystats?color=green)](https://cran.r-project.org/package=tidystats)
@@ -13,7 +13,7 @@
 `tidystats` is an R package aimed at sharing the output of statistical
 models. `tidystats` extracts the output of statistical models (e.g.,
 *t*-tests, regression models) and combines them into a structured file.
-This file can then used to report the statistics in a manuscript or
+This file can then be used to report the statistics in a manuscript or
 shared with others so that they can extract the statistics (e.g., for
 meta-analyses).
 
@@ -125,7 +125,10 @@ lm_D9 <- lm(weight ~ group)
 # ANOVA:
 npk_aov <- aov(yield ~ block + N*P*K, npk)
 
-# Add the analyses to an empty list
+# Create an empty list
+results <- list()
+
+# Add the analyses to the empty list
 results <- results %>%
   add_stats(sleep_test, type = "primary") %>%
   add_stats(lm_D9, preregistered = FALSE) %>%

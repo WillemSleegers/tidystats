@@ -1,0 +1,742 @@
+{
+  "lmerTest1": {
+    "method": "Linear mixed model",
+    "effects": {
+      "random_effects": {
+        "statistics": {
+          "N": 180
+        },
+        "groups": [
+          {
+            "name": "Subject",
+            "statistics": {
+              "N": 18
+            },
+            "terms": [
+              {
+                "name": "(Intercept)",
+                "statistics": {
+                  "var": 612.100158,
+                  "SD": 24.740658
+                }
+              },
+              {
+                "name": "Days",
+                "statistics": {
+                  "var": 35.071714,
+                  "SD": 5.922138
+                }
+              }
+            ],
+            "pairs": [
+              {
+                "names": [
+                  "(Intercept)",
+                  "Days"
+                ],
+                "statistics": {
+                  "r": 0.065551
+                }
+              }
+            ]
+          },
+          {
+            "name": "Residual",
+            "statistics": {
+              "var": 654.940008,
+              "SD": 25.591796
+            }
+          }
+        ]
+      },
+      "fixed_effects": {
+        "terms": [
+          {
+            "name": "(Intercept)",
+            "statistics": {
+              "estimate": {
+                "name": "b",
+                "value": 251.405105
+              },
+              "SE": 6.824597,
+              "df": 16.999726,
+              "statistic": {
+                "name": "t",
+                "value": 36.83809
+              },
+              "p": 1.171558e-17
+            }
+          },
+          {
+            "name": "Days",
+            "statistics": {
+              "estimate": {
+                "name": "b",
+                "value": 10.467286
+              },
+              "SE": 1.54579,
+              "df": 16.999984,
+              "statistic": {
+                "name": "t",
+                "value": 6.771481
+              },
+              "p": 3.263825e-06
+            }
+          }
+        ],
+        "pairs": [
+          {
+            "names": [
+              "(Intercept)",
+              "Days"
+            ],
+            "statistics": {
+              "r": -0.137552
+            }
+          }
+        ]
+      }
+    },
+    "REML_criterion_at_convergence": 1743.628272,
+    "convergence_code": 0,
+    "package": {
+      "name": "lme4",
+      "version": "1.1-23"
+    }
+  },
+  "lmerTest2": {
+    "method": "Linear mixed model",
+    "effects": {
+      "random_effects": {
+        "statistics": {
+          "N": 648
+        },
+        "groups": [
+          {
+            "name": "Consumer:Product",
+            "statistics": {
+              "N": 324
+            },
+            "terms": [
+              {
+                "name": "(Intercept)",
+                "statistics": {
+                  "var": 3.162236,
+                  "SD": 1.778268
+                }
+              }
+            ]
+          },
+          {
+            "name": "Consumer",
+            "statistics": {
+              "N": 81
+            },
+            "terms": [
+              {
+                "name": "(Intercept)",
+                "statistics": {
+                  "var": 0.375646,
+                  "SD": 0.6129
+                }
+              }
+            ]
+          },
+          {
+            "name": "Residual",
+            "statistics": {
+              "var": 1.667477,
+              "SD": 1.291308
+            }
+          }
+        ]
+      },
+      "fixed_effects": {
+        "terms": [
+          {
+            "name": "(Intercept)",
+            "statistics": {
+              "estimate": {
+                "name": "b",
+                "value": 5.849029
+              },
+              "SE": 0.28429,
+              "df": 322.336407,
+              "statistic": {
+                "name": "t",
+                "value": 20.574184
+              },
+              "p": 1.173089e-60
+            }
+          },
+          {
+            "name": "Gender2",
+            "statistics": {
+              "estimate": {
+                "name": "b",
+                "value": -0.244284
+              },
+              "SE": 0.260564,
+              "df": 79,
+              "statistic": {
+                "name": "t",
+                "value": -0.937517
+              },
+              "p": 0.35135
+            }
+          },
+          {
+            "name": "Information2",
+            "statistics": {
+              "estimate": {
+                "name": "b",
+                "value": 0.160494
+              },
+              "SE": 0.20291,
+              "df": 320.000002,
+              "statistic": {
+                "name": "t",
+                "value": 0.790963
+              },
+              "p": 0.429552
+            }
+          },
+          {
+            "name": "Product2",
+            "statistics": {
+              "estimate": {
+                "name": "b",
+                "value": -0.82716
+              },
+              "SE": 0.345329,
+              "df": 339.51232,
+              "statistic": {
+                "name": "t",
+                "value": -2.395282
+              },
+              "p": 0.017149
+            }
+          },
+          {
+            "name": "Product3",
+            "statistics": {
+              "estimate": {
+                "name": "b",
+                "value": 0.148148
+              },
+              "SE": 0.345329,
+              "df": 339.51232,
+              "statistic": {
+                "name": "t",
+                "value": 0.429006
+              },
+              "p": 0.668191
+            }
+          },
+          {
+            "name": "Product4",
+            "statistics": {
+              "estimate": {
+                "name": "b",
+                "value": 0.296296
+              },
+              "SE": 0.345329,
+              "df": 339.51232,
+              "statistic": {
+                "name": "t",
+                "value": 0.858011
+              },
+              "p": 0.391491
+            }
+          },
+          {
+            "name": "Information2:Product2",
+            "statistics": {
+              "estimate": {
+                "name": "b",
+                "value": 0.246914
+              },
+              "SE": 0.286957,
+              "df": 320.000002,
+              "statistic": {
+                "name": "t",
+                "value": 0.860454
+              },
+              "p": 0.390183
+            }
+          },
+          {
+            "name": "Information2:Product3",
+            "statistics": {
+              "estimate": {
+                "name": "b",
+                "value": 0.271605
+              },
+              "SE": 0.286957,
+              "df": 320.000002,
+              "statistic": {
+                "name": "t",
+                "value": 0.946499
+              },
+              "p": 0.344608
+            }
+          },
+          {
+            "name": "Information2:Product4",
+            "statistics": {
+              "estimate": {
+                "name": "b",
+                "value": -0.358025
+              },
+              "SE": 0.286957,
+              "df": 320.000002,
+              "statistic": {
+                "name": "t",
+                "value": -1.247658
+              },
+              "p": 0.213069
+            }
+          }
+        ],
+        "pairs": [
+          {
+            "names": [
+              "(Intercept)",
+              "Gender2"
+            ],
+            "statistics": {
+              "r": -0.452615
+            }
+          },
+          {
+            "names": [
+              "(Intercept)",
+              "Information2"
+            ],
+            "statistics": {
+              "r": -0.356871
+            }
+          },
+          {
+            "names": [
+              "(Intercept)",
+              "Product2"
+            ],
+            "statistics": {
+              "r": -0.607354
+            }
+          },
+          {
+            "names": [
+              "(Intercept)",
+              "Product3"
+            ],
+            "statistics": {
+              "r": -0.607354
+            }
+          },
+          {
+            "names": [
+              "(Intercept)",
+              "Product4"
+            ],
+            "statistics": {
+              "r": -0.607354
+            }
+          },
+          {
+            "names": [
+              "(Intercept)",
+              "Information2:Product2"
+            ],
+            "statistics": {
+              "r": 0.252346
+            }
+          },
+          {
+            "names": [
+              "(Intercept)",
+              "Information2:Product3"
+            ],
+            "statistics": {
+              "r": 0.252346
+            }
+          },
+          {
+            "names": [
+              "(Intercept)",
+              "Information2:Product4"
+            ],
+            "statistics": {
+              "r": 0.252346
+            }
+          },
+          {
+            "names": [
+              "Gender2",
+              "Information2"
+            ],
+            "statistics": {
+              "r": 4.715156e-31
+            }
+          },
+          {
+            "names": [
+              "Gender2",
+              "Product2"
+            ],
+            "statistics": {
+              "r": -1.649618e-14
+            }
+          },
+          {
+            "names": [
+              "Gender2",
+              "Product3"
+            ],
+            "statistics": {
+              "r": -1.649618e-14
+            }
+          },
+          {
+            "names": [
+              "Gender2",
+              "Product4"
+            ],
+            "statistics": {
+              "r": -1.649618e-14
+            }
+          },
+          {
+            "names": [
+              "Gender2",
+              "Information2:Product2"
+            ],
+            "statistics": {
+              "r": -3.334118e-31
+            }
+          },
+          {
+            "names": [
+              "Gender2",
+              "Information2:Product3"
+            ],
+            "statistics": {
+              "r": 5.774863e-31
+            }
+          },
+          {
+            "names": [
+              "Gender2",
+              "Information2:Product4"
+            ],
+            "statistics": {
+              "r": -1.577722e-30
+            }
+          },
+          {
+            "names": [
+              "Information2",
+              "Product2"
+            ],
+            "statistics": {
+              "r": 0.293792
+            }
+          },
+          {
+            "names": [
+              "Information2",
+              "Product3"
+            ],
+            "statistics": {
+              "r": 0.293792
+            }
+          },
+          {
+            "names": [
+              "Information2",
+              "Product4"
+            ],
+            "statistics": {
+              "r": 0.293792
+            }
+          },
+          {
+            "names": [
+              "Information2",
+              "Information2:Product2"
+            ],
+            "statistics": {
+              "r": -0.707107
+            }
+          },
+          {
+            "names": [
+              "Information2",
+              "Information2:Product3"
+            ],
+            "statistics": {
+              "r": -0.707107
+            }
+          },
+          {
+            "names": [
+              "Information2",
+              "Information2:Product4"
+            ],
+            "statistics": {
+              "r": -0.707107
+            }
+          },
+          {
+            "names": [
+              "Product2",
+              "Product3"
+            ],
+            "statistics": {
+              "r": 0.5
+            }
+          },
+          {
+            "names": [
+              "Product2",
+              "Product4"
+            ],
+            "statistics": {
+              "r": 0.5
+            }
+          },
+          {
+            "names": [
+              "Product2",
+              "Information2:Product2"
+            ],
+            "statistics": {
+              "r": -0.415484
+            }
+          },
+          {
+            "names": [
+              "Product2",
+              "Information2:Product3"
+            ],
+            "statistics": {
+              "r": -0.207742
+            }
+          },
+          {
+            "names": [
+              "Product2",
+              "Information2:Product4"
+            ],
+            "statistics": {
+              "r": -0.207742
+            }
+          },
+          {
+            "names": [
+              "Product3",
+              "Product4"
+            ],
+            "statistics": {
+              "r": 0.5
+            }
+          },
+          {
+            "names": [
+              "Product3",
+              "Information2:Product2"
+            ],
+            "statistics": {
+              "r": -0.207742
+            }
+          },
+          {
+            "names": [
+              "Product3",
+              "Information2:Product3"
+            ],
+            "statistics": {
+              "r": -0.415484
+            }
+          },
+          {
+            "names": [
+              "Product3",
+              "Information2:Product4"
+            ],
+            "statistics": {
+              "r": -0.207742
+            }
+          },
+          {
+            "names": [
+              "Product4",
+              "Information2:Product2"
+            ],
+            "statistics": {
+              "r": -0.207742
+            }
+          },
+          {
+            "names": [
+              "Product4",
+              "Information2:Product3"
+            ],
+            "statistics": {
+              "r": -0.207742
+            }
+          },
+          {
+            "names": [
+              "Product4",
+              "Information2:Product4"
+            ],
+            "statistics": {
+              "r": -0.415484
+            }
+          },
+          {
+            "names": [
+              "Information2:Product2",
+              "Information2:Product3"
+            ],
+            "statistics": {
+              "r": 0.5
+            }
+          },
+          {
+            "names": [
+              "Information2:Product2",
+              "Information2:Product4"
+            ],
+            "statistics": {
+              "r": 0.5
+            }
+          },
+          {
+            "names": [
+              "Information2:Product3",
+              "Information2:Product4"
+            ],
+            "statistics": {
+              "r": 0.5
+            }
+          }
+        ]
+      }
+    },
+    "REML_criterion_at_convergence": 2705.503577,
+    "convergence_code": 0,
+    "package": {
+      "name": "lme4",
+      "version": "1.1-23"
+    }
+  },
+  "anova_lmerTest": {
+    "method": "ANOVA",
+    "terms": [
+      {
+        "name": "Days",
+        "statistics": {
+          "SS": 30030.93902,
+          "MS": 30030.93902,
+          "statistic": {
+            "name": "F",
+            "value": 45.852962
+          },
+          "dfs": {
+            "df_numerator": 1,
+            "df_denominator": 16.999984
+          },
+          "p": 3.263825e-06
+        }
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.0.2"
+    }
+  },
+  "anova_lmerTest_lme4": {
+    "method": "ANOVA",
+    "terms": [
+      {
+        "name": "Days",
+        "statistics": {
+          "n_parameters": 1,
+          "SS": 30030.93902,
+          "MS": 30030.93902,
+          "statistic": {
+            "name": "F",
+            "value": 45.852962
+          }
+        }
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.0.2"
+    }
+  },
+  "anova_lmerTest_kenward_roger": {
+    "method": "ANOVA",
+    "terms": [
+      {
+        "name": "Days",
+        "statistics": {
+          "SS": 30030.93902,
+          "MS": 30030.93902,
+          "statistic": {
+            "name": "F",
+            "value": 45.852962
+          },
+          "dfs": {
+            "df_numerator": 1,
+            "df_denominator": 17
+          },
+          "p": 3.263808e-06
+        }
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.0.2"
+    }
+  },
+  "anova_lmerTest_fit": {
+    "method": "ANODE",
+    "terms": [
+      {
+        "name": "m0",
+        "statistics": {
+          "n_parameters": 4,
+          "AIC": 1802.078643,
+          "BIC": 1814.85047,
+          "log_likelihood": -897.039322,
+          "deviance": 1794.078643
+        }
+      },
+      {
+        "name": "m",
+        "statistics": {
+          "n_parameters": 6,
+          "AIC": 1763.939344,
+          "BIC": 1783.097086,
+          "log_likelihood": -875.969672,
+          "deviance": 1751.939344,
+          "statistic": {
+            "name": "chi-squared",
+            "value": 42.139299
+          },
+          "df": 2,
+          "p": 7.072413e-10
+        }
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.0.2"
+    }
+  }
+}

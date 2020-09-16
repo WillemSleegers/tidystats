@@ -5,34 +5,29 @@
 devtools::document()
 devtools::install()
 
-# README ------------------------------------------------------------------
-
-# Knit the README.Rmd file to a README.md file for Github
-knitr::knit("README.Rmd")
-
 # Testing -----------------------------------------------------------------
 
 # Add a test
-usethis::use_test("lm")
+# usethis::use_test("add_stats")
 
 # Test all tests
 devtools::test()
 
 # Test specific tests
-testthat::test_file("tests/testthat/test_htest.R")
-
-# Add a data set ----------------------------------------------------------
-
-usethis::use_data(quote_source, overwrite = TRUE)
+testthat::test_file("tests/testthat/test_counts.R")
 
 # Create a vignette -------------------------------------------------------
 
-usethis::use_vignette("read-and-use-a-tidystats-file")
+# usethis::use_vignette("read-and-use-a-tidystats-file")
+
+# Add a data set ----------------------------------------------------------
+
+# usethis::use_data(quote_source, overwrite = TRUE)
 
 # Build website -----------------------------------------------------------
 
 # Run once to configure package to use pkgdown
-# usethis::use_pkgdown()
+usethis::use_pkgdown()
 
 # Run to build the website
 pkgdown::build_site()
@@ -52,6 +47,7 @@ devtools::run_examples()
 devtools::test()
 
 # Check package
+# devtools::load_all()
 devtools::check()
 devtools::check(args = c('--run-donttest')) # Without examples test
 devtools::check(args = c('--as-cran'))

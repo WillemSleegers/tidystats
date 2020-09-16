@@ -1,0 +1,1291 @@
+{
+  "generalTestBF": {
+    "method": "Bayesian linear regression",
+    "models": [
+      {
+        "name": "shape + ID",
+        "statistics": {
+          "BF_01": 320308.915473,
+          "BF_10": 3.121986e-06,
+          "error": 0.014048
+        }
+      },
+      {
+        "name": "color + ID",
+        "statistics": {
+          "BF_01": 307496.480809,
+          "BF_10": 3.25207e-06,
+          "error": 0.00636
+        }
+      },
+      {
+        "name": "shape + color + ID",
+        "statistics": {
+          "BF_01": 1276619.432734,
+          "BF_10": 7.833188e-07,
+          "error": 0.01323
+        }
+      },
+      {
+        "name": "shape + color + shape:color + ID",
+        "statistics": {
+          "BF_01": 512746.945277,
+          "BF_10": 1.95028e-06,
+          "error": 0.01976
+        }
+      },
+      {
+        "name": "ID",
+        "statistics": {
+          "BF_01": 111516.571808,
+          "BF_10": 8.967277e-06,
+          "error": 1.132174e-06
+        }
+      }
+    ],
+    "alternative": {
+      "name": "Intercept only",
+      "formula": "RT ~ 1"
+    },
+    "package": {
+      "name": "BayesFactor",
+      "version": "0.9.12-4.2"
+    }
+  },
+  "bfFull": {
+    "method": "Bayesian linear regression",
+    "name": "shape + color + shape:color + ID",
+    "statistics": {
+      "BF_01": 468856.092558,
+      "BF_10": 2.132851e-06,
+      "error": 0.015935
+    },
+    "alternative": {
+      "name": "Intercept only",
+      "formula": "RT ~ 1"
+    },
+    "package": {
+      "name": "BayesFactor",
+      "version": "0.9.12-4.2"
+    }
+  },
+  "bfMain": {
+    "method": "Bayesian linear regression",
+    "name": "shape + color + ID",
+    "statistics": {
+      "BF_01": 1302101.560719,
+      "BF_10": 7.679892e-07,
+      "error": 0.014217
+    },
+    "alternative": {
+      "name": "Intercept only",
+      "formula": "RT ~ 1"
+    },
+    "package": {
+      "name": "BayesFactor",
+      "version": "0.9.12-4.2"
+    }
+  },
+  "bfMainFull": {
+    "method": "Bayesian linear regression",
+    "name": "shape + color + ID",
+    "statistics": {
+      "BF_01": 2.777188,
+      "BF_10": 0.360076,
+      "error": 0.021356
+    },
+    "alternative": {
+      "name": "RT ~ shape + color + shape:color + ID",
+      "formula": "RT ~ shape + color + shape:color + ID"
+    },
+    "package": {
+      "name": "BayesFactor",
+      "version": "0.9.12-4.2"
+    }
+  },
+  "attitudeBF": {
+    "method": "Bayesian linear regression",
+    "models": [
+      {
+        "name": "complaints",
+        "statistics": {
+          "BF_01": 417938.631039,
+          "BF_10": 2.392696e-06,
+          "error": 0.000081
+        }
+      },
+      {
+        "name": "privileges",
+        "statistics": {
+          "BF_01": 3.177784,
+          "BF_10": 0.314685,
+          "error": 4.909536e-06
+        }
+      },
+      {
+        "name": "learning",
+        "statistics": {
+          "BF_01": 103.393019,
+          "BF_10": 0.009672,
+          "error": 0.000015
+        }
+      },
+      {
+        "name": "raises",
+        "statistics": {
+          "BF_01": 47.009171,
+          "BF_10": 0.021272,
+          "error": 0.00008
+        }
+      },
+      {
+        "name": "critical",
+        "statistics": {
+          "BF_01": 0.449319,
+          "BF_10": 2.225592,
+          "error": 0.000014
+        }
+      },
+      {
+        "name": "advance",
+        "statistics": {
+          "BF_01": 0.447229,
+          "BF_10": 2.235988,
+          "error": 0.000014
+        }
+      },
+      {
+        "name": "complaints + privileges",
+        "statistics": {
+          "BF_01": 75015.227912,
+          "BF_10": 0.000013,
+          "error": 2.257246e-06
+        }
+      },
+      {
+        "name": "complaints + learning",
+        "statistics": {
+          "BF_01": 207271.902002,
+          "BF_10": 4.824581e-06,
+          "error": 2.115093e-06
+        }
+      },
+      {
+        "name": "complaints + raises",
+        "statistics": {
+          "BF_01": 77498.988721,
+          "BF_10": 0.000013,
+          "error": 2.249593e-06
+        }
+      },
+      {
+        "name": "complaints + critical",
+        "statistics": {
+          "BF_01": 70087.299971,
+          "BF_10": 0.000014,
+          "error": 2.274067e-06
+        }
+      },
+      {
+        "name": "complaints + advance",
+        "statistics": {
+          "BF_01": 72759.763981,
+          "BF_10": 0.000014,
+          "error": 2.264658e-06
+        }
+      },
+      {
+        "name": "privileges + learning",
+        "statistics": {
+          "BF_01": 42.16342,
+          "BF_10": 0.023717,
+          "error": 0.00012
+        }
+      },
+      {
+        "name": "privileges + raises",
+        "statistics": {
+          "BF_01": 25.899241,
+          "BF_10": 0.038611,
+          "error": 1.225566e-07
+        }
+      },
+      {
+        "name": "privileges + critical",
+        "statistics": {
+          "BF_01": 1.382939,
+          "BF_10": 0.723098,
+          "error": 9.728496e-06
+        }
+      },
+      {
+        "name": "privileges + advance",
+        "statistics": {
+          "BF_01": 1.234018,
+          "BF_10": 0.810361,
+          "error": 0.000011
+        }
+      },
+      {
+        "name": "learning + raises",
+        "statistics": {
+          "BF_01": 100.511072,
+          "BF_10": 0.009949,
+          "error": 0.000068
+        }
+      },
+      {
+        "name": "learning + critical",
+        "statistics": {
+          "BF_01": 33.967879,
+          "BF_10": 0.02944,
+          "error": 1.483631e-07
+        }
+      },
+      {
+        "name": "learning + advance",
+        "statistics": {
+          "BF_01": 68.891826,
+          "BF_10": 0.014516,
+          "error": 0.000088
+        }
+      },
+      {
+        "name": "raises + critical",
+        "statistics": {
+          "BF_01": 15.709543,
+          "BF_10": 0.063656,
+          "error": 5.149763e-08
+        }
+      },
+      {
+        "name": "raises + advance",
+        "statistics": {
+          "BF_01": 35.603569,
+          "BF_10": 0.028087,
+          "error": 1.515019e-07
+        }
+      },
+      {
+        "name": "critical + advance",
+        "statistics": {
+          "BF_01": 0.239363,
+          "BF_10": 4.177762,
+          "error": 0.000069
+        }
+      },
+      {
+        "name": "complaints + privileges + learning",
+        "statistics": {
+          "BF_01": 56341.123092,
+          "BF_10": 0.000018,
+          "error": 7.948638e-07
+        }
+      },
+      {
+        "name": "complaints + privileges + raises",
+        "statistics": {
+          "BF_01": 18230.791803,
+          "BF_10": 0.000055,
+          "error": 2.756406e-07
+        }
+      },
+      {
+        "name": "complaints + privileges + critical",
+        "statistics": {
+          "BF_01": 16235.873284,
+          "BF_10": 0.000062,
+          "error": 2.184335e-07
+        }
+      },
+      {
+        "name": "complaints + privileges + advance",
+        "statistics": {
+          "BF_01": 16482.374794,
+          "BF_10": 0.000061,
+          "error": 2.25804e-07
+        }
+      },
+      {
+        "name": "complaints + learning + raises",
+        "statistics": {
+          "BF_01": 42847.980268,
+          "BF_10": 0.000023,
+          "error": 6.823573e-07
+        }
+      },
+      {
+        "name": "complaints + learning + critical",
+        "statistics": {
+          "BF_01": 42374.733458,
+          "BF_10": 0.000024,
+          "error": 6.775721e-07
+        }
+      },
+      {
+        "name": "complaints + learning + advance",
+        "statistics": {
+          "BF_01": 88041.536504,
+          "BF_10": 0.000011,
+          "error": 9.556798e-07
+        }
+      },
+      {
+        "name": "complaints + raises + critical",
+        "statistics": {
+          "BF_01": 16913.970299,
+          "BF_10": 0.000059,
+          "error": 2.385033e-07
+        }
+      },
+      {
+        "name": "complaints + raises + advance",
+        "statistics": {
+          "BF_01": 20641.120449,
+          "BF_10": 0.000048,
+          "error": 3.376168e-07
+        }
+      },
+      {
+        "name": "complaints + critical + advance",
+        "statistics": {
+          "BF_01": 15821.130799,
+          "BF_10": 0.000063,
+          "error": 2.05841e-07
+        }
+      },
+      {
+        "name": "privileges + learning + raises",
+        "statistics": {
+          "BF_01": 39.023666,
+          "BF_10": 0.025625,
+          "error": 0.000031
+        }
+      },
+      {
+        "name": "privileges + learning + critical",
+        "statistics": {
+          "BF_01": 16.316617,
+          "BF_10": 0.061287,
+          "error": 0.000023
+        }
+      },
+      {
+        "name": "privileges + learning + advance",
+        "statistics": {
+          "BF_01": 38.475377,
+          "BF_10": 0.025991,
+          "error": 0.000031
+        }
+      },
+      {
+        "name": "privileges + raises + critical",
+        "statistics": {
+          "BF_01": 10.257101,
+          "BF_10": 0.097493,
+          "error": 0.000011
+        }
+      },
+      {
+        "name": "privileges + raises + advance",
+        "statistics": {
+          "BF_01": 28.715473,
+          "BF_10": 0.034824,
+          "error": 0.000031
+        }
+      },
+      {
+        "name": "privileges + critical + advance",
+        "statistics": {
+          "BF_01": 0.645198,
+          "BF_10": 1.549911,
+          "error": 0.000014
+        }
+      },
+      {
+        "name": "learning + raises + critical",
+        "statistics": {
+          "BF_01": 33.456504,
+          "BF_10": 0.02989,
+          "error": 0.000031
+        }
+      },
+      {
+        "name": "learning + raises + advance",
+        "statistics": {
+          "BF_01": 313.388458,
+          "BF_10": 0.003191,
+          "error": 0.000013
+        }
+      },
+      {
+        "name": "learning + critical + advance",
+        "statistics": {
+          "BF_01": 35.085449,
+          "BF_10": 0.028502,
+          "error": 0.000031
+        }
+      },
+      {
+        "name": "raises + critical + advance",
+        "statistics": {
+          "BF_01": 13.368632,
+          "BF_10": 0.074802,
+          "error": 0.000019
+        }
+      },
+      {
+        "name": "complaints + privileges + learning + raises",
+        "statistics": {
+          "BF_01": 13707.572081,
+          "BF_10": 0.000073,
+          "error": 2.221061e-06
+        }
+      },
+      {
+        "name": "complaints + privileges + learning + critical",
+        "statistics": {
+          "BF_01": 13604.670078,
+          "BF_10": 0.000074,
+          "error": 2.226979e-06
+        }
+      },
+      {
+        "name": "complaints + privileges + learning + advance",
+        "statistics": {
+          "BF_01": 24141.938462,
+          "BF_10": 0.000041,
+          "error": 1.360475e-06
+        }
+      },
+      {
+        "name": "complaints + privileges + raises + critical",
+        "statistics": {
+          "BF_01": 4737.97634,
+          "BF_10": 0.000211,
+          "error": 3.394395e-06
+        }
+      },
+      {
+        "name": "complaints + privileges + raises + advance",
+        "statistics": {
+          "BF_01": 5450.1043,
+          "BF_10": 0.000183,
+          "error": 3.195999e-06
+        }
+      },
+      {
+        "name": "complaints + privileges + critical + advance",
+        "statistics": {
+          "BF_01": 4280.87409,
+          "BF_10": 0.000234,
+          "error": 3.547393e-06
+        }
+      },
+      {
+        "name": "complaints + learning + raises + critical",
+        "statistics": {
+          "BF_01": 10520.620501,
+          "BF_10": 0.000095,
+          "error": 2.447227e-06
+        }
+      },
+      {
+        "name": "complaints + learning + raises + advance",
+        "statistics": {
+          "BF_01": 23334.000571,
+          "BF_10": 0.000043,
+          "error": 9.064252e-07
+        }
+      },
+      {
+        "name": "complaints + learning + critical + advance",
+        "statistics": {
+          "BF_01": 22169.302799,
+          "BF_10": 0.000045,
+          "error": 8.644828e-06
+        }
+      },
+      {
+        "name": "complaints + raises + critical + advance",
+        "statistics": {
+          "BF_01": 5302.836757,
+          "BF_10": 0.000189,
+          "error": 3.233663e-06
+        }
+      },
+      {
+        "name": "privileges + learning + raises + critical",
+        "statistics": {
+          "BF_01": 15.130439,
+          "BF_10": 0.066092,
+          "error": 0.000041
+        }
+      },
+      {
+        "name": "privileges + learning + raises + advance",
+        "statistics": {
+          "BF_01": 134.466234,
+          "BF_10": 0.007437,
+          "error": 7.400951e-06
+        }
+      },
+      {
+        "name": "privileges + learning + critical + advance",
+        "statistics": {
+          "BF_01": 20.646716,
+          "BF_10": 0.048434,
+          "error": 0.00002
+        }
+      },
+      {
+        "name": "privileges + raises + critical + advance",
+        "statistics": {
+          "BF_01": 11.719099,
+          "BF_10": 0.085331,
+          "error": 0.000067
+        }
+      },
+      {
+        "name": "learning + raises + critical + advance",
+        "statistics": {
+          "BF_01": 106.540246,
+          "BF_10": 0.009386,
+          "error": 6.199406e-06
+        }
+      },
+      {
+        "name": "complaints + privileges + learning + raises + critical",
+        "statistics": {
+          "BF_01": 3826.973017,
+          "BF_10": 0.000261,
+          "error": 1.430886e-06
+        }
+      },
+      {
+        "name": "complaints + privileges + learning + raises + advance",
+        "statistics": {
+          "BF_01": 7144.828333,
+          "BF_10": 0.00014,
+          "error": 9.173265e-07
+        }
+      },
+      {
+        "name": "complaints + privileges + learning + critical + advance",
+        "statistics": {
+          "BF_01": 6926.972759,
+          "BF_10": 0.000144,
+          "error": 9.403509e-07
+        }
+      },
+      {
+        "name": "complaints + privileges + raises + critical + advance",
+        "statistics": {
+          "BF_01": 1608.397046,
+          "BF_10": 0.000622,
+          "error": 2.15549e-06
+        }
+      },
+      {
+        "name": "complaints + learning + raises + critical + advance",
+        "statistics": {
+          "BF_01": 6461.750877,
+          "BF_10": 0.000155,
+          "error": 9.931268e-07
+        }
+      },
+      {
+        "name": "privileges + learning + raises + critical + advance",
+        "statistics": {
+          "BF_01": 51.023123,
+          "BF_10": 0.019599,
+          "error": 0.000023
+        }
+      },
+      {
+        "name": "complaints + privileges + learning + raises + critical + advance",
+        "statistics": {
+          "BF_01": 2211.912275,
+          "BF_10": 0.000452,
+          "error": 1.172122e-06
+        }
+      }
+    ],
+    "alternative": {
+      "name": "Intercept only",
+      "formula": "rating ~ 1"
+    },
+    "package": {
+      "name": "BayesFactor",
+      "version": "0.9.12-4.2"
+    }
+  },
+  "attitudeBFBest": {
+    "method": "Bayesian linear regression",
+    "models": [
+      {
+        "name": "complaints",
+        "statistics": {
+          "BF_01": 188.949008,
+          "BF_10": 0.005292,
+          "error": 0.000081
+        }
+      },
+      {
+        "name": "privileges",
+        "statistics": {
+          "BF_01": 0.001437,
+          "BF_10": 696.05493,
+          "error": 5.047515e-06
+        }
+      },
+      {
+        "name": "learning",
+        "statistics": {
+          "BF_01": 0.046744,
+          "BF_10": 21.393246,
+          "error": 0.000016
+        }
+      },
+      {
+        "name": "raises",
+        "statistics": {
+          "BF_01": 0.021253,
+          "BF_10": 47.052782,
+          "error": 0.00008
+        }
+      },
+      {
+        "name": "critical",
+        "statistics": {
+          "BF_01": 0.000203,
+          "BF_10": 4922.81435,
+          "error": 0.000014
+        }
+      },
+      {
+        "name": "advance",
+        "statistics": {
+          "BF_01": 0.000202,
+          "BF_10": 4945.810342,
+          "error": 0.000014
+        }
+      },
+      {
+        "name": "complaints + privileges",
+        "statistics": {
+          "BF_01": 33.914197,
+          "BF_10": 0.029486,
+          "error": 2.543429e-06
+        }
+      },
+      {
+        "name": "complaints + learning",
+        "statistics": {
+          "BF_01": 93.707108,
+          "BF_10": 0.010672,
+          "error": 2.418158e-06
+        }
+      },
+      {
+        "name": "complaints + raises",
+        "statistics": {
+          "BF_01": 35.037099,
+          "BF_10": 0.028541,
+          "error": 2.53664e-06
+        }
+      },
+      {
+        "name": "complaints + critical",
+        "statistics": {
+          "BF_01": 31.686293,
+          "BF_10": 0.031559,
+          "error": 2.558369e-06
+        }
+      },
+      {
+        "name": "complaints + advance",
+        "statistics": {
+          "BF_01": 32.894507,
+          "BF_10": 0.0304,
+          "error": 2.550009e-06
+        }
+      },
+      {
+        "name": "privileges + learning",
+        "statistics": {
+          "BF_01": 0.019062,
+          "BF_10": 52.460456,
+          "error": 0.00012
+        }
+      },
+      {
+        "name": "privileges + raises",
+        "statistics": {
+          "BF_01": 0.011709,
+          "BF_10": 85.404522,
+          "error": 1.178512e-06
+        }
+      },
+      {
+        "name": "privileges + critical",
+        "statistics": {
+          "BF_01": 0.000625,
+          "BF_10": 1599.428919,
+          "error": 9.798852e-06
+        }
+      },
+      {
+        "name": "privileges + advance",
+        "statistics": {
+          "BF_01": 0.000558,
+          "BF_10": 1792.447752,
+          "error": 0.000011
+        }
+      },
+      {
+        "name": "learning + raises",
+        "statistics": {
+          "BF_01": 0.045441,
+          "BF_10": 22.006653,
+          "error": 0.000068
+        }
+      },
+      {
+        "name": "learning + critical",
+        "statistics": {
+          "BF_01": 0.015357,
+          "BF_10": 65.117762,
+          "error": 1.181474e-06
+        }
+      },
+      {
+        "name": "learning + advance",
+        "statistics": {
+          "BF_01": 0.031146,
+          "BF_10": 32.107035,
+          "error": 0.000088
+        }
+      },
+      {
+        "name": "raises + critical",
+        "statistics": {
+          "BF_01": 0.007102,
+          "BF_10": 140.800553,
+          "error": 1.173253e-06
+        }
+      },
+      {
+        "name": "raises + advance",
+        "statistics": {
+          "BF_01": 0.016096,
+          "BF_10": 62.126138,
+          "error": 1.181872e-06
+        }
+      },
+      {
+        "name": "critical + advance",
+        "statistics": {
+          "BF_01": 0.000108,
+          "BF_10": 9240.842685,
+          "error": 0.000069
+        }
+      },
+      {
+        "name": "complaints + privileges + learning",
+        "statistics": {
+          "BF_01": 25.471681,
+          "BF_10": 0.039259,
+          "error": 1.41622e-06
+        }
+      },
+      {
+        "name": "complaints + privileges + raises",
+        "statistics": {
+          "BF_01": 8.242095,
+          "BF_10": 0.121328,
+          "error": 1.204096e-06
+        }
+      },
+      {
+        "name": "complaints + privileges + critical",
+        "statistics": {
+          "BF_01": 7.340198,
+          "BF_10": 0.136236,
+          "error": 1.192301e-06
+        }
+      },
+      {
+        "name": "complaints + privileges + advance",
+        "statistics": {
+          "BF_01": 7.45164,
+          "BF_10": 0.134199,
+          "error": 1.193674e-06
+        }
+      },
+      {
+        "name": "complaints + learning + raises",
+        "statistics": {
+          "BF_01": 19.371465,
+          "BF_10": 0.051622,
+          "error": 1.356275e-06
+        }
+      },
+      {
+        "name": "complaints + learning + critical",
+        "statistics": {
+          "BF_01": 19.157511,
+          "BF_10": 0.052199,
+          "error": 1.353873e-06
+        }
+      },
+      {
+        "name": "complaints + learning + advance",
+        "statistics": {
+          "BF_01": 39.803358,
+          "BF_10": 0.025124,
+          "error": 1.512347e-06
+        }
+      },
+      {
+        "name": "complaints + raises + critical",
+        "statistics": {
+          "BF_01": 7.646764,
+          "BF_10": 0.130774,
+          "error": 1.196141e-06
+        }
+      },
+      {
+        "name": "complaints + raises + advance",
+        "statistics": {
+          "BF_01": 9.331799,
+          "BF_10": 0.10716,
+          "error": 1.219776e-06
+        }
+      },
+      {
+        "name": "complaints + critical + advance",
+        "statistics": {
+          "BF_01": 7.152694,
+          "BF_10": 0.139807,
+          "error": 1.190059e-06
+        }
+      },
+      {
+        "name": "privileges + learning + raises",
+        "statistics": {
+          "BF_01": 0.017643,
+          "BF_10": 56.681304,
+          "error": 0.000031
+        }
+      },
+      {
+        "name": "privileges + learning + critical",
+        "statistics": {
+          "BF_01": 0.007377,
+          "BF_10": 135.561942,
+          "error": 0.000023
+        }
+      },
+      {
+        "name": "privileges + learning + advance",
+        "statistics": {
+          "BF_01": 0.017395,
+          "BF_10": 57.489035,
+          "error": 0.000031
+        }
+      },
+      {
+        "name": "privileges + raises + critical",
+        "statistics": {
+          "BF_01": 0.004637,
+          "BF_10": 215.646916,
+          "error": 0.000011
+        }
+      },
+      {
+        "name": "privileges + raises + advance",
+        "statistics": {
+          "BF_01": 0.012982,
+          "BF_10": 77.028585,
+          "error": 0.000031
+        }
+      },
+      {
+        "name": "privileges + critical + advance",
+        "statistics": {
+          "BF_01": 0.000292,
+          "BF_10": 3428.267096,
+          "error": 0.000014
+        }
+      },
+      {
+        "name": "learning + raises + critical",
+        "statistics": {
+          "BF_01": 0.015126,
+          "BF_10": 66.113072,
+          "error": 0.000031
+        }
+      },
+      {
+        "name": "learning + raises + advance",
+        "statistics": {
+          "BF_01": 0.141682,
+          "BF_10": 7.058053,
+          "error": 0.000013
+        }
+      },
+      {
+        "name": "learning + critical + advance",
+        "statistics": {
+          "BF_01": 0.015862,
+          "BF_10": 63.043579,
+          "error": 0.000031
+        }
+      },
+      {
+        "name": "raises + critical + advance",
+        "statistics": {
+          "BF_01": 0.006044,
+          "BF_10": 165.455389,
+          "error": 0.000019
+        }
+      },
+      {
+        "name": "complaints + privileges + learning + raises",
+        "statistics": {
+          "BF_01": 6.197159,
+          "BF_10": 0.161364,
+          "error": 2.51137e-06
+        }
+      },
+      {
+        "name": "complaints + privileges + learning + critical",
+        "statistics": {
+          "BF_01": 6.150637,
+          "BF_10": 0.162585,
+          "error": 2.516606e-06
+        }
+      },
+      {
+        "name": "complaints + privileges + learning + advance",
+        "statistics": {
+          "BF_01": 10.91451,
+          "BF_10": 0.091621,
+          "error": 1.795762e-06
+        }
+      },
+      {
+        "name": "complaints + privileges + raises + critical",
+        "statistics": {
+          "BF_01": 2.142027,
+          "BF_10": 0.466847,
+          "error": 3.591071e-06
+        }
+      },
+      {
+        "name": "complaints + privileges + raises + advance",
+        "statistics": {
+          "BF_01": 2.463979,
+          "BF_10": 0.405848,
+          "error": 3.404156e-06
+        }
+      },
+      {
+        "name": "complaints + privileges + critical + advance",
+        "statistics": {
+          "BF_01": 1.935372,
+          "BF_10": 0.516696,
+          "error": 3.736023e-06
+        }
+      },
+      {
+        "name": "complaints + learning + raises + critical",
+        "statistics": {
+          "BF_01": 4.756346,
+          "BF_10": 0.210245,
+          "error": 2.713446e-06
+        }
+      },
+      {
+        "name": "complaints + learning + raises + advance",
+        "statistics": {
+          "BF_01": 10.549243,
+          "BF_10": 0.094794,
+          "error": 1.481714e-06
+        }
+      },
+      {
+        "name": "complaints + learning + critical + advance",
+        "statistics": {
+          "BF_01": 10.022686,
+          "BF_10": 0.099774,
+          "error": 8.723928e-06
+        }
+      },
+      {
+        "name": "complaints + raises + critical + advance",
+        "statistics": {
+          "BF_01": 2.397399,
+          "BF_10": 0.417119,
+          "error": 3.439541e-06
+        }
+      },
+      {
+        "name": "privileges + learning + raises + critical",
+        "statistics": {
+          "BF_01": 0.00684,
+          "BF_10": 146.189563,
+          "error": 0.000041
+        }
+      },
+      {
+        "name": "privileges + learning + raises + advance",
+        "statistics": {
+          "BF_01": 0.060792,
+          "BF_10": 16.449574,
+          "error": 7.493193e-06
+        }
+      },
+      {
+        "name": "privileges + learning + critical + advance",
+        "statistics": {
+          "BF_01": 0.009334,
+          "BF_10": 107.131432,
+          "error": 0.00002
+        }
+      },
+      {
+        "name": "privileges + raises + critical + advance",
+        "statistics": {
+          "BF_01": 0.005298,
+          "BF_10": 188.744232,
+          "error": 0.000067
+        }
+      },
+      {
+        "name": "learning + raises + critical + advance",
+        "statistics": {
+          "BF_01": 0.048167,
+          "BF_10": 20.761284,
+          "error": 6.30924e-06
+        }
+      },
+      {
+        "name": "complaints + privileges + learning + raises + critical",
+        "statistics": {
+          "BF_01": 1.730165,
+          "BF_10": 0.57798,
+          "error": 1.849677e-06
+        }
+      },
+      {
+        "name": "complaints + privileges + learning + raises + advance",
+        "statistics": {
+          "BF_01": 3.230159,
+          "BF_10": 0.309582,
+          "error": 1.488408e-06
+        }
+      },
+      {
+        "name": "complaints + privileges + learning + critical + advance",
+        "statistics": {
+          "BF_01": 3.131667,
+          "BF_10": 0.319319,
+          "error": 1.502707e-06
+        }
+      },
+      {
+        "name": "complaints + privileges + raises + critical + advance",
+        "statistics": {
+          "BF_01": 0.727152,
+          "BF_10": 1.375228,
+          "error": 2.45357e-06
+        }
+      },
+      {
+        "name": "complaints + learning + raises + critical + advance",
+        "statistics": {
+          "BF_01": 2.921341,
+          "BF_10": 0.342309,
+          "error": 1.536285e-06
+        }
+      },
+      {
+        "name": "privileges + learning + raises + critical + advance",
+        "statistics": {
+          "BF_01": 0.023067,
+          "BF_10": 43.351174,
+          "error": 0.000023
+        }
+      },
+      {
+        "name": "complaints + privileges + learning + raises + critical + advance",
+        "statistics": {
+          "BF_01": 1,
+          "BF_10": 1,
+          "error": 0
+        }
+      }
+    ],
+    "alternative": {
+      "name": "rating ~ complaints + privileges + learning + raises + critical + advance",
+      "formula": "rating ~ complaints + privileges + learning + raises + critical + advance"
+    },
+    "package": {
+      "name": "BayesFactor",
+      "version": "0.9.12-4.2"
+    }
+  },
+  "sleepTTestBF": {
+    "method": "Bayesian t-test",
+    "name": "Alt., r=0.707",
+    "statistics": {
+      "BF_01": 17.25888,
+      "BF_10": 0.057941,
+      "error": 1.681548e-07
+    },
+    "alternative": {
+      "name": "Null, mu = 0",
+      "formula": "y ~ 0"
+    },
+    "package": {
+      "name": "BayesFactor",
+      "version": "0.9.12-4.2"
+    }
+  },
+  "sleepAnovaBF": {
+    "method": "Bayesian linear regression",
+    "name": "group + ID",
+    "statistics": {
+      "BF_01": 11.674381,
+      "BF_10": 0.085658,
+      "error": 0.011599
+    },
+    "alternative": {
+      "name": "extra ~ ID",
+      "formula": "extra ~ ID"
+    },
+    "package": {
+      "name": "BayesFactor",
+      "version": "0.9.12-4.2"
+    }
+  },
+  "puzzlesAnovaBF": {
+    "method": "Bayesian linear regression",
+    "models": [
+      {
+        "name": "shape + color + ID",
+        "statistics": {
+          "BF_01": 2.67741,
+          "BF_10": 0.373495,
+          "error": 0.023564
+        }
+      },
+      {
+        "name": "shape + shape:color + ID",
+        "statistics": {
+          "BF_01": 0.241097,
+          "BF_10": 4.147714,
+          "error": 0.023689
+        }
+      },
+      {
+        "name": "color + shape:color + ID",
+        "statistics": {
+          "BF_01": 0.254235,
+          "BF_10": 3.933374,
+          "error": 0.052909
+        }
+      }
+    ],
+    "alternative": {
+      "name": "RT ~ shape + color + shape:color + ID",
+      "formula": "RT ~ shape + color + shape:color + ID"
+    },
+    "package": {
+      "name": "BayesFactor",
+      "version": "0.9.12-4.2"
+    }
+  },
+  "correlationBF": {
+    "method": "Bayesian correlation",
+    "name": "Alt., r=0.333",
+    "statistics": {
+      "BF_01": 0.509018,
+      "BF_10": 1.964569,
+      "error": 0
+    },
+    "alternative": {
+      "name": "Null, rho = 0",
+      "formula": "rho = 0"
+    },
+    "package": {
+      "name": "BayesFactor",
+      "version": "0.9.12-4.2"
+    }
+  },
+  "contingencyTableBF": {
+    "method": "Bayesian contingency table",
+    "name": "Non-indep. (a=1)",
+    "statistics": {
+      "BF_01": 1.814856,
+      "BF_10": 0.551008,
+      "error": 0
+    },
+    "alternative": {
+      "name": "Null, independence, a = 1",
+      "formula": "independence"
+    },
+    "package": {
+      "name": "BayesFactor",
+      "version": "0.9.12-4.2"
+    }
+  },
+  "proportionBF": {
+    "method": "Bayesian analysis of proportions",
+    "name": "Alt., p0=0.5, r=0.5",
+    "statistics": {
+      "BF_01": 0.659872,
+      "BF_10": 1.515444,
+      "error": 0.000024
+    },
+    "alternative": {
+      "name": "Null, p = 0.5",
+      "formula": "p = p0"
+    },
+    "package": {
+      "name": "BayesFactor",
+      "version": "0.9.12-4.2"
+    }
+  },
+  "metaBF": {
+    "method": "Bayesian meta-analysis",
+    "models": [
+      {
+        "name": "Alt., r=1 0<d<Inf",
+        "statistics": {
+          "BF_01": 38.682476,
+          "BF_10": 0.025851,
+          "error": 6.038169e-08
+        }
+      },
+      {
+        "name": "Alt., r=1 !(0<d<Inf)",
+        "statistics": {
+          "BF_01": 0.008033,
+          "BF_10": 124.480489,
+          "error": 0.005553
+        }
+      }
+    ],
+    "alternative": {
+      "name": "Null, d = 0",
+      "formula": "d = 0"
+    },
+    "package": {
+      "name": "BayesFactor",
+      "version": "0.9.12-4.2"
+    }
+  }
+}

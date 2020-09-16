@@ -1,5 +1,11 @@
 #' Helper functions in tidystats
 #' 
+#' @description Functions used under the hood in the \code{tidystats} package.
+#' 
+#' @describeIn tidy_matrix 
+#' Function to convert matrix objects to a tidy data frame.
+#' 
+#' @param m A matrix.
 
 tidy_matrix <- function(m) {
   

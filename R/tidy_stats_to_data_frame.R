@@ -53,22 +53,22 @@ tidy_stats_to_data_frame <- function(x) {
 }
 
 analysis_to_data_frame <- function(x, y) {
-  output <- tibble()
+  output <- tibble::tibble()
   
   if ("statistics" %in% names(x)) {
     output <- statistics_to_data_frame(x$statistics)
   }
   if ("terms" %in% names(x)) {
-    output <- bind_rows(output, terms_to_data_frame(x$terms))
+    output <- dplyr::bind_rows(output, terms_to_data_frame(x$terms))
   }
   if ("model" %in% names(x)) {
-    output <- bind_rows(output, statistics_to_data_frame(x$model$statistics))
+    output <- dplyr::bind_rows(output, statistics_to_data_frame(x$model$statistics))
   }
   if ("groups" %in% names(x)) {
-    output <- bind_rows(output, groups_to_data_frame(x$groups))
+    output <- dplyr::bind_rows(output, groups_to_data_frame(x$groups))
   }
   if ("effects" %in% names(x)) {
-    output <- bind_rows(
+    output <- dplyr::bind_rows(
       output, 
       random_effects_to_data_frame(x$effects$random_effects),
       fixed_effects_to_data_frame(x$effects$fixed_effects)
@@ -96,49 +96,49 @@ random_effects_to_data_frame <- function(x) {
   df_statistics <- statistics_to_data_frame(x$statistics)
   df_groups <- groups_to_data_frame(x$groups)
   
-  return(bind_rows(df_statistics, df_groups))
+  return(dplyr::bind_rows(df_statistics, df_groups))
 }
 
 fixed_effects_to_data_frame <- function(x) {
   df_terms <- terms_to_data_frame(x$terms)
   df_pairs <- pairs_to_data_frame(x$pairs)
   
-  return(bind_rows(df_terms, df_pairs))
+  return(dplyr::bind_rows(df_terms, df_pairs))
 }
 
 groups_to_data_frame <- function(x) {
-  df <- map_df(x, group_to_data_frame)
+  df <- purrr::map_df(x, group_to_data_frame)
   
   return(df)
 }
 
 group_to_data_frame <- function(x) {
   
-  df <- tibble()
+  df <- tibble::tibble()
   
   if ("statistics" %in% names(x)) {
     df_statistics <- statistics_to_data_frame(x$statistics)
     df_statistics$group <- x$name
-    df <- bind_rows(df, df_statistics)
+    df <- dplyr::bind_rows(df, df_statistics)
   }
   
   if ("terms" %in% names(x)) {
     df_terms <- terms_to_data_frame(x$terms)
     df_terms$group <- x$name
-    df <- bind_rows(df, df_terms)
+    df <- dplyr::bind_rows(df, df_terms)
   }
   
   if ("pairs" %in% names(x)) {
     df_pairs <- pairs_to_data_frame(x$pairs)
     df_pairs$group <- x$name
-    df <- bind_rows(df, df_pairs)
+    df <- dplyr::bind_rows(df, df_pairs)
   }
   
   return(df)
 }
 
 terms_to_data_frame <- function(x) {
-  df <- map_df(x, term_to_data_frame)
+  df <- purrr::map_df(x, term_to_data_frame)
   
   return(df)
 }
@@ -151,7 +151,7 @@ term_to_data_frame <- function(x) {
 }
 
 pairs_to_data_frame <- function(x) {
-  df <- map_df(x, pair_to_data_frame)
+  df <- purrr::map_df(x, pair_to_data_frame)
   
   return(df)
 }
@@ -164,14 +164,14 @@ pair_to_data_frame <- function(x) {
 }
 
 statistics_to_data_frame <- function(x) {
-  df <- map2_dfr(x, names(x), statistic_to_data_frame)
+  df <- purrr::map2_dfr(x, names(x), statistic_to_data_frame)
   
   return(df)
 }
 
 statistic_to_data_frame <- function(x, y) {
   if (class(x) == "numeric" | class(x) == "integer") {
-    df <- tibble(
+    df <- tibble::tibble(
       statistic = y,
       value = x
     )

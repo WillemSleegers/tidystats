@@ -6,6 +6,14 @@
 \usage{
 tidy_matrix(m)
 }
-\description{
-Helper functions in tidystats
+\arguments{
+\item{m}{A matrix.}
 }
+\description{
+Functions used under the hood in the \code{tidystats} package.
+}
+\section{Functions}{
+\itemize{
+\item \code{tidy_matrix}: Function to convert matrix objects to a tidy data frame.
+}}
+

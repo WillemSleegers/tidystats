@@ -79,7 +79,7 @@ of supported statistical tests." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidystats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5</span>
       </span>
     </div>
 
@@ -160,10 +160,10 @@ of supported statistical tests.</p>
 <span class='co'># S3 method for lm</span>
 <span class='fu'>tidy_stats</span>(<span class='no'>x</span>)
 
-<span class='co'># S3 method for lmerMod</span>
+<span class='co'># S3 method for glm</span>
 <span class='fu'>tidy_stats</span>(<span class='no'>x</span>)
 
-<span class='co'># S3 method for lmerModLmerTest</span>
+<span class='co'># S3 method for anova</span>
 <span class='fu'>tidy_stats</span>(<span class='no'>x</span>)
 
 <span class='co'># S3 method for aov</span>
@@ -178,7 +178,10 @@ of supported statistical tests.</p>
 <span class='co'># S3 method for tidystats_counts</span>
 <span class='fu'>tidy_stats</span>(<span class='no'>x</span>)
 
-<span class='co'># S3 method for anova</span>
+<span class='co'># S3 method for lmerMod</span>
+<span class='fu'>tidy_stats</span>(<span class='no'>x</span>)
+
+<span class='co'># S3 method for lmerModLmerTest</span>
 <span class='fu'>tidy_stats</span>(<span class='no'>x</span>)
 
 <span class='co'># S3 method for BFBayesFactor</span>
@@ -215,13 +218,14 @@ of supported statistical tests.</p>
 <ul>
 <li><p><code>htest</code>: tidy_stats method for class 'htest'</p></li>
 <li><p><code>lm</code>: tidy_stats method for class 'lm'</p></li>
-<li><p><code>lmerMod</code>: tidy_stats method for class 'lmerMod'</p></li>
-<li><p><code>lmerModLmerTest</code>: tidy_stats method for class 'lmerModLmerTest'</p></li>
+<li><p><code>glm</code>: tidy_stats method for class 'glm'</p></li>
+<li><p><code>anova</code>: tidy_stats method for class 'anova'</p></li>
 <li><p><code>aov</code>: tidy_stats method for class 'aov'</p></li>
 <li><p><code>aovlist</code>: tidy_stats method for class 'aovlist'</p></li>
 <li><p><code>tidystats_descriptives</code>: tidy_stats method for class 'tidystats_descriptives'</p></li>
 <li><p><code>tidystats_counts</code>: tidy_stats method for class 'tidystats_counts'</p></li>
-<li><p><code>anova</code>: tidy_stats method for class 'anova'</p></li>
+<li><p><code>lmerMod</code>: tidy_stats method for class 'lmerMod'</p></li>
+<li><p><code>lmerModLmerTest</code>: tidy_stats method for class 'lmerModLmerTest'</p></li>
 <li><p><code>BFBayesFactor</code>: tidy_stats method for class 'BayesFactor'</p></li>
 <li><p><code>afex_aov</code>: tidy_stats method for class 'afex_aov'</p></li>
 </ul>
@@ -247,11 +251,15 @@ of supported statistical tests.</p>
 <span class='no'>list_npk_aov</span> <span class='kw'>&lt;-</span> <span class='fu'>tidy_stats</span>(<span class='no'>npk_aov</span>)
 
 <span class='co'># Now you can inspect each of these variables, e.g.,:</span>
-<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>list_sleep_test</span>)</div><div class='output co'>#&gt; [1] "method"      "data_name"   "statistics"  "alternative" "package"    </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>list_sleep_test</span>)</div><div class='output co'>#&gt; List of 5
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>list_sleep_test</span>)</div><div class='output co'>#&gt; [1] "method"      "var_equal"   "name"        "statistics"  "alternative"
+#&gt; [6] "package"    </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>list_sleep_test</span>)</div><div class='output co'>#&gt; List of 6
 #&gt;  $ method     : chr "Paired t-test"
-#&gt;  $ data_name  : chr "extra by group"
+#&gt;  $ var_equal  : logi TRUE
+#&gt;  $ name       : chr "extra by group"
 #&gt;  $ statistics :List of 6
-#&gt;   ..$ estimate : num -1.58
+#&gt;   ..$ estimate :List of 2
+#&gt;   .. ..$ name : chr "mean difference"
+#&gt;   .. ..$ value: num -1.58
 #&gt;   ..$ SE       : num 0.389
 #&gt;   ..$ statistic:List of 2
 #&gt;   .. ..$ name : chr "t"
@@ -259,16 +267,15 @@ of supported statistical tests.</p>
 #&gt;   ..$ df       : num 9
 #&gt;   ..$ p        : num 0.00283
 #&gt;   ..$ CI       :List of 3
-#&gt;   .. ..$ level: num 0.95
-#&gt;   .. ..$ lower: num -2.46
-#&gt;   .. ..$ upper: num -0.7
+#&gt;   .. ..$ CI_level: num 0.95
+#&gt;   .. ..$ CI_lower: num -2.46
+#&gt;   .. ..$ CI_upper: num -0.7
 #&gt;  $ alternative:List of 2
 #&gt;   ..$ direction : chr "two.sided"
-#&gt;   ..$ null_value: Named num 0
-#&gt;   .. ..- attr(*, "names")= chr "difference in means"
+#&gt;   ..$ null_value: num 0
 #&gt;  $ package    :List of 2
 #&gt;   ..$ name   : chr "stats"
-#&gt;   ..$ version: chr "4.0.1"</div><div class='input'>
+#&gt;   ..$ version: chr "4.0.2"</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

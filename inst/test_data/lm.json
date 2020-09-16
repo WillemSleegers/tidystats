@@ -1,0 +1,112 @@
+{
+  "lm": {
+    "method": "Linear regression",
+    "statistics": {
+      "r_squared": 0.073078,
+      "adjusted_r_squared": 0.021582,
+      "statistic": {
+        "name": "F",
+        "value": 1.419101
+      },
+      "dfs": {
+        "df_numerator": 1,
+        "df_denominator": 18
+      },
+      "p": 0.249023,
+      "sigma": 0.696389
+    },
+    "terms": [
+      {
+        "name": "(Intercept)",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": 5.032
+          },
+          "SE": 0.220218,
+          "statistic": {
+            "name": "t",
+            "value": 22.850117
+          },
+          "df": 18,
+          "p": 9.547128e-15
+        }
+      },
+      {
+        "name": "groupTrt",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": -0.371
+          },
+          "SE": 0.311435,
+          "statistic": {
+            "name": "t",
+            "value": -1.19126
+          },
+          "df": 18,
+          "p": 0.249023
+        }
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.0.2"
+    }
+  },
+  "lm_wo_intercept": {
+    "method": "Linear regression",
+    "statistics": {
+      "r_squared": 0.981783,
+      "adjusted_r_squared": 0.979759,
+      "statistic": {
+        "name": "F",
+        "value": 485.051413
+      },
+      "dfs": {
+        "df_numerator": 2,
+        "df_denominator": 18
+      },
+      "p": 2.209191e-16,
+      "sigma": 0.696389
+    },
+    "terms": [
+      {
+        "name": "groupCtl",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": 5.032
+          },
+          "SE": 0.220218,
+          "statistic": {
+            "name": "t",
+            "value": 22.850117
+          },
+          "df": 18,
+          "p": 9.547128e-15
+        }
+      },
+      {
+        "name": "groupTrt",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": 4.661
+          },
+          "SE": 0.220218,
+          "statistic": {
+            "name": "t",
+            "value": 21.16542
+          },
+          "df": 18,
+          "p": 3.615345e-14
+        }
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.0.2"
+    }
+  }
+}

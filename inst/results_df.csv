@@ -1,0 +1,70 @@
+identifier,term,statistic,value,extra,method,type,preregistered
+sleep_test,NA,mean difference,-1.58,NA,Paired t-test,primary,NA
+sleep_test,NA,SE,0.3889587238883952,NA,Paired t-test,primary,NA
+sleep_test,NA,t,-4.062127683382037,NA,Paired t-test,primary,NA
+sleep_test,NA,df,9,NA,Paired t-test,primary,NA
+sleep_test,NA,p,0.00283289019738427,NA,Paired t-test,primary,NA
+sleep_test,NA,CI_lower,-2.4598857632769824,95% CI,Paired t-test,primary,NA
+sleep_test,NA,CI_upper,-0.7001142367230175,95% CI,Paired t-test,primary,NA
+lm_D9,NA,r_squared,0.07307759899038556,NA,Linear regression,NA,no
+lm_D9,NA,adjusted_r_squared,0.021581910045406993,NA,Linear regression,NA,no
+lm_D9,NA,F,1.4191012973623196,NA,Linear regression,NA,no
+lm_D9,NA,df_numerator,1,NA,Linear regression,NA,no
+lm_D9,NA,df_denominator,18,NA,Linear regression,NA,no
+lm_D9,NA,p,0.2490231659730055,NA,Linear regression,NA,no
+lm_D9,NA,sigma,0.6963894982933998,NA,Linear regression,NA,no
+lm_D9,(Intercept),b,5.032,NA,Linear regression,NA,no
+lm_D9,(Intercept),SE,0.2202176953229084,NA,Linear regression,NA,no
+lm_D9,(Intercept),t,22.850116529561827,NA,Linear regression,NA,no
+lm_D9,(Intercept),df,18,NA,Linear regression,NA,no
+lm_D9,(Intercept),p,9.547127635904178e-15,NA,Linear regression,NA,no
+lm_D9,groupTrt,b,-0.3709999999999997,NA,Linear regression,NA,no
+lm_D9,groupTrt,SE,0.3114348514002032,NA,Linear regression,NA,no
+lm_D9,groupTrt,t,-1.1912603818487015,NA,Linear regression,NA,no
+lm_D9,groupTrt,df,18,NA,Linear regression,NA,no
+lm_D9,groupTrt,p,0.24902316597300633,NA,Linear regression,NA,no
+npk_aov,block,SS,343.29499999999985,NA,ANOVA,NA,NA
+npk_aov,block,MS,68.65899999999996,NA,ANOVA,NA,NA
+npk_aov,block,F,4.446666426798115,NA,ANOVA,NA,NA
+npk_aov,block,df_numerator,5,NA,ANOVA,NA,NA
+npk_aov,block,df_denominator,12,NA,ANOVA,NA,NA
+npk_aov,block,p,0.015938790208193922,NA,ANOVA,NA,NA
+npk_aov,N,SS,189.28166666666635,NA,ANOVA,NA,NA
+npk_aov,N,MS,189.28166666666635,NA,ANOVA,NA,NA
+npk_aov,N,F,12.258734213650905,NA,ANOVA,NA,NA
+npk_aov,N,df_numerator,1,NA,ANOVA,NA,NA
+npk_aov,N,df_denominator,12,NA,ANOVA,NA,NA
+npk_aov,N,p,0.004371811825799377,NA,ANOVA,NA,NA
+npk_aov,P,SS,8.401666666666681,NA,ANOVA,NA,NA
+npk_aov,P,MS,8.401666666666681,NA,ANOVA,NA,NA
+npk_aov,P,F,0.5441298168603618,NA,ANOVA,NA,NA
+npk_aov,P,df_numerator,1,NA,ANOVA,NA,NA
+npk_aov,P,df_denominator,12,NA,ANOVA,NA,NA
+npk_aov,P,p,0.4749040926744341,NA,ANOVA,NA,NA
+npk_aov,K,SS,95.20166666666658,NA,ANOVA,NA,NA
+npk_aov,K,MS,95.20166666666658,NA,ANOVA,NA,NA
+npk_aov,K,F,6.165689202317128,NA,ANOVA,NA,NA
+npk_aov,K,df_numerator,1,NA,ANOVA,NA,NA
+npk_aov,K,df_denominator,12,NA,ANOVA,NA,NA
+npk_aov,K,p,0.028795053500232606,NA,ANOVA,NA,NA
+npk_aov,N:P,SS,21.281666666666634,NA,ANOVA,NA,NA
+npk_aov,N:P,MS,21.281666666666634,NA,ANOVA,NA,NA
+npk_aov,N:P,F,1.3782966934120089,NA,ANOVA,NA,NA
+npk_aov,N:P,df_numerator,1,NA,ANOVA,NA,NA
+npk_aov,N:P,df_denominator,12,NA,ANOVA,NA,NA
+npk_aov,N:P,p,0.26316528287716817,NA,ANOVA,NA,NA
+npk_aov,N:K,SS,33.13499999999999,NA,ANOVA,NA,NA
+npk_aov,N:K,MS,33.13499999999999,NA,ANOVA,NA,NA
+npk_aov,N:K,F,2.145972007339978,NA,ANOVA,NA,NA
+npk_aov,N:K,df_numerator,1,NA,ANOVA,NA,NA
+npk_aov,N:K,df_denominator,12,NA,ANOVA,NA,NA
+npk_aov,N:K,p,0.16864787850049265,NA,ANOVA,NA,NA
+npk_aov,P:K,SS,0.4816666666666721,NA,ANOVA,NA,NA
+npk_aov,P:K,MS,0.4816666666666721,NA,ANOVA,NA,NA
+npk_aov,P:K,F,0.031194905191955176,NA,ANOVA,NA,NA
+npk_aov,P:K,df_numerator,1,NA,ANOVA,NA,NA
+npk_aov,P:K,df_denominator,12,NA,ANOVA,NA,NA
+npk_aov,P:K,p,0.8627520856854066,NA,ANOVA,NA,NA
+npk_aov,Residuals,SS,185.28666666666658,NA,ANOVA,NA,NA
+npk_aov,Residuals,MS,15.440555555555548,NA,ANOVA,NA,NA
+npk_aov,Residuals,df,12,NA,ANOVA,NA,NA

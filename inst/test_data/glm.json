@@ -1,0 +1,374 @@
+{
+  "glm_poisson": {
+    "method": "Linear regression",
+    "statistics": {
+      "deviance_null": 10.581446,
+      "deviance_residual": 5.129141,
+      "dfs": {
+        "df_null": 8,
+        "df_residual": 4
+      },
+      "AIC": 56.761318
+    },
+    "terms": [
+      {
+        "name": "(Intercept)",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": 3.044522
+          },
+          "SE": 0.170899,
+          "statistic": {
+            "name": "z",
+            "value": 17.814783
+          },
+          "df": 4,
+          "p": 5.426767e-71
+        }
+      },
+      {
+        "name": "outcome2",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": -0.454255
+          },
+          "SE": 0.202171,
+          "statistic": {
+            "name": "z",
+            "value": -2.246889
+          },
+          "df": 4,
+          "p": 0.024647
+        }
+      },
+      {
+        "name": "outcome3",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": -0.292987
+          },
+          "SE": 0.192742,
+          "statistic": {
+            "name": "z",
+            "value": -1.520097
+          },
+          "df": 4,
+          "p": 0.128487
+        }
+      },
+      {
+        "name": "treatment2",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": 1.337909e-15
+          },
+          "SE": 0.2,
+          "statistic": {
+            "name": "z",
+            "value": 6.689547e-15
+          },
+          "df": 4,
+          "p": 1
+        }
+      },
+      {
+        "name": "treatment3",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": 1.421085e-15
+          },
+          "SE": 0.2,
+          "statistic": {
+            "name": "z",
+            "value": 7.105427e-15
+          },
+          "df": 4,
+          "p": 1
+        }
+      }
+    ],
+    "iterations": 4,
+    "dispersion": 1,
+    "package": {
+      "name": "stats",
+      "version": "4.0.2"
+    }
+  },
+  "glm_gaussian": {
+    "method": "Linear regression",
+    "statistics": {
+      "deviance_null": 4525.386111,
+      "deviance_residual": 3311.26262,
+      "dfs": {
+        "df_null": 71,
+        "df_residual": 68
+      },
+      "AIC": 489.973298
+    },
+    "terms": [
+      {
+        "name": "(Intercept)",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": 49.771109
+          },
+          "SE": 13.390958,
+          "statistic": {
+            "name": "t",
+            "value": 3.71677
+          },
+          "df": 68,
+          "p": 0.00041
+        }
+      },
+      {
+        "name": "Prewt",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": -0.565539
+          },
+          "SE": 0.161182,
+          "statistic": {
+            "name": "t",
+            "value": -3.508689
+          },
+          "df": 68,
+          "p": 0.000803
+        }
+      },
+      {
+        "name": "TreatCont",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": -4.097066
+          },
+          "SE": 1.893493,
+          "statistic": {
+            "name": "t",
+            "value": -2.163761
+          },
+          "df": 68,
+          "p": 0.033999
+        }
+      },
+      {
+        "name": "TreatFT",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": 4.563063
+          },
+          "SE": 2.133336,
+          "statistic": {
+            "name": "t",
+            "value": 2.138933
+          },
+          "df": 68,
+          "p": 0.036035
+        }
+      }
+    ],
+    "iterations": 2,
+    "dispersion": 48.695039,
+    "package": {
+      "name": "stats",
+      "version": "4.0.2"
+    }
+  },
+  "glm_gamma": {
+    "method": "Linear regression",
+    "statistics": {
+      "deviance_null": 3.512826,
+      "deviance_residual": 0.01673,
+      "dfs": {
+        "df_null": 8,
+        "df_residual": 7
+      },
+      "AIC": 37.989924
+    },
+    "terms": [
+      {
+        "name": "(Intercept)",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": -0.016554
+          },
+          "SE": 0.000928,
+          "statistic": {
+            "name": "t",
+            "value": -17.847493
+          },
+          "df": 7,
+          "p": 4.279149e-07
+        }
+      },
+      {
+        "name": "log(u)",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": 0.015343
+          },
+          "SE": 0.000415,
+          "statistic": {
+            "name": "t",
+            "value": 36.974957
+          },
+          "df": 7,
+          "p": 2.751191e-09
+        }
+      }
+    ],
+    "iterations": 3,
+    "dispersion": 0.002446,
+    "package": {
+      "name": "stats",
+      "version": "4.0.2"
+    }
+  },
+  "glm_gamma_fs": {
+    "method": "Linear regression",
+    "statistics": {
+      "deviance_null": 3.118557,
+      "deviance_residual": 0.012672,
+      "dfs": {
+        "df_null": 8,
+        "df_residual": 7
+      },
+      "AIC": 27.03216
+    },
+    "terms": [
+      {
+        "name": "(Intercept)",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": -0.023908
+          },
+          "SE": 0.001326,
+          "statistic": {
+            "name": "t",
+            "value": -18.024307
+          },
+          "df": 7,
+          "p": 3.999039e-07
+        }
+      },
+      {
+        "name": "log(u)",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": 0.023599
+          },
+          "SE": 0.000577,
+          "statistic": {
+            "name": "t",
+            "value": 40.915157
+          },
+          "df": 7,
+          "p": 1.358149e-09
+        }
+      }
+    ],
+    "iterations": 3,
+    "dispersion": 0.001813,
+    "package": {
+      "name": "stats",
+      "version": "4.0.2"
+    }
+  },
+  "glm_binomial": {
+    "method": "Linear regression",
+    "statistics": {
+      "deviance_null": 15.158203,
+      "deviance_residual": 9.832821,
+      "dfs": {
+        "df_null": 10,
+        "df_residual": 7
+      },
+      "AIC": 17.832821
+    },
+    "terms": [
+      {
+        "name": "(Intercept)",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": 11.053666
+          },
+          "SE": 11.103166,
+          "statistic": {
+            "name": "z",
+            "value": 0.995542
+          },
+          "df": 7,
+          "p": 0.319473
+        }
+      },
+      {
+        "name": "gre",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": 0.018708
+          },
+          "SE": 0.015009,
+          "statistic": {
+            "name": "z",
+            "value": 1.246429
+          },
+          "df": 7,
+          "p": 0.212607
+        }
+      },
+      {
+        "name": "gpa",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": -5.620877
+          },
+          "SE": 4.753587,
+          "statistic": {
+            "name": "z",
+            "value": -1.18245
+          },
+          "df": 7,
+          "p": 0.237027
+        }
+      },
+      {
+        "name": "rank",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": -1.039158
+          },
+          "SE": 1.072947,
+          "statistic": {
+            "name": "z",
+            "value": -0.968509
+          },
+          "df": 7,
+          "p": 0.33279
+        }
+      }
+    ],
+    "iterations": 6,
+    "dispersion": 1,
+    "package": {
+      "name": "stats",
+      "version": "4.0.2"
+    }
+  }
+}
