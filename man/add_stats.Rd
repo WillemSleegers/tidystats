@@ -39,6 +39,8 @@ for a list of supported statistical tests.
 }
 \details{
 Currently supported functions:
+
+\code{stats}:
 \itemize{
   \item \code{t.test()}
   \item \code{cor.test()}
@@ -46,8 +48,34 @@ Currently supported functions:
   \item \code{wilcox.test()}
   \item \code{fisher.test()}
   \item \code{oneway.test()}
-  \item \code{aov()}
   \item \code{lm()}
+  \item \code{glm()}
+  \item \code{aov()}
+  \item \code{anova()}
+}
+
+\code{lme4}/\code{lmerTest}:
+\itemize{
+  \item \code{lmer()}
+}
+
+\code{BayesFactor}:
+\itemize{
+  \item \code{generalTestBF()}
+  \item \code{lmBF()}
+  \item \code{regressionBF()}
+  \item \code{ttestBF()}
+  \item \code{anovaBF()}
+  \item \code{correlationBF()}
+  \item \code{contingencyTableBF()}
+  \item \code{proportionBF()}
+  \item \code{meta.ttestBF()}
+}
+
+\code{tidystats}:
+\itemize{
+  \item \code{describe_data()}
+  \item \code{count_data()}
 }
 }
 \examples{
@@ -59,9 +87,9 @@ library(dplyr)
 sleep_test <- t.test(extra ~ group, data = sleep, paired = TRUE)
 
 # lm:
-ctl <- c(4.17,5.58,5.18,6.11,4.50,4.61,5.17,4.53,5.33,5.14)
-trt <- c(4.81,4.17,4.41,3.59,5.87,3.83,6.03,4.89,4.32,4.69)
-group <- gl(2, 10, 20, labels = c("Ctl","Trt"))
+ctl <- c(4.17, 5.58, 5.18, 6.11, 4.50, 4.61, 5.17, 4.53, 5.33, 5.14)
+trt <- c(4.81, 4.17, 4.41, 3.59, 5.87, 3.83, 6.03, 4.89, 4.32, 4.69)
+group <- gl(2, 10, 20, labels = c("Ctl", "Trt"))
 weight <- c(ctl, trt)
 lm_D9 <- lm(weight ~ group)
 

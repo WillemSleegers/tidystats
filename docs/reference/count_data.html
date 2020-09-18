@@ -40,8 +40,8 @@
 
 
 <meta property="og:title" content="Count the number of observations — count_data" />
-<meta property="og:description" content="count_data returns the number of observations for categorical
-variables." />
+<meta property="og:description" content="count_data returns the number and percentage of observations for 
+categorical variables." />
 
 
 
@@ -136,8 +136,8 @@ variables." />
     </div>
 
     <div class="ref-description">
-    <p><code>count_data</code> returns the number of observations for categorical
-variables.</p>
+    <p><code>count_data</code> returns the number and percentage of observations for 
+categorical variables.</p>
     </div>
 
     <pre class="usage"><span class='fu'>count_data</span>(<span class='no'>data</span>, <span class='no'>...</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
@@ -163,7 +163,8 @@ frame, separated by commas.</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The data frame can be grouped using <strong>dplyr</strong>'s <code>group_by</code>
-so that the number of observations will be calculated for each group level.</p>
+so that the number of observations will be calculated within each group 
+level.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Load dplyr for access to the %&gt;% operator and group_by()</span>

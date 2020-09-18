@@ -191,15 +191,39 @@ preregistered or not.</p></td>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Currently supported functions:</p><ul>
+    <p>Currently supported functions:</p>
+<p><code>stats</code>:</p><ul>
 <li><p><code><a href='https://rdrr.io/r/stats/t.test.html'>t.test()</a></code></p></li>
 <li><p><code><a href='https://rdrr.io/r/stats/cor.test.html'>cor.test()</a></code></p></li>
 <li><p><code><a href='https://rdrr.io/r/stats/chisq.test.html'>chisq.test()</a></code></p></li>
 <li><p><code><a href='https://rdrr.io/r/stats/wilcox.test.html'>wilcox.test()</a></code></p></li>
 <li><p><code><a href='https://rdrr.io/r/stats/fisher.test.html'>fisher.test()</a></code></p></li>
 <li><p><code><a href='https://rdrr.io/r/stats/oneway.test.html'>oneway.test()</a></code></p></li>
-<li><p><code><a href='https://rdrr.io/r/stats/aov.html'>aov()</a></code></p></li>
 <li><p><code><a href='https://rdrr.io/r/stats/lm.html'>lm()</a></code></p></li>
+<li><p><code><a href='https://rdrr.io/r/stats/glm.html'>glm()</a></code></p></li>
+<li><p><code><a href='https://rdrr.io/r/stats/aov.html'>aov()</a></code></p></li>
+<li><p><code><a href='https://rdrr.io/r/stats/anova.html'>anova()</a></code></p></li>
+</ul>
+
+<p><code>lme4</code>/<code>lmerTest</code>:</p><ul>
+<li><p><code>lmer()</code></p></li>
+</ul>
+
+<p><code>BayesFactor</code>:</p><ul>
+<li><p><code>generalTestBF()</code></p></li>
+<li><p><code>lmBF()</code></p></li>
+<li><p><code>regressionBF()</code></p></li>
+<li><p><code>ttestBF()</code></p></li>
+<li><p><code>anovaBF()</code></p></li>
+<li><p><code>correlationBF()</code></p></li>
+<li><p><code>contingencyTableBF()</code></p></li>
+<li><p><code>proportionBF()</code></p></li>
+<li><p><code>meta.ttestBF()</code></p></li>
+</ul>
+
+<p><code>tidystats</code>:</p><ul>
+<li><p><code><a href='describe_data.html'>describe_data()</a></code></p></li>
+<li><p><code><a href='count_data.html'>count_data()</a></code></p></li>
 </ul>
 
 
@@ -216,9 +240,9 @@ preregistered or not.</p></td>
 <span class='no'>sleep_test</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span>(<span class='no'>extra</span> ~ <span class='no'>group</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>sleep</span>, <span class='kw'>paired</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'># lm:</span>
-<span class='no'>ctl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4.17</span>,<span class='fl'>5.58</span>,<span class='fl'>5.18</span>,<span class='fl'>6.11</span>,<span class='fl'>4.50</span>,<span class='fl'>4.61</span>,<span class='fl'>5.17</span>,<span class='fl'>4.53</span>,<span class='fl'>5.33</span>,<span class='fl'>5.14</span>)
-<span class='no'>trt</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4.81</span>,<span class='fl'>4.17</span>,<span class='fl'>4.41</span>,<span class='fl'>3.59</span>,<span class='fl'>5.87</span>,<span class='fl'>3.83</span>,<span class='fl'>6.03</span>,<span class='fl'>4.89</span>,<span class='fl'>4.32</span>,<span class='fl'>4.69</span>)
-<span class='no'>group</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/gl.html'>gl</a></span>(<span class='fl'>2</span>, <span class='fl'>10</span>, <span class='fl'>20</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Ctl"</span>,<span class='st'>"Trt"</span>))
+<span class='no'>ctl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4.17</span>, <span class='fl'>5.58</span>, <span class='fl'>5.18</span>, <span class='fl'>6.11</span>, <span class='fl'>4.50</span>, <span class='fl'>4.61</span>, <span class='fl'>5.17</span>, <span class='fl'>4.53</span>, <span class='fl'>5.33</span>, <span class='fl'>5.14</span>)
+<span class='no'>trt</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4.81</span>, <span class='fl'>4.17</span>, <span class='fl'>4.41</span>, <span class='fl'>3.59</span>, <span class='fl'>5.87</span>, <span class='fl'>3.83</span>, <span class='fl'>6.03</span>, <span class='fl'>4.89</span>, <span class='fl'>4.32</span>, <span class='fl'>4.69</span>)
+<span class='no'>group</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/gl.html'>gl</a></span>(<span class='fl'>2</span>, <span class='fl'>10</span>, <span class='fl'>20</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Ctl"</span>, <span class='st'>"Trt"</span>))
 <span class='no'>weight</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>ctl</span>, <span class='no'>trt</span>)
 <span class='no'>lm_D9</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>weight</span> ~ <span class='no'>group</span>)
 

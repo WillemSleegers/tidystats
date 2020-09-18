@@ -116,6 +116,11 @@ find fruitful.
 - `proportionBF()`
 - `meta.ttestBF()`
 
+**Package:** tidystats
+
+- `describe_data()`
+- `count_data()`
+
 ### Example
 
 ```{r example-setup, echo = FALSE, message = FALSE}

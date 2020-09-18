@@ -1,7 +1,7 @@
 #' Count the number of observations
 #'
-#' \code{count_data} returns the number of observations for categorical
-#' variables.
+#' \code{count_data} returns the number and percentage of observations for 
+#' categorical variables.
 #'
 #' @param data A data frame.
 #' @param ... One or more unquoted (categorical) column names from the data
@@ -9,7 +9,8 @@
 #' @param na.rm Logical. Should missing values (including NaN) be removed?
 #'
 #' @details The data frame can be grouped using \strong{dplyr}'s \code{group_by}
-#' so that the number of observations will be calculated for each group level.
+#' so that the number of observations will be calculated within each group 
+#' level.
 #'
 #' @examples
 #' # Load dplyr for access to the %>% operator and group_by()

@@ -15,9 +15,9 @@
 #' sleep_test <- t.test(extra ~ group, data = sleep, paired = TRUE)
 #' 
 #' # lm:
-#' ctl <- c(4.17,5.58,5.18,6.11,4.50,4.61,5.17,4.53,5.33,5.14)
-#' trt <- c(4.81,4.17,4.41,3.59,5.87,3.83,6.03,4.89,4.32,4.69)
-#' group <- gl(2, 10, 20, labels = c("Ctl","Trt"))
+#' ctl <- c(4.17, 5.58, 5.18, 6.11, 4.50, 4.61, 5.17, 4.53, 5.33, 5.14)
+#' trt <- c(4.81, 4.17, 4.41, 3.59, 5.87, 3.83, 6.03, 4.89, 4.32, 4.69)
+#' group <- gl(2, 10, 20, labels = c("Ctl", "Trt"))
 #' weight <- c(ctl, trt)
 #' lm_D9 <- lm(weight ~ group)
 #' 
@@ -62,7 +62,8 @@ analysis_to_data_frame <- function(x, y) {
     output <- dplyr::bind_rows(output, terms_to_data_frame(x$terms))
   }
   if ("model" %in% names(x)) {
-    output <- dplyr::bind_rows(output, statistics_to_data_frame(x$model$statistics))
+    output <- dplyr::bind_rows(output, 
+      statistics_to_data_frame(x$model$statistics))
   }
   if ("groups" %in% names(x)) {
     output <- dplyr::bind_rows(output, groups_to_data_frame(x$groups))
@@ -216,4 +217,3 @@ CI_to_data_frame <- function(x) {
     )
   )
 }
-
