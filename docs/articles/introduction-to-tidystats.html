@@ -11,7 +11,8 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Introduction to tidystats">
+<script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
+<meta property="og:title" content="Introduction to tidystats">
 <meta property="og:description" content="tidystats">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -90,7 +91,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Introduction to tidystats</h1>
             
-            <h4 class="date">2020-09-18</h4>
+            <h4 class="date">2020-09-21</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/WillemSleegers/tidystats/blob/master/vignettes/introduction-to-tidystats.Rmd"><code>vignettes/introduction-to-tidystats.Rmd</code></a></small>
       <div class="hidden name"><code>introduction-to-tidystats.Rmd</code></div>
@@ -102,15 +103,19 @@
 <div id="why-use-tidystats" class="section level2">
 <h2 class="hasAnchor">
 <a href="#why-use-tidystats" class="anchor"></a>Why use tidystats?</h2>
-<p>The <code>tidystats</code> package is designed to address two problems common in scientific research: incomplete and incorrect statistics reporting. The problem of incomplete statistics reporting likely stems from a fundamental trade-off between wanting to be comprehensive on the one hand and providing a clear narrative on the other. The problem of incorrect statistics reporting is likely caused by manually copy-pasting statistical output from the output window into a text editor. <code>tidystats</code> addresses these two problems by enabling researchers to combine their statistical analyses into a single file, from which a subset of the analyses can then be reported using a Microsoft Word add-in. ## How to use tidystats?</p>
-<p><code>tidystats</code> is designed to easily fit in your data analysis workflow. In fact, <code>tidystats</code> can simply be tacked on at the end of a data analysis session, with only one minor requirement. This requirement is that all analyses are stored in a variable. For example, if you run a regression analysis using the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function, you store the result of that analysis in a variable: <code>model1 &lt;- lm(extra ~ group, data = sleep)</code>. By storing each analysis in a variable, you can later add each analysis to a list using the <code><a href="../reference/add_stats.html">add_stats()</a></code> function from <code>tidystats</code>. Once all the analyses are gathered together, you save the analyses to a .json file using the <code><a href="../reference/write_stats.html">write_stats()</a></code> function. This .json file can then be read by a Word add-in to report your analyses in Word, or shared with others and read into R to extra statistics from your analyses.</p>
+<p>The <code>tidystats</code> package is designed to address two problems common in scientific research: incomplete and incorrect statistics reporting. The problem of incomplete statistics reporting likely stems from a fundamental trade-off between wanting to be comprehensive on the one hand and providing a clear narrative on the other. The problem of incorrect statistics reporting is likely caused by manually copy-pasting statistical output from the output window into a text editor. <code>tidystats</code> addresses these two problems by enabling researchers to combine their statistical analyses into a single file, from which a subset of the analyses can then be reported using a Microsoft Word add-in.</p>
+</div>
+<div id="how-to-use-tidystats" class="section level2">
+<h2 class="hasAnchor">
+<a href="#how-to-use-tidystats" class="anchor"></a>How to use tidystats?</h2>
+<p><code>tidystats</code> is designed to easily fit in your data analysis workflow. In fact, <code>tidystats</code> can simply be tacked on at the end of a data analysis session, with only one minor requirement. This requirement is that all analyses are stored in a variable. For example, if you run a regression analysis using the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function, you store the result of that analysis in a variable: <code>model1 &lt;- lm(extra ~ group, data = sleep)</code>. By storing each analysis in a variable, you can later add each analysis to a list using the <code><a href="../reference/add_stats.html">add_stats()</a></code> function from <code>tidystats</code>. Once all the analyses are gathered together, you save the analyses to a .json file using the <code><a href="../reference/write_stats.html">write_stats()</a></code> function. This .json file can then be read by a Word add-in to report your analyses in Word, or shared with others and read into R to extract statistics from your analyses (e.g., for meta-analyses).</p>
 </div>
 <div id="an-example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#an-example" class="anchor"></a>An example</h2>
 <p>Below follows an example of a few analyses conducted on the <code>quote_source</code> data contained within the <code>tidystats</code> package. The data is from a large-scaled replication of Lorge &amp; Curtiss (1936). More details can be found in the paper of the replication effort (Klein et al., 2014). In short, participants saw the following quote:</p>
 <blockquote>
-<p>“I hold it that a little rebellion, now and then, is a good thing, and as necessary in the political world as storms are in the physical world.”</p>
+<p>“I have sworn to only live free, even if I find bitter the taste of death.”</p>
 </blockquote>
 <p>The quote was attributed to either George Washington, a liked individual, or Osama Bin Laden, a disliked individual. Participants were asked to what extent they agree with the quote, on a 9-point Likert scale ranging from 1 (disagreement) to 9 (agreement).</p>
 <p>We start with a bit of setup.</p>
@@ -166,8 +171,8 @@
 <p>Participants appear to rate the quote a bit more positively when it is attributed to George Washington.</p>
 <p>We can also perform some additional tests. For instance, does it matter if the participant is from the US? And does age matter? To answer these questions, we can perform interaction tests using <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>.</p>
 <p>The interaction with the participant being from the U.S. or not:</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">lm1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="no">response</span> ~ <span class="no">source</span> * <span class="no">us_or_international</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">data</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">lm1</span>)
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">lm_us_or_not</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="no">response</span> ~ <span class="no">source</span> * <span class="no">us_or_international</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">data</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">lm_us_or_not</span>)
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Call:</span>
 <span class="co">#&gt; lm(formula = response ~ source * us_or_international, data = data)</span>
@@ -191,8 +196,8 @@
 <span class="co">#&gt; F-statistic: 59.5 on 3 and 6321 DF,  p-value: &lt;2e-16</span></pre></body></html></div>
 <p>The interaction is significant, so it appears to matter whether the participant is from the U.S. or not. In fact, participants from the U.S. show a stronger effect than those from outside the U.S.</p>
 <p>The interaction with the participant’s age:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">lm2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="no">response</span> ~ <span class="no">source</span> * <span class="no">age</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">data</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">lm2</span>)
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">lm_age</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="no">response</span> ~ <span class="no">source</span> * <span class="no">age</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">data</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">lm_age</span>)
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Call:</span>
 <span class="co">#&gt; lm(formula = response ~ source * age, data = data)</span>
@@ -215,7 +220,7 @@
 <span class="co">#&gt; Multiple R-squared:  0.0308, Adjusted R-squared:  0.0304 </span>
 <span class="co">#&gt; F-statistic: 66.9 on 3 and 6308 DF,  p-value: &lt;2e-16</span></pre></body></html></div>
 <p>No significant interaction effect, so we do not have evidence for age changing the size of the effect.</p>
-<p>Let’s say these are the analyses we want to save the output of and report later. This is where <code>tidystats</code> comes in. The steps to perform are to first create an empty list and then to use the <code><a href="../reference/add_stats.html">add_stats()</a></code> function to add analyses to the list. This is why we stored each analysis into a variable. The <code><a href="../reference/add_stats.html">add_stats()</a></code> function takes an analysis so that it can be added to list. Optionally, you can add additional information about each analysis, such as whether it was preregistered, whether it was a primary, secondary, or exploratory analysis, or simply add some notes.</p>
+<p>Let’s say these are the analyses we want to save the output of and report later. This is where <code>tidystats</code> comes in. The steps to perform are to first create an empty list and then to use the <code><a href="../reference/add_stats.html">add_stats()</a></code> function to add analyses to the list. This is why we stored each analysis into a variable. The <code><a href="../reference/add_stats.html">add_stats()</a></code> function takes an analysis, extracts the statistics, and adds the result to a list. Optionally, you can add additional information about each analysis, such as whether it was preregistered, whether it was a primary, secondary, or exploratory analysis, or simply add some notes.</p>
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="co"># Create an empty list to store the analyses in</span>
 <span class="no">results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>()
 
@@ -223,10 +228,10 @@
 <span class="no">results</span> <span class="kw">&lt;-</span> <span class="no">results</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span>(<span class="no">t_test</span>, <span class="kw">preregistered</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"primary"</span>,
     <span class="kw">notes</span> <span class="kw">=</span> <span class="st">"A t-test comparing the effect of source on the quote rating."</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span>(<span class="no">lm1</span>, <span class="kw">preregistered</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"exploratory"</span>,
+  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span>(<span class="no">lm_us_or_not</span>, <span class="kw">preregistered</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"exploratory"</span>,
     <span class="kw">notes</span> <span class="kw">=</span> <span class="st">"Interaction effect with being from the U.S. or not."</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span>(<span class="no">lm2</span>)</pre></body></html></div>
-<p>You can see that I added quite some information each the first and second analysis. This is recommended because it is easy to forget which analysis is which; and you might accidentally report the wrong analysis if you have many of them. It’s also nice to add some documentation so that others who are not as familiar with your data can also better understand each analysis.</p>
+  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span>(<span class="no">lm_age</span>)</pre></body></html></div>
+<p>You can see that I added quite some information to the first and second analysis. This is recommended because it is easy to forget which analysis is which; and you might accidentally report the wrong analysis if you have many of them. It’s also nice to add some documentation so that others who are not as familiar with your data can also better understand each analysis.</p>
 <p>To save these analyses to a file, you can use the <code><a href="../reference/write_stats.html">write_stats()</a></code> function.</p>
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="../reference/write_stats.html">write_stats</a></span>(<span class="no">results</span>, <span class="st">"lorge-curtiss-1936-replication.json"</span>)</pre></body></html></div>
 <p>Note the file extension: .json. These types of files are simply text files, but in a format that is machine-readable (unfortunately, not very human-readable). This file can be used to share with others so that they can read it back into R and extract statistics (e.g., for meta-analyses) or by you to report the statistics in Word.</p>

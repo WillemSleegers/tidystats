@@ -9,6 +9,8 @@
 * Added support for generic tests. If `tidystats` does not support a particular analysis, you can create your own generic test by providing a list of statistics.
 * Improved support for `anova()`.
 * Added support for more `BayesFactor` functions.
+* Added a `pkgdown` website for the package.
+* Added several vignettes, including an introduction to tidystats, how to use the `tidy_stats_to_data_frame` function, and a description of the `tidystats` taxonomy.
 
 ## Misc
 

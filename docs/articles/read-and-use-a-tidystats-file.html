@@ -11,7 +11,8 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Read and use a tidystats file">
+<script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
+<meta property="og:title" content="Read and use a tidystats file">
 <meta property="og:description" content="tidystats">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -90,7 +91,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Read and use a tidystats file</h1>
             
-            <h4 class="date">2020-09-18</h4>
+            <h4 class="date">2020-09-21</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/WillemSleegers/tidystats/blob/master/vignettes/read-and-use-a-tidystats-file.Rmd"><code>vignettes/read-and-use-a-tidystats-file.Rmd</code></a></small>
       <div class="hidden name"><code>read-and-use-a-tidystats-file.Rmd</code></div>
@@ -99,7 +100,7 @@
 
     
     
-<p>An additional usage of the tidystats-produced file is that it can be read back into R and converted into a data frame. This enables researchers to then extract specific statistics to perform additional analyses with (e.g., meta-analyses). Below is an example.</p>
+<p>Besides using <code>tidystats</code> in combination with Microsoft Word to report statistics, you can also use <code>tidystats</code> to convert a list of statistics into a data frame. This enables researchers to then easily extract specific statistics to perform additional analyses with (e.g., meta-analyses). Below is an example of how to convert a list of statistics to a data frame and several simple operations.</p>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co"># Load packages</span>
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidystats</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
@@ -225,7 +226,69 @@
 </tr>
 </tbody>
 </table>
-</div>
+<p>Alternatively, you can select all the significant p-values:</p>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">sig_p_values</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">results_df</span>, <span class="no">statistic</span> <span class="kw">==</span> <span class="st">"p"</span> <span class="kw">&amp;</span> <span class="no">value</span> <span class="kw">&lt;</span> <span class="fl">.05</span>)</pre></body></html></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">identifier</th>
+<th align="left">term</th>
+<th align="left">statistic</th>
+<th align="right">value</th>
+<th align="left">method</th>
+<th align="left">type</th>
+<th align="left">preregistered</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">sleep_test</td>
+<td align="left"></td>
+<td align="left">p</td>
+<td align="right">0.002833</td>
+<td align="left">Paired t-test</td>
+<td align="left">primary</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">lm_D9</td>
+<td align="left">(Intercept)</td>
+<td align="left">p</td>
+<td align="right">0.000000</td>
+<td align="left">Linear regression</td>
+<td align="left"></td>
+<td align="left">no</td>
+</tr>
+<tr class="odd">
+<td align="left">npk_aov</td>
+<td align="left">block</td>
+<td align="left">p</td>
+<td align="right">0.015939</td>
+<td align="left">ANOVA</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">npk_aov</td>
+<td align="left">N</td>
+<td align="left">p</td>
+<td align="right">0.004372</td>
+<td align="left">ANOVA</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">npk_aov</td>
+<td align="left">K</td>
+<td align="left">p</td>
+<td align="right">0.028795</td>
+<td align="left">ANOVA</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p>This could be useful if you want to conduct a <a href="https://journals.sagepub.com/doi/abs/10.1177/1745691614553988">p-curve analysis</a>. Although do note that you should not blindly select all <em>p</em>-values. You should select only the <em>p</em>-values that are relevant to a particular hypothesis. If researchers provide the correct meta-information for each test (e.g., by indicating whether it is a primary analysis), this could help meta-researchers make correct decisions about which statistics to include in their analyses.</p>
+<p>In short, by reading a <code>tidystats</code>-produced file of statistics, you can convert the statistics to a data frame using the <code>tidy_stats_to_data_frame</code> function and apply common data transformation functions to extract specific statistics.</p>
+  </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 

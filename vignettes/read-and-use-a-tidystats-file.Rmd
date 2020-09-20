@@ -15,12 +15,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-An additional usage of the tidystats-produced file is that it can be read back
-into R and converted into a data frame. This enables researchers to then 
-extract specific statistics to perform additional analyses with 
-(e.g., meta-analyses). Below is an example.
+Besides using `tidystats` in combination with Microsoft Word to report statistics, you can also use `tidystats` to convert a list of statistics into a data frame. This enables researchers to then easily extract specific statistics to perform additional analyses with (e.g., meta-analyses). Below is an example of how to convert a list of statistics to a data frame and several simple operations.
 
-```{r read-example, eval = FALSE, message = FALSE}
+```{r example1_eval, eval = FALSE, message = FALSE}
 # Load packages
 library(tidystats)
 library(dplyr)
@@ -37,12 +34,12 @@ p_values <- filter(results_df, statistic == "p")
 
 With the current example, this results in the following data frame:
 
-```{r read-example-table, message = FALSE, echo = FALSE}
+```{r example1_no_eval, message = FALSE, echo = FALSE}
 library(tidystats)
 library(dplyr)
 library(knitr)
 
-results <- read_stats("../inst/results.json")
+results <-read_stats(system.file("results.json", package = "tidystats"))
 results_df <- tidy_stats_to_data_frame(results)
 
 p_values <- filter(results_df, statistic == "p")
@@ -53,3 +50,21 @@ p_values %>%
   select(-extra) %>%
   kable(format = "markdown")
 ```
+
+Alternatively, you can select all the significant p-values:
+
+```{r example2_no_eval, eval = FALSE}
+sig_p_values <- filter(results_df, statistic == "p" & value < .05)
+```
+
+```{r example2_eval, echo = FALSE}
+sig_p_values <- filter(results_df, statistic == "p" & value < .05)
+
+sig_p_values %>%
+  select(-extra) %>%
+  kable(format = "markdown")
+```
+
+This could be useful if you want to conduct a [p-curve analysis](https://journals.sagepub.com/doi/abs/10.1177/1745691614553988). Although do note that you should not blindly select all *p*-values. You should select only the *p*-values that are relevant to a particular hypothesis. If researchers provide the correct meta-information for each test (e.g., by indicating whether it is a primary analysis), this could help meta-researchers make correct decisions about which statistics to include in their analyses.
+
+In short, by reading a `tidystats`-produced file of statistics, you can convert the statistics to a data frame using the `tidy_stats_to_data_frame` function and apply common data transformation functions to extract specific statistics.
