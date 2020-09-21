@@ -82,25 +82,21 @@ m <- lmerTest::lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
 
 anova_lmerTest <- anova(m)
 anova_lmerTest_lme4 <- anova(m, ddf = "lme4")
-anova_lmerTest_kenward_roger <- anova(m, ddf = "Kenward-Roger")
 anova_lmerTest_fit <- anova(m0, m)
 
 anova_lmerTest
 anova_lmerTest_lme4
-anova_lmerTest_kenward_roger
 anova_lmerTest_fit
 
 # Tidy stats
 temp <- tidy_stats(anova_lmerTest)
 temp <- tidy_stats(anova_lmerTest_lme4)
-temp <- tidy_stats(anova_lmerTest_kenward_roger)
 temp <- tidy_stats(anova_lmerTest_fit)
 
 # Add stats
 results <- results %>%
   add_stats(anova_lmerTest) %>%
   add_stats(anova_lmerTest_lme4) %>%
-  add_stats(anova_lmerTest_kenward_roger) %>%
   add_stats(anova_lmerTest_fit)
 
 write_stats(results, "inst/test_data/lmerTest.json")

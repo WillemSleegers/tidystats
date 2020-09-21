@@ -63,19 +63,6 @@ test_that("lmerTest lme4 anova works", {
   expect_equal(tidy_model, tidy_model_test, tolerance = tolerance)
 })
 
-test_that("lmerTest kenward-roger anova works", {
-  m <- lmerTest::lmer(Reaction ~ Days + (Days | Subject), lme4::sleepstudy)
-  model <- anova(m, ddf = "Kenward-Roger")
-  
-  tidy_model <- tidy_stats(model)
-  tidy_model_test <- test_results$anova_lmerTest_kenward_roger
-  
-  tidy_model$package$version <- NULL
-  tidy_model_test$package$version <- NULL
-  
-  expect_equal(tidy_model, tidy_model_test, tolerance = tolerance)
-})
-
 test_that("lmerTest anova fit works", {
   m0 <- lmerTest::lmer(Reaction ~ Days + (1 | Subject), lme4::sleepstudy)
   m <- lmerTest::lmer(Reaction ~ Days + (Days | Subject), lme4::sleepstudy)

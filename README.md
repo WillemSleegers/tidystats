@@ -27,7 +27,7 @@ me know by creating an issue here on Github (it’s really easy to do\!).
 
 `tidystats` can be installed from CRAN and the latest version can be
 installed from Github using
-[devtools](https://github.com/hadley/devtools).
+[devtools](https://github.com/r-lib/devtools).
 
 ``` r
 library(devtools)
@@ -104,6 +104,11 @@ you may find fruitful.
   - `contingencyTableBF()`
   - `proportionBF()`
   - `meta.ttestBF()`
+
+**Package:** tidystats
+
+  - `describe_data()`
+  - `count_data()`
 
 ### Example
 

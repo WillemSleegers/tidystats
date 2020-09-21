@@ -679,31 +679,6 @@
       "version": "4.0.2"
     }
   },
-  "anova_lmerTest_kenward_roger": {
-    "method": "ANOVA",
-    "terms": [
-      {
-        "name": "Days",
-        "statistics": {
-          "SS": 30030.93902,
-          "MS": 30030.93902,
-          "statistic": {
-            "name": "F",
-            "value": 45.852962
-          },
-          "dfs": {
-            "df_numerator": 1,
-            "df_denominator": 17
-          },
-          "p": 3.263808e-06
-        }
-      }
-    ],
-    "package": {
-      "name": "stats",
-      "version": "4.0.2"
-    }
-  },
   "anova_lmerTest_fit": {
     "method": "ANODE",
     "terms": [
