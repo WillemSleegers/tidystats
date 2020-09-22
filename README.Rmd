@@ -8,8 +8,6 @@ output:
 library(badger)
 ```
 
-`r `
-
 ```{r, echo = FALSE, results='asis'}
 cat(
 	badge_cran_release("tidystats", "green"),
