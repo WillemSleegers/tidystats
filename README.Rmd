@@ -8,12 +8,15 @@ output:
 library(badger)
 ```
 
+`r `
+
 ```{r, echo = FALSE, results='asis'}
 cat(
-	badge_cran_release("tidystats", "blue"),
+	badge_cran_release("tidystats", "green"),
 	badge_cran_download("tidystats", "grand-total", "green"),
 	badge_cran_download("tidystats", "last-month", "green"),
-	badge_cran_download("tidystats", "last-week", "green")
+	badge_cran_download("tidystats", "last-week", "green"),
+  badge_doi("10.5281/zenodo.4041859", "blue")
 )
 ```
 
