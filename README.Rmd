@@ -8,6 +8,8 @@ output:
 library(badger)
 ```
 
+`r badge_doi("10.5281/zenodo.4041859", "yellow")`
+
 ```{r, echo = FALSE, results='asis'}
 cat(
 	badge_cran_release("tidystats", "blue"),

@@ -1,3 +1,5 @@
+[![](https://img.shields.io/badge/doi-10.5281/zenodo.4041859-yellow.svg)](https://doi.org/10.5281/zenodo.4041859)
+
 [![](https://www.r-pkg.org/badges/version/tidystats?color=blue)](https://cran.r-project.org/package=tidystats)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/tidystats?color=green)](https://cran.r-project.org/package=tidystats)
 [![](http://cranlogs.r-pkg.org/badges/last-month/tidystats?color=green)](https://cran.r-project.org/package=tidystats)
