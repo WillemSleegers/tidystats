@@ -1,12 +1,4 @@
-<<<<<<< HEAD
-`r`
-
 [![](https://www.r-pkg.org/badges/version/tidystats?color=green)](https://cran.r-project.org/package=tidystats)
-=======
-[![](https://img.shields.io/badge/doi-10.5281/zenodo.4041859-yellow.svg)](https://doi.org/10.5281/zenodo.4041859)
-
-[![](https://www.r-pkg.org/badges/version/tidystats?color=blue)](https://cran.r-project.org/package=tidystats)
->>>>>>> ae82806e1c843e5e0c26e806e7068cf64c18433b
 [![](http://cranlogs.r-pkg.org/badges/grand-total/tidystats?color=green)](https://cran.r-project.org/package=tidystats)
 [![](http://cranlogs.r-pkg.org/badges/last-month/tidystats?color=green)](https://cran.r-project.org/package=tidystats)
 [![](http://cranlogs.r-pkg.org/badges/last-week/tidystats?color=green)](https://cran.r-project.org/package=tidystats)
