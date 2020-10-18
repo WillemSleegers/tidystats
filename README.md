@@ -4,8 +4,6 @@
 [![](http://cranlogs.r-pkg.org/badges/last-week/tidystats?color=green)](https://cran.r-project.org/package=tidystats)
 [![](https://img.shields.io/badge/doi-10.5281/zenodo.4041859-blue.svg)](https://doi.org/10.5281/zenodo.4041859)
 
-<img src="man/figures/hex.png" width=150 alt="tidystats logo"/>
-
 ## tidystats
 
 **Author:** [Willem Sleegers](https://www.willemsleegers.com/)

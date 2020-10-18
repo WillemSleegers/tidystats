@@ -1,3 +1,9 @@
+# tidystats 0.5.1 
+
+## Bug fixes
+
+* Using `tidy_stats()` on ungrouped count data produced with `count_data()` is now properly tidied.
+
 # tidystats 0.5
 
 ## Breaking changes

@@ -12,8 +12,8 @@ library(tidyverse)
 sleep_test <- t.test(extra ~ group, data = sleep, paired = TRUE)
 
 # lm:
-ctl <- c(4.17,5.58,5.18,6.11,4.50,4.61,5.17,4.53,5.33,5.14)
-trt <- c(4.81,4.17,4.41,3.59,5.87,3.83,6.03,4.89,4.32,4.69)
+ctl <- c(4.17, 5.58, 5.18, 6.11, 4.50, 4.61, 5.17, 4.53, 5.33, 5.14)
+trt <- c(4.81, 4.17, 4.41, 3.59, 5.87, 3.83, 6.03, 4.89, 4.32, 4.69)
 group <- gl(2, 10, 20, labels = c("Ctl","Trt"))
 weight <- c(ctl, trt)
 lm_D9 <- lm(weight ~ group)
@@ -32,7 +32,7 @@ results <- results %>%
 
 # write_stats() -----------------------------------------------------------
 
-write_stats(results, "inst/results.json")
+write_stats(results, "inst/results_bad.json")
 
 # tidy_stats_to_data_frame ------------------------------------------------
 
@@ -82,6 +82,10 @@ write_stats(results, "inst/test_data/describe_data.json")
 
 results <- list()
 
+# No groups
+no_group <- count_data(quote_source)
+no_group
+
 # Single group
 single_group <- count_data(quote_source, source)
 single_group
@@ -103,6 +107,7 @@ grouped_group_na_rm <- quote_source %>%
 grouped_group_na_rm
 
 # Tidy stats
+temp <- tidy_stats(no_group)
 temp <- tidy_stats(single_group)
 temp <- tidy_stats(two_groups)
 temp <- tidy_stats(grouped_group)
@@ -110,6 +115,7 @@ temp <- tidy_stats(grouped_group_na_rm)
 
 # Add stats
 results <- results %>%
+  add_stats(no_group) %>%
   add_stats(single_group) %>%
   add_stats(two_groups) %>%
   add_stats(grouped_group) %>%

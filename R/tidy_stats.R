@@ -848,39 +848,52 @@ tidy_stats.tidystats_counts <- function(x) {
   
   # Extract grouping variables
   group_names <- names(x)[!names(x) %in% c("n", "pct")]
-  output$name <- paste(group_names, collapse = " - ")
   
-  # Combine grouping variables into a single column
-  x <- tidyr::unite(x, col = "group", dplyr::all_of(group_names), sep = " - ")
-  
-  # Create an empty groups list
-  groups <- list()
-  
-  # Loop over each row in the data frame and extract the statistics
-  for (i in 1:nrow(x)) {
-    # Create an empty group list
-    group <- list()
+  # Check if there are any groups, if so, combine the grouping variables into
+  # a single column and loop over each group to extract the statistics
+  if (length(group_names) != 0) {
+    output$name <- paste(group_names, collapse = " - ")
     
-    # Select the current row
-    row <- x[i, ]
+    x <- tidyr::unite(x, col = "group", dplyr::all_of(group_names), sep = " - ")
     
-    # Set the group name
-    group$name <- row$group
+    # Create an empty groups list
+    groups <- list()
+    
+    # Loop over each row in the data frame and extract the statistics
+    for (i in 1:nrow(x)) {
+      # Create an empty group list
+      group <- list()
       
+      # Select the current row
+      row <- x[i, ]
+      
+      # Set the group name
+      group$name <- row$group
+        
+      # Extract statistics
+      statistics <- list()
+      
+      if ("n" %in% names(row)) statistics$n <- row$n
+      if ("pct" %in% names(row)) statistics$pct <- row$pct
+      
+      # Add the statistics to the variable's statistics property
+      group$statistics <- statistics    
+        
+      # Add the group to the groups list
+      groups[[i]] <- group
+      
+      # Add the groups list to the variable list
+      output$groups <- groups
+    }
+  } else {
     # Extract statistics
     statistics <- list()
     
-    if ("n" %in% names(row)) statistics$n <- row$n
-    if ("pct" %in% names(row)) statistics$pct <- row$pct
+    if ("n" %in% names(x)) statistics$n <- x$n
+    if ("pct" %in% names(x)) statistics$pct <- x$pct
     
     # Add the statistics to the variable's statistics property
-    group$statistics <- statistics    
-      
-    # Add the group to the groups list
-    groups[[i]] <- group
-    
-    # Add the groups list to the variable list
-    output$groups <- groups
+    output$statistics <- statistics 
   }
   
   # Add package information
