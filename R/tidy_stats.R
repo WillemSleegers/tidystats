@@ -1444,44 +1444,43 @@ tidy_stats.afex_aov <- function(x) {
   # Set the DV
   output$DV <- attr(x, "dv")
   
-  # Create an empty coefficients list
-  coefficients <- list()
+  # Create an empty terms list
+  terms <- list()
   
   # Convert the results to a data frame
-  effects <- tibble::as_tibble(x$anova_table, rownames = "effect")
+  df <- tibble::as_tibble(x$anova_table, rownames = "effect")
   
-  for (i in 1:nrow(effects)) {
+  for (i in 1:nrow(df)) {
     
-    # Create a new coefficient list
-    coefficient <- list()
+    # Create a new term list
+    term <- list()
     
-    # Add the name of the coefficient
-    name <- effects$effect[i]
-    coefficient$name <- name
+    # Add the name of the term
+    term$name <- df$effect[i]
     
     # Create a new statistics list and add the coefficient's statistics
     statistics <- list()
     
-    statistics$dfs <- list(
-      df_numerator = effects$`num Df`[i], 
-      df_denominator = effects$`den Df`[i]
-    )
-    statistics$MS <- effects$MSE[i]
+    statistics$MS <- df$MSE[i]
     statistics$statistic <- list(
       name = "F", 
-      value = effects$`F`[i]
+      value = df$`F`[i]
     )
-    statistics$p <- effects$`Pr(>F)`[i]
-    statistics$ges <- effects$ges[i]
+    statistics$dfs <- list(
+      df_numerator = df$`num Df`[i], 
+      df_denominator = df$`den Df`[i]
+    )
+    statistics$p <- df$`Pr(>F)`[i]
+    statistics$ges <- df$ges[i]
     
-    coefficient$statistics <- statistics
+    term$statistics <- statistics
     
-    # Add the coefficient data to the coefficients list
-    coefficients[[i]] <- coefficient
+    # Add the term data to the terms list
+    terms[[i]] <- term
   }
   
-  # Add coefficients to the output
-  output$coefficients <- coefficients
+  # Add terms to the output
+  output$terms <- terms
   
   # Add additional information
   output$type <- attr(x, "type")
