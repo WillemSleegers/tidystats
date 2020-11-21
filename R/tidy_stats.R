@@ -1497,3 +1497,156 @@ tidy_stats.afex_aov <- function(x) {
   
   return(output)
 }
+
+
+#' @describeIn tidy_stats tidy_stats method for class 'emmGrid'
+#' @export
+tidy_stats.emmGrid <- function(x) {
+  
+  output <- list()
+
+  # Convert object to a data frame
+  df <- as.data.frame(x)
+  
+  # Set method
+  type <- x@misc$estType
+  
+  if (type == "contrast" | type == "pairs") {
+    output$method <- "contrast"  
+  } else {
+    output$method <- "EMM"
+  }
+  
+  # Determine type of analysis
+  by <- x@misc$by.vars
+  
+  if (!is.null(by)) {
+    
+    # Create an empty groups list
+    groups <- list()
+  
+    for (i in 1:length(levels(df[, by]))) {
+      # Create an empty group
+      group <- list()
+      
+      # Set the group name
+      name <- levels(df[, by])[i]
+      group$name <- paste(by, "=", name)
+      
+      # Create an empty terms list
+      terms <- list()
+      
+      # Filter the statistics of this group
+      df_group <- df[df[by] == name, ]
+      
+      for (j in 1:nrow(df_group)) {
+      
+        # Create a new term list
+        term <- list()
+        
+        # Add the name of the term
+        if (type == "contrast") {
+          term$name <- df_group$contrast[j]
+        } else if (type == "prediction") {
+          term$name <- paste(x@misc$pri.vars, "=", df_group[, x@misc$pri.vars][j])
+        } else {
+          term$name <- df_group$terms[j]  
+        }
+        
+        # Create a new statistics list and add the term's statistics
+        statistics <- list()
+        
+        if (type == "contrast") {
+          statistics$estimate$name <- "mean difference"
+          statistics$estimate$value <- df_group$estimate[j]
+          statistics$SE <- df_group$SE[j]
+          statistics$df <- df_group$df[j]
+          statistics$statistic$name <- "t"
+          statistics$statistic$value <- df_group$t.ratio[j]
+          statistics$p <- df_group$p.value[j]
+        } else {
+          statistics$EMM <- df_group$emmean[j]
+          statistics$SE <- df_group$SE[j]
+          statistics$df <- df_group$df[j]
+          statistics$CI$CI_level <- x@misc$level
+          statistics$CI$CI_lower <- df_group$lower.CL[j]
+          statistics$CI$CI_upper <- df_group$upper.CL[j]
+        }
+        
+        term$statistics <- statistics
+      
+        # Add the term data to the coefficients list
+        terms[[j]] <- term
+      }
+      
+      # Add coefficients to the group
+      group$terms <- terms
+      
+      # Add group to the groups list
+      groups[[i]] <- group
+    }
+    
+    # Add groups to the output
+    output$groups <- groups
+  } else {
+    # Create an empty terms list
+    terms <- list()
+    
+    for (i in 1:nrow(df)) {
+  
+      # Create a new term list
+      term <- list()
+      
+      # Add the name of the term
+      term$name <- df$contrast[i]
+      
+      # Create a new statistics list and add the term's statistics
+      statistics <- list()
+      
+      statistics$estimate$name <- "b"
+      statistics$estimate$value <- df$estimate[i]
+      statistics$SE <- df$SE[i]
+      statistics$df <- df$df[i]
+      statistics$statistic$name <- "t"
+      statistics$statistic$value <- df$t.ratio[i]
+      statistics$p <- df$p.value[i]
+      
+      term$statistics <- statistics
+    
+      # Add the term data to the coefficients list
+      terms[[i]] <- term
+    }
+    
+    # Add terms to the output
+    output$terms <- terms
+  }
+  
+  # Add additional information
+  if (!is.null(x@misc$avgd.over)) {
+    output$averaged_over <- paste(x@misc$avgd.over, collapse = "; ")  
+  }
+  if (!is.null(x@misc$adjust)) {
+    output$adjust <- x@misc$adjust  
+  }
+  if (!is.null(x@misc$famSize  )) {
+    output$family_size <- x@misc$famSize  
+  }
+  
+  # Add package information
+  package <- list()
+
+  package$name <- "emmeans"
+  package$version <- getNamespaceVersion("emmeans")[[1]]
+
+  # Add package information to output
+  output$package <- package
+  
+  return(output)
+}
+
+#' @describeIn tidy_stats tidy_stats method for class 'emm_list'
+#' @export
+tidy_stats.emm_list <- function(x) {
+  stop(paste("You're trying to tidy an object of class 'emm_list'; ", 
+    "please provide an object with class 'emmGrid'."))
+}

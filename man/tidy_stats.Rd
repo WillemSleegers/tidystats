@@ -14,6 +14,8 @@
 \alias{tidy_stats.lmerModLmerTest}
 \alias{tidy_stats.BFBayesFactor}
 \alias{tidy_stats.afex_aov}
+\alias{tidy_stats.emmGrid}
+\alias{tidy_stats.emm_list}
 \title{Tidy the output of a statistics object}
 \usage{
 tidy_stats(x)
@@ -41,6 +43,10 @@ tidy_stats(x)
 \method{tidy_stats}{BFBayesFactor}(x)
 
 \method{tidy_stats}{afex_aov}(x)
+
+\method{tidy_stats}{emmGrid}(x)
+
+\method{tidy_stats}{emm_list}(x)
 }
 \arguments{
 \item{x}{The output of a statistical test.}
@@ -122,6 +128,10 @@ Currently supported functions:
 \item \code{BFBayesFactor}: tidy_stats method for class 'BayesFactor'
 
 \item \code{afex_aov}: tidy_stats method for class 'afex_aov'
+
+\item \code{emmGrid}: tidy_stats method for class 'emmGrid'
+
+\item \code{emm_list}: tidy_stats method for class 'emm_list'
 }}
 
 \examples{

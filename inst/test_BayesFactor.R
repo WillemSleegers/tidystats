@@ -4,10 +4,6 @@
 # Load packages
 library(tidystats)
 library(tidyverse)
-
-# BayesFactor -------------------------------------------------------------
-
-# Load package
 library(BayesFactor)
 
 # Load data
@@ -16,8 +12,8 @@ data(attitude)
 data(raceDolls)
 
 ## Bem's (2010) data (see Rouder & Morey, 2011)
-t = c(-.15,2.39,2.42,2.43)
-N = c(100,150,97,99)
+t <- c(-.15, 2.39, 2.42, 2.43)
+N <- c(100, 150, 97, 99)
 
 # generalTestBF ----------------------------------------------
 
