@@ -8,6 +8,9 @@
 * Using `tidy_stats()` on ungrouped count data produced with `count_data()` is now properly tidied.
 * Fixed order of columns in `describe_data()` when the data is grouped.
 
+## Misc
+* Removed info message that is displayed when the package is loaded
+
 # tidystats 0.5
 
 ## Breaking changes
