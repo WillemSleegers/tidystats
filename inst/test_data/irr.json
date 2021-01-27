@@ -1,0 +1,83 @@
+{
+  "ICC_anxiety": {
+    "method": "ICC",
+    "model": "twoway",
+    "type": "agreement",
+    "unit": "single",
+    "ICC_name": "ICC(A,1)",
+    "statistics": {
+      "N_subject": 20,
+      "N_raters": 3,
+      "ICC": 0.197998,
+      "statistic": {
+        "name": "F",
+        "value": 0.197998
+      },
+      "dfs": {
+        "df_numerator": 19,
+        "df_denominator": 39.746041
+      },
+      "p": 0.054266,
+      "CI": {
+        "CI_level": 0.95,
+        "CI_lower": -0.038911,
+        "CI_upper": 0.493574
+      }
+    },
+    "null_value": 0
+  },
+  "ICC_high_consistency": {
+    "method": "ICC",
+    "model": "twoway",
+    "type": "consistency",
+    "unit": "single",
+    "ICC_name": "ICC(C,1)",
+    "statistics": {
+      "N_subject": 20,
+      "N_raters": 3,
+      "ICC": 0.845615,
+      "statistic": {
+        "name": "F",
+        "value": 0.845615
+      },
+      "dfs": {
+        "df_numerator": 19,
+        "df_denominator": 38
+      },
+      "p": 2.852714e-13,
+      "CI": {
+        "CI_level": 0.95,
+        "CI_lower": 0.70808,
+        "CI_upper": 0.929968
+      }
+    },
+    "null_value": 0
+  },
+  "ICC_low_agreement": {
+    "method": "ICC",
+    "model": "twoway",
+    "type": "agreement",
+    "unit": "single",
+    "ICC_name": "ICC(A,1)",
+    "statistics": {
+      "N_subject": 20,
+      "N_raters": 3,
+      "ICC": 0.106051,
+      "statistic": {
+        "name": "F",
+        "value": 0.106051
+      },
+      "dfs": {
+        "df_numerator": 19,
+        "df_denominator": 2.345547
+      },
+      "p": 0.037717,
+      "CI": {
+        "CI_level": 0.95,
+        "CI_lower": -0.002193,
+        "CI_upper": 0.345521
+      }
+    },
+    "null_value": 0
+  }
+}

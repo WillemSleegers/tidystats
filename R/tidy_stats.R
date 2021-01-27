@@ -1502,7 +1502,6 @@ tidy_stats.afex_aov <- function(x) {
 #' @describeIn tidy_stats tidy_stats method for class 'emmGrid'
 #' @export
 tidy_stats.emmGrid <- function(x) {
-  
   output <- list()
 
   # Convert object to a data frame
@@ -1649,4 +1648,42 @@ tidy_stats.emmGrid <- function(x) {
 tidy_stats.emm_list <- function(x) {
   stop(paste("You're trying to tidy an object of class 'emm_list'; ", 
     "please provide an object with class 'emmGrid'."))
+}
+
+#' @describeIn tidy_stats tidy_stats method for class 'icclist'
+#' @export
+tidy_stats.icclist <- function(x) {
+  output <- list()
+
+  # Set method
+  output$method <- "ICC" 
+  
+  # Set additional ICC information
+  output$model <- x$model
+  output$type <- x$type
+  output$unit <- x$unit
+  output$ICC_name <- x$icc.name
+  
+  # Extract statistics
+  statistics <- list()
+  
+  statistics$N_subject <- x$subjects
+  statistics$N_raters <- x$raters
+  statistics$ICC <- x$value
+  statistics$statistic$name <- "F"
+  statistics$statistic$value <- x$value
+  statistics$dfs$df_numerator <- x$df1
+  statistics$dfs$df_denominator <- x$df2
+  statistics$p <- x$p.value
+  statistics$CI$CI_level <- x$conf.level
+  statistics$CI$CI_lower <- x$lbound
+  statistics$CI$CI_upper <- x$ubound
+  
+  # Add statistics to output
+  output$statistics <- statistics
+  
+  # Add additional information
+  output$null_value <- x$r0
+  
+  return(output)
 }

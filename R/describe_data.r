@@ -109,7 +109,7 @@ describe_data <- function(data, column, na.rm = TRUE, short = FALSE) {
       "M", "SD")))
   } else {
     output <- dplyr::select_at(output, dplyr::vars(dplyr::contains("variable"), 
-      dplyr::contains("missing"), dplyr::starts_with("N"), 
+      all_of(grouping), dplyr::contains("missing"), dplyr::starts_with("N"), 
       dplyr::contains("pct"), dplyr::everything()))
   }
   

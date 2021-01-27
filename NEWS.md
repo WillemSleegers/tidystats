@@ -1,8 +1,12 @@
 # tidystats 0.5.1 
 
+## New
+* Added support for the `icc()` function from the `irr` package.
+
 ## Bug fixes
 
 * Using `tidy_stats()` on ungrouped count data produced with `count_data()` is now properly tidied.
+* Fixed order of columns in `describe_data()` when the data is grouped.
 
 # tidystats 0.5
 
