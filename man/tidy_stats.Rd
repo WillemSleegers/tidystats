@@ -16,6 +16,7 @@
 \alias{tidy_stats.afex_aov}
 \alias{tidy_stats.emmGrid}
 \alias{tidy_stats.emm_list}
+\alias{tidy_stats.icclist}
 \title{Tidy the output of a statistics object}
 \usage{
 tidy_stats(x)
@@ -47,6 +48,8 @@ tidy_stats(x)
 \method{tidy_stats}{emmGrid}(x)
 
 \method{tidy_stats}{emm_list}(x)
+
+\method{tidy_stats}{icclist}(x)
 }
 \arguments{
 \item{x}{The output of a statistical test.}
@@ -132,6 +135,8 @@ Currently supported functions:
 \item \code{emmGrid}: tidy_stats method for class 'emmGrid'
 
 \item \code{emm_list}: tidy_stats method for class 'emm_list'
+
+\item \code{icclist}: tidy_stats method for class 'icclist'
 }}
 
 \examples{
