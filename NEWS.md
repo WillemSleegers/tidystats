@@ -2,6 +2,7 @@
 
 ## New
 * Added support for the `icc()` function from the `irr` package.
+* Added support for the `cohen.d()` function from the `effsize` package.
 
 ## Bug fixes
 

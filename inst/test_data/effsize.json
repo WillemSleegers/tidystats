@@ -1,0 +1,44 @@
+{
+  "cohen_d": {
+    "method": "Cohen's d",
+    "statistics": {
+      "statistic": {
+        "name": "d",
+        "value": 1.99598
+      },
+      "CI": {
+        "CI_level": 0.95,
+        "CI_lower": 1.654645,
+        "CI_upper": 2.337314
+      },
+      "var": 0.02996,
+      "SD": 0.928519
+    },
+    "magnitude": "large",
+    "package": {
+      "name": "effsize",
+      "version": "0.8.1"
+    }
+  },
+  "cohen_d_hedges": {
+    "method": "Hedges's g",
+    "statistics": {
+      "statistic": {
+        "name": "g",
+        "value": 1.988409
+      },
+      "CI": {
+        "CI_level": 0.95,
+        "CI_lower": 1.648797,
+        "CI_upper": 2.328021
+      },
+      "var": 0.029658,
+      "SD": 0.928519
+    },
+    "magnitude": "large",
+    "package": {
+      "name": "effsize",
+      "version": "0.8.1"
+    }
+  }
+}

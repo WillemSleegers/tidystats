@@ -1667,11 +1667,11 @@ tidy_stats.icclist <- function(x) {
   # Extract statistics
   statistics <- list()
   
-  statistics$N_subject <- x$subjects
+  statistics$N_subjects <- x$subjects
   statistics$N_raters <- x$raters
   statistics$ICC <- x$value
   statistics$statistic$name <- "F"
-  statistics$statistic$value <- x$value
+  statistics$statistic$value <- x$Fvalue
   statistics$dfs$df_numerator <- x$df1
   statistics$dfs$df_denominator <- x$df2
   statistics$p <- x$p.value
@@ -1684,6 +1684,52 @@ tidy_stats.icclist <- function(x) {
   
   # Add additional information
   output$null_value <- x$r0
+  
+  # Add package information
+  package <- list()
+
+  package$name <- "irr"
+  package$version <- getNamespaceVersion("irr")[[1]]
+
+  # Add package information to output
+  output$package <- package
+  
+  return(output)
+}
+
+#' @describeIn tidy_stats tidy_stats method for class 'effsize'
+#' @export
+tidy_stats.effsize <- function(x) {
+  output <- list()
+  
+  # Set method
+  output$method <- x$method
+  
+  # Extract statistics
+  statistics <- list()
+
+  statistics$statistic$name <- x$name
+  statistics$statistic$value <- x$estimate
+  statistics$CI$CI_level <- x$conf.level
+  statistics$CI$CI_lower <- x$conf.int["lower"]
+  statistics$CI$CI_upper <- x$conf.int["upper"]
+  statistics$var <- x$var
+  statistics$SD <- x$sd
+  
+  # Add statistics to output
+  output$statistics <- statistics
+  
+  # Add additional information
+  output$magnitude <- x$magnitude
+  
+  # Add package information
+  package <- list()
+
+  package$name <- "effsize"
+  package$version <- getNamespaceVersion("effsize")[[1]]
+  
+  # Add package information to output
+  output$package <- package
   
   return(output)
 }

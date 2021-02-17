@@ -6,12 +6,12 @@
     "unit": "single",
     "ICC_name": "ICC(A,1)",
     "statistics": {
-      "N_subject": 20,
+      "N_subjects": 20,
       "N_raters": 3,
       "ICC": 0.197998,
       "statistic": {
         "name": "F",
-        "value": 0.197998
+        "value": 1.826772
       },
       "dfs": {
         "df_numerator": 19,
@@ -33,12 +33,12 @@
     "unit": "single",
     "ICC_name": "ICC(C,1)",
     "statistics": {
-      "N_subject": 20,
+      "N_subjects": 20,
       "N_raters": 3,
       "ICC": 0.845615,
       "statistic": {
         "name": "F",
-        "value": 0.845615
+        "value": 17.431948
       },
       "dfs": {
         "df_numerator": 19,
@@ -60,12 +60,12 @@
     "unit": "single",
     "ICC_name": "ICC(A,1)",
     "statistics": {
-      "N_subject": 20,
+      "N_subjects": 20,
       "N_raters": 3,
       "ICC": 0.106051,
       "statistic": {
         "name": "F",
-        "value": 0.106051
+        "value": 17.431948
       },
       "dfs": {
         "df_numerator": 19,
