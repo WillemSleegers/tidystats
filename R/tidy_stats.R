@@ -322,7 +322,7 @@ tidy_stats.glm <- function(x) {
   summary <- summary(x)
 
   # Extract method
-  output$method <- "Linear regression"
+  output$method <- "Generalized linear regression"
   
   # Extract model statistics
   statistics <- list()
