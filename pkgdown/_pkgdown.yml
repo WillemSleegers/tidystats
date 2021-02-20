@@ -37,6 +37,8 @@ navbar:
         href: articles/introduction-to-tidystats.html
       - text: Reading and using a tidystats file
         href: articles/read-and-use-a-tidystats-file.html
+      - text: Manually tidy statistics
+        href: articles/manually-tidy-statistics.html
       - text: tidystats taxonomy
         href: articles/tidystats-taxonomy.html
     - text: "Changelog"
@@ -49,3 +51,4 @@ navbar:
 template:
   params:
     bootswatch: flatly
+

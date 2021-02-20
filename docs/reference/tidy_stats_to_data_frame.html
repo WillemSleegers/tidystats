@@ -102,6 +102,9 @@ subsetting functions (e.g., dplyr::filter)." />
       <a href="../articles/read-and-use-a-tidystats-file.html">Reading and using a tidystats file</a>
     </li>
     <li>
+      <a href="../articles/manually-tidy-statistics.html">Manually tidy statistics</a>
+    </li>
+    <li>
       <a href="../articles/tidystats-taxonomy.html">tidystats taxonomy</a>
     </li>
   </ul>
@@ -116,7 +119,7 @@ subsetting functions (e.g., dplyr::filter)." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/WillemSleegers/tidystats">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
@@ -144,7 +147,7 @@ which can then be used to extract specific statistics using standard
 subsetting functions (e.g., <code><a href='https://dplyr.tidyverse.org/reference/filter.html'>dplyr::filter</a></code>).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>tidy_stats_to_data_frame</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>tidy_stats_to_data_frame</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -158,48 +161,49 @@ subsetting functions (e.g., <code><a href='https://dplyr.tidyverse.org/reference
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Load dplyr for access to the piping operator</span>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)
-
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
+  
 <span class='co'># t-test:</span>
-<span class='no'>sleep_test</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span>(<span class='no'>extra</span> ~ <span class='no'>group</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>sleep</span>, <span class='kw'>paired</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='va'>sleep_test</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span><span class='op'>(</span><span class='va'>extra</span> <span class='op'>~</span> <span class='va'>group</span>, data <span class='op'>=</span> <span class='va'>sleep</span>, paired <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
 <span class='co'># lm:</span>
-<span class='no'>ctl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4.17</span>, <span class='fl'>5.58</span>, <span class='fl'>5.18</span>, <span class='fl'>6.11</span>, <span class='fl'>4.50</span>, <span class='fl'>4.61</span>, <span class='fl'>5.17</span>, <span class='fl'>4.53</span>, <span class='fl'>5.33</span>, <span class='fl'>5.14</span>)
-<span class='no'>trt</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4.81</span>, <span class='fl'>4.17</span>, <span class='fl'>4.41</span>, <span class='fl'>3.59</span>, <span class='fl'>5.87</span>, <span class='fl'>3.83</span>, <span class='fl'>6.03</span>, <span class='fl'>4.89</span>, <span class='fl'>4.32</span>, <span class='fl'>4.69</span>)
-<span class='no'>group</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/gl.html'>gl</a></span>(<span class='fl'>2</span>, <span class='fl'>10</span>, <span class='fl'>20</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Ctl"</span>, <span class='st'>"Trt"</span>))
-<span class='no'>weight</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>ctl</span>, <span class='no'>trt</span>)
-<span class='no'>lm_D9</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>weight</span> ~ <span class='no'>group</span>)
+<span class='va'>ctl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4.17</span>, <span class='fl'>5.58</span>, <span class='fl'>5.18</span>, <span class='fl'>6.11</span>, <span class='fl'>4.50</span>, <span class='fl'>4.61</span>, <span class='fl'>5.17</span>, <span class='fl'>4.53</span>, <span class='fl'>5.33</span>, <span class='fl'>5.14</span><span class='op'>)</span>
+<span class='va'>trt</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4.81</span>, <span class='fl'>4.17</span>, <span class='fl'>4.41</span>, <span class='fl'>3.59</span>, <span class='fl'>5.87</span>, <span class='fl'>3.83</span>, <span class='fl'>6.03</span>, <span class='fl'>4.89</span>, <span class='fl'>4.32</span>, <span class='fl'>4.69</span><span class='op'>)</span>
+<span class='va'>group</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/gl.html'>gl</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>10</span>, <span class='fl'>20</span>, labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Ctl"</span>, <span class='st'>"Trt"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>weight</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>ctl</span>, <span class='va'>trt</span><span class='op'>)</span>
+<span class='va'>lm_D9</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>weight</span> <span class='op'>~</span> <span class='va'>group</span><span class='op'>)</span>
 
 <span class='co'># ANOVA:</span>
-<span class='no'>npk_aov</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span>(<span class='no'>yield</span> ~ <span class='no'>block</span> + <span class='no'>N</span>*<span class='no'>P</span>*<span class='no'>K</span>, <span class='no'>npk</span>)
+<span class='va'>npk_aov</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span><span class='op'>(</span><span class='va'>yield</span> <span class='op'>~</span> <span class='va'>block</span> <span class='op'>+</span> <span class='va'>N</span><span class='op'>*</span><span class='va'>P</span><span class='op'>*</span><span class='va'>K</span>, <span class='va'>npk</span><span class='op'>)</span>
 
 <span class='co'>#' # Create an empty list</span>
-<span class='no'>results</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>()
+<span class='va'>results</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>
 
 <span class='co'># Add output to the results list</span>
-<span class='no'>results</span> <span class='kw'>&lt;-</span> <span class='no'>results</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='add_stats.html'>add_stats</a></span>(<span class='no'>sleep_test</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='add_stats.html'>add_stats</a></span>(<span class='no'>lm_D9</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"primary"</span>, <span class='kw'>preregistered</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='add_stats.html'>add_stats</a></span>(<span class='no'>npk_aov</span>, <span class='kw'>notes</span> <span class='kw'>=</span> <span class='st'>"An ANOVA example"</span>)
-
+<span class='va'>results</span> <span class='op'>&lt;-</span> <span class='va'>results</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='add_stats.html'>add_stats</a></span><span class='op'>(</span><span class='va'>sleep_test</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='add_stats.html'>add_stats</a></span><span class='op'>(</span><span class='va'>lm_D9</span>, type <span class='op'>=</span> <span class='st'>"primary"</span>, preregistered <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='add_stats.html'>add_stats</a></span><span class='op'>(</span><span class='va'>npk_aov</span>, notes <span class='op'>=</span> <span class='st'>"An ANOVA example"</span><span class='op'>)</span>
+  
 <span class='co'># Convert the list to a data frame</span>
-<span class='no'>results_df</span> <span class='kw'>&lt;-</span> <span class='fu'>tidy_stats_to_data_frame</span>(<span class='no'>results</span>)
+<span class='va'>results_df</span> <span class='op'>&lt;-</span> <span class='fu'>tidy_stats_to_data_frame</span><span class='op'>(</span><span class='va'>results</span><span class='op'>)</span>
 
 <span class='co'># Select all the p-values</span>
-<span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>results_df</span>, <span class='no'>statistic</span> <span class='kw'>==</span> <span class='st'>"p"</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 11 x 8</span><span>
+<span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>results_df</span>, <span class='va'>statistic</span> <span class='op'>==</span> <span class='st'>"p"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 11 x 8</span><span>
 #&gt;    identifier term     statistic    value extra method       type  preregistered
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        
-#&gt; </span><span style='color: #555555;'> 1</span><span> sleep_test </span><span style='color: #BB0000;'>NA</span><span>       p         2.83</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 3</span><span> </span><span style='color: #BB0000;'>NA</span><span>    Paired t-te… </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>           
-#&gt; </span><span style='color: #555555;'> 2</span><span> lm_D9      </span><span style='color: #BB0000;'>NA</span><span>       p         2.49</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span> </span><span style='color: #BB0000;'>NA</span><span>    Linear regr… prim… yes          
-#&gt; </span><span style='color: #555555;'> 3</span><span> lm_D9      (Interc… p         9.55</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-15</span><span> </span><span style='color: #BB0000;'>NA</span><span>    Linear regr… prim… yes          
-#&gt; </span><span style='color: #555555;'> 4</span><span> lm_D9      groupTrt p         2.49</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span> </span><span style='color: #BB0000;'>NA</span><span>    Linear regr… prim… yes          
-#&gt; </span><span style='color: #555555;'> 5</span><span> npk_aov    block    p         1.59</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span> </span><span style='color: #BB0000;'>NA</span><span>    ANOVA        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>           
-#&gt; </span><span style='color: #555555;'> 6</span><span> npk_aov    N        p         4.37</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 3</span><span> </span><span style='color: #BB0000;'>NA</span><span>    ANOVA        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>           
-#&gt; </span><span style='color: #555555;'> 7</span><span> npk_aov    P        p         4.75</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span> </span><span style='color: #BB0000;'>NA</span><span>    ANOVA        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>           
-#&gt; </span><span style='color: #555555;'> 8</span><span> npk_aov    K        p         2.88</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span> </span><span style='color: #BB0000;'>NA</span><span>    ANOVA        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>           
-#&gt; </span><span style='color: #555555;'> 9</span><span> npk_aov    N:P      p         2.63</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span> </span><span style='color: #BB0000;'>NA</span><span>    ANOVA        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>           
-#&gt; </span><span style='color: #555555;'>10</span><span> npk_aov    N:K      p         1.69</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span> </span><span style='color: #BB0000;'>NA</span><span>    ANOVA        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>           
-#&gt; </span><span style='color: #555555;'>11</span><span> npk_aov    P:K      p         8.63</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span> </span><span style='color: #BB0000;'>NA</span><span>    ANOVA        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>           </div><div class='input'>
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>        
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> sleep_test </span><span style='color: #BB0000;'>NA</span><span>       p         2.83</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 3</span><span> </span><span style='color: #BB0000;'>NA</span><span>    Paired t-te… </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>           
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> lm_D9      </span><span style='color: #BB0000;'>NA</span><span>       p         2.49</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 1</span><span> </span><span style='color: #BB0000;'>NA</span><span>    Linear regr… prim… yes          
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> lm_D9      (Interc… p         9.55</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-15</span><span> </span><span style='color: #BB0000;'>NA</span><span>    Linear regr… prim… yes          
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> lm_D9      groupTrt p         2.49</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 1</span><span> </span><span style='color: #BB0000;'>NA</span><span>    Linear regr… prim… yes          
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> npk_aov    block    p         1.59</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 2</span><span> </span><span style='color: #BB0000;'>NA</span><span>    ANOVA        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>           
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> npk_aov    N        p         4.37</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 3</span><span> </span><span style='color: #BB0000;'>NA</span><span>    ANOVA        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>           
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> npk_aov    P        p         4.75</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 1</span><span> </span><span style='color: #BB0000;'>NA</span><span>    ANOVA        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>           
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> npk_aov    K        p         2.88</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 2</span><span> </span><span style='color: #BB0000;'>NA</span><span>    ANOVA        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>           
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> npk_aov    N:P      p         2.63</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 1</span><span> </span><span style='color: #BB0000;'>NA</span><span>    ANOVA        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>           
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> npk_aov    N:K      p         1.69</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 1</span><span> </span><span style='color: #BB0000;'>NA</span><span>    ANOVA        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>           
+#&gt; </span><span style='color: #BCBCBC;'>11</span><span> npk_aov    P:K      p         8.63</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 1</span><span> </span><span style='color: #BB0000;'>NA</span><span>    ANOVA        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>           </div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -216,7 +220,7 @@ subsetting functions (e.g., <code><a href='https://dplyr.tidyverse.org/reference
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

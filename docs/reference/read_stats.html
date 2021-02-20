@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Read a .json file that was produced with <code>write_stats</code> — read_stats • tidystats</title>
+<title>Read a .json file that was produced with write_stats — read_stats • tidystats</title>
 
 
 <!-- jquery -->
@@ -41,7 +41,7 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Read a .json file that was produced with <code>write_stats</code> — read_stats" />
+<meta property="og:title" content="Read a .json file that was produced with write_stats — read_stats" />
 <meta property="og:description" content="read_stats can read in a .json file containing the statistical output
 that was produced with write_stats. It returns a list containing the 
 results, with the identifier as the name for each list element." />
@@ -102,6 +102,9 @@ results, with the identifier as the name for each list element." />
       <a href="../articles/read-and-use-a-tidystats-file.html">Reading and using a tidystats file</a>
     </li>
     <li>
+      <a href="../articles/manually-tidy-statistics.html">Manually tidy statistics</a>
+    </li>
+    <li>
       <a href="../articles/tidystats-taxonomy.html">tidystats taxonomy</a>
     </li>
   </ul>
@@ -116,7 +119,7 @@ results, with the identifier as the name for each list element." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/WillemSleegers/tidystats">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
@@ -144,7 +147,7 @@ that was produced with <code>write_stats</code>. It returns a list containing th
 results, with the identifier as the name for each list element.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_stats</span>(<span class='no'>file</span>)</pre>
+    <pre class="usage"><span class='fu'>read_stats</span><span class='op'>(</span><span class='va'>file</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -157,7 +160,9 @@ results, with the identifier as the name for each list element.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>results</span> <span class='kw'>&lt;-</span> <span class='fu'>read_stats</span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"results.json"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"tidystats"</span>))</div></pre>
+    <pre class="examples"><div class='input'><span class='va'>results</span> <span class='op'>&lt;-</span> <span class='fu'>read_stats</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"results.json"</span>, package <span class='op'>=</span> <span class='st'>"tidystats"</span><span class='op'>)</span><span class='op'>)</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -173,7 +178,7 @@ results, with the identifier as the name for each list element.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -101,6 +101,9 @@ categorical variables." />
       <a href="../articles/read-and-use-a-tidystats-file.html">Reading and using a tidystats file</a>
     </li>
     <li>
+      <a href="../articles/manually-tidy-statistics.html">Manually tidy statistics</a>
+    </li>
+    <li>
       <a href="../articles/tidystats-taxonomy.html">tidystats taxonomy</a>
     </li>
   </ul>
@@ -115,7 +118,7 @@ categorical variables." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/WillemSleegers/tidystats">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
@@ -142,7 +145,7 @@ categorical variables." />
 categorical variables.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>count_data</span>(<span class='no'>data</span>, <span class='no'>...</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>count_data</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>...</span>, na.rm <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -170,45 +173,49 @@ level.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Load dplyr for access to the %&gt;% operator and group_by()</span>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
 
 <span class='co'># 1 variable</span>
-<span class='fu'>count_data</span>(<span class='no'>quote_source</span>, <span class='no'>source</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2 x 3</span><span>
+<span class='fu'>count_data</span><span class='op'>(</span><span class='va'>quote_source</span>, <span class='va'>source</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 x 3</span><span>
 #&gt;   source         n   pct
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> Bin Laden   </span><span style='text-decoration: underline;'>3</span><span>101  48.9
-#&gt; </span><span style='color: #555555;'>2</span><span> Washington  </span><span style='text-decoration: underline;'>3</span><span>242  51.1</div><div class='input'>
+#&gt; </span><span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> Bin Laden   </span><span style='text-decoration: underline;'>3</span><span>101  48.9
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> Washington  </span><span style='text-decoration: underline;'>3</span><span>242  51.1</div><div class='input'>
 <span class='co'># 2 variables</span>
-<span class='fu'>count_data</span>(<span class='no'>quote_source</span>, <span class='no'>source</span>, <span class='no'>sex</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 4</span><span>
+<span class='fu'>count_data</span><span class='op'>(</span><span class='va'>quote_source</span>, <span class='va'>source</span>, <span class='va'>sex</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 6 x 4</span><span>
 #&gt;   source     sex        n     pct
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> Bin Laden  female  </span><span style='text-decoration: underline;'>2</span><span>067 32.6   
-#&gt; </span><span style='color: #555555;'>2</span><span> Bin Laden  male    </span><span style='text-decoration: underline;'>1</span><span>029 16.2   
-#&gt; </span><span style='color: #555555;'>3</span><span> Bin Laden  </span><span style='color: #BB0000;'>NA</span><span>         5  0.078</span><span style='text-decoration: underline;'>8</span><span>
-#&gt; </span><span style='color: #555555;'>4</span><span> Washington female  </span><span style='text-decoration: underline;'>2</span><span>206 34.8   
-#&gt; </span><span style='color: #555555;'>5</span><span> Washington male    </span><span style='text-decoration: underline;'>1</span><span>031 16.3   
-#&gt; </span><span style='color: #555555;'>6</span><span> Washington </span><span style='color: #BB0000;'>NA</span><span>         5  0.078</span><span style='text-decoration: underline;'>8</span><span></div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> Bin Laden  female  </span><span style='text-decoration: underline;'>2</span><span>067 32.6   
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> Bin Laden  male    </span><span style='text-decoration: underline;'>1</span><span>029 16.2   
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> Bin Laden  </span><span style='color: #BB0000;'>NA</span><span>         5  0.078</span><span style='text-decoration: underline;'>8</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> Washington female  </span><span style='text-decoration: underline;'>2</span><span>206 34.8   
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> Washington male    </span><span style='text-decoration: underline;'>1</span><span>031 16.3   
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span> Washington </span><span style='color: #BB0000;'>NA</span><span>         5  0.078</span><span style='text-decoration: underline;'>8</span><span></div><div class='input'>
 <span class='co'># Ignore missing values</span>
-<span class='fu'>count_data</span>(<span class='no'>quote_source</span>, <span class='no'>source</span>, <span class='no'>sex</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 4</span><span>
+<span class='fu'>count_data</span><span class='op'>(</span><span class='va'>quote_source</span>, <span class='va'>source</span>, <span class='va'>sex</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 4 x 4</span><span>
 #&gt;   source     sex        n   pct
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> Bin Laden  female  </span><span style='text-decoration: underline;'>2</span><span>067  32.6
-#&gt; </span><span style='color: #555555;'>2</span><span> Bin Laden  male    </span><span style='text-decoration: underline;'>1</span><span>029  16.2
-#&gt; </span><span style='color: #555555;'>3</span><span> Washington female  </span><span style='text-decoration: underline;'>2</span><span>206  34.8
-#&gt; </span><span style='color: #555555;'>4</span><span> Washington male    </span><span style='text-decoration: underline;'>1</span><span>031  16.3</div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> Bin Laden  female  </span><span style='text-decoration: underline;'>2</span><span>067  32.6
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> Bin Laden  male    </span><span style='text-decoration: underline;'>1</span><span>029  16.2
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> Washington female  </span><span style='text-decoration: underline;'>2</span><span>206  34.8
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> Washington male    </span><span style='text-decoration: underline;'>1</span><span>031  16.3</div><div class='input'>
 <span class='co'># Use group_by() to get percentages within each group</span>
-<span class='no'>quote_source</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='no'>source</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>count_data</span>(<span class='no'>sex</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 4</span><span>
-#&gt; </span><span style='color: #555555;'># Groups:   source [2]</span><span>
+<span class='va'>quote_source</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>source</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>count_data</span><span class='op'>(</span><span class='va'>sex</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 6 x 4</span><span>
+#&gt; </span><span style='color: #949494;'># Groups:   source [2]</span><span>
 #&gt;   source     sex        n    pct
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> Bin Laden  female  </span><span style='text-decoration: underline;'>2</span><span>067 66.7  
-#&gt; </span><span style='color: #555555;'>2</span><span> Bin Laden  male    </span><span style='text-decoration: underline;'>1</span><span>029 33.2  
-#&gt; </span><span style='color: #555555;'>3</span><span> Bin Laden  </span><span style='color: #BB0000;'>NA</span><span>         5  0.161
-#&gt; </span><span style='color: #555555;'>4</span><span> Washington female  </span><span style='text-decoration: underline;'>2</span><span>206 68.0  
-#&gt; </span><span style='color: #555555;'>5</span><span> Washington male    </span><span style='text-decoration: underline;'>1</span><span>031 31.8  
-#&gt; </span><span style='color: #555555;'>6</span><span> Washington </span><span style='color: #BB0000;'>NA</span><span>         5  0.154</div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> Bin Laden  female  </span><span style='text-decoration: underline;'>2</span><span>067 66.7  
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> Bin Laden  male    </span><span style='text-decoration: underline;'>1</span><span>029 33.2  
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> Bin Laden  </span><span style='color: #BB0000;'>NA</span><span>         5  0.161
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> Washington female  </span><span style='text-decoration: underline;'>2</span><span>206 68.0  
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> Washington male    </span><span style='text-decoration: underline;'>1</span><span>031 31.8  
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span> Washington </span><span style='color: #BB0000;'>NA</span><span>         5  0.154</div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -225,7 +232,7 @@ level.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

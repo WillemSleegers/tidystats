@@ -105,6 +105,9 @@ for a list of supported statistical tests." />
       <a href="../articles/read-and-use-a-tidystats-file.html">Reading and using a tidystats file</a>
     </li>
     <li>
+      <a href="../articles/manually-tidy-statistics.html">Manually tidy statistics</a>
+    </li>
+    <li>
       <a href="../articles/tidystats-taxonomy.html">tidystats taxonomy</a>
     </li>
   </ul>
@@ -119,7 +122,7 @@ for a list of supported statistical tests." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/WillemSleegers/tidystats">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
@@ -150,14 +153,14 @@ Please note that not all statistical tests are supported. See 'Details' below
 for a list of supported statistical tests.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>add_stats</span>(
-  <span class='no'>results</span>,
-  <span class='no'>output</span>,
-  <span class='kw'>identifier</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>preregistered</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>notes</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>add_stats</span><span class='op'>(</span>
+  <span class='va'>results</span>,
+  <span class='va'>output</span>,
+  identifier <span class='op'>=</span> <span class='cn'>NULL</span>,
+  type <span class='op'>=</span> <span class='cn'>NULL</span>,
+  preregistered <span class='op'>=</span> <span class='cn'>NULL</span>,
+  notes <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -231,7 +234,8 @@ preregistered or not.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Load dplyr for access to the piping operator</span>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Attaching package: ‘dplyr’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:stats’:</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
@@ -239,26 +243,28 @@ preregistered or not.</p></td>
 #&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'>
 <span class='co'># Conduct statistical tests</span>
 <span class='co'># t-test:</span>
-<span class='no'>sleep_test</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span>(<span class='no'>extra</span> ~ <span class='no'>group</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>sleep</span>, <span class='kw'>paired</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='va'>sleep_test</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span><span class='op'>(</span><span class='va'>extra</span> <span class='op'>~</span> <span class='va'>group</span>, data <span class='op'>=</span> <span class='va'>sleep</span>, paired <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
 <span class='co'># lm:</span>
-<span class='no'>ctl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4.17</span>, <span class='fl'>5.58</span>, <span class='fl'>5.18</span>, <span class='fl'>6.11</span>, <span class='fl'>4.50</span>, <span class='fl'>4.61</span>, <span class='fl'>5.17</span>, <span class='fl'>4.53</span>, <span class='fl'>5.33</span>, <span class='fl'>5.14</span>)
-<span class='no'>trt</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4.81</span>, <span class='fl'>4.17</span>, <span class='fl'>4.41</span>, <span class='fl'>3.59</span>, <span class='fl'>5.87</span>, <span class='fl'>3.83</span>, <span class='fl'>6.03</span>, <span class='fl'>4.89</span>, <span class='fl'>4.32</span>, <span class='fl'>4.69</span>)
-<span class='no'>group</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/gl.html'>gl</a></span>(<span class='fl'>2</span>, <span class='fl'>10</span>, <span class='fl'>20</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Ctl"</span>, <span class='st'>"Trt"</span>))
-<span class='no'>weight</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>ctl</span>, <span class='no'>trt</span>)
-<span class='no'>lm_D9</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>weight</span> ~ <span class='no'>group</span>)
+<span class='va'>ctl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4.17</span>, <span class='fl'>5.58</span>, <span class='fl'>5.18</span>, <span class='fl'>6.11</span>, <span class='fl'>4.50</span>, <span class='fl'>4.61</span>, <span class='fl'>5.17</span>, <span class='fl'>4.53</span>, <span class='fl'>5.33</span>, <span class='fl'>5.14</span><span class='op'>)</span>
+<span class='va'>trt</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4.81</span>, <span class='fl'>4.17</span>, <span class='fl'>4.41</span>, <span class='fl'>3.59</span>, <span class='fl'>5.87</span>, <span class='fl'>3.83</span>, <span class='fl'>6.03</span>, <span class='fl'>4.89</span>, <span class='fl'>4.32</span>, <span class='fl'>4.69</span><span class='op'>)</span>
+<span class='va'>group</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/gl.html'>gl</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>10</span>, <span class='fl'>20</span>, labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Ctl"</span>, <span class='st'>"Trt"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>weight</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>ctl</span>, <span class='va'>trt</span><span class='op'>)</span>
+<span class='va'>lm_D9</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>weight</span> <span class='op'>~</span> <span class='va'>group</span><span class='op'>)</span>
 
 <span class='co'># ANOVA:</span>
-<span class='no'>npk_aov</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span>(<span class='no'>yield</span> ~ <span class='no'>block</span> + <span class='no'>N</span>*<span class='no'>P</span>*<span class='no'>K</span>, <span class='no'>npk</span>)
+<span class='va'>npk_aov</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span><span class='op'>(</span><span class='va'>yield</span> <span class='op'>~</span> <span class='va'>block</span> <span class='op'>+</span> <span class='va'>N</span><span class='op'>*</span><span class='va'>P</span><span class='op'>*</span><span class='va'>K</span>, <span class='va'>npk</span><span class='op'>)</span>
 
 <span class='co'>#' # Create an empty list</span>
-<span class='no'>results</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>()
+<span class='va'>results</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>
 
 <span class='co'># Add output to the results list</span>
-<span class='no'>results</span> <span class='kw'>&lt;-</span> <span class='no'>results</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>add_stats</span>(<span class='no'>sleep_test</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>add_stats</span>(<span class='no'>lm_D9</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"primary"</span>, <span class='kw'>preregistered</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>add_stats</span>(<span class='no'>npk_aov</span>, <span class='kw'>notes</span> <span class='kw'>=</span> <span class='st'>"An ANOVA example"</span>)</div></pre>
+<span class='va'>results</span> <span class='op'>&lt;-</span> <span class='va'>results</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>add_stats</span><span class='op'>(</span><span class='va'>sleep_test</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>add_stats</span><span class='op'>(</span><span class='va'>lm_D9</span>, type <span class='op'>=</span> <span class='st'>"primary"</span>, preregistered <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>add_stats</span><span class='op'>(</span><span class='va'>npk_aov</span>, notes <span class='op'>=</span> <span class='st'>"An ANOVA example"</span><span class='op'>)</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -274,7 +280,7 @@ preregistered or not.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

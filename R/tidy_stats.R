@@ -238,7 +238,7 @@ tidy_stats.lm <- function(x) {
   statistics <- list()
   
   statistics$r_squared <- summary$r.squared
-  statistics$adjusted_r_squared <- summary$adj.r.squared
+  statistics$r_squared_adjusted <- summary$adj.r.squared
   
   statistic <- list()
   statistic$name <- "F"
@@ -1386,8 +1386,6 @@ tidy_stats.BFBayesFactor <- function(x) {
       # Extract name of the model
       model$name <- rownames(bayes_factors)[i]
       
-      
-      
       # Extract statistics
       statistics$BF_01 <- bayes_factors$bf[i]
       statistics$BF_10 <- 1/bayes_factors$bf[i]
@@ -1732,4 +1730,48 @@ tidy_stats.effsize <- function(x) {
   output$package <- package
   
   return(output)
+}
+
+#' @describeIn tidy_stats tidy_stats method for class 'lavaan'
+#' @export
+tidy_stats.lavaan <- function(x) {
+  output <- list()
+  
+  # Set method
+  output$method <- "SEM"
+  
+  # Get summary statistics
+  summary <- summary(x, fit.measures = TRUE)
+  
+  # Get fit statistics
+  fit <- summary$FIT
+  
+  # Create a statistics list
+  statistics$n_parameters <- fit["npar"]
+  statistics$N <- fit["ntotal"]
+  statistics$CFI <- fit["cfi"]
+  statistics$TLI <- fit["tli"]
+  statistics$log_likelihood <- fit["logl"]
+  statistics$log_likelihood_unrestricted <- fit["logl"]
+  statistics$AIC <- fit["aic"]
+  statistics$BIC <- fit["bic"]
+  statistics$BIC_adjusted <- fit["bic2"]
+  statistics$RMSEA <- fit["rmsea"]
+  statistics$CI$CI_level <- .90
+  statistics$CI$CI_lower <- fit["rmsea.ci.lower"]
+  statistics$CI$CI_upper <- fit["rmsea.ci.upper"]
+  statistics$p <- fit["rmsea.pvalue "]
+  statistics$SRMR <- fit["srmr"]
+  
+  # Create an empty models list
+  models <- list()
+  
+  # Create an empty latent variables list
+  latent_variables <- list()
+  
+  # Create an empty covariances list
+  
+  # Create an empty variances list
+  
+  
 }

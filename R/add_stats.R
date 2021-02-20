@@ -173,11 +173,6 @@ add_stats.list <- function(results, output, identifier = NULL, type = NULL,
   # they should already be tidy
   analysis <- output
   
-  # Add method name and position it as the first element of the list
-  analysis <- append(analysis, list(method = "Generic test"), 0)
-  
-  # TODO: Add checks to see whether the format of the provided list is correct
-
   # Add type: primary, secondary, or exploratory
   if (!missing(type)) {
     if (type == "primary") {

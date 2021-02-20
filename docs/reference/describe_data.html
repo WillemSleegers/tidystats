@@ -101,6 +101,9 @@
       <a href="../articles/read-and-use-a-tidystats-file.html">Reading and using a tidystats file</a>
     </li>
     <li>
+      <a href="../articles/manually-tidy-statistics.html">Manually tidy statistics</a>
+    </li>
+    <li>
       <a href="../articles/tidystats-taxonomy.html">tidystats taxonomy</a>
     </li>
   </ul>
@@ -115,7 +118,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/WillemSleegers/tidystats">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
@@ -142,7 +145,7 @@
 (e.g., n, mean, sd) for numeric variables.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>describe_data</span>(<span class='no'>data</span>, <span class='no'>column</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>short</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>describe_data</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>column</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span>, short <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -181,34 +184,37 @@ non-missing observations.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Load the dplyr package for access to the %&gt;% operator and group_by()</span>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
 
 <span class='co'># Inspect descriptives of the response column from the 'quote_source' data</span>
 <span class='co'># frame included in tidystats</span>
-<span class='fu'>describe_data</span>(<span class='no'>quote_source</span>, <span class='no'>response</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 13</span><span>
+<span class='fu'>describe_data</span><span class='op'>(</span><span class='va'>quote_source</span>, <span class='va'>response</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 13</span><span>
 #&gt;   variable missing     N     M    SD     SE   min   max range median  mode
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> response      18  </span><span style='text-decoration: underline;'>6</span><span>325  5.59  2.19 0.027</span><span style='text-decoration: underline;'>5</span><span>     1     9     8      5     5
-#&gt; </span><span style='color: #555555;'># … with 2 more variables: skew </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, kurtosis </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> response      18  </span><span style='text-decoration: underline;'>6</span><span>325  5.59  2.19 0.027</span><span style='text-decoration: underline;'>5</span><span>     1     9     8      5     5
+#&gt; </span><span style='color: #949494;'># … with 2 more variables: skew </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, kurtosis </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
 <span class='co'># Repeat the former, now for each level of the source column</span>
-<span class='no'>quote_source</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='no'>source</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>describe_data</span>(<span class='no'>response</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 14</span><span>
-#&gt; </span><span style='color: #555555;'># Groups:   source [2]</span><span>
-#&gt;   variable missing     N source     M    SD     SE   min   max range median
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> response      18  </span><span style='text-decoration: underline;'>3</span><span>083 Bin L…  5.23  2.11 0.038</span><span style='text-decoration: underline;'>0</span><span>     1     9     8      5
-#&gt; </span><span style='color: #555555;'>2</span><span> response       0  </span><span style='text-decoration: underline;'>3</span><span>242 Washi…  5.93  2.21 0.038</span><span style='text-decoration: underline;'>8</span><span>     1     9     8      6
-#&gt; </span><span style='color: #555555;'># … with 3 more variables: mode </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, skew </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, kurtosis </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
+<span class='va'>quote_source</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>source</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>describe_data</span><span class='op'>(</span><span class='va'>response</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 2 x 14</span><span>
+#&gt; </span><span style='color: #949494;'># Groups:   source [2]</span><span>
+#&gt;   variable source missing     N     M    SD     SE   min   max range median
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> response Bin L…      18  </span><span style='text-decoration: underline;'>3</span><span>083  5.23  2.11 0.038</span><span style='text-decoration: underline;'>0</span><span>     1     9     8      5
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> response Washi…       0  </span><span style='text-decoration: underline;'>3</span><span>242  5.93  2.21 0.038</span><span style='text-decoration: underline;'>8</span><span>     1     9     8      6
+#&gt; </span><span style='color: #949494;'># … with 3 more variables: mode </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, skew </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, kurtosis </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>  
 <span class='co'># Only inspect the total N, mean, and standard deviation</span>
-<span class='no'>quote_source</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='no'>source</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>describe_data</span>(<span class='no'>response</span>, <span class='kw'>short</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 5</span><span>
-#&gt; </span><span style='color: #555555;'># Groups:   source [2]</span><span>
+<span class='va'>quote_source</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>source</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>describe_data</span><span class='op'>(</span><span class='va'>response</span>, short <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 2 x 5</span><span>
+#&gt; </span><span style='color: #949494;'># Groups:   source [2]</span><span>
 #&gt;   variable source         N     M    SD
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> response Bin Laden   </span><span style='text-decoration: underline;'>3</span><span>083  5.23  2.11
-#&gt; </span><span style='color: #555555;'>2</span><span> response Washington  </span><span style='text-decoration: underline;'>3</span><span>242  5.93  2.21</div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> response Bin Laden   </span><span style='text-decoration: underline;'>3</span><span>083  5.23  2.11
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> response Washington  </span><span style='text-decoration: underline;'>3</span><span>242  5.93  2.21</div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -225,7 +231,7 @@ non-missing observations.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

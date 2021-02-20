@@ -17,6 +17,8 @@
 \alias{tidy_stats.emmGrid}
 \alias{tidy_stats.emm_list}
 \alias{tidy_stats.icclist}
+\alias{tidy_stats.effsize}
+\alias{tidy_stats.lavaan}
 \title{Tidy the output of a statistics object}
 \usage{
 tidy_stats(x)
@@ -50,6 +52,10 @@ tidy_stats(x)
 \method{tidy_stats}{emm_list}(x)
 
 \method{tidy_stats}{icclist}(x)
+
+\method{tidy_stats}{effsize}(x)
+
+\method{tidy_stats}{lavaan}(x)
 }
 \arguments{
 \item{x}{The output of a statistical test.}
@@ -137,6 +143,10 @@ Currently supported functions:
 \item \code{emm_list}: tidy_stats method for class 'emm_list'
 
 \item \code{icclist}: tidy_stats method for class 'icclist'
+
+\item \code{effsize}: tidy_stats method for class 'effsize'
+
+\item \code{lavaan}: tidy_stats method for class 'lavaan'
 }}
 
 \examples{

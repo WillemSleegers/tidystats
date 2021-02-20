@@ -58,6 +58,9 @@
       <a href="../articles/read-and-use-a-tidystats-file.html">Reading and using a tidystats file</a>
     </li>
     <li>
+      <a href="../articles/manually-tidy-statistics.html">Manually tidy statistics</a>
+    </li>
+    <li>
       <a href="../articles/tidystats-taxonomy.html">tidystats taxonomy</a>
     </li>
   </ul>
@@ -72,7 +75,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/WillemSleegers/tidystats">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
@@ -86,12 +89,12 @@
 
       
 
-      </header><script src="read-and-use-a-tidystats-file_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="read-and-use-a-tidystats-file_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Read and use a tidystats file</h1>
             
-            <h4 class="date">2020-10-18</h4>
+            <h4 class="date">2021-02-20</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/WillemSleegers/tidystats/blob/master/vignettes/read-and-use-a-tidystats-file.Rmd"><code>vignettes/read-and-use-a-tidystats-file.Rmd</code></a></small>
       <div class="hidden name"><code>read-and-use-a-tidystats-file.Rmd</code></div>
@@ -101,18 +104,19 @@
     
     
 <p>Besides using <code>tidystats</code> in combination with Microsoft Word to report statistics, you can also use <code>tidystats</code> to convert a list of statistics into a data frame. This enables researchers to then easily extract specific statistics to perform additional analyses with (e.g., meta-analyses). Below is an example of how to convert a list of statistics to a data frame and several simple operations.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co"># Load packages</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidystats</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Load packages</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://willemsleegers.github.io/tidystats/">tidystats</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 
 <span class="co"># Read in a tidystats-produced .json file</span>
-<span class="no">results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/read_stats.html">read_stats</a></span>(<span class="st">"results.json"</span>)
+<span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_stats.html">read_stats</a></span><span class="op">(</span><span class="st">"results.json"</span><span class="op">)</span>
 
 <span class="co"># Convert the list to a data frame</span>
-<span class="no">results_df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/tidy_stats_to_data_frame.html">tidy_stats_to_data_frame</a></span>(<span class="no">results</span>)
+<span class="va">results_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tidy_stats_to_data_frame.html">tidy_stats_to_data_frame</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span>
 
 <span class="co"># Select the p-values</span>
-<span class="no">p_values</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">results_df</span>, <span class="no">statistic</span> <span class="kw">==</span> <span class="st">"p"</span>)</pre></body></html></div>
+<span class="va">p_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">results_df</span>, <span class="va">statistic</span> <span class="op">==</span> <span class="st">"p"</span><span class="op">)</span></code></pre></div>
 <p>With the current example, this results in the following data frame:</p>
 <table class="table">
 <thead><tr class="header">
@@ -227,7 +231,8 @@
 </tbody>
 </table>
 <p>Alternatively, you can select all the significant p-values:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">sig_p_values</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">results_df</span>, <span class="no">statistic</span> <span class="kw">==</span> <span class="st">"p"</span> <span class="kw">&amp;</span> <span class="no">value</span> <span class="kw">&lt;</span> <span class="fl">.05</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">sig_p_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">results_df</span>, <span class="va">statistic</span> <span class="op">==</span> <span class="st">"p"</span> <span class="op">&amp;</span> <span class="va">value</span> <span class="op">&lt;</span> <span class="fl">.05</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">identifier</th>
@@ -303,7 +308,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

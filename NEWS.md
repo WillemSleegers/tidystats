@@ -3,6 +3,10 @@
 ## New
 * Added support for the `icc()` function from the `irr` package.
 * Added support for the `cohen.d()` function from the `effsize` package.
+* Added support for the `emmeans()` function from the `emmeans` package.
+
+## Changes
+* Removed automatically setting the method to 'Generic test' when adding a custom test. This means you can set the method yourself now.
 
 ## Bug fixes
 
@@ -10,7 +14,7 @@
 * Fixed order of columns in `describe_data()` when the data is grouped.
 
 ## Misc
-* Removed info message that is displayed when the package is loaded
+* Removed info message that is displayed when the package is loaded.
 
 # tidystats 0.5
 
