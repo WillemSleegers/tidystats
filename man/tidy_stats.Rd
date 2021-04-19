@@ -19,43 +19,49 @@
 \alias{tidy_stats.icclist}
 \alias{tidy_stats.effsize}
 \alias{tidy_stats.lavaan}
+\alias{tidy_stats.psych}
+\alias{tidy_stats.confint}
 \title{Tidy the output of a statistics object}
 \usage{
-tidy_stats(x)
+tidy_stats(x, args = NULL)
 
-\method{tidy_stats}{htest}(x)
+\method{tidy_stats}{htest}(x, args = NULL)
 
-\method{tidy_stats}{lm}(x)
+\method{tidy_stats}{lm}(x, args = NULL)
 
-\method{tidy_stats}{glm}(x)
+\method{tidy_stats}{glm}(x, args = NULL)
 
-\method{tidy_stats}{anova}(x)
+\method{tidy_stats}{anova}(x, args = NULL)
 
-\method{tidy_stats}{aov}(x)
+\method{tidy_stats}{aov}(x, args = NULL)
 
-\method{tidy_stats}{aovlist}(x)
+\method{tidy_stats}{aovlist}(x, args = NULL)
 
-\method{tidy_stats}{tidystats_descriptives}(x)
+\method{tidy_stats}{tidystats_descriptives}(x, args = NULL)
 
-\method{tidy_stats}{tidystats_counts}(x)
+\method{tidy_stats}{tidystats_counts}(x, args = NULL)
 
-\method{tidy_stats}{lmerMod}(x)
+\method{tidy_stats}{lmerMod}(x, args = NULL)
 
-\method{tidy_stats}{lmerModLmerTest}(x)
+\method{tidy_stats}{lmerModLmerTest}(x, args = NULL)
 
-\method{tidy_stats}{BFBayesFactor}(x)
+\method{tidy_stats}{BFBayesFactor}(x, args = NULL)
 
-\method{tidy_stats}{afex_aov}(x)
+\method{tidy_stats}{afex_aov}(x, args = NULL)
 
-\method{tidy_stats}{emmGrid}(x)
+\method{tidy_stats}{emmGrid}(x, args = NULL)
 
-\method{tidy_stats}{emm_list}(x)
+\method{tidy_stats}{emm_list}(x, args = NULL)
 
-\method{tidy_stats}{icclist}(x)
+\method{tidy_stats}{icclist}(x, args = NULL)
 
-\method{tidy_stats}{effsize}(x)
+\method{tidy_stats}{effsize}(x, args = NULL)
 
-\method{tidy_stats}{lavaan}(x)
+\method{tidy_stats}{lavaan}(x, args = NULL)
+
+\method{tidy_stats}{psych}(x, args = NULL)
+
+\method{tidy_stats}{confint}(x, args = NULL)
 }
 \arguments{
 \item{x}{The output of a statistical test.}
@@ -147,6 +153,10 @@ Currently supported functions:
 \item \code{effsize}: tidy_stats method for class 'effsize'
 
 \item \code{lavaan}: tidy_stats method for class 'lavaan'
+
+\item \code{psych}: tidy_stats method for class 'psych'
+
+\item \code{confint}: tidy_stats method for class 'confint'
 }}
 
 \examples{

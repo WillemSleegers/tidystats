@@ -77,11 +77,11 @@
 #' str(list_sleep_test)
 #' 
 #' @export
-tidy_stats <- function(x) UseMethod("tidy_stats")
+tidy_stats <- function(x, args = NULL) UseMethod("tidy_stats")
 
 #' @describeIn tidy_stats tidy_stats method for class 'htest'
 #' @export
-tidy_stats.htest <- function(x) {
+tidy_stats.htest <- function(x, args = NULL) {
 
   output <- list()
 
@@ -224,7 +224,7 @@ tidy_stats.htest <- function(x) {
 
 #' @describeIn tidy_stats tidy_stats method for class 'lm'
 #' @export
-tidy_stats.lm <- function(x) {
+tidy_stats.lm <- function(x, args = NULL) {
 
   output <- list()
   
@@ -314,7 +314,7 @@ tidy_stats.lm <- function(x) {
 
 #' @describeIn tidy_stats tidy_stats method for class 'glm'
 #' @export
-tidy_stats.glm <- function(x) {
+tidy_stats.glm <- function(x, args = NULL) {
 
   output <- list()
   
@@ -405,7 +405,7 @@ tidy_stats.glm <- function(x) {
 
 #' @describeIn tidy_stats tidy_stats method for class 'anova'
 #' @export
-tidy_stats.anova <- function(x) {
+tidy_stats.anova <- function(x, args = NULL) {
   
   output <- list()
   
@@ -471,7 +471,7 @@ tidy_stats.anova <- function(x) {
     if ("Chisq" %in% colnames(x)) {
       if (!is.na(x$Chisq[i])) {
         statistic <- list()
-        statistic$name <- "chi-squared"
+        statistic$name <- "X-squared"
         statistic$value <- x$Chisq[i]
         statistics$statistic <- statistic
       }
@@ -579,7 +579,7 @@ tidy_stats.anova <- function(x) {
 
 #' @describeIn tidy_stats tidy_stats method for class 'aov'
 #' @export
-tidy_stats.aov <- function(x) {
+tidy_stats.aov <- function(x, args = NULL) {
 
   output <- list()
   
@@ -650,7 +650,7 @@ tidy_stats.aov <- function(x) {
 
 #' @describeIn tidy_stats tidy_stats method for class 'aovlist'
 #' @export
-tidy_stats.aovlist <- function(x) {
+tidy_stats.aovlist <- function(x, args = NULL) {
 
   output <- list()
   
@@ -739,7 +739,7 @@ tidy_stats.aovlist <- function(x) {
 
 #' @describeIn tidy_stats tidy_stats method for class 'tidystats_descriptives'
 #' @export
-tidy_stats.tidystats_descriptives <- function(x) {
+tidy_stats.tidystats_descriptives <- function(x, args = NULL) {
 
   output <- list()
   
@@ -747,83 +747,148 @@ tidy_stats.tidystats_descriptives <- function(x) {
   output$method <- "Descriptives"
   
   # Extract variable information
-  var_name <- dplyr::first(dplyr::pull(x, variable))
+  var_names <- unique(dplyr::pull(x, var))
   
   # Extract grouping information
   group_names <- dplyr::group_vars(x)
   n_groups <- length(group_names)
   
-  # Set the name property
-  output$name <- var_name
+  # Loop over the variable names
+  variables <- list()
   
-  # Check whether there are any grouping variables and select the relevant
-  # row of descriptives
-  if (n_groups > 0) {
+  for (i in 1:length(var_names)) {
+    variable <- list()
     
-    # Set the grouping name
-    # If there is more than 1 grouping variable, combine them together
-    output$group_by = paste(group_names, collapse = " by ")
+    # Subset the data frame to only contain the rows of the current variable
+    subset <- dplyr::filter(x, var == var_names[i])
     
-    # Create an empty groups list
-    groups <- list()
+    # Set the variable name
+    variable$name <- var_names[i]
     
-    # Loop over the groups
-    for (i in 1:nrow(x)) {
-      # Create an empty group list
-      group <- list()
+    # Extract statistics
+    # Check whether there are any grouping variables and select the relevant
+    # row of descriptives
+    if (n_groups > 0) {
       
-      # Select the current row
-      row <- x[i, ]
+      # Set the grouping name
+      # If there is more than 1 grouping variable, combine them together
+      variable$group_by = paste(group_names, collapse = " by ")
       
-      # Set the group name
-      group$name <- paste(unlist(row[group_names]), collapse = " - ")
+      # Create an empty groups list
+      groups <- list()
       
+      # Loop over the groups
+      for (j in 1:nrow(subset)) {
+        # Create an empty group list
+        group <- list()
+        
+        # Select the current row
+        row <- x[j, ]
+        
+        # Set the group name
+        group$name <- paste(unlist(row[group_names]), collapse = " - ")
+        
+        # Extract statistics
+        statistics <- list()
+      
+        if ("missing" %in% names(row)) {
+          if (!is.na(row$missing)) statistics$missing <- row$missing
+        }
+        if ("N" %in% names(row)) {
+          if (!is.na(row$N)) statistics$N <- row$N
+        }
+        if ("M" %in% names(row)) {
+          if (!is.na(row$M)) statistics$M <- row$M
+        }
+        if ("SD" %in% names(row)) {
+          if (!is.na(row$SD)) statistics$SD <- row$SD
+        }
+        if ("SE" %in% names(row)) {
+          if (!is.na(row$SE)) statistics$SE <- row$SE
+        }
+        if ("min" %in% names(row)) {
+          if (!is.na(row$min)) statistics$min <- row$min
+        }
+        if ("max" %in% names(row)) {
+          if (!is.na(row$max)) statistics$max <- row$max
+        }
+        if ("range" %in% names(row)) {
+          if (!is.na(row$range)) statistics$range <- row$range
+        }
+        if ("median" %in% names(row)) {
+          if (!is.na(row$median)) statistics$median <- row$median
+        }
+        if ("mode" %in% names(row)) {
+          if (!is.na(row$mode)) statistics$mode <- row$mode
+        }
+        if ("skew" %in% names(row)) {
+          if (!is.na(row$skew)) statistics$skew <- row$skew
+        }
+        if ("kurtosis" %in% names(row)) {
+          if (!is.na(row$kurtosis)) statistics$kurtosis <- row$kurtosis
+        }
+        
+        # Add the statistics to the variable's statistics property
+        group$statistics <- statistics    
+        
+        # Add the group to the groups list
+        groups[[j]] <- group
+      }
+      
+      # Add the groups list to the variable list
+      variable$groups <- groups
+      
+    } else {
       # Extract statistics
       statistics <- list()
     
-      if ("missing" %in% names(row)) statistics$missing <- row$missing
-      if ("N" %in% names(row)) statistics$N <- row$N
-      if ("M" %in% names(row)) statistics$M <- row$M
-      if ("SD" %in% names(row)) statistics$SD <- row$SD
-      if ("SE" %in% names(row)) statistics$SE <- row$SE
-      if ("min" %in% names(row)) statistics$min <- row$min
-      if ("max" %in% names(row)) statistics$max <- row$max
-      if ("range" %in% names(row)) statistics$range <- row$range
-      if ("median" %in% names(row)) statistics$median <- row$median
-      if ("mode" %in% names(row)) statistics$mode <- row$mode
-      if ("skew" %in% names(row)) statistics$skew <- row$skew
-      if ("kurtosis" %in% names(row)) statistics$kurtosis <- row$kurtosis
+      if ("missing" %in% names(subset)) {
+          if (!is.na(subset$missing)) statistics$missing <- subset$missing
+        }
+        if ("N" %in% names(subset)) {
+          if (!is.na(subset$N)) statistics$N <- subset$N
+        }
+        if ("M" %in% names(subset)) {
+          if (!is.na(subset$M)) statistics$M <- subset$M
+        }
+        if ("SD" %in% names(subset)) {
+          if (!is.na(subset$SD)) statistics$SD <- subset$SD
+        }
+        if ("SE" %in% names(subset)) {
+          if (!is.na(subset$SE)) statistics$SE <- subset$SE
+        }
+        if ("min" %in% names(subset)) {
+          if (!is.na(subset$min)) statistics$min <- subset$min
+        }
+        if ("max" %in% names(subset)) {
+          if (!is.na(subset$max)) statistics$max <- subset$max
+        }
+        if ("range" %in% names(subset)) {
+          if (!is.na(subset$range)) statistics$range <- subset$range
+        }
+        if ("median" %in% names(subset)) {
+          if (!is.na(subset$median)) statistics$median <- subset$median
+        }
+        if ("mode" %in% names(subset)) {
+          if (!is.na(subset$mode)) statistics$mode <- subset$mode
+        }
+        if ("skew" %in% names(subset)) {
+          if (!is.na(subset$skew)) statistics$skew <- subset$skew
+        }
+        if ("kurtosis" %in% names(subset)) {
+          if (!is.na(subset$kurtosis)) statistics$kurtosis <- subset$kurtosis
+        }
       
       # Add the statistics to the variable's statistics property
-      group$statistics <- statistics    
-      
-      # Add the group to the groups list
-      groups[[i]] <- group
+      variable$statistics <- statistics
     }
     
-    # Add the groups list to the variable list
-    output$groups <- groups
-    
-  } else {
-    # Extract statistics
-    statistics <- list()
-  
-    if ("missing" %in% names(x)) statistics$missing <- x$missing
-    if ("N" %in% names(x)) statistics$N <- x$N
-    if ("M" %in% names(x)) statistics$M <- x$M
-    if ("SD" %in% names(x)) statistics$SD <- x$SD
-    if ("SE" %in% names(x)) statistics$SE <- x$SE
-    if ("min" %in% names(x)) statistics$min <- x$min
-    if ("max" %in% names(x)) statistics$max <- x$max
-    if ("range" %in% names(x)) statistics$range <- x$range
-    if ("median" %in% names(x)) statistics$median <- x$median
-    if ("mode" %in% names(x)) statistics$mode <- x$mode
-    if ("skew" %in% names(x)) statistics$skew <- x$skew
-    if ("kurtosis" %in% names(x)) statistics$kurtosis <- x$kurtosis
-    
-    # Add the statistics to the variable's statistics property
-    output$statistics <- statistics
+    # Add variable to the list of variables
+    variables[[i]] <- variable
   }
+  
+  # Add variables to the output
+  output$variables <- variables
   
   # Add package information
   package <- list()
@@ -839,7 +904,7 @@ tidy_stats.tidystats_descriptives <- function(x) {
 
 #' @describeIn tidy_stats tidy_stats method for class 'tidystats_counts'
 #' @export
-tidy_stats.tidystats_counts <- function(x) {
+tidy_stats.tidystats_counts <- function(x, args = NULL) {
 
   output <- list()
   
@@ -910,7 +975,7 @@ tidy_stats.tidystats_counts <- function(x) {
 
 #' @describeIn tidy_stats tidy_stats method for class 'lmerMod'
 #' @export
-tidy_stats.lmerMod <- function(x) {
+tidy_stats.lmerMod <- function(x, args = NULL) {
   
   output <- list()
   
@@ -964,7 +1029,7 @@ tidy_stats.lmerMod <- function(x) {
   
     # Set N for the group, if there is an N  
     if (group$name %in% names(summary$ngrps)) {
-      group$statistics$N <- summary$ngrps[[names(summary$ngrps) == group$name]]
+      group$statistics$N <- summary$ngrps[names(summary$ngrps) == group$name][[1]]
     }
     
     random_statistics <- varcor[[i]]
@@ -1132,7 +1197,7 @@ tidy_stats.lmerMod <- function(x) {
 
 #' @describeIn tidy_stats tidy_stats method for class 'lmerModLmerTest'
 #' @export
-tidy_stats.lmerModLmerTest <- function(x) {
+tidy_stats.lmerModLmerTest <- function(x, args = NULL) {
   
   output <- list()
   
@@ -1355,7 +1420,7 @@ tidy_stats.lmerModLmerTest <- function(x) {
 
 #' @describeIn tidy_stats tidy_stats method for class 'BayesFactor'
 #' @export
-tidy_stats.BFBayesFactor <- function(x) {
+tidy_stats.BFBayesFactor <- function(x, args = NULL) {
   
   output <- list()
   
@@ -1432,7 +1497,7 @@ tidy_stats.BFBayesFactor <- function(x) {
 
 #' @describeIn tidy_stats tidy_stats method for class 'afex_aov'
 #' @export
-tidy_stats.afex_aov <- function(x) {
+tidy_stats.afex_aov <- function(x, args = NULL) {
 
   output <- list()
   
@@ -1499,7 +1564,7 @@ tidy_stats.afex_aov <- function(x) {
 
 #' @describeIn tidy_stats tidy_stats method for class 'emmGrid'
 #' @export
-tidy_stats.emmGrid <- function(x) {
+tidy_stats.emmGrid <- function(x, args = NULL) {
   output <- list()
 
   # Convert object to a data frame
@@ -1643,14 +1708,14 @@ tidy_stats.emmGrid <- function(x) {
 
 #' @describeIn tidy_stats tidy_stats method for class 'emm_list'
 #' @export
-tidy_stats.emm_list <- function(x) {
+tidy_stats.emm_list <- function(x, args = NULL) {
   stop(paste("You're trying to tidy an object of class 'emm_list'; ", 
     "please provide an object with class 'emmGrid'."))
 }
 
 #' @describeIn tidy_stats tidy_stats method for class 'icclist'
 #' @export
-tidy_stats.icclist <- function(x) {
+tidy_stats.icclist <- function(x, args = NULL) {
   output <- list()
 
   # Set method
@@ -1697,7 +1762,7 @@ tidy_stats.icclist <- function(x) {
 
 #' @describeIn tidy_stats tidy_stats method for class 'effsize'
 #' @export
-tidy_stats.effsize <- function(x) {
+tidy_stats.effsize <- function(x, args = NULL) {
   output <- list()
   
   # Set method
@@ -1734,19 +1799,22 @@ tidy_stats.effsize <- function(x) {
 
 #' @describeIn tidy_stats tidy_stats method for class 'lavaan'
 #' @export
-tidy_stats.lavaan <- function(x) {
+tidy_stats.lavaan <- function(x, args = NULL) {
   output <- list()
   
   # Set method
   output$method <- "SEM"
   
   # Get summary statistics
-  summary <- summary(x, fit.measures = TRUE)
+  sink("file") # Use this hack to hide the default printout of summary()
+  summary <- summary(x, fit.measures = TRUE, ci = TRUE, standardized = TRUE)
+  sink()
   
   # Get fit statistics
   fit <- summary$FIT
   
   # Create a statistics list
+  statistics <- list()
   statistics$n_parameters <- fit["npar"]
   statistics$N <- fit["ntotal"]
   statistics$CFI <- fit["cfi"]
@@ -1766,12 +1834,298 @@ tidy_stats.lavaan <- function(x) {
   # Create an empty models list
   models <- list()
   
-  # Create an empty latent variables list
+  # Add user model
+  model <- list()
+  model$name <- "user model"
+  model$statistics$statistic$name <- "X-squared"
+  model$statistics$statistic$value <- fit["chisq"]
+  model$statistics$df <- fit["df"]
+  model$statistics$p <- fit["pvalue"]
+  models[[1]] <- model
+  
+  # Add baseline model
+  model <- list()
+  model$name <- "baseline model"
+  model$statistics$statistic$name <- "X-squared"
+  model$statistics$statistic$value <- fit["baseline.chisq"]
+  model$statistics$df <- fit["baseline.df"]
+  model$statistics$p <- fit["baseline.pvalue"]
+  models[[2]] <- model
+  
+  # Add models to output
+  output$models <- models
+  
+  # Extract PE from the summary
+  PE <- summary$PE
+  
+  # Latent variables
+  # Create an empty list for the latent variables
   latent_variables <- list()
   
-  # Create an empty covariances list
+  # Select only the latent variables statistics from the PE data
+  PE_latent <- dplyr::filter(PE, op == "=~")
   
-  # Create an empty variances list
+  # Loop
+  for (i in 1:nrow(PE_latent)) {
+    var <- PE_latent[i, ]
+    
+    latent_variable <- list()
+    latent_variable$name <- paste(var$lhs, var$op, var$rhs)
+    latent_variable$statistics$estimate$name <- "b"
+    latent_variable$statistics$estimate$value <- var$est
+    latent_variable$statistics$SE <- var$se
+    if (!is.na(var$z)) {
+      latent_variable$statistics$statistic$name <- "z"
+      latent_variable$statistics$statistic$value <- var$z  
+      latent_variable$statistics$p <- var$p
+    }
+    
+    latent_variables[[i]] <- latent_variable
+  }
   
+  # Covariances
+  # Create an empty list for the covariances
+  covariances <- list()
   
+  # Select only the covariance statistics from the PE data
+  PE_covariances <- dplyr::filter(PE, op == "~~" & lhs != rhs)
+  
+  # Loop
+  for (i in 1:nrow(PE_covariances)) {
+    covar <- PE_covariances[i, ]
+    
+    covariance <- list()
+    covariance$name <- paste(covar$lhs, covar$op, covar$rhs)
+    covariance$statistics$estimate$name <- "b"
+    covariance$statistics$estimate$value <- covar$est
+    covariance$statistics$SE <- covar$se
+    covariance$statistics$statistic$name <- "z"
+    covariance$statistics$statistic$value <- covar$z  
+    covariance$statistics$p <- covar$p
+    
+    covariances[[i]] <- covariance
+  }
+  
+  # Variances
+  # Create an empty list for the variances
+  variances <- list()
+  
+  # Select only the variance statistics from the PE data
+  PE_variances <- dplyr::filter(PE, lhs == rhs)
+  
+  # Loop
+  for (i in 1:nrow(PE_variances)) {
+    var <- PE_variances[i, ]
+    
+    variance <- list()
+    variance$name <- var$lhs
+    variance$statistics$estimate$name <- "b"
+    variance$statistics$estimate$value <- var$est
+    variance$statistics$SE <- var$se
+    variance$statistics$statistic$name <- "z"
+    variance$statistics$statistic$value <- var$z  
+    variance$statistics$p <- var$p
+    
+    variances[[i]] <- variance
+  }
+
+  # Add statistics to output
+  output$latent_variables <- latent_variables
+  output$covariances <- covariances
+  output$variances <- variances
+  
+  # Add package information
+  package <- list()
+
+  package$name <- "lavaan"
+  package$version <- getNamespaceVersion("lavaan")[[1]]
+  
+  # Add package information to output
+  output$package <- package
+  
+  return(output)
+}
+
+#' @describeIn tidy_stats tidy_stats method for class 'psych'
+#' @export
+tidy_stats.psych <- function(x, args = NULL) {
+  output <- list()
+  
+  # Check the kind of psych object
+  if ("alpha" %in% class(x)) {
+    output$method <- "Reliability"
+    
+    # Extract statistics
+    statistics <- list()
+    
+    statistics$alpha <- x$total$raw_alpha
+    statistics$alpha_z <- x$total$std.alpha
+    statistics$G6 <- x$total$`G6(smc)`
+    statistics$r_mean <- x$total$average_r
+    statistics$r_median <- x$total$median_r
+    statistics$SNR <- x$total$`S/N`
+    if ("mean" %in% names(x$total)) {
+      statistics$mean <- x$total$mean
+      statistics$sd <- x$total$sd
+    }
+    
+    # Add statistics to the output
+    output$statistics <- statistics
+    
+  } else if ("corr.test" %in% class(x)) {
+    output$method <- "Correlations"
+    
+    # Create an empty pairs list
+    pairs <- list()
+    
+    # Extract variable names
+    rownames <- rownames(x$r)
+    colnames <- colnames(x$r)
+    
+    # Determine whether the correlation matrix is symmetric or asymmetric
+    if (identical(rownames, colnames)) {
+      I <- choose(length(rownames), 2)
+      symmetric <- TRUE
+    } else {
+      I <- length(rownames) * length(colnames)
+      symmetric <- FALSE
+    }
+    
+    # Tidy statistics
+    rs <- tidy_matrix(x$r, symmetric = symmetric)
+    SEs <- tidy_matrix(x$se, symmetric = symmetric)
+    ts <- tidy_matrix(x$t, symmetric = symmetric)
+    ps <- tidy_matrix(t(x$p), symmetric = symmetric)
+    ps_adjusted <- tidy_matrix(x$p, symmetric = symmetric)
+    
+    # Check if there are confidence intervals
+    if (!is.null(x$ci)) {
+      # Figure out the level
+      alpha <- as.character(x$Call)[which(names(x$Call) == "alpha")]
+      
+      if (length(alpha) == 0) {
+        level <- .95
+      } else {
+        level <- 1 - as.numeric(alpha)
+      }
+    }
+    
+    if (length(x$n) == 1) {
+      n <- x$n
+    } else {
+      ns <- tidy_matrix(x$n, symmetric = symmetric)
+    }
+    
+    # Loop over the pairs
+    for (i in 1:I) {
+      pair <- list()
+      
+      # Set names
+      names <- list()
+      names[[1]] <- rs$name1[i]
+      names[[2]] <- rs$name2[i]
+      pair$names <- names
+      
+      # Set statistics
+      if (length(x$n) == 1) {
+        pair$statistics$n <- n
+      } else {
+        pair$statistics$n <- ns$value[i]
+      }
+      pair$statistics$estimate$name <- "r"
+      pair$statistics$estimate$value <- rs$value[i]
+      pair$statistics$SE <- SEs$value[i]
+      pair$statistics$statistic$name <- "t"
+      pair$statistics$statistic$value <- ts$value[i]
+      pair$statistics$p <- ps$value[i]
+      
+      if (x$adjust != "none") {
+        pair$statistics$p_adjusted <- ps_adjusted$value[i]  
+      }
+      
+      if (!is.null(x$ci)) {
+        pair$statistics$CI$CI_level <- level
+        pair$statistics$CI$CI_lower <- x$ci$lower[i]
+        pair$statistics$CI$CI_upper <- x$ci$upper[i]
+      }
+      
+      if (!is.null(x$ci)) {
+        pair$statistics$CI_adjusted$CI_level <- level
+        pair$statistics$CI_adjusted$CI_lower <- x$ci.adj$lower[i]
+        pair$statistics$CI_adjusted$CI_upper <- x$ci.adj$upper[i]
+      }
+      
+      pairs[[i]] <- pair
+    }
+    
+    # Add pairs to output
+    output$pairs <- pairs
+    
+    # Set multiple test adjustment method
+    output$multiple_test_adjustment <- x$adjust
+  } else {
+    stop("Sorry, tidystats does not (yet) support this kind of analysis.")
+  }
+  
+  # Add package information
+  package <- list()
+
+  package$name <- "psych"
+  package$version <- getNamespaceVersion("psych")[[1]]
+  
+  # Add package information to output
+  output$package <- package
+  
+  return(output)
+}
+
+#' @describeIn tidy_stats tidy_stats method for class 'confint'
+#' @export
+tidy_stats.confint <- function(x, args = NULL) {
+  output <- list()
+  
+  # Set method
+  output$method <- "Confidence intervals"
+  
+  # Extract confidence level
+  CI_bounds <- readr::parse_number(colnames(x))
+  CI_level <- (CI_bounds[2] - CI_bounds[1]) / 100
+  
+  # Check if there is 1 or more terms
+  # If 1, only create a statistics list
+  # If multiple, loop over terms and create separate lists for each term
+  if (length(rownames(x)) == 1) {
+    output$name <- rownames(x)[1]
+    
+    output$statistics$CI$CI_level <- CI_level
+    output$statistics$CI$CI_lower <- x[1]
+    output$statistics$CI$CI_upper <- x[2]
+  } else {
+    terms <- list()
+    
+    for (i in 1:length(rownames(x))) {
+      term <- list()
+       
+      
+      term$name <- rownames(x)[i]
+      term$statistics$CI$CI_level <- CI_level
+      term$statistics$CI$CI_lower <- x[i]
+      term$statistics$CI$CI_upper <- x[i + length(rownames(x))]
+      
+      terms[[i]] <- term
+    }
+    
+    output$terms <- terms 
+  }
+  
+  # Add package information
+  package <- list()
+
+  package$name <- "stats"
+  package$version <- getNamespaceVersion("stats")[[1]]
+  
+  # Add package information to output
+  output$package <- package
+  
+  return(output)
 }

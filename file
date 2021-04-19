@@ -1,0 +1,121 @@
+lavaan 0.6-7 ended normally after 35 iterations
+
+  Estimator                                         ML
+  Optimization method                           NLMINB
+  Number of free parameters                         21
+                                                      
+  Number of observations                           301
+                                                      
+Model Test User Model:
+                                                      
+  Test statistic                                85.306
+  Degrees of freedom                                24
+  P-value (Chi-square)                           0.000
+
+Model Test Baseline Model:
+
+  Test statistic                               918.852
+  Degrees of freedom                                36
+  P-value                                        0.000
+
+User Model versus Baseline Model:
+
+  Comparative Fit Index (CFI)                    0.931
+  Tucker-Lewis Index (TLI)                       0.896
+
+Loglikelihood and Information Criteria:
+
+  Loglikelihood user model (H0)              -3737.745
+  Loglikelihood unrestricted model (H1)      -3695.092
+                                                      
+  Akaike (AIC)                                7517.490
+  Bayesian (BIC)                              7595.339
+  Sample-size adjusted Bayesian (BIC)         7528.739
+
+Root Mean Square Error of Approximation:
+
+  RMSEA                                          0.092
+  90 Percent confidence interval - lower         0.071
+  90 Percent confidence interval - upper         0.114
+  P-value RMSEA <= 0.05                          0.001
+
+Standardized Root Mean Square Residual:
+
+  SRMR                                           0.065
+
+Parameter Estimates:
+
+  Standard errors                             Standard
+  Information                                 Expected
+  Information saturated (h1) model          Structured
+
+Latent Variables:
+                   Estimate  Std.Err  z-value  P(>|z|) ci.lower ci.upper   Std.lv
+  visual =~                                                                      
+    x1                1.000                               1.000    1.000    0.900
+    x2                0.554    0.100    5.554    0.000    0.358    0.749    0.498
+    x3                0.729    0.109    6.685    0.000    0.516    0.943    0.656
+  textual =~                                                                     
+    x4                1.000                               1.000    1.000    0.990
+    x5                1.113    0.065   17.014    0.000    0.985    1.241    1.102
+    x6                0.926    0.055   16.703    0.000    0.817    1.035    0.917
+  speed =~                                                                       
+    x7                1.000                               1.000    1.000    0.619
+    x8                1.180    0.165    7.152    0.000    0.857    1.503    0.731
+    x9                1.082    0.151    7.155    0.000    0.785    1.378    0.670
+  Std.all
+         
+    0.772
+    0.424
+    0.581
+         
+    0.852
+    0.855
+    0.838
+         
+    0.570
+    0.723
+    0.665
+
+Covariances:
+                   Estimate  Std.Err  z-value  P(>|z|) ci.lower ci.upper   Std.lv
+  visual ~~                                                                      
+    textual           0.408    0.074    5.552    0.000    0.264    0.552    0.459
+    speed             0.262    0.056    4.660    0.000    0.152    0.373    0.471
+  textual ~~                                                                     
+    speed             0.173    0.049    3.518    0.000    0.077    0.270    0.283
+  Std.all
+         
+    0.459
+    0.471
+         
+    0.283
+
+Variances:
+                   Estimate  Std.Err  z-value  P(>|z|) ci.lower ci.upper   Std.lv
+   .x1                0.549    0.114    4.833    0.000    0.326    0.772    0.549
+   .x2                1.134    0.102   11.146    0.000    0.934    1.333    1.134
+   .x3                0.844    0.091    9.317    0.000    0.667    1.022    0.844
+   .x4                0.371    0.048    7.779    0.000    0.278    0.465    0.371
+   .x5                0.446    0.058    7.642    0.000    0.332    0.561    0.446
+   .x6                0.356    0.043    8.277    0.000    0.272    0.441    0.356
+   .x7                0.799    0.081    9.823    0.000    0.640    0.959    0.799
+   .x8                0.488    0.074    6.573    0.000    0.342    0.633    0.488
+   .x9                0.566    0.071    8.003    0.000    0.427    0.705    0.566
+    visual            0.809    0.145    5.564    0.000    0.524    1.094    1.000
+    textual           0.979    0.112    8.737    0.000    0.760    1.199    1.000
+    speed             0.384    0.086    4.451    0.000    0.215    0.553    1.000
+  Std.all
+    0.404
+    0.821
+    0.662
+    0.275
+    0.269
+    0.298
+    0.676
+    0.477
+    0.558
+    1.000
+    1.000
+    1.000
+

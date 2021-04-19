@@ -79,7 +79,7 @@
     "convergence_code": 0,
     "package": {
       "name": "lme4",
-      "version": "1.1-23"
+      "version": "1.1-26"
     }
   },
   "lme4_ML": {
@@ -168,7 +168,7 @@
     "convergence_code": 0,
     "package": {
       "name": "lme4",
-      "version": "1.1-23"
+      "version": "1.1-26"
     }
   },
   "lme4_slopes": {
@@ -263,7 +263,7 @@
     "convergence_code": 0,
     "package": {
       "name": "lme4",
-      "version": "1.1-23"
+      "version": "1.1-26"
     }
   },
   "lmer_anova": {
@@ -288,7 +288,7 @@
           "log_likelihood": -876.001628,
           "deviance": 1752.003255,
           "statistic": {
-            "name": "chi-squared",
+            "name": "X-squared",
             "value": 42.075388
           },
           "df": 1,
@@ -298,7 +298,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.0.2"
+      "version": "4.0.5"
     }
   }
 }

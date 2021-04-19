@@ -7,7 +7,7 @@
 #' 
 #' @param m A matrix.
 
-tidy_matrix <- function(m) {
+tidy_matrix <- function(m, symmetric = TRUE) {
   
   # Check whether there are row and column names
   if (!length(rownames(m)) > 0) {
@@ -18,12 +18,17 @@ tidy_matrix <- function(m) {
     stop("Matrix has no column names.")
   }
   
-  if (sum(rownames(m) == colnames(m)) != length(rownames(m))) {
-    stop("Matrix row and column names do not match.")
+  # Check if the matrix is indeed symmetric
+  if (symmetric) {
+    if (sum(rownames(m) == colnames(m)) != length(rownames(m))) {
+      stop("Matrix row and column names do not match.")
+    }  
   }
   
-  # Remove one half of the matrix because these are duplicate values
-  m[lower.tri(m, diag = TRUE)] <- NA
+  # Remove the diagonal and duplicate values in case of a symmetric matrix
+  if (symmetric) {
+    m[lower.tri(m, diag = TRUE)] <- NA  
+  }
   
   # Tidy the matrix into a data frame
   df <- m %>%

@@ -4,12 +4,12 @@
 \alias{describe_data}
 \title{Calculate common descriptive statistics}
 \usage{
-describe_data(data, column, na.rm = TRUE, short = FALSE)
+describe_data(data, ..., na.rm = TRUE, short = FALSE)
 }
 \arguments{
 \item{data}{A data frame.}
 
-\item{column}{An unquoted (numerical) column name from the data frame.}
+\item{...}{One or more unquoted column names from the data frame.}
 
 \item{na.rm}{Logical. Should missing values (including NaN) be excluded in
 calculating the descriptives? The default is TRUE.}

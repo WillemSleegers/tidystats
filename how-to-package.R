@@ -1,7 +1,7 @@
 
 # Update ------------------------------------------------------------------
 
-# Document and install the package
+# Update documentation and (re)install the package
 devtools::document()
 devtools::install()
 

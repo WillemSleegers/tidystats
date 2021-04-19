@@ -1,0 +1,1192 @@
+{
+  "ct": {
+    "method": "Correlations",
+    "pairs": [
+      {
+        "names": [
+          "rating",
+          "complaints"
+        ],
+        "statistics": {
+          "n": 30,
+          "estimate": {
+            "name": "r",
+            "value": 0.825418
+          },
+          "SE": 0.106685,
+          "statistic": {
+            "name": "t",
+            "value": 7.736978
+          },
+          "p": 1.987682e-08,
+          "p_adjusted": 4.174133e-07
+        }
+      },
+      {
+        "names": [
+          "rating",
+          "privileges"
+        ],
+        "statistics": {
+          "n": 30,
+          "estimate": {
+            "name": "r",
+            "value": 0.426117
+          },
+          "SE": 0.170966,
+          "statistic": {
+            "name": "t",
+            "value": 2.492404
+          },
+          "p": 0.018877,
+          "p_adjusted": 0.18877
+        }
+      },
+      {
+        "names": [
+          "rating",
+          "learning"
+        ],
+        "statistics": {
+          "n": 30,
+          "estimate": {
+            "name": "r",
+            "value": 0.623678
+          },
+          "SE": 0.147724,
+          "statistic": {
+            "name": "t",
+            "value": 4.221919
+          },
+          "p": 0.000231,
+          "p_adjusted": 0.004161
+        }
+      },
+      {
+        "names": [
+          "rating",
+          "raises"
+        ],
+        "statistics": {
+          "n": 30,
+          "estimate": {
+            "name": "r",
+            "value": 0.590139
+          },
+          "SE": 0.152566,
+          "statistic": {
+            "name": "t",
+            "value": 3.868098
+          },
+          "p": 0.000598,
+          "p_adjusted": 0.009565
+        }
+      },
+      {
+        "names": [
+          "rating",
+          "critical"
+        ],
+        "statistics": {
+          "n": 30,
+          "estimate": {
+            "name": "r",
+            "value": 0.156439
+          },
+          "SE": 0.186655,
+          "statistic": {
+            "name": "t",
+            "value": 0.838117
+          },
+          "p": 0.409063,
+          "p_adjusted": 1
+        }
+      },
+      {
+        "names": [
+          "rating",
+          "advance"
+        ],
+        "statistics": {
+          "n": 30,
+          "estimate": {
+            "name": "r",
+            "value": 0.155086
+          },
+          "SE": 0.186696,
+          "statistic": {
+            "name": "t",
+            "value": 0.83069
+          },
+          "p": 0.413176,
+          "p_adjusted": 1
+        }
+      },
+      {
+        "names": [
+          "complaints",
+          "privileges"
+        ],
+        "statistics": {
+          "n": 30,
+          "estimate": {
+            "name": "r",
+            "value": 0.558288
+          },
+          "SE": 0.156789,
+          "statistic": {
+            "name": "t",
+            "value": 3.560771
+          },
+          "p": 0.001346,
+          "p_adjusted": 0.018837
+        }
+      },
+      {
+        "names": [
+          "complaints",
+          "learning"
+        ],
+        "statistics": {
+          "n": 30,
+          "estimate": {
+            "name": "r",
+            "value": 0.596736
+          },
+          "SE": 0.151646,
+          "statistic": {
+            "name": "t",
+            "value": 3.935045
+          },
+          "p": 0.0005,
+          "p_adjusted": 0.0085
+        }
+      },
+      {
+        "names": [
+          "complaints",
+          "raises"
+        ],
+        "statistics": {
+          "n": 30,
+          "estimate": {
+            "name": "r",
+            "value": 0.669197
+          },
+          "SE": 0.14043,
+          "statistic": {
+            "name": "t",
+            "value": 4.765353
+          },
+          "p": 0.000053,
+          "p_adjusted": 0.001054
+        }
+      },
+      {
+        "names": [
+          "complaints",
+          "critical"
+        ],
+        "statistics": {
+          "n": 30,
+          "estimate": {
+            "name": "r",
+            "value": 0.187714
+          },
+          "SE": 0.185623,
+          "statistic": {
+            "name": "t",
+            "value": 1.011267
+          },
+          "p": 0.320548,
+          "p_adjusted": 1
+        }
+      },
+      {
+        "names": [
+          "complaints",
+          "advance"
+        ],
+        "statistics": {
+          "n": 30,
+          "estimate": {
+            "name": "r",
+            "value": 0.22458
+          },
+          "SE": 0.184155,
+          "statistic": {
+            "name": "t",
+            "value": 1.219515
+          },
+          "p": 0.232822,
+          "p_adjusted": 1
+        }
+      },
+      {
+        "names": [
+          "privileges",
+          "learning"
+        ],
+        "statistics": {
+          "n": 30,
+          "estimate": {
+            "name": "r",
+            "value": 0.493331
+          },
+          "SE": 0.164385,
+          "statistic": {
+            "name": "t",
+            "value": 3.001077
+          },
+          "p": 0.005602,
+          "p_adjusted": 0.067229
+        }
+      },
+      {
+        "names": [
+          "privileges",
+          "raises"
+        ],
+        "statistics": {
+          "n": 30,
+          "estimate": {
+            "name": "r",
+            "value": 0.445478
+          },
+          "SE": 0.169194,
+          "statistic": {
+            "name": "t",
+            "value": 2.632935
+          },
+          "p": 0.013624,
+          "p_adjusted": 0.149859
+        }
+      },
+      {
+        "names": [
+          "privileges",
+          "critical"
+        ],
+        "statistics": {
+          "n": 30,
+          "estimate": {
+            "name": "r",
+            "value": 0.147233
+          },
+          "SE": 0.186923,
+          "statistic": {
+            "name": "t",
+            "value": 0.787669
+          },
+          "p": 0.437508,
+          "p_adjusted": 1
+        }
+      },
+      {
+        "names": [
+          "privileges",
+          "advance"
+        ],
+        "statistics": {
+          "n": 30,
+          "estimate": {
+            "name": "r",
+            "value": 0.343293
+          },
+          "SE": 0.177497,
+          "statistic": {
+            "name": "t",
+            "value": 1.934075
+          },
+          "p": 0.063269,
+          "p_adjusted": 0.506153
+        }
+      },
+      {
+        "names": [
+          "learning",
+          "raises"
+        ],
+        "statistics": {
+          "n": 30,
+          "estimate": {
+            "name": "r",
+            "value": 0.640314
+          },
+          "SE": 0.14516,
+          "statistic": {
+            "name": "t",
+            "value": 4.411103
+          },
+          "p": 0.000138,
+          "p_adjusted": 0.002629
+        }
+      },
+      {
+        "names": [
+          "learning",
+          "critical"
+        ],
+        "statistics": {
+          "n": 30,
+          "estimate": {
+            "name": "r",
+            "value": 0.115965
+          },
+          "SE": 0.187707,
+          "statistic": {
+            "name": "t",
+            "value": 0.617799
+          },
+          "p": 0.541701,
+          "p_adjusted": 1
+        }
+      },
+      {
+        "names": [
+          "learning",
+          "advance"
+        ],
+        "statistics": {
+          "n": 30,
+          "estimate": {
+            "name": "r",
+            "value": 0.53162
+          },
+          "SE": 0.160065,
+          "statistic": {
+            "name": "t",
+            "value": 3.321279
+          },
+          "p": 0.002501,
+          "p_adjusted": 0.032507
+        }
+      },
+      {
+        "names": [
+          "raises",
+          "critical"
+        ],
+        "statistics": {
+          "n": 30,
+          "estimate": {
+            "name": "r",
+            "value": 0.376883
+          },
+          "SE": 0.175047,
+          "statistic": {
+            "name": "t",
+            "value": 2.15304
+          },
+          "p": 0.040077,
+          "p_adjusted": 0.36069
+        }
+      },
+      {
+        "names": [
+          "raises",
+          "advance"
+        ],
+        "statistics": {
+          "n": 30,
+          "estimate": {
+            "name": "r",
+            "value": 0.574186
+          },
+          "SE": 0.154724,
+          "statistic": {
+            "name": "t",
+            "value": 3.711024
+          },
+          "p": 0.000907,
+          "p_adjusted": 0.013602
+        }
+      },
+      {
+        "names": [
+          "critical",
+          "advance"
+        ],
+        "statistics": {
+          "n": 30,
+          "estimate": {
+            "name": "r",
+            "value": 0.283343
+          },
+          "SE": 0.181237,
+          "statistic": {
+            "name": "t",
+            "value": 1.563381
+          },
+          "p": 0.129196,
+          "p_adjusted": 0.904373
+        }
+      }
+    ],
+    "multiple_test_adjustment": "holm",
+    "package": {
+      "name": "psych",
+      "version": "2.0.12"
+    }
+  },
+  "cts": {
+    "method": "Correlations",
+    "pairs": [
+      {
+        "names": [
+          "rating",
+          "learning"
+        ],
+        "statistics": {
+          "n": 30,
+          "estimate": {
+            "name": "r",
+            "value": 0.623678
+          },
+          "SE": 0.147724,
+          "statistic": {
+            "name": "t",
+            "value": 4.221919
+          },
+          "p": 0.001849,
+          "p_adjusted": 0.001849
+        }
+      },
+      {
+        "names": [
+          "rating",
+          "raises"
+        ],
+        "statistics": {
+          "n": 30,
+          "estimate": {
+            "name": "r",
+            "value": 0.590139
+          },
+          "SE": 0.152566,
+          "statistic": {
+            "name": "t",
+            "value": 3.868098
+          },
+          "p": 0.0035,
+          "p_adjusted": 0.003587
+        }
+      },
+      {
+        "names": [
+          "rating",
+          "critical"
+        ],
+        "statistics": {
+          "n": 30,
+          "estimate": {
+            "name": "r",
+            "value": 0.156439
+          },
+          "SE": 0.186655,
+          "statistic": {
+            "name": "t",
+            "value": 0.838117
+          },
+          "p": 0.028012,
+          "p_adjusted": 0.961644
+        }
+      },
+      {
+        "names": [
+          "complaints",
+          "learning"
+        ],
+        "statistics": {
+          "n": 30,
+          "estimate": {
+            "name": "r",
+            "value": 0.596736
+          },
+          "SE": 0.151646,
+          "statistic": {
+            "name": "t",
+            "value": 3.935045
+          },
+          "p": 0.003587,
+          "p_adjusted": 0.0035
+        }
+      },
+      {
+        "names": [
+          "complaints",
+          "raises"
+        ],
+        "statistics": {
+          "n": 30,
+          "estimate": {
+            "name": "r",
+            "value": 0.669197
+          },
+          "SE": 0.14043,
+          "statistic": {
+            "name": "t",
+            "value": 4.765353
+          },
+          "p": 0.000474,
+          "p_adjusted": 0.000474
+        }
+      },
+      {
+        "names": [
+          "complaints",
+          "critical"
+        ],
+        "statistics": {
+          "n": 30,
+          "estimate": {
+            "name": "r",
+            "value": 0.187714
+          },
+          "SE": 0.185623,
+          "statistic": {
+            "name": "t",
+            "value": 1.011267
+          },
+          "p": 0.054494,
+          "p_adjusted": 0.961644
+        }
+      },
+      {
+        "names": [
+          "privileges",
+          "learning"
+        ],
+        "statistics": {
+          "n": 30,
+          "estimate": {
+            "name": "r",
+            "value": 0.493331
+          },
+          "SE": 0.164385,
+          "statistic": {
+            "name": "t",
+            "value": 3.001077
+          },
+          "p": 0.961644,
+          "p_adjusted": 0.028012
+        }
+      },
+      {
+        "names": [
+          "privileges",
+          "raises"
+        ],
+        "statistics": {
+          "n": 30,
+          "estimate": {
+            "name": "r",
+            "value": 0.445478
+          },
+          "SE": 0.169194,
+          "statistic": {
+            "name": "t",
+            "value": 2.632935
+          },
+          "p": 0.961644,
+          "p_adjusted": 0.054494
+        }
+      },
+      {
+        "names": [
+          "privileges",
+          "critical"
+        ],
+        "statistics": {
+          "n": 30,
+          "estimate": {
+            "name": "r",
+            "value": 0.147233
+          },
+          "SE": 0.186923,
+          "statistic": {
+            "name": "t",
+            "value": 0.787669
+          },
+          "p": 0.961644,
+          "p_adjusted": 0.961644
+        }
+      }
+    ],
+    "multiple_test_adjustment": "holm",
+    "package": {
+      "name": "psych",
+      "version": "2.0.12"
+    }
+  },
+  "sats": {
+    "method": "Correlations",
+    "pairs": [
+      {
+        "names": [
+          "gender",
+          "ACT"
+        ],
+        "statistics": {
+          "n": -0.036503,
+          "estimate": {
+            "name": "r",
+            "value": -0.036503
+          },
+          "SE": 0.037825,
+          "statistic": {
+            "name": "t",
+            "value": -0.965053
+          },
+          "p": 0.334853,
+          "p_adjusted": 0.334853
+        }
+      },
+      {
+        "names": [
+          "gender",
+          "SATV"
+        ],
+        "statistics": {
+          "n": -0.018843,
+          "estimate": {
+            "name": "r",
+            "value": -0.018843
+          },
+          "SE": 0.037844,
+          "statistic": {
+            "name": "t",
+            "value": -0.497925
+          },
+          "p": 0.000039,
+          "p_adjusted": 0.618694
+        }
+      },
+      {
+        "names": [
+          "gender",
+          "SATQ"
+        ],
+        "statistics": {
+          "n": -0.165303,
+          "estimate": {
+            "name": "r",
+            "value": -0.165303
+          },
+          "SE": 0.037682,
+          "statistic": {
+            "name": "t",
+            "value": -4.386752
+          },
+          "p": 0.003406,
+          "p_adjusted": 0.000013
+        }
+      },
+      {
+        "names": [
+          "education",
+          "ACT"
+        ],
+        "statistics": {
+          "n": 0.154829,
+          "estimate": {
+            "name": "r",
+            "value": 0.154829
+          },
+          "SE": 0.037394,
+          "statistic": {
+            "name": "t",
+            "value": 4.14046
+          },
+          "p": 0.618694,
+          "p_adjusted": 0.000039
+        }
+      },
+      {
+        "names": [
+          "education",
+          "SATV"
+        ],
+        "statistics": {
+          "n": 0.046477,
+          "estimate": {
+            "name": "r",
+            "value": 0.046477
+          },
+          "SE": 0.03781,
+          "statistic": {
+            "name": "t",
+            "value": 1.229234
+          },
+          "p": 0.219398,
+          "p_adjusted": 0.219398
+        }
+      },
+      {
+        "names": [
+          "education",
+          "SATQ"
+        ],
+        "statistics": {
+          "n": 0.034626,
+          "estimate": {
+            "name": "r",
+            "value": 0.034626
+          },
+          "SE": 0.038185,
+          "statistic": {
+            "name": "t",
+            "value": 0.906785
+          },
+          "p": 0.263106,
+          "p_adjusted": 0.364839
+        }
+      },
+      {
+        "names": [
+          "age",
+          "ACT"
+        ],
+        "statistics": {
+          "n": 0.110546,
+          "estimate": {
+            "name": "r",
+            "value": 0.110546
+          },
+          "SE": 0.037619,
+          "statistic": {
+            "name": "t",
+            "value": 2.938611
+          },
+          "p": 0.000013,
+          "p_adjusted": 0.003406
+        }
+      },
+      {
+        "names": [
+          "age",
+          "SATV"
+        ],
+        "statistics": {
+          "n": -0.042354,
+          "estimate": {
+            "name": "r",
+            "value": -0.042354
+          },
+          "SE": 0.037817,
+          "statistic": {
+            "name": "t",
+            "value": -1.119983
+          },
+          "p": 0.364839,
+          "p_adjusted": 0.263106
+        }
+      },
+      {
+        "names": [
+          "age",
+          "SATQ"
+        ],
+        "statistics": {
+          "n": -0.033944,
+          "estimate": {
+            "name": "r",
+            "value": -0.033944
+          },
+          "SE": 0.038186,
+          "statistic": {
+            "name": "t",
+            "value": -0.88892
+          },
+          "p": 0.374358,
+          "p_adjusted": 0.374358
+        }
+      }
+    ],
+    "multiple_test_adjustment": "none",
+    "package": {
+      "name": "psych",
+      "version": "2.0.12"
+    }
+  },
+  "sats_no_ci": {
+    "method": "Correlations",
+    "pairs": [
+      {
+        "names": [
+          "gender",
+          "ACT"
+        ],
+        "statistics": {
+          "n": -0.036503,
+          "estimate": {
+            "name": "r",
+            "value": -0.036503
+          },
+          "SE": 0.037825,
+          "statistic": {
+            "name": "t",
+            "value": -0.965053
+          },
+          "p": 0.334853,
+          "p_adjusted": 0.334853
+        }
+      },
+      {
+        "names": [
+          "gender",
+          "SATV"
+        ],
+        "statistics": {
+          "n": -0.018843,
+          "estimate": {
+            "name": "r",
+            "value": -0.018843
+          },
+          "SE": 0.037844,
+          "statistic": {
+            "name": "t",
+            "value": -0.497925
+          },
+          "p": 0.000039,
+          "p_adjusted": 0.618694
+        }
+      },
+      {
+        "names": [
+          "gender",
+          "SATQ"
+        ],
+        "statistics": {
+          "n": -0.165303,
+          "estimate": {
+            "name": "r",
+            "value": -0.165303
+          },
+          "SE": 0.037682,
+          "statistic": {
+            "name": "t",
+            "value": -4.386752
+          },
+          "p": 0.003406,
+          "p_adjusted": 0.000013
+        }
+      },
+      {
+        "names": [
+          "education",
+          "ACT"
+        ],
+        "statistics": {
+          "n": 0.154829,
+          "estimate": {
+            "name": "r",
+            "value": 0.154829
+          },
+          "SE": 0.037394,
+          "statistic": {
+            "name": "t",
+            "value": 4.14046
+          },
+          "p": 0.618694,
+          "p_adjusted": 0.000039
+        }
+      },
+      {
+        "names": [
+          "education",
+          "SATV"
+        ],
+        "statistics": {
+          "n": 0.046477,
+          "estimate": {
+            "name": "r",
+            "value": 0.046477
+          },
+          "SE": 0.03781,
+          "statistic": {
+            "name": "t",
+            "value": 1.229234
+          },
+          "p": 0.219398,
+          "p_adjusted": 0.219398
+        }
+      },
+      {
+        "names": [
+          "education",
+          "SATQ"
+        ],
+        "statistics": {
+          "n": 0.034626,
+          "estimate": {
+            "name": "r",
+            "value": 0.034626
+          },
+          "SE": 0.038185,
+          "statistic": {
+            "name": "t",
+            "value": 0.906785
+          },
+          "p": 0.263106,
+          "p_adjusted": 0.364839
+        }
+      },
+      {
+        "names": [
+          "age",
+          "ACT"
+        ],
+        "statistics": {
+          "n": 0.110546,
+          "estimate": {
+            "name": "r",
+            "value": 0.110546
+          },
+          "SE": 0.037619,
+          "statistic": {
+            "name": "t",
+            "value": 2.938611
+          },
+          "p": 0.000013,
+          "p_adjusted": 0.003406
+        }
+      },
+      {
+        "names": [
+          "age",
+          "SATV"
+        ],
+        "statistics": {
+          "n": -0.042354,
+          "estimate": {
+            "name": "r",
+            "value": -0.042354
+          },
+          "SE": 0.037817,
+          "statistic": {
+            "name": "t",
+            "value": -1.119983
+          },
+          "p": 0.364839,
+          "p_adjusted": 0.263106
+        }
+      },
+      {
+        "names": [
+          "age",
+          "SATQ"
+        ],
+        "statistics": {
+          "n": -0.033944,
+          "estimate": {
+            "name": "r",
+            "value": -0.033944
+          },
+          "SE": 0.038186,
+          "statistic": {
+            "name": "t",
+            "value": -0.88892
+          },
+          "p": 0.374358,
+          "p_adjusted": 0.374358
+        }
+      }
+    ],
+    "multiple_test_adjustment": "none",
+    "package": {
+      "name": "psych",
+      "version": "2.0.12"
+    }
+  },
+  "sats_alpha": {
+    "method": "Correlations",
+    "pairs": [
+      {
+        "names": [
+          "gender",
+          "ACT"
+        ],
+        "statistics": {
+          "n": -0.036503,
+          "estimate": {
+            "name": "r",
+            "value": -0.036503
+          },
+          "SE": 0.037825,
+          "statistic": {
+            "name": "t",
+            "value": -0.965053
+          },
+          "p": 0.334853,
+          "p_adjusted": 0.334853
+        }
+      },
+      {
+        "names": [
+          "gender",
+          "SATV"
+        ],
+        "statistics": {
+          "n": -0.018843,
+          "estimate": {
+            "name": "r",
+            "value": -0.018843
+          },
+          "SE": 0.037844,
+          "statistic": {
+            "name": "t",
+            "value": -0.497925
+          },
+          "p": 0.000039,
+          "p_adjusted": 0.618694
+        }
+      },
+      {
+        "names": [
+          "gender",
+          "SATQ"
+        ],
+        "statistics": {
+          "n": -0.165303,
+          "estimate": {
+            "name": "r",
+            "value": -0.165303
+          },
+          "SE": 0.037682,
+          "statistic": {
+            "name": "t",
+            "value": -4.386752
+          },
+          "p": 0.003406,
+          "p_adjusted": 0.000013
+        }
+      },
+      {
+        "names": [
+          "education",
+          "ACT"
+        ],
+        "statistics": {
+          "n": 0.154829,
+          "estimate": {
+            "name": "r",
+            "value": 0.154829
+          },
+          "SE": 0.037394,
+          "statistic": {
+            "name": "t",
+            "value": 4.14046
+          },
+          "p": 0.618694,
+          "p_adjusted": 0.000039
+        }
+      },
+      {
+        "names": [
+          "education",
+          "SATV"
+        ],
+        "statistics": {
+          "n": 0.046477,
+          "estimate": {
+            "name": "r",
+            "value": 0.046477
+          },
+          "SE": 0.03781,
+          "statistic": {
+            "name": "t",
+            "value": 1.229234
+          },
+          "p": 0.219398,
+          "p_adjusted": 0.219398
+        }
+      },
+      {
+        "names": [
+          "education",
+          "SATQ"
+        ],
+        "statistics": {
+          "n": 0.034626,
+          "estimate": {
+            "name": "r",
+            "value": 0.034626
+          },
+          "SE": 0.038185,
+          "statistic": {
+            "name": "t",
+            "value": 0.906785
+          },
+          "p": 0.263106,
+          "p_adjusted": 0.364839
+        }
+      },
+      {
+        "names": [
+          "age",
+          "ACT"
+        ],
+        "statistics": {
+          "n": 0.110546,
+          "estimate": {
+            "name": "r",
+            "value": 0.110546
+          },
+          "SE": 0.037619,
+          "statistic": {
+            "name": "t",
+            "value": 2.938611
+          },
+          "p": 0.000013,
+          "p_adjusted": 0.003406
+        }
+      },
+      {
+        "names": [
+          "age",
+          "SATV"
+        ],
+        "statistics": {
+          "n": -0.042354,
+          "estimate": {
+            "name": "r",
+            "value": -0.042354
+          },
+          "SE": 0.037817,
+          "statistic": {
+            "name": "t",
+            "value": -1.119983
+          },
+          "p": 0.364839,
+          "p_adjusted": 0.263106
+        }
+      },
+      {
+        "names": [
+          "age",
+          "SATQ"
+        ],
+        "statistics": {
+          "n": -0.033944,
+          "estimate": {
+            "name": "r",
+            "value": -0.033944
+          },
+          "SE": 0.038186,
+          "statistic": {
+            "name": "t",
+            "value": -0.88892
+          },
+          "p": 0.374358,
+          "p_adjusted": 0.374358
+        }
+      }
+    ],
+    "multiple_test_adjustment": "none",
+    "package": {
+      "name": "psych",
+      "version": "2.0.12"
+    }
+  }
+}

@@ -16,9 +16,14 @@
 #' @param preregistered A boolean specifying whether the analysis was 
 #' preregistered or not.
 #' @param notes A character string specifying additional information.
+#' @param args A list of additional arguments to customize which statistics 
+#' should be extracted. See details for a list of supported analyses.
+#' @param class A character string to manually specify the class of the object
+#' so that tidystats knows how to extract the statistics. See details for a list 
+#' classes that are supported.
 #' 
 #' @details 
-#' Currently supported functions:
+#' Supported functions:
 #' 
 #' \code{stats}:
 #' \itemize{
@@ -58,6 +63,16 @@
 #'   \item \code{count_data()}
 #' }
 #' 
+#' Supported classes:
+#' \itemize{
+#'   \item \code{confint}
+#' }
+#' 
+#' Functions with additional arguments:
+#' \itemize{
+#'   \item \code{lavaan}
+#' }
+#' 
 #' @examples 
 #' # Load dplyr for access to the piping operator
 #' library(dplyr)
@@ -87,11 +102,12 @@
 #' 
 #' @export
 add_stats <- function(results, output, identifier = NULL, type = NULL, 
-  preregistered = NULL, notes = NULL) UseMethod("add_stats", output)
+  preregistered = NULL, notes = NULL, args = NULL, class = NULL) 
+    UseMethod("add_stats", output)
 
 #' @export
 add_stats.default <- function(results, output, identifier = NULL, type = NULL,
-  preregistered = NULL, notes = NULL) {
+  preregistered = NULL, notes = NULL, args = NULL, class = NULL) {
 
   # Create an identifier if it is not specified, else check whether it already
   # exists
@@ -109,9 +125,14 @@ add_stats.default <- function(results, output, identifier = NULL, type = NULL,
       }
     }
   }
+  
+  # Add a class if one is provided
+  if (!is.null(class)) {
+    class(output) <- append(class(output), class, after = 0)
+  }
 
   # Tidy the output
-  analysis <- tidy_stats(output)
+  analysis <- tidy_stats(output, args = args)
 
   # Add type: primary, secondary, or exploratory
   if (!missing(type)) {
