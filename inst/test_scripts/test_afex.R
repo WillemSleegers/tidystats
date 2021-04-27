@@ -28,3 +28,5 @@ results <- results %>%
 
 # Write stats
 write_stats(results, "inst/test_data/afex.json")
+
+

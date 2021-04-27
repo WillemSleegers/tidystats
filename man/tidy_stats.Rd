@@ -57,7 +57,7 @@ tidy_stats(x, args = NULL)
 
 \method{tidy_stats}{effsize}(x, args = NULL)
 
-\method{tidy_stats}{lavaan}(x, args = NULL)
+\method{tidy_stats}{lavaan}(x, args = list(fit.measures = TRUE))
 
 \method{tidy_stats}{psych}(x, args = NULL)
 

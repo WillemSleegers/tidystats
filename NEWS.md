@@ -18,6 +18,8 @@
 
 * Using `tidy_stats()` on ungrouped count data produced with `count_data()` is now properly tidied.
 * Fixed order of columns in `describe_data()` when the data is grouped.
+* Fixed a bug when trying to add the results of a multilevel model ("Error in summary$ngrps[[names(summary$ngrps) == group$name]] : 
+  attempt to select more than one element in vectorIndex")
 
 ## Misc
 * Removed info message that is displayed when the package is loaded.

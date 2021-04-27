@@ -62,3 +62,34 @@ anova_emm_pairs
 
 # tidy stats
 temp <- tidy_stats(anova_emm_pairs)
+
+
+# GitHub issue #8 ---------------------------------------------------------
+
+library(afex)
+library(tidystats)
+library(emmeans)
+
+participant <- rep(seq(1, 10), each = 21)
+condition <- rep(c("cond_1", "cond_2", "cond_3"), times = 70)
+time <- rep(seq(0, 30, 5), each = 3, times = 10)
+response <- rnorm(n = 210, mean = c(1.1, 1.2, 1.3), sd = 0.1)
+
+df <- data.frame(participant = factor(participant),
+                 time = factor(time),
+                 condition = factor(condition),
+                 response)
+
+model <- mixed(response ~ condition * time +
+                 (condition | participant),
+               df)
+
+emm_results <- emmeans(model, "condition", by = "time") %>% 
+  contrast("pairwise")
+
+results <- list()
+
+results <- results %>% 
+  add_stats(emm_results)
+
+write_stats(results, "test_results.json")

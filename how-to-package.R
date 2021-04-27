@@ -4,6 +4,12 @@
 # Update documentation and (re)install the package
 devtools::document()
 devtools::install()
+detach("package:tidystats", unload = TRUE)
+library(tidystats)
+
+# Restart sessions --------------------------------------------------------
+
+.rs.restartR()
 
 # Testing -----------------------------------------------------------------
 

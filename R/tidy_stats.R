@@ -1607,18 +1607,18 @@ tidy_stats.emmGrid <- function(x, args = NULL) {
         term <- list()
         
         # Add the name of the term
-        if (type == "contrast") {
-          term$name <- df_group$contrast[j]
+        if (type == "contrast" | type == "pairs") {
+          term$name <- as.character(df_group$contrast[j])
         } else if (type == "prediction") {
           term$name <- paste(x@misc$pri.vars, "=", df_group[, x@misc$pri.vars][j])
         } else {
-          term$name <- df_group$terms[j]  
+          term$name <- df_group$terms[j]
         }
         
         # Create a new statistics list and add the term's statistics
         statistics <- list()
         
-        if (type == "contrast") {
+        if (type == "contrast" | type == "pairs") {
           statistics$estimate$name <- "mean difference"
           statistics$estimate$value <- df_group$estimate[j]
           statistics$SE <- df_group$SE[j]
@@ -1685,7 +1685,9 @@ tidy_stats.emmGrid <- function(x, args = NULL) {
   
   # Add additional information
   if (!is.null(x@misc$avgd.over)) {
-    output$averaged_over <- paste(x@misc$avgd.over, collapse = "; ")  
+    if (!identical(x@misc$avgd.over, character(0))) {
+      output$averaged_over <- paste(x@misc$avgd.over, collapse = "; ")    
+    }
   }
   if (!is.null(x@misc$adjust)) {
     output$adjust <- x@misc$adjust  
@@ -1799,7 +1801,7 @@ tidy_stats.effsize <- function(x, args = NULL) {
 
 #' @describeIn tidy_stats tidy_stats method for class 'lavaan'
 #' @export
-tidy_stats.lavaan <- function(x, args = NULL) {
+tidy_stats.lavaan <- function(x, args = list(fit.measures = TRUE)) {
   output <- list()
   
   # Set method
@@ -1807,29 +1809,13 @@ tidy_stats.lavaan <- function(x, args = NULL) {
   
   # Get summary statistics
   sink("file") # Use this hack to hide the default printout of summary()
-  summary <- summary(x, fit.measures = TRUE, ci = TRUE, standardized = TRUE)
+  summary <- do.call(get("summary", asNamespace("lavaan")), c(list(x), args))
   sink()
-  
-  # Get fit statistics
-  fit <- summary$FIT
   
   # Create a statistics list
   statistics <- list()
-  statistics$n_parameters <- fit["npar"]
-  statistics$N <- fit["ntotal"]
-  statistics$CFI <- fit["cfi"]
-  statistics$TLI <- fit["tli"]
-  statistics$log_likelihood <- fit["logl"]
-  statistics$log_likelihood_unrestricted <- fit["logl"]
-  statistics$AIC <- fit["aic"]
-  statistics$BIC <- fit["bic"]
-  statistics$BIC_adjusted <- fit["bic2"]
-  statistics$RMSEA <- fit["rmsea"]
-  statistics$CI$CI_level <- .90
-  statistics$CI$CI_lower <- fit["rmsea.ci.lower"]
-  statistics$CI$CI_upper <- fit["rmsea.ci.upper"]
-  statistics$p <- fit["rmsea.pvalue "]
-  statistics$SRMR <- fit["srmr"]
+  statistics$n_parameters <- x@Fit@npar
+  statistics$N <- x@Data@nobs[[1]]
   
   # Create an empty models list
   models <- list()
@@ -1838,21 +1824,43 @@ tidy_stats.lavaan <- function(x, args = NULL) {
   model <- list()
   model$name <- "user model"
   model$statistics$statistic$name <- "X-squared"
-  model$statistics$statistic$value <- fit["chisq"]
-  model$statistics$df <- fit["df"]
-  model$statistics$p <- fit["pvalue"]
+  model$statistics$statistic$value <- x@test$standard$stat
+  model$statistics$df <- x@test$standard$df
+  model$statistics$p <- x@test$standard$pvalue
   models[[1]] <- model
   
-  # Add baseline model
-  model <- list()
-  model$name <- "baseline model"
-  model$statistics$statistic$name <- "X-squared"
-  model$statistics$statistic$value <- fit["baseline.chisq"]
-  model$statistics$df <- fit["baseline.df"]
-  model$statistics$p <- fit["baseline.pvalue"]
-  models[[2]] <- model
+  # Get fit statistics
+  if (!is.null(args$fit.measures)) {
+    if (args$fit.measures) {
+      fit <- summary$FIT
   
-  # Add models to output
+      statistics$CFI <- fit["cfi"]
+      statistics$TLI <- fit["tli"]
+      statistics$log_likelihood <- fit["logl"]
+      statistics$log_likelihood_unrestricted <- fit["unrestricted.logl"]
+      statistics$AIC <- fit["aic"]
+      statistics$BIC <- fit["bic"]
+      statistics$BIC_adjusted <- fit["bic2"]
+      statistics$RMSEA <- fit["rmsea"]
+      statistics$CI$CI_level <- .90
+      statistics$CI$CI_lower <- fit["rmsea.ci.lower"]
+      statistics$CI$CI_upper <- fit["rmsea.ci.upper"]
+      statistics$p <- fit["rmsea.pvalue"]
+      statistics$SRMR <- fit["srmr"]
+      
+      # Add baseline model
+      model <- list()
+      model$name <- "baseline model"
+      model$statistics$statistic$name <- "X-squared"
+      model$statistics$statistic$value <- fit["baseline.chisq"]
+      model$statistics$df <- fit["baseline.df"]
+      model$statistics$p <- fit["baseline.pvalue"]
+      models[[2]] <- model
+    }
+  }
+  
+  # Add statistics and model to output
+  output$statistics <- statistics
   output$models <- models
   
   # Extract PE from the summary
@@ -1874,13 +1882,77 @@ tidy_stats.lavaan <- function(x, args = NULL) {
     latent_variable$statistics$estimate$name <- "b"
     latent_variable$statistics$estimate$value <- var$est
     latent_variable$statistics$SE <- var$se
+    
     if (!is.na(var$z)) {
       latent_variable$statistics$statistic$name <- "z"
       latent_variable$statistics$statistic$value <- var$z  
       latent_variable$statistics$p <- var$p
     }
     
+    if (!is.null(args$standardized)) {
+      if (args$standardized) {
+        latent_variable$statistics$std_lv <- var$std.lv
+        latent_variable$statistics$std_all <- var$std.all
+        latent_variable$statistics$std_nox <- var$std.nox
+      }  
+    }
+    
+    if (!is.null(args$ci)) {
+      if (args$ci) {
+        latent_variable$statistics$CI$CI_level <- .90
+        latent_variable$statistics$CI$CI_lower <- var$ci.lower
+        latent_variable$statistics$CI$CI_upper <- var$ci.upper
+      }
+    }
+    
     latent_variables[[i]] <- latent_variable
+  }
+  
+  # Add latent variables to output
+  output$latent_variables <- latent_variables
+  
+  # Regressions
+  # Create an empty list for the regressions
+  regressions <- list()
+  
+  # Select only the regressions statistics from the PE data
+  PE_regressions <- dplyr::filter(PE, op == "~")
+  
+  # Loop, if there are any regressions
+  if (nrow(PE_regressions) > 0) {
+    for (i in 1:nrow(PE_regressions)) {
+      reg <- PE_regressions[i, ]
+      
+      regression <- list()
+      regression$name <- paste(reg$lhs, reg$op, reg$rhs)
+      regression$statistics$estimate$name <- "b"
+      regression$statistics$estimate$value <- reg$est
+      regression$statistics$SE <- reg$se
+      regression$statistics$statistic$name <- "z"
+      regression$statistics$statistic$value <- reg$z  
+      regression$statistics$p <- reg$p
+      
+      if (!is.null(args$standardized)) {
+        if (args$standardized) {
+          regression$statistics$std_lv <- reg$std.lv
+          regression$statistics$std_all <- reg$std.all
+          regression$statistics$std_nox <- reg$std.nox
+        }  
+      }
+      
+      if (!is.null(args$ci)) {
+        if (args$ci) {
+          regression$statistics$CI$CI_level <- .90
+          regression$statistics$CI$CI_lower <- reg$ci.lower
+          regression$statistics$CI$CI_upper <- reg$ci.upper
+        }
+      }
+      
+      regressions[[i]] <- regression
+    }
+    
+    # Add regressions to output
+    output$regressions <- regressions
   }
   
   # Covariances
@@ -1902,6 +1974,22 @@ tidy_stats.lavaan <- function(x, args = NULL) {
     covariance$statistics$statistic$name <- "z"
     covariance$statistics$statistic$value <- covar$z  
     covariance$statistics$p <- covar$p
+    
+    if (!is.null(args$standardized)) {
+      if (args$standardized) {
+        covariance$statistics$std_lv <- var$std.lv
+        covariance$statistics$std_all <- var$std.all
+        covariance$statistics$std_nox <- var$std.nox
+      }  
+    }
+    
+    if (!is.null(args$ci)) {
+      if (args$ci) {
+        covariance$statistics$CI$CI_level <- .90
+        covariance$statistics$CI$CI_lower <- var$ci.lower
+        covariance$statistics$CI$CI_upper <- var$ci.upper
+      }
+    }
     
     covariances[[i]] <- covariance
   }
@@ -1926,11 +2014,26 @@ tidy_stats.lavaan <- function(x, args = NULL) {
     variance$statistics$statistic$value <- var$z  
     variance$statistics$p <- var$p
     
+    if (!is.null(args$standardized)) {
+      if (args$standardized) {
+        variance$statistics$std_lv <- var$std.lv
+        variance$statistics$std_all <- var$std.all
+        variance$statistics$std_nox <- var$std.nox
+      }  
+    }
+    
+    if (!is.null(args$ci)) {
+      if (args$ci) {
+        variance$statistics$CI$CI_level <- .90
+        variance$statistics$CI$CI_lower <- var$ci.lower
+        variance$statistics$CI$CI_upper <- var$ci.upper
+      }
+    }
+    
     variances[[i]] <- variance
   }
 
-  # Add statistics to output
-  output$latent_variables <- latent_variables
+  # Add covariances and variances to output  
   output$covariances <- covariances
   output$variances <- variances
   

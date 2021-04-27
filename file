@@ -1,47 +1,16 @@
-lavaan 0.6-7 ended normally after 35 iterations
+lavaan 0.6-8 ended normally after 68 iterations
 
   Estimator                                         ML
   Optimization method                           NLMINB
-  Number of free parameters                         21
+  Number of model parameters                        31
                                                       
-  Number of observations                           301
+  Number of observations                            75
                                                       
 Model Test User Model:
                                                       
-  Test statistic                                85.306
-  Degrees of freedom                                24
-  P-value (Chi-square)                           0.000
-
-Model Test Baseline Model:
-
-  Test statistic                               918.852
-  Degrees of freedom                                36
-  P-value                                        0.000
-
-User Model versus Baseline Model:
-
-  Comparative Fit Index (CFI)                    0.931
-  Tucker-Lewis Index (TLI)                       0.896
-
-Loglikelihood and Information Criteria:
-
-  Loglikelihood user model (H0)              -3737.745
-  Loglikelihood unrestricted model (H1)      -3695.092
-                                                      
-  Akaike (AIC)                                7517.490
-  Bayesian (BIC)                              7595.339
-  Sample-size adjusted Bayesian (BIC)         7528.739
-
-Root Mean Square Error of Approximation:
-
-  RMSEA                                          0.092
-  90 Percent confidence interval - lower         0.071
-  90 Percent confidence interval - upper         0.114
-  P-value RMSEA <= 0.05                          0.001
-
-Standardized Root Mean Square Residual:
-
-  SRMR                                           0.065
+  Test statistic                                38.125
+  Degrees of freedom                                35
+  P-value (Chi-square)                           0.329
 
 Parameter Estimates:
 
@@ -50,72 +19,58 @@ Parameter Estimates:
   Information saturated (h1) model          Structured
 
 Latent Variables:
-                   Estimate  Std.Err  z-value  P(>|z|) ci.lower ci.upper   Std.lv
-  visual =~                                                                      
-    x1                1.000                               1.000    1.000    0.900
-    x2                0.554    0.100    5.554    0.000    0.358    0.749    0.498
-    x3                0.729    0.109    6.685    0.000    0.516    0.943    0.656
-  textual =~                                                                     
-    x4                1.000                               1.000    1.000    0.990
-    x5                1.113    0.065   17.014    0.000    0.985    1.241    1.102
-    x6                0.926    0.055   16.703    0.000    0.817    1.035    0.917
-  speed =~                                                                       
-    x7                1.000                               1.000    1.000    0.619
-    x8                1.180    0.165    7.152    0.000    0.857    1.503    0.731
-    x9                1.082    0.151    7.155    0.000    0.785    1.378    0.670
-  Std.all
-         
-    0.772
-    0.424
-    0.581
-         
-    0.852
-    0.855
-    0.838
-         
-    0.570
-    0.723
-    0.665
+                   Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
+  ind60 =~                                                              
+    x1                1.000                               0.670    0.920
+    x2                2.180    0.139   15.742    0.000    1.460    0.973
+    x3                1.819    0.152   11.967    0.000    1.218    0.872
+  dem60 =~                                                              
+    y1                1.000                               2.223    0.850
+    y2                1.257    0.182    6.889    0.000    2.794    0.717
+    y3                1.058    0.151    6.987    0.000    2.351    0.722
+    y4                1.265    0.145    8.722    0.000    2.812    0.846
+  dem65 =~                                                              
+    y5                1.000                               2.103    0.808
+    y6                1.186    0.169    7.024    0.000    2.493    0.746
+    y7                1.280    0.160    8.002    0.000    2.691    0.824
+    y8                1.266    0.158    8.007    0.000    2.662    0.828
+
+Regressions:
+                   Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
+  dem60 ~                                                               
+    ind60             1.483    0.399    3.715    0.000    0.447    0.447
+  dem65 ~                                                               
+    ind60             0.572    0.221    2.586    0.010    0.182    0.182
+    dem60             0.837    0.098    8.514    0.000    0.885    0.885
 
 Covariances:
-                   Estimate  Std.Err  z-value  P(>|z|) ci.lower ci.upper   Std.lv
-  visual ~~                                                                      
-    textual           0.408    0.074    5.552    0.000    0.264    0.552    0.459
-    speed             0.262    0.056    4.660    0.000    0.152    0.373    0.471
-  textual ~~                                                                     
-    speed             0.173    0.049    3.518    0.000    0.077    0.270    0.283
-  Std.all
-         
-    0.459
-    0.471
-         
-    0.283
+                   Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
+ .y1 ~~                                                                 
+   .y5                0.624    0.358    1.741    0.082    0.624    0.296
+ .y2 ~~                                                                 
+   .y4                1.313    0.702    1.871    0.061    1.313    0.273
+   .y6                2.153    0.734    2.934    0.003    2.153    0.356
+ .y3 ~~                                                                 
+   .y7                0.795    0.608    1.308    0.191    0.795    0.191
+ .y4 ~~                                                                 
+   .y8                0.348    0.442    0.787    0.431    0.348    0.109
+ .y6 ~~                                                                 
+   .y8                1.356    0.568    2.386    0.017    1.356    0.338
 
 Variances:
-                   Estimate  Std.Err  z-value  P(>|z|) ci.lower ci.upper   Std.lv
-   .x1                0.549    0.114    4.833    0.000    0.326    0.772    0.549
-   .x2                1.134    0.102   11.146    0.000    0.934    1.333    1.134
-   .x3                0.844    0.091    9.317    0.000    0.667    1.022    0.844
-   .x4                0.371    0.048    7.779    0.000    0.278    0.465    0.371
-   .x5                0.446    0.058    7.642    0.000    0.332    0.561    0.446
-   .x6                0.356    0.043    8.277    0.000    0.272    0.441    0.356
-   .x7                0.799    0.081    9.823    0.000    0.640    0.959    0.799
-   .x8                0.488    0.074    6.573    0.000    0.342    0.633    0.488
-   .x9                0.566    0.071    8.003    0.000    0.427    0.705    0.566
-    visual            0.809    0.145    5.564    0.000    0.524    1.094    1.000
-    textual           0.979    0.112    8.737    0.000    0.760    1.199    1.000
-    speed             0.384    0.086    4.451    0.000    0.215    0.553    1.000
-  Std.all
-    0.404
-    0.821
-    0.662
-    0.275
-    0.269
-    0.298
-    0.676
-    0.477
-    0.558
-    1.000
-    1.000
-    1.000
+                   Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
+   .x1                0.082    0.019    4.184    0.000    0.082    0.154
+   .x2                0.120    0.070    1.718    0.086    0.120    0.053
+   .x3                0.467    0.090    5.177    0.000    0.467    0.239
+   .y1                1.891    0.444    4.256    0.000    1.891    0.277
+   .y2                7.373    1.374    5.366    0.000    7.373    0.486
+   .y3                5.067    0.952    5.324    0.000    5.067    0.478
+   .y4                3.148    0.739    4.261    0.000    3.148    0.285
+   .y5                2.351    0.480    4.895    0.000    2.351    0.347
+   .y6                4.954    0.914    5.419    0.000    4.954    0.443
+   .y7                3.431    0.713    4.814    0.000    3.431    0.322
+   .y8                3.254    0.695    4.685    0.000    3.254    0.315
+    ind60             0.448    0.087    5.173    0.000    1.000    1.000
+   .dem60             3.956    0.921    4.295    0.000    0.800    0.800
+   .dem65             0.172    0.215    0.803    0.422    0.039    0.039
 
