@@ -1,4 +1,8 @@
 
+# Todos -------------------------------------------------------------------
+
+#TODO: Rename certain terms to contrasts?
+
 # Update ------------------------------------------------------------------
 
 # Update documentation and (re)install the package

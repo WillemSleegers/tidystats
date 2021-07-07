@@ -31,6 +31,33 @@ summary(fit, fit.measures = TRUE)
 temp <- tidy_stats(fit)
 temp <- tidy_stats(fit, args = list(fit.measures = FALSE))
 
+HS.model <- "# three-factor model
+               visual  =~ x1 + x2 + x3
+               textual =~ x4 + x5 + x6
+               speed   =~ x7 + x8 + x9
+             # intercepts
+               x1 ~ 1
+               x2 ~ 1
+               x3 ~ 1
+               x4 ~ 1
+               x5 ~ 1
+               x6 ~ 1
+               x7 ~ 1
+               x8 ~ 1
+               x9 ~ 1"
+
+fit_intercepts <- cfa(HS.model, data = HolzingerSwineford1939, 
+  meanstructure = TRUE)
+summary(fit_intercepts)
+
+HS.model <- ' visual  =~ x1 + x2 + x3
+              textual =~ x4 + x5 + x6
+              speed   =~ x7 + x8 + x9 '
+
+fit_groups <- cfa(HS.model, data = HolzingerSwineford1939, group = "school")
+summary(fit_groups)
+
+
 # SEM ---------------------------------------------------------------------
 
 model <- "# measurement model
@@ -51,6 +78,24 @@ fit <- sem(model, data = PoliticalDemocracy)
 summary(fit, standardized = TRUE)
 
 temp <- tidy_stats(fit, args = list(standardized = TRUE))
+
+set.seed(1234)
+X <- rnorm(100)
+M <- 0.5*X + rnorm(100)
+Y <- 0.7*M + rnorm(100)
+Data <- data.frame(X = X, Y = Y, M = M)
+model <- ' # direct effect
+             Y ~ c*X
+           # mediator
+             M ~ a*X
+             Y ~ b*M
+           # indirect effect (a*b)
+             ab := a*b
+           # total effect
+             total := c + (a*b)
+         '
+fit_defined_parameters <- sem(model, data = Data)
+summary(fit_defined_parameters)
 
 # lavaan ------------------------------------------------------------------
 

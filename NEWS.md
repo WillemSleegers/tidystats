@@ -8,6 +8,8 @@
 * Added support for the `icc()` function from the `irr` package.
 * Added support for the `cohen.d()` function from the `effsize` package.
 * Added support for the `emmeans()` function from the `emmeans` package.
+* Added support for the `test()` function on the result of `contrast()` on the result of `emmeans()` from the `emmeans` package.
+* Added support for `lme()`, `nlme()`, `gls()`, and `anova()` from the `nlme` package.
 
 ## Changes
 * Removed automatically setting the method to 'Generic test' when adding a custom test. This means you can set the method yourself now.
@@ -20,6 +22,7 @@
 * Fixed order of columns in `describe_data()` when the data is grouped.
 * Fixed a bug when trying to add the results of a multilevel model ("Error in summary$ngrps[[names(summary$ngrps) == group$name]] : 
   attempt to select more than one element in vectorIndex")
+* Fixed GitHub issue #8.
 
 ## Misc
 * Removed info message that is displayed when the package is loaded.

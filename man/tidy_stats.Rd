@@ -6,12 +6,16 @@
 \alias{tidy_stats.lm}
 \alias{tidy_stats.glm}
 \alias{tidy_stats.anova}
+\alias{tidy_stats.anova.lme}
 \alias{tidy_stats.aov}
 \alias{tidy_stats.aovlist}
 \alias{tidy_stats.tidystats_descriptives}
 \alias{tidy_stats.tidystats_counts}
 \alias{tidy_stats.lmerMod}
 \alias{tidy_stats.lmerModLmerTest}
+\alias{tidy_stats.lme}
+\alias{tidy_stats.nlme}
+\alias{tidy_stats.gls}
 \alias{tidy_stats.BFBayesFactor}
 \alias{tidy_stats.afex_aov}
 \alias{tidy_stats.emmGrid}
@@ -33,6 +37,8 @@ tidy_stats(x, args = NULL)
 
 \method{tidy_stats}{anova}(x, args = NULL)
 
+\method{tidy_stats}{anova.lme}(x, args = NULL)
+
 \method{tidy_stats}{aov}(x, args = NULL)
 
 \method{tidy_stats}{aovlist}(x, args = NULL)
@@ -44,6 +50,12 @@ tidy_stats(x, args = NULL)
 \method{tidy_stats}{lmerMod}(x, args = NULL)
 
 \method{tidy_stats}{lmerModLmerTest}(x, args = NULL)
+
+\method{tidy_stats}{lme}(x, args = NULL)
+
+\method{tidy_stats}{nlme}(x, args = NULL)
+
+\method{tidy_stats}{gls}(x, args = NULL)
 
 \method{tidy_stats}{BFBayesFactor}(x, args = NULL)
 
@@ -128,6 +140,8 @@ Currently supported functions:
 
 \item \code{anova}: tidy_stats method for class 'anova'
 
+\item \code{anova.lme}: tidy_stats method for class 'anova.lme'
+
 \item \code{aov}: tidy_stats method for class 'aov'
 
 \item \code{aovlist}: tidy_stats method for class 'aovlist'
@@ -139,6 +153,12 @@ Currently supported functions:
 \item \code{lmerMod}: tidy_stats method for class 'lmerMod'
 
 \item \code{lmerModLmerTest}: tidy_stats method for class 'lmerModLmerTest'
+
+\item \code{lme}: tidy_stats method for class 'nlme'
+
+\item \code{nlme}: tidy_stats method for class 'nlme'
+
+\item \code{gls}: tidy_stats method for class 'gls'
 
 \item \code{BFBayesFactor}: tidy_stats method for class 'BayesFactor'
 

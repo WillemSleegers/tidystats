@@ -577,6 +577,78 @@ tidy_stats.anova <- function(x, args = NULL) {
   return(output)
 }
 
+#' @describeIn tidy_stats tidy_stats method for class 'anova.lme'
+#' @export
+tidy_stats.anova.lme <- function(x, args = NULL) {
+  
+  output <- list()
+
+  # Set method
+  output$method <- "ANOVA"
+  
+  # Determine the ANOVA tests a single or multiple models
+  if ("Model" %in% colnames(x)) {
+    # Create an empty models list
+    models <- list()
+    
+    # Loop over the models and extract the statistics
+    for (i in 1:length(rownames(x))) {
+      model <- list()
+      
+      model$name <- rownames(x)[i]
+      model$statistics$df <- x$df[i]
+      model$statistics$AIC <- x$AIC[i]
+      model$statistics$BIC <- x$BIC[i]
+      model$statistics$log_likelihood <- x$logLik[i]
+      
+      if ("Test" %in% colnames(x)) {
+        if (!is.na(x$L.Ratio[i])) {
+          model$statistics$likelihood_ratio <- x$L.Ratio[i]
+          model$statistics$p <- x$`p-value`[i]
+        }  
+      }
+    
+      # Add the model to models
+      models[[i]] <- model
+    }
+    
+    # Add models to the output
+    output$models <- models
+    
+  } else {
+    # Create an empty terms list
+    terms <- list()
+    
+    # Loop over the terms and extract the statistics
+    for (i in 1:length(rownames(x))) {
+      term <- list()
+      
+      term$name <- rownames(x)[i]
+      term$statistics$dfs$df_numerator <- x$numDF[i]
+      term$statistics$dfs$df_denominator <- x$denDF[i]
+      term$statistics$statistic$name <- "F"
+      term$statistics$statistic$value <- x$`F-value`[i]
+      term$statistics$p <- x$`p-value`[i]
+      
+      terms[[i]] <- term
+    }
+    
+    # Add terms to the output
+    output$terms <- terms
+  }
+
+  # Add package information
+  package <- list()
+
+  package$name <- "nlme"
+  package$version <- getNamespaceVersion("nlme")[[1]]
+
+  # Add package information to output
+  output$package <- package
+  
+  return(output)
+}
+
 #' @describeIn tidy_stats tidy_stats method for class 'aov'
 #' @export
 tidy_stats.aov <- function(x, args = NULL) {
@@ -1418,6 +1490,416 @@ tidy_stats.lmerModLmerTest <- function(x, args = NULL) {
   return(output)
 }
 
+#' @describeIn tidy_stats tidy_stats method for class 'nlme'
+#' @export
+tidy_stats.lme <- function(x, args = NULL) {
+  
+  output <- list()
+  
+  # Get summary statistics
+  summary <- summary(x)
+  
+  # Extract method
+  output$method <- "Linear mixed model"
+  
+  # Add model fit statistics
+  statistics <- list()
+  
+  statistics$N_observations <- x$dims$N
+  statistics$N_groups <- x$dims$ngrps[[1]]
+  statistics$AIC <- summary$AIC
+  statistics$BIC <- summary$BIC
+  statistics$log_likelihood <- summary$logLik
+  statistics$sigma <- summary$sigma
+  
+  output$statistics <- statistics
+  
+  # We create the following nested structure:
+  # effects:
+  # - random_effects:
+  #   - groups:
+  #     - terms: for variances
+  #     - pairs: for correlations between random effects
+  # - fixed_effects:
+  #     - terms: for coefficient statistics
+  #     - pairs: for correlations between fixed effects
+  
+  effects <- list()
+  
+  # Extract random effects
+  random_effects <- list()
+  
+  # Get variance-covariance matrix
+  varcor <- VarCorr(x)
+  
+  # Loop over each term and set the variance statistics 
+  terms <- list()
+
+  for (i in 1:length(rownames(varcor))) {
+    term <- list()
+    
+    term$name <- rownames(varcor)[i]
+  
+    term$statistics$var <- varcor[i, "Variance"]
+    term$statistics$SD <- varcor[i, "StdDev"]
+      
+    terms[[i]] <- term
+  }
+  
+  # Add terms to the random effects
+  random_effects$terms <- terms
+  
+  # Extract correlations between the random effects, if there are any
+  # Throw a warning if there is more than 1 correlation
+  if ("Corr" %in% colnames(varcor)) {
+    if (length(varcor[, "Corr"]) > 3) {
+      warning("No support yet for multiple random effects correlations.")
+    } else {
+      pairs <- list()
+      
+      pair <- list()
+      names <- list()
+      names[[1]] <- rownames(varcor)[1]
+      names[[2]] <- rownames(varcor)[2]
+      value <- varcor[2, "Corr"]
+      
+      pair$names <- names
+      pair$statistics$r <- value
+      
+      pairs[[1]] <- pair
+    }
+    
+    random_effects$pairs <- pairs
+  }
+  
+  # Add random_effects to effects
+  effects$random_effects <- random_effects
+  
+  # Extract fixed effects
+  fixed_effects <- list()
+  terms <- list()
+
+  coefficients <- summary$tTable
+
+  # Loop over the terms
+  for (i in 1:nrow(coefficients)) {
+    
+    term <- list()
+    
+    # Add the name of the coefficient
+    term$name <- rownames(coefficients)[i]
+    
+    # Create a new statistics list and add the fixed effect's statistics
+    statistics <- list()
+    
+    estimate <- list()
+    estimate$name <- "b"
+    estimate$value <- coefficients[i, "Value"]
+    statistics$estimate <- estimate
+
+    statistics$SE <- coefficients[i, "Std.Error"]
+    
+    statistics$df <- coefficients[i, "DF"]
+    
+    statistic <- list()
+    statistic$name <- "t"
+    statistic$value <- coefficients[i, "t-value"]
+    statistics$statistic <- statistic
+    
+    statistics$p <- coefficients[i, "p-value"]
+    
+    term$statistics <- statistics
+    
+    # Add the term to the terms list
+    terms[[i]] <- term
+  }
+  
+  effects$fixed_effects$terms <- terms
+  
+  # Extract fixed correlations
+  fixed_cors <- summary$corFixed
+  
+  if (length(fixed_cors) > 1) {
+    
+    # Tidy the matrix
+    fixed_cors <- tidy_matrix(fixed_cors)
+    
+    pairs <- list()
+    
+    for (i in 1:nrow(fixed_cors)) {
+      pair <- list()
+      names <- list()
+      names[[1]] <- fixed_cors$name1[i]
+      names[[2]] <- fixed_cors$name2[i]
+      value <- fixed_cors$value[i]
+      
+      pair$names <- names
+      pair$statistics$r <- value
+      
+      pairs[[i]] <- pair
+    }
+    
+    effects$fixed_effects$pairs <- pairs
+  }
+  
+  # Add effects to output
+  output$effects <- effects
+  
+  # Add package information
+  package <- list()
+
+  package$name <- "nlme"
+  package$version <- getNamespaceVersion("nlme")[[1]]
+
+  # Add package information to output
+  output$package <- package
+  
+  return(output)
+}
+
+#' @describeIn tidy_stats tidy_stats method for class 'nlme'
+#' @export
+tidy_stats.nlme <- function(x, args = NULL) {
+  
+  output <- list()
+  
+  # Get summary statistics
+  summary <- summary(x)
+  
+  # Extract method
+  output$method <- "Nonlinear mixed model"
+  
+  # Add model fit statistics
+  statistics <- list()
+  
+  statistics$N_observations <- x$dims$N
+  statistics$N_groups <- x$dims$ngrps[[1]]
+  statistics$AIC <- summary$AIC
+  statistics$BIC <- summary$BIC
+  statistics$log_likelihood <- summary$logLik
+  statistics$sigma <- summary$sigma
+  
+  output$statistics <- statistics
+  
+  # We create the following nested structure:
+  # effects:
+  # - random_effects:
+  #   - groups:
+  #     - terms: for variances
+  #     - pairs: for correlations between random effects
+  # - fixed_effects:
+  #     - terms: for coefficient statistics
+  #     - pairs: for correlations between fixed effects
+  
+  effects <- list()
+  
+  # Extract random effects
+  random_effects <- list()
+  
+  # Get variance-covariance matrix
+  varcor <- VarCorr(x)
+  
+  # Loop over each term and set the variance statistics 
+  terms <- list()
+
+  for (i in 1:length(rownames(varcor))) {
+    term <- list()
+    
+    term$name <- rownames(varcor)[i]
+  
+    term$statistics$var <- varcor[i, "Variance"]
+    term$statistics$SD <- varcor[i, "StdDev"]
+      
+    terms[[i]] <- term
+  }
+  
+  # Add terms to the random effects
+  random_effects$terms <- terms
+  
+  # Add random_effects to effects
+  effects$random_effects <- random_effects
+  
+  # Extract fixed effects
+  fixed_effects <- list()
+  terms <- list()
+
+  coefficients <- summary$tTable
+
+  # Loop over the terms
+  for (i in 1:nrow(coefficients)) {
+    
+    term <- list()
+    
+    # Add the name of the coefficient
+    term$name <- rownames(coefficients)[i]
+    
+    # Create a new statistics list and add the fixed effect's statistics
+    statistics <- list()
+    
+    estimate <- list()
+    estimate$name <- "b"
+    estimate$value <- coefficients[i, "Value"]
+    statistics$estimate <- estimate
+
+    statistics$SE <- coefficients[i, "Std.Error"]
+    
+    statistics$df <- coefficients[i, "DF"]
+    
+    statistic <- list()
+    statistic$name <- "t"
+    statistic$value <- coefficients[i, "t-value"]
+    statistics$statistic <- statistic
+    
+    statistics$p <- coefficients[i, "p-value"]
+    
+    term$statistics <- statistics
+    
+    # Add the term to the terms list
+    terms[[i]] <- term
+  }
+  
+  effects$fixed_effects$terms <- terms
+  
+  # Extract fixed correlations
+  fixed_cors <- summary$corFixed
+  
+  if (length(fixed_cors) > 1) {
+    
+    # Tidy the matrix
+    fixed_cors <- tidy_matrix(fixed_cors)
+    
+    pairs <- list()
+    
+    for (i in 1:nrow(fixed_cors)) {
+      pair <- list()
+      names <- list()
+      names[[1]] <- fixed_cors$name1[i]
+      names[[2]] <- fixed_cors$name2[i]
+      value <- fixed_cors$value[i]
+      
+      pair$names <- names
+      pair$statistics$r <- value
+      
+      pairs[[i]] <- pair
+    }
+    
+    effects$fixed_effects$pairs <- pairs
+  }
+  
+  # Add effects to output
+  output$effects <- effects
+  
+  # Add package information
+  package <- list()
+
+  package$name <- "nlme"
+  package$version <- getNamespaceVersion("nlme")[[1]]
+
+  # Add package information to output
+  output$package <- package
+  
+  return(output)
+}
+
+#' @describeIn tidy_stats tidy_stats method for class 'gls'
+#' @export
+tidy_stats.gls <- function(x, args = NULL) {
+  
+  output <- list()
+  
+  # Get summary statistics
+  summary <- summary(x)
+  
+  # Extract method
+  output$method <- "Linear model using generalized least squares"
+  
+  # Add model fit statistics
+  statistics <- list()
+  
+  statistics$N
+  statistics$AIC <- summary$AIC
+  statistics$BIC <- summary$BIC
+  statistics$log_likelihood <- summary$logLik
+  statistics$sigma <- summary$sigma
+  
+  output$statistics <- statistics
+  
+  # Extract coefficients
+  terms <- list()
+
+  coefficients <- summary$tTable
+
+  # Loop over the terms
+  for (i in 1:nrow(coefficients)) {
+    
+    term <- list()
+    
+    # Add the name of the coefficient
+    term$name <- rownames(coefficients)[i]
+    
+    # Create a new statistics list and add the fixed effect's statistics
+    statistics <- list()
+    
+    estimate <- list()
+    estimate$name <- "b"
+    estimate$value <- coefficients[i, "Value"]
+    statistics$estimate <- estimate
+
+    statistics$SE <- coefficients[i, "Std.Error"]
+
+    statistic <- list()
+    statistic$name <- "t"
+    statistic$value <- coefficients[i, "t-value"]
+    statistics$statistic <- statistic
+    
+    statistics$p <- coefficients[i, "p-value"]
+    
+    term$statistics <- statistics
+    
+    # Add the term to the terms list
+    terms[[i]] <- term
+  }
+  
+  output$terms <- terms
+  
+  # Extract correlations
+  cors <- summary$corBeta
+  
+  if (length(cors) > 1) {
+    
+    # Tidy the matrix
+    cors <- tidy_matrix(cors)
+    
+    pairs <- list()
+    
+    for (i in 1:nrow(cors)) {
+      pair <- list()
+      names <- list()
+      names[[1]] <- cors$name1[i]
+      names[[2]] <- cors$name2[i]
+      value <- cors$value[i]
+      
+      pair$names <- names
+      pair$statistics$r <- value
+      
+      pairs[[i]] <- pair
+    }
+    
+    output$pairs <- pairs
+  }
+  
+  # Add package information
+  package <- list()
+
+  package$name <- "nlme"
+  package$version <- getNamespaceVersion("nlme")[[1]]
+
+  # Add package information to output
+  output$package <- package
+  
+  return(output)
+}
+
 #' @describeIn tidy_stats tidy_stats method for class 'BayesFactor'
 #' @export
 tidy_stats.BFBayesFactor <- function(x, args = NULL) {
@@ -1708,6 +2190,132 @@ tidy_stats.emmGrid <- function(x, args = NULL) {
   return(output)
 }
 
+#' @describeIn tidy_stats tidy_stats method for class 'summary_emm'
+#' @export
+tidy_stats.summary_emm <- function(x, args = NULL) {
+  output <- list()
+
+  # Convert object to a data frame
+  df <- as.data.frame(x)
+  
+  # Set method
+  if ("contrast" %in% names(df)) {
+    output$method <- "contrast"  
+  } else {
+    output$method <- "EMM"
+  }
+  
+  # Determine whether there are any groups
+  pri_vars <- attr(x, "pri.vars")
+  
+  if (length(pri_vars) > 1) {
+    # Create an empty groups list
+    groups <- list()
+  
+    for (i in 1:length(levels(df[, 2]))) {
+      # Create an empty group
+      group <- list()
+      
+      # Set the group name
+      name <- levels(df[, 2])[i]
+      group$name <- name
+      
+      # Create an empty terms list
+      terms <- list()
+      
+      # Filter the statistics of this group
+      df_group <- df[df[2] == name, ]
+      
+      for (j in 1:nrow(df_group)) {
+      
+        # Create a new term list
+        term <- list()
+        
+        # Add the name of the term
+        term$name <- as.character(df_group$contrast[j])
+        
+        # Create a new statistics list and add the term's statistics
+        statistics <- list()
+        
+        statistics$estimate$name <- "mean difference"
+        statistics$estimate$value <- df_group$estimate[j]
+        statistics$SE <- df_group$SE[j]
+        statistics$df <- df_group$df[j]
+        statistics$statistic$name <- "t"
+        statistics$statistic$value <- df_group$t.ratio[j]
+        statistics$p <- df_group$p.value[j]
+        
+        term$statistics <- statistics
+      
+        # Add the term data to the coefficients list
+        terms[[j]] <- term
+      }
+      
+      # Add coefficients to the group
+      group$terms <- terms
+      
+      # Add group to the groups list
+      groups[[i]] <- group
+    }
+    
+    # Add groups to the output
+    output$groups <- groups
+  } else {
+    # Create an empty terms list
+    terms <- list()
+    
+    for (i in 1:nrow(df)) {
+      # Create a new term list
+      term <- list()
+      
+      # Add the name of the term
+      term$name <- as.character(df$contrast[i])
+      
+      # Create a new statistics list and add the term's statistics
+      statistics <- list()
+      
+      statistics$estimate$name <- "mean difference"
+      statistics$estimate$value <- df$estimate[i]
+      statistics$SE <- df$SE[i]
+      statistics$df <- df$df[i]
+      statistics$statistic$name <- "t"
+      statistics$statistic$value <- df$t.ratio[i]
+      statistics$p <- df$p.value[i]
+      
+      term$statistics <- statistics
+    
+      # Add the term data to the coefficients list
+      terms[[i]] <- term
+    }
+    
+    # Add terms to the output
+    output$terms <- terms
+  }
+  
+  # Set additional information
+  mesg <- attr(x, "mesg")
+  
+  if (!is.null(mesg[1])) {
+    output$df_method <- stringr::str_remove(mesg[1], 
+      "Degrees-of-freedom method: ")
+  }
+  if (!is.null(mesg[2])) {
+    output$p_value_adjustment <- stringr::str_remove(mesg[2], 
+      "P value adjustment: ")
+  }
+  
+  # Add package information
+  package <- list()
+
+  package$name <- "emmeans"
+  package$version <- getNamespaceVersion("emmeans")[[1]]
+
+  # Add package information to output
+  output$package <- package
+  
+  return(output)
+}
+
 #' @describeIn tidy_stats tidy_stats method for class 'emm_list'
 #' @export
 tidy_stats.emm_list <- function(x, args = NULL) {
@@ -1866,176 +2474,257 @@ tidy_stats.lavaan <- function(x, args = list(fit.measures = TRUE)) {
   # Extract PE from the summary
   PE <- summary$PE
   
-  # Latent variables
-  # Create an empty list for the latent variables
-  latent_variables <- list()
+  # Create a groups list and loop over each group
+  groups <- list()
   
-  # Select only the latent variables statistics from the PE data
-  PE_latent <- dplyr::filter(PE, op == "=~")
+  # Set grouped_by
+  output$grouped_by <- x@Data@group
   
-  # Loop
-  for (i in 1:nrow(PE_latent)) {
-    var <- PE_latent[i, ]
+  for (i in 1:x@Data@ngroups) {
+    group <- list()
     
-    latent_variable <- list()
-    latent_variable$name <- paste(var$lhs, var$op, var$rhs)
-    latent_variable$statistics$estimate$name <- "b"
-    latent_variable$statistics$estimate$value <- var$est
-    latent_variable$statistics$SE <- var$se
+    group$name <- x@Data@group.label[i]
     
-    if (!is.na(var$z)) {
-      latent_variable$statistics$statistic$name <- "z"
-      latent_variable$statistics$statistic$value <- var$z  
-      latent_variable$statistics$p <- var$p
-    }
+    # Latent variables
+    # Create an empty list for the latent variables
+    latent_variables <- list()
     
-    if (!is.null(args$standardized)) {
-      if (args$standardized) {
-        latent_variable$statistics$std_lv <- var$std.lv
-        latent_variable$statistics$std_all <- var$std.all
-        latent_variable$statistics$std_nox <- var$std.nox
-      }  
-    }
+    # Select only the latent variables statistics from the PE data
+    PE_latent <- dplyr::filter(PE, op == "=~")
     
-    if (!is.null(args$ci)) {
-      if (args$ci) {
-        latent_variable$statistics$CI$CI_level <- .90
-        latent_variable$statistics$CI$CI_lower <- var$ci.lower
-        latent_variable$statistics$CI$CI_upper <- var$ci.upper
-      }
-    }
-    
-    latent_variables[[i]] <- latent_variable
-  }
-  
-  # Add latent variables to output
-  output$latent_variables <- latent_variables
-  
-  # Regressions
-  # Create an empty list for the regressions
-  regressions <- list()
-  
-  # Select only the regressions statistics from the PE data
-  PE_regressions <- dplyr::filter(PE, op == "~")
-  
-  # Loop, if there are any regressions
-  if (nrow(PE_regressions) > 0) {
-    for (i in 1:nrow(PE_regressions)) {
-      reg <- PE_regressions[i, ]
+    # Loop
+    for (j in 1:nrow(PE_latent)) {
+      var <- PE_latent[j, ]
       
-      regression <- list()
-      regression$name <- paste(reg$lhs, reg$op, reg$rhs)
-      regression$statistics$estimate$name <- "b"
-      regression$statistics$estimate$value <- reg$est
-      regression$statistics$SE <- reg$se
-      regression$statistics$statistic$name <- "z"
-      regression$statistics$statistic$value <- reg$z  
-      regression$statistics$p <- reg$p
+      latent_variable <- list()
+      latent_variable$name <- paste(var$lhs, var$op, var$rhs)
+      latent_variable$statistics$estimate$name <- "b"
+      latent_variable$statistics$estimate$value <- var$est
+      latent_variable$statistics$SE <- var$se
+      
+      if (!is.na(var$z)) {
+        latent_variable$statistics$statistic$name <- "z"
+        latent_variable$statistics$statistic$value <- var$z  
+        latent_variable$statistics$p <- var$p
+      }
       
       if (!is.null(args$standardized)) {
         if (args$standardized) {
-          regression$statistics$std_lv <- reg$std.lv
-          regression$statistics$std_all <- reg$std.all
-          regression$statistics$std_nox <- reg$std.nox
+          latent_variable$statistics$std_lv <- var$std.lv
+          latent_variable$statistics$std_all <- var$std.all
+          latent_variable$statistics$std_nox <- var$std.nox
         }  
       }
       
       if (!is.null(args$ci)) {
         if (args$ci) {
-          regression$statistics$CI$CI_level <- .90
-          regression$statistics$CI$CI_lower <- reg$ci.lower
-          regression$statistics$CI$CI_upper <- reg$ci.upper
+          latent_variable$statistics$CI$CI_level <- .90
+          latent_variable$statistics$CI$CI_lower <- var$ci.lower
+          latent_variable$statistics$CI$CI_upper <- var$ci.upper
         }
       }
       
-      regressions[[i]] <- regression
+      latent_variables[[j]] <- latent_variable
     }
     
-    # Add regressions to output
-    output$regressions <- regressions
-  }
-  
-  # Covariances
-  # Create an empty list for the covariances
-  covariances <- list()
-  
-  # Select only the covariance statistics from the PE data
-  PE_covariances <- dplyr::filter(PE, op == "~~" & lhs != rhs)
-  
-  # Loop
-  for (i in 1:nrow(PE_covariances)) {
-    covar <- PE_covariances[i, ]
+    # Add latent variables to output
+    group$latent_variables <- latent_variables
     
-    covariance <- list()
-    covariance$name <- paste(covar$lhs, covar$op, covar$rhs)
-    covariance$statistics$estimate$name <- "b"
-    covariance$statistics$estimate$value <- covar$est
-    covariance$statistics$SE <- covar$se
-    covariance$statistics$statistic$name <- "z"
-    covariance$statistics$statistic$value <- covar$z  
-    covariance$statistics$p <- covar$p
+    # Regressions
+    # Create an empty list for the regressions
+    regressions <- list()
     
-    if (!is.null(args$standardized)) {
-      if (args$standardized) {
-        covariance$statistics$std_lv <- var$std.lv
-        covariance$statistics$std_all <- var$std.all
-        covariance$statistics$std_nox <- var$std.nox
-      }  
-    }
+    # Select only the regressions statistics from the PE data
+    PE_regressions <- dplyr::filter(PE, op == "~")
     
-    if (!is.null(args$ci)) {
-      if (args$ci) {
-        covariance$statistics$CI$CI_level <- .90
-        covariance$statistics$CI$CI_lower <- var$ci.lower
-        covariance$statistics$CI$CI_upper <- var$ci.upper
+    # Loop, if there are any regressions
+    if (nrow(PE_regressions) > 0) {
+      for (j in 1:nrow(PE_regressions)) {
+        reg <- PE_regressions[j, ]
+        
+        regression <- list()
+        regression$name <- paste(reg$lhs, reg$op, reg$rhs)
+        regression$statistics$estimate$name <- "b"
+        regression$statistics$estimate$value <- reg$est
+        regression$statistics$SE <- reg$se
+        regression$statistics$statistic$name <- "z"
+        regression$statistics$statistic$value <- reg$z  
+        regression$statistics$p <- reg$p
+        
+        if (!is.null(args$standardized)) {
+          if (args$standardized) {
+            regression$statistics$std_lv <- reg$std.lv
+            regression$statistics$std_all <- reg$std.all
+            regression$statistics$std_nox <- reg$std.nox
+          }  
+        }
+        
+        if (!is.null(args$ci)) {
+          if (args$ci) {
+            regression$statistics$CI$CI_level <- .90
+            regression$statistics$CI$CI_lower <- reg$ci.lower
+            regression$statistics$CI$CI_upper <- reg$ci.upper
+          }
+        }
+        
+        regressions[[j]] <- regression
       }
+      
+      # Add regressions to output
+      group$regressions <- regressions
     }
     
-    covariances[[i]] <- covariance
-  }
-  
-  # Variances
-  # Create an empty list for the variances
-  variances <- list()
-  
-  # Select only the variance statistics from the PE data
-  PE_variances <- dplyr::filter(PE, lhs == rhs)
-  
-  # Loop
-  for (i in 1:nrow(PE_variances)) {
-    var <- PE_variances[i, ]
+    # Covariances
+    # Create an empty list for the covariances
+    covariances <- list()
     
-    variance <- list()
-    variance$name <- var$lhs
-    variance$statistics$estimate$name <- "b"
-    variance$statistics$estimate$value <- var$est
-    variance$statistics$SE <- var$se
-    variance$statistics$statistic$name <- "z"
-    variance$statistics$statistic$value <- var$z  
-    variance$statistics$p <- var$p
+    # Select only the covariance statistics from the PE data
+    PE_covariances <- dplyr::filter(PE, op == "~~" & lhs != rhs)
     
-    if (!is.null(args$standardized)) {
-      if (args$standardized) {
-        variance$statistics$std_lv <- var$std.lv
-        variance$statistics$std_all <- var$std.all
-        variance$statistics$std_nox <- var$std.nox
-      }  
-    }
-    
-    if (!is.null(args$ci)) {
-      if (args$ci) {
-        variance$statistics$CI$CI_level <- .90
-        variance$statistics$CI$CI_lower <- var$ci.lower
-        variance$statistics$CI$CI_upper <- var$ci.upper
+    # Loop
+    for (j in 1:nrow(PE_covariances)) {
+      covar <- PE_covariances[j, ]
+      
+      covariance <- list()
+      covariance$name <- paste(covar$lhs, covar$op, covar$rhs)
+      covariance$statistics$estimate$name <- "b"
+      covariance$statistics$estimate$value <- covar$est
+      covariance$statistics$SE <- covar$se
+      covariance$statistics$statistic$name <- "z"
+      covariance$statistics$statistic$value <- covar$z  
+      covariance$statistics$p <- covar$p
+      
+      if (!is.null(args$standardized)) {
+        if (args$standardized) {
+          covariance$statistics$std_lv <- covar$std.lv
+          covariance$statistics$std_all <- covar$std.all
+          covariance$statistics$std_nox <- covar$std.nox
+        }  
       }
+      
+      if (!is.null(args$ci)) {
+        if (args$ci) {
+          covariance$statistics$CI$CI_level <- .90
+          covariance$statistics$CI$CI_lower <- covar$ci.lower
+          covariance$statistics$CI$CI_upper <- covar$ci.upper
+        }
+      }
+      
+      covariances[[j]] <- covariance
     }
     
-    variances[[i]] <- variance
+    # Add covariances to output
+    group$covariances <- covariances
+    
+    # Intercepts
+    # Create an empty list for the covariances
+    intercepts <- list()
+    
+    # Select only the covariance statistics from the PE data
+    PE_intercepts <- dplyr::filter(PE, op == "~1" & lhs != rhs)
+    
+    # Loop, if there are any intercepts
+    if (nrow(PE_regressions) > 0) {
+      for (j in 1:nrow(PE_intercepts)) {
+        inter <- PE_intercepts[j, ]
+        
+        intercept <- list()
+        intercept$name <- paste(inter$lhs, inter$op, inter$rhs)
+        intercept$statistics$estimate$name <- "b"
+        intercept$statistics$estimate$value <- inter$est
+        intercept$statistics$SE <- inter$se
+        intercept$statistics$statistic$name <- "z"
+        intercept$statistics$statistic$value <- inter$z  
+        intercept$statistics$p <- inter$p
+        
+        if (!is.null(args$standardized)) {
+          if (args$standardized) {
+            intercept$statistics$std_lv <- inter$std.lv
+            intercept$statistics$std_all <- inter$std.all
+            intercept$statistics$std_nox <- inter$std.nox
+          }  
+        }
+        
+        if (!is.null(args$ci)) {
+          if (args$ci) {
+            intercept$statistics$CI$CI_level <- .90
+            intercept$statistics$CI$CI_lower <- inter$ci.lower
+            intercept$statistics$CI$CI_upper <- inter$ci.upper
+          }
+        }
+        
+        intercepts[[j]] <- intercept
+      }
+      
+      # Add intercepts to output
+      group$intercepts <- intercepts
+    }
+    
+    # Variances
+    # Create an empty list for the variances
+    variances <- list()
+    
+    # Select only the variance statistics from the PE data
+    PE_variances <- dplyr::filter(PE, lhs == rhs)
+    
+    # Loop
+    for (j in 1:nrow(PE_variances)) {
+      var <- PE_variances[j, ]
+      
+      variance <- list()
+      variance$name <- var$lhs
+      variance$statistics$estimate$name <- "b"
+      variance$statistics$estimate$value <- var$est
+      variance$statistics$SE <- var$se
+      variance$statistics$statistic$name <- "z"
+      variance$statistics$statistic$value <- var$z  
+      variance$statistics$p <- var$p
+      
+      if (!is.null(args$standardized)) {
+        if (args$standardized) {
+          variance$statistics$std_lv <- var$std.lv
+          variance$statistics$std_all <- var$std.all
+          variance$statistics$std_nox <- var$std.nox
+        }  
+      }
+      
+      if (!is.null(args$ci)) {
+        if (args$ci) {
+          variance$statistics$CI$CI_level <- .90
+          variance$statistics$CI$CI_lower <- var$ci.lower
+          variance$statistics$CI$CI_upper <- var$ci.upper
+        }
+      }
+      
+      variances[[j]] <- variance
+    }
+  
+    # Add variances to output  
+    group$variances <- variances
   }
+  
+  # Add group to groups
+  groups[[i]] <- group
+  
+  # If there are no groups, add the information directly to the output instead
+  if (x@Model@ngroups == 1) {
+    output$latent_variables <- latent_variables
 
-  # Add covariances and variances to output  
-  output$covariances <- covariances
-  output$variances <- variances
+        if (nrow(PE_regressions) > 0) {
+      output$regressions <- regressions
+    }
+
+    output$covariances <- covariances
+    
+    if (nrow(PE_intercepts) > 0) {
+      output$intercepts <- intercepts
+    }
+    
+    output$variances <- variances
+  } else {
+    # Add groups to output
+    output$groups <- groups
+  }
   
   # Add package information
   package <- list()
