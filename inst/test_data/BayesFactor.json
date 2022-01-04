@@ -49,7 +49,7 @@
     },
     "package": {
       "name": "BayesFactor",
-      "version": "0.9.12-4.2"
+      "version": "0.9.12-4.3"
     }
   },
   "bfFull": {
@@ -66,7 +66,7 @@
     },
     "package": {
       "name": "BayesFactor",
-      "version": "0.9.12-4.2"
+      "version": "0.9.12-4.3"
     }
   },
   "bfMain": {
@@ -83,7 +83,7 @@
     },
     "package": {
       "name": "BayesFactor",
-      "version": "0.9.12-4.2"
+      "version": "0.9.12-4.3"
     }
   },
   "bfMainFull": {
@@ -100,7 +100,7 @@
     },
     "package": {
       "name": "BayesFactor",
-      "version": "0.9.12-4.2"
+      "version": "0.9.12-4.3"
     }
   },
   "attitudeBF": {
@@ -617,7 +617,7 @@
     },
     "package": {
       "name": "BayesFactor",
-      "version": "0.9.12-4.2"
+      "version": "0.9.12-4.3"
     }
   },
   "attitudeBFBest": {
@@ -1134,7 +1134,7 @@
     },
     "package": {
       "name": "BayesFactor",
-      "version": "0.9.12-4.2"
+      "version": "0.9.12-4.3"
     }
   },
   "sleepTTestBF": {
@@ -1143,7 +1143,7 @@
     "statistics": {
       "BF_01": 17.25888,
       "BF_10": 0.057941,
-      "error": 1.681548e-07
+      "error": 6.110074e-08
     },
     "alternative": {
       "name": "Null, mu = 0",
@@ -1151,7 +1151,7 @@
     },
     "package": {
       "name": "BayesFactor",
-      "version": "0.9.12-4.2"
+      "version": "0.9.12-4.3"
     }
   },
   "sleepAnovaBF": {
@@ -1168,7 +1168,7 @@
     },
     "package": {
       "name": "BayesFactor",
-      "version": "0.9.12-4.2"
+      "version": "0.9.12-4.3"
     }
   },
   "puzzlesAnovaBF": {
@@ -1205,7 +1205,7 @@
     },
     "package": {
       "name": "BayesFactor",
-      "version": "0.9.12-4.2"
+      "version": "0.9.12-4.3"
     }
   },
   "correlationBF": {
@@ -1222,7 +1222,7 @@
     },
     "package": {
       "name": "BayesFactor",
-      "version": "0.9.12-4.2"
+      "version": "0.9.12-4.3"
     }
   },
   "contingencyTableBF": {
@@ -1239,7 +1239,7 @@
     },
     "package": {
       "name": "BayesFactor",
-      "version": "0.9.12-4.2"
+      "version": "0.9.12-4.3"
     }
   },
   "proportionBF": {
@@ -1256,7 +1256,7 @@
     },
     "package": {
       "name": "BayesFactor",
-      "version": "0.9.12-4.2"
+      "version": "0.9.12-4.3"
     }
   },
   "metaBF": {
@@ -1267,15 +1267,15 @@
         "statistics": {
           "BF_01": 38.682476,
           "BF_10": 0.025851,
-          "error": 6.038169e-08
+          "error": 1.110865e-06
         }
       },
       {
         "name": "Alt., r=1 !(0<d<Inf)",
         "statistics": {
           "BF_01": 0.008033,
-          "BF_10": 124.480489,
-          "error": 0.005553
+          "BF_10": 124.48044,
+          "error": 0.000036
         }
       }
     ],
@@ -1285,7 +1285,7 @@
     },
     "package": {
       "name": "BayesFactor",
-      "version": "0.9.12-4.2"
+      "version": "0.9.12-4.3"
     }
   }
 }

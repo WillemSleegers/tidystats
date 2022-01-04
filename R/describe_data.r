@@ -57,7 +57,8 @@ describe_data <- function(data, column, na.rm = TRUE, short = FALSE) {
   }
   
   # Check whether the values in var are numeric
-  if (sum(!class(dplyr::pull(data, {{ column }})) %in% c("numeric", "integer")) > 0) {
+  if (sum(!class(dplyr::pull(data, {{ column }})) %in% 
+      c("numeric", "integer")) > 0) {
     stop("The column does not contain numeric values.")
   }
 
@@ -92,7 +93,7 @@ describe_data <- function(data, column, na.rm = TRUE, short = FALSE) {
     )
   
   output <- dplyr::mutate(output, 
-      variable = dplyr::quo_name(dplyr::enquo(column))
+      var = dplyr::quo_name(dplyr::enquo(column))
     )
   # TODO: See if this can be done differently
   
@@ -105,12 +106,10 @@ describe_data <- function(data, column, na.rm = TRUE, short = FALSE) {
   
   # Reorder the columns and return only a subset if short was set to TRUE
   if (short) {
-    output <- dplyr::select(output, dplyr::all_of(c("variable", grouping, "N", 
-      "M", "SD")))
+    output <- dplyr::select(output, var, dplyr::all_of(grouping), N, M, SD)
   } else {
-    output <- dplyr::select_at(output, dplyr::vars(dplyr::contains("variable"), 
-      dplyr::contains("missing"), dplyr::starts_with("N"), 
-      dplyr::contains("pct"), dplyr::everything()))
+    output <- dplyr::select(output, var, dplyr::all_of(grouping),
+      missing, N, dplyr::contains("pct"), everything())
   }
   
   # Add a tidystats class so we can use the tidy_stats() function to parse the

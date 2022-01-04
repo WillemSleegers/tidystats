@@ -747,7 +747,7 @@ tidy_stats.tidystats_descriptives <- function(x) {
   output$method <- "Descriptives"
   
   # Extract variable information
-  var_name <- dplyr::first(dplyr::pull(x, variable))
+  var_name <- dplyr::first(dplyr::pull(x, var))
   
   # Extract grouping information
   group_names <- dplyr::group_vars(x)

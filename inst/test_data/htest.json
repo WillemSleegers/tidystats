@@ -27,7 +27,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.0.2"
+      "version": "4.1.2"
     }
   },
   "t_test_two_sample": {
@@ -58,7 +58,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.0.2"
+      "version": "4.1.2"
     }
   },
   "t_test_welch": {
@@ -89,7 +89,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.0.2"
+      "version": "4.1.2"
     }
   },
   "t_test_paired": {
@@ -120,7 +120,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.0.2"
+      "version": "4.1.2"
     }
   },
   "correlation_pearson": {
@@ -150,7 +150,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.0.2"
+      "version": "4.1.2"
     }
   },
   "correlation_kendall": {
@@ -174,7 +174,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.0.2"
+      "version": "4.1.2"
     }
   },
   "correlation_spearman": {
@@ -198,7 +198,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.0.2"
+      "version": "4.1.2"
     }
   },
   "chi_squared": {
@@ -215,7 +215,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.0.2"
+      "version": "4.1.2"
     }
   },
   "chi_squared_yates": {
@@ -232,7 +232,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.0.2"
+      "version": "4.1.2"
     }
   },
   "chi_squared_prob": {
@@ -249,7 +249,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.0.2"
+      "version": "4.1.2"
     }
   },
   "wilcoxon_signed_rank": {
@@ -269,7 +269,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.0.2"
+      "version": "4.1.2"
     }
   },
   "wilcoxon_rank_sum_continuity": {
@@ -289,7 +289,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.0.2"
+      "version": "4.1.2"
     }
   },
   "wilcoxon_rank_sum": {
@@ -309,7 +309,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.0.2"
+      "version": "4.1.2"
     }
   },
   "wilcoxon_rank_sum_conf": {
@@ -338,7 +338,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.0.2"
+      "version": "4.1.2"
     }
   },
   "fisher_test": {
@@ -363,7 +363,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.0.2"
+      "version": "4.1.2"
     }
   },
   "fisher_test_no_CI": {
@@ -383,7 +383,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.0.2"
+      "version": "4.1.2"
     }
   },
   "fisher_test_r_by_c": {
@@ -398,12 +398,12 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.0.2"
+      "version": "4.1.2"
     }
   },
   "fisher_test_simulated_p": {
     "method": "Fisher's Exact Test for Count Data with simulated p-value",
-    "sim": 100000,
+    "sim": 100,
     "name": "Job",
     "statistics": {
       "p": 0.783322
@@ -413,7 +413,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.0.2"
+      "version": "4.1.2"
     }
   },
   "fisher_test_hybrid": {
@@ -432,7 +432,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.0.2"
+      "version": "4.1.2"
     }
   },
   "oneway_test": {
@@ -452,7 +452,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.0.2"
+      "version": "4.1.2"
     }
   },
   "oneway_test_equal_var": {
@@ -472,7 +472,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.0.2"
+      "version": "4.1.2"
     }
   }
 }

@@ -34,7 +34,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.0.2"
+      "version": "4.1.2"
     }
   },
   "anova_glm_cp": {
@@ -75,7 +75,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.0.2"
+      "version": "4.1.2"
     }
   },
   "anova_glm_chisq": {
@@ -115,7 +115,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.0.2"
+      "version": "4.1.2"
     }
   },
   "anova_glm_rao": {
@@ -144,7 +144,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.0.2"
+      "version": "4.1.2"
     }
   }
 }
