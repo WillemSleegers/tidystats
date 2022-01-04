@@ -20,6 +20,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -32,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidystats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.5.1</span>
       </span>
     </div>
 
@@ -71,7 +73,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/WillemSleegers/tidystats">
+  <a href="https://github.com/WillemSleegers/tidystats" class="external-link">
     <span class="fa fa-github"></span>
      
   </a>
@@ -86,53 +88,55 @@
 
       
 
-      </header><script src="introduction-to-tidystats_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Introduction to tidystats</h1>
             
-            <h4 class="date">2020-10-18</h4>
+            <h4 data-toc-skip class="date">2022-01-04</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/WillemSleegers/tidystats/blob/master/vignettes/introduction-to-tidystats.Rmd"><code>vignettes/introduction-to-tidystats.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/WillemSleegers/tidystats/blob/HEAD/vignettes/introduction-to-tidystats.Rmd" class="external-link"><code>vignettes/introduction-to-tidystats.Rmd</code></a></small>
       <div class="hidden name"><code>introduction-to-tidystats.Rmd</code></div>
 
     </div>
 
     
     
-<div id="why-use-tidystats" class="section level2">
-<h2 class="hasAnchor">
-<a href="#why-use-tidystats" class="anchor"></a>Why use tidystats?</h2>
+<div class="section level2">
+<h2 id="why-use-tidystats">Why use tidystats?<a class="anchor" aria-label="anchor" href="#why-use-tidystats"></a>
+</h2>
 <p>The <code>tidystats</code> package is designed to address two problems common in scientific research: incomplete and incorrect statistics reporting. The problem of incomplete statistics reporting likely stems from a fundamental trade-off between wanting to be comprehensive on the one hand and providing a clear narrative on the other. The problem of incorrect statistics reporting is likely caused by manually copy-pasting statistical output from the output window into a text editor. <code>tidystats</code> addresses these two problems by enabling researchers to combine their statistical analyses into a single file, from which a subset of the analyses can then be reported using a Microsoft Word add-in.</p>
 </div>
-<div id="how-to-use-tidystats" class="section level2">
-<h2 class="hasAnchor">
-<a href="#how-to-use-tidystats" class="anchor"></a>How to use tidystats?</h2>
-<p><code>tidystats</code> is designed to easily fit in your data analysis workflow. In fact, <code>tidystats</code> can simply be tacked on at the end of a data analysis session, with only one minor requirement. This requirement is that all analyses are stored in a variable. For example, if you run a regression analysis using the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function, you store the result of that analysis in a variable: <code>model1 &lt;- lm(extra ~ group, data = sleep)</code>. By storing each analysis in a variable, you can later add each analysis to a list using the <code><a href="../reference/add_stats.html">add_stats()</a></code> function from <code>tidystats</code>. Once all the analyses are gathered together, you save the analyses to a .json file using the <code><a href="../reference/write_stats.html">write_stats()</a></code> function. This .json file can then be read by a Word add-in to report your analyses in Word, or shared with others and read into R to extract statistics from your analyses (e.g., for meta-analyses).</p>
+<div class="section level2">
+<h2 id="how-to-use-tidystats">How to use tidystats?<a class="anchor" aria-label="anchor" href="#how-to-use-tidystats"></a>
+</h2>
+<p><code>tidystats</code> is designed to easily fit in your data analysis workflow. In fact, <code>tidystats</code> can simply be tacked on at the end of a data analysis session, with only one minor requirement. This requirement is that all analyses are stored in a variable. For example, if you run a regression analysis using the <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code> function, you store the result of that analysis in a variable: <code>model1 &lt;- lm(extra ~ group, data = sleep)</code>. By storing each analysis in a variable, you can later add each analysis to a list using the <code><a href="../reference/add_stats.html">add_stats()</a></code> function from <code>tidystats</code>. Once all the analyses are gathered together, you save the analyses to a .json file using the <code><a href="../reference/write_stats.html">write_stats()</a></code> function. This .json file can then be read by a Word add-in to report your analyses in Word, or shared with others and read into R to extract statistics from your analyses (e.g., for meta-analyses).</p>
 </div>
-<div id="an-example" class="section level2">
-<h2 class="hasAnchor">
-<a href="#an-example" class="anchor"></a>An example</h2>
+<div class="section level2">
+<h2 id="an-example">An example<a class="anchor" aria-label="anchor" href="#an-example"></a>
+</h2>
 <p>Below follows an example of a few analyses conducted on the <code>quote_source</code> data contained within the <code>tidystats</code> package. The data is from a large-scaled replication of Lorge &amp; Curtiss (1936). More details can be found in the paper of the replication effort (Klein et al., 2014). In short, participants saw the following quote:</p>
 <blockquote>
 <p>“I have sworn to only live free, even if I find bitter the taste of death.”</p>
 </blockquote>
 <p>The quote was attributed to either George Washington, a liked individual, or Osama Bin Laden, a disliked individual. Participants were asked to what extent they agree with the quote, on a 9-point Likert scale ranging from 1 (disagreement) to 9 (agreement).</p>
 <p>We start with a bit of setup.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co"># Load packages</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidystats</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Load packages</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://willemsleegers.github.io/tidystats/" class="external-link">tidystats</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
 
 <span class="co"># Load data</span>
-<span class="no">data</span> <span class="kw">&lt;-</span> <span class="kw pkg">tidystats</span><span class="kw ns">::</span><span class="no"><a href="../reference/quote_source.html">quote_source</a></span></pre></body></html></div>
+<span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">tidystats</span><span class="fu">::</span><span class="va"><a href="../reference/quote_source.html">quote_source</a></span></code></pre></div>
 <p>The main hypothesis is that people will like the quote more when it is attributed to George Washington compared to Osama Bin Laden. We test this hypothesis by first looking at the descriptives and then by conducting a <em>t</em>-test.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">descriptives</span> <span class="kw">&lt;-</span> <span class="no">data</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="no">source</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/describe_data.html">describe_data</a></span>(<span class="no">response</span>, <span class="kw">short</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-<span class="no">descriptives</span></pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">descriptives</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">source</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/describe_data.html">describe_data</a></span><span class="op">(</span><span class="va">response</span>, short <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">descriptives</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
-<th align="left">variable</th>
+<th align="left">var</th>
 <th align="left">source</th>
 <th align="right">N</th>
 <th align="right">M</th>
@@ -155,24 +159,26 @@
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">t_test</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span>(<span class="no">response</span> ~ <span class="no">source</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">data</span>)
-<span class="no">t_test</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">t_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="va">source</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span>
+<span class="va">t_test</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  Welch Two Sample t-test</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; data:  response by source</span>
 <span class="co">#&gt; t = -13, df = 6323, p-value &lt;2e-16</span>
-<span class="co">#&gt; alternative hypothesis: true difference in means is not equal to 0</span>
+<span class="co">#&gt; alternative hypothesis: true difference in means between group Bin Laden and group Washington is not equal to 0</span>
 <span class="co">#&gt; 95 percent confidence interval:</span>
 <span class="co">#&gt;  -0.802 -0.589</span>
 <span class="co">#&gt; sample estimates:</span>
 <span class="co">#&gt;  mean in group Bin Laden mean in group Washington </span>
-<span class="co">#&gt;                     5.23                     5.93</span></pre></body></html></div>
+<span class="co">#&gt;                     5.23                     5.93</span></code></pre></div>
 <p>Participants appear to rate the quote a bit more positively when it is attributed to George Washington.</p>
-<p>We can also perform some additional tests. For instance, does it matter if the participant is from the US? And does age matter? To answer these questions, we can perform interaction tests using <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>.</p>
+<p>We can also perform some additional tests. For instance, does it matter if the participant is from the US? And does age matter? To answer these questions, we can perform interaction tests using <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code>.</p>
 <p>The interaction with the participant being from the U.S. or not:</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">lm_us_or_not</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="no">response</span> ~ <span class="no">source</span> * <span class="no">us_or_international</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">data</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">lm_us_or_not</span>)
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">lm_us_or_not</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="va">source</span> <span class="op">*</span> <span class="va">us_or_international</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">lm_us_or_not</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Call:</span>
 <span class="co">#&gt; lm(formula = response ~ source * us_or_international, data = data)</span>
@@ -193,11 +199,12 @@
 <span class="co">#&gt; Residual standard error: 2.16 on 6321 degrees of freedom</span>
 <span class="co">#&gt;   (18 observations deleted due to missingness)</span>
 <span class="co">#&gt; Multiple R-squared:  0.0275, Adjusted R-squared:  0.027 </span>
-<span class="co">#&gt; F-statistic: 59.5 on 3 and 6321 DF,  p-value: &lt;2e-16</span></pre></body></html></div>
+<span class="co">#&gt; F-statistic: 59.5 on 3 and 6321 DF,  p-value: &lt;2e-16</span></code></pre></div>
 <p>The interaction is significant, so it appears to matter whether the participant is from the U.S. or not. In fact, participants from the U.S. show a stronger effect than those from outside the U.S.</p>
 <p>The interaction with the participant’s age:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">lm_age</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="no">response</span> ~ <span class="no">source</span> * <span class="no">age</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">data</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">lm_age</span>)
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">lm_age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="va">source</span> <span class="op">*</span> <span class="va">age</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">lm_age</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Call:</span>
 <span class="co">#&gt; lm(formula = response ~ source * age, data = data)</span>
@@ -218,29 +225,31 @@
 <span class="co">#&gt; Residual standard error: 2.16 on 6308 degrees of freedom</span>
 <span class="co">#&gt;   (31 observations deleted due to missingness)</span>
 <span class="co">#&gt; Multiple R-squared:  0.0308, Adjusted R-squared:  0.0304 </span>
-<span class="co">#&gt; F-statistic: 66.9 on 3 and 6308 DF,  p-value: &lt;2e-16</span></pre></body></html></div>
+<span class="co">#&gt; F-statistic: 66.9 on 3 and 6308 DF,  p-value: &lt;2e-16</span></code></pre></div>
 <p>No significant interaction effect, so we do not have evidence for age changing the size of the effect.</p>
 <p>Let’s say these are the analyses we want to save the output of and report later. This is where <code>tidystats</code> comes in. The steps to perform are to first create an empty list and then to use the <code><a href="../reference/add_stats.html">add_stats()</a></code> function to add analyses to the list. This is why we stored each analysis into a variable. The <code><a href="../reference/add_stats.html">add_stats()</a></code> function takes an analysis, extracts the statistics, and adds the result to a list. Optionally, you can add additional information about each analysis, such as whether it was preregistered, whether it was a primary, secondary, or exploratory analysis, or simply add some notes.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="co"># Create an empty list to store the analyses in</span>
-<span class="no">results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>()
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Create an empty list to store the analyses in</span>
+<span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># Add the analyses</span>
-<span class="no">results</span> <span class="kw">&lt;-</span> <span class="no">results</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span>(<span class="no">t_test</span>, <span class="kw">preregistered</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"primary"</span>,
-    <span class="kw">notes</span> <span class="kw">=</span> <span class="st">"A t-test comparing the effect of source on the quote rating."</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span>(<span class="no">lm_us_or_not</span>, <span class="kw">preregistered</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"exploratory"</span>,
-    <span class="kw">notes</span> <span class="kw">=</span> <span class="st">"Interaction effect with being from the U.S. or not."</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span>(<span class="no">lm_age</span>)</pre></body></html></div>
+<span class="va">results</span> <span class="op">&lt;-</span> <span class="va">results</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">t_test</span>, preregistered <span class="op">=</span> <span class="cn">TRUE</span>, type <span class="op">=</span> <span class="st">"primary"</span>, 
+    notes <span class="op">=</span> <span class="st">"A t-test comparing the effect of source on the quote rating."</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">lm_us_or_not</span>, preregistered <span class="op">=</span> <span class="cn">FALSE</span>, type <span class="op">=</span> <span class="st">"exploratory"</span>, 
+    notes <span class="op">=</span> <span class="st">"Interaction effect with being from the U.S. or not."</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">lm_age</span><span class="op">)</span></code></pre></div>
 <p>You can see that I added quite some information to the first and second analysis. This is recommended because it is easy to forget which analysis is which; and you might accidentally report the wrong analysis if you have many of them. It’s also nice to add some documentation so that others who are not as familiar with your data can also better understand each analysis.</p>
 <p>To save these analyses to a file, you can use the <code><a href="../reference/write_stats.html">write_stats()</a></code> function.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="../reference/write_stats.html">write_stats</a></span>(<span class="no">results</span>, <span class="st">"lorge-curtiss-1936-replication.json"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/write_stats.html">write_stats</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"lorge-curtiss-1936-replication.json"</span><span class="op">)</span></code></pre></div>
 <p>Note the file extension: .json. These types of files are simply text files, but in a format that is machine-readable (unfortunately, not very human-readable). This file can be used to share with others so that they can read it back into R and extract statistics (e.g., for meta-analyses) or by you to report the statistics in Word.</p>
 </div>
-<div id="references" class="section level2">
-<h2 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h2>
-<p>Lorge, I., &amp; Curtiss, C. C. (1936). Prestige, suggestion, and attitudes. <em>The Journal of Social Psychology</em>, <em>7</em>, 386-402. <a href="https://doi.org/10.1080/00224545.1936.9919891" class="uri">https://doi.org/10.1080/00224545.1936.9919891</a></p>
-<p>Klein, R.A. et al. (2014) Investigating Variation in Replicability: A “Many Labs” Replication Project. <em>Social Psychology</em>, <em>45</em>(3), 142-152. <a href="https://dx.doi.org/10.1027/1864-9335/a000178" class="uri">https://dx.doi.org/10.1027/1864-9335/a000178</a></p>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
+<p>Lorge, I., &amp; Curtiss, C. C. (1936). Prestige, suggestion, and attitudes. <em>The Journal of Social Psychology</em>, <em>7</em>, 386-402. <a href="https://doi.org/10.1080/00224545.1936.9919891" class="external-link uri">https://doi.org/10.1080/00224545.1936.9919891</a></p>
+<p>Klein, R.A. et al. (2014) Investigating Variation in Replicability: A “Many Labs” Replication Project. <em>Social Psychology</em>, <em>45</em>(3), 142-152. <a href="https://dx.doi.org/10.1027/1864-9335/a000178" class="external-link uri">https://dx.doi.org/10.1027/1864-9335/a000178</a></p>
 </div>
   </div>
 
@@ -255,11 +264,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Willem Sleegers.</p>
+  <p></p>
+<p>Developed by Willem Sleegers.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -267,6 +278,8 @@
 
   
 
+
+  
 
   </body>
 </html>

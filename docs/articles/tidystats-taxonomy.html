@@ -20,6 +20,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -32,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidystats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.5.1</span>
       </span>
     </div>
 
@@ -71,7 +73,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/WillemSleegers/tidystats">
+  <a href="https://github.com/WillemSleegers/tidystats" class="external-link">
     <span class="fa fa-github"></span>
      
   </a>
@@ -86,14 +88,14 @@
 
       
 
-      </header><script src="tidystats-taxonomy_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>tidystats taxonomy</h1>
             
-            <h4 class="date">2020-10-18</h4>
+            <h4 data-toc-skip class="date">2022-01-04</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/WillemSleegers/tidystats/blob/master/vignettes/tidystats-taxonomy.Rmd"><code>vignettes/tidystats-taxonomy.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/WillemSleegers/tidystats/blob/HEAD/vignettes/tidystats-taxonomy.Rmd" class="external-link"><code>vignettes/tidystats-taxonomy.Rmd</code></a></small>
       <div class="hidden name"><code>tidystats-taxonomy.Rmd</code></div>
 
     </div>
@@ -101,39 +103,39 @@
     
     
 <p>The purpose of <code>tidystats</code> is to take multiple statistical tests, extract their statistics, and organize the statistics into a file. It is the organization of the statistics that is probably the most difficult and opinionated aspect of <code>tidystats</code>. Below I show what I’ve come up with. Please note that this is a work in progress and that it might change when I add support for new statistical tests (or after receiving feedback on the taxonomy).</p>
-<div id="statistics" class="section level4">
-<h4 class="hasAnchor">
-<a href="#statistics" class="anchor"></a>Statistics</h4>
-<p>A collection of statistics (e.g., <em>t</em>-value, <em>p</em>-value) belonging to a test. Every test will have Statistics. Sometimes a test only has one set of Statistics (e.g., a <em>t</em>-test) and other tests have multiple sets of Statistics. For example, the Statistics of a regression analysis done with <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> consists of the model fit Statistics and the Statistics belonging to each Term in the model. Statistics have a Name to help indicate what the statistics refer to.</p>
+<div class="section level4">
+<h4 id="statistics">Statistics<a class="anchor" aria-label="anchor" href="#statistics"></a>
+</h4>
+<p>A collection of statistics (e.g., <em>t</em>-value, <em>p</em>-value) belonging to a test. Every test will have Statistics. Sometimes a test only has one set of Statistics (e.g., a <em>t</em>-test) and other tests have multiple sets of Statistics. For example, the Statistics of a regression analysis done with <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code> consists of the model fit Statistics and the Statistics belonging to each Term in the model. Statistics have a Name to help indicate what the statistics refer to.</p>
 </div>
-<div id="terms" class="section level4">
-<h4 class="hasAnchor">
-<a href="#terms" class="anchor"></a>Terms</h4>
+<div class="section level4">
+<h4 id="terms">Terms<a class="anchor" aria-label="anchor" href="#terms"></a>
+</h4>
 <p>This category is a bit of a general category that refers to different components depending on the exact test. For example, in a regression analysis it refers to the coefficients, but in an ANOVA test of multiple models, it refers to the models being compared. A Term consists of a Name and a set of Statistics.</p>
 </div>
-<div id="pairs" class="section level4">
-<h4 class="hasAnchor">
-<a href="#pairs" class="anchor"></a>Pairs</h4>
-<p>Refers to Statistics consisting of two variables, such as correlations and covariances. However, this is only used when the number of variables can be more than 2, such as in multilevel models or when you tidy a correlation matrix. If you simply run a correlation test (e.g., <code><a href="https://rdrr.io/r/stats/cor.test.html">cor.test()</a></code>) and tidy the results, you will get a list of Statistics, but not a list of Statistics including a Pair. The reason for this category to exist is to tidy correlation or covariance matrices. Pairs have two Names and a set of Statistics.</p>
+<div class="section level4">
+<h4 id="pairs">Pairs<a class="anchor" aria-label="anchor" href="#pairs"></a>
+</h4>
+<p>Refers to Statistics consisting of two variables, such as correlations and covariances. However, this is only used when the number of variables can be more than 2, such as in multilevel models or when you tidy a correlation matrix. If you simply run a correlation test (e.g., <code><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test()</a></code>) and tidy the results, you will get a list of Statistics, but not a list of Statistics including a Pair. The reason for this category to exist is to tidy correlation or covariance matrices. Pairs have two Names and a set of Statistics.</p>
 </div>
-<div id="groups" class="section level4">
-<h4 class="hasAnchor">
-<a href="#groups" class="anchor"></a>Groups</h4>
+<div class="section level4">
+<h4 id="groups">Groups<a class="anchor" aria-label="anchor" href="#groups"></a>
+</h4>
 <p>Groups is also a rather broad category. It can refer to grouped descriptives (e.g., created with <code><a href="../reference/describe_data.html">describe_data()</a></code>), to within-subjects components in ANOVA, or to Groups in the Random Effects of a multilevel model. A Group has a Name and can consist of Statistics, Terms, and/or Pairs.</p>
 </div>
-<div id="effects" class="section level4">
-<h4 class="hasAnchor">
-<a href="#effects" class="anchor"></a>Effects</h4>
+<div class="section level4">
+<h4 id="effects">Effects<a class="anchor" aria-label="anchor" href="#effects"></a>
+</h4>
 <p>Effects is a category for multilevel models, which consists of Random Effects and Fixed Effects. Random Effects consists of Groups and Fixed Effects consists of Terms and Pairs.</p>
 </div>
-<div id="models" class="section level4">
-<h4 class="hasAnchor">
-<a href="#models" class="anchor"></a>Models</h4>
+<div class="section level4">
+<h4 id="models">Models<a class="anchor" aria-label="anchor" href="#models"></a>
+</h4>
 <p>Sometimes tests return multiple Models, each containing Statistics. This category contains those models. Currently it is only used when tidying certain tests from the <code>BayesFactor</code> package.</p>
 </div>
-<div id="name" class="section level4">
-<h4 class="hasAnchor">
-<a href="#name" class="anchor"></a>Name</h4>
+<div class="section level4">
+<h4 id="name">Name<a class="anchor" aria-label="anchor" href="#name"></a>
+</h4>
 <p>The name provides information about what the statistics refer to. It can be the name of a set of Statistics, a Term, a Group, and so on. Pairs have two names.</p>
 </div>
   </div>
@@ -147,11 +149,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Willem Sleegers.</p>
+  <p></p>
+<p>Developed by Willem Sleegers.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -159,6 +163,8 @@
 
   
 
+
+  
 
   </body>
 </html>

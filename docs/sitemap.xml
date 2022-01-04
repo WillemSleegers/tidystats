@@ -1,7 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/404.html</loc>
+  </url>
+  <url>
+    <loc>https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/articles/introduction-to-tidystats.html</loc>
+  </url>
+  <url>
+    <loc>https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/articles/read-and-use-a-tidystats-file.html</loc>
+  </url>
+  <url>
+    <loc>https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/articles/tidystats-taxonomy.html</loc>
+  </url>
+  <url>
+    <loc>https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/authors.html</loc>
+  </url>
+  <url>
     <loc>https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/index.html</loc>
+  </url>
+  <url>
+    <loc>https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/news/index.html</loc>
   </url>
   <url>
     <loc>https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/reference/add_stats.html</loc>
@@ -11,6 +35,9 @@
   </url>
   <url>
     <loc>https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/reference/describe_data.html</loc>
+  </url>
+  <url>
+    <loc>https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/reference/index.html</loc>
   </url>
   <url>
     <loc>https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/reference/quote_source.html</loc>
@@ -29,14 +56,5 @@
   </url>
   <url>
     <loc>https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/reference/write_stats.html</loc>
-  </url>
-  <url>
-    <loc>https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/articles/introduction-to-tidystats.html</loc>
-  </url>
-  <url>
-    <loc>https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/articles/read-and-use-a-tidystats-file.html</loc>
-  </url>
-  <url>
-    <loc>https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/articles/tidystats-taxonomy.html</loc>
   </url>
 </urlset>

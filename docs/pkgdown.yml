@@ -1,11 +1,11 @@
-pandoc: 2.7.3
-pkgdown: 1.5.1
+pandoc: 2.14.0.3
+pkgdown: 2.0.1
 pkgdown_sha: ~
 articles:
   introduction-to-tidystats: introduction-to-tidystats.html
   read-and-use-a-tidystats-file: read-and-use-a-tidystats-file.html
   tidystats-taxonomy: tidystats-taxonomy.html
-last_built: 2020-10-18T10:52Z
+last_built: 2022-01-04T20:45Z
 urls:
   reference: https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/reference
   article: https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/articles
