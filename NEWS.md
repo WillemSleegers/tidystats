@@ -1,5 +1,10 @@
 # tidystats 0.5.1 
 
+## Improvements
+
+* Renamed the `variable` column in the output of `describe_data()` to `var`.
+* Improved ordering of the columns in the output of `describe_data()`.
+
 ## Bug fixes
 
 * Using `tidy_stats()` on ungrouped count data produced with `count_data()` is now properly tidied.

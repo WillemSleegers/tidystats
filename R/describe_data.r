@@ -109,7 +109,7 @@ describe_data <- function(data, column, na.rm = TRUE, short = FALSE) {
     output <- dplyr::select(output, var, dplyr::all_of(grouping), N, M, SD)
   } else {
     output <- dplyr::select(output, var, dplyr::all_of(grouping),
-      missing, N, dplyr::contains("pct"), everything())
+      missing, N, dplyr::contains("pct"), dplyr::everything())
   }
   
   # Add a tidystats class so we can use the tidy_stats() function to parse the

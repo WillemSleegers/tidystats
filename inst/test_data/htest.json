@@ -403,7 +403,7 @@
   },
   "fisher_test_simulated_p": {
     "method": "Fisher's Exact Test for Count Data with simulated p-value",
-    "sim": 100,
+    "sim": 100000,
     "name": "Job",
     "statistics": {
       "p": 0.783322
