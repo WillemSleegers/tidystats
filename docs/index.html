@@ -28,7 +28,7 @@
     
     <a class="navbar-brand me-2" href="index.html">tidystats</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,36 +72,37 @@
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9">
-<div class="section level2">
-<h2 id="tidystats">tidystats<a class="anchor" aria-label="anchor" href="#tidystats"></a>
-</h2>
+  <main id="main" class="col-md-9"><div class="section level1">
+<div class="page-header"><h1 id="tidystats">tidystats<a class="anchor" aria-label="anchor" href="#tidystats"></a>
+</h1></div>
+<!-- badges: start -->
+
 <p><strong>Author:</strong> <a href="https://www.willemsleegers.com/" class="external-link">Willem Sleegers</a>
 <strong>License:</strong> <a href="https://opensource.org/licenses/MIT" class="external-link">MIT</a></p>
 <p><code>tidystats</code> is an R package aimed at sharing the output of
-statistical models. <code>tidystats</code> extracts the output of
-statistical models (e.g., <em>t</em>-tests, regression models) and
-combines them into a structured file. This file can then be used to
-report the statistics in a manuscript or shared with others so that they
-can extract the statistics (e.g., for meta-analyses).</p>
+statistical models. <code>tidystats</code> extracts the output (e.g.,
+<em>t</em>-values, <em>p</em>-values) of statistical models (e.g.,
+<em>t</em>-tests, regression models) and combines them into a structured
+file. This file can then be used to report the statistics in a
+manuscript or shared with others so that they can extract the statistics
+(e.g., for meta-analyses).</p>
 <p>Please see below for instructions on how to install and use this
 package. <strong>Do note that the package is currently in development.
 This means the package may contain bugs and is subject to significant
 changes.</strong> If you find any bugs or if you have any feedback,
 please let me know by creating an issue here on Github (it’s really easy
 to do!).</p>
-<div class="section level3">
-<h3 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
-</h3>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p><code>tidystats</code> can be installed from CRAN and the latest
 version can be installed from Github using <a href="https://github.com/r-lib/devtools" class="external-link">devtools</a>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span>
-<span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"willemsleegers/tidystats"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"willemsleegers/tidystats"</span><span class="op">)</span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
-</h3>
+<div class="section level2">
+<h2 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
+</h2>
 <p>Load the package and start by creating an empty list to store the
 results of statistical models. You can name the list whatever you want
 (in the example below I create an empty list called
@@ -111,9 +112,9 @@ results of statistical models. You can name the list whatever you want
 
 <span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
-</h3>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
 <p>The main function is <code><a href="reference/add_stats.html">add_stats()</a></code>. The function has 2
 necessary arguments:</p>
 <ul>
@@ -138,9 +139,9 @@ the analysis was preregistered or not.</p>
 <p>Finally the <code>notes</code> argument is used to add additional
 information which you may find fruitful.</p>
 </div>
-<div class="section level3">
-<h3 id="supported-statistical-functions">Supported statistical functions<a class="anchor" aria-label="anchor" href="#supported-statistical-functions"></a>
-</h3>
+<div class="section level2">
+<h2 id="supported-statistical-functions">Supported statistical functions<a class="anchor" aria-label="anchor" href="#supported-statistical-functions"></a>
+</h2>
 <p><strong>Package:</strong> stats</p>
 <ul>
 <li><code><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test()</a></code></li>
@@ -179,9 +180,9 @@ information which you may find fruitful.</p>
 <li><code><a href="reference/count_data.html">count_data()</a></code></li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
-</h3>
+<div class="section level2">
+<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h2>
 <p>In the following example we perform several tests, add them to a
 list, and save the list to a file.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -203,17 +204,16 @@ list, and save the list to a file.</p>
 <span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># Add the analyses to the empty list</span>
-<span class="va">results</span> <span class="op">&lt;-</span> <span class="va">results</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">sleep_test</span>, type <span class="op">=</span> <span class="st">"primary"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">lm_D9</span>, preregistered <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<span class="va">results</span> <span class="op">&lt;-</span> <span class="va">results</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">sleep_test</span>, type <span class="op">=</span> <span class="st">"primary"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">lm_D9</span>, preregistered <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">npk_aov</span>, notes <span class="op">=</span> <span class="st">"An ANOVA example"</span><span class="op">)</span>
 
 <span class="co"># Save the results to a file</span>
 <span class="fu"><a href="reference/write_stats.html">write_stats</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"results.json"</span><span class="op">)</span></code></pre></div>
-<p>This results is a .json file that contains all the statistics from
+<p>This results in a .json file that contains all the statistics from
 the three models. If you want to see what this file looks like, you can
 inspect it <a href="https://github.com/WillemSleegers/tidystats/blob/master/inst/results.json" class="external-link">here</a>.</p>
-</div>
 </div>
 <div class="section level2">
 <h2 id="reporting-statistics">Reporting statistics<a class="anchor" aria-label="anchor" href="#reporting-statistics"></a>
@@ -227,7 +227,7 @@ with a Word add-in that is currently in development <a href="https://github.com/
 <p>Do you have questions or comments about <code>tidystats</code>?
 Create an issue here on Github or contact me via <a href="https://twitter.com/willemsleegers" class="external-link">Twitter</a>.</p>
 </div>
-
+</div>
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">

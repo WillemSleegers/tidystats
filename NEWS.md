@@ -15,10 +15,12 @@
 * Added support for `lme()`, `nlme()`, `gls()`, and `anova()` from the `nlme` package.
 
 ## Changes
-* Removed automatically setting the method to 'Generic test' when adding a custom test. This means you can set the method yourself now.
-* Renames the `variable` column to `var` in `describe_data()`.
-* `describe_data()` now (again) has support for multiple variables. You can provide more than 1 column name (separated by commas) to calculate descriptives for each variable.
 * Improved names in `anova()` tests.
+
+## Misc
+* Removed info message that is displayed when the package is loaded.
+
+# tidystats 0.5.1
 
 ## Bug fixes
 
@@ -28,8 +30,10 @@
   attempt to select more than one element in vectorIndex")
 * Fixed GitHub issue #8.
 
-## Misc
-* Removed info message that is displayed when the package is loaded.
+## Changes
+* Removed automatically setting the method to 'Generic test' when adding a custom test. This means you can set the method yourself now.
+* Renames the `variable` column to `var` in `describe_data()`.
+* `describe_data()` now (again) has support for multiple variables. You can provide more than 1 column name (separated by commas) to calculate descriptives for each variable.
 
 # tidystats 0.5
 

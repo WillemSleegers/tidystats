@@ -18,7 +18,7 @@ specific analysis will be organized."><!-- mathjax --><script src="https://cdnjs
     
     <a class="navbar-brand me-2" href="../index.html">tidystats</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -230,34 +230,27 @@ below for a list of supported statistical tests.</p>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Now you can inspect each of these variables, e.g.,:</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">list_sleep_test</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "name"        "method"      "statistics"  "alternative" "package"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "method"      "var_equal"   "name"        "statistics"  "alternative"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6] "package"    </span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">list_sleep_test</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> List of 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ name       : chr "extra by group"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> List of 6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ method     : chr "Paired t-test"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ statistics :List of 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ :List of 8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ name     : chr "estimate"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ symbol   : chr "M"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ subscript: chr "diff."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ value    : num -1.58</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ interval : chr "CI"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ level    : num 0.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ lower    : num -2.46</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ upper    : num -0.7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ :List of 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ name : chr "SE"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ value: num 0.389</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ :List of 3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ name  : chr "statistic"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ symbol: chr "t"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ value : num -4.06</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ :List of 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ name : chr "df"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ value: num 9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ :List of 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ name : chr "p"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ value: num 0.00283</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ var_equal  : logi TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ name       : chr "extra by group"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ statistics :List of 6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ estimate :List of 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ name : chr "mean difference"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ value: num -1.58</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ SE       : num 0.389</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ statistic:List of 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ name : chr "t"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ value: num -4.06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ df       : num 9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ p        : num 0.00283</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ CI       :List of 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ CI_level: num 0.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ CI_lower: num -2.46</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ CI_upper: num -0.7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ alternative:List of 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ direction : chr "two.sided"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ null_value: num 0</span>
