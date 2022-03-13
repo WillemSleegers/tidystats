@@ -1,9 +1,23 @@
 
+# Todos -------------------------------------------------------------------
+
+#TODO: Rename certain terms to contrasts?
+#TODO: # Call deviance dfs df numerator and df denominator?
+#TODO: Replace some of the statistics extraction code with loops over all 
+#      columns and then fix the names after
+
 # Update ------------------------------------------------------------------
 
-# Document and install the package
+# Update documentation and (re)install the package
 devtools::document()
 devtools::install()
+detach("package:tidystats", unload = TRUE)
+library(tidystats)
+
+# Restart sessions --------------------------------------------------------
+
+.rs.restartR()
+library(tidystats)
 
 # Testing -----------------------------------------------------------------
 
@@ -14,7 +28,7 @@ devtools::install()
 devtools::test()
 
 # Test specific tests
-testthat::test_file("tests/testthat/test_counts.R")
+testthat::test_file("tests/testthat/test_htest.R")
 
 # Create a vignette -------------------------------------------------------
 
