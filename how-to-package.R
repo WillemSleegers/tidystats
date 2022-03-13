@@ -49,13 +49,13 @@ testthat::test_file("tests/testthat/test_htest.R")
 # Build website -----------------------------------------------------------
 
 # Run to build the website
-pkgdown::build_site()
+pkgdown::build_site_github_pages()
 
 # Preview the site
 pkgdown::preview_site()
 
 # Delete website files
-pkgdown::clean_site()
+# pkgdown::clean_site()
 
 # CRAN submission ---------------------------------------------------------
 
