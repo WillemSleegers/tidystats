@@ -1,24 +1,24 @@
 {
   "sleep_test": {
-    "method": "Paired t-test",
-    "var_equal": true,
+    "method": "Welch Two Sample t-test",
+    "var_equal": false,
     "name": "extra by group",
     "statistics": {
       "estimate": {
         "name": "mean difference",
         "value": -1.58
       },
-      "SE": 0.388959,
+      "SE": 0.849091,
       "statistic": {
         "name": "t",
-        "value": -4.062128
+        "value": -1.860813
       },
-      "df": 9,
-      "p": 0.002833,
+      "df": 17.776474,
+      "p": 0.079394,
       "CI": {
         "CI_level": 0.95,
-        "CI_lower": -2.459886,
-        "CI_upper": -0.700114
+        "CI_lower": -3.365483,
+        "CI_upper": 0.205483
       }
     },
     "alternative": {
@@ -34,18 +34,18 @@
   "lm_D9": {
     "method": "Linear regression",
     "statistics": {
-      "r_squared": 0.073078,
-      "adjusted_r_squared": 0.021582,
+      "r_squared": 0.006322,
+      "adjusted_r_squared": -0.048883,
       "statistic": {
         "name": "F",
-        "value": 1.419101
+        "value": 0.114516
       },
       "dfs": {
         "df_numerator": 1,
         "df_denominator": 18
       },
-      "p": 0.249023,
-      "sigma": 0.696389
+      "p": 0.738976,
+      "sigma": 0.72103
     },
     "terms": [
       {
@@ -53,15 +53,15 @@
         "statistics": {
           "estimate": {
             "name": "b",
-            "value": 5.032
+            "value": 4.878
           },
-          "SE": 0.220218,
+          "SE": 0.186169,
           "statistic": {
             "name": "t",
-            "value": 22.850117
+            "value": 26.201974
           },
           "df": 18,
-          "p": 9.547128e-15
+          "p": 8.701813e-16
         }
       },
       {
@@ -69,15 +69,15 @@
         "statistics": {
           "estimate": {
             "name": "b",
-            "value": -0.371
+            "value": -0.126
           },
-          "SE": 0.311435,
+          "SE": 0.372338,
           "statistic": {
             "name": "t",
-            "value": -1.19126
+            "value": -0.338402
           },
           "df": 18,
-          "p": 0.249023
+          "p": 0.738976
         }
       }
     ],
@@ -91,35 +91,19 @@
     "method": "ANOVA",
     "terms": [
       {
-        "name": "block",
-        "statistics": {
-          "SS": 343.295,
-          "MS": 68.659,
-          "statistic": {
-            "name": "F",
-            "value": 4.446666
-          },
-          "dfs": {
-            "df_numerator": 5,
-            "df_denominator": 12
-          },
-          "p": 0.015939
-        }
-      },
-      {
         "name": "N",
         "statistics": {
           "SS": 189.281667,
           "MS": 189.281667,
           "statistic": {
             "name": "F",
-            "value": 12.258734
+            "value": 6.160761
           },
           "dfs": {
             "df_numerator": 1,
-            "df_denominator": 12
+            "df_denominator": 16
           },
-          "p": 0.004372
+          "p": 0.024542
         }
       },
       {
@@ -129,13 +113,13 @@
           "MS": 8.401667,
           "statistic": {
             "name": "F",
-            "value": 0.54413
+            "value": 0.273458
           },
           "dfs": {
             "df_numerator": 1,
-            "df_denominator": 12
+            "df_denominator": 16
           },
-          "p": 0.474904
+          "p": 0.608188
         }
       },
       {
@@ -145,13 +129,13 @@
           "MS": 95.201667,
           "statistic": {
             "name": "F",
-            "value": 6.165689
+            "value": 3.098634
           },
           "dfs": {
             "df_numerator": 1,
-            "df_denominator": 12
+            "df_denominator": 16
           },
-          "p": 0.028795
+          "p": 0.097458
         }
       },
       {
@@ -161,13 +145,13 @@
           "MS": 21.281667,
           "statistic": {
             "name": "F",
-            "value": 1.378297
+            "value": 0.692678
           },
           "dfs": {
             "df_numerator": 1,
-            "df_denominator": 12
+            "df_denominator": 16
           },
-          "p": 0.263165
+          "p": 0.417505
         }
       },
       {
@@ -177,13 +161,13 @@
           "MS": 33.135,
           "statistic": {
             "name": "F",
-            "value": 2.145972
+            "value": 1.078482
           },
           "dfs": {
             "df_numerator": 1,
-            "df_denominator": 12
+            "df_denominator": 16
           },
-          "p": 0.168648
+          "p": 0.314478
         }
       },
       {
@@ -193,21 +177,37 @@
           "MS": 0.481667,
           "statistic": {
             "name": "F",
-            "value": 0.031195
+            "value": 0.015677
           },
           "dfs": {
             "df_numerator": 1,
-            "df_denominator": 12
+            "df_denominator": 16
           },
-          "p": 0.862752
+          "p": 0.901918
+        }
+      },
+      {
+        "name": "N:P:K",
+        "statistics": {
+          "SS": 37.001667,
+          "MS": 37.001667,
+          "statistic": {
+            "name": "F",
+            "value": 1.204334
+          },
+          "dfs": {
+            "df_numerator": 1,
+            "df_denominator": 16
+          },
+          "p": 0.288699
         }
       },
       {
         "name": "Residuals",
         "statistics": {
-          "SS": 185.286667,
-          "MS": 15.440556,
-          "df": 12
+          "SS": 491.58,
+          "MS": 30.72375,
+          "df": 16
         }
       }
     ],

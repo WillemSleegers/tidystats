@@ -1,0 +1,21 @@
+{
+  "generic_ICs": {
+    "method": "Generic test",
+    "statistics": {
+      "BIC": 21.21,
+      "AIC": 478.21
+    },
+    "notes": "Wagenmakers (2007) method for calculating Bayes factors"
+  },
+  "generic_CIs": {
+    "method": "Generic test",
+    "statistics": {
+      "CI": {
+        "CI_level": 0.95,
+        "CI_upper": 0.64,
+        "CI_lower": 0.32
+      }
+    },
+    "notes": "Just some random CIs"
+  }
+}

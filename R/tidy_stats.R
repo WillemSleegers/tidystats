@@ -77,1901 +77,1291 @@
 #' str(list_sleep_test)
 #' 
 #' @export
-tidy_stats <- function(x, args = NULL) UseMethod("tidy_stats")
+tidy_stats <- function(x) UseMethod("tidy_stats")
 
 #' @describeIn tidy_stats tidy_stats method for class 'htest'
 #' @export
-tidy_stats.htest <- function(x, args = NULL) {
-  # Create the analysis list and set the name
-  analysis <- list(name = x$data.name)
+tidy_stats.htest <- function(x) {
+
+  output <- list()
+
+  # Extract method
+  method <- x$method
   
-  # Extract and clean up the method
-  method <- dplyr::case_when(
-    stringr::str_detect(x$method, "simulated p-value") ~ 
-      stringr::str_replace(x$method, "simulated p-value(.|\n|\t)+", 
-        "(with simulated p-value)"),
-    stringr::str_detect(x$method, "with continuity correction") ~ 
-      stringr::str_replace(x$method, "with continuity correction", 
-        "(with continuity correction)"),
-    stringr::str_detect(x$method, "without continuity correction") ~ 
-      stringr::str_replace(x$method, "without continuity correction", 
-        "(without continuity correction)"),
-    stringr::str_detect(x$method, "hybrid using asym") ~
-      stringr::str_replace(x$method, "hybrid using asym(.)+", "(hybrid)"),
-    stringr::str_detect(x$method, "Two Sample t-test") ~ trimws(x$method),
-    stringr::str_detect(x$method, "One-way analysis of means") ~ 
-      "One-way analysis of means",
-    TRUE ~ x$method
-  )
+  # Extract number of simulations from Fisher's test based on simulated p-values
+  if (stringr::str_detect(method, "simulated p-value")) {
+    output$method <- "Fisher's Exact Test for Count Data with simulated p-value"
+
+    output$sim <- as.numeric(stringr::str_extract(method, 
+      "[0-9](e\\+)?([0-9].)?"))
+  # Extract parameters from Fisher's test using sym. chisq
+  } else if (stringr::str_detect(method, "hybrid using asym")) {
+    output$method <- paste("Fisher's Exact Test for Count Data",
+      "hybrid using asym.chisq")
+
+    hybridPars <- list()
+
+    hybridPars$expect = readr::parse_number(stringr::str_extract(method,
+      "exp=[0-9+]"))
+    hybridPars$percent = readr::parse_number(stringr::str_extract(method,
+      "perc=[0-9+]"))
+    hybridPars$Emin = readr::parse_number(stringr::str_extract(method,
+      "exp=[0-9+]"))
+
+    output$hybrid_parameters <- hybridPars
+  } else if (stringr::str_detect(method, "Two Sample t-test")) {
+    # (use trimws to remove the leading space from a Two Sample t-test)
+    method <- trimws(method)
+    output$method <- method
+    
+    if (stringr::str_detect(method, "Welch")) {
+      output$var_equal <- FALSE
+    } else {
+      output$var_equal <- TRUE
+    }
+    
+  } else if (stringr::str_detect(method, 
+      "One-way analysis of means \\(not assuming equal variances\\)")) {
+    output$method <- "One-way analysis of means"
+    output$var_equal <- FALSE
+  } else {
+    output$method <- method
+    output$var_equal <- TRUE
+  }
+
+  # Extract DV and IV information
+  output$name <- x$data.name
   
-  # Add method to the analysis
-  analysis$method <- method
-  
-  # Create a list to add the statistics to
+  # Extract statistics
   statistics <- list()
 
-  # Extract statistics and add them to the statistics list, taking into account
-  # several special cases
-  # Special case: Calculate estimate for Two Sample t-tests
+  # Estimate
   if (!is.null(x$estimate)) {
+    estimate <- list()
     
-    # Special case: Calculate the estimate as a mean difference in the case of
-    # a two sample t-test
-    # Special case: If there is more than 1 estimate, set the estimate to
-    # NULL to skip it
-    if (stringr::str_detect(method, "Two Sample t-test")) {
-      value <- x$estimate[[1]] - x$estimate[[2]]
-    } else if (length(x$estimate) > 1) {
-      value <- NULL
+    # Special case: Calculate estimate for Two Sample t-tests
+     if (length(x$estimate) > 1) {
+      estimate_name <- "mean difference"
+      estimate_value <- x$estimate[[1]] - x$estimate[[2]]
     } else {
-      value <- x$estimate[[1]]
+      estimate_name <- names(x$estimate)
+      estimate_value <- x$estimate[[1]]
     }
-    
-    # Set the name
-    name <- dplyr::case_when(
-      method == "One Sample t-test" ~ "mean",
-      stringr::str_detect(method, "Two Sample t-test") | 
-        method == "Paired t-test"~ "mean difference",
-      names(x$estimate)[1] == "ratio of variances" ~ "variance ratio",
-      TRUE ~ names(x$estimate)
-    )
-    
-    # Set the symbol
-    # Explicitly ask for the first element because sometimes there are more, in
-    # which case case_when() returns multiple values
-    symbol <- dplyr::case_when(
-      names(x$estimate)[1] == "cor" ~ "r",
-      names(x$estimate)[1] == "tau" ~ "r",
-      names(x$estimate)[1] == "rho" ~ "r",
-      names(x$estimate)[1] == "odds ratio" ~ "OR",
-      names(x$estimate)[1] == "p" ~ "p̂",
-      names(x$estimate)[1] == "difference in location" ~ "Mdn",
-      names(x$estimate)[1] == "ratio of variances" ~ "VR",
-      stringr::str_detect(method, "t-test") ~ "M"
-    )
-  
-    # Special case: In the case of a paired t-test and two sample t-test (Welch
-    # or not), set the subscript to 'difference'
-    subscript <- dplyr::case_when(
-      stringr::str_detect(method, "Two Sample t-test") | 
-        method == "Paired t-test" ~ "diff.",
-      names(x$estimate)[1] == "tau" ~ "τ",
-      names(x$estimate)[1] == "rho" ~ "S",
-      names(x$estimate)[1] == "difference in location" ~ "diff.",
-    )
-    
-    statistics <- add_statistic(statistics, "estimate", value, symbol, 
-      subscript, "CI", attr(x$conf.int, "conf.level"), x$conf.int[1], 
-      x$conf.int[2])
-  }
 
-  statistics <- add_statistic(statistics, "SE", x$stderr)
-  
-  # Set the symbol of the statistic
-  if (!is.null(names(x$statistic))) {
-    symbol <- dplyr::case_when(
-      names(x$statistic) == "X-squared" ~ "χ²",
-      names(x$statistic) == "Kruskal-Wallis chi-squared" ~ "χ²",
-      names(x$statistic) == "D^+" ~ "D",
-      names(x$statistic) == "D^-" ~ "D",
-      TRUE ~ names(x$statistic)
-    )  
+    estimate$name <- dplyr::case_when(
+      x$method == "One Sample t-test" ~ "mean",
+      x$method == "Paired t-test" ~ "mean difference",
+      TRUE ~ estimate_name
+    )
+    estimate$value <- estimate_value
+    
+    statistics$estimate <- estimate 
   }
   
-  statistics <- add_statistic(statistics, "statistic", x$statistic[[1]], symbol)
+  # SE
+  if (!is.null(x$stderr)) {
+    statistics$SE <- x$stderr
+  }
   
-  # Special case: One-way analysis of means has more than 1 df
+  # Test statistic
+  if (!is.null(x$statistic)) {
+    statistic <- list()
+    statistic$name <- names(x$statistic)
+    statistic$value <- x$statistic[[1]]
+    statistics$statistic <- statistic
+  }
+  
+  # Degrees of freedom
+  # Special case: One-way analysis of means without equal variance assumption
   if (length(x$parameter) > 1) {
-    statistics <- add_statistic(statistics, "df numerator", x$parameter[[1]], 
-      "df", "num.")
-    statistics <- add_statistic(statistics, "df denominator", 
-      x$parameter[[2]], "df", "den.")
+    dfs <- list()
+    dfs$df_numerator <- x$parameter[[1]]
+    dfs$df_denominator <- x$parameter[[2]]
+    statistics$dfs <- dfs
   } else {
-    statistics <- add_statistic(statistics, "df", x$parameter[[1]])
+    statistics$df <- x$parameter[[1]]
   }
   
-  statistics <- add_statistic(statistics, "p", x$p.value)
-
-  # Add statistics to the analysis
-  analysis$statistics <- statistics
+  # p-value
+  statistics$p <- x$p.value
   
-  # Add additional information
+  # Extract confidence intervals
+  if (!is.null(x$conf.int)) {
+    CIs <- list()
+
+    CIs$CI_level <- attr(x$conf.int, "conf.level")
+    CIs$CI_lower <- x$conf.int[1]
+    CIs$CI_upper <- x$conf.int[2]
+
+    statistics$CI <- CIs
+  }
+
+  # Add statistics to output
+  output$statistics <- statistics
+  
+  # Add alternative hypothesis information
   if (!is.null(x$alternative)) {
-    alternative <- list(direction = x$alternative)
-    
-    if (!is.null(x$null.value)) {
-      alternative$null_value <- x$null.value[[1]]
-    }
+    alternative <- list()
 
-    analysis$alternative <- alternative
+    alternative$direction <- x$alternative
+    alternative$null_value <- x$null.value[[1]]
+
+    # Add alternative hypothesis information to output
+    output$alternative <- alternative
   }
 
-  if (stringr::str_detect(x$method, "simulated p-value")) {
-    analysis$sim <- as.numeric(stringr::str_extract(x$method, 
-      "[0-9](e\\+)?([0-9].)?"))
-  }
-  
-  if (stringr::str_detect(x$method, "hybrid")) {
-    analysis$hybrid_parameters <- list(
-      expect = readr::parse_number(
-        stringr::str_extract(x$method, "exp=[0-9+]")
-      ),
-      percent = readr::parse_number(stringr::str_extract(x$method, 
-        "perc=[0-9+]")), 
-      Emin = readr::parse_number(stringr::str_extract(x$method, "exp=[0-9+]"))
-    )
-  }
-  
-  if (x$method == "Welch Two Sample t-test") {
-    analysis$var_equal <- FALSE
-  } else if (x$method == " Two Sample t-test") {
-    analysis$var_equal <- TRUE
-  } else if (x$method == "One-way analysis of means") {
-    analysis$var_equal <- TRUE
-  } else if (stringr::str_detect(x$method, 
-      "\\(not assuming equal variances\\)")) {
-    analysis$var_equal <- FALSE  
-  }
-  
   # Add package information
-  analysis <- add_package_info(analysis, "stats")
-  
-  return(analysis)
+  package <- list()
+
+  package$name <- "stats"
+  package$version <- getNamespaceVersion("stats")[[1]]
+
+  # Add package information to output
+  output$package <- package
+
+  return(output)
 }
 
 #' @describeIn tidy_stats tidy_stats method for class 'lm'
 #' @export
-tidy_stats.lm <- function(x, args = NULL) {
-  # Create the analysis list and set the name and method
-  analysis <- list(
-    name = deparse(x$call[[2]]),
-    method = "Linear regression"
-  )
+tidy_stats.lm <- function(x) {
+
+  output <- list()
   
   # Get summary statistics
   summary <- summary(x)
+
+  # Extract method
+  output$method <- "Linear regression"
   
-  # Model fit
-  # Create a group and statistics list for the model fit statistics
-  group <- list(name = "Model")
+  # Extract model statistics
   statistics <- list()
   
-  # Extract and add statistics to the statistics list
-  statistics <- add_statistic(statistics, "R squared", summary$r.squared, "R²")
-  statistics <- add_statistic(statistics, "adj. R squared", 
-    summary$adj.r.squared, "R²", "adj.")
-  statistics <- add_statistic(statistics, "statistic", summary$fstatistic[[1]], 
-    "F")
-  statistics <- add_statistic(statistics, "df numerator", 
-    summary$fstatistic[[2]], "df", "num.")
-  statistics <- add_statistic(statistics, "df denominator", 
-    summary$fstatistic[[3]], "df", "den.")
-  statistics <- add_statistic(statistics, "p", 
-    stats::pf(summary$fstatistic[[1]], summary$fstatistic[[2]], 
-      summary$fstatistic[[3]], lower.tail = FALSE))
-  statistics <- add_statistic(statistics, "sigma", summary$sigma, "s", 
-    "res.")
-
-  # Add statistics to the group
-  group$statistics <- statistics
+  statistics$r_squared <- summary$r.squared
+  statistics$adjusted_r_squared <- summary$adj.r.squared
   
-  # Add the model group to a groups element on the analysis
-  analysis$groups <- append(analysis$groups, list(group))
+  statistic <- list()
+  statistic$name <- "F"
+  statistic$value <- summary$fstatistic[[1]]
+  statistics$statistic <- statistic
   
-  # Create a groups list for the coefficients
-  groups <- list(name = "Coefficients")
+  dfs <- list()
+  dfs$df_numerator <- summary$fstatistic[[2]]
+  dfs$df_denominator <- summary$fstatistic[[3]]
+  statistics$dfs <- dfs
   
-  # Extract statistics of the coefficients
-  coefs <- stats::coef(summary)
+  statistics$p <- stats::pf(summary$fstatistic[[1]], summary$fstatistic[[2]], 
+    summary$fstatistic[[3]], lower.tail = FALSE)
+  statistics$sigma <- summary$sigma
   
-  # Loop over the coefficients and add statistics to a group list
-  for (i in 1:nrow(coefs)) {
-    # Create a new group list
-    group <- list()
+  # Add statistics to output
+  output$statistics <- statistics
+  
+  # Extract statistics of the coefficients, although we will call them 'terms'
+  coefficients <- stats::coef(summary)
+  
+  # Create an empty terms list
+  terms <- list()
+  
+  for (i in 1:nrow(coefficients)) {
     
-    # Add the name and type of the coefficient
-    group$name <- rownames(coefs)[i]
+    # Create a new term list
+    term <- list()
     
-    # Create a new statistics list 
-    statistics <- list()
-    
-    statistics <- add_statistic(statistics, "estimate", coefs[i, "Estimate"], 
-      "b")
-    statistics <- add_statistic(statistics, "SE", coefs[i, "Std. Error"])
-    statistics <- add_statistic(statistics, "statistic", coefs[i, "t value"], 
-      "t")
-    statistics <- add_statistic(statistics, "df", summary$df[2])
-    statistics <- add_statistic(statistics, "p", coefs[i, "Pr(>|t|)"])
-    
-    # Add statistics to the group
-    group$statistics <- statistics
-    
-    # Add the group to the groups of the coefficients groups list
-    groups$groups <- append(groups$groups, list(group))
-  }
-  
-  # Add the coefficient groups to the statistics list
-  analysis$groups <- append(analysis$groups, list(groups))
-  
-  # Add package information
-  analysis <- add_package_info(analysis, "stats")
-  
-  return(analysis)
-}
-
-#' @describeIn tidy_stats tidy_stats method for class 'glm'
-#' @export
-tidy_stats.glm <- function(x, args = NULL) {
-  # Create the analysis list and set the name and method
-  analysis <- list(
-    name = deparse(x$call[[2]]),
-    method = "Generalized linear regression"
-  )
-  
-  # Get summary statistics
-  summary <- summary(x)
-  
-  # Model fit
-  # Create a group and statistics list for the model fit statistics
-  group <- list(name = "Model")
-  statistics <- list()
-  
-  # Extract and add statistics to the statistics list
-  statistics <- add_statistic(statistics, "null deviance", 
-    summary$null.deviance, "D", "null")
-  statistics <- add_statistic(statistics, "residual deviance", summary$deviance,
-    "D", "res.")
-  statistics <- add_statistic(statistics, "null df", summary$df.null, "df", 
-    "null")
-  statistics <- add_statistic(statistics, "residual df", summary$df.residual,
-    "df", "res.")
-  statistics <- add_statistic(statistics, "AIC", summary$aic)
-  
-  # Add statistics to the model group
-  group$statistics <- statistics
-  
-  # Add the group to a statistics element on the analysis
-  analysis$groups <- append(analysis$groups, list(group))
-  
-  # Create a (new) groups list for the coefficients
-  groups <- list(name = "Coefficients")
-  
-  # Extract statistics of the coefficients
-  coefs <- stats::coef(summary)
-  
-  # Loop over the coefficients and add statistics to a group list
-  for (i in 1:nrow(coefs)) {
-    # Create a new group list
-    group <- list()
-    
-    # Add the name and type of the coefficient
-    group$name <- rownames(coefs)[i]
-    
-    # Create a new statistics list 
-    statistics <- list()
-    
-    statistics <- add_statistic(statistics, "estimate", coefs[i, "Estimate"], 
-      "b")
-    statistics <- add_statistic(statistics, "SE", coefs[i, "Std. Error"])
-    statistics <- add_statistic(statistics, "statistic", coefs[i, 3], 
-      dplyr::if_else(colnames(coefs)[3] == "z value", "z", "t"))
-    statistics <- add_statistic(statistics, "df", summary$df[2])
-    statistics <- add_statistic(statistics, "p", coefs[i, 4])
-    
-    # Add statistics to the group
-    group$statistics <- statistics
-    
-    # Add the group to the groups of the coefficients groups list
-    groups$groups <- append(groups$groups, list(group))
-  }
-  
-  # Add the coefficient groups to the statistics list
-  analysis$groups <- append(analysis$groups, list(groups))
-  
-  # Add additional information
-  analysis$family <- x$family$family
-  analysis$link <- x$family$link
-  
-  if (!is.null(summary$dispersion)) {
-    analysis$dispersion <- summary$dispersion
-  }
-  
-  if (!is.null(summary$fisher_scoring_iterations)) {
-    analysis$iterations <- summary$iter
-  }
-  
-  # Add package information
-  analysis <- add_package_info(analysis, "stats")
-  
-  return(analysis)
-}
-
-#' @describeIn tidy_stats tidy_stats method for class 'anova'
-#' @export
-tidy_stats.anova <- function(x, args = NULL) {
-  # Create the analysis list
-  analysis <- list()
-  
-  # Extract the heading
-  heading <- attr(x, "heading")
-  
-  # Determine the method
-  if (stringr::str_detect(heading[1], "Analysis of Deviance")) {
-    method <- "ANODE"
-  } else {
-    method <- "ANOVA"
-  }
-  
-  # Determine and set the name, if there is one
-  if (sum(stringr::str_detect(heading, "Response: ")) > 0) {
-    if (length(heading) == 1) {
-      analysis$name <- paste(
-        stringr::str_extract(heading, "(?<=Response: ).*"), " ~ ",
-        paste(rownames(x)[-1], collapse = " + ")
-      )
-    } else {
-      analysis$name <- paste(
-        stringr::str_extract(heading[2], "(?<=Response: ).*"), " ~ ",
-        paste(rownames(x)[-length(x)], collapse = " + ")
-      )
-    }
-  }
-  
-  # Check whether multiple models are being compared
-  if (sum(str_detect(heading, "Models: ")) > 0) {
-    model_comparison = TRUE
-  } else {
-    model_comparison = FALSE
-  }
-  
-  # Set the method
-  analysis$method <- method
-  
-  # Trim spaces from the rownames
-  rownames(x) <- stringr::str_trim(rownames(x))
-  
-  # Replace the numeric names with model names in case of a model comparison
-  # ANOVA
-  if (model_comparison) {
-    x$name <- stringr::str_remove(
-      unlist(stringr::str_split(
-        heading[2], "\n")
-      ), "Model [0-9+]: "
-    )  
-  }
-  
-  # Replace NULL with (Intercept) in the case of a single model ANODE
-  if (!model_comparison & method == "ANODE") {
-    if (rownames(x)[1] == "NULL") {
-      rownames(x)[1] <- "(Intercept)"
-    }
-  }
-  
-  # Create an empty groups list to add model or term statistics to
-  groups <- list(name = dplyr::if_else(model_comparison, "Models", "Terms"))
-  
-  # Loop over each row 
-  for (i in 1:nrow(x)) {
-    # Create a new group list
-    group <- list(name = x$name[i])
-    
-    # Create a new statistics list and add statistics
-    statistics <- list()
-    
-    statistics <- add_statistic(statistics, "n parameters", x$npar[i], "k")
-    statistics <- add_statistic(statistics, "AIC", x$AIC[i])
-    statistics <- add_statistic(statistics, "BIC", x$BIC[i])
-    statistics <- add_statistic(statistics, "log likelihood", x$logLik[i], "l")
-    statistics <- add_statistic(statistics, "deviance", x$deviance[i], "D")
-    statistics <- add_statistic(statistics, "deviance", x$Deviance[i], "D")
-    statistics <- add_statistic(statistics, "residual deviance", 
-      x$`Resid. Dev`[i], "D", "res.")
-    statistics <- add_statistic(statistics, "RSS", x$RSS[i])
-    statistics <- add_statistic(statistics, "SS", x$`Sum Sq`[i])
-    statistics <- add_statistic(statistics, "SS", x$`Sum of Sq`[i])
-    statistics <- add_statistic(statistics, "MS", x$`Mean Sq`[i])
-    statistics <- add_statistic(statistics, "statistic", x$Chisq[i], 
-      "χ²")
-    statistics <- add_statistic(statistics, "statistic", x$`F value`[i], "F")
-    statistics <- add_statistic(statistics, "statistic", x$`F`[i], "F")
-    
-    # Special case: Degrees of freedom
-    if (method == "ANOVA" & !model_comparison) {
-      if (rownames(x)[i] != "Residuals") {
-        statistics <- add_statistic(statistics, "df numerator", x$Df[i], "df",
-          "num.")
-        statistics <- add_statistic(statistics, "df denominator", 
-          x$Df[[nrow(x)]], "df", "den.")
-      } else {
-        statistics <- add_statistic(statistics, "df", x$Df[i])
-      }
-    } else {
-      statistics <- add_statistic(statistics, "df", x$Df[i])
-      statistics <- add_statistic(statistics, "residual df", x$Res.Df[i], "df",
-        "res.")
-      statistics <- add_statistic(statistics, "residual df", x$`Res. Df`[i], 
-        "df", "res.")
-      statistics <- add_statistic(statistics, "df numerator", x$NumDF[i], "df",
-        "num.")
-      statistics <- add_statistic(statistics, "df denominator", x$DenDF[i], 
-        "df", "den.")
-    }
-    
-    statistics <- add_statistic(statistics, "Rao", x$Rao[i])
-    statistics <- add_statistic(statistics, "p", x$`Pr(>F)`[i])
-    statistics <- add_statistic(statistics, "p", x$`Pr(>Chisq)`[i])
-    statistics <- add_statistic(statistics, "Cp", x$Cp[i])
-    
-    # Add statistics to the group
-    group$statistics <- statistics
-    
-    # Add the group to the groups list
-    groups$groups <- append(groups$groups, list(group))
-  }
-  
-  # Add the groups to the groups list on the analysis list
-  analysis$groups <- append(analysis$groups, list(groups))
-  
-  # Add additional information
-  if (method == "ANODE" & model_comparison) {
-    analysis$family <- stringr::str_extract(heading, "(?<=Model: ).*(?=,)")
-    analysis$link <- stringr::str_extract(heading, "(?<=link: ).*")
-  }
-  
-  # Add package information
-  analysis <- add_package_info(analysis, "stats")
-  
-  return(analysis)
-}
-
-#' @describeIn tidy_stats tidy_stats method for class 'anova.lme'
-#' @export
-tidy_stats.anova.lme <- function(x, args = NULL) {
-  # Create the analysis list
-  analysis <- list()
-
-  # Set method
-  analysis$method <- "ANOVA"
-  
-  # Create a groups list to add model or term statistics to
-  groups <- list(name = dplyr::if_else("Model" %in% colnames(x), "Models", 
-    "Terms"))
-  
-  # Loop over the models or terms
-  for (i in 1:length(rownames(x))) {
-    # Create a group list and set the name
-    group <- list(name = rownames(x)[i])
-    
-    # Create a statistics list and add statistics
-    statistics <- list()
-    
-    statistics <- add_statistic(statistics, "AIC", x$AIC[i])
-    statistics <- add_statistic(statistics, "BIC", x$BIC[i])
-    statistics <- add_statistic(statistics, "log likelihood", x$logLik[i], "l")
-    statistics <- add_statistic(statistics, "likelihood ratio", x$L.Ratio[i], 
-      "LR")
-    statistics <- add_statistic(statistics, "df", x$df[i])
-    statistics <- add_statistic(statistics, "df numerator", x$NumDF[i], "df",
-      "num.")
-    statistics <- add_statistic(statistics, "df denominator", x$DenDF[i], "df",
-      "den.")
-    statistics <- add_statistic(statistics, "statistic", x$`F-value`[i], "F")
-    statistics <- add_statistic(statistics, "p", x$p-value[i])
-
-    # Add the statistics to the group
-    group$statistics <- statistics
-    
-    # Add the group to the groups list
-    groups$groups <- append(groups$groups, list(group))
-  }
-  
-  # Add the groups to the analysis list
-  analysis$groups <- append(analysis$groups, list(groups))
-
-  # Add package information
-  analysis <- add_package_info(analysis, "nlme")
-  
-  return(analysis)
-}
-
-#' @describeIn tidy_stats tidy_stats method for class 'aov'
-#' @export
-tidy_stats.aov <- function(x, args = NULL) {
-  # Create the analysis list and set the name and method
-  analysis <- list(
-    name = deparse(x$call[[2]]),
-    method = "ANOVA"
-  )
-  
-  # Get term statistics
-  terms <- summary(x)[[1]]
-  
-  # Trim spaces from the names of the terms
-  rownames(terms) <- stringr::str_trim(rownames(terms))
-  
-  # Create an empty groups list to add term statistics to
-  groups <- list(name = "Terms")
-  
-  # Loop over the terms 
-  for (i in 1:nrow(terms)) {
-    # Create a new group list
-    group <- list(name = rownames(terms)[i])
+    # Add the name of the term
+    name = rownames(coefficients)[i]
+    term$name <- name
     
     # Create a new statistics list and add the term's statistics
     statistics <- list()
     
-    statistics <- add_statistic(statistics, "SS", terms$`Sum Sq`[i])
-    statistics <- add_statistic(statistics, "MS", terms$`Mean Sq`[i])
+    estimate <- list()
+    estimate$name <- "b"
+    estimate$value <- coefficients[i, "Estimate"]
+    statistics$estimate <- estimate
     
-    # Special case: Extract different statistics depending on whether the term
-    # is the Residuals term or not
-    if (i != nrow(terms)) {
-      statistics <- add_statistic(statistics, "statistic", terms$`F value`[i], 
-        "F")
-      statistics <- add_statistic(statistics, "df numerator", terms$Df[i], "df",
-        "num.")
-      statistics <- add_statistic(statistics, "df denominator", 
-        terms$Df[[nrow(terms)]], "df", "den.")
-      
-      statistics <- add_statistic(statistics, "p", terms$`Pr(>F)`[i])
-    } else {
-      statistics <- add_statistic(statistics, "df", terms$Df[i])
-    }
+    statistics$SE <- coefficients[i, "Std. Error"]
     
-    # Add statistics to the group
-    group$statistics <- statistics
+    statistic <- list()
+    statistic$name <- "t"
+    statistic$value <- coefficients[i, "t value"]
+    statistics$statistic <- statistic
     
-    # Add the group to the groups list
-    groups$groups <- append(groups$groups, list(group))
+    statistics$df <- summary$df[2]
+    
+    statistics$p <- coefficients[i, "Pr(>|t|)"]
+    
+    term$statistics <- statistics
+    
+    # Add the term data to the terms list
+    terms[[i]] <- term
   }
   
-  # Add the groups to the groups list on the analysis list
-  analysis$groups <- append(analysis$groups, list(groups))
+  # Add terms to output
+  output$terms <- terms
   
   # Add package information
-  analysis <- add_package_info(analysis, "stats")
+  package <- list()
+
+  package$name <- "stats"
+  package$version <- getNamespaceVersion("stats")[[1]]
+
+  # Add package information to output
+  output$package <- package
   
-  return(analysis)
+  return(output)
+}
+
+#' @describeIn tidy_stats tidy_stats method for class 'glm'
+#' @export
+tidy_stats.glm <- function(x) {
+
+  output <- list()
+  
+  # Get summary statistics
+  summary <- summary(x)
+
+  # Extract method
+  output$method <- "Linear regression"
+  
+  # Extract model statistics
+  statistics <- list()
+  
+  statistics$deviance_null <- summary$null.deviance
+  statistics$deviance_residual <- summary$deviance
+  
+  dfs <- list()
+  dfs$df_null <- summary$df.null
+  dfs$df_residual <- summary$df.residual
+  statistics$dfs <- dfs
+  
+  statistics$AIC <- summary$aic
+  
+  # Add model fit statistics to output
+  output$statistics <- statistics
+  
+  # Extract statistics of the coefficients, although we will call them 'terms'
+  coefficients <- stats::coef(summary)
+  
+  # Create an empty terms list
+  terms <- list()
+  
+  for (i in 1:nrow(coefficients)) {
+    
+    # Create a new term list
+    term <- list()
+    
+    # Add the name of the term
+    term$name <- rownames(coefficients)[i]
+    
+    # Create a new statistics list and add the term's statistics
+    statistics <- list()
+    
+    estimate <- list()
+    estimate$name <- "b"
+    estimate$value <- coefficients[i, "Estimate"]
+    statistics$estimate <- estimate
+    
+    statistics$SE <- coefficients[i, "Std. Error"]
+    
+    statistic <- list()
+    statistic$name <- ifelse(colnames(coefficients)[3] == "z value", "z", "t")
+    statistic$value <- coefficients[i, 3]
+    statistics$statistic <- statistic
+    
+    statistics$df <- summary$df[2]
+    
+    statistics$p <- coefficients[i, 4]
+    
+    term$statistics <- statistics
+    
+    # Add the term data to the terms list
+    terms[[i]] <- term
+  }
+  
+  # Add terms to output
+  output$terms <- terms
+  
+  # Add additional information
+  if (!is.null(summary$iter)) {
+    output$iterations <- summary$iter
+  }
+  
+  if (!is.null(summary$dispersion)) {
+    output$dispersion <- summary$dispersion
+  }
+  
+  # Add package information
+  package <- list()
+
+  package$name <- "stats"
+  package$version <- getNamespaceVersion("stats")[[1]]
+
+  # Add package information to output
+  output$package <- package
+  
+  return(output)
+}
+
+#' @describeIn tidy_stats tidy_stats method for class 'anova'
+#' @export
+tidy_stats.anova <- function(x) {
+  
+  output <- list()
+  
+  # Create an empty terms list
+  terms <- list()
+  
+  # Figure out whether it's an ANOVA or ANODE
+  heading = attr(x, "heading")
+  #TODO: Extract error distribution
+  #TODO: Extract link function
+  
+  # Convert the summary statistics format to a data frame
+  x <- tibble::as_tibble(x, rownames = "terms")
+  
+  # Determine method
+  if ("deviance" %in% tolower(names(x))) {
+    output$method <- "ANODE"
+  } else {
+    output$method <- "ANOVA"
+  }
+  
+  # Trim spaces from the names of the terms
+  x <- dplyr::mutate(x, terms = stringr::str_trim(terms))
+  
+  for (i in 1:nrow(x)) {
+    # Create a new term list
+    term <- list()
+    
+    # Add the name of the term
+    name <- x$terms[i]
+    term$name <- name
+    
+    # Create a new statistics list and add the term's statistics
+    statistics <- list()
+    
+    if ("npar" %in% colnames(x)) {statistics$n_parameters <- x$npar[i]}
+    if ("AIC" %in% colnames(x)) {statistics$AIC <- x$AIC[i]}
+    if ("BIC" %in% colnames(x)) {statistics$BIC <- x$BIC[i]}
+    if ("logLik" %in% colnames(x)) {statistics$log_likelihood <- x$logLik[i]}
+    if ("deviance" %in% colnames(x)) {
+      if (!is.na(x$deviance[i])) {
+        statistics$deviance = x$deviance[i]  
+      }
+    }
+    if ("Deviance" %in% colnames(x)) {
+      if (!is.na(x$Deviance[i])) {
+        statistics$deviance = x$Deviance[i]  
+      }
+    }
+    if ("Resid. Dev" %in% colnames(x)) {
+      if (!is.na(x$`Resid. Dev`[i])) {
+        statistics$deviance_residual = x$`Resid. Dev`[i]
+      }
+    }
+    if ("RSS" %in% colnames(x)) {statistics$RSS <- x$RSS[i]}
+    if ("Sum Sq" %in% colnames(x)) {statistics$SS <- x$`Sum Sq`[i]}
+    if ("Sum of Sq" %in% colnames(x)) {
+      if (!is.na(x$`Sum of Sq`[i])) {
+        statistics$SS <- x$`Sum of Sq`[i]
+      }
+    }
+    if ("Mean Sq" %in% colnames(x)) {statistics$MS <- x$`Mean Sq`[i]}
+    if ("Chisq" %in% colnames(x)) {
+      if (!is.na(x$Chisq[i])) {
+        statistic <- list()
+        statistic$name <- "chi-squared"
+        statistic$value <- x$Chisq[i]
+        statistics$statistic <- statistic
+      }
+    }
+    if ("F value" %in% colnames(x)) {
+      if (!is.na(x$`F value`[i])) {
+        statistic <- list()
+        statistic$name <- "F"
+        statistic$value <- x$`F value`[i]
+        statistics$statistic <- statistic
+      }
+    }
+    if ("F" %in% colnames(x)) {
+      if (!is.na(x$F[i])) {
+        statistic <- list()
+        statistic$name <- "F"
+        statistic$value <- x$F[i]
+        statistics$statistic <- statistic
+      }
+    }
+    if (name != "Residuals") {
+      if (x$terms[nrow(x)] == "Residuals") {
+        dfs <- list()
+        dfs$df_numerator <- x$Df[i]
+        dfs$df_denominator <- x$Df[nrow(x)]
+        statistics$dfs <- dfs
+      } else {
+        if ("Df" %in% colnames(x)) {
+          if (!is.na(x$Df[i])) {
+            if (!"Res.Df" %in% colnames(x) & !"Resid. Df" %in% colnames(x)) {
+              statistics$df <- x$Df[i]
+            } else {
+              dfs <- list()
+              dfs$df <- x$Df[i] # Call this df_numerator?
+              if ("Res.Df" %in% colnames(x)) {
+                dfs$df_residual <- x$Res.Df[i] # Call this df_denominator?
+              }
+              if ("Resid. Df" %in% colnames(x)) {
+                dfs$df_residual <- x$`Resid. Df`[i] # Call this df_denominator?
+              }
+              statistics$dfs <- dfs 
+            }
+          } else {
+            if ("Res.Df" %in% colnames(x)) {statistics$df <- x$Res.Df[i]}
+            if ("Resid. Df" %in% colnames(x)) {
+              statistics$df <- x$`Resid. Df`[i]
+            }
+          } 
+        }
+        if ("NumDF" %in% colnames(x)) {
+          statistics$dfs$df_numerator <- x$NumDF[i]
+          statistics$dfs$df_denominator <- x$DenDF[i]
+        }
+      }
+    } else {
+      if ("Df" %in% colnames(x)) {
+        statistics$df <- x$Df[i]
+      }
+    }
+    if ("Rao" %in% colnames(x)) {
+      if (!is.na(x$Rao[i])) {
+        statistics$rao <- x$Rao[i]
+      }
+    }
+    if ("Pr(>F)" %in% colnames(x)) {
+      if (!is.na(x$`Pr(>F)`[i])) {
+        statistics$p <- x$`Pr(>F)`[i]
+      }
+    }
+    if ("Pr(>Chi)" %in% colnames(x)) {
+      if (!is.na(x$`Pr(>Chi)`[i])) {
+        statistics$p <- x$`Pr(>Chi)`[i]
+      }
+    }
+    if ("Pr(>Chisq)" %in% colnames(x)) {
+      if (!is.na(x$`Pr(>Chisq)`[i])) {
+        statistics$p <- x$`Pr(>Chisq)`[i]
+      }
+    }
+    if ("Cp" %in% colnames(x)) {
+      statistics$cp <- x$Cp[i]
+    }
+    
+    # Add statistics to the term
+    term$statistics <- statistics
+    
+    # Add the term data to the coefficients list
+    terms[[i]] <- term
+  }
+  
+  # Add terms to the output
+  output$terms <- terms
+  
+  # Add package information
+  package <- list()
+
+  package$name <- "stats"
+  package$version <- getNamespaceVersion("stats")[[1]]
+
+  # Add package information to output
+  output$package <- package
+  
+  return(output)
+}
+
+#' @describeIn tidy_stats tidy_stats method for class 'aov'
+#' @export
+tidy_stats.aov <- function(x) {
+
+  output <- list()
+  
+  # Get summary statistics
+  summary <- summary(x)
+
+  # Extract method
+  output$method <- "ANOVA"
+  
+  # Create an empty terms list
+  terms <- list()
+  
+  # Convert the summary statistics format to a data frame
+  summary <- tibble::as_tibble(summary[[1]], rownames = "terms")
+  
+  # Trim spaces from the names of the terms
+  summary <- dplyr::mutate(summary, terms = stringr::str_trim(terms))
+  
+  for (i in 1:nrow(summary)) {
+    
+    # Create a new term list
+    term <- list()
+    
+    # Add the name of the term
+    name = summary$terms[i]
+    term$name <- name
+    
+    # Create a new statistics list and add the term's statistics
+    statistics <- list()
+    
+    statistics$SS <- summary$`Sum Sq`[i]
+    statistics$MS <- summary$`Mean Sq`[i]
+    
+    if (name != "Residuals") {
+      statistics$statistic$name <- "F"
+      statistics$statistic$value <- summary$`F value`[i]
+      
+      statistics$dfs$df_numerator <- summary$Df[i]
+      statistics$dfs$df_denominator <- summary$Df[nrow(summary)]
+    } else {
+      statistics$df <- summary$Df[i]
+    }
+    
+    if (name != "Residuals") {
+      statistics$p <- summary$`Pr(>F)`[i]
+    }
+    
+    term$statistics <- statistics
+    
+    # Add the term data to the coefficients list
+    terms[[i]] <- term
+  }
+  
+  # Add coefficients to the output
+  output$terms <- terms
+  
+  # Add package information
+  package <- list()
+
+  package$name <- "stats"
+  package$version <- getNamespaceVersion("stats")[[1]]
+
+  # Add package information to output
+  output$package <- package
+  
+  return(output)
 }
 
 #' @describeIn tidy_stats tidy_stats method for class 'aovlist'
 #' @export
-tidy_stats.aovlist <- function(x, args = NULL) {
-  # Create the analysis list and set the name and method
-  analysis <- list(
-    name = deparse(attr(x, "call")),
-    method = "ANOVA"
-  )
+tidy_stats.aovlist <- function(x) {
+
+  output <- list()
   
-  # Loop over the error strata
-  for (i in 1:length(names(summary(x)))) {
+  # Get summary statistics
+  summary <- summary(x)
+
+  # Extract method
+  output$method <- "ANOVA"
+  
+  # Create an empty groups list
+  groups <- list()
+  
+  for (i in 1:length(summary)) {
     
-    # Get term statistics of the current error stratum
-    terms <- summary(x)[[i]][[1]]
+    # Create an empty group
+    group <- list()
+    
+    # Set the group name
+    group$name <- stringr::str_remove(names(summary[i]), "Error: ")
+    
+    # Create an empty terms list
+    terms <- list()
+    
+    # Convert the summary statistics format to a data frame
+    summary_df <- tibble::as_tibble(as.data.frame(as.list.data.frame(
+      summary[[i]])), rownames = "terms")
     
     # Trim spaces from the names of the terms
-    rownames(terms) <- stringr::str_trim(rownames(terms))
+    summary_df <- dplyr::mutate(summary_df, terms = stringr::str_trim(terms))
     
-    # Create an empty groups list to add term statistics to of this error 
-    # stratum 
-    groups <- list(name = names(summary(x))[i])
+    for (j in 1:nrow(summary_df)) {
     
-    # Loop over the terms 
-    for (j in 1:nrow(y)) {
-      # Create a new group list
-      group <- list(name = rownames(terms)[j])
+      # Create a new term list
+      term <- list()
+      
+      # Add the name of the term
+      name = summary_df$terms[j]
+      term$name <- name
       
       # Create a new statistics list and add the term's statistics
       statistics <- list()
       
-      statistics <- add_statistic(statistics, "SS", terms$`Sum Sq`[j])
-      statistics <- add_statistic(statistics, "MS", terms$`Mean Sq`[j])
+      statistics$SS <- summary_df$`Sum.Sq`[j]
+      statistics$MS <- summary_df$`Mean.Sq`[j]
       
-      # Special case: Extract different statistics depending on whether the term
-      # is the Residuals term or not
-      if (j != nrow(terms)) {
-        statistics <- add_statistic(statistics, "statistic", terms$`F value`, 
-          "F")
-        statistics <- add_statistic(statistics, "df numerator", terms$Df[j], 
-          "df", "num.")
-        statistics <- add_statistic(statistics, "df denominator", 
-          terms$Df[[nrow(terms)]], "df", "den.")
-      } else {
-        statistics <- add_statistic(statistics, "df", terms$Df[j])
+      if (name != "Residuals") {
+        statistic <- list()
+        statistic$name <- "F"
+        statistic$value <- summary_df$`F.value`[j]
+        statistics$statistic <- statistic
       }
       
-      statistics <- add_statistic(statistics, "p", terms$`Pr(>F)`[j])
+      statistics$df <- summary_df$Df[j]
       
-      # Add statistics to the group
-      group$statistics <- statistics
-      
-      # Add the group to the groups list
-      groups$groups <- append(groups$groups, list(group))
+      if (name != "Residuals") {
+        statistics$p <- summary_df$Pr..F.[j]
+      }
+    
+      term$statistics <- statistics
+    
+      # Add the term data to the coefficients list
+      terms[[j]] <- term
     }
     
-    # Add the groups to the statistics of the error stratum
-    analysis$groups <- append(analysis$groups, list(groups))
+    # Add coefficients to the group
+    group$terms <- terms
+    
+    # Add group to the groups list
+    groups[[i]] <- group
   }
  
+  # Add groups to the output
+  output$groups <- groups
+ 
   # Add package information
-  analysis <- add_package_info(analysis, "stats")
+  package <- list()
+
+  package$name <- "stats"
+  package$version <- getNamespaceVersion("stats")[[1]]
+
+  # Add package information to output
+  output$package <- package
   
-  return(analysis)
+  return(output)
 }
 
 #' @describeIn tidy_stats tidy_stats method for class 'tidystats_descriptives'
 #' @export
-tidy_stats.tidystats_descriptives <- function(x, args = NULL) {
-  # Create the analysis list
-  analysis <- list()
+tidy_stats.tidystats_descriptives <- function(x) {
+
+  output <- list()
+  
+  # Add method
+  output$method <- "Descriptives"
   
   # Extract variable information
-  var_names <- unique(dplyr::pull(x, var))
-  
-  # Set the name if there is only 1 variable
-  if (length(var_names) == 1) {
-    analysis$name <- var_names
-  }
-  
-  # Set method
-  analysis$method <- "Descriptives"
-  
-  # Create a loop function to recursively create groups and extract the 
-  # statistics
-  loop <- function(df, list, group_names, depth) {
-    if (length(group_names) == depth) {
-      # Create a list to store the statistics in
-      statistics <- list()
-      
-      # Add statistics
-      statistics <- add_statistic(statistics, "missing", df$missing)
-      statistics <- add_statistic(statistics, "N", df$N)
-      statistics <- add_statistic(statistics, "mean", df$M, "M")
-      statistics <- add_statistic(statistics, "standard deviation", df$SD, "SD")
-      statistics <- add_statistic(statistics, "standard error", df$SE, "SE")
-      statistics <- add_statistic(statistics, "minimum", df$min, "min")
-      statistics <- add_statistic(statistics, "maximum", df$maxm, "max")
-      statistics <- add_statistic(statistics, "range", df$range)
-      statistics <- add_statistic(statistics, "median", df$median, "Mdn")
-      statistics <- add_statistic(statistics, "mode", df$mode)
-      statistics <- add_statistic(statistics, "skew", df$skew)
-      statistics <- add_statistic(statistics, "kurtosis", df$kurtosis)
-      
-      # Add statistics to the group
-      list$statistics <- statistics
-    } else {
-      # Increment the depth 
-      depth <- depth + 1
-      
-      # Create a groups list
-      groups <- list(name = group_names[depth])
-      
-      # Loop over the groups
-      for (group_name in unique(pull(df, groups$name))) {
-        # Subset the data so it only has data of the current group
-        df_group <- df[df[, depth + 1] == group_name, ]
-        
-        if (!is.na(group_name)) {
-          df_group <- dplyr::filter(df, 
-            dplyr::across(dplyr::all_of(groups$name), ~ . == group_name)
-          )
-        } else {
-          df_group <- dplyr::filter(df, 
-            dplyr::across(dplyr::all_of(groups$name), is.na)
-          )
-        }
-        
-        # Create a group list
-        group <- list(name = group_name)
-        
-        # Loop again
-        groups$groups <- append(groups$groups, list(loop(df_group, group, 
-          group_names, depth)))   
-      }
-      
-      # Add the groups to the list's groups
-      list$groups <- append(list$groups, list(groups))
-    }
-    
-    return(list)
-  }
+  var_name <- dplyr::first(dplyr::pull(x, var))
   
   # Extract grouping information
   group_names <- dplyr::group_vars(x)
+  n_groups <- length(group_names)
   
-  # Convert the data frame to a base data frame to disable warnings
-  df <- as.data.frame(x)
+  # Set the name property
+  output$name <- var_name
   
-  # Get the groups and statistics and loop over the variables if there are
-  # more than one
-  if (length(var_names) == 1) {
-    analysis <- loop(df, analysis, group_names, 0)
-  } else {
-    for (var_name in var_names) {
-      # Filter the data frame to have only the rows belonging to this variable
-      df_var <- dplyr::filter(df, var == var_name)
+  # Check whether there are any grouping variables and select the relevant
+  # row of descriptives
+  if (n_groups > 0) {
+    
+    # Set the grouping name
+    # If there is more than 1 grouping variable, combine them together
+    output$group_by = paste(group_names, collapse = " by ")
+    
+    # Create an empty groups list
+    groups <- list()
+    
+    # Loop over the groups
+    for (i in 1:nrow(x)) {
+      # Create an empty group list
+      group <- list()
       
-      # Create a list for the variable
-      group <- list(name = var_name)
+      # Select the current row
+      row <- x[i, ]
       
-      # Loop
-      group <- loop(df_var, group, group_names, 0)
+      # Set the group name
+      group$name <- paste(unlist(row[group_names]), collapse = " - ")
       
-      # Add the lists to the groups element of the analysis
-      analysis$groups <- append(analysis$groups, list(group))
+      # Extract statistics
+      statistics <- list()
+    
+      if ("missing" %in% names(row)) statistics$missing <- row$missing
+      if ("N" %in% names(row)) statistics$N <- row$N
+      if ("M" %in% names(row)) statistics$M <- row$M
+      if ("SD" %in% names(row)) statistics$SD <- row$SD
+      if ("SE" %in% names(row)) statistics$SE <- row$SE
+      if ("min" %in% names(row)) statistics$min <- row$min
+      if ("max" %in% names(row)) statistics$max <- row$max
+      if ("range" %in% names(row)) statistics$range <- row$range
+      if ("median" %in% names(row)) statistics$median <- row$median
+      if ("mode" %in% names(row)) statistics$mode <- row$mode
+      if ("skew" %in% names(row)) statistics$skew <- row$skew
+      if ("kurtosis" %in% names(row)) statistics$kurtosis <- row$kurtosis
+      
+      # Add the statistics to the variable's statistics property
+      group$statistics <- statistics    
+      
+      # Add the group to the groups list
+      groups[[i]] <- group
     }
+    
+    # Add the groups list to the variable list
+    output$groups <- groups
+    
+  } else {
+    # Extract statistics
+    statistics <- list()
+  
+    if ("missing" %in% names(x)) statistics$missing <- x$missing
+    if ("N" %in% names(x)) statistics$N <- x$N
+    if ("M" %in% names(x)) statistics$M <- x$M
+    if ("SD" %in% names(x)) statistics$SD <- x$SD
+    if ("SE" %in% names(x)) statistics$SE <- x$SE
+    if ("min" %in% names(x)) statistics$min <- x$min
+    if ("max" %in% names(x)) statistics$max <- x$max
+    if ("range" %in% names(x)) statistics$range <- x$range
+    if ("median" %in% names(x)) statistics$median <- x$median
+    if ("mode" %in% names(x)) statistics$mode <- x$mode
+    if ("skew" %in% names(x)) statistics$skew <- x$skew
+    if ("kurtosis" %in% names(x)) statistics$kurtosis <- x$kurtosis
+    
+    # Add the statistics to the variable's statistics property
+    output$statistics <- statistics
   }
   
   # Add package information
-  analysis <- add_package_info(analysis, "tidystats")
+  package <- list()
+
+  package$name <- "tidystats"
+  package$version <- getNamespaceVersion("tidystats")[[1]]
+
+  # Add package information to output
+  output$package <- package
   
-  return(analysis)
+  return(output)
 }
 
 #' @describeIn tidy_stats tidy_stats method for class 'tidystats_counts'
 #' @export
-tidy_stats.tidystats_counts <- function(x, args = NULL) {
-  # Create the analysis list
-  analysis <- list()
+tidy_stats.tidystats_counts <- function(x) {
+
+  output <- list()
   
   # Add method
-  analysis$method <- "Counts"
-  
-  # Create a loop function to recursively create groups and extract the 
-  # statistics
-  loop <- function(df, list, group_names, depth) {
-    if (length(group_names) == depth) {
-      # Create a list to store the statistics in
-      statistics <- list()
-      
-      # Add statistics
-      statistics <- add_statistic(statistics, "n", df$n)
-      statistics <- add_statistic(statistics, "pct", df$pct, "%")
-      
-      # Add statistics to the group
-      list$statistics <- statistics
-    } else {
-      # Increment the depth 
-      depth <- depth + 1
-      
-      # Create a groups list
-      groups <- list(name = group_names[depth])
-      
-      # Loop over the groups
-      for (group_name in unique(pull(df, groups$name))) {
-        # Subset the data so it only has data of the current group
-        df_group <- df[df[, depth + 1] == group_name, ]
-        
-        if (!is.na(group_name)) {
-          df_group <- dplyr::filter(df, 
-            dplyr::across(dplyr::all_of(groups$name), ~ . == group_name)
-          )
-        } else {
-          df_group <- dplyr::filter(df, 
-            dplyr::across(dplyr::all_of(groups$name), is.na)
-          )
-        }
-        
-        # Create a group list
-        group <- list(name = group_name)
-        
-        # Loop again
-        groups$groups <- append(groups$groups, list(loop(df_group, group, 
-          group_names, depth)))   
-      }
-      
-      # Add the groups to the list's groups
-      list$groups <- append(list$groups, list(groups))
-    }
-    
-    return(list)
-  }
+  output$method <- "Counts"
   
   # Extract grouping variables
   group_names <- names(x)[!names(x) %in% c("n", "pct")]
   
-  # Convert the data frame to a base data frame to disable warnings
-  df <- as.data.frame(x)
-  
-  # Loop over the groups and extract the statistics
-  analysis <- loop(df, analysis, group_names, 0)
+  # Check if there are any groups, if so, combine the grouping variables into
+  # a single column and loop over each group to extract the statistics
+  if (length(group_names) != 0) {
+    output$name <- paste(group_names, collapse = " - ")
+    
+    x <- tidyr::unite(x, col = "group", dplyr::all_of(group_names), sep = " - ")
+    
+    # Create an empty groups list
+    groups <- list()
+    
+    # Loop over each row in the data frame and extract the statistics
+    for (i in 1:nrow(x)) {
+      # Create an empty group list
+      group <- list()
+      
+      # Select the current row
+      row <- x[i, ]
+      
+      # Set the group name
+      group$name <- row$group
+        
+      # Extract statistics
+      statistics <- list()
+      
+      if ("n" %in% names(row)) statistics$n <- row$n
+      if ("pct" %in% names(row)) statistics$pct <- row$pct
+      
+      # Add the statistics to the variable's statistics property
+      group$statistics <- statistics    
+        
+      # Add the group to the groups list
+      groups[[i]] <- group
+      
+      # Add the groups list to the variable list
+      output$groups <- groups
+    }
+  } else {
+    # Extract statistics
+    statistics <- list()
+    
+    if ("n" %in% names(x)) statistics$n <- x$n
+    if ("pct" %in% names(x)) statistics$pct <- x$pct
+    
+    # Add the statistics to the variable's statistics property
+    output$statistics <- statistics 
+  }
   
   # Add package information
-  analysis <- add_package_info(analysis, "tidystats")
+  package <- list()
+
+  package$name <- "tidystats"
+  package$version <- getNamespaceVersion("tidystats")[[1]]
+
+  # Add package information to output
+  output$package <- package
   
-  return(analysis)
+  return(output)
 }
 
 #' @describeIn tidy_stats tidy_stats method for class 'lmerMod'
 #' @export
-tidy_stats.lmerMod <- function(x, args = NULL) {
-  # Create a list to store the analysis in and set the name and method
-  analysis <- list(
-    name = deparse(attr(x@frame, "formula")),
-    method = "Linear mixed model"
-  )
+tidy_stats.lmerMod <- function(x) {
+  
+  output <- list()
   
   # Get summary statistics
   summary <- summary(x)
   
-  # Model fit
-  # Create a group and statistics list for the model fit statistics
-  group_model <- list(name = "Model")
-  statistics <- list()
+  # Extract method
+  output$method <- "Linear mixed model"
   
-  # Check if the AIC is in the AICtab, if so, add the statistics
+  # Add model fit statistics, if we have them
   if ("AIC" %in% names(summary$AICtab)) {
-    statistics <- add_statistic(statistics, "AIC", summary$AICtab[["AIC"]])
-    statistics <- add_statistic(statistics, "BIC", summary$AICtab[["BIC"]])
-    statistics <- add_statistic(statistics, "log likelihood", 
-      summary$AICtab[["logLik"]], "l")
-    statistics <- add_statistic(statistics, "deviance", 
-      summary$AICtab[["deviance"]], "D")
-    statistics <- add_statistic(statistics, "residual df", 
-      summary$AICtab[["df.resid"]], "df", "res.")
+    statistics <- list()
+    
+    statistics$AIC <- summary$AICtab[[1]]
+    statistics$BIC <- summary$AICtab[[2]]
+    statistics$log_likelihood <- summary$AICtab[[3]]
+    statistics$deviance <- summary$AICtab[[4]]
+    statistics$df <- summary$AICtab[[5]]
+    
+    output$statistics <- statistics
   }
   
-  # Add number of observations
-  statistics <- add_statistic(statistics, "N", summary[[3]]$dims[[1]])
+  # We create the following nested structure:
+  # effects:
+  # - random_effects:
+  #   - groups:
+  #     - terms: for variances
+  #     - pairs: for correlations between random effects
+  # - fixed_effects:
+  #     - terms: for coefficient statistics
+  #     - pairs: for correlations between fixed effects
   
-  # Add statistics to the model's statistics
-  group_model$statistics <- statistics
+  effects <- list()
   
-  # Add the group to a groups element on the analysis
-  analysis$groups <- append(analysis$groups, list(group_model))
+  # Extract random effects
+  random_effects <- list()
   
-  # Random effects
-  # Create a groups lists for the random effects, terms, and pairs
-  group_RE <- list(name = "Random effects")
-  group_RE_groups <- list(name = "Groups")
-  group_RE_pairs <- list(name = "Correlations")
+  # Set N to number of observations
+  random_effects$statistics$N <- summary[[3]]$dims[[1]]
   
   # Get variance-covariance matrix
   varcor <- summary$varcor
   
-  # Loop over the groups
+  # Loop over each group and set the variance statistics and correlations
+  groups <- list()
+
   for (i in 1:length(varcor)) {
-    # Create a list for the group
-    group_RE_group <- list(name = names(varcor)[i])
+    group <- list()
     
+    group$name <- names(varcor)[i]
+  
     # Set N for the group, if there is an N  
-    if (names(varcor)[i] %in% names(summary$ngrps)) {
-      statistics <- list()
-      statistics <- add_statistic(statistics, "N", 
-        summary$ngrps[names(summary$ngrps) == names(varcor)[i]][[1]])
-      
-      group_RE_group$statistics <- statistics
+    if (group$name %in% names(summary$ngrps)) {
+      group$statistics$N <- summary$ngrps[[names(summary$ngrps) == group$name]]
     }
     
-    # Extract standard deviations
-    SDs <- attr(varcor[[i]], "stddev")
+    random_statistics <- varcor[[i]]
     
-    # Loop over coefficients in the group
-    for (j in 1:length(SDs)) {
-      group_RE_group_coefficient <- list(name = names(SDs)[j])
+    # Extract standard deviations
+    vars <- attr(random_statistics, "stddev")^2
+    SDs <- attr(random_statistics, "stddev")
+    
+    # Extract variances of each term in a group
+    terms <- list()
+    
+    for (j in 1:length(vars)) {
+      term <- list()
+      term$name <- names(vars)[j]
       
       # Extract statistics
       statistics <- list()
+
+      statistics$var <- vars[[j]]
+      statistics$SD <- SDs[[j]] 
+
+      term$statistics <- statistics
       
-      statistics <- add_statistic(statistics, "standard deviation", SDs[[j]], 
-        "SD")
-      statistics <- add_statistic(statistics, "variance", SDs[[j]]^2, "var")
-      
-      # Add statistics to the RE group
-      group_RE_group_coefficient$statistics <- statistics
-      
-      # Add RE group coefficients to the RE group
-      group_RE_group$groups <- append(
-        group_RE_group$groups, 
-        list(group_RE_group_coefficient)
-      )
+      terms[[j]] <- term
     }
       
-    # Add RE group to the RE groups list
-    group_RE_groups$groups <- append(
-      group_RE_groups$groups, 
-      list(group_RE_group)
-    )
+    # Add terms to group
+    group$terms <- terms
     
-    # Extract correlations
-    cors <- attr(varcor[[i]], "correlation")  
+    # Extract correlation pairs, if there are any
+    random_cors <- attr(random_statistics, "correlation")  
     
-    # Check if there are any correlations
-    if (length(cors) > 1) {
+    if (length(random_cors) > 1) {
       
       # Tidy the matrix
-      cors <- tidy_matrix(cors)
+      random_cors <- tidy_matrix(random_cors)
       
-      # Loop over the correlations
-      for (j in 1:nrow(cors)) {
-        group_RE_pair <- list(name = paste(cors$name1[j], "-", cors$name2[j]))
+      pairs <- list()
+      
+      for (k in 1:nrow(random_cors)) {
+        pair <- list()
         
-        statistics <- list()
-        statistics <- add_statistic(statistics, "correlation", cors$value[j], 
-          "r")
+        names <- list()
+        names[[1]] <- random_cors$name1[k]
+        names[[2]] <- random_cors$name2[k]
         
-        group_RE_pair$statistics <- statistics
+        pair$names <- names
+        pair$statistics$r <- random_cors$value[k]
         
-        group_RE_pairs$groups <- append(
-          group_RE_pairs$groups, 
-          list(group_RE_pair)
-        )
+        pairs[[k]] <- pair
       }
+      
+      group$pairs <- pairs
     }
     
-    # Add statistics from the Residual group
-    group_RE_group <- list(name = "Residual")
-    
-    statistics <- list()
-    statistics <- add_statistic(statistics, "standard deviation", 
-      attr(varcor, "sc"), "SD")
-    statistics <- add_statistic(statistics, "variance", attr(varcor, "sc")^2, 
-      "var")
-    
-    group_RE_group$statistics <- statistics
-    
-    group_RE_groups$groups <- append(
-      group_RE_groups$groups, 
-      list(group_RE_group)
-    )
-    
-    # Add the RE groups to the group_RE element
-    group_RE$groups <- append(group_RE$groups, list(group_RE_groups))
-    
-    # Add the RE pairs to the group_RE element, if there are any
-    if (length(cors) > 1) {
-      group_RE$groups <- append(group_RE$groups, list(group_RE_pairs))
-    }
+    # Add group to random
+    groups[[i]] <- group
   }
   
-  # Add RE groups to the statistics element on the analysis
-  analysis$groups <- append(analysis$groups, list(group_RE))
+  # Add residual statistics to the group
+  statistics <- list()
+  statistics$var <- attr(varcor, "sc")^2
+  statistics$SD <- attr(varcor, "sc")
   
-  # Fixed effects
-  # Create a groups lists for the random effects, terms, and pairs
-  group_FE <- list(name = "Fixed effects")
-  group_FE_coefficients <- list(name = "Coefficients")
-  group_FE_pairs <- list(name = "Correlations")
+  group <- list()
+  group$name <- "Residual"
+  group$statistics <- statistics
+  
+  groups[[i + 1]] <- group
+  
+  # Add groups to random_effects
+  random_effects$groups <- groups
+  
+  # Add random_effects to effects
+  effects$random_effects <- random_effects
+  
+  # Extract fixed effects
+  fixed_effects <- list()
+  
+  # Get coefficient statistics, which we call terms
+  terms <- list()
+  coefficients <- stats::coef(summary)
 
-  # Get coefficient statistics
-  coefs <- stats::coef(summary)
-
-  # Loop over the coefficients
-  for (i in 1:nrow(coefs)) {
-    # Create a list for the coefficient and set the name
-    group_FE_coefficient <- list(name = rownames(coefs)[i])
+  # Loop over the terms
+  for (i in 1:nrow(coefficients)) {
+    
+    term <- list()
+    
+    # Add the name of the coefficient
+    name <- rownames(coefficients)[i]
+    term$name <- name
     
     # Create a new statistics list and add the fixed effect's statistics
     statistics <- list()
     
-    statistics <- add_statistic(statistics, "estimate", coefs[i, "Estimate"], 
-      "b")
-    statistics <- add_statistic(statistics, "SE", coefs[i, "Std. Error"])
-    statistics <- add_statistic(statistics, "statistic", coefs[i, "t value"], 
-      "t")
+    estimate <- list()
+    estimate$name <- "b"
+    estimate$value <- coefficients[i, "Estimate"]
+    statistics$estimate <- estimate
+
+    statistics$SE <- coefficients[i, "Std. Error"]
     
-    # Add statistics to the coefficient list
-    group_FE_coefficient$statistics <- statistics
+    statistic <- list()
+    statistic$name <- "t"
+    statistic$value <- coefficients[i, "t value"]
+    statistics$statistic <- statistic
     
-    # Add coefficient to the groups of coefficients
-    group_FE_coefficients$groups <- append(
-      group_FE_coefficients$groups, 
-      list(group_FE_coefficient)
-    )
+    term$statistics <- statistics
+    
+    # Add the term to the coefficients list
+    terms[[i]] <- term
   }
   
-  # Add group of coefficients to the fixed effect group
-  group_FE$groups <- append(group_FE$groups, list(group_FE_coefficients))
+  effects$fixed_effects$terms <- terms
   
   # Extract fixed correlations
   fixed_cors <- attr(summary$vcov, "factors")$correlation
   
-  # Check if there are any correlations
   if (length(fixed_cors) > 1) {
+    
     # Tidy the matrix
     fixed_cors <- tidy_matrix(fixed_cors)
     
-    # Loop over the pairs
+    pairs <- list()
+    
     for (i in 1:nrow(fixed_cors)) {
-      group_FE_pair <- list(
-        name = paste(fixed_cors$name1[i], "-", fixed_cors$name2[i])
-      )
+      pair <- list()
+      names <- list()
+      names[[1]] <- fixed_cors$name1[i]
+      names[[2]] <- fixed_cors$name2[i]
+      value <- fixed_cors$value[i]
       
-      statistics <- list()
-      statistics <- add_statistic(statistics, "correlation", 
-        fixed_cors$value[i], "r")
+      pair$names <- names
+      pair$statistics$r <- value
       
-      group_FE_pair$statistics <- statistics
-      
-      group_FE_pairs$groups <- append(
-        group_FE_pairs$groups, 
-        list(group_FE_pair)
-      )
+      pairs[[i]] <- pair
     }
     
-    # Add FE pairs to the statistics of the FE group
-    group_FE$groups <- append(group_FE$groups, list(group_FE_pairs))
+    effects$fixed_effects$pairs <- pairs
   }
   
-  # Add FE groups to the statistics element on the analysis
-  analysis$groups <- append(analysis$groups, list(group_FE))
+  # Add effects to output
+  output$effects <- effects
   
     # Extract REML criterion at convergence
   if ("REML" %in% names(summary$AICtab)) {
-    analysis$REML_criterion_at_convergence <- summary$AICtab[[1]]
+    output$REML_criterion_at_convergence <- summary$AICtab[[1]]
   }
   
   # Add additional convergence information
-  analysis$convergence_code = summary$optinfo$conv$opt
-  analysis$convergence_message = summary$optinfo$conv$lme4$messages
+  output$convergence_code = summary$optinfo$conv$opt
+  output$convergence_message = summary$optinfo$conv$lme4$messages
   
   # Add package information
-  analysis <- add_package_info(analysis, "lme4")
+  package <- list()
+
+  package$name <- "lme4"
+  package$version <- getNamespaceVersion("lme4")[[1]]
+
+  # Add package information to output
+  output$package <- package
   
-  return(analysis)
+  return(output)
 }
 
 #' @describeIn tidy_stats tidy_stats method for class 'lmerModLmerTest'
 #' @export
-tidy_stats.lmerModLmerTest <- function(x, args = NULL) {
-  # Create a list to store the analysis in and set the name and method
-  analysis <- list(
-    name = deparse(attr(x@frame, "formula")),
-    method = "Linear mixed model"
-  )
+tidy_stats.lmerModLmerTest <- function(x) {
+  
+  output <- list()
   
   # Get summary statistics
   summary <- summary(x)
   
-  # Model fit
-  # Create a group and statistics list for the model fit statistics
-  group_model <- list(name = "Model")
-  statistics <- list()
+  # Extract method
+  output$method <- "Linear mixed model"
   
-  # Check if the AIC is in the AICtab, if so, add the statistics
+  # Add model fit statistics, if we have them
   if ("AIC" %in% names(summary$AICtab)) {
-    statistics <- add_statistic(statistics, "AIC", summary$AICtab[["AIC"]])
-    statistics <- add_statistic(statistics, "BIC", summary$AICtab[["BIC"]])
-    statistics <- add_statistic(statistics, "log likelihood", 
-      summary$AICtab[["logLik"]], "l")
-    statistics <- add_statistic(statistics, "deviance", 
-      summary$AICtab[["deviance"]], "D")
-    statistics <- add_statistic(statistics, "residual df", 
-      summary$AICtab[["df.resid"]], "df", "res.")
+    statistics <- list()
+    
+    statistics$AIC <- summary$AICtab[[1]]
+    statistics$BIC <- summary$AICtab[[2]]
+    statistics$log_likelihood <- summary$AICtab[[3]]
+    statistics$deviance <- summary$AICtab[[4]]
+    statistics$df <- summary$AICtab[[5]]
+    
+    output$statistics <- statistics
   }
   
-  # Add number of observations
-  statistics <- add_statistic(statistics, "N", summary[[3]]$dims[[1]])
+  # We create the following nested structure:
+  # effects:
+  # - random_effects:
+  #   - groups:
+  #     - terms: for variances
+  #     - pairs: for correlations between random effects
+  # - fixed_effects:
+  #     - terms: for coefficient statistics
+  #     - pairs: for correlations between fixed effects
   
-  # Add statistics to the model's statistics
-  group_model$statistics <- statistics
+  effects <- list()
   
-  # Add the group to a groups element on the analysis
-  analysis$groups <- append(analysis$groups, list(group_model))
+  # Extract random effects
+  random_effects <- list()
   
-  # Random effects
-  # Create a groups lists for the random effects, terms, and pairs
-  group_RE <- list(name = "Random effects")
-  group_RE_groups <- list(name = "Groups")
-  group_RE_pairs <- list(name = "Correlations")
+  # Set N to number of observations
+  random_effects$statistics$N <- summary[[3]]$dims[[1]]
   
   # Get variance-covariance matrix
   varcor <- summary$varcor
   
-  # Loop over the groups
+  # Loop over each group and set the variance statistics and correlations
+  groups <- list()
+
   for (i in 1:length(varcor)) {
-    # Create a list for the group
-    group_RE_group <- list(name = names(varcor)[i])
+    group <- list()
     
+    group$name <- names(varcor)[i]
+  
     # Set N for the group, if there is an N  
-    if (names(varcor)[i] %in% names(summary$ngrps)) {
-      statistics <- list()
-      statistics <- add_statistic(statistics, "N", 
-        summary$ngrps[names(summary$ngrps) == names(varcor)[i]][[1]])
-      
-      group_RE_group$statistics <- statistics
+    if (group$name %in% names(summary$ngrps)) {
+      group$statistics$N <- summary$ngrps[names(summary$ngrps) == group$name][[1]]
     }
     
-    # Extract standard deviations
-    SDs <- attr(varcor[[i]], "stddev")
+    random_statistics <- varcor[[i]]
     
-    # Loop over coefficients in the group
-    for (j in 1:length(SDs)) {
-      group_RE_group_coefficient <- list(name = names(SDs)[j])
+    # Extract standard deviations
+    vars <- attr(random_statistics, "stddev")^2
+    SDs <- attr(random_statistics, "stddev")
+    
+    # Extract variances of each term in a group
+    terms <- list()
+    
+    for (j in 1:length(vars)) {
+      term <- list()
+      term$name <- names(vars)[j]
       
       # Extract statistics
       statistics <- list()
+
+      statistics$var <- vars[[j]]
+      statistics$SD <- SDs[[j]] 
+
+      term$statistics <- statistics
       
-      statistics <- add_statistic(statistics, "standard deviation", SDs[[j]], 
-        "SD")
-      statistics <- add_statistic(statistics, "variance", SDs[[j]]^2, "var")
-      
-      # Add statistics to the RE group
-      group_RE_group_coefficient$statistics <- statistics
-      
-      # Add RE group coefficients to the RE group
-      group_RE_group$groups <- append(
-        group_RE_group$groups, 
-        list(group_RE_group_coefficient)
-      )
+      terms[[j]] <- term
     }
+      
+    # Add terms to group
+    group$terms <- terms
     
-    # Add RE group to the RE groups list
-    group_RE_groups$groups <- append(
-      group_RE_groups$groups, 
-      list(group_RE_group)
-    )
+    # Extract correlation pairs, if there are any
+    random_cors <- attr(random_statistics, "correlation")  
     
-    # Extract correlations
-    cors <- attr(varcor[[i]], "correlation")  
-    
-    # Check if there are any correlations
-    if (length(cors) > 1) {
+    if (length(random_cors) > 1) {
       
       # Tidy the matrix
-      cors <- tidy_matrix(cors)
+      random_cors <- tidy_matrix(random_cors)
       
-      # Loop over the correlations
-      for (j in 1:nrow(cors)) {
-        group_RE_pair <- list(name = paste(cors$name1[j], "-", cors$name2[j]))
+      pairs <- list()
+      
+      for (k in 1:nrow(random_cors)) {
+        pair <- list()
         
-        statistics <- list()
-        statistics <- add_statistic(statistics, "correlation", cors$value[j], 
-          "r")
+        names <- list()
+        names[[1]] <- random_cors$name1[k]
+        names[[2]] <- random_cors$name2[k]
         
-        group_RE_pair$statistics <- statistics
+        pair$names <- names
+        pair$statistics$r <- random_cors$value[k]
         
-        group_RE_pairs$groups <- append(
-          group_RE_pairs$groups, 
-          list(group_RE_pair)
-        )
+        pairs[[k]] <- pair
       }
+      
+      group$pairs <- pairs
     }
     
-    # Add statistics from the Residual group
-    group_RE_group <- list(name = "Residual")
-    
-    statistics <- list()
-    statistics <- add_statistic(statistics, "standard deviation", 
-      attr(varcor, "sc"), "SD")
-    statistics <- add_statistic(statistics, "variance", attr(varcor, "sc")^2,
-      "var")
-    
-    group_RE_group$statistics <- statistics
-    
-    group_RE_groups$groups <- append(
-      group_RE_groups$groups, 
-      list(group_RE_group)
-    )
-    
-    # Add the RE groups to the group_RE element
-    group_RE$groups <- append(group_RE$groups, list(group_RE_groups))
-    
-    # Add the RE pairs to the group_RE element, if there are any
-    if (length(cors) > 1) {
-      group_RE$groups <- append(group_RE$groups, list(group_RE_pairs))
-    }
+    # Add group to random
+    groups[[i]] <- group
   }
   
-  # Add RE groups to the statistics element on the analysis
-  analysis$groups <- append(analysis$groups, list(group_RE))
+  # Add residual statistics to the group
+  statistics <- list()
+  statistics$var <- attr(varcor, "sc")^2
+  statistics$SD <- attr(varcor, "sc")
   
-  # Fixed effects
-  # Create a groups lists for the random effects, terms, and pairs
-  group_FE <- list(name = "Fixed effects")
-  group_FE_coefficients <- list(name = "Coefficients")
-  group_FE_pairs <- list(name = "Correlations")
+  group <- list()
+  group$name <- "Residual"
+  group$statistics <- statistics
   
-  # Get coefficient statistics
-  coefs <- stats::coef(summary)
+  groups[[i + 1]] <- group
   
-  # Loop over the coefficients
-  for (i in 1:nrow(coefs)) {
-    # Create a list for the coefficient and set the name
-    group_FE_coefficient <- list(name = rownames(coefs)[i])
+  # Add groups to random
+  random_effects$groups <- groups
+  
+  # Add random_effects to effects
+  effects$random_effects <- random_effects
+  
+  # Extract fixed effects
+  fixed_effects <- list()
+  
+  # Get coefficient statistics, which we call terms
+  terms <- list()
+  coefficients <- stats::coef(summary)
+
+  # Loop over the terms
+  for (i in 1:nrow(coefficients)) {
+    
+    term <- list()
+    
+    # Add the name of the coefficient
+    name <- rownames(coefficients)[i]
+    term$name <- name
     
     # Create a new statistics list and add the fixed effect's statistics
     statistics <- list()
     
-    statistics <- add_statistic(statistics, "estimate", coefs[i, "Estimate"], 
-      "b")
-    statistics <- add_statistic(statistics, "SE", coefs[i, "Std. Error"])
-    statistics <- add_statistic(statistics, "df", coefs[i, "df"])
-    statistics <- add_statistic(statistics, "statistic", coefs[i, "t value"], 
-      "t")
-    statistics <- add_statistic(statistics, "p", coefs[i, "Pr(>|t|)"])
+    estimate <- list()
+    estimate$name <- "b"
+    estimate$value <- coefficients[i, "Estimate"]
+    statistics$estimate <- estimate
     
-    # Add statistics to the coefficient list
-    group_FE_coefficient$statistics <- statistics
+    statistics$SE <- coefficients[i, "Std. Error"]
+    statistics$df <- coefficients[i, "df"]
     
-    # Add coefficient to the groups of coefficients
-    group_FE_coefficients$groups <- append(
-      group_FE_coefficients$groups, 
-      list(group_FE_coefficient)
-    )
+    statistic <- list()
+    statistic$name <- "t"
+    statistic$value <- coefficients[i, "t value"]
+    statistics$statistic <- statistic
+    
+    statistics$p <- coefficients[i, "Pr(>|t|)"]
+    
+    term$statistics <- statistics
+    
+    # Add the term to the coefficients list
+    terms[[i]] <- term
   }
   
-  # Add group of coefficients to the fixed effect group
-  group_FE$groups <- append(group_FE$groups, list(group_FE_coefficients))
+  effects$fixed_effects$terms <- terms
   
   # Extract fixed correlations
   fixed_cors <- attr(summary$vcov, "factors")$correlation
   
-  # Check if there are any correlations
   if (length(fixed_cors) > 1) {
+    
     # Tidy the matrix
     fixed_cors <- tidy_matrix(fixed_cors)
     
-    # Loop over the pairs
+    pairs <- list()
+    
     for (i in 1:nrow(fixed_cors)) {
-      group_FE_pair <- list(
-        name = paste(fixed_cors$name1[i], "-", fixed_cors$name2[i])
-      )
+      pair <- list()
+      names <- list()
+      names[[1]] <- fixed_cors$name1[i]
+      names[[2]] <- fixed_cors$name2[i]
+      value <- fixed_cors$value[i]
       
-      statistics <- list()
-      statistics <- add_statistic(statistics, "correlation", 
-        fixed_cors$value[i], "r")
+      pair$names <- names
+      pair$statistics$r <- value
       
-      group_FE_pair$statistics <- statistics
-      
-      group_FE_pairs$groups <- append(
-        group_FE_pairs$groups, 
-        list(group_FE_pair)
-      )
+      pairs[[i]] <- pair
     }
     
-    # Add FE pairs to the statistics of the FE group
-    group_FE$groups <- append(group_FE$groups, list(group_FE_pairs))
+    effects$fixed_effects$pairs <- pairs
   }
   
-  # Add FE groups to the statistics element on the analysis
-  analysis$groups <- append(analysis$groups, list(group_FE))
+  # Add effects to output
+  output$effects <- effects
   
-  # Extract REML criterion at convergence
-  if ("REML" %in% names(summary$AICtab)) {
-    analysis$REML_criterion_at_convergence <- summary$AICtab[[1]]
-  }
+   # Extract REML criterion at convergence
+  output$REML_criterion_at_convergence <- summary$AICtab[[1]]
   
   # Add additional convergence information
-  analysis$convergence_code = summary$optinfo$conv$opt
-  analysis$convergence_message = summary$optinfo$conv$lme4$messages
+  output$convergence_code = summary$optinfo$conv$opt
+  output$convergence_message = summary$optinfo$conv$lme4$messages
   
   # Add package information
-  analysis <- add_package_info(analysis, "lme4")
-  
-  return(analysis)
-}
+  package <- list()
 
-#' @describeIn tidy_stats tidy_stats method for class 'nlme'
-#' @export
-tidy_stats.lme <- function(x, args = NULL) {
-  # Create a list to store the analysis in and set the method
-  analysis <- list(
-    method = "Linear mixed-effects model"
-  )
-  
-  # Get summary statistics
-  summary <- summary(x)
-  
-  # Model fit
-  # Create a group and statistics list for the model fit statistics
-  group_model <- list(name = "Model")
-  statistics <- list()
-  
-  statistics <- add_statistic(statistics, "N", x$dims$N)
-  statistics <- add_statistic(statistics, "AIC", summary$AIC)
-  statistics <- add_statistic(statistics, "BIC", summary$BIC)
-  statistics <- add_statistic(statistics, "log likelihood", summary$logLik, "l")
-  statistics <- add_statistic(statistics, "sigma", summary$sigma, "s", "res.")
-  
-  # Add statistics to the model's statistics
-  group_model$statistics <- statistics
-  
-  # Add the group to a groups element on the analysis
-  analysis$groups <- append(analysis$groups, list(group_model))
-  
-  # Random effects
-  # Create a groups lists for the random effects, terms, and pairs
-  group_RE <- list(name = "Random effects")
-  group_RE_groups <- list(name = "Groups")
-  group_RE_pairs <- list(name = "Correlations")
-  
-  # Get variance-covariance matrix
-  varcor <- VarCorr(x)
-  
-  # Convert the matrix to a data frame with the variances and one with the
-  # correlations
-  coefs <- tibble()
-  corrs <- tibble()
-  group_row <- 0
-  for (i in 1:nrow(varcor)) {
-    rowname <- rownames(varcor)[i]
-    
-    if (x$dims$Q == 1) {
-      group <- attr(varcor, "title")
-    } else if (str_detect(rowname, " =")) {
-      group <- paste(rowname, varcor[i, "Variance"])
-      group_row <- i
-    } 
-    
-    if (rowname == "Residual") {
-      coefs <- bind_rows(coefs, tibble(group = "Residual", 
-        var = varcor[i, "Variance"], sd = varcor[i, "StdDev"]))
-    } else {
-      coefs <- bind_rows(coefs, tibble(group = group, coef = rowname, 
-        var = varcor[i, "Variance"], sd = varcor[i, "StdDev"]))
-      
-      if ("Corr" %in% colnames(varcor)) {
-        if (varcor[i, "Corr"] != "") {
-          value <- suppressWarnings(as.numeric(varcor[i, "Corr"]))
-          if (is.na(value)) {
-            
-            rownames(varcor)[]
-            
-            colnames <- rownames(varcor)[(group_row + 1):(group_row + 
-                length(colnames(varcor))-2)]
-          } else {
-            c(rownames(varcor)[i], varcor[i, 3:length(colnames(varcor))])
-            
-            corrs <- suppressMessages(rbind(corrs, 
-              c(group, rownames(varcor)[i], 
-                varcor[i, 3:length(colnames(varcor))])))
-          }
-        }
-      }
-    }
-  }
-  colnames(corrs) <- c("group", "name", colnames)
-  
-  # Loop over the coefficient groups
-  for (group_name in unique(dplyr::pull(coefs, group))) {
-    # Create a list for the group
-    group_RE_group <- list(name = group_name)
-    
-    # Set N for the group, if this isn't the Residuals group
-    if (group_name != "Residual") {
-      # Set N for the group
-      statistics <- list()
-      
-      statistics <- add_statistic(statistics, "N", 
-        x$dims$ngrps[stringr::str_detect(group_name, names(x$dims$ngrps))][[1]])
-      
-      group_RE_group$statistics <- statistics
-      
-      # Subset the coefs data from to only the current group
-      group_coefs <- dplyr::filter(coefs, group == group_name)
-      
-      for (i in 1:nrow(group_coefs)) {
-        group_RE_group_coefficient <- list(name = group_coefs$coef[i])
-        
-        # Extract statistics
-        statistics <- list()
-        
-        statistics <- add_statistic(statistics, "standard deviation", 
-          group_coefs$sd[i], "SD")
-        statistics <- add_statistic(statistics, "variance", group_coefs$var[i],
-          "var")
-        
-        # Add statistics to the RE group
-        group_RE_group_coefficient$statistics <- statistics
-        
-        # Add RE group coefficients to the RE group
-        group_RE_group$groups <- append(
-          group_RE_group$groups, 
-          list(group_RE_group_coefficient)
-        )
-      }
-    } else {
-      # Create a statistics list for the Residual statistics
-      statistics <- list()
-      
-      statistics <- add_statistic(statistics, "standard deviation", 
-        as.numeric(varcor[i, "StdDev"]), "SD")
-      statistics <- add_statistic(statistics, "variance", 
-        as.numeric(varcor[i, "Variance"]), "var")
-      
-      group_RE_group$statistics <- statistics
-    }
-    
-    # Add RE group to the RE groups list
-    group_RE_groups$groups <- append(
-      group_RE_groups$groups, 
-      list(group_RE_group)
-    )
-  }
-        
-  # Extract correlations, if there are any
-  if (nrow(corrs) > 0) {
-    # Loop over the groups
-    for (group_name in unique(dplyr::pull(corrs, group))) {
-      # Create a list for the group
-      group_RE_pairs <- list(name = group_name)
-      
-      # Subset the corrs data from to only the current group
-      group_corrs <- dplyr::filter(corrs, group == group_name)
-      
-      # Tidy the data frame so that each row is a correlation pair
-      pairs <- group_corrs %>%
-        dplyr::rename(name2 = name) %>%
-        pivot_longer(cols = c(-group, -name2), names_to = "name1")
-      
-      # Loop over the pairs
-      for (i in 1:nrow(pairs)) {
-        group_RE_pair <- list(name = paste(pairs$name1[i], "-", pairs$name2[i]))
-        
-        # 
-        statistics <- list()
-        statistics <- add_statistic(statistics, "correlation", pairs$value[i], 
-          "r")
-        
-        group_RE_pair$statistics <- statistics
-      }
-      
-      group_RE_pairs$groups <- append(
-        group_RE_pairs$groups, 
-        list(group_RE_pair)
-      )
-    }
-  }
-    
-  # Add RE groups to the statistics element on the analysis
-  analysis$groups <- append(analysis$groups, list(group_RE))
-  
-  # Fixed effects
-  # Create a groups lists for the random effects, terms, and pairs
-  group_FE <- list(name = "Fixed effects")
-  group_FE_coefficients <- list(name = "Coefficients")
-  group_FE_pairs <- list(name = "Correlations")
-  
-  # Get coefficient statistics
-  coefs <- stats::coef(summary)
-  
-  # Loop over the coefficients
-  for (i in 1:nrow(coefs)) {
-    # Create a list for the coefficient and set the name
-    group_FE_coefficient <- list(name = rownames(coefs)[i])
-    
-    # Create a new statistics list and add the fixed effect's statistics
-    statistics <- list()
-    
-    statistics <- add_statistic(statistics, "estimate", coefs[i, "Value"], 
-      "b")
-    statistics <- add_statistic(statistics, "SE", coefs[i, "Std.Error"])
-    statistics <- add_statistic(statistics, "df", coefs[i, "DF"])
-    statistics <- add_statistic(statistics, "statistic", coefs[i, "t-value"], 
-      "t")
-    statistics <- add_statistic(statistics, "p", coefs[i, "p-value"])
-    
-    # Add statistics to the coefficient list
-    group_FE_coefficient$statistics <- statistics
-    
-    # Add coefficient to the groups of coefficients
-    group_FE_coefficients$groups <- append(
-      group_FE_coefficients$groups, 
-      list(group_FE_coefficient)
-    )
-  }
-  
-  # Add group of coefficients to the fixed effect group
-  group_FE$groups <- append(group_FE$groups, list(group_FE_coefficients))
-  
-  # Extract fixed correlations
-  fixed_cors <- summary$corFixed
-  
-  # Check if there are any correlations
-  if (length(fixed_cors) > 1) {
-    # Tidy the matrix
-    fixed_cors <- tidy_matrix(fixed_cors)
-    
-    # Loop over the pairs
-    for (i in 1:nrow(fixed_cors)) {
-      group_FE_pair <- list(
-        name = paste(fixed_cors$name1[i], "-", fixed_cors$name2[i])
-      )
-      
-      statistics <- list()
-      statistics <- add_statistic(statistics, "correlation", 
-        fixed_cors$value[i], "r")
-      
-      group_FE_pair$statistics <- statistics
-      
-      group_FE_pairs$groups <- append(
-        group_FE_pairs$groups, 
-        list(group_FE_pair)
-      )
-    }
-    
-    # Add FE pairs to the statistics of the FE group
-    group_FE$groups <- append(group_FE$groups, list(group_FE_pairs))
-  }
-  
-  # Add FE groups to the statistics element on the analysis
-  analysis$groups <- append(analysis$groups, list(group_FE))
-  
-  # Add package information
-  analysis <- add_package_info(analysis, "nlme")
-  
-  return(analysis)
-}
+  package$name <- "lme4"
+  package$version <- getNamespaceVersion("lme4")[[1]]
 
-#' @describeIn tidy_stats tidy_stats method for class 'nlme'
-#' @export
-tidy_stats.nlme <- function(x, args = NULL) {
-  # Create a list to store the analysis in and set the method
-  analysis <- list(
-    method = "Nonlinear mixed-effects model"
-  )
+  # Add package information to output
+  output$package <- package
   
-  # Get summary statistics
-  summary <- summary(x)
-  
-  # Model fit
-  # Create a group and statistics list for the model fit statistics
-  group_model <- list(name = "Model")
-  statistics <- list()
-  
-  statistics <- add_statistic(statistics, "N", x$dims$N)
-  statistics <- add_statistic(statistics, "AIC", summary$AIC)
-  statistics <- add_statistic(statistics, "BIC", summary$BIC)
-  statistics <- add_statistic(statistics, "log likelihood", summary$logLik, "l")
-  statistics <- add_statistic(statistics, "sigma", summary$sigma, "s", "res.")
-  
-  # Add statistics to the model's statistics
-  group_model$statistics <- statistics
-  
-  # Add the group to a groups element on the analysis
-  analysis$groups <- append(analysis$groups, list(group_model))
-  
-  # Random effects
-  # Create a groups lists for the random effects, terms, and pairs
-  group_RE <- list(name = "Random effects")
-  group_RE_groups <- list(name = "Groups")
-  group_RE_pairs <- list(name = "Correlations")
-  
-  # Get variance-covariance matrix
-  varcor <- VarCorr(x)
-  
-  # Convert the matrix to a data frame with the variances and one with the
-  # correlations
-  coefs <- tibble()
-  corrs <- tibble()
-  group_row <- 0
-  for (i in 1:nrow(varcor)) {
-    rowname <- rownames(varcor)[i]
-    
-    if (x$dims$Q == 1) {
-      group <- attr(varcor, "title")
-    } else if (str_detect(rowname, " =")) {
-      group <- paste(rowname, varcor[i, "Variance"])
-      group_row <- i
-    } 
-    
-    if (rowname == "Residual") {
-      coefs <- bind_rows(coefs, tibble(group = "Residual", 
-        var = varcor[i, "Variance"], sd = varcor[i, "StdDev"]))
-    } else {
-      coefs <- bind_rows(coefs, tibble(group = group, coef = rowname, 
-        var = varcor[i, "Variance"], sd = varcor[i, "StdDev"]))
-      
-      if ("Corr" %in% colnames(varcor)) {
-        if (varcor[i, "Corr"] != "") {
-          value <- suppressWarnings(as.numeric(varcor[i, "Corr"]))
-          if (is.na(value)) {
-            
-            rownames(varcor)[]
-            
-            colnames <- rownames(varcor)[(group_row + 1):(group_row + 
-                length(colnames(varcor))-2)]
-          } else {
-            c(rownames(varcor)[i], varcor[i, 3:length(colnames(varcor))])
-            
-            corrs <- suppressMessages(rbind(corrs, 
-              c(group, rownames(varcor)[i], 
-                varcor[i, 3:length(colnames(varcor))])))
-          }
-        }
-      }
-    }
-  }
-  colnames(corrs) <- c("group", "name", colnames)
-  
-  # Loop over the coefficient groups
-  for (group_name in unique(dplyr::pull(coefs, group))) {
-    # Create a list for the group
-    group_RE_group <- list(name = group_name)
-    
-    # Set N for the group, if this isn't the Residuals group
-    if (group_name != "Residual") {
-      # Set N for the group
-      statistics <- list()
-      
-      statistics <- add_statistic(statistics, "N", 
-        x$dims$ngrps[stringr::str_detect(group_name, names(x$dims$ngrps))][[1]])
-      
-      group_RE_group$statistics <- statistics
-      
-      # Subset the coefs data from to only the current group
-      group_coefs <- dplyr::filter(coefs, group == group_name)
-      
-      for (i in 1:nrow(group_coefs)) {
-        group_RE_group_coefficient <- list(name = group_coefs$coef[i])
-        
-        # Extract statistics
-        statistics <- list()
-        
-        statistics <- add_statistic(statistics, "standard deviation", 
-          group_coefs$sd[i], "SD")
-        statistics <- add_statistic(statistics, "variance", group_coefs$var[i],
-          "var")
-        
-        # Add statistics to the RE group
-        group_RE_group_coefficient$statistics <- statistics
-        
-        # Add RE group coefficients to the RE group
-        group_RE_group$groups <- append(
-          group_RE_group$groups, 
-          list(group_RE_group_coefficient)
-        )
-      }
-    } else {
-      # Create a statistics list for the Residual statistics
-      statistics <- list()
-      
-      statistics <- add_statistic(statistics, "standard deviation", 
-        as.numeric(varcor[i, "StdDev"]), "SD")
-      statistics <- add_statistic(statistics, "variance", 
-        as.numeric(varcor[i, "Variance"]), "var")
-      
-      group_RE_group$statistics <- statistics
-    }
-    
-    # Add RE group to the RE groups list
-    group_RE_groups$groups <- append(
-      group_RE_groups$groups, 
-      list(group_RE_group)
-    )
-  }
-  
-  # Extract correlations, if there are any
-  if (nrow(corrs) > 0) {
-    # Loop over the groups
-    for (group_name in unique(dplyr::pull(corrs, group))) {
-      # Create a list for the group
-      group_RE_pairs <- list(name = group_name)
-      
-      # Subset the corrs data from to only the current group
-      group_corrs <- dplyr::filter(corrs, group == group_name)
-      
-      # Tidy the data frame so that each row is a correlation pair
-      pairs <- group_corrs %>%
-        dplyr::rename(name2 = name) %>%
-        pivot_longer(cols = c(-group, -name2), names_to = "name1")
-      
-      # Loop over the pairs
-      for (i in 1:nrow(pairs)) {
-        group_RE_pair <- list(name = paste(pairs$name1[i], "-", pairs$name2[i]))
-        
-        # 
-        statistics <- list()
-        statistics <- add_statistic(statistics, "correlation", pairs$value[i], 
-          "r")
-        
-        group_RE_pair$statistics <- statistics
-      }
-      
-      group_RE_pairs$groups <- append(
-        group_RE_pairs$groups, 
-        list(group_RE_pair)
-      )
-    }
-  }
-  
-  # Add RE groups to the statistics element on the analysis
-  analysis$groups <- append(analysis$groups, list(group_RE))
-  
-  # Fixed effects
-  # Create a groups lists for the random effects, terms, and pairs
-  group_FE <- list(name = "Fixed effects")
-  group_FE_coefficients <- list(name = "Coefficients")
-  group_FE_pairs <- list(name = "Correlations")
-  
-  # Get coefficient statistics
-  coefs <- stats::coef(summary)
-  
-  # Loop over the coefficients
-  for (i in 1:nrow(coefs)) {
-    # Create a list for the coefficient and set the name
-    group_FE_coefficient <- list(name = rownames(coefs)[i])
-    
-    # Create a new statistics list and add the fixed effect's statistics
-    statistics <- list()
-    
-    statistics <- add_statistic(statistics, "estimate", coefs[i, "Value"], 
-      "b")
-    statistics <- add_statistic(statistics, "SE", coefs[i, "Std.Error"])
-    statistics <- add_statistic(statistics, "df", coefs[i, "DF"])
-    statistics <- add_statistic(statistics, "statistic", coefs[i, "t-value"], 
-      "t")
-    statistics <- add_statistic(statistics, "p", coefs[i, "p-value"])
-    
-    # Add statistics to the coefficient list
-    group_FE_coefficient$statistics <- statistics
-    
-    # Add coefficient to the groups of coefficients
-    group_FE_coefficients$groups <- append(
-      group_FE_coefficients$groups, 
-      list(group_FE_coefficient)
-    )
-  }
-  
-  # Add group of coefficients to the fixed effect group
-  group_FE$groups <- append(group_FE$groups, list(group_FE_coefficients))
-  
-  # Extract fixed correlations
-  fixed_cors <- summary$corFixed
-  
-  # Check if there are any correlations
-  if (length(fixed_cors) > 1) {
-    # Tidy the matrix
-    fixed_cors <- tidy_matrix(fixed_cors)
-    
-    # Loop over the pairs
-    for (i in 1:nrow(fixed_cors)) {
-      group_FE_pair <- list(
-        name = paste(fixed_cors$name1[i], "-", fixed_cors$name2[i])
-      )
-      
-      statistics <- list()
-      statistics <- add_statistic(statistics, "correlation", 
-        fixed_cors$value[i], "r")
-      
-      group_FE_pair$statistics <- statistics
-      
-      group_FE_pairs$groups <- append(
-        group_FE_pairs$groups, 
-        list(group_FE_pair)
-      )
-    }
-    
-    # Add FE pairs to the statistics of the FE group
-    group_FE$groups <- append(group_FE$groups, list(group_FE_pairs))
-  }
-  
-  # Add FE groups to the statistics element on the analysis
-  analysis$groups <- append(analysis$groups, list(group_FE))
-  
-  # Add package information
-  analysis <- add_package_info(analysis, "nlme")
-  
-  return(analysis)
-}
-
-#' @describeIn tidy_stats tidy_stats method for class 'gls'
-#' @export
-tidy_stats.gls <- function(x, args = NULL) {
-  # Create the analysis list and set the method
-  analysis <- list(method = "Linear model using generalized least squares")
-  
-  # Get summary statistics
-  summary <- summary(x)
-  
-  # Model fit
-  # Create a group and statistics list for the model fit statistics
-  group_model <- list(name = "Model")
-  statistics <- list()
-  
-  statistics <- add_statistic(statistics, "N", x$dims$N)
-  statistics <- add_statistic(statistics, "AIC", summary$AIC)
-  statistics <- add_statistic(statistics, "BIC", summary$BIC)
-  statistics <- add_statistic(statistics, "log likelihood", summary$logLik, "l")
-  statistics <- add_statistic(statistics, "sigma", summary$sigma, "s", "res.")
-  
-  # Add statistics to the model's statistics
-  group_model$statistics <- statistics
-  
-  # Add the group to a groups element on the analysis
-  analysis$groups <- append(analysis$groups, list(group_model))
-  
-  # Create lists for the coefficients and correlations
-  group_coefficients <- list(name = "Coefficients")
-  group_correlations <- list(name = "Correlations")
-  
-  # Get coefficient statistics
-  coefs <- stats::coef(summary)
-  
-  # Loop over the coefficients
-  for (i in 1:nrow(coefs)) {
-    # Create a list for the coefficient and set the name
-    group_coefficient <- list(name = rownames(coefs)[i])
-    
-    # Create a new statistics list and add the fixed effect's statistics
-    statistics <- list()
-    
-    statistics <- add_statistic(statistics, "estimate", coefs[i, "Value"], 
-      "b")
-    statistics <- add_statistic(statistics, "SE", coefs[i, "Std.Error"])
-    statistics <- add_statistic(statistics, "statistic", coefs[i, "t-value"], 
-      "t")
-    statistics <- add_statistic(statistics, "p", coefs[i, "p-value"])
-    
-    # Add statistics to the coefficient list
-    group_coefficient$statistics <- statistics
-    
-    # Add coefficient to the groups of coefficients
-    group_coefficients$groups <- append(
-      group_coefficients$groups, 
-      list(group_coefficient)
-    )
-  }
-  
-  # Add group of coefficients to the analysis group
-  analysis$groups <- append(analysis$groups, list(group_coefficients))
-  
-  # Extract correlations
-  cors <- summary$corBeta
-  
-  # Check if there are any correlations
-  if (length(cors) > 1) {
-    # Tidy the matrix
-    cors <- tidy_matrix(cors)
-    
-    # Loop over the pairs
-    for (i in 1:nrow(fixed_cors)) {
-      group_correlation <- list(
-        name = paste(cors$name1[i], "-", cors$name2[i])
-      )
-      
-      statistics <- list()
-      statistics <- add_statistic(statistics, "correlation", 
-        cors$value[i], "r")
-      
-      group_correlation$statistics <- statistics
-      
-      group_correlations$groups <- append(
-        group_correlations$groups, 
-        list(group_correlation)
-      )
-    }
-  }
-  
-  # Add group of correlations to the analysis groups
-  analysis$groups <- append(analysis$groups, list(group_correlations))
-  
-  # Add package information
-  analysis <- add_package_info(analysis, "nlme")
-
-  return(analysis)
+  return(output)
 }
 
 #' @describeIn tidy_stats tidy_stats method for class 'BayesFactor'
 #' @export
-tidy_stats.BFBayesFactor <- function(x, args = NULL) {
-  # Create the analysis list
-  analysis <- list()
+tidy_stats.BFBayesFactor <- function(x) {
   
-  # Determine and set the method
+  output <- list()
+  
+  # Determine the method
   class <- class(x@numerator[[1]])[1]
-  analysis$method <- dplyr::case_when(
+  output$method <- dplyr::case_when(
     class == "BFoneSample" ~ "Bayesian t-test",
     class == "BFlinearModel" ~ "Bayesian linear regression",
     class == "BFcorrelation" ~ "Bayesian correlation",
@@ -1983,140 +1373,152 @@ tidy_stats.BFBayesFactor <- function(x, args = NULL) {
   # Extract bayes factors
   bayes_factors <- BayesFactor::extractBF(x)
   
-  # Extract the statistics or loop over the models
-  if (nrow(bayes_factors) == 1) {
+  # Check whether the test contains one or more models
+  if (nrow(bayes_factors) > 1) {
+    # Create an empty models list
+    models <- list()
+    
+    for (i in 1:nrow(bayes_factors)) {
+      # Create a model and statistics list
+      model <- list()
+      statistics <- list()
+      
+      # Extract name of the model
+      model$name <- rownames(bayes_factors)[i]
+      
+      
+      
+      # Extract statistics
+      statistics$BF_01 <- bayes_factors$bf[i]
+      statistics$BF_10 <- 1/bayes_factors$bf[i]
+      statistics$error <- bayes_factors$error[i]
+      
+      # Add statistics to model and model to models
+      model$statistics <- statistics
+      models[[i]] <- model
+    }
+    
+    # Add models to output
+    output$models <- models
+  } else {
+    # Extract the name of the model
+    output$name <- rownames(bayes_factors)[1]
+    
     # Create a statistics list
     statistics <- list()
     
     # Extract statistics
-    statistics <- add_statistic(statistics, "BF10", bayes_factors$bf, "BF", 
-      "10")
-    statistics <- add_statistic(statistics, "BF01", 1/bayes_factors$bf, "BF",
-      "01")
-    statistics <- add_statistic(statistics, "proportional error", 
-      bayes_factors$error, "PE")
+    statistics$BF_01 <- bayes_factors$bf[1]
+    statistics$BF_10 <- 1/bayes_factors$bf[1]
+    statistics$error <- bayes_factors$error[1]
     
-    # Add statistics to the analysis
-    analysis$statistics <- statistics
-  } else {
-    # Create a list to store the different models in
-    groups <- list(name = "Models")
-    
-    # Loop over the models
-    for (i in 1:nrow(bayes_factors)) {
-      # Create a list to store the model statistics in
-      group <- list(name = rownames(bayes_factors)[i])
-      
-      # Create a list to add the statistics to
-      statistics <- list()
-      
-      statistics <- add_statistic(statistics, "BF10", bayes_factors$bf[i], "BF",
-        "10")
-      statistics <- add_statistic(statistics, "BF01", 1/bayes_factors$bf[i], 
-        "BF", "01")
-      statistics <- add_statistic(statistics, "proportional error", 
-        bayes_factors$error[i], "PE")
-      
-      # Add statistics to the model list
-      group$statistics <- statistics
-      
-      # Add the model group to the groups list
-      groups$groups <- append(groups$groups, list(group))
-    }
-    
-    # Add the list of models to the analysis list
-    analysis$groups <- append(analysis$groups, list(groups))
+    # Add statistics to output
+    output$statistics <- statistics
   }
   
   # Add denominator model information
-  alternative <- list(
-    name = x@denominator@longName,
-    formula = x@denominator@identifier$formula
-  )
-  analysis$alternative <- alternative
+  output$alternative$name <- x@denominator@longName
+  output$alternative$formula <- x@denominator@identifier$formula
   
   # Add package information
-  analysis <- add_package_info(analysis, "BayesFactor")
+  package <- list()
+
+  package$name <- "BayesFactor"
+  package$version <- getNamespaceVersion("BayesFactor")[[1]]
+
+  # Add package information to output
+  output$package <- package
   
-  return(analysis)
+  return(output)
 }
 
 #' @describeIn tidy_stats tidy_stats method for class 'afex_aov'
 #' @export
-tidy_stats.afex_aov <- function(x, args = NULL) {
-  # Create the analysis list and set the name and method
-  analysis <- list(name = attr(x, "dv"), method = "ANOVA")
+tidy_stats.afex_aov <- function(x) {
 
-  # Get term statistics
-  terms <- x$anova_table
+  output <- list()
   
-  # Create an empty groups list to add term statistics to
-  groups <- list(name = "Terms")
+  # Set method
+  output$method <- "ANOVA"
   
-  # Loop over the terms 
-  for (i in 1:nrow(terms)) {
-    # Create a new group list
-    group <- list(name = rownames(terms)[i])
+  # Set the DV
+  output$DV <- attr(x, "dv")
+  
+  # Create an empty terms list
+  terms <- list()
+  
+  # Convert the results to a data frame
+  df <- tibble::as_tibble(x$anova_table, rownames = "effect")
+  
+  for (i in 1:nrow(df)) {
     
-    # Create a new statistics list and add the term's statistics
+    # Create a new term list
+    term <- list()
+    
+    # Add the name of the term
+    term$name <- df$effect[i]
+    
+    # Create a new statistics list and add the coefficient's statistics
     statistics <- list()
     
-    statistics <- add_statistic(statistics, "df numerator", terms$`num Df`[i],
-      "df", "num.")
-    statistics <- add_statistic(statistics, "df denominator", terms$`den Df`[i],
-      "df", "den.")
-    statistics <- add_statistic(statistics, "MSE", terms$MSE[i])
-    statistics <- add_statistic(statistics, "statistic", terms$`F`[i], "F")
-    statistics <- add_statistic(statistics, "ges", terms$ges[i], "η²", "G")
-    statistics <- add_statistic(statistics, "pes", terms$pes[i], "η²", "p")
-    statistics <- add_statistic(statistics, "p", terms$`Pr(>F)`[i])
+    statistics$MS <- df$MSE[i]
+    statistics$statistic <- list(
+      name = "F", 
+      value = df$`F`[i]
+    )
+    statistics$dfs <- list(
+      df_numerator = df$`num Df`[i], 
+      df_denominator = df$`den Df`[i]
+    )
+    statistics$p <- df$`Pr(>F)`[i]
+    statistics$ges <- df$ges[i]
     
-    # Add statistics to the group
-    group$statistics <- statistics
+    term$statistics <- statistics
     
-    # Add the group to the groups list
-    groups$groups <- append(groups$groups, list(group))
+    # Add the term data to the terms list
+    terms[[i]] <- term
   }
   
-  # Add the groups to the groups list on the analysis list
-  analysis$groups <- append(analysis$groups, list(groups))
+  # Add terms to the output
+  output$terms <- terms
   
   # Add additional information
-  analysis$anova_type <- attr(x, "type")
-  analysis$p_adjustment_method <- attr(x$anova_table, "p_adjust_method")
-  analysis$sphericity_correction_method <- attr(x$anova_table, "correction")
+  output$type <- attr(x, "type")
+  output$sphericity_correction_method <- attr(x$anova_table, "correction")
   
   # Add package information
-  analysis <- add_package_info(analysis, "afex")
+  package <- list()
+
+  package$name <- "afex"
+  package$version <- getNamespaceVersion("afex")[[1]]
+
+  # Add package information to output
+  output$package <- package
   
-  return(analysis)
+  return(output)
 }
 
 
 #' @describeIn tidy_stats tidy_stats method for class 'emmGrid'
 #' @export
-tidy_stats.emmGrid <- function(x, args = NULL) {
-  # Create the analysis list
-  analysis <- list()
+tidy_stats.emmGrid <- function(x) {
   
-  # Determine and set method
-  type <- x@misc$estType
-  
-  if (type == "contrast" | type == "pairs") {
-    analysis$method <- "contrasts"
-  } else {
-    analysis$method <- "EMMs"
-  }
-  
+  output <- list()
+
   # Convert object to a data frame
   df <- as.data.frame(x)
   
+  # Set method
+  type <- x@misc$estType
+  
+  if (type == "contrast" | type == "pairs") {
+    output$method <- "contrast"  
+  } else {
+    output$method <- "EMM"
+  }
   
   # Determine type of analysis
   by <- x@misc$by.vars
-  
-  x@misc$by.vars
-  x@misc$pri.vars
   
   if (!is.null(by)) {
     
@@ -2143,18 +1545,18 @@ tidy_stats.emmGrid <- function(x, args = NULL) {
         term <- list()
         
         # Add the name of the term
-        if (type == "contrast" | type == "pairs") {
-          term$name <- as.character(df_group$contrast[j])
+        if (type == "contrast") {
+          term$name <- df_group$contrast[j]
         } else if (type == "prediction") {
           term$name <- paste(x@misc$pri.vars, "=", df_group[, x@misc$pri.vars][j])
         } else {
-          term$name <- df_group$terms[j]
+          term$name <- df_group$terms[j]  
         }
         
         # Create a new statistics list and add the term's statistics
         statistics <- list()
         
-        if (type == "contrast" | type == "pairs") {
+        if (type == "contrast") {
           statistics$estimate$name <- "mean difference"
           statistics$estimate$value <- df_group$estimate[j]
           statistics$SE <- df_group$SE[j]
@@ -2221,9 +1623,7 @@ tidy_stats.emmGrid <- function(x, args = NULL) {
   
   # Add additional information
   if (!is.null(x@misc$avgd.over)) {
-    if (!identical(x@misc$avgd.over, character(0))) {
-      output$averaged_over <- paste(x@misc$avgd.over, collapse = "; ")    
-    }
+    output$averaged_over <- paste(x@misc$avgd.over, collapse = "; ")  
   }
   if (!is.null(x@misc$adjust)) {
     output$adjust <- x@misc$adjust  
@@ -2244,294 +1644,9 @@ tidy_stats.emmGrid <- function(x, args = NULL) {
   return(output)
 }
 
-#' @describeIn tidy_stats tidy_stats method for class 'summary_emm'
-#' @export
-tidy_stats.summary_emm <- function(x, args = NULL) {
-  output <- list()
-
-  # Convert object to a data frame
-  df <- as.data.frame(x)
-  
-  # Set method
-  if ("contrast" %in% names(df)) {
-    output$method <- "contrast"  
-  } else {
-    output$method <- "EMM"
-  }
-  
-  # Determine whether there are any groups
-  pri_vars <- attr(x, "pri.vars")
-  
-  if (length(pri_vars) > 1) {
-    # Create an empty groups list
-    groups <- list()
-  
-    for (i in 1:length(levels(df[, 2]))) {
-      # Create an empty group
-      group <- list()
-      
-      # Set the group name
-      name <- levels(df[, 2])[i]
-      group$name <- name
-      
-      # Create an empty terms list
-      terms <- list()
-      
-      # Filter the statistics of this group
-      df_group <- df[df[2] == name, ]
-      
-      for (j in 1:nrow(df_group)) {
-      
-        # Create a new term list
-        term <- list()
-        
-        # Add the name of the term
-        term$name <- as.character(df_group$contrast[j])
-        
-        # Create a new statistics list and add the term's statistics
-        statistics <- list()
-        
-        statistics$estimate$name <- "mean difference"
-        statistics$estimate$value <- df_group$estimate[j]
-        statistics$SE <- df_group$SE[j]
-        statistics$df <- df_group$df[j]
-        statistics$statistic$name <- "t"
-        statistics$statistic$value <- df_group$t.ratio[j]
-        statistics$p <- df_group$p.value[j]
-        
-        term$statistics <- statistics
-      
-        # Add the term data to the coefficients list
-        terms[[j]] <- term
-      }
-      
-      # Add coefficients to the group
-      group$terms <- terms
-      
-      # Add group to the groups list
-      groups[[i]] <- group
-    }
-    
-    # Add groups to the output
-    output$groups <- groups
-  } else {
-    # Create an empty terms list
-    terms <- list()
-    
-    for (i in 1:nrow(df)) {
-      # Create a new term list
-      term <- list()
-      
-      # Add the name of the term
-      term$name <- as.character(df$contrast[i])
-      
-      # Create a new statistics list and add the term's statistics
-      statistics <- list()
-      
-      statistics$estimate$name <- "mean difference"
-      statistics$estimate$value <- df$estimate[i]
-      statistics$SE <- df$SE[i]
-      statistics$df <- df$df[i]
-      statistics$statistic$name <- "t"
-      statistics$statistic$value <- df$t.ratio[i]
-      statistics$p <- df$p.value[i]
-      
-      term$statistics <- statistics
-    
-      # Add the term data to the coefficients list
-      terms[[i]] <- term
-    }
-    
-    # Add terms to the output
-    output$terms <- terms
-  }
-  
-  # Set additional information
-  mesg <- attr(x, "mesg")
-  
-  if (!is.null(mesg[1])) {
-    output$df_method <- stringr::str_remove(mesg[1], 
-      "Degrees-of-freedom method: ")
-  }
-  if (!is.null(mesg[2])) {
-    output$p_value_adjustment <- stringr::str_remove(mesg[2], 
-      "P value adjustment: ")
-  }
-  
-  # Add package information
-  package <- list()
-
-  package$name <- "emmeans"
-  package$version <- getNamespaceVersion("emmeans")[[1]]
-
-  # Add package information to output
-  output$package <- package
-  
-  return(output)
-}
-
 #' @describeIn tidy_stats tidy_stats method for class 'emm_list'
 #' @export
-tidy_stats.emm_list <- function(x, args = NULL) {
+tidy_stats.emm_list <- function(x) {
   stop(paste("You're trying to tidy an object of class 'emm_list'; ", 
     "please provide an object with class 'emmGrid'."))
-}
-
-#' @describeIn tidy_stats tidy_stats method for class 'icclist'
-#' @export
-tidy_stats.icclist <- function(x, args = NULL) {
-  # Create the analysis list and set the method
-  analysis <- list(method = "ICC")
-  
-  # Extract statistics
-  statistics <- list()
-  
-  statistics <- add_statistic(statistics, "N subjects", x$subjects, "N", 
-    "subjects")
-  statistics <- add_statistic(statistics, "N raters", x$raters, "N", "raters")
-  statistics <- add_statistic(statistics, "ICC", x$value, interval = "CI", 
-    level = x$conf.level, lower = x$lbound, upper = x$ubound)
-  statistics <- add_statistic(statistics, "statistic", x$Fvalue, "F")
-  statistics <- add_statistic(statistics, "df numerator", x$df1, "df", "num.")
-  statistics <- add_statistic(statistics, "df denominator", x$df2, "df", "den.")
-  statistics <- add_statistic(statistics, "p", x$p.value)
-  
-  # Add statistics to the analysis
-  analysis$statistics <- statistics
-  
-  # Add additional information
-  analysis$model <- x$model
-  analysis$type <- x$type
-  analysis$unit <- x$unit
-  analysis$ICC_name <- x$icc.name
-  
-  alternative <- list(null_value = x$r0)
-  analysis$alernative <- alternative
-  
-  # Add package information
-  analysis <- add_package_info(analysis, "irr")
-
-  return(analysis)
-}
-
-#' @describeIn tidy_stats tidy_stats method for class 'effsize'
-#' @export
-tidy_stats.effsize <- function(x, args = NULL) {
-  # Create the analysis list and set the method
-  analysis <- list(method = x$method)
-  
-  # Extract statistics
-  statistics <- list()
-  
-  statistics <- add_statistic(statistics, x$name, x$estimate, interval = "CI",
-    level = x$conf.level, lower = x$conf.int[["lower"]], 
-    upper = x$conf.int[["upper"]])
-
-  # Add statistics to the analysis
-  analysis$statistics <- statistics
-  
-  # Add package information
-  analysis <- add_package_info(analysis, "effsize")
-  
-  return(analysis)
-}
-
-#' @describeIn tidy_stats tidy_stats method for class 'effectsize_difference'
-#' @export
-tidy_stats.effectsize_difference <- function(x, args = NULL) {
-  # Create the analysis list and set the method
-  analysis <- list()
-  
-  # Determine the method
-  method <- dplyr::case_when(
-    "Cohens_d" %in% names(x) ~ "Cohen's d",
-    "Hedges_g" %in% names(x) ~ "Hedge's g",
-    "Glass_delta" %in% names(x) ~ "Glass' delta"
-  )
-  
-  # Set the method
-  analysis$method <- method
-  
-  # Extract statistics
-  statistics <- list()
-  
-  # Special case: The name is equal to the method
-  statistics <- add_statistic(statistics, method , x$Cohens_d, 
-    interval = "CI", level = x$CI, lower = x$CI_low, upper = x$CI_high)
-  
-  # Add statistics to the analysis
-  analysis$statistics <- statistics
-  
-  # Add additional information
-  alternative <- list(
-    direction = attr(x, "alternative"),
-    null_value = attr(x, "mu")
-  )
-  
-  analysis$alternative <- alternative
-  
-  analysis$paired <- attr(x, "paired")
-  analysis$correction <- attr(x, "correction")
-  analysis$pooled_sd <- attr(x, "pooled_sd")
-  analysis$proximate <- attr(x, "approximate")
-  
-  # Add package information
-  analysis <- add_package_info(analysis, "effectsize")
-  
-  return(analysis)
-}
-
-#' @describeIn tidy_stats tidy_stats method for class 'confint'
-#' @export
-tidy_stats.confint <- function(x, args = NULL) {
-  # Create the analysis list
-  analysis <- list()
-  
-  # If there is only 1 parameter, set the name
-  if (length(rownames(x)) == 1) {
-    analysis$name <- rownames(x)[1]
-  }
-  
-  # Set method
-  analysis$method <- "Confidence intervals"
-  
-  # Extract confidence level
-  CI_bounds <- readr::parse_number(colnames(x))
-  CI_level <- (CI_bounds[2] - CI_bounds[1]) / 100
-  
-  # Check if there is 1 or more terms
-  # If 1, only create a statistics list
-  # If multiple, loop over terms and create separate lists for each term
-  if (length(rownames(x)) == 1) {
-    statistics <- list()
-    
-    statistics <- add_statistic(statistics, "lower", x[1])
-    statistics <- add_statistic(statistics, "upper", x[2])
-    
-    analysis$statistics <- statistics
-  } else {
-    groups <- list(name = "Coefficients")
-    
-    for (i in 1:length(rownames(x))) {
-      group <- list(name = rownames(x)[i])
-       
-      statistics <- list()
-      statistics <- add_statistic(statistics, "lower", x[i, 1])
-      statistics <- add_statistic(statistics, "upper", x[i, 2])
-      
-      group$statistics <- statistics
-      
-      groups$groups <- append(groups$groups, list(group))
-    }
-    
-    analysis$groups <- groups
-  }
-  
-  # Add additional information
-  analysis$level <- CI_level
-  
-  # Add package information
-  analysis <- add_package_info(analysis, "stats")
-  
-  return(analysis)
 }
