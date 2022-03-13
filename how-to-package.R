@@ -54,6 +54,9 @@ pkgdown::clean_site()
 
 # CRAN submission ---------------------------------------------------------
 
+# Add files to .Rbuildignore prior to building the package 
+devtools::use_build_ignore("")
+
 # Check examples
 devtools::run_examples()
 
