@@ -1,478 +1,879 @@
 {
   "t_test_one_sample": {
-    "method": "One Sample t-test",
-    "var_equal": true,
     "name": "extra",
-    "statistics": {
-      "estimate": {
-        "name": "mean",
-        "value": 1.54
+    "method": "One Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "value": 1.54,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.595584,
+        "upper": 2.484416
       },
-      "SE": 0.451221,
-      "statistic": {
-        "name": "t",
+      {
+        "name": "SE",
+        "value": 0.451221
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
         "value": 3.412965
       },
-      "df": 19,
-      "p": 0.002918,
-      "CI": {
-        "CI_level": 0.95,
-        "CI_lower": 0.595584,
-        "CI_upper": 2.484416
+      {
+        "name": "df",
+        "value": 19
+      },
+      {
+        "name": "p",
+        "value": 0.002918
       }
-    },
+    ],
     "alternative": {
       "direction": "two.sided",
       "null_value": 0
     },
     "package": {
       "name": "stats",
-      "version": "4.1.2"
+      "version": "4.1.1"
     }
   },
   "t_test_two_sample": {
-    "method": "Two Sample t-test",
-    "var_equal": true,
     "name": "extra by group",
-    "statistics": {
-      "estimate": {
-        "name": "mean difference",
-        "value": -1.58
+    "method": "Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": -1.58,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -3.363874,
+        "upper": 0.203874
       },
-      "SE": 0.849091,
-      "statistic": {
-        "name": "t",
+      {
+        "name": "SE",
+        "value": 0.849091
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
         "value": -1.860813
       },
-      "df": 18,
-      "p": 0.079187,
-      "CI": {
-        "CI_level": 0.95,
-        "CI_lower": -3.363874,
-        "CI_upper": 0.203874
+      {
+        "name": "df",
+        "value": 18
+      },
+      {
+        "name": "p",
+        "value": 0.079187
       }
-    },
+    ],
     "alternative": {
       "direction": "two.sided",
       "null_value": 0
     },
+    "var_equal": true,
     "package": {
       "name": "stats",
-      "version": "4.1.2"
+      "version": "4.1.1"
     }
   },
   "t_test_welch": {
-    "method": "Welch Two Sample t-test",
-    "var_equal": false,
     "name": "extra by group",
-    "statistics": {
-      "estimate": {
-        "name": "mean difference",
-        "value": -1.58
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": -1.58,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -3.365483,
+        "upper": 0.205483
       },
-      "SE": 0.849091,
-      "statistic": {
-        "name": "t",
+      {
+        "name": "SE",
+        "value": 0.849091
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
         "value": -1.860813
       },
-      "df": 17.776474,
-      "p": 0.079394,
-      "CI": {
-        "CI_level": 0.95,
-        "CI_lower": -3.365483,
-        "CI_upper": 0.205483
+      {
+        "name": "df",
+        "value": 17.776474
+      },
+      {
+        "name": "p",
+        "value": 0.079394
       }
-    },
+    ],
     "alternative": {
       "direction": "two.sided",
       "null_value": 0
     },
+    "var_equal": false,
     "package": {
       "name": "stats",
-      "version": "4.1.2"
+      "version": "4.1.1"
     }
   },
   "t_test_paired": {
-    "method": "Paired t-test",
-    "var_equal": true,
     "name": "extra by group",
-    "statistics": {
-      "estimate": {
-        "name": "mean difference",
-        "value": -1.58
+    "method": "Paired t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": -1.58,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -2.459886,
+        "upper": -0.700114
       },
-      "SE": 0.388959,
-      "statistic": {
-        "name": "t",
+      {
+        "name": "SE",
+        "value": 0.388959
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
         "value": -4.062128
       },
-      "df": 9,
-      "p": 0.002833,
-      "CI": {
-        "CI_level": 0.95,
-        "CI_lower": -2.459886,
-        "CI_upper": -0.700114
+      {
+        "name": "df",
+        "value": 9
+      },
+      {
+        "name": "p",
+        "value": 0.002833
       }
-    },
+    ],
     "alternative": {
       "direction": "two.sided",
       "null_value": 0
     },
     "package": {
       "name": "stats",
-      "version": "4.1.2"
+      "version": "4.1.1"
     }
   },
   "correlation_pearson": {
-    "method": "Pearson's product-moment correlation",
-    "var_equal": true,
     "name": "x and y",
-    "statistics": {
-      "estimate": {
-        "name": "cor",
-        "value": 0.571182
+    "method": "Pearson's product-moment correlation",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "r",
+        "value": 0.571182,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -0.149743,
+        "upper": 0.895579
       },
-      "statistic": {
-        "name": "t",
+      {
+        "name": "statistic",
+        "symbol": "t",
         "value": 1.841083
       },
-      "df": 7,
-      "p": 0.108173,
-      "CI": {
-        "CI_level": 0.95,
-        "CI_lower": -0.149743,
-        "CI_upper": 0.895579
+      {
+        "name": "df",
+        "value": 7
+      },
+      {
+        "name": "p",
+        "value": 0.108173
       }
-    },
+    ],
     "alternative": {
       "direction": "two.sided",
       "null_value": 0
     },
     "package": {
       "name": "stats",
-      "version": "4.1.2"
+      "version": "4.1.1"
     }
   },
   "correlation_kendall": {
-    "method": "Kendall's rank correlation tau",
-    "var_equal": true,
     "name": "x and y",
-    "statistics": {
-      "estimate": {
-        "name": "tau",
+    "method": "Kendall's rank correlation tau",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "r",
+        "subscript": "τ",
         "value": 0.444444
       },
-      "statistic": {
-        "name": "T",
+      {
+        "name": "statistic",
+        "symbol": "T",
         "value": 26
       },
-      "p": 0.119439
-    },
+      {
+        "name": "p",
+        "value": 0.119439
+      }
+    ],
     "alternative": {
       "direction": "two.sided",
       "null_value": 0
     },
     "package": {
       "name": "stats",
-      "version": "4.1.2"
+      "version": "4.1.1"
     }
   },
   "correlation_spearman": {
-    "method": "Spearman's rank correlation rho",
-    "var_equal": true,
     "name": "x and y",
-    "statistics": {
-      "estimate": {
-        "name": "rho",
+    "method": "Spearman's rank correlation rho",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "r",
+        "subscript": "S",
         "value": 0.6
       },
-      "statistic": {
-        "name": "S",
+      {
+        "name": "statistic",
+        "symbol": "S",
         "value": 48
       },
-      "p": 0.096798
-    },
+      {
+        "name": "p",
+        "value": 0.096798
+      }
+    ],
     "alternative": {
       "direction": "two.sided",
       "null_value": 0
     },
     "package": {
       "name": "stats",
-      "version": "4.1.2"
+      "version": "4.1.1"
     }
   },
   "chi_squared": {
-    "method": "Pearson's Chi-squared test",
-    "var_equal": true,
     "name": "M",
-    "statistics": {
-      "statistic": {
-        "name": "X-squared",
+    "method": "Pearson's Chi-squared test",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "χ²",
         "value": 30.070149
       },
-      "df": 2,
-      "p": 2.953589e-07
-    },
+      {
+        "name": "df",
+        "value": 2
+      },
+      {
+        "name": "p",
+        "value": 2.953589e-07
+      }
+    ],
     "package": {
       "name": "stats",
-      "version": "4.1.2"
+      "version": "4.1.1"
     }
   },
   "chi_squared_yates": {
-    "method": "Pearson's Chi-squared test with Yates' continuity correction",
-    "var_equal": true,
     "name": "x",
-    "statistics": {
-      "statistic": {
-        "name": "X-squared",
+    "method": "Pearson's Chi-squared test with Yates' continuity correction",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "χ²",
         "value": 0.64112
       },
-      "df": 1,
-      "p": 0.423305
-    },
+      {
+        "name": "df",
+        "value": 1
+      },
+      {
+        "name": "p",
+        "value": 0.423305
+      }
+    ],
     "package": {
       "name": "stats",
-      "version": "4.1.2"
+      "version": "4.1.1"
     }
   },
   "chi_squared_prob": {
-    "method": "Chi-squared test for given probabilities",
-    "var_equal": true,
     "name": "y",
-    "statistics": {
-      "statistic": {
-        "name": "X-squared",
+    "method": "Chi-squared test for given probabilities",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "χ²",
         "value": 2.5
       },
-      "df": 2,
-      "p": 0.286505
+      {
+        "name": "df",
+        "value": 2
+      },
+      {
+        "name": "p",
+        "value": 0.286505
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.1.1"
+    }
+  },
+  "prop_test": {
+    "name": "heads out of 100, null probability 0.5",
+    "method": "1-sample proportions test (with continuity correction)",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "p̂",
+        "value": 0.52,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.418318,
+        "upper": 0.620128
+      },
+      {
+        "name": "statistic",
+        "symbol": "χ²",
+        "value": 0.09
+      },
+      {
+        "name": "df",
+        "value": 1
+      },
+      {
+        "name": "p",
+        "value": 0.764177
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0.5
     },
     "package": {
       "name": "stats",
-      "version": "4.1.2"
+      "version": "4.1.1"
+    }
+  },
+  "prop_test_correct": {
+    "name": "heads out of 100, null probability 0.5",
+    "method": "1-sample proportions test (without continuity correction)",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "p̂",
+        "value": 0.52,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.423166,
+        "upper": 0.615354
+      },
+      {
+        "name": "statistic",
+        "symbol": "χ²",
+        "value": 0.16
+      },
+      {
+        "name": "df",
+        "value": 1
+      },
+      {
+        "name": "p",
+        "value": 0.689157
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0.5
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.1.1"
+    }
+  },
+  "prop_test_smokers": {
+    "name": "smokers out of patients",
+    "method": "4-sample test for equality of proportions (without continuity correction)",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "χ²",
+        "value": 12.600411
+      },
+      {
+        "name": "df",
+        "value": 3
+      },
+      {
+        "name": "p",
+        "value": 0.005585
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided"
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.1.1"
     }
   },
   "wilcoxon_signed_rank": {
-    "method": "Wilcoxon signed rank exact test",
-    "var_equal": true,
     "name": "x and y",
-    "statistics": {
-      "statistic": {
-        "name": "V",
+    "method": "Wilcoxon signed rank exact test",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "V",
         "value": 40
       },
-      "p": 0.019531
-    },
+      {
+        "name": "p",
+        "value": 0.019531
+      }
+    ],
     "alternative": {
       "direction": "greater",
       "null_value": 0
     },
     "package": {
       "name": "stats",
-      "version": "4.1.2"
+      "version": "4.1.1"
     }
   },
   "wilcoxon_rank_sum_continuity": {
-    "method": "Wilcoxon rank sum test with continuity correction",
-    "var_equal": true,
     "name": "Ozone by Month",
-    "statistics": {
-      "statistic": {
-        "name": "W",
+    "method": "Wilcoxon rank sum test (with continuity correction)",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "W",
         "value": 127.5
       },
-      "p": 0.000121
-    },
+      {
+        "name": "p",
+        "value": 0.000121
+      }
+    ],
     "alternative": {
       "direction": "two.sided",
       "null_value": 0
     },
     "package": {
       "name": "stats",
-      "version": "4.1.2"
+      "version": "4.1.1"
     }
   },
   "wilcoxon_rank_sum": {
-    "method": "Wilcoxon rank sum test",
-    "var_equal": true,
     "name": "x and y",
-    "statistics": {
-      "statistic": {
-        "name": "W",
+    "method": "Wilcoxon rank sum test",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "W",
         "value": 35
       },
-      "p": 0.110336
-    },
+      {
+        "name": "p",
+        "value": 0.110336
+      }
+    ],
     "alternative": {
       "direction": "greater",
       "null_value": 0
     },
     "package": {
       "name": "stats",
-      "version": "4.1.2"
+      "version": "4.1.1"
     }
   },
   "wilcoxon_rank_sum_conf": {
-    "method": "Wilcoxon rank sum exact test",
-    "var_equal": true,
     "name": "x and y",
-    "statistics": {
-      "estimate": {
-        "name": "difference in location",
-        "value": 0.305
+    "method": "Wilcoxon rank sum exact test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "Mdn",
+        "subscript": "diff.",
+        "value": 0.305,
+        "interval": "CI",
+        "level": 0.9,
+        "lower": -0.08,
+        "upper": 0.72
       },
-      "statistic": {
-        "name": "W",
+      {
+        "name": "statistic",
+        "symbol": "W",
         "value": 35
       },
-      "p": 0.254412,
-      "CI": {
-        "CI_level": 0.9,
-        "CI_lower": -0.08,
-        "CI_upper": 0.72
+      {
+        "name": "p",
+        "value": 0.254412
       }
-    },
+    ],
     "alternative": {
       "direction": "two.sided",
       "null_value": 0
     },
     "package": {
       "name": "stats",
-      "version": "4.1.2"
+      "version": "4.1.1"
+    }
+  },
+  "kruskal": {
+    "name": "list(x, y, z)",
+    "method": "Kruskal-Wallis rank sum test",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "χ²",
+        "value": 0.771429
+      },
+      {
+        "name": "df",
+        "value": 2
+      },
+      {
+        "name": "p",
+        "value": 0.679965
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.1.1"
+    }
+  },
+  "kruskal_formula": {
+    "name": "Ozone by Month",
+    "method": "Kruskal-Wallis rank sum test",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "χ²",
+        "value": 29.266576
+      },
+      {
+        "name": "df",
+        "value": 4
+      },
+      {
+        "name": "p",
+        "value": 6.900714e-06
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.1.1"
     }
   },
   "fisher_test": {
-    "method": "Fisher's Exact Test for Count Data",
-    "var_equal": true,
     "name": "TeaTasting",
-    "statistics": {
-      "estimate": {
-        "name": "odds ratio",
-        "value": 6.408309
+    "method": "Fisher's Exact Test for Count Data",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "OR",
+        "value": 6.408309,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.313569,
+        "upper": "Inf"
       },
-      "p": 0.242857,
-      "CI": {
-        "CI_level": 0.95,
-        "CI_lower": 0.313569,
-        "CI_upper": "Inf"
+      {
+        "name": "p",
+        "value": 0.242857
       }
-    },
+    ],
     "alternative": {
       "direction": "greater",
       "null_value": 1
     },
     "package": {
       "name": "stats",
-      "version": "4.1.2"
+      "version": "4.1.1"
     }
   },
   "fisher_test_no_CI": {
-    "method": "Fisher's Exact Test for Count Data",
-    "var_equal": true,
     "name": "Convictions",
-    "statistics": {
-      "estimate": {
-        "name": "odds ratio",
+    "method": "Fisher's Exact Test for Count Data",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "OR",
         "value": 0.046937
       },
-      "p": 0.000537
-    },
+      {
+        "name": "p",
+        "value": 0.000537
+      }
+    ],
     "alternative": {
       "direction": "two.sided",
       "null_value": 1
     },
     "package": {
       "name": "stats",
-      "version": "4.1.2"
+      "version": "4.1.1"
     }
   },
   "fisher_test_r_by_c": {
-    "method": "Fisher's Exact Test for Count Data",
-    "var_equal": true,
     "name": "Job",
-    "statistics": {
-      "p": 0.782685
-    },
+    "method": "Fisher's Exact Test for Count Data",
+    "statistics": [
+      {
+        "name": "p",
+        "value": 0.782685
+      }
+    ],
     "alternative": {
       "direction": "two.sided"
     },
     "package": {
       "name": "stats",
-      "version": "4.1.2"
+      "version": "4.1.1"
     }
   },
   "fisher_test_simulated_p": {
-    "method": "Fisher's Exact Test for Count Data with simulated p-value",
-    "sim": 100000,
     "name": "Job",
-    "statistics": {
-      "p": 0.783322
-    },
+    "method": "Fisher's Exact Test for Count Data with (with simulated p-value)",
+    "statistics": [
+      {
+        "name": "p",
+        "value": 0.783322
+      }
+    ],
     "alternative": {
       "direction": "two.sided"
     },
+    "sim": 100000,
     "package": {
       "name": "stats",
-      "version": "4.1.2"
+      "version": "4.1.1"
     }
   },
   "fisher_test_hybrid": {
-    "method": "Fisher's Exact Test for Count Data hybrid using asym.chisq",
+    "name": "MP6",
+    "method": "Fisher's Exact Test for Count Data (hybrid)",
+    "statistics": [
+      {
+        "name": "p",
+        "value": 0.03929
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided"
+    },
     "hybrid_parameters": {
       "expect": 5,
       "percent": 8,
       "Emin": 5
     },
-    "name": "MP6",
-    "statistics": {
-      "p": 0.03929
-    },
+    "package": {
+      "name": "stats",
+      "version": "4.1.1"
+    }
+  },
+  "ks_test": {
+    "name": "x and y",
+    "method": "Two-sample Kolmogorov-Smirnov test",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "D",
+        "value": 0.48
+      },
+      {
+        "name": "p",
+        "value": 0.000203
+      }
+    ],
     "alternative": {
-      "direction": "two.sided"
+      "direction": "two-sided"
     },
     "package": {
       "name": "stats",
-      "version": "4.1.2"
+      "version": "4.1.1"
+    }
+  },
+  "ks_test_two": {
+    "name": "x + 2",
+    "method": "One-sample Kolmogorov-Smirnov test",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "D",
+        "value": 0.409618
+      },
+      {
+        "name": "p",
+        "value": 4.226692e-08
+      }
+    ],
+    "alternative": {
+      "direction": "two-sided"
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.1.1"
+    }
+  },
+  "ks_test_exact": {
+    "name": "x + 2",
+    "method": "One-sample Kolmogorov-Smirnov test",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "D",
+        "value": 0.409618
+      },
+      {
+        "name": "p",
+        "value": 1.033062e-07
+      }
+    ],
+    "alternative": {
+      "direction": "two-sided"
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.1.1"
+    }
+  },
+  "ks_test_greater": {
+    "name": "x + 2",
+    "method": "One-sample Kolmogorov-Smirnov test",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "D",
+        "value": 0.039998
+      },
+      {
+        "name": "p",
+        "value": 0.83016
+      }
+    ],
+    "alternative": {
+      "direction": "the CDF of x lies above the null hypothesis"
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.1.1"
     }
   },
   "oneway_test": {
-    "method": "One-way analysis of means",
-    "var_equal": false,
     "name": "extra and group",
-    "statistics": {
-      "statistic": {
-        "name": "F",
+    "method": "One-way analysis of means",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "F",
         "value": 3.462627
       },
-      "dfs": {
-        "df_numerator": 1,
-        "df_denominator": 17.776474
+      {
+        "name": "df numerator",
+        "symbol": "df",
+        "subscript": "num.",
+        "value": 1
       },
-      "p": 0.079394
-    },
+      {
+        "name": "df denominator",
+        "symbol": "df",
+        "subscript": "den.",
+        "value": 17.776474
+      },
+      {
+        "name": "p",
+        "value": 0.079394
+      }
+    ],
+    "var_equal": false,
     "package": {
       "name": "stats",
-      "version": "4.1.2"
+      "version": "4.1.1"
     }
   },
   "oneway_test_equal_var": {
-    "method": "One-way analysis of means",
-    "var_equal": true,
     "name": "extra and group",
-    "statistics": {
-      "statistic": {
-        "name": "F",
+    "method": "One-way analysis of means",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "F",
         "value": 3.462627
       },
-      "dfs": {
-        "df_numerator": 1,
-        "df_denominator": 18
+      {
+        "name": "df numerator",
+        "symbol": "df",
+        "subscript": "num.",
+        "value": 1
       },
-      "p": 0.079187
+      {
+        "name": "df denominator",
+        "symbol": "df",
+        "subscript": "den.",
+        "value": 18
+      },
+      {
+        "name": "p",
+        "value": 0.079187
+      }
+    ],
+    "var_equal": true,
+    "package": {
+      "name": "stats",
+      "version": "4.1.1"
+    }
+  },
+  "var_test": {
+    "name": "x and y",
+    "method": "F test to compare two variances",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "VR",
+        "value": 2.652168,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 1.33251,
+        "upper": 4.989832
+      },
+      {
+        "name": "statistic",
+        "symbol": "F",
+        "value": 2.652168
+      },
+      {
+        "name": "df numerator",
+        "symbol": "df",
+        "subscript": "num.",
+        "value": 49
+      },
+      {
+        "name": "df denominator",
+        "symbol": "df",
+        "subscript": "den.",
+        "value": 29
+      },
+      {
+        "name": "p",
+        "value": 0.006232
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 1
     },
     "package": {
       "name": "stats",
-      "version": "4.1.2"
+      "version": "4.1.1"
     }
   }
 }

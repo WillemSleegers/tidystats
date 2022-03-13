@@ -52,10 +52,10 @@ liked individual, or Osama Bin Laden, the disliked individual.
 \references{
 Lorge, I., & Curtiss, C. C. (1936). Prestige, suggestion, and attitudes. 
 The Journal of Social Psychology, 7, 386-402. 
-\doi{10.1080/00224545.1936.9919891}
+\url{https://doi.org/10.1080/00224545.1936.9919891}
 
 Klein, R.A. et al. (2014) Investigating Variation in Replicability: A "Many 
 Labs" Replication Project. Social Psychology, 45(3), 142-152. 
-\doi{10.1027/1864-9335/a000178}
+\url{https://dx.doi.org/10.1027/1864-9335/a000178}
 }
 \keyword{datasets}

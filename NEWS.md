@@ -1,13 +1,35 @@
-# tidystats 0.5.1 
+# tidystats 0.6
 
-## Improvements
+## Meta
+* Redesigned the tidystats structure to be more expandable.
 
-* Renamed the `variable` column in the output of `describe_data()` to `var`.
-* Improved ordering of the columns in the output of `describe_data()`.
+## New
+* Added two new arguments to `add_stats()`: `args` and `class`. The `args` argument can be used to supply additional arguments to customize which statistics are extracted from a particular analysis. For a list of supported functions, see the Details section in the help document of `add_stats()`. The `class` argument can be used to explicitly indicate the class of the analysis you want to add. Sometimes the output of a particular analysis returns an object with insufficient information for `tidystats` to know how to extract the statistics. By using the `class` argument, you can tell `tidystats` what kind of object it is so that it can nevertheless extract the statistics. For a list of supported classes, see the Details section of the help document of `add_stats()`.
+* Added support for the `confint()` function from the `stats` package using the new `class` argument in `add_stats().
+* Added support for the `alpha()` function from the `psych` package.
+* Added support for the `corr.test()` function from the `psych` package.
+* Added support for the `icc()` function from the `irr` package.
+* Added support for the `cohen.d()` function from the `effsize` package.
+* Added support for the `emmeans()` function from the `emmeans` package.
+* Added support for the `test()` function on the result of `contrast()` on the result of `emmeans()` from the `emmeans` package.
+* Added support for `lme()`, `nlme()`, `gls()`, and `anova()` from the `nlme` package.
+
+## Changes
+* Removed automatically setting the method to 'Generic test' when adding a custom test. This means you can set the method yourself now.
+* Renames the `variable` column to `var` in `describe_data()`.
+* `describe_data()` now (again) has support for multiple variables. You can provide more than 1 column name (separated by commas) to calculate descriptives for each variable.
+* Improved names in `anova()` tests.
 
 ## Bug fixes
 
 * Using `tidy_stats()` on ungrouped count data produced with `count_data()` is now properly tidied.
+* Fixed order of columns in `describe_data()` when the data is grouped.
+* Fixed a bug when trying to add the results of a multilevel model ("Error in summary$ngrps[[names(summary$ngrps) == group$name]] : 
+  attempt to select more than one element in vectorIndex")
+* Fixed GitHub issue #8.
+
+## Misc
+* Removed info message that is displayed when the package is loaded.
 
 # tidystats 0.5
 

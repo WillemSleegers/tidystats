@@ -10,7 +10,9 @@ add_stats(
   identifier = NULL,
   type = NULL,
   preregistered = NULL,
-  notes = NULL
+  notes = NULL,
+  args = NULL,
+  class = NULL
 )
 }
 \arguments{
@@ -28,6 +30,13 @@ secondary, or exploratory.}
 preregistered or not.}
 
 \item{notes}{A character string specifying additional information.}
+
+\item{args}{A list of additional arguments to customize which statistics 
+should be extracted. See details for a list of supported analyses.}
+
+\item{class}{A character string to manually specify the class of the object
+so that tidystats knows how to extract the statistics. See details for a list 
+classes that are supported.}
 }
 \description{
 \code{add_stats} is used to add the output of a statistical test to a 
@@ -38,7 +47,7 @@ Please note that not all statistical tests are supported. See 'Details' below
 for a list of supported statistical tests.
 }
 \details{
-Currently supported functions:
+Supported functions:
 
 \code{stats}:
 \itemize{
@@ -76,6 +85,16 @@ Currently supported functions:
 \itemize{
   \item \code{describe_data()}
   \item \code{count_data()}
+}
+
+Supported classes:
+\itemize{
+  \item \code{confint}
+}
+
+Functions with additional arguments:
+\itemize{
+  \item \code{lavaan}
 }
 }
 \examples{

@@ -6,47 +6,74 @@
 \alias{tidy_stats.lm}
 \alias{tidy_stats.glm}
 \alias{tidy_stats.anova}
+\alias{tidy_stats.anova.lme}
 \alias{tidy_stats.aov}
 \alias{tidy_stats.aovlist}
 \alias{tidy_stats.tidystats_descriptives}
 \alias{tidy_stats.tidystats_counts}
 \alias{tidy_stats.lmerMod}
 \alias{tidy_stats.lmerModLmerTest}
+\alias{tidy_stats.lme}
+\alias{tidy_stats.nlme}
+\alias{tidy_stats.gls}
 \alias{tidy_stats.BFBayesFactor}
 \alias{tidy_stats.afex_aov}
 \alias{tidy_stats.emmGrid}
+\alias{tidy_stats.summary_emm}
 \alias{tidy_stats.emm_list}
+\alias{tidy_stats.icclist}
+\alias{tidy_stats.effsize}
+\alias{tidy_stats.effectsize_difference}
+\alias{tidy_stats.confint}
 \title{Tidy the output of a statistics object}
 \usage{
-tidy_stats(x)
+tidy_stats(x, args = NULL)
 
-\method{tidy_stats}{htest}(x)
+\method{tidy_stats}{htest}(x, args = NULL)
 
-\method{tidy_stats}{lm}(x)
+\method{tidy_stats}{lm}(x, args = NULL)
 
-\method{tidy_stats}{glm}(x)
+\method{tidy_stats}{glm}(x, args = NULL)
 
-\method{tidy_stats}{anova}(x)
+\method{tidy_stats}{anova}(x, args = NULL)
 
-\method{tidy_stats}{aov}(x)
+\method{tidy_stats}{anova.lme}(x, args = NULL)
 
-\method{tidy_stats}{aovlist}(x)
+\method{tidy_stats}{aov}(x, args = NULL)
 
-\method{tidy_stats}{tidystats_descriptives}(x)
+\method{tidy_stats}{aovlist}(x, args = NULL)
 
-\method{tidy_stats}{tidystats_counts}(x)
+\method{tidy_stats}{tidystats_descriptives}(x, args = NULL)
 
-\method{tidy_stats}{lmerMod}(x)
+\method{tidy_stats}{tidystats_counts}(x, args = NULL)
 
-\method{tidy_stats}{lmerModLmerTest}(x)
+\method{tidy_stats}{lmerMod}(x, args = NULL)
 
-\method{tidy_stats}{BFBayesFactor}(x)
+\method{tidy_stats}{lmerModLmerTest}(x, args = NULL)
 
-\method{tidy_stats}{afex_aov}(x)
+\method{tidy_stats}{lme}(x, args = NULL)
 
-\method{tidy_stats}{emmGrid}(x)
+\method{tidy_stats}{nlme}(x, args = NULL)
 
-\method{tidy_stats}{emm_list}(x)
+\method{tidy_stats}{gls}(x, args = NULL)
+
+\method{tidy_stats}{BFBayesFactor}(x, args = NULL)
+
+\method{tidy_stats}{afex_aov}(x, args = NULL)
+
+\method{tidy_stats}{emmGrid}(x, args = NULL)
+
+\method{tidy_stats}{summary_emm}(x, args = NULL)
+
+\method{tidy_stats}{emm_list}(x, args = NULL)
+
+\method{tidy_stats}{icclist}(x, args = NULL)
+
+\method{tidy_stats}{effsize}(x, args = NULL)
+
+\method{tidy_stats}{effectsize_difference}(x, args = NULL)
+
+\method{tidy_stats}{confint}(x, args = NULL)
 }
 \arguments{
 \item{x}{The output of a statistical test.}
@@ -113,6 +140,8 @@ Currently supported functions:
 
 \item \code{anova}: tidy_stats method for class 'anova'
 
+\item \code{anova.lme}: tidy_stats method for class 'anova.lme'
+
 \item \code{aov}: tidy_stats method for class 'aov'
 
 \item \code{aovlist}: tidy_stats method for class 'aovlist'
@@ -125,13 +154,29 @@ Currently supported functions:
 
 \item \code{lmerModLmerTest}: tidy_stats method for class 'lmerModLmerTest'
 
+\item \code{lme}: tidy_stats method for class 'nlme'
+
+\item \code{nlme}: tidy_stats method for class 'nlme'
+
+\item \code{gls}: tidy_stats method for class 'gls'
+
 \item \code{BFBayesFactor}: tidy_stats method for class 'BayesFactor'
 
 \item \code{afex_aov}: tidy_stats method for class 'afex_aov'
 
 \item \code{emmGrid}: tidy_stats method for class 'emmGrid'
 
+\item \code{summary_emm}: tidy_stats method for class 'summary_emm'
+
 \item \code{emm_list}: tidy_stats method for class 'emm_list'
+
+\item \code{icclist}: tidy_stats method for class 'icclist'
+
+\item \code{effsize}: tidy_stats method for class 'effsize'
+
+\item \code{effectsize_difference}: tidy_stats method for class 'effectsize_difference'
+
+\item \code{confint}: tidy_stats method for class 'confint'
 }}
 
 \examples{
