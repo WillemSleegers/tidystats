@@ -19,6 +19,14 @@ library(tidystats)
 .rs.restartR()
 library(tidystats)
 
+# Setup -------------------------------------------------------------------
+
+# Create README file
+usethis::use_readme_rmd(open = rlang::is_interactive())
+
+# Create pkgdown website
+usethis::use_pkgdown()
+
 # Testing -----------------------------------------------------------------
 
 # Add a test
@@ -40,9 +48,6 @@ testthat::test_file("tests/testthat/test_htest.R")
 
 # Build website -----------------------------------------------------------
 
-# Run once to configure package to use pkgdown
-usethis::use_pkgdown()
-
 # Run to build the website
 pkgdown::build_site()
 
@@ -53,6 +58,9 @@ pkgdown::preview_site()
 pkgdown::clean_site()
 
 # CRAN submission ---------------------------------------------------------
+
+# Update README
+knitr::knit(input = "README.Rmd")
 
 # Check examples
 devtools::run_examples()
