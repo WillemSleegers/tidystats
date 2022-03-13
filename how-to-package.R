@@ -8,16 +8,8 @@
 
 # Update ------------------------------------------------------------------
 
-# Update documentation and (re)install the package
-devtools::document()
-devtools::install()
-detach("package:tidystats", unload = TRUE)
-library(tidystats)
-
-# Restart sessions --------------------------------------------------------
-
-.rs.restartR()
-library(tidystats)
+# Load the package
+devtools::load_all()
 
 # Testing -----------------------------------------------------------------
 
@@ -40,9 +32,6 @@ testthat::test_file("tests/testthat/test_htest.R")
 
 # Build website -----------------------------------------------------------
 
-# Run once to configure package to use pkgdown
-# usethis::use_pkgdown()
-
 # Run to build the website
 pkgdown::build_site()
 
@@ -54,8 +43,11 @@ pkgdown::clean_site()
 
 # CRAN submission ---------------------------------------------------------
 
-# Add files to .Rbuildignore prior to building the package 
-devtools::use_build_ignore("")
+# Update README
+knitr::knit(input = "README.Rmd")
+
+# Update website
+pkgdown::build_site()
 
 # Check examples
 devtools::run_examples()
@@ -73,5 +65,13 @@ devtools::check(args = c('--as-cran'))
 devtools::check_win_devel()
 devtools::check_win_release()
 
-# Build tar
-devtools::build()
+# Submit
+devtools::release()
+
+# Setup -------------------------------------------------------------------
+
+# Create README file
+usethis::use_readme_rmd(open = rlang::is_interactive())
+
+# Create pkgdown website
+usethis::use_pkgdown()
