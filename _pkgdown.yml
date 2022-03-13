@@ -23,30 +23,5 @@ reference:
     contents:
       - quote_source
 
-navbar:
-  title: ~
-  type: default
-  left:
-    - text: "Home"
-      href: index.html
-    - text: "Reference"
-      href: reference/index.html
-    - text: Articles
-      menu:
-      - text: Introduction to tidystats
-        href: articles/introduction-to-tidystats.html
-      - text: Reading and using a tidystats file
-        href: articles/read-and-use-a-tidystats-file.html
-      - text: tidystats taxonomy
-        href: articles/tidystats-taxonomy.html
-    - text: "Changelog"
-      href: news/index.html
-    - text: 
-  right:
-    - icon: fa-github
-      href: https://github.com/WillemSleegers/tidystats
-
 template:
   bootstrap: 5
-  params:
-    bootswatch: flatly

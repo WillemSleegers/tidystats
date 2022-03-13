@@ -18,7 +18,7 @@ cat(
 )
 ```
 
-## tidystats
+# tidystats
 
 **Author:** [Willem Sleegers](https://www.willemsleegers.com/)
 **License:** [MIT](https://opensource.org/licenses/MIT)
@@ -35,7 +35,7 @@ package may contain bugs and is subject to significant changes.** If you find
 any bugs or if you have any feedback, please let me know by creating an issue 
 here on Github (it's really easy to do!).
 
-### Installation
+## Installation
 
 `tidystats` can be installed from CRAN and the latest version can be installed 
 from Github using [devtools](https://github.com/r-lib/devtools). 
@@ -45,7 +45,7 @@ library(devtools)
 install_github("willemsleegers/tidystats")
 ```
 
-### Setup
+## Setup
 
 Load the package and start by creating an empty list to store the results of 
 statistical models. You can name the list whatever you want (in the 
@@ -57,7 +57,7 @@ library(tidystats)
 results <- list()
 ```
 
-### Usage
+## Usage
 
 The main function is `add_stats()`. The function has 2 necessary arguments:
 
@@ -81,7 +81,7 @@ preregistered or not.
 Finally the `notes` argument is used to add additional information which you may
 find fruitful.
 
-### Supported statistical functions
+## Supported statistical functions
 
 **Package:** stats
 
@@ -120,7 +120,7 @@ find fruitful.
 - `describe_data()`
 - `count_data()`
 
-### Example
+## Example
 
 ```{r example-setup, echo = FALSE, message = FALSE}
 library(dplyr)
