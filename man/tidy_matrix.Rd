@@ -4,7 +4,7 @@
 \alias{tidy_matrix}
 \title{Helper functions in tidystats}
 \usage{
-tidy_matrix(m, symmetric = TRUE)
+tidy_matrix(m)
 }
 \arguments{
 \item{m}{A matrix.}

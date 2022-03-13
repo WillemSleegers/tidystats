@@ -4,20 +4,20 @@
 # Load packages
 library(tidystats)
 library(tidyverse)
-library(lme4)
-library(lmerTest)
 
-# Create an empty list
+# lme4’s lmer() -----------------------------------------------------------
+
 results <- list()
 
-# lme4::lmer() ------------------------------------------------------------
+# Load the package
+library(lme4)
 
-# Run tests
+# Run multilevel models
 lme4 <- lme4::lmer(Reaction ~ Days + (1 | Subject), sleepstudy)
 lme4_ML <- lme4::lmer(Reaction ~ Days + (1 | Subject), sleepstudy, 
-  REML = FALSE)
-lme4_slopes <- lme4::lmer(Reaction ~ Days + (Days | Subject), sleepstudy, 
-  REML = FALSE)
+  REML = FALSE, verbose = 1)
+
+lme4_slopes <- lme4::lmer(Reaction ~ Days + (Days || Subject), sleepstudy)
 
 summary(lme4)
 summary(lme4_ML)
@@ -36,18 +36,16 @@ results <- results %>%
 
 # anova.merMod ------------------------------------------------------------
 
-# Run tests
-anova_lme4 <- anova(lme4)
-anova_models <- anova(lme4, lme4_slopes)
+# Run model
+lmer_anova <- anova(lme4, lme4_slopes)
+lmer_anova
 
 # Tidy stats
-temp <- tidy_stats(anova_lme4)
-temp <- tidy_stats(anova_models)
+temp <- tidy_stats(lmer_anova)
 
 # Add stats
 results <- results %>%
-  add_stats(anova_lme4) %>%
-  add_stats(anova_models)
+  add_stats(lmer_anova)
 
 # Save stats
 write_stats(results, "inst/test_data/lmer.json")
@@ -65,17 +63,12 @@ lmerTest1 <- lmerTest::lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
 lmerTest2 <- lmerTest::lmer(Informed.liking ~ Gender + Information * 
     Product + (1 | Consumer) + (1 | Consumer:Product), data = lmerTest::ham)
 
-lmerTest_ML <- lmerTest::lmer(Reaction ~ Days + (Days | Subject), sleepstudy, 
-  REML = FALSE)
-
 summary(lmerTest1)
 summary(lmerTest2)
-summary(lmerTest_ML)
 
 # Tidy results
 temp <- tidy_stats(lmerTest1)
 temp <- tidy_stats(lmerTest2)
-temp <- tidy_stats(lmerTest_ML)
 
 # Add stats
 results <- results %>%

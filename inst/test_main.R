@@ -32,7 +32,7 @@ results <- results %>%
 
 # write_stats() -----------------------------------------------------------
 
-write_stats(results, "inst/results.json")
+write_stats(results, "inst/results_bad.json")
 
 # tidy_stats_to_data_frame ------------------------------------------------
 
@@ -43,45 +43,31 @@ write_csv(df, "inst/results_df.csv")
 
 results <- list()
 
-# Run analyses
+# Single variable descriptives 
 single_var <- describe_data(quote_source, response)
+single_var
 
+# Single variable with group descriptives
 single_var_w_group <- quote_source %>%
   group_by(source) %>%
   describe_data(response)
+single_var_w_group
 
-multiple_var <- describe_data(quote_source, response, age)
-
+# Single variable with multiple group descriptives
 single_var_w_groups <- quote_source %>%
   group_by(source, sex) %>%
   describe_data(response)
-
-single_var_w_groups_wo_na <- quote_source %>%
-  group_by(source, sex) %>%
-  describe_data(response, na.rm = FALSE)
-
-multiple_var_w_group <- quote_source %>%
-  group_by(source) %>%
-  describe_data(response, age)
-
-single_var_subset <- describe_data(quote_source, response, short = TRUE)
-
-single_var
-single_var_subset
-single_var_w_group
 single_var_w_groups
-single_var_w_groups_wo_na
-multiple_var
-multiple_var_w_group
+
+# Subset of descriptives
+single_var_subset <- describe_data(quote_source, response, short = TRUE)
+single_var_subset
 
 # Tidy stats
 temp <- tidy_stats(single_var)
-temp <- tidy_stats(single_var_subset)
 temp <- tidy_stats(single_var_w_group)
 temp <- tidy_stats(single_var_w_groups)
-temp <- tidy_stats(single_var_w_groups_wo_na)
-temp <- tidy_stats(multiple_var)
-temp <- tidy_stats(multiple_var_w_group)
+temp <- tidy_stats(single_var_subset)
 
 # Add stats
 results <- results %>%
@@ -92,27 +78,32 @@ results <- results %>%
 
 write_stats(results, "inst/test_data/describe_data.json")
 
-# Analysis: count_data() --------------------------------------------------
+# Analysis: count_data ----------------------------------------------------
 
 results <- list()
 
-# Run analyses
+# No groups
 no_group <- count_data(quote_source)
-single_group <- count_data(quote_source, source)
-two_groups <- count_data(quote_source, source, sex)
+no_group
 
+# Single group
+single_group <- count_data(quote_source, source)
+single_group
+
+# Two groups
+two_groups <- count_data(quote_source, source, sex)
+two_groups
+
+# Grouped groups
 grouped_group <- quote_source %>%
   group_by(source) %>%
   count_data(sex)
+grouped_group
 
+# Omit missings
 grouped_group_na_rm <- quote_source %>%
   group_by(source) %>%
   count_data(sex, na.rm = TRUE)
-
-no_group
-single_group
-two_groups
-grouped_group
 grouped_group_na_rm
 
 # Tidy stats
@@ -161,43 +152,3 @@ results <- results %>%
     add_stats(generic_CIs, notes = "Just some random CIs")
 
 write_stats(results, "inst/test_data/generic.json")
-
-
-# class: confint() --------------------------------------------------------
-
-# Example 1
-fit <- lm(100/mpg ~ disp + hp + wt + am, data = mtcars)
-
-CI_fit <- confint(fit)
-CI_fit
-
-CI_fit_wt <- confint(fit, "wt")
-CI_fit_wt
-
-# Example 2
-counts <- c(18, 17, 15, 20, 10, 20, 25, 13, 12)
-outcome <- gl(3, 1, 9); treatment <- gl(3, 3)
-glm_D93 <- glm(counts ~ outcome + treatment, family = poisson())
-
-CI_glm_D93_MASS <- confint(glm_D93) # needs MASS to be installed
-CI_glm_D93_MASS
-CI_glm_D93_default <- confint.default(glm_D93)  # based on asymptotic normality
-CI_glm_D93_default
-
-# Tidy stats
-temp <- tidy_stats(CI_fit)
-temp <- tidy_stats(CI_fit_wt)
-temp <- tidy_stats(CI_glm_D93_MASS)
-temp <- tidy_stats(CI_glm_D93_default)
-
-# Add stats
-results <- list()
-
-results <- results %>%
-  add_stats(CI_fit, class = "confint") %>%
-  add_stats(CI_fit_wt, class = "confint") %>%
-  add_stats(CI_glm_D93_MASS, class = "confint") %>%
-  add_stats(CI_glm_D93_default, class = "confint")
-
-# Save stats
-write_stats(results, "inst/test_data/confint.json")

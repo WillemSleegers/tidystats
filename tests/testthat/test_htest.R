@@ -1,9 +1,6 @@
 
 # Setup -------------------------------------------------------------------
 
-# Load packages
-library(tidystats)
-
 # Load test data
 test_results <- read_stats(system.file("test_data/htest.json", 
   package = "tidystats"))
@@ -19,8 +16,8 @@ test_that("one sample t-tests works", {
   tidy_model <- tidy_stats(model)
   tidy_model_test <- test_results$t_test_one_sample
   
-  tidy_model$package <- NULL
-  tidy_model_test$package <- NULL
+  tidy_model$package$version <- NULL
+  tidy_model_test$package$version <- NULL
   
   expect_equal(tidy_model, tidy_model_test, tolerance = tolerance)
 })
@@ -31,8 +28,8 @@ test_that("two sample t-tests works", {
   tidy_model <- tidy_stats(model)
   tidy_model_test <- test_results$t_test_two_sample
   
-  tidy_model$package <- NULL
-  tidy_model_test$package <- NULL
+  tidy_model$package$version <- NULL
+  tidy_model_test$package$version <- NULL
   
   expect_equal(tidy_model, tidy_model_test, tolerance = tolerance)
 })
@@ -43,8 +40,8 @@ test_that("Welch t-tests works", {
   tidy_model <- tidy_stats(model)
   tidy_model_test <- test_results$t_test_welch
   
-  tidy_model$package <- NULL
-  tidy_model_test$package <- NULL
+  tidy_model$package$version <- NULL
+  tidy_model_test$package$version <- NULL
   
   expect_equal(tidy_model, tidy_model_test, tolerance = tolerance)
 })
@@ -55,8 +52,8 @@ test_that("paired t-tests works", {
   tidy_model <- tidy_stats(model)
   tidy_model_test <- test_results$t_test_paired
   
-  tidy_model$package <- NULL
-  tidy_model_test$package <- NULL
+  tidy_model$package$version <- NULL
+  tidy_model_test$package$version <- NULL
   
   expect_equal(tidy_model, tidy_model_test, tolerance = tolerance)
 })
@@ -72,8 +69,8 @@ test_that("pearson correlations works", {
   tidy_model <- tidy_stats(model)
   tidy_model_test <- test_results$correlation_pearson
   
-  tidy_model$package <- NULL
-  tidy_model_test$package <- NULL
+  tidy_model$package$version <- NULL
+  tidy_model_test$package$version <- NULL
   
   expect_equal(tidy_model, tidy_model_test, tolerance = tolerance)
 })
@@ -87,8 +84,8 @@ test_that("spearman correlations works", {
   tidy_model <- tidy_stats(model)
   tidy_model_test <- test_results$correlation_spearman
   
-  tidy_model$package <- NULL
-  tidy_model_test$package <- NULL
+  tidy_model$package$version <- NULL
+  tidy_model_test$package$version <- NULL
   
   expect_equal(tidy_model, tidy_model_test, tolerance = tolerance)
 })
@@ -102,8 +99,8 @@ test_that("kendall correlations works", {
   tidy_model <- tidy_stats(model)
   tidy_model_test <- test_results$correlation_kendall
   
-  tidy_model$package <- NULL
-  tidy_model_test$package <- NULL
+  tidy_model$package$version <- NULL
+  tidy_model_test$package$version <- NULL
   
   expect_equal(tidy_model, tidy_model_test, tolerance = tolerance)
 })
@@ -120,8 +117,8 @@ test_that("pearson's chi-squared tests works", {
   tidy_model <- tidy_stats(model)
   tidy_model_test <- test_results$chi_squared
   
-  tidy_model$package <- NULL
-  tidy_model_test$package <- NULL
+  tidy_model$package$version <- NULL
+  tidy_model_test$package$version <- NULL
   
   expect_equal(tidy_model, tidy_model_test, tolerance = tolerance)
 })
@@ -134,8 +131,8 @@ test_that("pearson's chi-squared tests with yates' correction works", {
   tidy_model <- tidy_stats(model)
   tidy_model_test <- test_results$chi_squared_yates
   
-  tidy_model$package <- NULL
-  tidy_model_test$package <- NULL
+  tidy_model$package$version <- NULL
+  tidy_model_test$package$version <- NULL
   
   expect_equal(tidy_model, tidy_model_test, tolerance = tolerance)
 })
@@ -148,8 +145,8 @@ test_that("chi-squared tests with for given probabilities works", {
   tidy_model <- tidy_stats(model)
   tidy_model_test <- test_results$chi_squared_prob
   
-  tidy_model$package <- NULL
-  tidy_model_test$package <- NULL
+  tidy_model$package$version <- NULL
+  tidy_model_test$package$version <- NULL
   
   expect_equal(tidy_model, tidy_model_test, tolerance = tolerance)
 })
@@ -165,8 +162,8 @@ test_that("wilcoxon signed rank exact tests works", {
   tidy_model <- tidy_stats(model)
   tidy_model_test <- test_results$wilcoxon_signed_rank
   
-  tidy_model$package <- NULL
-  tidy_model_test$package <- NULL
+  tidy_model$package$version <- NULL
+  tidy_model_test$package$version <- NULL
   
   expect_equal(tidy_model, tidy_model_test, tolerance = tolerance)
 })
@@ -178,8 +175,8 @@ test_that("wilcoxon rank sum tests with continuity correction works", {
   tidy_model <- tidy_stats(model)
   tidy_model_test <- test_results$wilcoxon_rank_sum_continuity
   
-  tidy_model$package <- NULL
-  tidy_model_test$package <- NULL
+  tidy_model$package$version <- NULL
+  tidy_model_test$package$version <- NULL
   
   expect_equal(tidy_model, tidy_model_test, tolerance = tolerance)
 })
@@ -194,8 +191,8 @@ test_that("wilcoxon rank sum tests works", {
   tidy_model <- tidy_stats(model)
   tidy_model_test <- test_results$wilcoxon_rank_sum
   
-  tidy_model$package <- NULL
-  tidy_model_test$package <- NULL
+  tidy_model$package$version <- NULL
+  tidy_model_test$package$version <- NULL
   
   expect_equal(tidy_model, tidy_model_test, tolerance = tolerance)
 })
@@ -209,8 +206,8 @@ test_that("wilcoxon rank sum tests works", {
   tidy_model <- tidy_stats(model)
   tidy_model_test <- test_results$wilcoxon_rank_sum_conf
   
-  tidy_model$package <- NULL
-  tidy_model_test$package <- NULL
+  tidy_model$package$version <- NULL
+  tidy_model_test$package$version <- NULL
   
   expect_equal(tidy_model, tidy_model_test, tolerance = tolerance)
 })
@@ -225,8 +222,8 @@ test_that("fisher's exact tests works", {
   tidy_model <- tidy_stats(model)
   tidy_model_test <- test_results$fisher_test
   
-  tidy_model$package <- NULL
-  tidy_model_test$package <- NULL
+  tidy_model$package$version <- NULL
+  tidy_model_test$package$version <- NULL
   
   expect_equal(tidy_model, tidy_model_test, tolerance = tolerance)
 })
@@ -239,8 +236,8 @@ test_that("fisher's exact tests without a confidence interval works", {
   tidy_model <- tidy_stats(model)
   tidy_model_test <- test_results$fisher_test_no_CI
   
-  tidy_model$package <- NULL
-  tidy_model_test$package <- NULL
+  tidy_model$package$version <- NULL
+  tidy_model_test$package$version <- NULL
   
   expect_equal(tidy_model, tidy_model_test, tolerance = tolerance)
 })
@@ -253,8 +250,8 @@ test_that("fisher's exact tests on r x c tables works", {
   tidy_model <- tidy_stats(model)
   tidy_model_test <- test_results$fisher_test_r_by_c
   
-  tidy_model$package <- NULL
-  tidy_model_test$package <- NULL
+  tidy_model$package$version <- NULL
+  tidy_model_test$package$version <- NULL
   
   expect_equal(tidy_model, tidy_model_test, tolerance = tolerance)
 })
@@ -270,8 +267,8 @@ test_that("fisher's exact tests with simulated p-value works", {
   tidy_model <- tidy_stats(model)
   tidy_model_test <- test_results$fisher_test_simulated_p
   
-  tidy_model$package <- NULL
-  tidy_model_test$package <- NULL
+  tidy_model$package$version <- NULL
+  tidy_model_test$package$version <- NULL
   
   expect_equal(tidy_model, tidy_model_test, tolerance = tolerance)
 })
@@ -290,8 +287,8 @@ test_that("fisher's exact tests hybrid works", {
   tidy_model <- tidy_stats(model)
   tidy_model_test <- test_results$fisher_test_hybrid
   
-  tidy_model$package <- NULL
-  tidy_model_test$package <- NULL
+  tidy_model$package$version <- NULL
+  tidy_model_test$package$version <- NULL
   
   expect_equal(tidy_model, tidy_model_test, tolerance = tolerance)
 })

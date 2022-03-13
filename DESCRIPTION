@@ -1,7 +1,7 @@
 Package: tidystats
 Type: Package
-Title: Save Output of Statistical Tests 
-Version: 0.5
+Title: Save Output of Statistical Tests
+Version: 0.5.1
 Author: Willem Sleegers
 Maintainer: Willem Sleegers <w.sleegers@me.com>
 Description: Save the output of statistical tests in an organized file that can 
@@ -13,19 +13,8 @@ Encoding: UTF-8
 RoxygenNote: 7.1.2
 LazyData: true
 Depends: R (>= 3.2.0)
-Imports: 
-    dplyr,
-    tidyr,
-    purrr,
-    stringr,
-    readr,
-    jsonlite,
-    tibble
-Suggests: 
-    knitr,
-    rmarkdown,
-    testthat,
-    BayesFactor,
-    lme4,
-    lmerTest
+Imports: dplyr, tidyr, purrr, stringr, readr, jsonlite, tibble
+Suggests: knitr, rmarkdown, testthat, BayesFactor, lme4, lmerTest
 VignetteBuilder: knitr
+NeedsCompilation: no
+Packaged: 2022-01-04 21:40:44 UTC; willem

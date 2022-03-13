@@ -1,0 +1,545 @@
+{
+  "warp_emm_wool_by_tension": {
+    "method": "EMM",
+    "groups": [
+      {
+        "name": "tension = L",
+        "terms": [
+          {
+            "name": "wool = A",
+            "statistics": {
+              "EMM": 44.555556,
+              "SE": 3.646761,
+              "df": 48,
+              "CI": {
+                "CI_level": 0.95,
+                "CI_lower": 37.22325,
+                "CI_upper": 51.887861
+              }
+            }
+          },
+          {
+            "name": "wool = B",
+            "statistics": {
+              "EMM": 28.222222,
+              "SE": 3.646761,
+              "df": 48,
+              "CI": {
+                "CI_level": 0.95,
+                "CI_lower": 20.889917,
+                "CI_upper": 35.554527
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "tension = M",
+        "terms": [
+          {
+            "name": "wool = A",
+            "statistics": {
+              "EMM": 24,
+              "SE": 3.646761,
+              "df": 48,
+              "CI": {
+                "CI_level": 0.95,
+                "CI_lower": 16.667695,
+                "CI_upper": 31.332305
+              }
+            }
+          },
+          {
+            "name": "wool = B",
+            "statistics": {
+              "EMM": 28.777778,
+              "SE": 3.646761,
+              "df": 48,
+              "CI": {
+                "CI_level": 0.95,
+                "CI_lower": 21.445473,
+                "CI_upper": 36.110083
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "tension = H",
+        "terms": [
+          {
+            "name": "wool = A",
+            "statistics": {
+              "EMM": 24.555556,
+              "SE": 3.646761,
+              "df": 48,
+              "CI": {
+                "CI_level": 0.95,
+                "CI_lower": 17.22325,
+                "CI_upper": 31.887861
+              }
+            }
+          },
+          {
+            "name": "wool = B",
+            "statistics": {
+              "EMM": 18.777778,
+              "SE": 3.646761,
+              "df": 48,
+              "CI": {
+                "CI_level": 0.95,
+                "CI_lower": 11.445473,
+                "CI_upper": 26.110083
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "averaged_over": "",
+    "adjust": "none",
+    "family_size": 6,
+    "package": {
+      "name": "emmeans",
+      "version": "1.5.2-1"
+    }
+  },
+  "warp_list$emmeans": {
+    "method": "EMM",
+    "groups": [
+      {
+        "name": "wool = A",
+        "terms": [
+          {
+            "name": "tension = L",
+            "statistics": {
+              "EMM": 44.555556,
+              "SE": 3.646761,
+              "df": 48,
+              "CI": {
+                "CI_level": 0.95,
+                "CI_lower": 37.22325,
+                "CI_upper": 51.887861
+              }
+            }
+          },
+          {
+            "name": "tension = M",
+            "statistics": {
+              "EMM": 24,
+              "SE": 3.646761,
+              "df": 48,
+              "CI": {
+                "CI_level": 0.95,
+                "CI_lower": 16.667695,
+                "CI_upper": 31.332305
+              }
+            }
+          },
+          {
+            "name": "tension = H",
+            "statistics": {
+              "EMM": 24.555556,
+              "SE": 3.646761,
+              "df": 48,
+              "CI": {
+                "CI_level": 0.95,
+                "CI_lower": 17.22325,
+                "CI_upper": 31.887861
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "wool = B",
+        "terms": [
+          {
+            "name": "tension = L",
+            "statistics": {
+              "EMM": 28.222222,
+              "SE": 3.646761,
+              "df": 48,
+              "CI": {
+                "CI_level": 0.95,
+                "CI_lower": 20.889917,
+                "CI_upper": 35.554527
+              }
+            }
+          },
+          {
+            "name": "tension = M",
+            "statistics": {
+              "EMM": 28.777778,
+              "SE": 3.646761,
+              "df": 48,
+              "CI": {
+                "CI_level": 0.95,
+                "CI_lower": 21.445473,
+                "CI_upper": 36.110083
+              }
+            }
+          },
+          {
+            "name": "tension = H",
+            "statistics": {
+              "EMM": 18.777778,
+              "SE": 3.646761,
+              "df": 48,
+              "CI": {
+                "CI_level": 0.95,
+                "CI_lower": 11.445473,
+                "CI_upper": 26.110083
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "averaged_over": "",
+    "adjust": "none",
+    "family_size": 6,
+    "package": {
+      "name": "emmeans",
+      "version": "1.5.2-1"
+    }
+  },
+  "warp_list$contrasts": {
+    "method": "contrast",
+    "groups": [
+      {
+        "name": "wool = A",
+        "terms": [
+          {
+            "name": "linear",
+            "statistics": {
+              "estimate": {
+                "name": "mean difference",
+                "value": -20
+              },
+              "SE": 5.157299,
+              "df": 48,
+              "statistic": {
+                "name": "t",
+                "value": -3.877999
+              },
+              "p": 0.00064
+            }
+          },
+          {
+            "name": "quadratic",
+            "statistics": {
+              "estimate": {
+                "name": "mean difference",
+                "value": 21.111111
+              },
+              "SE": 8.932705,
+              "df": 48,
+              "statistic": {
+                "name": "t",
+                "value": 2.36335
+              },
+              "p": 0.043923
+            }
+          }
+        ]
+      },
+      {
+        "name": "wool = B",
+        "terms": [
+          {
+            "name": "linear",
+            "statistics": {
+              "estimate": {
+                "name": "mean difference",
+                "value": -9.444444
+              },
+              "SE": 5.157299,
+              "df": 48,
+              "statistic": {
+                "name": "t",
+                "value": -1.831277
+              },
+              "p": 0.141171
+            }
+          },
+          {
+            "name": "quadratic",
+            "statistics": {
+              "estimate": {
+                "name": "mean difference",
+                "value": -10.555556
+              },
+              "SE": 8.932705,
+              "df": 48,
+              "statistic": {
+                "name": "t",
+                "value": -1.181675
+              },
+              "p": 0.427187
+            }
+          }
+        ]
+      }
+    ],
+    "averaged_over": "",
+    "adjust": "sidak",
+    "family_size": 3,
+    "package": {
+      "name": "emmeans",
+      "version": "1.5.2-1"
+    }
+  },
+  "warp_pairwise$contrasts": {
+    "method": "contrast",
+    "terms": [
+      {
+        "name": "A L - B L",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": 16.333333
+          },
+          "SE": 5.157299,
+          "df": 48,
+          "statistic": {
+            "name": "t",
+            "value": 3.167032
+          },
+          "p": 0.030214
+        }
+      },
+      {
+        "name": "A L - A M",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": 20.555556
+          },
+          "SE": 5.157299,
+          "df": 48,
+          "statistic": {
+            "name": "t",
+            "value": 3.985721
+          },
+          "p": 0.002958
+        }
+      },
+      {
+        "name": "A L - B M",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": 15.777778
+          },
+          "SE": 5.157299,
+          "df": 48,
+          "statistic": {
+            "name": "t",
+            "value": 3.05931
+          },
+          "p": 0.039817
+        }
+      },
+      {
+        "name": "A L - A H",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": 20
+          },
+          "SE": 5.157299,
+          "df": 48,
+          "statistic": {
+            "name": "t",
+            "value": 3.877999
+          },
+          "p": 0.004095
+        }
+      },
+      {
+        "name": "A L - B H",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": 25.777778
+          },
+          "SE": 5.157299,
+          "df": 48,
+          "statistic": {
+            "name": "t",
+            "value": 4.998309
+          },
+          "p": 0.000114
+        }
+      },
+      {
+        "name": "B L - A M",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": 4.222222
+          },
+          "SE": 5.157299,
+          "df": 48,
+          "statistic": {
+            "name": "t",
+            "value": 0.818689
+          },
+          "p": 0.962654
+        }
+      },
+      {
+        "name": "B L - B M",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": -0.555556
+          },
+          "SE": 5.157299,
+          "df": 48,
+          "statistic": {
+            "name": "t",
+            "value": -0.107722
+          },
+          "p": 0.999998
+        }
+      },
+      {
+        "name": "B L - A H",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": 3.666667
+          },
+          "SE": 5.157299,
+          "df": 48,
+          "statistic": {
+            "name": "t",
+            "value": 0.710966
+          },
+          "p": 0.979712
+        }
+      },
+      {
+        "name": "B L - B H",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": 9.444444
+          },
+          "SE": 5.157299,
+          "df": 48,
+          "statistic": {
+            "name": "t",
+            "value": 1.831277
+          },
+          "p": 0.456095
+        }
+      },
+      {
+        "name": "A M - B M",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": -4.777778
+          },
+          "SE": 5.157299,
+          "df": 48,
+          "statistic": {
+            "name": "t",
+            "value": -0.926411
+          },
+          "p": 0.937721
+        }
+      },
+      {
+        "name": "A M - A H",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": -0.555556
+          },
+          "SE": 5.157299,
+          "df": 48,
+          "statistic": {
+            "name": "t",
+            "value": -0.107722
+          },
+          "p": 0.999998
+        }
+      },
+      {
+        "name": "A M - B H",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": 5.222222
+          },
+          "SE": 5.157299,
+          "df": 48,
+          "statistic": {
+            "name": "t",
+            "value": 1.012589
+          },
+          "p": 0.911478
+        }
+      },
+      {
+        "name": "B M - A H",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": 4.222222
+          },
+          "SE": 5.157299,
+          "df": 48,
+          "statistic": {
+            "name": "t",
+            "value": 0.818689
+          },
+          "p": 0.962654
+        }
+      },
+      {
+        "name": "B M - B H",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": 10
+          },
+          "SE": 5.157299,
+          "df": 48,
+          "statistic": {
+            "name": "t",
+            "value": 1.938999
+          },
+          "p": 0.391877
+        }
+      },
+      {
+        "name": "A H - B H",
+        "statistics": {
+          "estimate": {
+            "name": "b",
+            "value": 5.777778
+          },
+          "SE": 5.157299,
+          "df": 48,
+          "statistic": {
+            "name": "t",
+            "value": 1.120311
+          },
+          "p": 0.870557
+        }
+      }
+    ],
+    "averaged_over": "",
+    "adjust": "tukey",
+    "family_size": 6,
+    "package": {
+      "name": "emmeans",
+      "version": "1.5.2-1"
+    }
+  }
+}

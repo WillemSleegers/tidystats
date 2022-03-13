@@ -1,14 +1,9 @@
-pandoc: 2.14.0.3
-pkgdown: 2.0.1
+pandoc: 2.17.1.1
+pkgdown: 2.0.2
 pkgdown_sha: ~
 articles:
   introduction-to-tidystats: introduction-to-tidystats.html
-  manually-tidy-statistics: manually-tidy-statistics.html
   read-and-use-a-tidystats-file: read-and-use-a-tidystats-file.html
-  statistics-symbols: statistics-symbols.html
   tidystats-taxonomy: tidystats-taxonomy.html
-last_built: 2022-01-05T08:15Z
-urls:
-  reference: https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/reference
-  article: https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/articles
+last_built: 2022-03-13T18:38Z
 
