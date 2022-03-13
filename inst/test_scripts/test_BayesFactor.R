@@ -15,10 +15,12 @@ data(raceDolls)
 t <- c(-.15, 2.39, 2.42, 2.43)
 N <- c(100, 150, 97, 99)
 
-# generalTestBF ----------------------------------------------
-
-# Run model
+# Set seed
 set.seed(1)
+
+# generalTestBF() ---------------------------------------------------------
+
+# Run test
 generalTestBF <- generalTestBF(RT ~ shape*color + ID, data = puzzles, 
   whichRandom = "ID", neverExclude = "ID", progress = FALSE)
 generalTestBF
@@ -26,19 +28,19 @@ generalTestBF
 # Tidy stats
 temp <- tidy_stats(generalTestBF)
 
-# lmBF -------------------------------------------------------
+# Add stats
+results <- add_stats(results, generalTestBF)
 
-# Run models
-set.seed(1)
+# lmBF() ------------------------------------------------------------------
+
+# Run tests
 bfFull <- lmBF(RT ~ shape + color + shape:color + ID, data = puzzles, 
   whichRandom = "ID", )
 bfFull
 
-set.seed(1)
 bfMain <- lmBF(RT ~ shape + color + ID, data = puzzles, whichRandom = "ID")
 bfMain
 
-set.seed(1)
 bfMainFull <- bfMain / bfFull
 bfMainFull
 
@@ -47,29 +49,52 @@ temp <- tidy_stats(bfFull)
 temp <- tidy_stats(bfMain)
 temp <- tidy_stats(bfMainFull)
 
-# regressionBF -----------------------------------------------
+# Add stats
+results <- results %>%
+  add_stats(bfFull) %>%
+  add_stats(bfMain) %>%
+  add_stats(bfMainFull) 
 
+# regressionBF() ----------------------------------------------------------
+
+# Run tests
 attitudeBF <- regressionBF(rating ~ ., data = attitude, progress = FALSE)
 head(attitudeBF)
 
 attitudeBFBest <- attitudeBF / attitudeBF[63]
 head(attitudeBFBest)
 
+# Tidy stats
 temp <- tidy_stats(attitudeBF)
 temp <- tidy_stats(attitudeBFBest)
 
-# ttestBF ----------------------------------------------------
+# Add stats
+results <- results %>%
+  add_stats(attitudeBF) %>%
+  add_stats(attitudeBFBest)
 
-# Run models
+# ttestBF() ---------------------------------------------------------------
+
+# Get data
+diffScores <- sleep$extra[1:10] - sleep$extra[11:20]
+
+# Run analyses
 sleepTTestBF <- ttestBF(x = sleep$extra[sleep$group == 1], 
   y = sleep$extra[sleep$group == 2], paired = TRUE)
-sleepTTestBF
+sleepTTestBF_interval <- ttestBF(x = diffScores, nullInterval=c(-Inf,0))
 
 # Tidy stats
 temp <- tidy_stats(sleepTTestBF)
+temp <- tidy_stats(sleepTTestBF_interval)
 
-# anovaBF ----------------------------------------------------
+# Add stats
+results <- results %>%
+  add_stats(sleepTTestBF) %>%
+  add_stats(sleepTTestBF_interval)
 
+# anovaBF() ---------------------------------------------------------------
+
+# Run tests
 sleepAnovaBF <- anovaBF(extra ~ group + ID, data = sleep, whichRandom = "ID",
     progress = FALSE)
 sleepAnovaBF
@@ -82,18 +107,26 @@ puzzlesAnovaBF
 temp <- tidy_stats(sleepAnovaBF)
 temp <- tidy_stats(puzzlesAnovaBF)
 
-# correlationBF ----------------------------------------------
+# Add stats
+results <- results %>%
+  add_stats(sleepAnovaBF) %>%
+  add_stats(puzzlesAnovaBF)
 
-# Run models
+# correlationBF() ---------------------------------------------------------
+
+# Run test
 correlationBF = correlationBF(y = iris$Sepal.Length, x = iris$Sepal.Width)
 correlationBF
 
 # Tidy stats
 temp <- tidy_stats(correlationBF)
 
-# contingencyTableBF -----------------------------------------
+# Add stats
+results <- add_stats(results, correlationBF)
 
-# Run model
+# contingencyTableBF() ----------------------------------------------------
+
+# Run test
 contingencyTableBF = contingencyTableBF(raceDolls, sampleType = "indepMulti", 
   fixedMargin = "cols")
 contingencyTableBF
@@ -101,44 +134,33 @@ contingencyTableBF
 # Tidy stats
 temp <- tidy_stats(contingencyTableBF)
 
-# proportionBF -----------------------------------------------
+# Add stats
+results <- add_stats(results, contingencyTableBF)
 
-# Run models
+# proportionBF() ----------------------------------------------------------
+
+# Run test
 proportionBF = proportionBF(y = 15, N = 25, p = .5)
 proportionBF
 
 # Tidy stats
 temp <- tidy_stats(proportionBF)
 
-# meta.ttestBF -----------------------------------------------
+# Add stats
+results <- add_stats(results, proportionBF)
 
-# Run models
+# meta.ttestBF() ----------------------------------------------------------
+
+# Run test
 metaBF = meta.ttestBF(t, N, rscale = 1, nullInterval = c(0, Inf))
 metaBF
 
 # Tidy stats
 temp <- tidy_stats(metaBF)
 
-# add_stats() -------------------------------------------------------------
-
-# Create an empty list
-results <- list()
-
 # Add stats
-results <- results %>%
-  add_stats(generalTestBF) %>%
-  add_stats(bfFull) %>%
-  add_stats(bfMain) %>%
-  add_stats(bfMainFull) %>%
-  add_stats(attitudeBF) %>%
-  add_stats(attitudeBFBest) %>%
-  add_stats(sleepTTestBF) %>%
-  add_stats(sleepAnovaBF) %>%
-  add_stats(puzzlesAnovaBF) %>%
-  add_stats(correlationBF) %>%
-  add_stats(contingencyTableBF) %>%
-  add_stats(proportionBF) %>%
-  add_stats(metaBF)
+results <- add_stats(results, metaBF)
 
-# Save stats
+# write_stats() -----------------------------------------------------------
+
 write_stats(results, "inst/test_data/BayesFactor.json")

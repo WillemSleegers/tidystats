@@ -11,10 +11,10 @@ results <- list()
 # lme() -------------------------------------------------------------------
 
 # Run models
-lme_fm1 <- lme(distance ~ age, data = Orthodont)
-summary(lme_fm1)
-
+lme_fm1 <- lme(distance ~ age, data = Orthodont, random = ~ 1 + age| Subject/Sex)
 lme_fm2 <- lme(distance ~ age + Sex, data = Orthodont, random = ~ 1)
+
+summary(lme_fm1)
 summary(lme_fm2)
 
 # Tidy stats
@@ -32,9 +32,9 @@ results <- results %>%
 nlme_fm1 <- nlme(height ~ SSasymp(age, Asym, R0, lrc), data = Loblolly, 
   fixed = Asym + R0 + lrc ~ 1, random = Asym ~ 1, 
   start = c(Asym = 103, R0 = -8.5, lrc = -3.3))
-summary(nlme_fm1)
+nlme_fm2 <- update(nlme_fm1, random = pdDiag(Asym + lrc ~ 1))
 
-nlme_fm2 <- update(fm1, random = pdDiag(Asym + lrc ~ 1))
+summary(nlme_fm1)
 summary(nlme_fm2)
 
 # Tidy stats
@@ -51,9 +51,9 @@ results <- results %>%
 # Run models
 gls_fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary, 
   correlation = corAR1(form = ~ 1 | Mare))
-summary(gls_fm1)
+gls_fm2 <- update(gls_fm1, weights = varPower())
 
-gls_fm2 <- update(fm1, weights = varPower())
+summary(gls_fm1)
 summary(gls_fm2)
 
 # Tidy stats
@@ -141,3 +141,28 @@ results <- results %>%
 # Write stats -------------------------------------------------------------
 
 write_stats(results, "inst/test_data/nlme.json")
+
+
+
+
+library(nlme)
+library(aomisc)
+data(WinterWheat)
+WinterWheat <- WinterWheat[WinterWheat$Genotype != "SIMETO" & 
+    WinterWheat$Genotype != "SOLEX",]
+WinterWheat$Genotype <- factor(WinterWheat$Genotype)
+WinterWheat$Year <- factor(WinterWheat$Year)
+WinterWheat$Block <- factor(WinterWheat$Block)
+
+EnvVarMod <- lme(Yield ~ Genotype, 
+  random = list(Year = pdSymm(~Genotype - 1), 
+    Year = pdIdent(~Block - 1)),
+  control = list(opt = "optim", maxIter = 100),
+  data=WinterWheat)
+
+varcor <- VarCorr(EnvVarMod)
+
+
+
+
+test <- nlme(distance ~ age + Sex, data = Orthodont, random = ~ 1)

@@ -19,11 +19,11 @@
 \alias{tidy_stats.BFBayesFactor}
 \alias{tidy_stats.afex_aov}
 \alias{tidy_stats.emmGrid}
+\alias{tidy_stats.summary_emm}
 \alias{tidy_stats.emm_list}
 \alias{tidy_stats.icclist}
 \alias{tidy_stats.effsize}
-\alias{tidy_stats.lavaan}
-\alias{tidy_stats.psych}
+\alias{tidy_stats.effectsize_difference}
 \alias{tidy_stats.confint}
 \title{Tidy the output of a statistics object}
 \usage{
@@ -63,15 +63,15 @@ tidy_stats(x, args = NULL)
 
 \method{tidy_stats}{emmGrid}(x, args = NULL)
 
+\method{tidy_stats}{summary_emm}(x, args = NULL)
+
 \method{tidy_stats}{emm_list}(x, args = NULL)
 
 \method{tidy_stats}{icclist}(x, args = NULL)
 
 \method{tidy_stats}{effsize}(x, args = NULL)
 
-\method{tidy_stats}{lavaan}(x, args = list(fit.measures = TRUE))
-
-\method{tidy_stats}{psych}(x, args = NULL)
+\method{tidy_stats}{effectsize_difference}(x, args = NULL)
 
 \method{tidy_stats}{confint}(x, args = NULL)
 }
@@ -166,15 +166,15 @@ Currently supported functions:
 
 \item \code{emmGrid}: tidy_stats method for class 'emmGrid'
 
+\item \code{summary_emm}: tidy_stats method for class 'summary_emm'
+
 \item \code{emm_list}: tidy_stats method for class 'emm_list'
 
 \item \code{icclist}: tidy_stats method for class 'icclist'
 
 \item \code{effsize}: tidy_stats method for class 'effsize'
 
-\item \code{lavaan}: tidy_stats method for class 'lavaan'
-
-\item \code{psych}: tidy_stats method for class 'psych'
+\item \code{effectsize_difference}: tidy_stats method for class 'effectsize_difference'
 
 \item \code{confint}: tidy_stats method for class 'confint'
 }}

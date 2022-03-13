@@ -1,16 +1,46 @@
-lavaan 0.6-8 ended normally after 68 iterations
+lavaan 0.6-8 ended normally after 12 iterations
 
   Estimator                                         ML
   Optimization method                           NLMINB
-  Number of model parameters                        31
+  Number of model parameters                         5
                                                       
-  Number of observations                            75
+  Number of observations                           100
                                                       
 Model Test User Model:
                                                       
-  Test statistic                                38.125
-  Degrees of freedom                                35
-  P-value (Chi-square)                           0.329
+  Test statistic                                 0.000
+  Degrees of freedom                                 0
+
+Model Test Baseline Model:
+
+  Test statistic                                84.319
+  Degrees of freedom                                 3
+  P-value                                        0.000
+
+User Model versus Baseline Model:
+
+  Comparative Fit Index (CFI)                    1.000
+  Tucker-Lewis Index (TLI)                       1.000
+
+Loglikelihood and Information Criteria:
+
+  Loglikelihood user model (H0)               -281.061
+  Loglikelihood unrestricted model (H1)       -281.061
+                                                      
+  Akaike (AIC)                                 572.122
+  Bayesian (BIC)                               585.148
+  Sample-size adjusted Bayesian (BIC)          569.357
+
+Root Mean Square Error of Approximation:
+
+  RMSEA                                          0.000
+  90 Percent confidence interval - lower         0.000
+  90 Percent confidence interval - upper         0.000
+  P-value RMSEA <= 0.05                             NA
+
+Standardized Root Mean Square Residual:
+
+  SRMR                                           0.000
 
 Parameter Estimates:
 
@@ -18,59 +48,22 @@ Parameter Estimates:
   Information                                 Expected
   Information saturated (h1) model          Structured
 
-Latent Variables:
-                   Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
-  ind60 =~                                                              
-    x1                1.000                               0.670    0.920
-    x2                2.180    0.139   15.742    0.000    1.460    0.973
-    x3                1.819    0.152   11.967    0.000    1.218    0.872
-  dem60 =~                                                              
-    y1                1.000                               2.223    0.850
-    y2                1.257    0.182    6.889    0.000    2.794    0.717
-    y3                1.058    0.151    6.987    0.000    2.351    0.722
-    y4                1.265    0.145    8.722    0.000    2.812    0.846
-  dem65 =~                                                              
-    y5                1.000                               2.103    0.808
-    y6                1.186    0.169    7.024    0.000    2.493    0.746
-    y7                1.280    0.160    8.002    0.000    2.691    0.824
-    y8                1.266    0.158    8.007    0.000    2.662    0.828
-
 Regressions:
-                   Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
-  dem60 ~                                                               
-    ind60             1.483    0.399    3.715    0.000    0.447    0.447
-  dem65 ~                                                               
-    ind60             0.572    0.221    2.586    0.010    0.182    0.182
-    dem60             0.837    0.098    8.514    0.000    0.885    0.885
-
-Covariances:
-                   Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
- .y1 ~~                                                                 
-   .y5                0.624    0.358    1.741    0.082    0.624    0.296
- .y2 ~~                                                                 
-   .y4                1.313    0.702    1.871    0.061    1.313    0.273
-   .y6                2.153    0.734    2.934    0.003    2.153    0.356
- .y3 ~~                                                                 
-   .y7                0.795    0.608    1.308    0.191    0.795    0.191
- .y4 ~~                                                                 
-   .y8                0.348    0.442    0.787    0.431    0.348    0.109
- .y6 ~~                                                                 
-   .y8                1.356    0.568    2.386    0.017    1.356    0.338
+                   Estimate  Std.Err  z-value  P(>|z|)
+  Y ~                                                 
+    X          (c)    0.036    0.104    0.348    0.728
+  M ~                                                 
+    X          (a)    0.474    0.103    4.613    0.000
+  Y ~                                                 
+    M          (b)    0.788    0.092    8.539    0.000
 
 Variances:
-                   Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
-   .x1                0.082    0.019    4.184    0.000    0.082    0.154
-   .x2                0.120    0.070    1.718    0.086    0.120    0.053
-   .x3                0.467    0.090    5.177    0.000    0.467    0.239
-   .y1                1.891    0.444    4.256    0.000    1.891    0.277
-   .y2                7.373    1.374    5.366    0.000    7.373    0.486
-   .y3                5.067    0.952    5.324    0.000    5.067    0.478
-   .y4                3.148    0.739    4.261    0.000    3.148    0.285
-   .y5                2.351    0.480    4.895    0.000    2.351    0.347
-   .y6                4.954    0.914    5.419    0.000    4.954    0.443
-   .y7                3.431    0.713    4.814    0.000    3.431    0.322
-   .y8                3.254    0.695    4.685    0.000    3.254    0.315
-    ind60             0.448    0.087    5.173    0.000    1.000    1.000
-   .dem60             3.956    0.921    4.295    0.000    0.800    0.800
-   .dem65             0.172    0.215    0.803    0.422    0.039    0.039
+                   Estimate  Std.Err  z-value  P(>|z|)
+   .Y                 0.898    0.127    7.071    0.000
+   .M                 1.054    0.149    7.071    0.000
+
+Defined Parameters:
+                   Estimate  Std.Err  z-value  P(>|z|)
+    ab                0.374    0.092    4.059    0.000
+    total             0.410    0.125    3.287    0.001
 

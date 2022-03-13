@@ -11,31 +11,34 @@ results <- list()
 
 # emmeans -----------------------------------------------------------------
 
-# Run model
+# Run tests
 warp_lm <- lm(breaks ~ wool * tension, data = warpbreaks)
-summary(warp_lm)
 
-# Run emmeans
 warp_emm_wool_by_tension <- emmeans(warp_lm,  ~ wool | tension)
-warp_emm_wool_by_tension
-
 warp_list <- emmeans(warp_lm, poly ~ tension | wool, adjust = "sidak")
-warp_list
-
 warp_tension_by_wool <- warp_list$emmeans
-warp_tension_by_wool
-
 warp_contrasts <- warp_list$contrasts
-warp_contrasts
-
 warp_pairwise <- emmeans(warp_lm, specs = pairwise ~ wool:tension)
-warp_pairwise
+
+warp_emm_wool_by_tension
+warp_emm_wool_by_tension
+warp_list
+warp_tension_by_wool
+warp_contrasts
+warp_pairwise$emmeans
+warp_pairwise$contrasts
+
+summary(warp_emm_wool_by_tension)
+confint(warp_emm_wool_by_tension)
+test(warp_emm_wool_by_tension)
+contrast(warp_emm_wool_by_tension)
+pairs(warp_emm_wool_by_tension)
 
 # Tidy stats
 temp <- tidy_stats(warp_emm_wool_by_tension)
 temp <- tidy_stats(warp_list)
-temp <- tidy_stats(warp_list$emmeans)
-temp <- tidy_stats(warp_list$contrasts)
+temp <- tidy_stats(warp_tension_by_wool)
+temp <- tidy_stats(warp_contrasts)
 temp <- tidy_stats(warp_pairwise$contrasts)
 
 # Add stats
@@ -93,3 +96,11 @@ results <- results %>%
   add_stats(emm_results)
 
 write_stats(results, "test_results.json")
+
+
+
+
+noise.lm <- lm(noise/10 ~ size * type * side, data = auto.noise)
+anova(noise.lm)
+emmeans(noise.lm, pairwise ~ size)
+emmeans(noise.lm, ~ size * side * type)

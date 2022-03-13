@@ -22,6 +22,9 @@ f = rep(c("Treatment","Control"),each=100)
 cohen_d <- cohen.d(d ~ f)
 cohen_d_hedges <- cohen.d(d ~ f, hedges.correction = TRUE)
 
+cohen_d
+cohen_d_hedges
+
 # Tidy stats
 temp <- tidy_stats(cohen_d)
 temp <- tidy_stats(cohen_d_hedges)

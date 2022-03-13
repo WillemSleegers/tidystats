@@ -32,7 +32,7 @@ results <- results %>%
 
 # write_stats() -----------------------------------------------------------
 
-write_stats(results, "inst/results_bad.json")
+write_stats(results, "inst/results.json")
 
 # tidy_stats_to_data_frame ------------------------------------------------
 
@@ -43,50 +43,45 @@ write_csv(df, "inst/results_df.csv")
 
 results <- list()
 
-# Single variable descriptives 
+# Run analyses
 single_var <- describe_data(quote_source, response)
-single_var
 
-# Multiple variable descriptives 
-multiple_var <- describe_data(quote_source, response, age)
-multiple_var
-
-# Single variable with group descriptives
 single_var_w_group <- quote_source %>%
   group_by(source) %>%
   describe_data(response)
-single_var_w_group
 
-# Single variable with multiple group descriptives
+multiple_var <- describe_data(quote_source, response, age)
+
 single_var_w_groups <- quote_source %>%
   group_by(source, sex) %>%
   describe_data(response)
-single_var_w_groups
 
-# Single variable with multiple group descriptives, excluding NA
 single_var_w_groups_wo_na <- quote_source %>%
   group_by(source, sex) %>%
   describe_data(response, na.rm = FALSE)
-single_var_w_groups_wo_na
 
-# Multiple variables with group descriptives
 multiple_var_w_group <- quote_source %>%
   group_by(source) %>%
   describe_data(response, age)
-multiple_var_w_group
 
-# Subset of descriptives
 single_var_subset <- describe_data(quote_source, response, short = TRUE)
+
+single_var
 single_var_subset
+single_var_w_group
+single_var_w_groups
+single_var_w_groups_wo_na
+multiple_var
+multiple_var_w_group
 
 # Tidy stats
 temp <- tidy_stats(single_var)
-temp <- tidy_stats(multiple_var)
+temp <- tidy_stats(single_var_subset)
 temp <- tidy_stats(single_var_w_group)
-temp <- tidy_stats(multiple_var_w_group)
 temp <- tidy_stats(single_var_w_groups)
 temp <- tidy_stats(single_var_w_groups_wo_na)
-temp <- tidy_stats(single_var_subset)
+temp <- tidy_stats(multiple_var)
+temp <- tidy_stats(multiple_var_w_group)
 
 # Add stats
 results <- results %>%
@@ -97,32 +92,27 @@ results <- results %>%
 
 write_stats(results, "inst/test_data/describe_data.json")
 
-# Analysis: count_data ----------------------------------------------------
+# Analysis: count_data() --------------------------------------------------
 
 results <- list()
 
-# No groups
+# Run analyses
 no_group <- count_data(quote_source)
-no_group
-
-# Single group
 single_group <- count_data(quote_source, source)
-single_group
-
-# Two groups
 two_groups <- count_data(quote_source, source, sex)
-two_groups
 
-# Grouped groups
 grouped_group <- quote_source %>%
   group_by(source) %>%
   count_data(sex)
-grouped_group
 
-# Omit missings
 grouped_group_na_rm <- quote_source %>%
   group_by(source) %>%
   count_data(sex, na.rm = TRUE)
+
+no_group
+single_group
+two_groups
+grouped_group
 grouped_group_na_rm
 
 # Tidy stats
@@ -180,6 +170,7 @@ fit <- lm(100/mpg ~ disp + hp + wt + am, data = mtcars)
 
 CI_fit <- confint(fit)
 CI_fit
+
 CI_fit_wt <- confint(fit, "wt")
 CI_fit_wt
 

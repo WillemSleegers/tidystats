@@ -1,4 +1,7 @@
-# tidystats 0.5.1 
+# tidystats 0.6
+
+## Meta
+* Redesigned the tidystats structure to be more expandable.
 
 ## New
 * Added two new arguments to `add_stats()`: `args` and `class`. The `args` argument can be used to supply additional arguments to customize which statistics are extracted from a particular analysis. For a list of supported functions, see the Details section in the help document of `add_stats()`. The `class` argument can be used to explicitly indicate the class of the analysis you want to add. Sometimes the output of a particular analysis returns an object with insufficient information for `tidystats` to know how to extract the statistics. By using the `class` argument, you can tell `tidystats` what kind of object it is so that it can nevertheless extract the statistics. For a list of supported classes, see the Details section of the help document of `add_stats()`.
@@ -15,6 +18,7 @@
 * Removed automatically setting the method to 'Generic test' when adding a custom test. This means you can set the method yourself now.
 * Renames the `variable` column to `var` in `describe_data()`.
 * `describe_data()` now (again) has support for multiple variables. You can provide more than 1 column name (separated by commas) to calculate descriptives for each variable.
+* Improved names in `anova()` tests.
 
 ## Bug fixes
 

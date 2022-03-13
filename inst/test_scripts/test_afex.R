@@ -9,22 +9,56 @@ library(afex)
 # Create an empty list
 results <- list()
 
-# Analysis: aov_ez -------------------------------------------------------
+# aov_ez() ----------------------------------------------------------------
 
 # Load data
-data("fhch2010", package = "afex")
-fhch <- fhch2010[ fhch2010$correct,]
+data(md_12.1)
 
-# Run analysis
-aov_ez <- aov_ez("id", "log_rt", fhch, between = "task", 
-  within = c("stimulus", "length"))
+# Run tests
+aov_ez <- aov_ez("id", "rt", md_12.1, within = c("angle", "noise"), 
+  anova_table = list(correction = "none", es = "none"))
+aov_ez_default <- aov_ez("id", "rt", md_12.1, within = c("angle", "noise"))
+
+aov_ez
+aov_ez_default
 
 # Tidy stats
-temp <- tidy_stats(aov_ez)
+
+
+# aov_car() ---------------------------------------------------------------
+
+# Load data
+data(obk.long, package = "afex")
+
+aov_car <- aov_car(value ~ treatment * gender + Error(id/(phase*hour)), 
+  data = obk.long, observed = "gender")
+aov_car_covariate <- aov_car(value ~ treatment * gender + age + 
+    Error(id/(phase*hour)), data = obk.long, observed = c("gender", "age"), 
+  factorize = FALSE)
+aov_car_aggregate <- aov_car(value ~ treatment * gender + Error(id/hour), 
+  data = obk.long, observed = "gender")
+aov_car_aggregate_both <- aov_car(value ~ treatment * gender + Error(id), 
+  data = obk.long, observed = c("gender"))
+aov_car_within <- aov_car(value ~ Error(id/(phase*hour)), data = obk.long)
+aov_car_no_df_pes <- aov_car(value ~ treatment * gender + 
+    Error(id/(phase*hour)), data = obk.long, 
+  anova_table = list(correction = "none", es = "pes"))
+aov_car_no_df_no_MSE <- aov_car(value ~ treatment * gender + 
+    Error(id/(phase*hour)), data = obk.long,observed = "gender", 
+  anova_table = list(correction = "none", MSE = FALSE))
+
+aov_car
+aov_car_covariate
+aov_car_aggregate
+aov_car_aggregate_both
+aov_car_within
+aov_car_no_df_pes
+aov_car_no_df_no_MSE
+
+# Tidy stats
+
 
 # Add stats
-results <- results %>%
-  add_stats(aov_ez)
 
 # Issue: #11 --------------------------------------------------------------
 

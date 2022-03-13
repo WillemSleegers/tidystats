@@ -49,6 +49,7 @@ navbar:
       href: https://github.com/WillemSleegers/tidystats
 
 template:
+  bootstrap: 5
   params:
     bootswatch: flatly
 
