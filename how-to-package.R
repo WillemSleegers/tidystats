@@ -30,6 +30,11 @@ testthat::test_file("tests/testthat/test_htest.R")
 
 # usethis::use_data(quote_source, overwrite = TRUE)
 
+# README ------------------------------------------------------------------
+
+# Update README
+knitr::knit(input = "README.Rmd")
+
 # Build website -----------------------------------------------------------
 
 # Run to build the website
