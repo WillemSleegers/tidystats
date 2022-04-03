@@ -1,0 +1,781 @@
+{
+  "aov": {
+    "name": "yield ~ block + N * P * K",
+    "method": "ANOVA",
+    "groups": [
+      {
+        "name": "Terms",
+        "groups": [
+          {
+            "name": "block",
+            "statistics": [
+              {
+                "name": "SS",
+                "value": 343.295
+              },
+              {
+                "name": "MS",
+                "value": 68.659
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 4.446666
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 5
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 12
+              },
+              {
+                "name": "p",
+                "value": 0.015939
+              }
+            ]
+          },
+          {
+            "name": "N",
+            "statistics": [
+              {
+                "name": "SS",
+                "value": 189.281667
+              },
+              {
+                "name": "MS",
+                "value": 189.281667
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 12.258734
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 12
+              },
+              {
+                "name": "p",
+                "value": 0.004372
+              }
+            ]
+          },
+          {
+            "name": "P",
+            "statistics": [
+              {
+                "name": "SS",
+                "value": 8.401667
+              },
+              {
+                "name": "MS",
+                "value": 8.401667
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.54413
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 12
+              },
+              {
+                "name": "p",
+                "value": 0.474904
+              }
+            ]
+          },
+          {
+            "name": "K",
+            "statistics": [
+              {
+                "name": "SS",
+                "value": 95.201667
+              },
+              {
+                "name": "MS",
+                "value": 95.201667
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 6.165689
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 12
+              },
+              {
+                "name": "p",
+                "value": 0.028795
+              }
+            ]
+          },
+          {
+            "name": "N:P",
+            "statistics": [
+              {
+                "name": "SS",
+                "value": 21.281667
+              },
+              {
+                "name": "MS",
+                "value": 21.281667
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 1.378297
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 12
+              },
+              {
+                "name": "p",
+                "value": 0.263165
+              }
+            ]
+          },
+          {
+            "name": "N:K",
+            "statistics": [
+              {
+                "name": "SS",
+                "value": 33.135
+              },
+              {
+                "name": "MS",
+                "value": 33.135
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 2.145972
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 12
+              },
+              {
+                "name": "p",
+                "value": 0.168648
+              }
+            ]
+          },
+          {
+            "name": "P:K",
+            "statistics": [
+              {
+                "name": "SS",
+                "value": 0.481667
+              },
+              {
+                "name": "MS",
+                "value": 0.481667
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.031195
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 12
+              },
+              {
+                "name": "p",
+                "value": 0.862752
+              }
+            ]
+          },
+          {
+            "name": "Residuals",
+            "statistics": [
+              {
+                "name": "SS",
+                "value": 185.286667
+              },
+              {
+                "name": "MS",
+                "value": 15.440556
+              },
+              {
+                "name": "df",
+                "value": 12
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.1.3"
+    }
+  },
+  "aov_order": {
+    "name": "terms(yield ~ block + N * P + K, keep.order = TRUE)",
+    "method": "ANOVA",
+    "groups": [
+      {
+        "name": "Terms",
+        "groups": [
+          {
+            "name": "block",
+            "statistics": [
+              {
+                "name": "SS",
+                "value": 343.295
+              },
+              {
+                "name": "MS",
+                "value": 68.659
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 4.391098
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 5
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 14
+              },
+              {
+                "name": "p",
+                "value": 0.012954
+              }
+            ]
+          },
+          {
+            "name": "N",
+            "statistics": [
+              {
+                "name": "SS",
+                "value": 189.281667
+              },
+              {
+                "name": "MS",
+                "value": 189.281667
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 12.105541
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 14
+              },
+              {
+                "name": "p",
+                "value": 0.003684
+              }
+            ]
+          },
+          {
+            "name": "P",
+            "statistics": [
+              {
+                "name": "SS",
+                "value": 8.401667
+              },
+              {
+                "name": "MS",
+                "value": 8.401667
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.53733
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 14
+              },
+              {
+                "name": "p",
+                "value": 0.475637
+              }
+            ]
+          },
+          {
+            "name": "N:P",
+            "statistics": [
+              {
+                "name": "SS",
+                "value": 21.281667
+              },
+              {
+                "name": "MS",
+                "value": 21.281667
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 1.361073
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 14
+              },
+              {
+                "name": "p",
+                "value": 0.262841
+              }
+            ]
+          },
+          {
+            "name": "K",
+            "statistics": [
+              {
+                "name": "SS",
+                "value": 95.201667
+              },
+              {
+                "name": "MS",
+                "value": 95.201667
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 6.088639
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 14
+              },
+              {
+                "name": "p",
+                "value": 0.027114
+              }
+            ]
+          },
+          {
+            "name": "Residuals",
+            "statistics": [
+              {
+                "name": "SS",
+                "value": 218.903333
+              },
+              {
+                "name": "MS",
+                "value": 15.635952
+              },
+              {
+                "name": "df",
+                "value": 14
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.1.3"
+    }
+  },
+  "aov_error": {
+    "name": "aov(formula = yield ~ N * P * K + Error(block), data = npk)",
+    "method": "ANOVA",
+    "groups": [
+      {
+        "name": "Error terms",
+        "groups": [
+          {
+            "name": "Error: block",
+            "groups": [
+              {
+                "name": "Terms",
+                "groups": [
+                  {
+                    "name": "N:P:K",
+                    "statistics": [
+                      {
+                        "name": "SS",
+                        "value": 37.001667
+                      },
+                      {
+                        "name": "MS",
+                        "value": 37.001667
+                      },
+                      {
+                        "name": "statistic",
+                        "symbol": "F",
+                        "value": 0.483219
+                      },
+                      {
+                        "name": "df numerator",
+                        "symbol": "df",
+                        "subscript": "num.",
+                        "value": 1
+                      },
+                      {
+                        "name": "df denominator",
+                        "symbol": "df",
+                        "subscript": "den.",
+                        "value": 4
+                      },
+                      {
+                        "name": "p",
+                        "value": 0.525236
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Residuals",
+                    "statistics": [
+                      {
+                        "name": "SS",
+                        "value": 306.293333
+                      },
+                      {
+                        "name": "MS",
+                        "value": 76.573333
+                      },
+                      {
+                        "name": "df",
+                        "value": 4
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Error: Within",
+            "groups": [
+              {
+                "name": "Terms",
+                "groups": [
+                  {
+                    "name": "N",
+                    "statistics": [
+                      {
+                        "name": "SS",
+                        "value": 189.281667
+                      },
+                      {
+                        "name": "MS",
+                        "value": 189.281667
+                      },
+                      {
+                        "name": "statistic",
+                        "symbol": "F",
+                        "value": 12.258734
+                      },
+                      {
+                        "name": "df numerator",
+                        "symbol": "df",
+                        "subscript": "num.",
+                        "value": 1
+                      },
+                      {
+                        "name": "df denominator",
+                        "symbol": "df",
+                        "subscript": "den.",
+                        "value": 12
+                      },
+                      {
+                        "name": "p",
+                        "value": 0.004372
+                      }
+                    ]
+                  },
+                  {
+                    "name": "P",
+                    "statistics": [
+                      {
+                        "name": "SS",
+                        "value": 8.401667
+                      },
+                      {
+                        "name": "MS",
+                        "value": 8.401667
+                      },
+                      {
+                        "name": "statistic",
+                        "symbol": "F",
+                        "value": 0.54413
+                      },
+                      {
+                        "name": "df numerator",
+                        "symbol": "df",
+                        "subscript": "num.",
+                        "value": 1
+                      },
+                      {
+                        "name": "df denominator",
+                        "symbol": "df",
+                        "subscript": "den.",
+                        "value": 12
+                      },
+                      {
+                        "name": "p",
+                        "value": 0.474904
+                      }
+                    ]
+                  },
+                  {
+                    "name": "K",
+                    "statistics": [
+                      {
+                        "name": "SS",
+                        "value": 95.201667
+                      },
+                      {
+                        "name": "MS",
+                        "value": 95.201667
+                      },
+                      {
+                        "name": "statistic",
+                        "symbol": "F",
+                        "value": 6.165689
+                      },
+                      {
+                        "name": "df numerator",
+                        "symbol": "df",
+                        "subscript": "num.",
+                        "value": 1
+                      },
+                      {
+                        "name": "df denominator",
+                        "symbol": "df",
+                        "subscript": "den.",
+                        "value": 12
+                      },
+                      {
+                        "name": "p",
+                        "value": 0.028795
+                      }
+                    ]
+                  },
+                  {
+                    "name": "N:P",
+                    "statistics": [
+                      {
+                        "name": "SS",
+                        "value": 21.281667
+                      },
+                      {
+                        "name": "MS",
+                        "value": 21.281667
+                      },
+                      {
+                        "name": "statistic",
+                        "symbol": "F",
+                        "value": 1.378297
+                      },
+                      {
+                        "name": "df numerator",
+                        "symbol": "df",
+                        "subscript": "num.",
+                        "value": 1
+                      },
+                      {
+                        "name": "df denominator",
+                        "symbol": "df",
+                        "subscript": "den.",
+                        "value": 12
+                      },
+                      {
+                        "name": "p",
+                        "value": 0.263165
+                      }
+                    ]
+                  },
+                  {
+                    "name": "N:K",
+                    "statistics": [
+                      {
+                        "name": "SS",
+                        "value": 33.135
+                      },
+                      {
+                        "name": "MS",
+                        "value": 33.135
+                      },
+                      {
+                        "name": "statistic",
+                        "symbol": "F",
+                        "value": 2.145972
+                      },
+                      {
+                        "name": "df numerator",
+                        "symbol": "df",
+                        "subscript": "num.",
+                        "value": 1
+                      },
+                      {
+                        "name": "df denominator",
+                        "symbol": "df",
+                        "subscript": "den.",
+                        "value": 12
+                      },
+                      {
+                        "name": "p",
+                        "value": 0.168648
+                      }
+                    ]
+                  },
+                  {
+                    "name": "P:K",
+                    "statistics": [
+                      {
+                        "name": "SS",
+                        "value": 0.481667
+                      },
+                      {
+                        "name": "MS",
+                        "value": 0.481667
+                      },
+                      {
+                        "name": "statistic",
+                        "symbol": "F",
+                        "value": 0.031195
+                      },
+                      {
+                        "name": "df numerator",
+                        "symbol": "df",
+                        "subscript": "num.",
+                        "value": 1
+                      },
+                      {
+                        "name": "df denominator",
+                        "symbol": "df",
+                        "subscript": "den.",
+                        "value": 12
+                      },
+                      {
+                        "name": "p",
+                        "value": 0.862752
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Residuals",
+                    "statistics": [
+                      {
+                        "name": "SS",
+                        "value": 185.286667
+                      },
+                      {
+                        "name": "MS",
+                        "value": 15.440556
+                      },
+                      {
+                        "name": "df",
+                        "value": 12
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.1.3"
+    }
+  }
+}

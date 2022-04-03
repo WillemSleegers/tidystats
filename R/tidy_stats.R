@@ -663,8 +663,13 @@ tidy_stats.aovlist <- function(x, args = NULL) {
     method = "ANOVA"
   )
   
+  # Create a groups list to the the error strata in
+  groups_error <- list(name = "Error terms")
+  
   # Loop over the error strata
   for (i in 1:length(names(summary(x)))) {
+    # Create a group for the error stratum
+    group_error <- list(name = names(summary(x))[i])
     
     # Get term statistics of the current error stratum
     terms <- summary(x)[[i]][[1]]
@@ -672,12 +677,11 @@ tidy_stats.aovlist <- function(x, args = NULL) {
     # Trim spaces from the names of the terms
     rownames(terms) <- stringr::str_trim(rownames(terms))
     
-    # Create an empty groups list to add term statistics to of this error 
-    # stratum 
-    groups <- list(name = names(summary(x))[i])
+    # Create an empty groups list to add term statistics to
+    groups <- list(name = "Terms")
     
     # Loop over the terms 
-    for (j in 1:nrow(y)) {
+    for (j in 1:nrow(terms)) {
       # Create a new group list
       group <- list(name = rownames(terms)[j])
       
@@ -690,17 +694,17 @@ tidy_stats.aovlist <- function(x, args = NULL) {
       # Special case: Extract different statistics depending on whether the term
       # is the Residuals term or not
       if (j != nrow(terms)) {
-        statistics <- add_statistic(statistics, "statistic", terms$`F value`, 
+        statistics <- add_statistic(statistics, "statistic", terms$`F value`[j], 
           "F")
-        statistics <- add_statistic(statistics, "df numerator", terms$Df[j], 
-          "df", "num.")
+        statistics <- add_statistic(statistics, "df numerator", terms$Df[j], "df",
+          "num.")
         statistics <- add_statistic(statistics, "df denominator", 
           terms$Df[[nrow(terms)]], "df", "den.")
+        
+        statistics <- add_statistic(statistics, "p", terms$`Pr(>F)`[j])
       } else {
         statistics <- add_statistic(statistics, "df", terms$Df[j])
       }
-      
-      statistics <- add_statistic(statistics, "p", terms$`Pr(>F)`[j])
       
       # Add statistics to the group
       group$statistics <- statistics
@@ -709,9 +713,15 @@ tidy_stats.aovlist <- function(x, args = NULL) {
       groups$groups <- append(groups$groups, list(group))
     }
     
-    # Add the groups to the statistics of the error stratum
-    analysis$groups <- append(analysis$groups, list(groups))
+    # Add the term group to the error groups
+    group_error$groups <- append(group_error$groups, list(groups))
+    
+    # Add the error group to the error strata groups
+    groups_error$groups <- append(groups_error$groups, list(group_error))
   }
+
+  # Add the error stratum groups to the analysis
+  analysis$groups <- append(analysis$groups, list(groups_error))
  
   # Add package information
   analysis <- add_package_info(analysis, "stats")

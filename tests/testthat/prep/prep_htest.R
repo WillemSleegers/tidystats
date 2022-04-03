@@ -296,4 +296,3 @@ df <- tidy_stats_to_data_frame(results)
 # write_stats() -----------------------------------------------------------
 
 write_stats(results, "tests/testthat/data/htest.json")
-write_csv(df, "tests/testthat/data/htest_df.csv")

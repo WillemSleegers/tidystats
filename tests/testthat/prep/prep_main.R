@@ -42,4 +42,3 @@ df <- tidy_stats_to_data_frame(results)
 # Write files -------------------------------------------------------------
 
 write_stats(results, "tests/testthat/data/main.json")
-write_csv(df, "tests/testthat/data/main_df.csv")

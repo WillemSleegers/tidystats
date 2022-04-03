@@ -2,8 +2,8 @@
 # Setup -------------------------------------------------------------------
 
 # Load test data
-test_results <- read_stats(system.file("test_data/aov.json", 
-  package = "tidystats"))
+path <- system.file("tests/testthat/data/aov.json", package = "tidystats")
+test_results <- read_stats(path)
 
 # Set options
 tolerance <- 0.001
