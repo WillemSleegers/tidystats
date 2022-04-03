@@ -37,11 +37,6 @@ t_test_two_sample <- t.test(extra ~ group, data = sleep, var.equal = TRUE)
 t_test_welch <- t.test(extra ~ group, data = sleep)
 t_test_paired <- t.test(extra ~ group, data = sleep, paired = TRUE)
 
-t_test_one_sample
-t_test_two_sample
-t_test_welch
-t_test_paired
-
 # Add stats
 results <- results %>%
   add_stats(t_test_one_sample) %>%
@@ -49,26 +44,31 @@ results <- results %>%
   add_stats(t_test_welch) %>%
   add_stats(t_test_paired)
 
+t_test_one_sample
+t_test_two_sample
+t_test_welch
+t_test_paired
+
 # cor.test() --------------------------------------------------------------
 
 # Get data
 x <- c(44.4, 45.9, 41.9, 53.3, 44.7, 44.1, 50.7, 45.2, 60.1)
-y <- c(2.6,  3.1,  2.5,  5.0,  3.6,  4.0,  5.2,  2.8,  3.8)
+y <- c(2.6, 3.1, 2.5, 5.0, 3.6, 4.0, 5.2, 2.8, 3.8)
 
 # Run analyses
 correlation_pearson <- cor.test(x, y, method = "pearson")
 correlation_kendall <- cor.test(x, y, method = "kendall")
 correlation_spearman <- cor.test(x, y, method = "spearman")
 
-correlation_pearson
-correlation_kendall
-correlation_spearman
-
 # Add stats
 results <- results %>%
   add_stats(correlation_pearson) %>%
   add_stats(correlation_kendall) %>%
   add_stats(correlation_spearman)
+
+correlation_pearson
+correlation_kendall
+correlation_spearman
 
 # chisq.test() ------------------------------------------------------------
 
@@ -84,15 +84,15 @@ chi_squared <- chisq.test(M)
 chi_squared_yates <- chisq.test(x)
 chi_squared_prob <- chisq.test(y)
 
-chi_squared
-chi_squared_yates
-chi_squared_prob
-
 # Add stats
 results <- results %>%
   add_stats(chi_squared) %>%
   add_stats(chi_squared_yates) %>%
   add_stats(chi_squared_prob)
+
+chi_squared
+chi_squared_yates
+chi_squared_prob
 
 # prop.test() -------------------------------------------------------------
 
@@ -101,23 +101,23 @@ set.seed(1)
 
 # Get data
 heads <- rbinom(1, size = 100, prob = .5)
-smokers  <- c( 83, 90, 129, 70 )
-patients <- c( 86, 93, 136, 82 )
+smokers  <- c(83, 90, 129, 70)
+patients <- c(86, 93, 136, 82)
 
 # Run analyses
 prop_test <- prop.test(heads, 100)
 prop_test_correct <- prop.test(heads, 100, correct = FALSE)
 prop_test_smokers <- prop.test(smokers, patients)
 
-prop_test
-prop_test_correct
-prop_test_smokers
-
 # Add stats
 results <- results %>%
   add_stats(prop_test) %>%
   add_stats(prop_test_correct) %>%
   add_stats(prop_test_smokers)
+
+prop_test
+prop_test_correct
+prop_test_smokers
 
 # wilcox.test() -----------------------------------------------------------
 
@@ -131,9 +131,6 @@ wilcoxon_signed_rank <- wilcox.test(x, y, paired = TRUE,
 wilcoxon_rank_sum_continuity <- wilcox.test(Ozone ~ Month, data = airquality,
   subset = Month %in% c(5, 8))
 
-wilcoxon_signed_rank
-wilcoxon_rank_sum_continuity
-
 # Get data
 x <- c(0.80, 0.83, 1.89, 1.04, 1.45, 1.38, 1.91, 1.64, 0.73, 1.46)
 y <- c(1.15, 0.88, 0.90, 0.74, 1.21)
@@ -143,15 +140,17 @@ wilcoxon_rank_sum <- wilcox.test(x, y, alternative = "greater", exact = FALSE,
   correct = FALSE)
 wilcoxon_rank_sum_conf <- wilcox.test(x, y, conf.int = TRUE, conf.level = .9)
 
-wilcoxon_rank_sum
-wilcoxon_rank_sum_conf
-
 # Add stats
 results <- results %>%
   add_stats(wilcoxon_signed_rank) %>%
   add_stats(wilcoxon_rank_sum_continuity) %>%
   add_stats(wilcoxon_rank_sum) %>%
   add_stats(wilcoxon_rank_sum_conf)
+
+wilcoxon_signed_rank
+wilcoxon_rank_sum_continuity
+wilcoxon_rank_sum
+wilcoxon_rank_sum_conf
 
 # kruskal.test() ----------------------------------------------------------
 
@@ -164,13 +163,13 @@ z <- c(2.8, 3.4, 3.7, 2.2, 2.0)
 kruskal <- kruskal.test(list(x, y, z))
 kruskal_formula <- kruskal.test(Ozone ~ Month, data = airquality)
 
-kruskal
-kruskal_formula 
-
 # Add stats
 results <- results %>%
   add_stats(kruskal) %>%
   add_stats(kruskal_formula)
+
+kruskal
+kruskal_formula 
 
 # fisher.test() -----------------------------------------------------------
 
@@ -217,12 +216,6 @@ fisher_test_r_by_c <- fisher.test(Job)
 fisher_test_simulated_p <- fisher.test(Job, simulate.p.value = TRUE, B = 1e5)
 fisher_test_hybrid <- fisher.test(MP6, hybrid = TRUE)
 
-fisher_test
-fisher_test_no_CI
-fisher_test_r_by_c
-fisher_test_simulated_p
-fisher_test_hybrid
-
 # Add stats
 results <- results %>%
   add_stats(fisher_test) %>%
@@ -230,6 +223,12 @@ results <- results %>%
   add_stats(fisher_test_r_by_c) %>%
   add_stats(fisher_test_simulated_p) %>%
   add_stats(fisher_test_hybrid)
+
+fisher_test
+fisher_test_no_CI
+fisher_test_r_by_c
+fisher_test_simulated_p
+fisher_test_hybrid
 
 # ks.test() ---------------------------------------------------------------
 
@@ -241,22 +240,22 @@ x <- rnorm(50)
 y <- runif(30)
 
 # Run analyses
-ks_test <- ks.test(x, y)
-ks_test_two <- ks.test(x + 2, "pgamma", 3, 2)
-ks_test_exact <- ks.test(x + 2, "pgamma", 3, 2, exact = FALSE)
+ks_test_two <- ks.test(x, y)
+ks_test_one <- ks.test(x + 2, "pgamma", 3, 2)
+ks_test_inexact <- ks.test(x + 2, "pgamma", 3, 2, exact = FALSE)
 ks_test_greater <- ks.test(x + 2, "pgamma", 3, 2, alternative = "greater")
-
-ks_test
-ks_test_two
-ks_test_exact
-ks_test_greater
 
 # Add stats
 results <- results %>%
-  add_stats(ks_test) %>%
   add_stats(ks_test_two) %>%
-  add_stats(ks_test_exact) %>%
+  add_stats(ks_test_one) %>%
+  add_stats(ks_test_inexact) %>%
   add_stats(ks_test_greater) 
+
+ks_test_two
+ks_test_one
+ks_test_inexact
+ks_test_greater
 
 # oneway.test() -----------------------------------------------------------
 
@@ -265,13 +264,13 @@ oneway_test <- oneway.test(extra ~ group, data = sleep)
 oneway_test_equal_var <- oneway.test(extra ~ group, data = sleep, 
   var.equal = TRUE)
 
-oneway_test
-oneway_test_equal_var
-
 # Add stats
 results <- results %>%
   add_stats(oneway_test) %>%
   add_stats(oneway_test_equal_var)
+
+oneway_test
+oneway_test_equal_var
 
 # var.test() --------------------------------------------------------------
 
@@ -285,10 +284,10 @@ y <- rnorm(30, mean = 1, sd = 1)
 # Run analysis
 var_test <- var.test(x, y)
 
-var_test
-
 # Add stats
 results <- add_stats(results, var_test)
+
+var_test
 
 # tidy_stats_to_data_frame() ----------------------------------------------
 
@@ -297,3 +296,4 @@ df <- tidy_stats_to_data_frame(results)
 # write_stats() -----------------------------------------------------------
 
 write_stats(results, "tests/testthat/data/htest.json")
+write_csv(df, "tests/testthat/data/htest_df.csv")

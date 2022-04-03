@@ -642,7 +642,7 @@
   },
   "fisher_test_simulated_p": {
     "name": "Job",
-    "method": "Fisher's Exact Test for Count Data with (with simulated p-value)",
+    "method": "Fisher's Exact Test for Count Data (with simulated p-value)",
     "statistics": [
       {
         "name": "p",
@@ -672,7 +672,7 @@
     },
     "hybrid_parameters": {
       "expect": 5,
-      "percent": 8,
+      "percent": 80,
       "Emin": 5
     },
     "package": {
@@ -680,7 +680,7 @@
       "version": "4.1.3"
     }
   },
-  "ks_test": {
+  "ks_test_two": {
     "name": "x and y",
     "method": "Two-sample Kolmogorov-Smirnov test",
     "statistics": [
@@ -702,7 +702,7 @@
       "version": "4.1.3"
     }
   },
-  "ks_test_two": {
+  "ks_test_one": {
     "name": "x + 2",
     "method": "One-sample Kolmogorov-Smirnov test",
     "statistics": [
@@ -724,7 +724,7 @@
       "version": "4.1.3"
     }
   },
-  "ks_test_exact": {
+  "ks_test_inexact": {
     "name": "x + 2",
     "method": "One-sample Kolmogorov-Smirnov test",
     "statistics": [

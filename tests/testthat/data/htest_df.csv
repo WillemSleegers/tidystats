@@ -1,0 +1,94 @@
+identifier,analysis_name,statistic_name,symbol,value,interval,level,lower,upper,subscript
+t_test_one_sample,extra,estimate,M,1.54,CI,0.95,0.5955844996196039,2.484415500380396,NA
+t_test_one_sample,extra,SE,NA,0.45122056690713913,NA,NA,NA,NA,NA
+t_test_one_sample,extra,statistic,t,3.412964995270109,NA,NA,NA,NA,NA
+t_test_one_sample,extra,df,NA,19,NA,NA,NA,NA,NA
+t_test_one_sample,extra,p,NA,0.002917620404154116,NA,NA,NA,NA,NA
+t_test_two_sample,extra by group,estimate,M,-1.58,CI,0.95,-3.3638740322875984,0.2038740322875986,diff.
+t_test_two_sample,extra by group,SE,NA,0.8490910172387621,NA,NA,NA,NA,NA
+t_test_two_sample,extra by group,statistic,t,-1.8608134674868528,NA,NA,NA,NA,NA
+t_test_two_sample,extra by group,df,NA,18,NA,NA,NA,NA,NA
+t_test_two_sample,extra by group,p,NA,0.07918671421593818,NA,NA,NA,NA,NA
+t_test_welch,extra by group,estimate,M,-1.58,CI,0.95,-3.3654832307117104,0.20548323071171018,diff.
+t_test_welch,extra by group,SE,NA,0.849091017238762,NA,NA,NA,NA,NA
+t_test_welch,extra by group,statistic,t,-1.860813467486853,NA,NA,NA,NA,NA
+t_test_welch,extra by group,df,NA,17.7764735161785,NA,NA,NA,NA,NA
+t_test_welch,extra by group,p,NA,0.07939414018735817,NA,NA,NA,NA,NA
+t_test_paired,extra by group,estimate,M,-1.58,CI,0.95,-2.4598857632769824,-0.7001142367230175,diff.
+t_test_paired,extra by group,SE,NA,0.3889587238883952,NA,NA,NA,NA,NA
+t_test_paired,extra by group,statistic,t,-4.062127683382037,NA,NA,NA,NA,NA
+t_test_paired,extra by group,df,NA,9,NA,NA,NA,NA,NA
+t_test_paired,extra by group,p,NA,0.00283289019738427,NA,NA,NA,NA,NA
+correlation_pearson,x and y,estimate,r,0.5711815575638287,CI,0.95,-0.14974263303675717,0.8955794618387393,NA
+correlation_pearson,x and y,statistic,t,1.8410826381153382,NA,NA,NA,NA,NA
+correlation_pearson,x and y,df,NA,7,NA,NA,NA,NA,NA
+correlation_pearson,x and y,p,NA,0.10817305434949379,NA,NA,NA,NA,NA
+correlation_kendall,x and y,estimate,r,0.44444444444444453,NA,NA,NA,NA,τ
+correlation_kendall,x and y,statistic,T,26,NA,NA,NA,NA,NA
+correlation_kendall,x and y,p,NA,0.1194389329805996,NA,NA,NA,NA,NA
+correlation_spearman,x and y,estimate,r,0.6,NA,NA,NA,NA,S
+correlation_spearman,x and y,statistic,S,48,NA,NA,NA,NA,NA
+correlation_spearman,x and y,p,NA,0.09679783950617284,NA,NA,NA,NA,NA
+chi_squared,M,statistic,χ²,30.070149095754672,NA,NA,NA,NA,NA
+chi_squared,M,df,NA,2,NA,NA,NA,NA,NA
+chi_squared,M,p,NA,2.953589183211757e-7,NA,NA,NA,NA,NA
+chi_squared_yates,x,statistic,χ²,0.6411202638950317,NA,NA,NA,NA,NA
+chi_squared_yates,x,df,NA,1,NA,NA,NA,NA,NA
+chi_squared_yates,x,p,NA,0.42330542432241836,NA,NA,NA,NA,NA
+chi_squared_prob,y,statistic,χ²,2.5,NA,NA,NA,NA,NA
+chi_squared_prob,y,df,NA,2,NA,NA,NA,NA,NA
+chi_squared_prob,y,p,NA,0.2865047968601901,NA,NA,NA,NA,NA
+prop_test,"heads out of 100, null probability 0.5",estimate,p̂,0.52,CI,0.95,0.41831831181445966,0.6201277988422511,NA
+prop_test,"heads out of 100, null probability 0.5",statistic,χ²,0.09,NA,NA,NA,NA,NA
+prop_test,"heads out of 100, null probability 0.5",df,NA,1,NA,NA,NA,NA,NA
+prop_test,"heads out of 100, null probability 0.5",p,NA,0.7641771556220948,NA,NA,NA,NA,NA
+prop_test_correct,"heads out of 100, null probability 0.5",estimate,p̂,0.52,CI,0.95,0.4231657776522396,0.615354482419481,NA
+prop_test_correct,"heads out of 100, null probability 0.5",statistic,χ²,0.16,NA,NA,NA,NA,NA
+prop_test_correct,"heads out of 100, null probability 0.5",df,NA,1,NA,NA,NA,NA,NA
+prop_test_correct,"heads out of 100, null probability 0.5",p,NA,0.6891565167793517,NA,NA,NA,NA,NA
+prop_test_smokers,smokers out of patients,statistic,χ²,12.60041129712764,NA,NA,NA,NA,NA
+prop_test_smokers,smokers out of patients,df,NA,3,NA,NA,NA,NA,NA
+prop_test_smokers,smokers out of patients,p,NA,0.005585476661627026,NA,NA,NA,NA,NA
+wilcoxon_signed_rank,x and y,statistic,V,40,NA,NA,NA,NA,NA
+wilcoxon_signed_rank,x and y,p,NA,0.01953125,NA,NA,NA,NA,NA
+wilcoxon_rank_sum_continuity,Ozone by Month,statistic,W,127.5,NA,NA,NA,NA,NA
+wilcoxon_rank_sum_continuity,Ozone by Month,p,NA,1.2080783076877442e-4,NA,NA,NA,NA,NA
+wilcoxon_rank_sum,x and y,statistic,W,35,NA,NA,NA,NA,NA
+wilcoxon_rank_sum,x and y,p,NA,0.1103356809599234,NA,NA,NA,NA,NA
+wilcoxon_rank_sum_conf,x and y,estimate,Mdn,0.30500000000000005,CI,0.9,-0.07999999999999996,0.72,diff.
+wilcoxon_rank_sum_conf,x and y,statistic,W,35,NA,NA,NA,NA,NA
+wilcoxon_rank_sum_conf,x and y,p,NA,0.2544122544122544,NA,NA,NA,NA,NA
+kruskal,"list(x, y, z)",statistic,χ²,0.7714285714285722,NA,NA,NA,NA,NA
+kruskal,"list(x, y, z)",df,NA,2,NA,NA,NA,NA,NA
+kruskal,"list(x, y, z)",p,NA,0.6799647735788936,NA,NA,NA,NA,NA
+kruskal_formula,Ozone by Month,statistic,χ²,29.26657630611694,NA,NA,NA,NA,NA
+kruskal_formula,Ozone by Month,df,NA,4,NA,NA,NA,NA,NA
+kruskal_formula,Ozone by Month,p,NA,6.90071411854678e-6,NA,NA,NA,NA,NA
+fisher_test,TeaTasting,estimate,OR,6.408308867005788,CI,0.95,0.313569264110218,Inf,NA
+fisher_test,TeaTasting,p,NA,0.24285714285714288,NA,NA,NA,NA,NA
+fisher_test_no_CI,Convictions,estimate,OR,0.04693660882769891,NA,NA,NA,NA,NA
+fisher_test_no_CI,Convictions,p,NA,5.367241191434364e-4,NA,NA,NA,NA,NA
+fisher_test_r_by_c,Job,p,NA,0.7826849389656388,NA,NA,NA,NA,NA
+fisher_test_simulated_p,Job,p,NA,0.7833221667783322,NA,NA,NA,NA,NA
+fisher_test_hybrid,MP6,p,NA,0.03928964365533234,NA,NA,NA,NA,NA
+ks_test_two,x and y,statistic,D,0.48,NA,NA,NA,NA,NA
+ks_test_two,x and y,p,NA,2.033070118023783e-4,NA,NA,NA,NA,NA
+ks_test_one,x + 2,statistic,D,0.409618310073747,NA,NA,NA,NA,NA
+ks_test_one,x + 2,p,NA,4.226692373876517e-8,NA,NA,NA,NA,NA
+ks_test_inexact,x + 2,statistic,D,0.409618310073747,NA,NA,NA,NA,NA
+ks_test_inexact,x + 2,p,NA,1.033061616251274e-7,NA,NA,NA,NA,NA
+ks_test_greater,x + 2,statistic,D,0.03999841566496703,NA,NA,NA,NA,NA
+ks_test_greater,x + 2,p,NA,0.8301600585652312,NA,NA,NA,NA,NA
+oneway_test,extra and group,statistic,F,3.462626760780446,NA,NA,NA,NA,NA
+oneway_test,extra and group,df numerator,df,1,NA,NA,NA,NA,num.
+oneway_test,extra and group,df denominator,df,17.77647351617849,NA,NA,NA,NA,den.
+oneway_test,extra and group,p,NA,0.07939414018735814,NA,NA,NA,NA,NA
+oneway_test_equal_var,extra and group,statistic,F,3.462626760780446,NA,NA,NA,NA,NA
+oneway_test_equal_var,extra and group,df numerator,df,1,NA,NA,NA,NA,num.
+oneway_test_equal_var,extra and group,df denominator,df,18,NA,NA,NA,NA,den.
+oneway_test_equal_var,extra and group,p,NA,0.0791867142159381,NA,NA,NA,NA,NA
+var_test,x and y,estimate,VR,2.6521677583088863,CI,0.95,1.3325103747812135,4.989832020416675,NA
+var_test,x and y,statistic,F,2.6521677583088863,NA,NA,NA,NA,NA
+var_test,x and y,df numerator,df,49,NA,NA,NA,NA,num.
+var_test,x and y,df denominator,df,29,NA,NA,NA,NA,den.
+var_test,x and y,p,NA,0.0062320601006709,NA,NA,NA,NA,NA

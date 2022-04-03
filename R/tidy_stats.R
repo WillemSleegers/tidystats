@@ -87,8 +87,8 @@ tidy_stats.htest <- function(x, args = NULL) {
   
   # Extract and clean up the method
   method <- dplyr::case_when(
-    stringr::str_detect(x$method, "simulated p-value") ~ 
-      stringr::str_replace(x$method, "simulated p-value(.|\n|\t)+", 
+    stringr::str_detect(x$method, "with simulated p-value") ~ 
+      stringr::str_replace(x$method, "with simulated p-value(.|\n|\t)+", 
         "(with simulated p-value)"),
     stringr::str_detect(x$method, "with continuity correction") ~ 
       stringr::str_replace(x$method, "with continuity correction", 
@@ -217,7 +217,7 @@ tidy_stats.htest <- function(x, args = NULL) {
         stringr::str_extract(x$method, "exp=[0-9+]")
       ),
       percent = readr::parse_number(stringr::str_extract(x$method, 
-        "perc=[0-9+]")), 
+        "perc=[0-9]+")), 
       Emin = readr::parse_number(stringr::str_extract(x$method, "exp=[0-9+]"))
     )
   }

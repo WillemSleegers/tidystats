@@ -5,7 +5,7 @@
 library(tidystats)
 
 # Load test data
-path <- system.file("tests/testthat/data/results.json", package = "tidystats")
+path <- system.file("tests/testthat/data/main.json", package = "tidystats")
 test_results <- read_stats(path)
 
 # Set options
@@ -27,7 +27,7 @@ test_that("the t-test in main works", {
   expect_equal(tidy_model, tidy_model_test, tolerance = tolerance)
 })
 
-test_that("the linear regression in main works works", {
+test_that("the linear regression in main works", {
   ctl <- c(4.17, 5.58, 5.18, 6.11, 4.50, 4.61, 5.17, 4.53, 5.33, 5.14)
   trt <- c(4.81, 4.17, 4.41, 3.59, 5.87, 3.83, 6.03, 4.89, 4.32, 4.69)
   group <- gl(2, 10, 20, labels = c("Ctl","Trt"))

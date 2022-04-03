@@ -31,15 +31,15 @@ results <- results %>%
   add_stats(lm_D9, preregistered = FALSE) %>%
   add_stats(npk_aov, notes = "An ANOVA example")
 
+sleep_test
+lm_D9
+npk_aov
+
 # Convert to data frame ---------------------------------------------------
 
 df <- tidy_stats_to_data_frame(results)
 
 # Write files -------------------------------------------------------------
 
-write_stats(results, "tests/testthat/data/results.json")
-write_csv(df, "tests/testthat/data/results_df.csv")
-
-# Cleanup -----------------------------------------------------------------
-
-rm(path, ctl, trt, group, weight, sleep_test, lm_D9, npk_aov, results, df)
+write_stats(results, "tests/testthat/data/main.json")
+write_csv(df, "tests/testthat/data/main_df.csv")
