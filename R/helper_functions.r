@@ -81,4 +81,3 @@ add_package_info <- function(list, package) {
   
   return(list)
 }
-

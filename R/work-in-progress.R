@@ -1,5 +1,4 @@
 #' @describeIn tidy_stats tidy_stats method for class 'lavaan'
-#' @export
 tidy_stats.lavaan <- function(x, args = list(fit.measures = TRUE)) {
   output <- list()
   

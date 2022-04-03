@@ -42,12 +42,6 @@ t_test_two_sample
 t_test_welch
 t_test_paired
 
-# Tidy stats
-temp <- tidy_stats(t_test_one_sample)
-temp <- tidy_stats(t_test_two_sample)
-temp <- tidy_stats(t_test_welch)
-temp <- tidy_stats(t_test_paired)
-
 # Add stats
 results <- results %>%
   add_stats(t_test_one_sample) %>%
@@ -69,11 +63,6 @@ correlation_spearman <- cor.test(x, y, method = "spearman")
 correlation_pearson
 correlation_kendall
 correlation_spearman
-
-# Tidy stats
-temp <- tidy_stats(correlation_pearson)
-temp <- tidy_stats(correlation_kendall)
-temp <- tidy_stats(correlation_spearman)
 
 # Add stats
 results <- results %>%
@@ -99,11 +88,6 @@ chi_squared
 chi_squared_yates
 chi_squared_prob
 
-# Tidy results
-temp <- tidy_stats(chi_squared)
-temp <- tidy_stats(chi_squared_yates)
-temp <- tidy_stats(chi_squared_prob)
-
 # Add stats
 results <- results %>%
   add_stats(chi_squared) %>%
@@ -123,17 +107,11 @@ patients <- c( 86, 93, 136, 82 )
 # Run analyses
 prop_test <- prop.test(heads, 100)
 prop_test_correct <- prop.test(heads, 100, correct = FALSE)
-
 prop_test_smokers <- prop.test(smokers, patients)
 
 prop_test
 prop_test_correct
 prop_test_smokers
-
-# Tidy stats
-temp <- tidy_stats(prop_test)
-temp <- tidy_stats(prop_test_correct)
-temp <- tidy_stats(prop_test_smokers)
 
 # Add stats
 results <- results %>%
@@ -168,12 +146,6 @@ wilcoxon_rank_sum_conf <- wilcox.test(x, y, conf.int = TRUE, conf.level = .9)
 wilcoxon_rank_sum
 wilcoxon_rank_sum_conf
 
-# Tidy stats
-temp <- tidy_stats(wilcoxon_signed_rank)
-temp <- tidy_stats(wilcoxon_rank_sum_continuity)
-temp <- tidy_stats(wilcoxon_rank_sum)
-temp <- tidy_stats(wilcoxon_rank_sum_conf)
-
 # Add stats
 results <- results %>%
   add_stats(wilcoxon_signed_rank) %>%
@@ -195,10 +167,6 @@ kruskal_formula <- kruskal.test(Ozone ~ Month, data = airquality)
 kruskal
 kruskal_formula 
 
-# Tidy stats
-temp <- tidy_stats(kruskal)
-temp <- tidy_stats(kruskal_formula)
-
 # Add stats
 results <- results %>%
   add_stats(kruskal) %>%
@@ -207,15 +175,30 @@ results <- results %>%
 # fisher.test() -----------------------------------------------------------
 
 # Get data
-TeaTasting <- matrix(c(3, 1, 1, 3), nrow = 2,
-  dimnames = list(Guess = c("Milk", "Tea"), Truth = c("Milk", "Tea")))
+TeaTasting <- matrix(
+  data = c(3, 1, 1, 3), 
+  nrow = 2,
+  dimnames = list(Guess = c("Milk", "Tea"), Truth = c("Milk", "Tea"))
+)
 
-Convictions <- matrix(c(2, 10, 15, 3), nrow = 2, dimnames =
-    list(c("Dizygotic", "Monozygotic"), c("Convicted", "Not convicted")))
+Convictions <- matrix(
+  data = c(2, 10, 15, 3), 
+  nrow = 2, 
+  dimnames = list(
+    c("Dizygotic", "Monozygotic"), 
+    c("Convicted", "Not convicted")
+  )
+)
 
-Job <- matrix(c(1, 2, 1, 0, 3, 3, 6, 1, 10, 10, 14, 9, 6, 7, 12, 11), 4, 4,
-  dimnames = list(income = c("< 15k", "15-25k", "25-40k", "> 40k"),
-    satisfaction = c("VeryD", "LittleD", "ModerateS", "VeryS")))
+Job <- matrix(
+  data = c(1, 2, 1, 0, 3, 3, 6, 1, 10, 10, 14, 9, 6, 7, 12, 11), 
+  nrow = 4, 
+  ncol = 4,
+  dimnames = list(
+    income = c("< 15k", "15-25k", "25-40k", "> 40k"),
+    satisfaction = c("VeryD", "LittleD", "ModerateS", "VeryS")
+  )
+)
 
 MP6 <- rbind(
   c(1, 2, 2, 1, 1, 0, 1),
@@ -239,13 +222,6 @@ fisher_test_no_CI
 fisher_test_r_by_c
 fisher_test_simulated_p
 fisher_test_hybrid
-
-# Tidy stats
-temp <- tidy_stats(fisher_test)
-temp <- tidy_stats(fisher_test_no_CI)
-temp <- tidy_stats(fisher_test_r_by_c)
-temp <- tidy_stats(fisher_test_simulated_p)
-temp <- tidy_stats(fisher_test_hybrid)
 
 # Add stats
 results <- results %>%
@@ -275,12 +251,6 @@ ks_test_two
 ks_test_exact
 ks_test_greater
 
-# Tidy stats
-temp <- tidy_stats(ks_test)
-temp <- tidy_stats(ks_test_two)
-temp <- tidy_stats(ks_test_exact)
-temp <- tidy_stats(ks_test_greater)
-
 # Add stats
 results <- results %>%
   add_stats(ks_test) %>%
@@ -297,10 +267,6 @@ oneway_test_equal_var <- oneway.test(extra ~ group, data = sleep,
 
 oneway_test
 oneway_test_equal_var
-
-# Tidy stats
-temp <- tidy_stats(oneway_test)
-temp <- tidy_stats(oneway_test_equal_var)
 
 # Add stats
 results <- results %>%
@@ -321,12 +287,13 @@ var_test <- var.test(x, y)
 
 var_test
 
-# Tidy stats
-temp <- tidy_stats(var_test)
-
 # Add stats
 results <- add_stats(results, var_test)
 
+# tidy_stats_to_data_frame() ----------------------------------------------
+
+df <- tidy_stats_to_data_frame(results)
+
 # write_stats() -----------------------------------------------------------
 
-write_stats(results, "inst/test_data/htest.json")
+write_stats(results, "tests/testthat/data/htest.json")

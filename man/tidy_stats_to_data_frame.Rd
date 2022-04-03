@@ -12,7 +12,7 @@ tidy_stats_to_data_frame(x)
 \description{
 \code{tidy_stats_to_data_frame} converts a tidystats list to a data frame, 
 which can then be used to extract specific statistics using standard
-subsetting functions (e.g., \code{dplyr::filter}).
+subsetting functions (e.g., \code{dplyr::filter()}).
 }
 \examples{
 # Load dplyr for access to the piping operator

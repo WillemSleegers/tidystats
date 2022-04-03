@@ -2,7 +2,7 @@
 #'
 #' \code{tidy_stats_to_data_frame} converts a tidystats list to a data frame, 
 #' which can then be used to extract specific statistics using standard
-#' subsetting functions (e.g., \code{dplyr::filter}).
+#' subsetting functions (e.g., \code{dplyr::filter()}).
 #'
 #' @param x A tidystats list.
 #' 
@@ -41,179 +41,69 @@
 #'
 #' @export
 tidy_stats_to_data_frame <- function(x) {
-  # Loop over each analysis and convert each to a data frame
-  output <- purrr::map2_dfr(x, names(x), analysis_to_data_frame)
+  # Convert statistics to a data frame
+  df <- purrr::map2_df(x, names(x), analysis_to_data_frame)
   
-  # Re-order output
-  output <- dplyr::select_at(output, vars(identifier, dplyr::contains("group"), 
-    dplyr::contains("term"), statistic, value, dplyr::contains("extra"), method, 
-    dplyr::everything()))
+  # Rename name to statistic_name
+  df <- dplyr::rename(df, statistic_name = name)
   
-  return(output)
+  # Reorder the columns
+  df <- dplyr::relocate(df, identifier, analysis_name, 
+    dplyr::contains("group_name"), statistic_name)
+  
+  return(df)
 }
 
 analysis_to_data_frame <- function(x, y) {
-  output <- tibble::tibble()
+  # Create a data frame with the identifier of the analysis
+  df <- tibble::tibble(identifier = y)
   
+  # Check if there is a name for the analysis, if so, add it to the data frame
+  if ("name" %in% names(x)) {
+    df <- dplyr::mutate(df, analysis_name = x$name)
+  }
+  
+  # Check if there are statistics, if so, convert them to a data frame and add
+  # them to the data frame of the analysis
   if ("statistics" %in% names(x)) {
-    output <- statistics_to_data_frame(x$statistics)
+    df <- dplyr::bind_cols(
+      df, 
+      purrr::map_df(x$statistics, function(x) return(x))
+    )
   }
-  if ("terms" %in% names(x)) {
-    output <- dplyr::bind_rows(output, terms_to_data_frame(x$terms))
-  }
-  if ("model" %in% names(x)) {
-    output <- dplyr::bind_rows(output, 
-      statistics_to_data_frame(x$model$statistics))
-  }
+  
+  # Check if there are groups, if so, recursively loop through them and convert
+  # each group to a data frame, with a level integer to keep track of each
+  # group name
   if ("groups" %in% names(x)) {
-    output <- dplyr::bind_rows(output, groups_to_data_frame(x$groups))
-  }
-  if ("effects" %in% names(x)) {
-    output <- dplyr::bind_rows(
-      output, 
-      random_effects_to_data_frame(x$effects$random_effects),
-      fixed_effects_to_data_frame(x$effects$fixed_effects)
+    level <- 0
+    df <- dplyr::bind_cols(
+      df, 
+      purrr::map_df(x$groups, groups_to_data_frame, level)
     )
   }
-  
-  # Add identifier 
-  output$identifier <- y
-
-  # Add the method
-  output$method <- x$method
-  
-  # Add additional information, if present
-  if ("type" %in% names(x)) {
-    output$type <- x$type
-  }
-  if ("preregistered" %in% names(x)) {
-    output$preregistered <- x$preregistered
-  }
-  
-  return(output)
-}
-
-random_effects_to_data_frame <- function(x) {
-  df_statistics <- statistics_to_data_frame(x$statistics)
-  df_groups <- groups_to_data_frame(x$groups)
-  
-  return(dplyr::bind_rows(df_statistics, df_groups))
-}
-
-fixed_effects_to_data_frame <- function(x) {
-  df_terms <- terms_to_data_frame(x$terms)
-  df_pairs <- pairs_to_data_frame(x$pairs)
-  
-  return(dplyr::bind_rows(df_terms, df_pairs))
-}
-
-groups_to_data_frame <- function(x) {
-  df <- purrr::map_df(x, group_to_data_frame)
   
   return(df)
 }
 
-group_to_data_frame <- function(x) {
+groups_to_data_frame <- function(x, level) {
+  # Increment the level
+  level <- level + 1
   
-  df <- tibble::tibble()
-  
+  # Check if there are statistics, if so, convert them to a data frame
   if ("statistics" %in% names(x)) {
-    df_statistics <- statistics_to_data_frame(x$statistics)
-    df_statistics$group <- x$name
-    df <- dplyr::bind_rows(df, df_statistics)
+    df <- purrr::map_df(x$statistics, function(x) return(x))
+  }
+  # Check if there are groups, if so, convert them to a data frame (recursively)
+  if ("groups" %in% names(x)) {
+    df <- purrr::map_df(x$groups, groups_to_data_frame, level)
   }
   
-  if ("terms" %in% names(x)) {
-    df_terms <- terms_to_data_frame(x$terms)
-    df_terms$group <- x$name
-    df <- dplyr::bind_rows(df, df_terms)
-  }
-  
-  if ("pairs" %in% names(x)) {
-    df_pairs <- pairs_to_data_frame(x$pairs)
-    df_pairs$group <- x$name
-    df <- dplyr::bind_rows(df, df_pairs)
+  # Check if there's a name, if so, add it to the data frame and append the
+  # level to the name
+  if ("name" %in% names(x)) {
+    df <- dplyr::mutate(df, "group_name{level}" := x$name)
   }
   
   return(df)
-}
-
-terms_to_data_frame <- function(x) {
-  df <- purrr::map_df(x, term_to_data_frame)
-  
-  return(df)
-}
-
-term_to_data_frame <- function(x) {
-  df <- statistics_to_data_frame(x$statistics)
-  df$term <- x$name
-  
-  return(df)
-}
-
-pairs_to_data_frame <- function(x) {
-  df <- purrr::map_df(x, pair_to_data_frame)
-  
-  return(df)
-}
-
-pair_to_data_frame <- function(x) {
-  df <- statistics_to_data_frame(x$statistics)
-  df$term <- paste(x$names[[1]], "-", x$names[[2]])
-  
-  return(df)
-}
-
-statistics_to_data_frame <- function(x) {
-  df <- purrr::map2_dfr(x, names(x), statistic_to_data_frame)
-  
-  return(df)
-}
-
-statistic_to_data_frame <- function(x, y) {
-  if (class(x) == "numeric" | class(x) == "integer") {
-    df <- tibble::tibble(
-      statistic = y,
-      value = x
-    )
-  } else {
-    if (y == "CI") {
-      df <- CI_to_data_frame(x)
-    } else if (y == "dfs") {
-      df <- dfs_to_data_frame(x)
-    } else if (y == "estimate" | y == "statistic") {
-      df <- named_statistic_to_data_frame(x)
-    }
-  }
-
-  return(df)
-}
-
-named_statistic_to_data_frame <- function(x) {
-  return(
-    tibble::tribble(
-      ~"statistic", ~"value",
-      x$name, x$value
-    )
-  )
-}
-
-dfs_to_data_frame <- function(x) {
-  return(
-    tibble::tribble(
-      ~"statistic", ~"value",
-      names(x)[1], x[[1]],
-      names(x)[2], x[[2]],
-    )
-  )
-}
-
-CI_to_data_frame <- function(x) {
-  return(
-    tibble::tribble(
-      ~"statistic", ~"value", ~"extra",
-      "CI_lower", x$CI_lower, paste0(x$CI_level * 100, "% CI"),
-      "CI_upper", x$CI_upper, paste0(x$CI_level * 100, "% CI"),
-    )
-  )
 }

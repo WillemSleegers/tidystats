@@ -8,19 +8,25 @@
 
 # Update ------------------------------------------------------------------
 
+# Update documentation
+devtools::document()
+
 # Load the package
 devtools::load_all()
+
+# Install the dev version
+devtools::install()
 
 # Testing -----------------------------------------------------------------
 
 # Add a test
 # usethis::use_test("add_stats")
 
+# Test a specific test
+testthat::test_file("tests/testthat/tests/test_main.R")
+
 # Test all tests
 devtools::test()
-
-# Test specific tests
-testthat::test_file("tests/testthat/test_htest.R")
 
 # Create a vignette -------------------------------------------------------
 

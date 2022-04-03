@@ -7,7 +7,7 @@
 read_stats(file)
 }
 \arguments{
-\item{file}{Path to the tidy stats data file}
+\item{file}{A string; specifying the path to the tidystats data file.}
 }
 \description{
 \code{read_stats} can read in a .json file containing the statistical output
@@ -15,6 +15,12 @@ that was produced with \code{write_stats}. It returns a list containing the
 results, with the identifier as the name for each list element.
 }
 \examples{
+# A simple example, assuming there is a file called 'results.json'
+\dontrun{
+  results <- read_stats("results.json")
+}
+
+# A working example
 results <- read_stats(system.file("results.json", package = "tidystats"))
 
 }
