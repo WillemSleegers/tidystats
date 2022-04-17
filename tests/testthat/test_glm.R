@@ -1,9 +1,12 @@
 
 # Setup -------------------------------------------------------------------
 
+# Load packages
+library(tidystats)
+
 # Load test data
-test_results <- read_stats(system.file("test_data/glm.json", 
-  package = "tidystats"))
+path <- system.file("tests/testthat/data/glm.json", package = "tidystats")
+test_results <- read_stats(path)
 
 # Set options
 tolerance <- 0.001
@@ -11,12 +14,13 @@ tolerance <- 0.001
 # Test: glm ---------------------------------------------------------------
 
 test_that("glm poisson works", {
-  counts <- c(18,17,15,20,10,20,25,13,12)
-  outcome <- gl(3,1,9)
-  treatment <- gl(3,3)
-  d.AD <- data.frame(treatment, outcome, counts)
+  d.AD <- tibble(
+    treatment = gl(3, 3),
+    outcome = gl(3, 1, 9),
+    counts = c(18, 17, 15, 20, 10, 20, 25, 13, 12)
+  )
   
-  model <- glm(counts ~ outcome + treatment, family = poisson())
+  model <- glm(counts ~ outcome + treatment, data = d.AD, family = poisson())
   
   tidy_model <- tidy_stats(model)
   tidy_model_test <- test_results$glm_poisson
@@ -64,13 +68,13 @@ test_that("glm gaussian works", {
   expect_equal(tidy_model, tidy_model_test, tolerance = tolerance)
 })
 
+clotting <- tibble(
+  u = c(5, 10, 15, 20, 30, 40, 60, 80, 100),
+  lot1 = c(118, 58, 42, 35, 27, 25, 21, 19, 18),
+  lot2 = c(69, 35, 26, 21, 18, 16, 13, 12, 12)
+)
+
 test_that("glm gamma works", {
-  clotting <- tibble(
-    u = c(5,10,15,20,30,40,60,80,100),
-    lot1 = c(118,58,42,35,27,25,21,19,18),
-    lot2 = c(69,35,26,21,18,16,13,12,12)
-  )
-  
   model <- glm(lot1 ~ log(u), data = clotting, family = Gamma)
   
   tidy_model <- tidy_stats(model)
@@ -83,12 +87,6 @@ test_that("glm gamma works", {
 })
 
 test_that("glm gamma fs works", {
-  clotting <- tibble(
-    u = c(5,10,15,20,30,40,60,80,100),
-    lot1 = c(118,58,42,35,27,25,21,19,18),
-    lot2 = c(69,35,26,21,18,16,13,12,12)
-  )
-  
   model <- glm(lot2 ~ log(u) + log(u^2), data = clotting, family = Gamma)
   
   tidy_model <- tidy_stats(model)

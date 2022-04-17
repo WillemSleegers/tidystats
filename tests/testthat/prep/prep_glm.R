@@ -10,22 +10,15 @@ results <- list()
 
 # glm ---------------------------------------------------------------------
 
-# Example 1: Dobson (1990) Page 93: Randomized Controlled Trial
 # Get data
-counts <- c(18,17,15,20,10,20,25,13,12)
-outcome <- gl(3,1,9)
-treatment <- gl(3,3)
-d.AD <- data.frame(treatment, outcome, counts)
-
-# Run tests
-glm_poisson <- glm(counts ~ outcome + treatment, family = poisson())
-summary(glm_poisson)
-
-# Tidy stats
-temp <- tidy_stats(glm_poisson)
+# Example 1: Dobson (1990) Page 93: Randomized Controlled Trial
+d.AD <- tibble(
+  treatment = gl(3, 3),
+  outcome = gl(3, 1, 9),
+  counts = c(18, 17, 15, 20, 10, 20, 25, 13, 12)
+)
 
 # Example 2: Venables & Ripley (2002, p.189)
-# Get data
 anorexia <- tibble(
   Treat = c("Cont", "Cont", "Cont", "Cont", "Cont", "Cont", "Cont", "Cont", 
     "Cont", "Cont", "Cont", "Cont", "Cont", "Cont", "Cont", "Cont", "Cont", 
@@ -51,34 +44,14 @@ anorexia <- tibble(
     98.0)
 )
 
-# Run analyses
-glm_gaussian <- glm(Postwt ~ Prewt + Treat + offset(Prewt), data = anorexia)
-summary(glm_gaussian)
-
-# Tidy stats
-temp <- tidy_stats(glm_gaussian)
-
 # Example 3: McCullagh & Nelder (1989, pp. 300-2)
-# Get data
 clotting <- tibble(
   u = c(5, 10, 15, 20, 30, 40, 60, 80, 100),
   lot1 = c(118, 58, 42, 35, 27, 25, 21, 19, 18),
   lot2 = c(69, 35, 26, 21, 18, 16, 13, 12, 12)
 )
 
-# Run tests
-glm_gamma <- glm(lot1 ~ log(u), data = clotting, family = Gamma)
-glm_gamma_fs <- glm(lot2 ~ log(u) + log(u^2), data = clotting, family = Gamma)
-
-summary(glm_gamma)
-summary(glm_gamma_fs)
-
-# Tidy stats
-temp <- tidy_stats(glm_gamma)
-temp <- tidy_stats(glm_gamma_fs)
-
 # Example 4: Logistic regression
-# Get data
 admission <- tibble(
   admit = c(0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0),
   gre = c(380, 660, 800, 640, 520, 760, 560, 400, 540, 700, 800),
@@ -86,14 +59,14 @@ admission <- tibble(
   rank = c(3, 3, 1, 4, 4, 2, 1, 2, 3, 2, 4)
 )
 
-# Run tests
-glm_binomial = glm(admit ~ gre + gpa + rank, data = admission, 
+# Run analyses
+glm_poisson <- glm(counts ~ outcome + treatment, data = d.AD, 
+  family = poisson())
+glm_gaussian <- glm(Postwt ~ Prewt + Treat + offset(Prewt), data = anorexia)
+glm_gamma <- glm(lot1 ~ log(u), data = clotting, family = Gamma)
+glm_gamma_fs <- glm(lot2 ~ log(u) + log(u^2), data = clotting, family = Gamma)
+glm_binomial <- glm(admit ~ gre + gpa + rank, data = admission, 
   family = binomial(link = "logit"))
-
-summary(glm_binomial)
-
-# Tidy stats
-temp <- tidy_stats(glm_binomial)
 
 # Add stats
 results <- results %>%
@@ -103,5 +76,16 @@ results <- results %>%
   add_stats(glm_gamma_fs) %>%
   add_stats(glm_binomial)
 
-# Write stats
-write_stats(results, "inst/test_data/glm.json")
+summary(glm_poisson)
+summary(glm_gaussian)
+summary(glm_gamma)
+summary(glm_gamma_fs)
+summary(glm_binomial)
+
+# tidy_stats_to_data_frame() ----------------------------------------------
+
+df <- tidy_stats_to_data_frame(results)
+
+# write_stats() -----------------------------------------------------------
+
+write_stats(results, "tests/testthat/data/glm.json")

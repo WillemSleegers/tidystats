@@ -438,7 +438,7 @@ tidy_stats.anova <- function(x, args = NULL) {
   }
   
   # Check whether multiple models are being compared
-  if (sum(str_detect(heading, "Models: ")) > 0) {
+  if (sum(stringr::str_detect(heading, "Models:")) > 0) {
     model_comparison = TRUE
   } else {
     model_comparison = FALSE
@@ -473,7 +473,14 @@ tidy_stats.anova <- function(x, args = NULL) {
   # Loop over each row 
   for (i in 1:nrow(x)) {
     # Create a new group list
-    group <- list(name = x$name[i])
+    group <- list()
+    
+    # Set the name
+    if (!is.null(rownames(x)[i])) {
+      group$name <- rownames(x)[i]
+    } else if (!is.null(x$name[i])) {
+      group$name <- x$name[i] #TODO: Check if this one is necessary
+    }
     
     # Create a new statistics list and add statistics
     statistics <- list()
@@ -492,8 +499,12 @@ tidy_stats.anova <- function(x, args = NULL) {
     statistics <- add_statistic(statistics, "MS", x$`Mean Sq`[i])
     statistics <- add_statistic(statistics, "statistic", x$Chisq[i], 
       "χ²")
-    statistics <- add_statistic(statistics, "statistic", x$`F value`[i], "F")
-    statistics <- add_statistic(statistics, "statistic", x$`F`[i], "F")
+    
+    if ("F" %in% names(x)) {
+      statistics <- add_statistic(statistics, "statistic", x$`F`[i], "F")  
+    } else {
+      statistics <- add_statistic(statistics, "statistic", x$`F value`[i], "F")  
+    }
     
     # Special case: Degrees of freedom
     if (method == "ANOVA" & !model_comparison) {
@@ -951,18 +962,16 @@ tidy_stats.lmerMod <- function(x, args = NULL) {
   analysis$groups <- append(analysis$groups, list(group_model))
   
   # Random effects
-  # Create a groups lists for the random effects, terms, and pairs
   group_RE <- list(name = "Random effects")
-  group_RE_groups <- list(name = "Groups")
-  group_RE_pairs <- list(name = "Correlations")
   
   # Get variance-covariance matrix
   varcor <- summary$varcor
   
   # Loop over the groups
   for (i in 1:length(varcor)) {
-    # Create a list for the group
+    # Create lists for the group
     group_RE_group <- list(name = names(varcor)[i])
+    group_RE_variances <- list(name = "Variances")
     
     # Set N for the group, if there is an N  
     if (names(varcor)[i] %in% names(summary$ngrps)) {
@@ -976,9 +985,9 @@ tidy_stats.lmerMod <- function(x, args = NULL) {
     # Extract standard deviations
     SDs <- attr(varcor[[i]], "stddev")
     
-    # Loop over coefficients in the group
+    # Loop over variances in the group
     for (j in 1:length(SDs)) {
-      group_RE_group_coefficient <- list(name = names(SDs)[j])
+      group_RE_group_variance <- list(name = names(SDs)[j])
       
       # Extract statistics
       statistics <- list()
@@ -988,19 +997,19 @@ tidy_stats.lmerMod <- function(x, args = NULL) {
       statistics <- add_statistic(statistics, "variance", SDs[[j]]^2, "var")
       
       # Add statistics to the RE group
-      group_RE_group_coefficient$statistics <- statistics
+      group_RE_group_variance$statistics <- statistics
       
-      # Add RE group coefficients to the RE group
-      group_RE_group$groups <- append(
-        group_RE_group$groups, 
-        list(group_RE_group_coefficient)
+      # Add RE group variances to the RE group
+      group_RE_variances$groups <- append(
+        group_RE_variances$groups, 
+        list(group_RE_group_variance)
       )
     }
-      
-    # Add RE group to the RE groups list
-    group_RE_groups$groups <- append(
-      group_RE_groups$groups, 
-      list(group_RE_group)
+    
+    # Add variances to the group
+    group_RE_group$groups <- append(
+      group_RE_group$groups, 
+      list(group_RE_variances)
     )
     
     # Extract correlations
@@ -1008,51 +1017,59 @@ tidy_stats.lmerMod <- function(x, args = NULL) {
     
     # Check if there are any correlations
     if (length(cors) > 1) {
+      # Create a group for the correlations
+      group_RE_correlations <- list(name = "Correlations")
       
       # Tidy the matrix
       cors <- tidy_matrix(cors)
       
       # Loop over the correlations
       for (j in 1:nrow(cors)) {
-        group_RE_pair <- list(name = paste(cors$name1[j], "-", cors$name2[j]))
+        group_RE_correlation <- list(
+          name = paste(cors$name1[j], "-", cors$name2[j])
+        )
         
         statistics <- list()
         statistics <- add_statistic(statistics, "correlation", cors$value[j], 
           "r")
         
-        group_RE_pair$statistics <- statistics
+        group_RE_correlation$statistics <- statistics
         
-        group_RE_pairs$groups <- append(
-          group_RE_pairs$groups, 
-          list(group_RE_pair)
+        group_RE_correlations$groups <- append(
+          group_RE_correlations$groups, 
+          list(group_RE_correlation)
         )
       }
+      
+      # Add correlations to the group
+      group_RE_group$groups <- append(
+        group_RE_group$groups, 
+        list(group_RE_correlations)
+      )
     }
     
-    # Add statistics from the Residual group
-    group_RE_group <- list(name = "Residual")
-    
-    statistics <- list()
-    statistics <- add_statistic(statistics, "standard deviation", 
-      attr(varcor, "sc"), "SD")
-    statistics <- add_statistic(statistics, "variance", attr(varcor, "sc")^2, 
-      "var")
-    
-    group_RE_group$statistics <- statistics
-    
-    group_RE_groups$groups <- append(
-      group_RE_groups$groups, 
+    # Add group to the groups list
+    group_RE$groups <- append(
+      group_RE$groups, 
       list(group_RE_group)
     )
-    
-    # Add the RE groups to the group_RE element
-    group_RE$groups <- append(group_RE$groups, list(group_RE_groups))
-    
-    # Add the RE pairs to the group_RE element, if there are any
-    if (length(cors) > 1) {
-      group_RE$groups <- append(group_RE$groups, list(group_RE_pairs))
-    }
   }
+  
+  # Add the Residual group
+  group_RE_group <- list(name = "Residual")
+  
+  statistics <- list()
+  statistics <- add_statistic(statistics, "standard deviation", 
+    attr(varcor, "sc"), "SD")
+  statistics <- add_statistic(statistics, "variance", attr(varcor, "sc")^2, 
+    "var")
+  
+  group_RE_group$statistics <- statistics
+  
+  group_RE$groups <- append(
+    group_RE$groups, 
+    list(group_RE_group)
+  )
   
   # Add RE groups to the statistics element on the analysis
   analysis$groups <- append(analysis$groups, list(group_RE))
@@ -1146,7 +1163,14 @@ tidy_stats.lmerMod <- function(x, args = NULL) {
 tidy_stats.lmerModLmerTest <- function(x, args = NULL) {
   # Create a list to store the analysis in and set the name and method
   analysis <- list(
-    name = deparse(attr(x@frame, "formula")),
+    name = paste(
+      stringr::str_replace_all(
+        string = deparse(attr(x@frame, "formula")), 
+        pattern = "^ +", 
+        replacement = ""
+      ), 
+      collapse = ""
+    ),
     method = "Linear mixed model"
   )
   
@@ -1180,18 +1204,16 @@ tidy_stats.lmerModLmerTest <- function(x, args = NULL) {
   analysis$groups <- append(analysis$groups, list(group_model))
   
   # Random effects
-  # Create a groups lists for the random effects, terms, and pairs
   group_RE <- list(name = "Random effects")
-  group_RE_groups <- list(name = "Groups")
-  group_RE_pairs <- list(name = "Correlations")
   
   # Get variance-covariance matrix
   varcor <- summary$varcor
   
   # Loop over the groups
   for (i in 1:length(varcor)) {
-    # Create a list for the group
+    # Create lists for the group
     group_RE_group <- list(name = names(varcor)[i])
+    group_RE_variances <- list(name = "Variances")
     
     # Set N for the group, if there is an N  
     if (names(varcor)[i] %in% names(summary$ngrps)) {
@@ -1205,9 +1227,9 @@ tidy_stats.lmerModLmerTest <- function(x, args = NULL) {
     # Extract standard deviations
     SDs <- attr(varcor[[i]], "stddev")
     
-    # Loop over coefficients in the group
+    # Loop over variances in the group
     for (j in 1:length(SDs)) {
-      group_RE_group_coefficient <- list(name = names(SDs)[j])
+      group_RE_group_variance <- list(name = names(SDs)[j])
       
       # Extract statistics
       statistics <- list()
@@ -1217,19 +1239,19 @@ tidy_stats.lmerModLmerTest <- function(x, args = NULL) {
       statistics <- add_statistic(statistics, "variance", SDs[[j]]^2, "var")
       
       # Add statistics to the RE group
-      group_RE_group_coefficient$statistics <- statistics
+      group_RE_group_variance$statistics <- statistics
       
       # Add RE group coefficients to the RE group
-      group_RE_group$groups <- append(
-        group_RE_group$groups, 
-        list(group_RE_group_coefficient)
+      group_RE_variances$groups <- append(
+        group_RE_variances$groups, 
+        list(group_RE_group_variance)
       )
     }
     
-    # Add RE group to the RE groups list
-    group_RE_groups$groups <- append(
-      group_RE_groups$groups, 
-      list(group_RE_group)
+    # Add variances to the group
+    group_RE_group$groups <- append(
+      group_RE_group$groups, 
+      list(group_RE_variances)
     )
     
     # Extract correlations
@@ -1237,51 +1259,58 @@ tidy_stats.lmerModLmerTest <- function(x, args = NULL) {
     
     # Check if there are any correlations
     if (length(cors) > 1) {
+      # Create a group for the correlations
+      group_RE_correlations <- list(name = "Correlations")
       
       # Tidy the matrix
       cors <- tidy_matrix(cors)
       
       # Loop over the correlations
       for (j in 1:nrow(cors)) {
-        group_RE_pair <- list(name = paste(cors$name1[j], "-", cors$name2[j]))
+        group_RE_correlation <- list(
+          name = paste(cors$name1[j], "-", cors$name2[j])
+        )
         
         statistics <- list()
         statistics <- add_statistic(statistics, "correlation", cors$value[j], 
           "r")
         
-        group_RE_pair$statistics <- statistics
+        group_RE_correlation$statistics <- statistics
         
-        group_RE_pairs$groups <- append(
-          group_RE_pairs$groups, 
-          list(group_RE_pair)
+        group_RE_correlations$groups <- append(
+          group_RE_correlations$groups, 
+          list(group_RE_correlation)
         )
       }
+      
+      # Add correlations to the group
+      group_RE_group$groups <- append(
+        group_RE_group$groups, 
+        list(group_RE_correlations)
+      )
     }
-    
-    # Add statistics from the Residual group
-    group_RE_group <- list(name = "Residual")
-    
-    statistics <- list()
-    statistics <- add_statistic(statistics, "standard deviation", 
-      attr(varcor, "sc"), "SD")
-    statistics <- add_statistic(statistics, "variance", attr(varcor, "sc")^2,
-      "var")
-    
-    group_RE_group$statistics <- statistics
-    
-    group_RE_groups$groups <- append(
-      group_RE_groups$groups, 
+    # Add group to the groups list
+    group_RE$groups <- append(
+      group_RE$groups, 
       list(group_RE_group)
     )
-    
-    # Add the RE groups to the group_RE element
-    group_RE$groups <- append(group_RE$groups, list(group_RE_groups))
-    
-    # Add the RE pairs to the group_RE element, if there are any
-    if (length(cors) > 1) {
-      group_RE$groups <- append(group_RE$groups, list(group_RE_pairs))
-    }
   }
+
+  # Add the Residual group
+  group_RE_group <- list(name = "Residual")
+  
+  statistics <- list()
+  statistics <- add_statistic(statistics, "standard deviation", 
+    attr(varcor, "sc"), "SD")
+  statistics <- add_statistic(statistics, "variance", attr(varcor, "sc")^2,
+    "var")
+  
+  group_RE_group$statistics <- statistics
+  
+  group_RE$groups <- append(
+    group_RE$groups, 
+    list(group_RE_group)
+  )
   
   # Add RE groups to the statistics element on the analysis
   analysis$groups <- append(analysis$groups, list(group_RE))
@@ -1367,7 +1396,7 @@ tidy_stats.lmerModLmerTest <- function(x, args = NULL) {
   analysis$convergence_message = summary$optinfo$conv$lme4$messages
   
   # Add package information
-  analysis <- add_package_info(analysis, "lme4")
+  analysis <- add_package_info(analysis, "lmerTest")
   
   return(analysis)
 }

@@ -48,8 +48,8 @@ tidy_stats_to_data_frame <- function(x) {
   df <- dplyr::rename(df, statistic_name = name)
   
   # Reorder the columns
-  df <- dplyr::relocate(df, identifier, analysis_name, 
-    dplyr::contains("group_name"), statistic_name)
+  df <- dplyr::relocate(df, identifier, sort(tidyselect::peek_vars()))
+  df <- dplyr::relocate(df, subscript, .after = symbol)
   
   return(df)
 }
@@ -107,3 +107,4 @@ groups_to_data_frame <- function(x, level) {
   
   return(df)
 }
+

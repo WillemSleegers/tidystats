@@ -5,6 +5,7 @@
 #TODO: # Call deviance dfs df numerator and df denominator?
 #TODO: Replace some of the statistics extraction code with loops over all 
 #      columns and then fix the names after
+#TODO: Use pipes when adding statistics via add_statistic()?
 
 # Update ------------------------------------------------------------------
 

@@ -1,3 +1,4 @@
+
 # Setup -------------------------------------------------------------------
 
 # Load packages
@@ -7,9 +8,9 @@ library(tidyverse)
 # Create an empty list
 results <- list()
 
-# anova: anova.lm ---------------------------------------------------------
+# anova(): anova.lm -------------------------------------------------------
 
-# Run tests
+# Run analyses
 fit <- lm(sr ~ ., data = LifeCycleSavings)
 fit0 <- lm(sr ~ 1, data = LifeCycleSavings)
 fit1 <- update(fit0, . ~ . + pop15)
@@ -23,20 +24,6 @@ anova_lm_order <- anova(fit4, fit2, fit0, test = "F")
 anova_lm_chisq <- anova(fit4, fit2, fit0, test = "Chisq")
 anova_lm_cp <- anova(fit4, fit2, fit0, test = "Cp")
 
-anova_lm
-anova_lm_fits
-anova_lm_order
-anova_lm_chisq
-anova_lm_cp
-
-
-# Tidy stats
-temp <- tidy_stats(anova_lm)
-temp <- tidy_stats(anova_lm_fits)
-temp <- tidy_stats(anova_lm_order)
-temp <- tidy_stats(anova_lm_chisq)
-temp <- tidy_stats(anova_lm_cp)
-
 # Add stats
 results <- results %>%
   add_stats(anova_lm) %>%
@@ -45,15 +32,22 @@ results <- results %>%
   add_stats(anova_lm_chisq) %>%
   add_stats(anova_lm_cp)
 
-# anova: anova.glm --------------------------------------------------------
+anova_lm
+anova_lm_fits
+anova_lm_order
+anova_lm_chisq
+anova_lm_cp
+
+# anova(): anova.glm ------------------------------------------------------
 
 # Get data
-counts <- c(18, 17, 15, 20, 10, 20, 25, 13, 12)
-outcome <- gl(3, 1, 9)
-treatment <- gl(3, 3)
-d.AD <- data.frame(treatment, outcome, counts)
+d.AD <- tibble(
+  treatment = gl(3, 3),
+  outcome = gl(3, 1, 9),
+  counts = c(18, 17, 15, 20, 10, 20, 25, 13, 12)
+)
 
-# Run tests
+# Run analyses
 glm.D93 <- glm(counts ~ outcome + treatment, family = poisson())
 glm.D93a <- update(glm.D93, ~treatment * outcome)
 
@@ -62,24 +56,17 @@ anova_glm_cp <- anova(glm.D93, test = "Cp")
 anova_glm_chisq <- anova(glm.D93, test = "Chisq")
 anova_glm_rao <- anova(glm.D93, glm.D93a, test = "Rao")
 
-anova_glm
-anova_glm_cp
-anova_glm_chisq
-anova_glm_rao
-
-
-# Tidy stats
-temp <- tidy_stats(anova_glm)
-temp <- tidy_stats(anova_glm_cp)
-temp <- tidy_stats(anova_glm_chisq)
-temp <- tidy_stats(anova_glm_rao)
-
 # Add stats
 results <- results %>%
   add_stats(anova_glm) %>%
   add_stats(anova_glm_cp) %>%
   add_stats(anova_glm_chisq) %>%
   add_stats(anova_glm_rao)
+
+anova_glm
+anova_glm_cp
+anova_glm_chisq
+anova_glm_rao
 
 # lme4 --------------------------------------------------------------------
 
