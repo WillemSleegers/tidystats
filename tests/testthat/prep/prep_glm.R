@@ -8,7 +8,7 @@ library(tidyverse)
 # Create an empty list
 results <- list()
 
-# glm ---------------------------------------------------------------------
+# glm() -------------------------------------------------------------------
 
 # Get data
 # Example 1: Dobson (1990) Page 93: Randomized Controlled Trial
@@ -68,13 +68,16 @@ glm_gamma_fs <- glm(lot2 ~ log(u) + log(u^2), data = clotting, family = Gamma)
 glm_binomial <- glm(admit ~ gre + gpa + rank, data = admission, 
   family = binomial(link = "logit"))
 
-# Add stats
+# add_stats() -------------------------------------------------------------
+
 results <- results %>%
   add_stats(glm_poisson) %>%
   add_stats(glm_gaussian) %>%
   add_stats(glm_gamma) %>%
   add_stats(glm_gamma_fs) %>%
   add_stats(glm_binomial)
+
+# Inspect output ----------------------------------------------------------
 
 summary(glm_poisson)
 summary(glm_gaussian)
@@ -89,3 +92,8 @@ df <- tidy_stats_to_data_frame(results)
 # write_stats() -----------------------------------------------------------
 
 write_stats(results, "tests/testthat/data/glm.json")
+
+# Cleanup -----------------------------------------------------------------
+
+rm(admission, anorexia, clotting, d.AD, glm_binomial, glm_gamma, glm_gamma_fs,
+  glm_gaussian, glm_poisson, df, results)

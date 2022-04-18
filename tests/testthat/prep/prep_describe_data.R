@@ -5,11 +5,12 @@
 library(tidystats)
 library(tidyverse)
 
-# Create the list
+# Create an empty list
 results <- list()
 
-# Run analyses ------------------------------------------------------------
+# describe_data() ---------------------------------------------------------
 
+# Run analyses
 single_var <- describe_data(quote_source, response)
 
 single_var_w_group <- quote_source %>%
@@ -32,6 +33,19 @@ multiple_var_w_group <- quote_source %>%
 
 single_var_subset <- describe_data(quote_source, response, short = TRUE)
 
+# add_stats() -------------------------------------------------------------
+
+results <- results %>%
+  add_stats(single_var) %>%
+  add_stats(single_var_w_group) %>%
+  add_stats(multiple_var) %>%
+  add_stats(single_var_w_groups) %>%
+  add_stats(single_var_w_groups_wo_na) %>%
+  add_stats(multiple_var_w_group) %>%
+  add_stats(single_var_subset)
+
+# Inspect output ----------------------------------------------------------
+
 single_var
 single_var_subset
 single_var_w_group
@@ -40,24 +54,14 @@ single_var_w_groups_wo_na
 multiple_var
 multiple_var_w_group
 
-# Add stats ---------------------------------------------------------------
+# tidy_stats_to_data_frame() ----------------------------------------------
 
-results <- results %>%
-  add_stats(single_var) %>%
-  add_stats(single_var_w_group) %>%
-  add_stats(single_var_w_groups) %>%
-  add_stats(single_var_subset)
+df <- tidy_stats_to_data_frame(results)
 
-# Write stats -------------------------------------------------------------
+# write_stats() -----------------------------------------------------------
 
 write_stats(results, "tests/testthat/data/results.json")
-
-# Convert to data frame ---------------------------------------------------
-
-df <- tidystats_to_data_frame(results)
-write_csv(df, "tests/testthat/data/results_df.csv")
 
 # Cleanup -----------------------------------------------------------------
 
 rm(sleep_test, lm_D9, npk_aov, results, df)
-

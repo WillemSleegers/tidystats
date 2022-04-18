@@ -43,12 +43,11 @@ count_data <- function(data, ..., na.rm = FALSE) {
   
   # Remove missing observations if na.rm is set to TRUE
   if (na.rm) {
-    output <- dplyr::filter_all(output, dplyr::all_vars(!is.na(.)))
+    output <- dplyr::filter(output, dplyr::if_all(everything(), ~ !is.na(.)))
   }
 
   # Calculate percentage of each group per var
-  output <- output %>%
-    dplyr::mutate(pct = n / sum(n) * 100)
+  output <- dplyr::mutate(output, pct = n / sum(n) * 100)
   
   # Add a tidystats class so we can use the tidy_stats() function to parse the
   # the output

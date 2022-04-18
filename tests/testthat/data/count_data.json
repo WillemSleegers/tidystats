@@ -1,0 +1,388 @@
+{
+  "no_group": {
+    "method": "Counts",
+    "statistics": [
+      {
+        "name": "n",
+        "value": 6343
+      },
+      {
+        "name": "pct",
+        "symbol": "%",
+        "value": 100
+      }
+    ],
+    "package": {
+      "name": "tidystats",
+      "version": "0.6"
+    }
+  },
+  "single_group": {
+    "method": "Counts",
+    "groups": [
+      {
+        "name": "source",
+        "groups": [
+          {
+            "name": "Bin Laden",
+            "statistics": [
+              {
+                "name": "n",
+                "value": 3101
+              },
+              {
+                "name": "pct",
+                "symbol": "%",
+                "value": 48.888539
+              }
+            ]
+          },
+          {
+            "name": "Washington",
+            "statistics": [
+              {
+                "name": "n",
+                "value": 3242
+              },
+              {
+                "name": "pct",
+                "symbol": "%",
+                "value": 51.111461
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "tidystats",
+      "version": "0.6"
+    }
+  },
+  "two_groups": {
+    "method": "Counts",
+    "groups": [
+      {
+        "name": "source",
+        "groups": [
+          {
+            "name": "Bin Laden",
+            "groups": [
+              {
+                "name": "sex",
+                "groups": [
+                  {
+                    "name": "female",
+                    "statistics": [
+                      {
+                        "name": "n",
+                        "value": 2067
+                      },
+                      {
+                        "name": "pct",
+                        "symbol": "%",
+                        "value": 32.587104
+                      }
+                    ]
+                  },
+                  {
+                    "name": "male",
+                    "statistics": [
+                      {
+                        "name": "n",
+                        "value": 1029
+                      },
+                      {
+                        "name": "pct",
+                        "symbol": "%",
+                        "value": 16.222608
+                      }
+                    ]
+                  },
+                  {
+                    "name": "NA",
+                    "statistics": [
+                      {
+                        "name": "n",
+                        "value": 5
+                      },
+                      {
+                        "name": "pct",
+                        "symbol": "%",
+                        "value": 0.078827
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Washington",
+            "groups": [
+              {
+                "name": "sex",
+                "groups": [
+                  {
+                    "name": "female",
+                    "statistics": [
+                      {
+                        "name": "n",
+                        "value": 2206
+                      },
+                      {
+                        "name": "pct",
+                        "symbol": "%",
+                        "value": 34.778496
+                      }
+                    ]
+                  },
+                  {
+                    "name": "male",
+                    "statistics": [
+                      {
+                        "name": "n",
+                        "value": 1031
+                      },
+                      {
+                        "name": "pct",
+                        "symbol": "%",
+                        "value": 16.254138
+                      }
+                    ]
+                  },
+                  {
+                    "name": "NA",
+                    "statistics": [
+                      {
+                        "name": "n",
+                        "value": 5
+                      },
+                      {
+                        "name": "pct",
+                        "symbol": "%",
+                        "value": 0.078827
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "tidystats",
+      "version": "0.6"
+    }
+  },
+  "grouped_group": {
+    "method": "Counts",
+    "groups": [
+      {
+        "name": "source",
+        "groups": [
+          {
+            "name": "Bin Laden",
+            "groups": [
+              {
+                "name": "sex",
+                "groups": [
+                  {
+                    "name": "female",
+                    "statistics": [
+                      {
+                        "name": "n",
+                        "value": 2067
+                      },
+                      {
+                        "name": "pct",
+                        "symbol": "%",
+                        "value": 66.655917
+                      }
+                    ]
+                  },
+                  {
+                    "name": "male",
+                    "statistics": [
+                      {
+                        "name": "n",
+                        "value": 1029
+                      },
+                      {
+                        "name": "pct",
+                        "symbol": "%",
+                        "value": 33.182844
+                      }
+                    ]
+                  },
+                  {
+                    "name": "NA",
+                    "statistics": [
+                      {
+                        "name": "n",
+                        "value": 5
+                      },
+                      {
+                        "name": "pct",
+                        "symbol": "%",
+                        "value": 0.161238
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Washington",
+            "groups": [
+              {
+                "name": "sex",
+                "groups": [
+                  {
+                    "name": "female",
+                    "statistics": [
+                      {
+                        "name": "n",
+                        "value": 2206
+                      },
+                      {
+                        "name": "pct",
+                        "symbol": "%",
+                        "value": 68.044417
+                      }
+                    ]
+                  },
+                  {
+                    "name": "male",
+                    "statistics": [
+                      {
+                        "name": "n",
+                        "value": 1031
+                      },
+                      {
+                        "name": "pct",
+                        "symbol": "%",
+                        "value": 31.801357
+                      }
+                    ]
+                  },
+                  {
+                    "name": "NA",
+                    "statistics": [
+                      {
+                        "name": "n",
+                        "value": 5
+                      },
+                      {
+                        "name": "pct",
+                        "symbol": "%",
+                        "value": 0.154226
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "tidystats",
+      "version": "0.6"
+    }
+  },
+  "grouped_group_na_rm": {
+    "method": "Counts",
+    "groups": [
+      {
+        "name": "source",
+        "groups": [
+          {
+            "name": "Bin Laden",
+            "groups": [
+              {
+                "name": "sex",
+                "groups": [
+                  {
+                    "name": "female",
+                    "statistics": [
+                      {
+                        "name": "n",
+                        "value": 2067
+                      },
+                      {
+                        "name": "pct",
+                        "symbol": "%",
+                        "value": 66.763566
+                      }
+                    ]
+                  },
+                  {
+                    "name": "male",
+                    "statistics": [
+                      {
+                        "name": "n",
+                        "value": 1029
+                      },
+                      {
+                        "name": "pct",
+                        "symbol": "%",
+                        "value": 33.236434
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Washington",
+            "groups": [
+              {
+                "name": "sex",
+                "groups": [
+                  {
+                    "name": "female",
+                    "statistics": [
+                      {
+                        "name": "n",
+                        "value": 2206
+                      },
+                      {
+                        "name": "pct",
+                        "symbol": "%",
+                        "value": 68.149521
+                      }
+                    ]
+                  },
+                  {
+                    "name": "male",
+                    "statistics": [
+                      {
+                        "name": "n",
+                        "value": 1031
+                      },
+                      {
+                        "name": "pct",
+                        "symbol": "%",
+                        "value": 31.850479
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "tidystats",
+      "version": "0.6"
+    }
+  }
+}

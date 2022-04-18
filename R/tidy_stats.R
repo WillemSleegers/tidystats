@@ -794,11 +794,11 @@ tidy_stats.tidystats_descriptives <- function(x, args = NULL) {
         
         if (!is.na(group_name)) {
           df_group <- dplyr::filter(df, 
-            dplyr::across(dplyr::all_of(groups$name), ~ . == group_name)
+            dplyr::if_all(dplyr::all_of(groups$name), ~ . == group_name)
           )
         } else {
           df_group <- dplyr::filter(df, 
-            dplyr::across(dplyr::all_of(groups$name), is.na)
+            dplyr::if_all(dplyr::all_of(groups$name), is.na)
           )
         }
         
@@ -879,22 +879,29 @@ tidy_stats.tidystats_counts <- function(x, args = NULL) {
       groups <- list(name = group_names[depth])
       
       # Loop over the groups
-      for (group_name in unique(pull(df, groups$name))) {
+      for (group_name in unique(dplyr::pull(df, groups$name))) {
         # Subset the data so it only has data of the current group
         df_group <- df[df[, depth + 1] == group_name, ]
         
         if (!is.na(group_name)) {
           df_group <- dplyr::filter(df, 
-            dplyr::across(dplyr::all_of(groups$name), ~ . == group_name)
+            dplyr::if_all(groups$name, ~ . == group_name)
           )
         } else {
           df_group <- dplyr::filter(df, 
-            dplyr::across(dplyr::all_of(groups$name), is.na)
+            dplyr::if_all(groups$name, is.na)
           )
         }
         
         # Create a group list
-        group <- list(name = group_name)
+        group <- list()
+        
+        # Set the name to the string NA if it is missing
+        if (is.na(group_name)) {
+          group$name <- "NA"
+        } else {
+          group$name <- group_name
+        }
         
         # Loop again
         groups$groups <- append(groups$groups, list(loop(df_group, group, 

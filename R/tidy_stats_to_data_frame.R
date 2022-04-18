@@ -49,7 +49,9 @@ tidy_stats_to_data_frame <- function(x) {
   
   # Reorder the columns
   df <- dplyr::relocate(df, identifier, sort(tidyselect::peek_vars()))
-  df <- dplyr::relocate(df, subscript, .after = symbol)
+  df <- dplyr::relocate(df, dplyr::any_of("subscript"), .after = symbol)
+  df <- dplyr::relocate(df, dplyr::any_of("lower"), .before = value)
+  df <- dplyr::relocate(df, dplyr::any_of("upper"), .after = value)
   
   return(df)
 }

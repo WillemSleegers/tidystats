@@ -197,12 +197,6 @@ cox %>%
   add_stats(list(), ., type = "d")
 
 
-# stats_list_to_df() ------------------------------------------------------
-
-results_data <- stats_list_to_df(results)
-View(results_data)
-
-
 # In progress -------------------------------------------------------------
 
 # Analysis: metafor -------------------------------------------------------

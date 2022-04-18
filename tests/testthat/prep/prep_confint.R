@@ -1,3 +1,13 @@
+
+# Setup -------------------------------------------------------------------
+
+# Load packages
+library(tidystats)
+library(tidyverse)
+
+# Create an empty list
+results <- list()
+
 # class: confint() --------------------------------------------------------
 
 # Example 1

@@ -1,0 +1,31 @@
+{
+  "generic_ICs": {
+    "name": "BIC/AIC",
+    "statistics": [
+      {
+        "name": "BIC",
+        "value": 21.21
+      },
+      {
+        "name": "AIC",
+        "value": 478.21
+      }
+    ],
+    "notes": "Wagenmakers (2007) method for calculating Bayes factors"
+  },
+  "generic_CI": {
+    "name": "disp confidence intervals",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "b",
+        "interval": "CI",
+        "level": ".95",
+        "value": 0.002703,
+        "lower": -0.002868,
+        "upper": 0.008274
+      }
+    ],
+    "notes": "CI of only the disp coefficient"
+  }
+}
