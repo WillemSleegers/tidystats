@@ -7,7 +7,7 @@
 #' Please note that not all statistical tests are supported. See 'Details' below
 #' for a list of supported statistical tests.
 #'
-#' @param results A tidystats list.
+#' @param list A tidystats list.
 #' @param output Output of a statistical test.
 #' @param identifier A character string identifying the model. Automatically
 #' created if not provided.
@@ -101,26 +101,26 @@
 #'   add_stats(npk_aov, notes = "An ANOVA example")
 #' 
 #' @export
-add_stats <- function(results, output, identifier = NULL, type = NULL, 
+add_stats <- function(list, output, identifier = NULL, type = NULL, 
   preregistered = NULL, notes = NULL, args = NULL, class = NULL) 
     UseMethod("add_stats", output)
 
 #' @export
-add_stats.default <- function(results, output, identifier = NULL, type = NULL,
+add_stats.default <- function(list, output, identifier = NULL, type = NULL,
   preregistered = NULL, notes = NULL, args = NULL, class = NULL) {
 
   # Create an identifier if it is not specified, else check whether it already
   # exists
   if (is.null(identifier)) {
     if (deparse(substitute(output)) == ".") {
-      identifier <- paste0("M", formatC(length(results) + 1, width = "1",
+      identifier <- paste0("M", formatC(length(list) + 1, width = "1",
         format = "d"))
     } else {
       identifier <- deparse(substitute(output))
     }
   } else {
-    if (!is.null(names(results))) {
-      if (identifier %in% names(results)) {
+    if (!is.null(names(list))) {
+      if (identifier %in% names(list)) {
         stop("Identifier already exists.")
       }
     }
@@ -163,34 +163,34 @@ add_stats.default <- function(results, output, identifier = NULL, type = NULL,
   }
 
   # Add the new analysis to the list
-  results[[identifier]] <- analysis
+  list[[identifier]] <- analysis
 
-  # Return the new results list
-  return(results)
+  # Return the new list
+  return(list)
 }
 
 #' @export
-add_stats.list <- function(results, output, identifier = NULL, type = NULL,
+add_stats.list <- function(list, output, identifier = NULL, type = NULL,
   preregistered = NULL, notes = NULL) {
 
   # Create an identifier if it is not specified, else check whether it already
   # exists
   if (is.null(identifier)) {
     if (deparse(substitute(output)) == ".") {
-      identifier <- paste0("M", formatC(length(results) + 1, width = "1",
+      identifier <- paste0("M", formatC(length(list) + 1, width = "1",
         format = "d"))
     } else {
       identifier <- deparse(substitute(output))
     }
   } else {
-    if (!is.null(names(results))) {
-      if (identifier %in% names(results)) {
+    if (!is.null(names(list))) {
+      if (identifier %in% names(list)) {
         stop("Identifier already exists.")
       }
     }
   }
 
-  # Simply set analysis to output; we don't need to tidy the results because
+  # Simply set analysis to output; we don't need to tidy the output because
   # they should already be tidy
   analysis <- output
   
@@ -223,8 +223,8 @@ add_stats.list <- function(results, output, identifier = NULL, type = NULL,
   }
 
   # Add the new analysis to the list
-  results[[identifier]] <- analysis
+  list[[identifier]] <- analysis
 
-  # Return the new results list
-  return(results)
+  # Return the new list
+  return(list)
 }

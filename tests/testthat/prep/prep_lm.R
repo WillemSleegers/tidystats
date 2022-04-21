@@ -25,6 +25,7 @@ results <- results %>%
   add_stats(lm) %>%
   add_stats(lm_wo_intercept)
 
+# Inspect output
 summary(lm)
 summary(lm_wo_intercept)
 

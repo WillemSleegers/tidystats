@@ -2570,7 +2570,7 @@ tidy_stats.confint <- function(x, args = NULL) {
       groups$groups <- append(groups$groups, list(group))
     }
     
-    analysis$groups <- groups
+    analysis$groups <- append(analysis$groups, list(groups))
   }
   
   # Add additional information

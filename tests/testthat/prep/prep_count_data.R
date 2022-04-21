@@ -10,6 +10,7 @@ results <- list()
 
 # count_data() ------------------------------------------------------------
 
+# Run analyses
 no_group <- count_data(quote_source)
 single_group <- count_data(quote_source, source)
 two_groups <- count_data(quote_source, source, sex)
@@ -22,8 +23,7 @@ grouped_group_na_rm <- quote_source %>%
   group_by(source) %>%
   count_data(sex, na.rm = TRUE)
 
-# add_stats() -------------------------------------------------------------
-
+# Add stats
 results <- results %>%
   add_stats(no_group) %>%
   add_stats(single_group) %>%
@@ -31,8 +31,7 @@ results <- results %>%
   add_stats(grouped_group) %>%
   add_stats(grouped_group_na_rm) 
 
-# Inspect output ----------------------------------------------------------
-
+# Inspect output
 no_group
 single_group
 two_groups

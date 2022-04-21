@@ -44,6 +44,7 @@ results <- results %>%
   add_stats(t_test_welch) %>%
   add_stats(t_test_paired)
 
+# Inspect output
 t_test_one_sample
 t_test_two_sample
 t_test_welch
@@ -66,6 +67,7 @@ results <- results %>%
   add_stats(correlation_kendall) %>%
   add_stats(correlation_spearman)
 
+# Inspect output
 correlation_pearson
 correlation_kendall
 correlation_spearman
@@ -90,6 +92,7 @@ results <- results %>%
   add_stats(chi_squared_yates) %>%
   add_stats(chi_squared_prob)
 
+# Inspect output
 chi_squared
 chi_squared_yates
 chi_squared_prob
@@ -115,6 +118,7 @@ results <- results %>%
   add_stats(prop_test_correct) %>%
   add_stats(prop_test_smokers)
 
+# Inspect output
 prop_test
 prop_test_correct
 prop_test_smokers
@@ -147,6 +151,7 @@ results <- results %>%
   add_stats(wilcoxon_rank_sum) %>%
   add_stats(wilcoxon_rank_sum_conf)
 
+# Inspect output
 wilcoxon_signed_rank
 wilcoxon_rank_sum_continuity
 wilcoxon_rank_sum
@@ -168,10 +173,14 @@ results <- results %>%
   add_stats(kruskal) %>%
   add_stats(kruskal_formula)
 
+# Inspect output
 kruskal
 kruskal_formula 
 
 # fisher.test() -----------------------------------------------------------
+
+# Set seed
+set.seed(2015)
 
 # Get data
 TeaTasting <- matrix(
@@ -208,8 +217,6 @@ MP6 <- rbind(
 )
 
 # Run analyses
-set.seed(2015)
-
 fisher_test <- fisher.test(TeaTasting, alternative = "greater")
 fisher_test_no_CI <- fisher.test(Convictions, conf.int = FALSE)
 fisher_test_r_by_c <- fisher.test(Job)
@@ -224,6 +231,7 @@ results <- results %>%
   add_stats(fisher_test_simulated_p) %>%
   add_stats(fisher_test_hybrid)
 
+# Inspect output
 fisher_test
 fisher_test_no_CI
 fisher_test_r_by_c
@@ -252,6 +260,7 @@ results <- results %>%
   add_stats(ks_test_inexact) %>%
   add_stats(ks_test_greater) 
 
+# Inspect output
 ks_test_two
 ks_test_one
 ks_test_inexact
@@ -269,6 +278,7 @@ results <- results %>%
   add_stats(oneway_test) %>%
   add_stats(oneway_test_equal_var)
 
+# Inspect output
 oneway_test
 oneway_test_equal_var
 
@@ -287,6 +297,7 @@ var_test <- var.test(x, y)
 # Add stats
 results <- add_stats(results, var_test)
 
+# Inspect output
 var_test
 
 # tidy_stats_to_data_frame() ----------------------------------------------

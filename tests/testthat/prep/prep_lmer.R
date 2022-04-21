@@ -25,6 +25,7 @@ results <- results %>%
   add_stats(lme4_ML) %>%
   add_stats(lme4_slopes) 
 
+# Inspect output
 summary(lme4)
 summary(lme4_ML)
 summary(lme4_slopes)
@@ -40,6 +41,7 @@ results <- results %>%
   add_stats(anova_lme4) %>%
   add_stats(anova_models)
 
+# Inspect output
 anova_lme4
 anova_models
 
@@ -58,6 +60,7 @@ results <- results %>%
   add_stats(lmerTest2) %>%
   add_stats(lmerTest_ML)
 
+# Inspect output
 summary(lmerTest1)
 summary(lmerTest2)
 summary(lmerTest_ML)
@@ -78,6 +81,7 @@ results <- results %>%
   add_stats(anova_lmerTest_lme4) %>%
   add_stats(anova_lmerTest_fit)
 
+# Inspect output
 anova_lmerTest
 anova_lmerTest_lme4
 anova_lmerTest_fit
@@ -89,3 +93,9 @@ df <- tidy_stats_to_data_frame(results)
 # write_stats() -----------------------------------------------------------
 
 write_stats(results, "tests/testthat/data/lmer.json")
+
+# Cleanup -----------------------------------------------------------------
+
+rm(anova_lme4, anova_lmerTest, anova_lmerTest_fit, anova_lmerTest_lme4, 
+  anova_models, lme4, lme4_ML, lme4_slopes, lmerTest_ML, lmerTest1, lmerTest2,
+  m, m0, df, results)

@@ -10,6 +10,7 @@ results <- list()
 
 # BIC/AIC -----------------------------------------------------------------
 
+# Run analysis
 generic_ICs <- list(
   name = "BIC/AIC",
   statistics = list(
@@ -18,8 +19,19 @@ generic_ICs <- list(
   )
 )
 
+# Add stats
+results <- add_stats(
+  list = results, 
+  output = generic_ICs, 
+  notes = "Wagenmakers (2007) method for calculating Bayes factors"
+)
+
+# Inspect output
+generic_ICs
+
 # CI ----------------------------------------------------------------------
 
+# Run analyses
 fit <- lm(100/mpg ~ disp + hp + wt + am, data = mtcars)
 fit_CIs <- confint(fit)
 
@@ -38,12 +50,15 @@ generic_CI <- list(
   )
 )
 
-# add_stats() -------------------------------------------------------------
+# Add stats
+results <- add_stats(
+  list = results, 
+  output = generic_CI, 
+  notes = "CI of only the disp coefficient"
+)
 
-results <- results %>%
-  add_stats(generic_ICs, 
-    notes = "Wagenmakers (2007) method for calculating Bayes factors") %>%
-  add_stats(generic_CI, notes = "CI of only the disp coefficient")
+# Inspect output
+generic_CI
 
 # tidy_stats_to_data_frame() ----------------------------------------------
 

@@ -68,8 +68,7 @@ glm_gamma_fs <- glm(lot2 ~ log(u) + log(u^2), data = clotting, family = Gamma)
 glm_binomial <- glm(admit ~ gre + gpa + rank, data = admission, 
   family = binomial(link = "logit"))
 
-# add_stats() -------------------------------------------------------------
-
+# Add stats
 results <- results %>%
   add_stats(glm_poisson) %>%
   add_stats(glm_gaussian) %>%
@@ -77,8 +76,7 @@ results <- results %>%
   add_stats(glm_gamma_fs) %>%
   add_stats(glm_binomial)
 
-# Inspect output ----------------------------------------------------------
-
+# Inspect output
 summary(glm_poisson)
 summary(glm_gaussian)
 summary(glm_gamma)

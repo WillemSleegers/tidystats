@@ -5,7 +5,7 @@
 \title{Add statistical output to a tidystats list}
 \usage{
 add_stats(
-  results,
+  list,
   output,
   identifier = NULL,
   type = NULL,
@@ -16,7 +16,7 @@ add_stats(
 )
 }
 \arguments{
-\item{results}{A tidystats list.}
+\item{list}{A tidystats list.}
 
 \item{output}{Output of a statistical test.}
 

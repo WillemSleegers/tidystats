@@ -15,6 +15,7 @@
 * Added support for `lme()`, `nlme()`, `gls()`, and `anova()` from the `nlme` package.
 
 ## Changes
+* Renamed the `results` argument in `add_stats()` to `list`
 * Improved names in `anova()` tests.
 
 ## Misc

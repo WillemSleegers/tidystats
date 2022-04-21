@@ -10,27 +10,29 @@ results <- list()
 
 # aov(): aov --------------------------------------------------------------
 
-# Run tests
+# Run analyses
 aov <- aov(yield ~ block + N * P * K, npk)
 aov_order <- aov(terms(yield ~ block + N * P + K, keep.order = TRUE), npk)
-
-# aov(): aovlist ----------------------------------------------------------
-
-# Run test
-aov_error <- aov(yield ~ N * P * K + Error(block), npk)
-
-# add_stats() -------------------------------------------------------------
 
 # Add stats
 results <- results %>%
   add_stats(aov) %>%
-  add_stats(aov_order) %>%
-  add_stats(aov_error)
+  add_stats(aov_order)
 
-# Inspect output ----------------------------------------------------------
-
+# Inspect output
 summary(aov)
 summary(aov_order)
+
+# aov(): aovlist ----------------------------------------------------------
+
+# Run analysis
+aov_error <- aov(yield ~ N * P * K + Error(block), npk)
+
+# Add stats
+results <- results %>%
+  add_stats(aov_error)
+
+# Inspect output
 summary(aov_error)
 
 # tidy_stats_to_data_frame() ----------------------------------------------
