@@ -1,0 +1,221 @@
+{
+  "alpha_r4": {
+    "method": "Reliability analysis",
+    "statistics": [
+      {
+        "name": "unstandardized alpha",
+        "symbol": "α",
+        "subscript": "Σ",
+        "value": 0.742055,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -0.309877,
+        "upper": 0.982178
+      },
+      {
+        "name": "standardized alpha",
+        "symbol": "α",
+        "subscript": "R",
+        "value": 0.742055
+      },
+      {
+        "name": "Guttman's Lambda 6 reliability",
+        "symbol": "Guttman's λ",
+        "subscript": "6",
+        "value": 0.693574
+      },
+      {
+        "name": "mean interitem correlation",
+        "symbol": "IIC",
+        "subscript": "M",
+        "value": 0.418333
+      },
+      {
+        "name": "signal-to-noise ratio",
+        "symbol": "S/N",
+        "value": 2.876791
+      },
+      {
+        "name": "median interitem correlation",
+        "symbol": "IIC",
+        "subscript": "Mdn",
+        "value": 0.41
+      }
+    ],
+    "groups": [
+      {
+        "name": "Reliability if an item is dropped",
+        "groups": [
+          {
+            "name": "V1",
+            "statistics": [
+              {
+                "name": "unstandardized alpha",
+                "symbol": "α",
+                "subscript": "Σ",
+                "value": 0.742055
+              },
+              {
+                "name": "standardized alpha",
+                "symbol": "α",
+                "subscript": "R",
+                "value": 0.742055
+              },
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.693574
+              },
+              {
+                "name": "mean interitem correlation",
+                "symbol": "IIC",
+                "subscript": "M",
+                "value": 0.418333
+              },
+              {
+                "name": "signal-to-noise ratio",
+                "symbol": "S/N",
+                "value": 2.876791
+              }
+            ]
+          },
+          {
+            "name": "V2",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.693574
+              }
+            ]
+          },
+          {
+            "name": "V3",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.693574
+              }
+            ]
+          },
+          {
+            "name": "V4",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.693574
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Item statistics",
+        "groups": [
+          {
+            "name": "V1",
+            "statistics": [
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.812431
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.742025
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.635157
+              }
+            ]
+          },
+          {
+            "name": "V2",
+            "statistics": [
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.775805
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.674321
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.574473
+              }
+            ]
+          },
+          {
+            "name": "V3",
+            "statistics": [
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.73252
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.588351
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.506189
+              }
+            ]
+          },
+          {
+            "name": "V4",
+            "statistics": [
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.682575
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.49651
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.431547
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "psych",
+      "version": "2.2.3"
+    }
+  }
+}

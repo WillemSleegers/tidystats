@@ -707,8 +707,8 @@ tidy_stats.aovlist <- function(x, args = NULL) {
       if (j != nrow(terms)) {
         statistics <- add_statistic(statistics, "statistic", terms$`F value`[j], 
           "F")
-        statistics <- add_statistic(statistics, "df numerator", terms$Df[j], "df",
-          "num.")
+        statistics <- add_statistic(statistics, "df numerator", terms$Df[j], 
+          "df", "num.")
         statistics <- add_statistic(statistics, "df denominator", 
           terms$Df[[nrow(terms)]], "df", "den.")
         
@@ -2192,7 +2192,9 @@ tidy_stats.emmGrid <- function(x, args = NULL) {
         if (type == "contrast" | type == "pairs") {
           term$name <- as.character(df_group$contrast[j])
         } else if (type == "prediction") {
-          term$name <- paste(x@misc$pri.vars, "=", df_group[, x@misc$pri.vars][j])
+          term$name <- paste(
+            x@misc$pri.vars, "=", df_group[, x@misc$pri.vars][j]
+          )
         } else {
           term$name <- df_group$terms[j]
         }
@@ -2578,6 +2580,134 @@ tidy_stats.confint <- function(x, args = NULL) {
   
   # Add package information
   analysis <- add_package_info(analysis, "stats")
+  
+  return(analysis)
+}
+
+#' @describeIn tidy_stats tidy_stats method for class 'psych'
+#' @export
+tidy_stats.psych <- function(x, args = NULL) {
+  # Create the analysis list
+  analysis <- list()
+  
+  # Check the kind of psych object
+  if ("alpha" %in% class(x)) {
+    # Set method
+    analysis$method <- "Reliability analysis"
+    
+    # Create a statistics list for the total statistics and CI
+    statistics <- list()
+    
+    statistics <- add_statistic(statistics, "unstandardized alpha", 
+      x$total$raw_alpha[i], symbol = "α", subscript = "Σ", interval = "CI", 
+      level = .95, lower = x$feldt$lower.ci[[1]], upper = x$feldt$upper.ci[[1]])  
+    statistics <- add_statistic(statistics, "standardized alpha", 
+      x$total$std.alpha, symbol = "α", subscript = "R")
+    statistics <- add_statistic(statistics, "Guttman's Lambda 6 reliability", 
+      x$total$`G6(smc)`, symbol = "Guttman's λ", subscript = "6")
+    statistics <- add_statistic(statistics, "mean interitem correlation", 
+      x$total$average_r, symbol = "IIC", subscript = "M")
+    statistics <- add_statistic(statistics, "signal-to-noise ratio", 
+      x$total$`S/N`, symbol = "S/N")
+    statistics <- add_statistic(statistics, "standard error", x$total$ase,
+      symbol = "SE")
+    statistics <- add_statistic(statistics, "mean", x$total$mean,
+      symbol = "M")
+    statistics <- add_statistic(statistics, "standard deviation", x$total$sd,
+      symbol = "SD")
+    statistics <- add_statistic(statistics, "median interitem correlation", 
+      x$total$median_r, symbol = "IIC", subscript = "Mdn")
+    
+    # Add the statistics to the analysis
+    analysis$statistics <- statistics
+    
+    # Create the reliability if an item is dropped group
+    group <- list(name = "Reliability if an item is dropped")
+    
+    # Loop over the items
+    for (i in 1:nrow(x$alpha.drop)) {
+      # Create a list for the item
+      item <- list(name = rownames(x$alpha.drop)[i])
+      
+      # Create a statistics list and add the item statistics
+      statistics <- list()
+      
+      statistics <- add_statistic(statistics, "unstandardized alpha", 
+        x$total$raw_alpha[i], symbol = "α", subscript = "Σ")
+      statistics <- add_statistic(statistics, "standardized alpha", 
+        x$total$std.alpha[i], symbol = "α", subscript = "R")
+      statistics <- add_statistic(statistics, "Guttman's Lambda 6 reliability", 
+        x$total$`G6(smc)`, symbol = "Guttman's λ", subscript = "6")
+      statistics <- add_statistic(statistics, "mean interitem correlation", 
+        x$total$average_r[i], symbol = "IIC", subscript = "M")
+      statistics <- add_statistic(statistics, "signal-to-noise ratio", 
+        x$total$`S/N`[i], symbol = "S/N")
+      statistics <- add_statistic(statistics, "standard error", x$total$ase[i],
+        symbol = "SE")
+      statistics <- add_statistic(statistics, "mean", x$total$mean[i],
+        symbol = "M")
+      statistics <- add_statistic(statistics, "standard deviation", 
+        x$total$sd[i], symbol = "SD")
+      statistics <- add_statistic(statistics, "variance interitem correlation", 
+        x$total$var.r[i], symbol = "IIC", subscript = "var")
+      statistics <- add_statistic(statistics, "median interitem correlation", 
+        x$total$med.r[i], symbol = "IIC", subscript = "Mdn")
+      
+      # Add statistics to the group
+      item$statistics <- statistics
+      
+      # Add item to the group
+      group$groups <- append(group$groups, list(item))
+    }
+    
+    # Add the reliability if an item is dropped group to the analysis groups
+    analysis$groups <- append(analysis$groups, list(group))
+    
+    # Create the item statistics group
+    group <- list(name = "Item statistics")
+    
+    # Loop over the items
+    for (i in 1:nrow(x$item.stats)) {
+      # Create a list for the item
+      item <- list(name = rownames(x$item.stats)[i])
+      
+      # Create a statistics list and add the item statistics
+      statistics <- list()
+      
+      statistics <- add_statistic(statistics, "number of complete cases", 
+        x$item.stats$n[i], symbol = "n")
+      statistics <- add_statistic(statistics, 
+        "total score correlation with standardized items", 
+        x$item.stats$r[i], symbol = "r", subscript = "std")
+      statistics <- add_statistic(statistics, "total score correlation", 
+        x$item.stats$raw.r[i], symbol = "r", subscript = "raw")
+      statistics <- add_statistic(statistics, 
+        "total score correlation with standardized items", 
+        x$item.stats$std.r[i], symbol = "r", subscript = "std")
+      statistics <- add_statistic(statistics, 
+        "corrected item whole correlation", 
+        x$item.stats$r.cor[i], symbol = "r", subscript = "cor")
+      statistics <- add_statistic(statistics, 
+        "item whole correlation without this item", 
+        x$item.stats$r.drop[i], symbol = "r", subscript = "drop")
+      statistics <- add_statistic(statistics, "mean", x$item.stats$mean[i],
+        symbol = "M")
+      statistics <- add_statistic(statistics, "standard deviation", 
+        x$item.stats$sd[i], symbol = "SD")
+      
+      # Add statistics to the group
+      item$statistics <- statistics
+      
+      # Add item to the group
+      group$groups <- append(group$groups, list(item))
+    }
+    
+    # Add the reliability if an item is dropped group to the analysis groups
+    analysis$groups <- append(analysis$groups, list(group))
+  }
+  
+  # Add package information
+  analysis <- add_package_info(analysis, "psych")
   
   return(analysis)
 }

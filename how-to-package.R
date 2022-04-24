@@ -17,6 +17,7 @@ devtools::load_all()
 
 # Install the dev version
 devtools::install()
+#.rs.restartR()
 
 # Testing -----------------------------------------------------------------
 

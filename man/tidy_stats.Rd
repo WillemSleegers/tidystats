@@ -25,8 +25,9 @@
 \alias{tidy_stats.effsize}
 \alias{tidy_stats.effectsize_difference}
 \alias{tidy_stats.confint}
-\alias{tidy_stats.lavaan}
 \alias{tidy_stats.psych}
+\alias{tidy_stats.lavaan}
+\alias{tidy_stats.psychwip}
 \title{Tidy the output of a statistics object}
 \usage{
 tidy_stats(x, args = NULL)
@@ -77,9 +78,11 @@ tidy_stats(x, args = NULL)
 
 \method{tidy_stats}{confint}(x, args = NULL)
 
+\method{tidy_stats}{psych}(x, args = NULL)
+
 \method{tidy_stats}{lavaan}(x, args = list(fit.measures = TRUE))
 
-\method{tidy_stats}{psych}(x, args = NULL)
+\method{tidy_stats}{psychwip}(x, args = NULL)
 }
 \arguments{
 \item{x}{The output of a statistical test.}
@@ -184,9 +187,11 @@ Currently supported functions:
 
 \item \code{confint}: tidy_stats method for class 'confint'
 
+\item \code{psych}: tidy_stats method for class 'psych'
+
 \item \code{lavaan}: tidy_stats method for class 'lavaan'
 
-\item \code{psych}: tidy_stats method for class 'psych'
+\item \code{psychwip}: tidy_stats method for class 'psych'
 }}
 
 \examples{

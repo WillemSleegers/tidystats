@@ -321,31 +321,11 @@ tidy_stats.lavaan <- function(x, args = list(fit.measures = TRUE)) {
 
 #' @describeIn tidy_stats tidy_stats method for class 'psych'
 #' @export
-tidy_stats.psych <- function(x, args = NULL) {
+tidy_stats.psychwip <- function(x, args = NULL) {
   output <- list()
   
   # Check the kind of psych object
-  if ("alpha" %in% class(x)) {
-    output$method <- "Reliability"
-    
-    # Extract statistics
-    statistics <- list()
-    
-    statistics$alpha <- x$total$raw_alpha
-    statistics$alpha_z <- x$total$std.alpha
-    statistics$G6 <- x$total$`G6(smc)`
-    statistics$r_mean <- x$total$average_r
-    statistics$r_median <- x$total$median_r
-    statistics$SNR <- x$total$`S/N`
-    if ("mean" %in% names(x$total)) {
-      statistics$mean <- x$total$mean
-      statistics$sd <- x$total$sd
-    }
-    
-    # Add statistics to the output
-    output$statistics <- statistics
-    
-  } else if ("corr.test" %in% class(x)) {
+   if ("corr.test" %in% class(x)) {
     output$method <- "Correlations"
     
     # Create an empty pairs list
