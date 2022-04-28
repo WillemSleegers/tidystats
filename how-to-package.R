@@ -19,6 +19,10 @@ devtools::load_all()
 devtools::install()
 #.rs.restartR()
 
+# Add dependency ----------------------------------------------------------
+
+usethis::use_package("lavaan", "Suggests")
+
 # Testing -----------------------------------------------------------------
 
 # Add a test

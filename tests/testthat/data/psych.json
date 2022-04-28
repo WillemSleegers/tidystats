@@ -6,11 +6,7 @@
         "name": "unstandardized alpha",
         "symbol": "α",
         "subscript": "Σ",
-        "value": 0.742055,
-        "interval": "CI",
-        "level": 0.95,
-        "lower": -0.309877,
-        "upper": 0.982178
+        "value": 0.742055
       },
       {
         "name": "standardized alpha",
@@ -43,6 +39,25 @@
       }
     ],
     "groups": [
+      {
+        "name": "95% confidence boundaries",
+        "groups": [
+          {
+            "name": "Feldt",
+            "statistics": [
+              {
+                "name": "alpha",
+                "symbol": "α",
+                "value": 0.742055,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.309877,
+                "upper": 0.982178
+              }
+            ]
+          }
+        ]
+      },
       {
         "name": "Reliability if an item is dropped",
         "groups": [
@@ -207,6 +222,2320 @@
                 "symbol": "r",
                 "subscript": "drop",
                 "value": 0.431547
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "psych",
+      "version": "2.2.3"
+    }
+  },
+  "alpha_r9": {
+    "method": "Reliability analysis",
+    "statistics": [
+      {
+        "name": "unstandardized alpha",
+        "symbol": "α",
+        "subscript": "Σ",
+        "value": 0.763085
+      },
+      {
+        "name": "standardized alpha",
+        "symbol": "α",
+        "subscript": "R",
+        "value": 0.763085
+      },
+      {
+        "name": "Guttman's Lambda 6 reliability",
+        "symbol": "Guttman's λ",
+        "subscript": "6",
+        "value": 0.757925
+      },
+      {
+        "name": "mean interitem correlation",
+        "symbol": "IIC",
+        "subscript": "M",
+        "value": 0.263558
+      },
+      {
+        "name": "signal-to-noise ratio",
+        "symbol": "S/N",
+        "value": 3.220927
+      },
+      {
+        "name": "median interitem correlation",
+        "symbol": "IIC",
+        "subscript": "Mdn",
+        "value": 0.246
+      }
+    ],
+    "groups": [
+      {
+        "name": "95% confidence boundaries",
+        "groups": [
+          {
+            "name": "Feldt",
+            "statistics": [
+              {
+                "name": "alpha",
+                "symbol": "α",
+                "value": 0.763085,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.432026,
+                "upper": 0.937282
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Reliability if an item is dropped",
+        "groups": [
+          {
+            "name": "V1",
+            "statistics": [
+              {
+                "name": "unstandardized alpha",
+                "symbol": "α",
+                "subscript": "Σ",
+                "value": 0.763085
+              },
+              {
+                "name": "standardized alpha",
+                "symbol": "α",
+                "subscript": "R",
+                "value": 0.763085
+              },
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.757925
+              },
+              {
+                "name": "mean interitem correlation",
+                "symbol": "IIC",
+                "subscript": "M",
+                "value": 0.263558
+              },
+              {
+                "name": "signal-to-noise ratio",
+                "symbol": "S/N",
+                "value": 3.220927
+              }
+            ]
+          },
+          {
+            "name": "V2",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.757925
+              }
+            ]
+          },
+          {
+            "name": "V3",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.757925
+              }
+            ]
+          },
+          {
+            "name": "V4",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.757925
+              }
+            ]
+          },
+          {
+            "name": "V5",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.757925
+              }
+            ]
+          },
+          {
+            "name": "V6",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.757925
+              }
+            ]
+          },
+          {
+            "name": "V7",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.757925
+              }
+            ]
+          },
+          {
+            "name": "V8",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.757925
+              }
+            ]
+          },
+          {
+            "name": "V9",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.757925
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Item statistics",
+        "groups": [
+          {
+            "name": "V1",
+            "statistics": [
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.724639
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.711212
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.613646
+              }
+            ]
+          },
+          {
+            "name": "V2",
+            "statistics": [
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.670926
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.633642
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.544888
+              }
+            ]
+          },
+          {
+            "name": "V3",
+            "statistics": [
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.613433
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.548064
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.47334
+              }
+            ]
+          },
+          {
+            "name": "V4",
+            "statistics": [
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.645913
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.590818
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.513507
+              }
+            ]
+          },
+          {
+            "name": "V5",
+            "statistics": [
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.591993
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.515247
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.447177
+              }
+            ]
+          },
+          {
+            "name": "V6",
+            "statistics": [
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.534291
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.434206
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.378092
+              }
+            ]
+          },
+          {
+            "name": "V7",
+            "statistics": [
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.555579
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.461007
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.403359
+              }
+            ]
+          },
+          {
+            "name": "V8",
+            "statistics": [
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.503946
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.392142
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.34251
+              }
+            ]
+          },
+          {
+            "name": "V9",
+            "statistics": [
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.448532
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.318428
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.278799
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "psych",
+      "version": "2.2.3"
+    }
+  },
+  "alpha_two_f": {
+    "method": "Reliability analysis",
+    "statistics": [
+      {
+        "name": "unstandardized alpha",
+        "symbol": "α",
+        "subscript": "Σ",
+        "value": 0.581637
+      },
+      {
+        "name": "standardized alpha",
+        "symbol": "α",
+        "subscript": "R",
+        "value": 0.581485
+      },
+      {
+        "name": "Guttman's Lambda 6 reliability",
+        "symbol": "Guttman's λ",
+        "subscript": "6",
+        "value": 0.617879
+      },
+      {
+        "name": "mean interitem correlation",
+        "symbol": "IIC",
+        "subscript": "M",
+        "value": 0.147975
+      },
+      {
+        "name": "signal-to-noise ratio",
+        "symbol": "S/N",
+        "value": 1.389398
+      },
+      {
+        "name": "standard error",
+        "symbol": "SE",
+        "value": 0.028804
+      },
+      {
+        "name": "mean",
+        "symbol": "M",
+        "value": 0.071793
+      },
+      {
+        "name": "standard deviation",
+        "symbol": "SD",
+        "value": 0.505845
+      },
+      {
+        "name": "median interitem correlation",
+        "symbol": "IIC",
+        "subscript": "Mdn",
+        "value": 0.051061
+      }
+    ],
+    "groups": [
+      {
+        "name": "95% confidence boundaries",
+        "groups": [
+          {
+            "name": "Feldt",
+            "statistics": [
+              {
+                "name": "alpha",
+                "symbol": "α",
+                "value": 0.581637,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.523831,
+                "upper": 0.634879
+              }
+            ]
+          },
+          {
+            "name": "Duhachek",
+            "statistics": [
+              {
+                "name": "alpha",
+                "symbol": "α",
+                "value": 0.581637,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.525182,
+                "upper": 0.638093
+              }
+            ]
+          },
+          {
+            "name": "bootstrapped",
+            "statistics": [
+              {
+                "name": "alpha",
+                "symbol": "α",
+                "value": 0.583389,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.526474,
+                "upper": 0.633585
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Reliability if an item is dropped",
+        "groups": [
+          {
+            "name": "V1",
+            "statistics": [
+              {
+                "name": "unstandardized alpha",
+                "symbol": "α",
+                "subscript": "Σ",
+                "value": 0.581637
+              },
+              {
+                "name": "standardized alpha",
+                "symbol": "α",
+                "subscript": "R",
+                "value": 0.581485
+              },
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.617879
+              },
+              {
+                "name": "mean interitem correlation",
+                "symbol": "IIC",
+                "subscript": "M",
+                "value": 0.147975
+              },
+              {
+                "name": "signal-to-noise ratio",
+                "symbol": "S/N",
+                "value": 1.389398
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.028804
+              },
+              {
+                "name": "mean",
+                "symbol": "M",
+                "value": 0.071793
+              },
+              {
+                "name": "standard deviation",
+                "symbol": "SD",
+                "value": 0.505845
+              }
+            ]
+          },
+          {
+            "name": "V2",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.617879
+              }
+            ]
+          },
+          {
+            "name": "V3-",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.617879
+              }
+            ]
+          },
+          {
+            "name": "V4-",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.617879
+              }
+            ]
+          },
+          {
+            "name": "V5-",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.617879
+              }
+            ]
+          },
+          {
+            "name": "V6-",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.617879
+              }
+            ]
+          },
+          {
+            "name": "V7",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.617879
+              }
+            ]
+          },
+          {
+            "name": "V8",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.617879
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Item statistics",
+        "groups": [
+          {
+            "name": "V1",
+            "statistics": [
+              {
+                "name": "number of complete cases",
+                "symbol": "n",
+                "value": 500
+              },
+              {
+                "name": "total score correlation",
+                "symbol": "r",
+                "subscript": "raw",
+                "value": 0.499808
+              },
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.498499
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.381561
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.278529
+              },
+              {
+                "name": "mean",
+                "symbol": "M",
+                "value": 0.011703
+              },
+              {
+                "name": "standard deviation",
+                "symbol": "SD",
+                "value": 1.006119
+              }
+            ]
+          },
+          {
+            "name": "V2",
+            "statistics": [
+              {
+                "name": "number of complete cases",
+                "symbol": "n",
+                "value": 500
+              },
+              {
+                "name": "total score correlation",
+                "symbol": "r",
+                "subscript": "raw",
+                "value": 0.551749
+              },
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.551597
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.458718
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.342535
+              },
+              {
+                "name": "mean",
+                "symbol": "M",
+                "value": -0.001828
+              },
+              {
+                "name": "standard deviation",
+                "symbol": "SD",
+                "value": 1.002291
+              }
+            ]
+          },
+          {
+            "name": "V3-",
+            "statistics": [
+              {
+                "name": "number of complete cases",
+                "symbol": "n",
+                "value": 500
+              },
+              {
+                "name": "total score correlation",
+                "symbol": "r",
+                "subscript": "raw",
+                "value": 0.504041
+              },
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.497085
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.387363
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.272401
+              },
+              {
+                "name": "mean",
+                "symbol": "M",
+                "value": 0.144332
+              },
+              {
+                "name": "standard deviation",
+                "symbol": "SD",
+                "value": 1.050247
+              }
+            ]
+          },
+          {
+            "name": "V4-",
+            "statistics": [
+              {
+                "name": "number of complete cases",
+                "symbol": "n",
+                "value": 500
+              },
+              {
+                "name": "total score correlation",
+                "symbol": "r",
+                "subscript": "raw",
+                "value": 0.510968
+              },
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.514758
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.411066
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.296543
+              },
+              {
+                "name": "mean",
+                "symbol": "M",
+                "value": 0.150169
+              },
+              {
+                "name": "standard deviation",
+                "symbol": "SD",
+                "value": 0.987627
+              }
+            ]
+          },
+          {
+            "name": "V5-",
+            "statistics": [
+              {
+                "name": "number of complete cases",
+                "symbol": "n",
+                "value": 500
+              },
+              {
+                "name": "total score correlation",
+                "symbol": "r",
+                "subscript": "raw",
+                "value": 0.480747
+              },
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.479124
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.362097
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.255788
+              },
+              {
+                "name": "mean",
+                "symbol": "M",
+                "value": 0.102982
+              },
+              {
+                "name": "standard deviation",
+                "symbol": "SD",
+                "value": 1.006583
+              }
+            ]
+          },
+          {
+            "name": "V6-",
+            "statistics": [
+              {
+                "name": "number of complete cases",
+                "symbol": "n",
+                "value": 500
+              },
+              {
+                "name": "total score correlation",
+                "symbol": "r",
+                "subscript": "raw",
+                "value": 0.479857
+              },
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.478402
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.362403
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.255453
+              },
+              {
+                "name": "mean",
+                "symbol": "M",
+                "value": 0.112838
+              },
+              {
+                "name": "standard deviation",
+                "symbol": "SD",
+                "value": 1.003775
+              }
+            ]
+          },
+          {
+            "name": "V7",
+            "statistics": [
+              {
+                "name": "number of complete cases",
+                "symbol": "n",
+                "value": 500
+              },
+              {
+                "name": "total score correlation",
+                "symbol": "r",
+                "subscript": "raw",
+                "value": 0.557191
+              },
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.55722
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.477201
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.349212
+              },
+              {
+                "name": "mean",
+                "symbol": "M",
+                "value": 0.022166
+              },
+              {
+                "name": "standard deviation",
+                "symbol": "SD",
+                "value": 1.002495
+              }
+            ]
+          },
+          {
+            "name": "V8",
+            "statistics": [
+              {
+                "name": "number of complete cases",
+                "symbol": "n",
+                "value": 500
+              },
+              {
+                "name": "total score correlation",
+                "symbol": "r",
+                "subscript": "raw",
+                "value": 0.450934
+              },
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.458981
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.331839
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.232958
+              },
+              {
+                "name": "mean",
+                "symbol": "M",
+                "value": 0.031983
+              },
+              {
+                "name": "standard deviation",
+                "symbol": "SD",
+                "value": 0.959577
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "psych",
+      "version": "2.2.3"
+    }
+  },
+  "alpha_cov_two": {
+    "method": "Reliability analysis",
+    "statistics": [
+      {
+        "name": "unstandardized alpha",
+        "symbol": "α",
+        "subscript": "Σ",
+        "value": 0.581637
+      },
+      {
+        "name": "standardized alpha",
+        "symbol": "α",
+        "subscript": "R",
+        "value": 0.581485
+      },
+      {
+        "name": "Guttman's Lambda 6 reliability",
+        "symbol": "Guttman's λ",
+        "subscript": "6",
+        "value": 0.617879
+      },
+      {
+        "name": "mean interitem correlation",
+        "symbol": "IIC",
+        "subscript": "M",
+        "value": 0.147975
+      },
+      {
+        "name": "signal-to-noise ratio",
+        "symbol": "S/N",
+        "value": 1.389398
+      },
+      {
+        "name": "median interitem correlation",
+        "symbol": "IIC",
+        "subscript": "Mdn",
+        "value": 0.051061
+      }
+    ],
+    "groups": [
+      {
+        "name": "95% confidence boundaries",
+        "groups": [
+          {
+            "name": "Feldt",
+            "statistics": [
+              {
+                "name": "alpha",
+                "symbol": "α",
+                "value": 0.581637,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.070458,
+                "upper": 0.902228
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Reliability if an item is dropped",
+        "groups": [
+          {
+            "name": "V1",
+            "statistics": [
+              {
+                "name": "unstandardized alpha",
+                "symbol": "α",
+                "subscript": "Σ",
+                "value": 0.581637
+              },
+              {
+                "name": "standardized alpha",
+                "symbol": "α",
+                "subscript": "R",
+                "value": 0.581485
+              },
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.617879
+              },
+              {
+                "name": "mean interitem correlation",
+                "symbol": "IIC",
+                "subscript": "M",
+                "value": 0.147975
+              },
+              {
+                "name": "signal-to-noise ratio",
+                "symbol": "S/N",
+                "value": 1.389398
+              }
+            ]
+          },
+          {
+            "name": "V2",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.617879
+              }
+            ]
+          },
+          {
+            "name": "V3-",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.617879
+              }
+            ]
+          },
+          {
+            "name": "V4-",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.617879
+              }
+            ]
+          },
+          {
+            "name": "V5-",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.617879
+              }
+            ]
+          },
+          {
+            "name": "V6-",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.617879
+              }
+            ]
+          },
+          {
+            "name": "V7",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.617879
+              }
+            ]
+          },
+          {
+            "name": "V8",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.617879
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Item statistics",
+        "groups": [
+          {
+            "name": "V1",
+            "statistics": [
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.498499
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.381561
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.278529
+              }
+            ]
+          },
+          {
+            "name": "V2",
+            "statistics": [
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.551597
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.458718
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.342535
+              }
+            ]
+          },
+          {
+            "name": "V3-",
+            "statistics": [
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.497085
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.387363
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.272401
+              }
+            ]
+          },
+          {
+            "name": "V4-",
+            "statistics": [
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.514758
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.411066
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.296543
+              }
+            ]
+          },
+          {
+            "name": "V5-",
+            "statistics": [
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.479124
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.362097
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.255788
+              }
+            ]
+          },
+          {
+            "name": "V6-",
+            "statistics": [
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.478402
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.362403
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.255453
+              }
+            ]
+          },
+          {
+            "name": "V7",
+            "statistics": [
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.55722
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.477201
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.349212
+              }
+            ]
+          },
+          {
+            "name": "V8",
+            "statistics": [
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.458981
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.331839
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.232958
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "psych",
+      "version": "2.2.3"
+    }
+  },
+  "alpha_two_f_check": {
+    "method": "Reliability analysis",
+    "statistics": [
+      {
+        "name": "unstandardized alpha",
+        "symbol": "α",
+        "subscript": "Σ",
+        "value": 0.581637
+      },
+      {
+        "name": "standardized alpha",
+        "symbol": "α",
+        "subscript": "R",
+        "value": 0.581485
+      },
+      {
+        "name": "Guttman's Lambda 6 reliability",
+        "symbol": "Guttman's λ",
+        "subscript": "6",
+        "value": 0.617879
+      },
+      {
+        "name": "mean interitem correlation",
+        "symbol": "IIC",
+        "subscript": "M",
+        "value": 0.147975
+      },
+      {
+        "name": "signal-to-noise ratio",
+        "symbol": "S/N",
+        "value": 1.389398
+      },
+      {
+        "name": "standard error",
+        "symbol": "SE",
+        "value": 0.028804
+      },
+      {
+        "name": "mean",
+        "symbol": "M",
+        "value": 0.071793
+      },
+      {
+        "name": "standard deviation",
+        "symbol": "SD",
+        "value": 0.505845
+      },
+      {
+        "name": "median interitem correlation",
+        "symbol": "IIC",
+        "subscript": "Mdn",
+        "value": 0.051061
+      }
+    ],
+    "groups": [
+      {
+        "name": "95% confidence boundaries",
+        "groups": [
+          {
+            "name": "Feldt",
+            "statistics": [
+              {
+                "name": "alpha",
+                "symbol": "α",
+                "value": 0.581637,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.523831,
+                "upper": 0.634879
+              }
+            ]
+          },
+          {
+            "name": "Duhachek",
+            "statistics": [
+              {
+                "name": "alpha",
+                "symbol": "α",
+                "value": 0.581637,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.525182,
+                "upper": 0.638093
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Reliability if an item is dropped",
+        "groups": [
+          {
+            "name": "V1",
+            "statistics": [
+              {
+                "name": "unstandardized alpha",
+                "symbol": "α",
+                "subscript": "Σ",
+                "value": 0.581637
+              },
+              {
+                "name": "standardized alpha",
+                "symbol": "α",
+                "subscript": "R",
+                "value": 0.581485
+              },
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.617879
+              },
+              {
+                "name": "mean interitem correlation",
+                "symbol": "IIC",
+                "subscript": "M",
+                "value": 0.147975
+              },
+              {
+                "name": "signal-to-noise ratio",
+                "symbol": "S/N",
+                "value": 1.389398
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.028804
+              },
+              {
+                "name": "mean",
+                "symbol": "M",
+                "value": 0.071793
+              },
+              {
+                "name": "standard deviation",
+                "symbol": "SD",
+                "value": 0.505845
+              }
+            ]
+          },
+          {
+            "name": "V2",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.617879
+              }
+            ]
+          },
+          {
+            "name": "V3-",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.617879
+              }
+            ]
+          },
+          {
+            "name": "V4-",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.617879
+              }
+            ]
+          },
+          {
+            "name": "V5-",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.617879
+              }
+            ]
+          },
+          {
+            "name": "V6-",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.617879
+              }
+            ]
+          },
+          {
+            "name": "V7",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.617879
+              }
+            ]
+          },
+          {
+            "name": "V8",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.617879
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Item statistics",
+        "groups": [
+          {
+            "name": "V1",
+            "statistics": [
+              {
+                "name": "number of complete cases",
+                "symbol": "n",
+                "value": 500
+              },
+              {
+                "name": "total score correlation",
+                "symbol": "r",
+                "subscript": "raw",
+                "value": 0.499808
+              },
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.498499
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.381561
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.278529
+              },
+              {
+                "name": "mean",
+                "symbol": "M",
+                "value": 0.011703
+              },
+              {
+                "name": "standard deviation",
+                "symbol": "SD",
+                "value": 1.006119
+              }
+            ]
+          },
+          {
+            "name": "V2",
+            "statistics": [
+              {
+                "name": "number of complete cases",
+                "symbol": "n",
+                "value": 500
+              },
+              {
+                "name": "total score correlation",
+                "symbol": "r",
+                "subscript": "raw",
+                "value": 0.551749
+              },
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.551597
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.458718
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.342535
+              },
+              {
+                "name": "mean",
+                "symbol": "M",
+                "value": -0.001828
+              },
+              {
+                "name": "standard deviation",
+                "symbol": "SD",
+                "value": 1.002291
+              }
+            ]
+          },
+          {
+            "name": "V3-",
+            "statistics": [
+              {
+                "name": "number of complete cases",
+                "symbol": "n",
+                "value": 500
+              },
+              {
+                "name": "total score correlation",
+                "symbol": "r",
+                "subscript": "raw",
+                "value": 0.504041
+              },
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.497085
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.387363
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.272401
+              },
+              {
+                "name": "mean",
+                "symbol": "M",
+                "value": 0.144332
+              },
+              {
+                "name": "standard deviation",
+                "symbol": "SD",
+                "value": 1.050247
+              }
+            ]
+          },
+          {
+            "name": "V4-",
+            "statistics": [
+              {
+                "name": "number of complete cases",
+                "symbol": "n",
+                "value": 500
+              },
+              {
+                "name": "total score correlation",
+                "symbol": "r",
+                "subscript": "raw",
+                "value": 0.510968
+              },
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.514758
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.411066
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.296543
+              },
+              {
+                "name": "mean",
+                "symbol": "M",
+                "value": 0.150169
+              },
+              {
+                "name": "standard deviation",
+                "symbol": "SD",
+                "value": 0.987627
+              }
+            ]
+          },
+          {
+            "name": "V5-",
+            "statistics": [
+              {
+                "name": "number of complete cases",
+                "symbol": "n",
+                "value": 500
+              },
+              {
+                "name": "total score correlation",
+                "symbol": "r",
+                "subscript": "raw",
+                "value": 0.480747
+              },
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.479124
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.362097
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.255788
+              },
+              {
+                "name": "mean",
+                "symbol": "M",
+                "value": 0.102982
+              },
+              {
+                "name": "standard deviation",
+                "symbol": "SD",
+                "value": 1.006583
+              }
+            ]
+          },
+          {
+            "name": "V6-",
+            "statistics": [
+              {
+                "name": "number of complete cases",
+                "symbol": "n",
+                "value": 500
+              },
+              {
+                "name": "total score correlation",
+                "symbol": "r",
+                "subscript": "raw",
+                "value": 0.479857
+              },
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.478402
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.362403
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.255453
+              },
+              {
+                "name": "mean",
+                "symbol": "M",
+                "value": 0.112838
+              },
+              {
+                "name": "standard deviation",
+                "symbol": "SD",
+                "value": 1.003775
+              }
+            ]
+          },
+          {
+            "name": "V7",
+            "statistics": [
+              {
+                "name": "number of complete cases",
+                "symbol": "n",
+                "value": 500
+              },
+              {
+                "name": "total score correlation",
+                "symbol": "r",
+                "subscript": "raw",
+                "value": 0.557191
+              },
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.55722
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.477201
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.349212
+              },
+              {
+                "name": "mean",
+                "symbol": "M",
+                "value": 0.022166
+              },
+              {
+                "name": "standard deviation",
+                "symbol": "SD",
+                "value": 1.002495
+              }
+            ]
+          },
+          {
+            "name": "V8",
+            "statistics": [
+              {
+                "name": "number of complete cases",
+                "symbol": "n",
+                "value": 500
+              },
+              {
+                "name": "total score correlation",
+                "symbol": "r",
+                "subscript": "raw",
+                "value": 0.450934
+              },
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.458981
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.331839
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.232958
+              },
+              {
+                "name": "mean",
+                "symbol": "M",
+                "value": 0.031983
+              },
+              {
+                "name": "standard deviation",
+                "symbol": "SD",
+                "value": 0.959577
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "psych",
+      "version": "2.2.3"
+    }
+  },
+  "alpha_a4": {
+    "method": "Reliability analysis",
+    "statistics": [
+      {
+        "name": "unstandardized alpha",
+        "symbol": "α",
+        "subscript": "Σ",
+        "value": 0.727225
+      },
+      {
+        "name": "standardized alpha",
+        "symbol": "α",
+        "subscript": "R",
+        "value": 0.728544
+      },
+      {
+        "name": "Guttman's Lambda 6 reliability",
+        "symbol": "Guttman's λ",
+        "subscript": "6",
+        "value": 0.679466
+      },
+      {
+        "name": "mean interitem correlation",
+        "symbol": "IIC",
+        "subscript": "M",
+        "value": 0.401542
+      },
+      {
+        "name": "signal-to-noise ratio",
+        "symbol": "S/N",
+        "value": 2.68384
+      },
+      {
+        "name": "standard error",
+        "symbol": "SE",
+        "value": 0.019994
+      },
+      {
+        "name": "mean",
+        "symbol": "M",
+        "value": -0.0125
+      },
+      {
+        "name": "standard deviation",
+        "symbol": "SD",
+        "value": 0.755553
+      },
+      {
+        "name": "median interitem correlation",
+        "symbol": "IIC",
+        "subscript": "Mdn",
+        "value": 0.400449
+      }
+    ],
+    "groups": [
+      {
+        "name": "95% confidence boundaries",
+        "groups": [
+          {
+            "name": "Feldt",
+            "statistics": [
+              {
+                "name": "alpha",
+                "symbol": "α",
+                "value": 0.727225,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.685983,
+                "upper": 0.764283
+              }
+            ]
+          },
+          {
+            "name": "Duhachek",
+            "statistics": [
+              {
+                "name": "alpha",
+                "symbol": "α",
+                "value": 0.727225,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.688037,
+                "upper": 0.766414
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Reliability if an item is dropped",
+        "groups": [
+          {
+            "name": "V1",
+            "statistics": [
+              {
+                "name": "unstandardized alpha",
+                "symbol": "α",
+                "subscript": "Σ",
+                "value": 0.727225
+              },
+              {
+                "name": "standardized alpha",
+                "symbol": "α",
+                "subscript": "R",
+                "value": 0.728544
+              },
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.679466
+              },
+              {
+                "name": "mean interitem correlation",
+                "symbol": "IIC",
+                "subscript": "M",
+                "value": 0.401542
+              },
+              {
+                "name": "signal-to-noise ratio",
+                "symbol": "S/N",
+                "value": 2.68384
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.019994
+              },
+              {
+                "name": "mean",
+                "symbol": "M",
+                "value": -0.0125
+              },
+              {
+                "name": "standard deviation",
+                "symbol": "SD",
+                "value": 0.755553
+              }
+            ]
+          },
+          {
+            "name": "V2",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.679466
+              }
+            ]
+          },
+          {
+            "name": "V3",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.679466
+              }
+            ]
+          },
+          {
+            "name": "V4",
+            "statistics": [
+              {
+                "name": "Guttman's Lambda 6 reliability",
+                "symbol": "Guttman's λ",
+                "subscript": "6",
+                "value": 0.679466
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Item statistics",
+        "groups": [
+          {
+            "name": "V1",
+            "statistics": [
+              {
+                "name": "number of complete cases",
+                "symbol": "n",
+                "value": 500
+              },
+              {
+                "name": "total score correlation",
+                "symbol": "r",
+                "subscript": "raw",
+                "value": 0.801356
+              },
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.803872
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.72763
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.616923
+              },
+              {
+                "name": "mean",
+                "symbol": "M",
+                "value": 0.05
+              },
+              {
+                "name": "standard deviation",
+                "symbol": "SD",
+                "value": 1.004748
+              }
+            ]
+          },
+          {
+            "name": "V2",
+            "statistics": [
+              {
+                "name": "number of complete cases",
+                "symbol": "n",
+                "value": 500
+              },
+              {
+                "name": "total score correlation",
+                "symbol": "r",
+                "subscript": "raw",
+                "value": 0.774575
+              },
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.773545
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.671687
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.565764
+              },
+              {
+                "name": "mean",
+                "symbol": "M",
+                "value": -0.022
+              },
+              {
+                "name": "standard deviation",
+                "symbol": "SD",
+                "value": 1.029386
+              }
+            ]
+          },
+          {
+            "name": "V3",
+            "statistics": [
+              {
+                "name": "number of complete cases",
+                "symbol": "n",
+                "value": 500
+              },
+              {
+                "name": "total score correlation",
+                "symbol": "r",
+                "subscript": "raw",
+                "value": 0.721976
+              },
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.72897
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.584389
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.495675
+              },
+              {
+                "name": "mean",
+                "symbol": "M",
+                "value": -0.028
+              },
+              {
+                "name": "standard deviation",
+                "symbol": "SD",
+                "value": 0.988519
+              }
+            ]
+          },
+          {
+            "name": "V4",
+            "statistics": [
+              {
+                "name": "number of complete cases",
+                "symbol": "n",
+                "value": 500
+              },
+              {
+                "name": "total score correlation",
+                "symbol": "r",
+                "subscript": "raw",
+                "value": 0.671431
+              },
+              {
+                "name": "total score correlation with standardized items",
+                "symbol": "r",
+                "subscript": "std",
+                "value": 0.663209
+              },
+              {
+                "name": "corrected item whole correlation",
+                "symbol": "r",
+                "subscript": "cor",
+                "value": 0.464124
+              },
+              {
+                "name": "item whole correlation without this item",
+                "symbol": "r",
+                "subscript": "drop",
+                "value": 0.400072
+              },
+              {
+                "name": "mean",
+                "symbol": "M",
+                "value": -0.05
+              },
+              {
+                "name": "standard deviation",
+                "symbol": "SD",
+                "value": 1.051528
               }
             ]
           }

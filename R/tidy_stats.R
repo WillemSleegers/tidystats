@@ -2599,8 +2599,7 @@ tidy_stats.psych <- function(x, args = NULL) {
     statistics <- list()
     
     statistics <- add_statistic(statistics, "unstandardized alpha", 
-      x$total$raw_alpha[i], symbol = "α", subscript = "Σ", interval = "CI", 
-      level = .95, lower = x$feldt$lower.ci[[1]], upper = x$feldt$upper.ci[[1]])  
+      x$total$raw_alpha, symbol = "α", subscript = "Σ")  
     statistics <- add_statistic(statistics, "standardized alpha", 
       x$total$std.alpha, symbol = "α", subscript = "R")
     statistics <- add_statistic(statistics, "Guttman's Lambda 6 reliability", 
@@ -2621,7 +2620,54 @@ tidy_stats.psych <- function(x, args = NULL) {
     # Add the statistics to the analysis
     analysis$statistics <- statistics
     
-    # Create the reliability if an item is dropped group
+     # Create a group for the 95% confidence boundaries, if there are any
+    if (!is.null(x$feldt) | !is.null(x$total$ase) | !is.null(x$boot.ci)) {
+      group <- list(name = "95% confidence boundaries")
+      
+      if (!is.null(x$feldt)) {
+        # Feldt group
+        group_feldt <- list(name = "Feldt")
+        statistics <- list()
+        
+        statistics <- add_statistic(statistics, "alpha", x$total$raw_alpha, 
+          symbol = "α", interval = "CI", level = .95, 
+          lower = x$feldt$lower.ci[[1]], upper = x$feldt$upper.ci[[1]])
+        
+        group_feldt$statistics <- statistics
+        group$groups <- append(group$groups, list(group_feldt))
+      }
+      
+      # Duhachek group
+      if (!is.null(x$total$ase)) {
+        group_duhachek <- list(name = "Duhachek")
+        statistics <- list()
+        
+        statistics <- add_statistic(statistics, "alpha", x$total$raw_alpha, 
+          symbol = "α", interval = "CI", level = .95, 
+          lower = x$total$raw_alpha - 1.96 * x$total$ase, 
+          upper = x$total$raw_alpha + 1.96 * x$total$ase)
+        
+        group_duhachek$statistics <- statistics
+        group$groups <- append(group$groups, list(group_duhachek))
+      }
+      
+      # Bootstrapped group
+      if (!is.null(x$boot.ci)) {
+        group_bootstrapped <- list(name = "bootstrapped")
+        statistics <- list()
+        
+        statistics <- add_statistic(statistics, "alpha", x$boot.ci[2], 
+          symbol = "α", interval = "CI", level = .95, 
+          lower = x$boot.ci[1], upper = x$boot.ci[3])
+        
+        group_bootstrapped$statistics <- statistics
+        group$groups <- append(group$groups, list(group_bootstrapped))
+      }
+      
+      analysis$groups <- append(analysis$groups, list(group))
+    }
+    
+    # Create a group for the the reliability if an item is dropped statistics
     group <- list(name = "Reliability if an item is dropped")
     
     # Loop over the items
@@ -2663,7 +2709,7 @@ tidy_stats.psych <- function(x, args = NULL) {
     # Add the reliability if an item is dropped group to the analysis groups
     analysis$groups <- append(analysis$groups, list(group))
     
-    # Create the item statistics group
+    # Create a group for the item statistics
     group <- list(name = "Item statistics")
     
     # Loop over the items

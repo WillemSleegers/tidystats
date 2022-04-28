@@ -74,6 +74,20 @@ sats
 sats_no_ci
 sats_alpha
 
+# mardia() ----------------------------------------------------------------
+
+# Set seed
+set.seed(1)
+
+# Get data
+x <- matrix(rnorm(1000), ncol = 10)
+
+# Run analyses
+mardia_attitude <- mardia(attitude, plot = FALSE)
+mardia_x <- mardia(x, plot = FALSE)
+
+mardia_attitude
+
 # Save stats --------------------------------------------------------------
 
 write_stats(results, "tests/testthat/data/psych.json")
