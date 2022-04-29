@@ -2752,6 +2752,81 @@ tidy_stats.psych <- function(x, args = NULL) {
     analysis$groups <- append(analysis$groups, list(group))
   }
   
+  if ("corr.test" %in% class(x)) {
+    analysis$method <- "Correlation" #TODO detect kendall or spearman
+    
+    if (x$adjust == "none") {
+      warning("Only saving unadjusted statistics.")
+    } else {
+      warning("Only saving adjusted statistics.")
+    }
+    
+    # Check if there is only 1 pair, or multiple
+    if (length(rownames(x$r)) == 1) {
+      # Create a list for the statistics of this single pair
+      statistics <- list()
+      
+      #TODO: figure out number of pairs
+      
+    }
+    
+    analysis$adjust <- x$adjust
+  }
+  
+  if ("mardia" %in% class(x)) {
+     # Set method
+    analysis$method <- "Mardia's test"
+    
+    # Create a statistics list for number of observations and variables
+    statistics <- list()
+    
+    statistics <- add_statistic(statistics, "number of observations", x$n.obs, 
+      symbol = "N")
+    statistics <- add_statistic(statistics, "number of variables", x$n.var, 
+      symbol = "k")
+    
+    analysis$statistics <- statistics
+    
+    # Create a group for the skew statistics
+    group <- list(name = "skew")
+    
+    statistics <- list()
+    
+    statistics <- add_statistic(statistics, "estimate", x$b1p, symbol = "b", 
+      subscript = "1, p")
+    statistics <- add_statistic(statistics, "skew", x$skew)
+    statistics <- add_statistic(statistics, "p", x$p.skew)
+    
+    group$statistics <- statistics
+    analysis$groups <- append(analysis$groups, list(group))
+    
+    # Create a group for the small sample skew statistics
+    group <- list(name = "small sample skew")
+    
+    statistics <- list()
+    
+    statistics <- add_statistic(statistics, "estimate", x$b1p, symbol = "b", 
+      subscript = "1, p")
+    statistics <- add_statistic(statistics, "skew", x$small.skew)
+    statistics <- add_statistic(statistics, "p", x$p.small)
+    
+    group$statistics <- statistics
+    analysis$groups <- append(analysis$groups, list(group))
+    
+    # Create a group for the kurtosis statistics
+    group <- list(name = "kurtosis")
+    
+    statistics <- list()
+    
+    statistics <- add_statistic(statistics, "estimate", x$b2p, symbol = "b", 
+      subscript = "2, p")
+    statistics <- add_statistic(statistics, "kurtosis", x$kurtosis)
+    statistics <- add_statistic(statistics, "p", x$p.kurt)
+    
+    group$statistics <- statistics
+    analysis$groups <- append(analysis$groups, list(group))
+  }
+  
   # Add package information
   analysis <- add_package_info(analysis, "psych")
   

@@ -55,6 +55,9 @@ alpha_a4
 # Run analyses
 ct <- corr.test(attitude)
 cts <- corr.test(attitude[1:3], attitude[4:6])
+cts_single <- corr.test(attitude[1:2], attitude[1:2])
+cts_spearman <- corr.test(attitude[1:3], attitude[4:6], method = "spearman")
+cts_kendall <- corr.test(attitude[1:3], attitude[4:6], method = "kendall")
 sats <- corr.test(sat.act[1:3], sat.act[4:6], adjust = "none")
 sats_no_ci <- corr.test(sat.act[1:3], sat.act[4:6], adjust = "none", ci = FALSE)
 sats_alpha <- corr.test(sat.act[1:3], sat.act[4:6], adjust = "none", alpha =.1)
@@ -70,6 +73,7 @@ results <- results %>%
 # Inspect output
 print(ct, short = FALSE)
 cts
+print(cts_kendall, short = FALSE)
 sats
 sats_no_ci
 sats_alpha
@@ -86,7 +90,13 @@ x <- matrix(rnorm(1000), ncol = 10)
 mardia_attitude <- mardia(attitude, plot = FALSE)
 mardia_x <- mardia(x, plot = FALSE)
 
+# Add stats
+results <- results %>%
+  add_stats(mardia_attitude) %>%
+  add_stats(mardia_x)
+
 mardia_attitude
+mardia_x
 
 # Save stats --------------------------------------------------------------
 
