@@ -1,0 +1,417 @@
+{
+  "pairwise_t_test": {
+    "name": "airquality$Ozone and Month",
+    "method": "Pairwise t tests with pooled SD",
+    "groups": [
+      {
+        "name": "P-values",
+        "groups": [
+          {
+            "name": "Jun",
+            "statistics": [
+              {
+                "name": "p",
+                "subscript": "May",
+                "value": 1
+              },
+              {
+                "name": "p",
+                "subscript": "Jun",
+                "value": "NA"
+              },
+              {
+                "name": "p",
+                "subscript": "Jul",
+                "value": "NA"
+              },
+              {
+                "name": "p",
+                "subscript": "Aug",
+                "value": "NA"
+              }
+            ]
+          },
+          {
+            "name": "Jul",
+            "statistics": [
+              {
+                "name": "p",
+                "subscript": "May",
+                "value": 0.000264
+              },
+              {
+                "name": "p",
+                "subscript": "Jun",
+                "value": 0.051127
+              },
+              {
+                "name": "p",
+                "subscript": "Jul",
+                "value": "NA"
+              },
+              {
+                "name": "p",
+                "subscript": "Aug",
+                "value": "NA"
+              }
+            ]
+          },
+          {
+            "name": "Aug",
+            "statistics": [
+              {
+                "name": "p",
+                "subscript": "May",
+                "value": 0.000195
+              },
+              {
+                "name": "p",
+                "subscript": "Jun",
+                "value": 0.049873
+              },
+              {
+                "name": "p",
+                "subscript": "Jul",
+                "value": 1
+              },
+              {
+                "name": "p",
+                "subscript": "Aug",
+                "value": "NA"
+              }
+            ]
+          },
+          {
+            "name": "Sep",
+            "statistics": [
+              {
+                "name": "p",
+                "subscript": "May",
+                "value": 1
+              },
+              {
+                "name": "p",
+                "subscript": "Jun",
+                "value": 1
+              },
+              {
+                "name": "p",
+                "subscript": "Jul",
+                "value": 0.004879
+              },
+              {
+                "name": "p",
+                "subscript": "Aug",
+                "value": 0.003878
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "p_adjust_method": "holm",
+    "package": {
+      "name": "stats",
+      "version": "4.2.0"
+    }
+  },
+  "pairwise_t_test_paired": {
+    "name": "c(1, 2, 3, 1, 2, 4) and c(1, 1, 2, 2, 3, 3)",
+    "method": "Pairwise paired t tests",
+    "groups": [
+      {
+        "name": "P-values",
+        "groups": [
+          {
+            "name": "2",
+            "statistics": [
+              {
+                "name": "p",
+                "subscript": "1",
+                "value": 1
+              },
+              {
+                "name": "p",
+                "subscript": "2",
+                "value": "NA"
+              }
+            ]
+          },
+          {
+            "name": "3",
+            "statistics": [
+              {
+                "name": "p",
+                "subscript": "1",
+                "value": 0.614498
+              },
+              {
+                "name": "p",
+                "subscript": "2",
+                "value": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "p_adjust_method": "holm",
+    "package": {
+      "name": "stats",
+      "version": "4.2.0"
+    }
+  },
+  "pairwise_t_test_nonpooled": {
+    "name": "airquality$Ozone and Month",
+    "method": "Pairwise t tests with non-pooled SD",
+    "groups": [
+      {
+        "name": "P-values",
+        "groups": [
+          {
+            "name": "Jun",
+            "statistics": [
+              {
+                "name": "p",
+                "subscript": "May",
+                "value": 1
+              },
+              {
+                "name": "p",
+                "subscript": "Jun",
+                "value": "NA"
+              },
+              {
+                "name": "p",
+                "subscript": "Jul",
+                "value": "NA"
+              },
+              {
+                "name": "p",
+                "subscript": "Aug",
+                "value": "NA"
+              }
+            ]
+          },
+          {
+            "name": "Jul",
+            "statistics": [
+              {
+                "name": "p",
+                "subscript": "May",
+                "value": 0.000265
+              },
+              {
+                "name": "p",
+                "subscript": "Jun",
+                "value": 0.021817
+              },
+              {
+                "name": "p",
+                "subscript": "Jul",
+                "value": "NA"
+              },
+              {
+                "name": "p",
+                "subscript": "Aug",
+                "value": "NA"
+              }
+            ]
+          },
+          {
+            "name": "Aug",
+            "statistics": [
+              {
+                "name": "p",
+                "subscript": "May",
+                "value": 0.002169
+              },
+              {
+                "name": "p",
+                "subscript": "Jun",
+                "value": 0.042693
+              },
+              {
+                "name": "p",
+                "subscript": "Jul",
+                "value": 1
+              },
+              {
+                "name": "p",
+                "subscript": "Aug",
+                "value": "NA"
+              }
+            ]
+          },
+          {
+            "name": "Sep",
+            "statistics": [
+              {
+                "name": "p",
+                "subscript": "May",
+                "value": 1
+              },
+              {
+                "name": "p",
+                "subscript": "Jun",
+                "value": 1
+              },
+              {
+                "name": "p",
+                "subscript": "Jul",
+                "value": 0.007361
+              },
+              {
+                "name": "p",
+                "subscript": "Aug",
+                "value": 0.028683
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "p_adjust_method": "bonferroni",
+    "package": {
+      "name": "stats",
+      "version": "4.2.0"
+    }
+  },
+  "pairwise_prop_test": {
+    "name": "smokers out of patients",
+    "method": "Pairwise comparison of proportions",
+    "groups": [
+      {
+        "name": "P-values",
+        "groups": [
+          {
+            "name": "2",
+            "statistics": [
+              {
+                "name": "p",
+                "subscript": "1",
+                "value": 1
+              },
+              {
+                "name": "p",
+                "subscript": "2",
+                "value": "NA"
+              },
+              {
+                "name": "p",
+                "subscript": "3",
+                "value": "NA"
+              }
+            ]
+          },
+          {
+            "name": "3",
+            "statistics": [
+              {
+                "name": "p",
+                "subscript": "1",
+                "value": 1
+              },
+              {
+                "name": "p",
+                "subscript": "2",
+                "value": 1
+              },
+              {
+                "name": "p",
+                "subscript": "3",
+                "value": "NA"
+              }
+            ]
+          },
+          {
+            "name": "4",
+            "statistics": [
+              {
+                "name": "p",
+                "subscript": "1",
+                "value": 0.118565
+              },
+              {
+                "name": "p",
+                "subscript": "2",
+                "value": 0.093217
+              },
+              {
+                "name": "p",
+                "subscript": "3",
+                "value": 0.123768
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "p_adjust_method": "holm",
+    "package": {
+      "name": "stats",
+      "version": "4.2.0"
+    }
+  },
+  "pairwise_wilcox_test": {
+    "name": "c(1, 2, 3, 4, 5, 6, 7, 8, 9, 11) and c(1, 1, 1, 1, 1, 2, 2, 2, 2, 2)",
+    "method": "Pairwise Wilcoxon rank sum exact test",
+    "statistics": [
+      {
+        "name": "p",
+        "value": 0.007937
+      }
+    ],
+    "p_adjust_method": "holm",
+    "package": {
+      "name": "stats",
+      "version": "4.2.0"
+    }
+  },
+  "pairwise_wilcox_test_paired": {
+    "name": "PlantGrowth$weight and PlantGrowth$group",
+    "method": "Pairwise Wilcoxon signed rank exact test",
+    "groups": [
+      {
+        "name": "P-values",
+        "groups": [
+          {
+            "name": "trt1",
+            "statistics": [
+              {
+                "name": "p",
+                "subscript": "ctrl",
+                "value": 0.375
+              },
+              {
+                "name": "p",
+                "subscript": "trt1",
+                "value": "NA"
+              }
+            ]
+          },
+          {
+            "name": "trt2",
+            "statistics": [
+              {
+                "name": "p",
+                "subscript": "ctrl",
+                "value": 0.196289
+              },
+              {
+                "name": "p",
+                "subscript": "trt1",
+                "value": 0.058594
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "p_adjust_method": "BH",
+    "package": {
+      "name": "stats",
+      "version": "4.2.0"
+    }
+  }
+}
