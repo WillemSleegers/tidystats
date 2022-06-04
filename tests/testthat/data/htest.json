@@ -36,7 +36,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.0"
     }
   },
   "t_test_two_sample": {
@@ -78,7 +78,7 @@
     "var_equal": true,
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.0"
     }
   },
   "t_test_welch": {
@@ -120,7 +120,7 @@
     "var_equal": false,
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.0"
     }
   },
   "t_test_paired": {
@@ -161,7 +161,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.0"
     }
   },
   "correlation_pearson": {
@@ -197,7 +197,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.0"
     }
   },
   "correlation_kendall": {
@@ -226,7 +226,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.0"
     }
   },
   "correlation_spearman": {
@@ -255,7 +255,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.0"
     }
   },
   "chi_squared": {
@@ -278,7 +278,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.0"
     }
   },
   "chi_squared_yates": {
@@ -301,7 +301,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.0"
     }
   },
   "chi_squared_prob": {
@@ -324,7 +324,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.0"
     }
   },
   "prop_test": {
@@ -360,7 +360,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.0"
     }
   },
   "prop_test_correct": {
@@ -396,7 +396,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.0"
     }
   },
   "prop_test_smokers": {
@@ -422,7 +422,53 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.0"
+    }
+  },
+  "prop_trend_test": {
+    "name": "smokers out of patients (scores: 1 2 3 4)",
+    "method": "Chi-squared Test for Trend in Proportions",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "χ²",
+        "value": 8.224922
+      },
+      {
+        "name": "df",
+        "value": 1
+      },
+      {
+        "name": "p",
+        "value": 0.004132
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.2.0"
+    }
+  },
+  "prop_trend_test_scores": {
+    "name": "smokers out of patients (scores: 0 0 0 1)",
+    "method": "Chi-squared Test for Trend in Proportions",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "χ²",
+        "value": 12.173146
+      },
+      {
+        "name": "df",
+        "value": 1
+      },
+      {
+        "name": "p",
+        "value": 0.000485
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.2.0"
     }
   },
   "wilcoxon_signed_rank": {
@@ -445,7 +491,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.0"
     }
   },
   "wilcoxon_rank_sum_continuity": {
@@ -468,7 +514,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.0"
     }
   },
   "wilcoxon_rank_sum": {
@@ -491,7 +537,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.0"
     }
   },
   "wilcoxon_rank_sum_conf": {
@@ -524,7 +570,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.0"
     }
   },
   "kruskal": {
@@ -547,7 +593,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.0"
     }
   },
   "kruskal_formula": {
@@ -570,7 +616,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.0"
     }
   },
   "fisher_test": {
@@ -597,7 +643,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.0"
     }
   },
   "fisher_test_no_CI": {
@@ -620,7 +666,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.0"
     }
   },
   "fisher_test_r_by_c": {
@@ -637,7 +683,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.0"
     }
   },
   "fisher_test_simulated_p": {
@@ -655,7 +701,7 @@
     "sim": 100000,
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.0"
     }
   },
   "fisher_test_hybrid": {
@@ -677,12 +723,12 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.0"
     }
   },
   "ks_test_two": {
     "name": "x and y",
-    "method": "Two-sample Kolmogorov-Smirnov test",
+    "method": "Exact two-sample Kolmogorov-Smirnov test",
     "statistics": [
       {
         "name": "statistic",
@@ -699,12 +745,12 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.0"
     }
   },
   "ks_test_one": {
     "name": "x + 2",
-    "method": "One-sample Kolmogorov-Smirnov test",
+    "method": "Exact one-sample Kolmogorov-Smirnov test",
     "statistics": [
       {
         "name": "statistic",
@@ -721,12 +767,12 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.0"
     }
   },
   "ks_test_inexact": {
     "name": "x + 2",
-    "method": "One-sample Kolmogorov-Smirnov test",
+    "method": "Asymptotic one-sample Kolmogorov-Smirnov test",
     "statistics": [
       {
         "name": "statistic",
@@ -743,12 +789,12 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.0"
     }
   },
   "ks_test_greater": {
     "name": "x + 2",
-    "method": "One-sample Kolmogorov-Smirnov test",
+    "method": "Exact one-sample Kolmogorov-Smirnov test",
     "statistics": [
       {
         "name": "statistic",
@@ -765,7 +811,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.0"
     }
   },
   "oneway_test": {
@@ -797,7 +843,7 @@
     "var_equal": false,
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.0"
     }
   },
   "oneway_test_equal_var": {
@@ -829,7 +875,7 @@
     "var_equal": true,
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.0"
     }
   },
   "var_test": {
@@ -873,7 +919,659 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.0"
+    }
+  },
+  "mauchly_test": {
+    "name": "SSD matrix from lm(formula = reacttime ~ 1)",
+    "method": "Mauchly's test of sphericity",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "W",
+        "value": 0.031084
+      },
+      {
+        "name": "p",
+        "value": 0.047652
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.2.0"
+    }
+  },
+  "mauchly_test_orthogonal": {
+    "name": "SSD matrix from lm(formula = reacttime ~ 1)",
+    "method": "Mauchly's test of sphericity",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "W",
+        "value": 0.893777
+      },
+      {
+        "name": "p",
+        "value": 0.638142
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.2.0"
+    }
+  },
+  "mauchly_test_spanned": {
+    "name": "SSD matrix from lm(formula = reacttime ~ 1)",
+    "method": "Mauchly's test of sphericity",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "W",
+        "value": 0.960106
+      },
+      {
+        "name": "p",
+        "value": 0.849722
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.2.0"
+    }
+  },
+  "mcnemar_test": {
+    "name": "Performance",
+    "method": "McNemar's Chi-squared test (with continuity correction)",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "χ²",
+        "value": 16.817797
+      },
+      {
+        "name": "df",
+        "value": 1
+      },
+      {
+        "name": "p",
+        "value": 0.000041
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.2.0"
+    }
+  },
+  "mcnemar_test_nocorrect": {
+    "name": "Performance",
+    "method": "McNemar's Chi-squared test",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "χ²",
+        "value": 17.355932
+      },
+      {
+        "name": "df",
+        "value": 1
+      },
+      {
+        "name": "p",
+        "value": 0.000031
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.2.0"
+    }
+  },
+  "binom_test": {
+    "name": "c(682, 243)",
+    "method": "Exact binomial test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "P",
+        "value": 0.737297,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.707668,
+        "upper": 0.765407
+      },
+      {
+        "name": "count",
+        "symbol": "k",
+        "subscript": "successes",
+        "value": 682
+      },
+      {
+        "name": "count",
+        "symbol": "n",
+        "subscript": "total",
+        "value": 925
+      },
+      {
+        "name": "statistic",
+        "symbol": "P",
+        "subscript": "expected",
+        "value": 0.5
+      },
+      {
+        "name": "p",
+        "value": 7.087291e-49
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0.5
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.2.0"
+    }
+  },
+  "binom_test_params": {
+    "name": "c(682, 243)",
+    "method": "Exact binomial test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "P",
+        "value": 0.737297,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0,
+        "upper": 0.761055
+      },
+      {
+        "name": "count",
+        "symbol": "k",
+        "subscript": "successes",
+        "value": 682
+      },
+      {
+        "name": "count",
+        "symbol": "n",
+        "subscript": "total",
+        "value": 925
+      },
+      {
+        "name": "statistic",
+        "symbol": "P",
+        "subscript": "expected",
+        "value": 0.75
+      },
+      {
+        "name": "p",
+        "value": 0.196009
+      }
+    ],
+    "alternative": {
+      "direction": "less",
+      "null_value": 0.75
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.2.0"
+    }
+  },
+  "pp_test": {
+    "name": "x",
+    "method": "Phillips-Perron Unit Root Test",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "Dickey-Fuller",
+        "value": -33.056683
+      },
+      {
+        "name": "lag",
+        "value": 7
+      },
+      {
+        "name": "p",
+        "value": 0.01
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.2.0"
+    }
+  },
+  "pp_test_long": {
+    "name": "y",
+    "method": "Phillips-Perron Unit Root Test",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "Dickey-Fuller",
+        "value": -2.724437
+      },
+      {
+        "name": "lag",
+        "value": 21
+      },
+      {
+        "name": "p",
+        "value": 0.271655
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.2.0"
+    }
+  },
+  "box_test": {
+    "name": "x",
+    "method": "Box-Pierce test",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "χ²",
+        "value": 0.001333
+      },
+      {
+        "name": "df",
+        "value": 1
+      },
+      {
+        "name": "p",
+        "value": 0.970874
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.2.0"
+    }
+  },
+  "box_test_ljung": {
+    "name": "x",
+    "method": "Box-Ljung test",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "χ²",
+        "value": 0.077367
+      },
+      {
+        "name": "df",
+        "value": 2
+      },
+      {
+        "name": "p",
+        "value": 0.962055
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.2.0"
+    }
+  },
+  "ansari_test": {
+    "name": "ramsay and jung_parekh",
+    "method": "Ansari-Bradley test",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "AB",
+        "value": 185.5
+      },
+      {
+        "name": "p",
+        "value": 0.181458
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 1
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.2.0"
+    }
+  },
+  "ansari_test_ci": {
+    "name": "rnorm(100) and rnorm(100, 0, 2)",
+    "method": "Ansari-Bradley test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "ratio",
+        "value": 0.461553,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.35678,
+        "upper": 0.608956
+      },
+      {
+        "name": "statistic",
+        "symbol": "AB",
+        "value": 6100
+      },
+      {
+        "name": "p",
+        "value": 2.87734e-07
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 1
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.2.0"
+    }
+  },
+  "mood_test": {
+    "name": "ramsay and jung_parekh",
+    "method": "Mood two-sample test of scale",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "Z",
+        "value": 1.037128
+      },
+      {
+        "name": "p",
+        "value": 0.299676
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided"
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.2.0"
+    }
+  },
+  "quade_test": {
+    "name": "dataFreq",
+    "method": "Quade test",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "F",
+        "value": 3.829252
+      },
+      {
+        "name": "df numerator",
+        "symbol": "df",
+        "subscript": "num.",
+        "value": 4
+      },
+      {
+        "name": "df denominator",
+        "symbol": "df",
+        "subscript": "den.",
+        "value": 24
+      },
+      {
+        "name": "p",
+        "value": 0.015189
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.2.0"
+    }
+  },
+  "bartlett_test": {
+    "name": "InsectSprays$count and InsectSprays$spray",
+    "method": "Bartlett test of homogeneity of variances",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "K²",
+        "value": 25.959825
+      },
+      {
+        "name": "df",
+        "value": 5
+      },
+      {
+        "name": "p",
+        "value": 0.000091
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.2.0"
+    }
+  },
+  "fligner_test": {
+    "name": "InsectSprays$count and InsectSprays$spray",
+    "method": "Fligner-Killeen test of homogeneity of variances",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "χ²",
+        "value": 14.482781
+      },
+      {
+        "name": "df",
+        "value": 5
+      },
+      {
+        "name": "p",
+        "value": 0.012817
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.2.0"
+    }
+  },
+  "poisson_test": {
+    "name": "137 time base: 24.19893",
+    "method": "Exact Poisson test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "rate",
+        "subscript": "event",
+        "value": 5.661407,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 4.753125,
+        "upper": 6.692709
+      },
+      {
+        "name": "count",
+        "symbol": "n",
+        "subscript": "total",
+        "value": 137
+      },
+      {
+        "name": "statistic",
+        "symbol": "T",
+        "subscript": "time base",
+        "value": 24.19893
+      },
+      {
+        "name": "p",
+        "value": 2.845227e-56
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 1
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.2.0"
+    }
+  },
+  "poisson_test_comparison": {
+    "name": "c(11, 6 + 8 + 7) time base: c(800, 1083 + 1050 + 878)",
+    "method": "Comparison of Poisson rates",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "ratio",
+        "subscript": "rate",
+        "value": 1.971488,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.858426,
+        "upper": 4.277266
+      },
+      {
+        "name": "count",
+        "symbol": "n",
+        "subscript": "event(1)",
+        "value": 11
+      },
+      {
+        "name": "statistic",
+        "symbol": "n",
+        "subscript": "expected",
+        "value": 6.717397
+      },
+      {
+        "name": "p",
+        "value": 0.079669
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 1
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.2.0"
+    }
+  },
+  "shapiro_test": {
+    "name": "runif(100, min = 2, max = 4)",
+    "method": "Shapiro-Wilk normality test",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "W",
+        "value": 0.959346
+      },
+      {
+        "name": "p",
+        "value": 0.003613
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.2.0"
+    }
+  },
+  "friedman_test": {
+    "name": "rounding_times",
+    "method": "Friedman rank sum test",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "χ²",
+        "value": 11.142857
+      },
+      {
+        "name": "df",
+        "value": 2
+      },
+      {
+        "name": "p",
+        "value": 0.003805
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.2.0"
+    }
+  },
+  "mantelhaen_test": {
+    "name": "Satisfaction",
+    "method": "Cochran-Mantel-Haenszel test",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "CMH",
+        "value": 10.200089
+      },
+      {
+        "name": "df",
+        "value": 9
+      },
+      {
+        "name": "p",
+        "value": 0.334531
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.2.0"
+    }
+  },
+  "mantelhaen_test_2by2": {
+    "name": "Rabbits",
+    "method": "Mantel-Haenszel chi-squared test (with continuity correction)",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "OR",
+        "value": 7,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 1.026713,
+        "upper": 47.725133
+      },
+      {
+        "name": "statistic",
+        "symbol": "χ²",
+        "value": 3.928571
+      },
+      {
+        "name": "df",
+        "value": 1
+      },
+      {
+        "name": "p",
+        "value": 0.047472
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 1
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.2.0"
+    }
+  },
+  "mantelhaen_test_2by2_exact": {
+    "name": "Rabbits",
+    "method": "Exact conditional test of independence in 2 x 2 x k tables",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "OR",
+        "value": 10.361024,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 1.077401,
+        "upper": 529.837399
+      },
+      {
+        "name": "statistic",
+        "symbol": "S",
+        "value": 16
+      },
+      {
+        "name": "p",
+        "value": 0.039945
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 1
+    },
+    "package": {
+      "name": "stats",
+      "version": "4.2.0"
     }
   }
 }

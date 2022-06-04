@@ -81,3 +81,13 @@ add_package_info <- function(list, package) {
   
   return(list)
 }
+
+expect_equal_models <- function(model, tidy_model_test, tolerance = 0.001) {
+  tidy_model <- tidy_stats(model)
+  
+  tidy_model$package <- NULL
+  tidy_model_test$package <- NULL
+  
+  expect_equal(tidy_model, tidy_model_test, tolerance = tolerance)
+}
+

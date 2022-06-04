@@ -1,25 +1,4 @@
 
-# Todo
-# ?stats::PP.test()
-# ?stats::Box.test()
-# ?stats::mood.test()
-# ?stats::binom.test()
-# ?stats::quade.test()
-# ?stats::ansari.test()
-# ?stats::bartlett.test()
-# ?stats::fligner.test()
-# ?stats::kruskal.test()
-# ?stats::mauchly.test()
-# ?stats::mcnemar.test()
-# ?stats::poisson.test()
-# ?stats::shapiro.test()
-# ?stats::friedman.test()
-# ?stats::mantelhaen.test()
-# ?stats::prop.trend.test()
-# ?stats::pairwise.t.test()
-# ?stats::pairwise.prop.test()
-# ?stats::pairwise.wilcox.test()
-
 # Setup -------------------------------------------------------------------
 
 # Load packages
@@ -104,7 +83,7 @@ set.seed(1)
 
 # Get data
 heads <- rbinom(1, size = 100, prob = .5)
-smokers  <- c(83, 90, 129, 70)
+smokers <- c(83, 90, 129, 70)
 patients <- c(86, 93, 136, 82)
 
 # Run analyses
@@ -122,6 +101,21 @@ results <- results %>%
 prop_test
 prop_test_correct
 prop_test_smokers
+
+# prop.trend.test()  ------------------------------------------------------
+
+# Run analysis
+prop_trend_test <- prop.trend.test(smokers, patients)
+prop_trend_test_scores <- prop.trend.test(smokers, patients, c(0, 0, 0, 1))
+
+# Add stats
+results <- results %>%
+  add_stats(prop_trend_test) %>%
+  add_stats(prop_trend_test_scores)
+
+# Inspect output
+prop_trend_test
+prop_trend_test_scores
 
 # wilcox.test() -----------------------------------------------------------
 
@@ -161,7 +155,7 @@ wilcoxon_rank_sum_conf
 
 # Get data
 x <- c(2.9, 3.0, 2.5, 2.6, 3.2)
-y <- c(3.8, 2.7, 4.0, 2.4)     
+y <- c(3.8, 2.7, 4.0, 2.4)
 z <- c(2.8, 3.4, 3.7, 2.2, 2.0)
 
 # Run analyses
@@ -175,7 +169,7 @@ results <- results %>%
 
 # Inspect output
 kruskal
-kruskal_formula 
+kruskal_formula
 
 # fisher.test() -----------------------------------------------------------
 
@@ -184,23 +178,23 @@ set.seed(2015)
 
 # Get data
 TeaTasting <- matrix(
-  data = c(3, 1, 1, 3), 
+  data = c(3, 1, 1, 3),
   nrow = 2,
   dimnames = list(Guess = c("Milk", "Tea"), Truth = c("Milk", "Tea"))
 )
 
 Convictions <- matrix(
-  data = c(2, 10, 15, 3), 
-  nrow = 2, 
+  data = c(2, 10, 15, 3),
+  nrow = 2,
   dimnames = list(
-    c("Dizygotic", "Monozygotic"), 
+    c("Dizygotic", "Monozygotic"),
     c("Convicted", "Not convicted")
   )
 )
 
 Job <- matrix(
-  data = c(1, 2, 1, 0, 3, 3, 6, 1, 10, 10, 14, 9, 6, 7, 12, 11), 
-  nrow = 4, 
+  data = c(1, 2, 1, 0, 3, 3, 6, 1, 10, 10, 14, 9, 6, 7, 12, 11),
+  nrow = 4,
   ncol = 4,
   dimnames = list(
     income = c("< 15k", "15-25k", "25-40k", "> 40k"),
@@ -258,7 +252,7 @@ results <- results %>%
   add_stats(ks_test_two) %>%
   add_stats(ks_test_one) %>%
   add_stats(ks_test_inexact) %>%
-  add_stats(ks_test_greater) 
+  add_stats(ks_test_greater)
 
 # Inspect output
 ks_test_two
@@ -270,7 +264,7 @@ ks_test_greater
 
 # Run analyses
 oneway_test <- oneway.test(extra ~ group, data = sleep)
-oneway_test_equal_var <- oneway.test(extra ~ group, data = sleep, 
+oneway_test_equal_var <- oneway.test(extra ~ group, data = sleep,
   var.equal = TRUE)
 
 # Add stats
@@ -299,6 +293,332 @@ results <- add_stats(results, var_test)
 
 # Inspect output
 var_test
+
+# mauchly.test() ----------------------------------------------------------
+
+# Get data
+example(SSD)
+
+idata <- data.frame(
+  deg = gl(3, 1, 6, labels = c(0, 4, 8)),
+  noise = gl(2, 3, 6, labels = c("A", "P"))
+)
+
+# Run analyses
+mauchly_test <- mauchly.test(mlmfit, X = ~ 1)
+mauchly_test_orthogonal <- mauchly.test(mlmfit, X = ~ deg + noise, 
+  idata = idata)
+mauchly_test_spanned <- mauchly.test(mlmfit, M = ~ deg + noise, X = ~ noise,
+  idata = idata)
+
+# Add stats
+results <- results %>%
+  add_stats(mauchly_test) %>%
+  add_stats(mauchly_test_orthogonal) %>%
+  add_stats(mauchly_test_spanned)
+
+# Inspect output
+mauchly_test
+mauchly_test_orthogonal
+mauchly_test_spanned
+
+# mcnemar.test()  ---------------------------------------------------------
+
+# Get data
+Performance <- matrix(
+  data = c(794, 86, 150, 570),
+  nrow = 2,
+  dimnames = list(
+    "1st Survey" = c("Approve", "Disapprove"),
+    "2nd Survey" = c("Approve", "Disapprove")
+  )
+)
+
+# Run analysis
+mcnemar_test <- mcnemar.test(Performance)
+mcnemar_test_nocorrect <- mcnemar.test(Performance, correct = FALSE)
+
+# Add stats
+results <- results %>%
+  add_stats(mcnemar_test) %>%
+  add_stats(mcnemar_test_nocorrect)
+
+# Inspect output
+mcnemar_test
+mcnemar_test_nocorrect
+
+# binom.test()  -----------------------------------------------------------
+
+# Run analysis
+binom_test <- binom.test(c(682, 243))
+binom_test_params <- binom.test(c(682, 243), p = 3 / 4, alternative = "less")
+
+# Add stats
+results <- results %>%
+  add_stats(binom_test) %>%
+  add_stats(binom_test_params)
+
+# Inspect output
+binom_test
+binom_test_params
+
+# PP.test()  --------------------------------------------------------------
+
+# Set seed
+set.seed(1)
+
+# Get data
+x <- rnorm(1000)
+y <- cumsum(x)
+
+# Run analysis
+pp_test <- PP.test(x)
+pp_test_long <- PP.test(y, lshort = FALSE)
+
+# Add stats
+results <- results %>%
+  add_stats(pp_test) %>%
+  add_stats(pp_test_long)
+
+# Inspect output
+pp_test
+pp_test_long
+
+# Box.test()  -------------------------------------------------------------
+
+# Set seed
+set.seed(1)
+
+# Get data
+x <- rnorm(100)
+
+# Run analysis
+box_test <- Box.test(x, lag = 1)
+box_test_ljung <- Box.test(x, lag = 2, type = "Ljung")
+
+# Add stats
+results <- results %>%
+  add_stats(box_test) %>%
+  add_stats(box_test_ljung)
+
+# Inspect output
+box_test
+box_test_ljung
+
+# ansari.test()  ----------------------------------------------------------
+
+# Set seed
+set.seed(1)
+
+# Get data
+ramsay <- c(111, 107, 100, 99, 102, 106, 109, 108, 104, 99, 101, 96, 97, 102, 
+  107, 113, 116, 113, 110, 98)
+jung_parekh <- c(107, 108, 106, 98, 105, 103, 110, 105, 104, 100, 96, 108, 103, 
+  104, 114, 114, 113, 108, 106, 99)
+
+# Run analyses
+ansari_test <- ansari.test(ramsay, jung_parekh)
+ansari_test_ci <- ansari.test(rnorm(100), rnorm(100, 0, 2), conf.int = TRUE)
+
+# Add stats
+results <- results %>%
+  add_stats(ansari_test) %>%
+  add_stats(ansari_test_ci)
+
+# Inspect output
+ansari_test
+ansari_test_ci
+
+# mood.test()  ------------------------------------------------------------
+
+# Get data
+ramsay <- c(111, 107, 100, 99, 102, 106, 109, 108, 104, 99,
+  101, 96, 97, 102, 107, 113, 116, 113, 110, 98)
+jung_parekh <- c(107, 108, 106, 98, 105, 103, 110, 105, 104,
+  100, 96, 108, 103, 104, 114, 114, 113, 108, 106, 99)
+
+# Run analysis
+mood_test <- mood.test(ramsay, jung_parekh)
+
+# Add stats
+results <- add_stats(results, mood_test)
+
+# Inspect output
+mood_test
+
+# quade.test()  -----------------------------------------------------------
+
+# Get data
+dataFreq <- matrix(
+  nrow = 7, 
+  byrow = TRUE,
+  data = c(5, 4, 7, 10, 12,
+    1,  3,  1,  0,  2,
+    16, 12, 22, 22, 35,
+    5, 4, 3, 5, 4,
+    10, 9, 7, 13, 10,
+    19, 18, 28, 37, 58,
+    10, 7, 6, 8, 7
+  ),
+  dimnames = list(Store = as.character(1:7), Brand = LETTERS[1:5])
+)
+
+# Run analysis
+quade_test <- quade.test(dataFreq)
+
+# Add stats
+results <- add_stats(results, quade_test)
+
+# Inspect output
+quade_test
+
+# bartlett.test()  --------------------------------------------------------
+
+# Run analysis
+bartlett_test <- bartlett.test(InsectSprays$count, InsectSprays$spray)
+
+# Add stats
+results <- add_stats(results, bartlett_test)
+
+# Inspect output
+bartlett_test
+
+# fligner.test()  ---------------------------------------------------------
+
+# Run analysis
+fligner_test <- fligner.test(InsectSprays$count, InsectSprays$spray)
+
+# Add stats
+results <- add_stats(results, fligner_test)
+
+# Inspect output
+fligner_test
+
+# poisson.test()  ---------------------------------------------------------
+
+# Run analysis
+poisson_test <- poisson.test(137, 24.19893)
+poisson_test_comparison <- poisson.test(
+  x = c(11, 6 + 8 + 7), 
+  T = c(800, 1083 + 1050 + 878)
+)
+
+# Add stats
+results <- results %>%
+  add_stats(poisson_test) %>%
+  add_stats(poisson_test_comparison)
+
+# Inspect output
+poisson_test
+poisson_test_comparison
+
+# shapiro.test()  ---------------------------------------------------------
+
+# Set seed
+set.seed(1)
+
+# Run analysis
+shapiro_test = shapiro.test(runif(100, min = 2, max = 4))
+
+# Add stats
+results <- add_stats(results, shapiro_test)
+
+# Inspect output
+shapiro_test
+
+# friedman.test()  --------------------------------------------------------
+
+# Get data
+rounding_times <- matrix(
+  nrow = 22,
+  byrow = TRUE,
+  data = c(
+    5.40, 5.50, 5.55,
+    5.85, 5.70, 5.75,
+    5.20, 5.60, 5.50,
+    5.55, 5.50, 5.40,
+    5.90, 5.85, 5.70,
+    5.45, 5.55, 5.60,
+    5.40, 5.40, 5.35,
+    5.45, 5.50, 5.35,
+    5.25, 5.15, 5.00,
+    5.85, 5.80, 5.70,
+    5.25, 5.20, 5.10,
+    5.65, 5.55, 5.45,
+    5.60, 5.35, 5.45,
+    5.05, 5.00, 4.95,
+    5.50, 5.50, 5.40,
+    5.45, 5.55, 5.50,
+    5.55, 5.55, 5.35,
+    5.45, 5.50, 5.55,
+    5.50, 5.45, 5.25,
+    5.65, 5.60, 5.40,
+    5.70, 5.65, 5.55,
+    6.30, 6.30, 6.25
+  ),
+  dimnames = list(1:22, c("Round Out", "Narrow Angle", "Wide Angle"))
+)
+
+# Run analysis
+friedman_test <- friedman.test(rounding_times)
+
+# Add stats
+results <- add_stats(results, friedman_test)
+
+# Inspect output
+friedman_test
+
+# mantelhaen.test()  ------------------------------------------------------
+
+# Get data
+Satisfaction <- as.table(
+  array(
+    dim = c(4, 4, 2),
+    data = c(
+      1, 2, 0, 0, 3, 3, 1, 2,
+      11, 17, 8, 4, 2, 3, 5, 2,
+      1, 0, 0, 0, 1, 3, 0, 1,
+      2, 5, 7, 9, 1, 1, 3, 6
+    ),
+    dimnames = list(
+      Income = c("<5000", "5000-15000", "15000-25000", ">25000"), 
+      `Job Satisfaction` = c("V_D", "L_S", "M_S", "V_S"),
+      Gender = c("Female", "Male")
+    )
+  )
+)
+
+Rabbits <- array(
+  dim = c(2, 2, 5),
+  data = c(
+      0, 0, 6, 5,
+      3, 0, 3, 6,
+      6, 2, 0, 4,
+      5, 6, 1, 0,
+      2, 5, 0, 0
+  ),
+  dimnames = list(
+    Delay = c("None", "1.5h"),
+    Response = c("Cured", "Died"),
+    Penicillin.Level = c("1/8", "1/4", "1/2", "1", "4")
+  )
+)
+
+# Run analyses
+mantelhaen_test <- mantelhaen.test(Satisfaction)
+mantelhaen_test_2by2 <- mantelhaen.test(Rabbits)
+mantelhaen_test_2by2_exact <- mantelhaen.test(Rabbits, exact = TRUE)
+
+# Add stats
+results <- results %>%
+  add_stats(mantelhaen_test) %>%
+  add_stats(mantelhaen_test_2by2) %>%
+  add_stats(mantelhaen_test_2by2_exact)
+
+# Inspect output
+mantelhaen_test
+mantelhaen_test_2by2
+mantelhaen_test_2by2_exact
 
 # tidy_stats_to_data_frame() ----------------------------------------------
 

@@ -83,30 +83,38 @@ tidy_stats <- function(x, args = NULL) UseMethod("tidy_stats")
 #' @export
 tidy_stats.htest <- function(x, args = NULL) {
   # Create the analysis list and set the name
+  if (str_detect(x$data.name, ",\n using scores:")) {
+    x$data.name = paste0(gsub(" ,\n using scores:", " (scores:", x$data.name), ')')
+  }
   analysis <- list(name = x$data.name)
-  
+
+  # Reduce Mauchly's test's method to one element
+  if (x$method[1] == "Mauchly's test of sphericity") {
+      x$method = "Mauchly's test of sphericity"
+  }
+
   # Extract and clean up the method
   method <- dplyr::case_when(
-    stringr::str_detect(x$method, "with simulated p-value") ~ 
-      stringr::str_replace(x$method, "with simulated p-value(.|\n|\t)+", 
+    stringr::str_detect(x$method, "with simulated p-value") ~
+      stringr::str_replace(x$method, "with simulated p-value(.|\n|\t)+",
         "(with simulated p-value)"),
-    stringr::str_detect(x$method, "with continuity correction") ~ 
-      stringr::str_replace(x$method, "with continuity correction", 
+    stringr::str_detect(x$method, "with continuity correction") ~
+      stringr::str_replace(x$method, "with continuity correction",
         "(with continuity correction)"),
-    stringr::str_detect(x$method, "without continuity correction") ~ 
-      stringr::str_replace(x$method, "without continuity correction", 
+    stringr::str_detect(x$method, "without continuity correction") ~
+      stringr::str_replace(x$method, "without continuity correction",
         "(without continuity correction)"),
     stringr::str_detect(x$method, "hybrid using asym") ~
       stringr::str_replace(x$method, "hybrid using asym(.)+", "(hybrid)"),
     stringr::str_detect(x$method, "Two Sample t-test") ~ trimws(x$method),
-    stringr::str_detect(x$method, "One-way analysis of means") ~ 
+    stringr::str_detect(x$method, "One-way analysis of means") ~
       "One-way analysis of means",
     TRUE ~ x$method
   )
-  
+
   # Add method to the analysis
   analysis$method <- method
-  
+
   # Create a list to add the statistics to
   statistics <- list()
 
@@ -114,7 +122,7 @@ tidy_stats.htest <- function(x, args = NULL) {
   # several special cases
   # Special case: Calculate estimate for Two Sample t-tests
   if (!is.null(x$estimate)) {
-    
+
     # Special case: Calculate the estimate as a mean difference in the case of
     # a two sample t-test
     # Special case: If there is more than 1 estimate, set the estimate to
@@ -126,16 +134,18 @@ tidy_stats.htest <- function(x, args = NULL) {
     } else {
       value <- x$estimate[[1]]
     }
-    
+
     # Set the name
     name <- dplyr::case_when(
       method == "One Sample t-test" ~ "mean",
-      stringr::str_detect(method, "Two Sample t-test") | 
+      stringr::str_detect(method, "Two Sample t-test") |
         method == "Paired t-test"~ "mean difference",
       names(x$estimate)[1] == "ratio of variances" ~ "variance ratio",
+      names(x$estimate)[1] == "probability of success" ~ "probability ratio",
+      method == "One Sample t-test" ~ "mean",
       TRUE ~ names(x$estimate)
     )
-    
+
     # Set the symbol
     # Explicitly ask for the first element because sometimes there are more, in
     # which case case_when() returns multiple values
@@ -147,26 +157,33 @@ tidy_stats.htest <- function(x, args = NULL) {
       names(x$estimate)[1] == "p" ~ "p̂",
       names(x$estimate)[1] == "difference in location" ~ "Mdn",
       names(x$estimate)[1] == "ratio of variances" ~ "VR",
+      names(x$estimate)[1] == "probability of success" ~ "P",
+      names(x$estimate)[1] == "ratio of scales" ~ "ratio",
+      names(x$estimate)[1] == "event rate" ~ "rate",
+      names(x$estimate)[1] == "rate ratio" ~ "ratio",
+      names(x$estimate)[1] == "common odds ratio" ~ "OR",
       stringr::str_detect(method, "t-test") ~ "M"
     )
-  
+
     # Special case: In the case of a paired t-test and two sample t-test (Welch
     # or not), set the subscript to 'difference'
     subscript <- dplyr::case_when(
-      stringr::str_detect(method, "Two Sample t-test") | 
+      stringr::str_detect(method, "Two Sample t-test") |
         method == "Paired t-test" ~ "diff.",
       names(x$estimate)[1] == "tau" ~ "τ",
       names(x$estimate)[1] == "rho" ~ "S",
       names(x$estimate)[1] == "difference in location" ~ "diff.",
+      names(x$estimate)[1] == "event rate" ~ "event",
+      names(x$estimate)[1] == "rate ratio" ~ "rate"
     )
-    
-    statistics <- add_statistic(statistics, "estimate", value, symbol, 
-      subscript, "CI", attr(x$conf.int, "conf.level"), x$conf.int[1], 
+
+    statistics <- add_statistic(statistics, "estimate", value, symbol,
+      subscript, "CI", attr(x$conf.int, "conf.level"), x$conf.int[1],
       x$conf.int[2])
   }
 
   statistics <- add_statistic(statistics, "SE", x$stderr)
-  
+
   # Set the symbol of the statistic
   if (!is.null(names(x$statistic))) {
     symbol <- dplyr::case_when(
@@ -174,31 +191,64 @@ tidy_stats.htest <- function(x, args = NULL) {
       names(x$statistic) == "Kruskal-Wallis chi-squared" ~ "χ²",
       names(x$statistic) == "D^+" ~ "D",
       names(x$statistic) == "D^-" ~ "D",
+      stringr::str_detect(names(x$statistic), "McNemar") ~ "χ²",
+      names(x$statistic) == "Quade F" ~ "F",
+      names(x$statistic) == "Bartlett's K-squared" ~ "K²",
+      names(x$statistic) == "Fligner-Killeen:med chi-squared" ~ "χ²",
+      names(x$statistic) == "number of successes" ~ "k",
+      names(x$statistic) == "number of events" ~ "n",
+      names(x$statistic) == "count1" ~ "n",
+      names(x$statistic) == "Friedman chi-squared" ~ "χ²",
+      names(x$statistic) == "Cochran-Mantel-Haenszel M^2" ~ "CMH",
+      names(x$statistic) == "Mantel-Haenszel X-squared" ~ "χ²",
       TRUE ~ names(x$statistic)
-    )  
+    )
+    subscript <- dplyr::case_when(
+      x$method == "Exact binomial test" ~ "successes",
+      names(x$statistic) == "number of events" ~ "total",
+      names(x$statistic) == "count1" ~ "event(1)"
+    )
+    name <-
+      ifelse(symbol %in% c("k", "n"),
+        "count",
+        "statistic")
   }
-  
-  statistics <- add_statistic(statistics, "statistic", x$statistic[[1]], symbol)
-  
+
+  statistics = add_statistic(statistics, name, x$statistic[[1]], symbol, subscript)
+
   # Special case: One-way analysis of means has more than 1 df
   if (length(x$parameter) > 1) {
-    statistics <- add_statistic(statistics, "df numerator", x$parameter[[1]], 
-      "df", "num.")
-    statistics <- add_statistic(statistics, "df denominator", 
-      x$parameter[[2]], "df", "den.")
-  } else {
+    statistics <-
+      add_statistic(statistics, "df numerator", x$parameter[[1]],
+                    "df", "num.")
+    statistics <- add_statistic(statistics, "df denominator",
+                                x$parameter[[2]], "df", "den.")
+  } else if (x$method == "Phillips-Perron Unit Root Test") {
+    statistics <-
+      add_statistic(statistics, 'lag', as.numeric(x$parameter))
+  } else if (x$method == "Exact binomial test") {
+    statistics <- statistics %>%
+      add_statistic("count", x$parameter[[1]], 'n', 'total') %>%
+      add_statistic("statistic", x$null.value[[1]], 'P', 'expected')
+  } else if (x$method == "Exact Poisson test") {
+    statistics <-
+      add_statistic(statistics, "statistic", x$parameter[[1]], 'T', 'time base')
+  } else if (x$method == "Comparison of Poisson rates") {
+    statistics <-
+      add_statistic(statistics, "statistic", x$parameter[[1]], 'n', 'expected')
+  } else{
     statistics <- add_statistic(statistics, "df", x$parameter[[1]])
   }
-  
+
   statistics <- add_statistic(statistics, "p", x$p.value)
 
   # Add statistics to the analysis
   analysis$statistics <- statistics
-  
+
   # Add additional information
   if (!is.null(x$alternative)) {
     alternative <- list(direction = x$alternative)
-    
+
     if (!is.null(x$null.value)) {
       alternative$null_value <- x$null.value[[1]]
     }
@@ -207,35 +257,35 @@ tidy_stats.htest <- function(x, args = NULL) {
   }
 
   if (stringr::str_detect(x$method, "simulated p-value")) {
-    analysis$sim <- as.numeric(stringr::str_extract(x$method, 
+    analysis$sim <- as.numeric(stringr::str_extract(x$method,
       "[0-9](e\\+)?([0-9].)?"))
   }
-  
+
   if (stringr::str_detect(x$method, "hybrid")) {
     analysis$hybrid_parameters <- list(
       expect = readr::parse_number(
         stringr::str_extract(x$method, "exp=[0-9+]")
       ),
-      percent = readr::parse_number(stringr::str_extract(x$method, 
-        "perc=[0-9]+")), 
+      percent = readr::parse_number(stringr::str_extract(x$method,
+        "perc=[0-9]+")),
       Emin = readr::parse_number(stringr::str_extract(x$method, "exp=[0-9+]"))
     )
   }
-  
+
   if (x$method == "Welch Two Sample t-test") {
     analysis$var_equal <- FALSE
   } else if (x$method == " Two Sample t-test") {
     analysis$var_equal <- TRUE
   } else if (x$method == "One-way analysis of means") {
     analysis$var_equal <- TRUE
-  } else if (stringr::str_detect(x$method, 
+  } else if (stringr::str_detect(x$method,
       "\\(not assuming equal variances\\)")) {
-    analysis$var_equal <- FALSE  
+    analysis$var_equal <- FALSE
   }
-  
+
   # Add package information
   analysis <- add_package_info(analysis, "stats")
-  
+
   return(analysis)
 }
 
