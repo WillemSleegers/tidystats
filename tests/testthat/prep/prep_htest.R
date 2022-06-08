@@ -306,10 +306,16 @@ idata <- data.frame(
 
 # Run analyses
 mauchly_test <- mauchly.test(mlmfit, X = ~ 1)
-mauchly_test_orthogonal <- mauchly.test(mlmfit, X = ~ deg + noise, 
-  idata = idata)
-mauchly_test_spanned <- mauchly.test(mlmfit, M = ~ deg + noise, X = ~ noise,
-  idata = idata)
+mauchly_test_orthogonal <- mauchly.test(
+  mlmfit, 
+  X = ~ deg + noise, 
+  idata = idata
+)
+mauchly_test_spanned <- mauchly.test(
+  mlmfit, 
+  M = ~ deg + noise, X = ~ noise,
+  idata = idata
+)
 
 # Add stats
 results <- results %>%
@@ -626,4 +632,6 @@ df <- tidy_stats_to_data_frame(results)
 
 # write_stats() -----------------------------------------------------------
 
-write_stats(results, "tests/testthat/data/htest.json")
+# NOTE: Only overwrite the existing file if we know everything works because
+# the file is used in the tests
+# write_stats(results, "tests/testthat/data/htest.json")
