@@ -66,6 +66,28 @@
 #'   \item \code{lmer()}
 #' }
 #'
+#' \code{metafor}:
+#' \itemize{
+#'   item code{anova.rma()}
+#'   item code{confint.rma()}
+#'   item code{cumul()}
+#'   item code{fsn()}
+#'   item code{hc()}
+#'   item code{matreg()}
+#'   item code{permutest()}
+#'   item code{ranktest()}
+#'   item code{regtest()}
+#'   item code{rma.glmm()}
+#'   item code{rma.mh()}
+#'   item code{rma.mv()}
+#'   item code{rma.peto()}
+#'   item code{rma.uni()}
+#'   item code{robust()}
+#'   item code{selmodel()}
+#'   item code{tes()}
+#'   item code{trimfill()}
+#' }
+#'
 #' \code{BayesFactor}:
 #' \itemize{
 #'   \item \code{generalTestBF()}

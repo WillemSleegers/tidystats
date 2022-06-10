@@ -43,7 +43,7 @@ add_statistic <- function(list, name, value, symbol = NULL, subscript = NULL,
   interval = NULL, level = NULL, lower = NULL, upper = NULL) {
 
   if (!is.null(value)) {
-    if (!is.na(value) || name == "p") {
+    if (!anyNA(value) || all(name == "p")) {
       new_list <- list()
       new_list$name <- name
 
@@ -80,4 +80,81 @@ add_package_info <- function(list, package) {
   )
 
   return(list)
+}
+
+df_to_group <- function(name, df) {
+  df = as.data.frame(df)
+  df[] <- sapply(df, function(x)
+    suppressWarnings(as.numeric(as.character(x))))
+  df = Filter(function(x)!all(is.na(x)), df)
+  if (ncol(df) == 0 || nrow(df) < 1 ) {
+     return(NULL)
+  }
+  if (any(rownames(df) == "")) {
+    rownames(df)[rownames(df) == ""] = 1:nrow(df)[rownames(df) == ""]
+  }
+  groups <- list(name = paste("Table:", name))
+  # Loop over the coefficients and add statistics to a group list
+  for (i in 1:nrow(df)) {
+    # Create a new group list
+    group <- list()
+    # Add the name and type of the coefficient
+    group$name <- rownames(df)[i]
+    # Create a new statistics list
+    statistics <- list()
+    for (j in 1:ncol(df)) {
+      statistics <-
+        add_statistic(statistics, colnames(df)[j], ifelse(is.na(df[i, j]), "-", df[i, j]))
+    }
+    # Add statistics to the group
+    group$statistics <- statistics
+    # Add the group to the groups of the coefficients groups list
+    groups$groups <- append(groups$groups, list(group))
+  }
+  return(list(groups))
+}
+
+replacers = list("tau" = "τ",
+                 "^2" = "²",
+                 "sigma" = "σ",
+                 "rho" = "ρ",
+                 "pval" = "p",
+                 "zval" = "z",
+                 "tval" = "ρ")
+
+ci_df_to_group <- function(name, df, level) {
+  df = as.data.frame(df)
+  if (any(rownames(df) == "")) {
+    rownames(df)[rownames(df) == ""] = 1:nrow(df)[rownames(df) == ""]
+  }
+  for (replacer in names(replacers)) {
+    rownames(df) = gsub(replacer, replacers[[replacer]], rownames(df), fixed = TRUE)
+  }
+  groups <- list(name = paste("Table:", name))
+  # Loop over the coefficients and add statistics to a group list
+  for (i in 1:nrow(df)) {
+    # Create a new group list
+    group <- list()
+    # Add the name and type of the coefficient
+    group$name <- rownames(df)[i]
+    # Create a new statistics list
+    statistics <- list()
+    if (!is.null(level)) {
+      statistics <-
+        add_statistic(statistics, "estimate", df$estimate[i], interval = "CI", 
+          level = level, lower = df$ci.lb[i], upper = df$ci.ub[i])
+    } else {
+      statistics <-
+        add_statistic(statistics, "estimate", df$estimate[i])
+      statistics <-
+        add_statistic(statistics, "interval", df$ci.lb[i], "CI", "lower")
+      statistics <-
+        add_statistic(statistics, "interval", df$ci.ub[i], "CI", "upper")
+    }
+    # Add statistics to the group
+    group$statistics <- statistics
+    # Add the group to the groups of the coefficients groups list
+    groups$groups <- append(groups$groups, list(group))
+  }
+  return(list(groups))
 }
