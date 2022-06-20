@@ -1,10 +1,6 @@
 
 # Setup -------------------------------------------------------------------
 
-# Load packages
-library(tidystats)
-library(tidyverse)
-
 # Load test data
 path <- system.file("tests/testthat/data/htest.json", package = "tidystats")
 test_results <- read_stats(path)
@@ -49,10 +45,10 @@ test_that("paired t-test works", {
 
 # Test: cor.test() --------------------------------------------------------
 
-x <- c(44.4, 45.9, 41.9, 53.3, 44.7, 44.1, 50.7, 45.2, 60.1)
-y <- c(2.6, 3.1, 2.5, 5.0, 3.6, 4.0, 5.2, 2.8, 3.8)
-
 test_that("pearson correlation works", {
+  x <- c(44.4, 45.9, 41.9, 53.3, 44.7, 44.1, 50.7, 45.2, 60.1)
+  y <- c(2.6, 3.1, 2.5, 5.0, 3.6, 4.0, 5.2, 2.8, 3.8)
+  
   model <- cor.test(x, y, method = "pearson")
 
   expect_equal_models(
@@ -62,6 +58,9 @@ test_that("pearson correlation works", {
 })
 
 test_that("spearman correlation works", {
+  x <- c(44.4, 45.9, 41.9, 53.3, 44.7, 44.1, 50.7, 45.2, 60.1)
+  y <- c(2.6, 3.1, 2.5, 5.0, 3.6, 4.0, 5.2, 2.8, 3.8)
+  
   model <- cor.test(x, y, method = "spearman")
 
   expect_equal_models(
@@ -71,6 +70,9 @@ test_that("spearman correlation works", {
 })
 
 test_that("kendall correlation works", {
+  x <- c(44.4, 45.9, 41.9, 53.3, 44.7, 44.1, 50.7, 45.2, 60.1)
+  y <- c(2.6, 3.1, 2.5, 5.0, 3.6, 4.0, 5.2, 2.8, 3.8)
+  
   model <- cor.test(x, y, method = "kendall")
 
   expect_equal_models(
@@ -126,10 +128,11 @@ test_that("chi-squared test with for given probabilities works", {
 
 # Test: prop.test() -------------------------------------------------------
 
-set.seed(1)
-heads <- rbinom(1, size = 100, prob = .5)
-
 test_that("1-sample proportion test works", {
+  set.seed(1)
+  
+  heads <- rbinom(1, size = 100, prob = .5)
+  
   model <- prop.test(heads, 100)
 
   expect_equal_models(
@@ -139,6 +142,10 @@ test_that("1-sample proportion test works", {
 })
 
 test_that("1-sample proportion test without continuity correction works", {
+  set.seed(1)
+  
+  heads <- rbinom(1, size = 100, prob = .5)
+  
   model <- prop.test(heads, 100, correct = FALSE)
 
   expect_equal_models(
@@ -161,10 +168,10 @@ test_that("4-sample proportion test works", {
 
 # Test: prop.test() -------------------------------------------------------
 
-smokers  <- c(83, 90, 129, 70)
-patients <- c(86, 93, 136, 82)
-
 test_that("Chi-squared test for trend in proportions works", {
+  smokers  <- c(83, 90, 129, 70)
+  patients <- c(86, 93, 136, 82)
+  
   model <- prop.trend.test(smokers, patients)
   
   expect_equal_models(
@@ -178,6 +185,9 @@ test_that(
     "Chi-squared test for trend in proportions (with alternative", 
     "scores) works"
   ), {
+  smokers  <- c(83, 90, 129, 70)
+  patients <- c(86, 93, 136, 82)
+  
   model <- prop.trend.test(smokers, patients, c(0, 0, 0, 1))
   
   expect_equal_models(
@@ -211,10 +221,10 @@ test_that("wilcoxon rank sum tests with continuity correction works", {
   )
 })
 
-x <- c(0.80, 0.83, 1.89, 1.04, 1.45, 1.38, 1.91, 1.64, 0.73, 1.46)
-y <- c(1.15, 0.88, 0.90, 0.74, 1.21)
-
 test_that("wilcoxon rank sum tests works", {
+  x <- c(0.80, 0.83, 1.89, 1.04, 1.45, 1.38, 1.91, 1.64, 0.73, 1.46)
+  y <- c(1.15, 0.88, 0.90, 0.74, 1.21)
+  
   model <- wilcox.test(x, y, alternative = "greater", exact = FALSE,
     correct = FALSE)
 
@@ -225,6 +235,9 @@ test_that("wilcoxon rank sum tests works", {
 })
 
 test_that("wilcoxon rank sum tests works", {
+  x <- c(0.80, 0.83, 1.89, 1.04, 1.45, 1.38, 1.91, 1.64, 0.73, 1.46)
+  y <- c(1.15, 0.88, 0.90, 0.74, 1.21)
+  
   model <- wilcox.test(x, y, conf.int = TRUE, conf.level = .9)
 
   expect_equal_models(
@@ -281,9 +294,9 @@ test_that("fisher's exact tests without a confidence interval works", {
   )
 })
 
-Job <- matrix(c(1, 2, 1, 0, 3, 3, 6, 1, 10, 10, 14, 9, 6, 7, 12, 11), 4, 4)
-
 test_that("fisher's exact tests on r x c tables works", {
+  Job <- matrix(c(1, 2, 1, 0, 3, 3, 6, 1, 10, 10, 14, 9, 6, 7, 12, 11), 4, 4)
+  
   model <- fisher.test(Job)
 
   expect_equal_models(
@@ -294,6 +307,8 @@ test_that("fisher's exact tests on r x c tables works", {
 
 test_that("fisher's exact tests with simulated p-value works", {
   set.seed(2015)
+  
+  Job <- matrix(c(1, 2, 1, 0, 3, 3, 6, 1, 10, 10, 14, 9, 6, 7, 12, 11), 4, 4)
   
   model <- fisher.test(Job, simulate.p.value = TRUE, B = 1e5)
 
@@ -322,11 +337,12 @@ test_that("fisher's exact tests hybrid works", {
 
 # Test: ks.test() ---------------------------------------------------------
 
-set.seed(1)
-x <- rnorm(50)
-y <- runif(30)
-
 test_that("two-sample kolmogorov-smirnov test works", {
+  set.seed(1)
+  
+  x <- rnorm(50)
+  y <- runif(30)
+  
   model <- ks.test(x, y)
   
   expect_equal_models(
@@ -336,6 +352,11 @@ test_that("two-sample kolmogorov-smirnov test works", {
 })
 
 test_that("one-sample kolmogorov-smirnov test works", {
+  set.seed(1)
+  
+  x <- rnorm(50)
+  y <- runif(30)
+  
   model <- ks.test(x + 2, "pgamma", 3, 2)
 
   expect_equal_models(
@@ -345,6 +366,11 @@ test_that("one-sample kolmogorov-smirnov test works", {
 })
 
 test_that("inexact kolmogorov-smirnov test works", {
+  set.seed(1)
+  
+  x <- rnorm(50)
+  y <- runif(30)
+  
   model <- ks.test(x + 2, "pgamma", 3, 2, exact = FALSE)
 
   expect_equal_models(
@@ -354,6 +380,11 @@ test_that("inexact kolmogorov-smirnov test works", {
 })
 
 test_that("greater alternative kolmogorov-smirnov test works", {
+  set.seed(1)
+  
+  x <- rnorm(50)
+  y <- runif(30)
+  
   model <- ks.test(x + 2, "pgamma", 3, 2, alternative = "greater")
 
   expect_equal_models(
@@ -400,9 +431,9 @@ test_that("F test to compare two variances works", {
 
 # Test: mauchly.test() ----------------------------------------------------
 
-invisible(capture.output(utils::example(SSD)))
-
 test_that("Mauchly's test of sphericity (traditional) works", {
+  invisible(capture.output(utils::example(SSD)))
+  
   model <- mauchly.test(mlmfit, X = ~ 1)
   
   expect_equal_models(
@@ -411,12 +442,14 @@ test_that("Mauchly's test of sphericity (traditional) works", {
   )
 })
 
-idata <- data.frame(
-  deg = gl(3, 1, 6, labels = c(0, 4, 8)),
-  noise = gl(2, 3, 6, labels = c("A", "P"))
-)
-
 test_that("Mauchly's test of sphericity (inner projection) works", {
+  invisible(capture.output(utils::example(SSD)))
+  
+  idata <- data.frame(
+    deg = gl(3, 1, 6, labels = c(0, 4, 8)),
+    noise = gl(2, 3, 6, labels = c("A", "P"))
+  )
+  
   model <- mauchly.test(mlmfit, X = ~ deg + noise, idata = idata)
   
   expect_equal_models(
@@ -426,6 +459,13 @@ test_that("Mauchly's test of sphericity (inner projection) works", {
 })
 
 test_that("Mauchly's test of sphericity (outer projection) works", {
+  invisible(capture.output(utils::example(SSD)))
+  
+  idata <- data.frame(
+    deg = gl(3, 1, 6, labels = c(0, 4, 8)),
+    noise = gl(2, 3, 6, labels = c("A", "P"))
+  )
+  
   model <- mauchly.test(mlmfit, M = ~ deg + noise, X = ~ noise, idata = idata)
     
   expect_equal_models(
@@ -436,16 +476,16 @@ test_that("Mauchly's test of sphericity (outer projection) works", {
 
 # Test: mcnemar.test() --------------------------------------------------------
 
-Performance <- matrix(
-  data = c(794, 86, 150, 570),
-  nrow = 2,
-  dimnames = list(
-    "1st Survey" = c("Approve", "Disapprove"),
-    "2nd Survey" = c("Approve", "Disapprove")
-  )
-)
-
 test_that("McNemar's Chi-squared test (with continuity correction) works", {
+  Performance <- matrix(
+    data = c(794, 86, 150, 570),
+    nrow = 2,
+    dimnames = list(
+      "1st Survey" = c("Approve", "Disapprove"),
+      "2nd Survey" = c("Approve", "Disapprove")
+    )
+  )
+  
   model <- mcnemar.test(Performance)
   
   expect_equal_models(
@@ -455,6 +495,15 @@ test_that("McNemar's Chi-squared test (with continuity correction) works", {
 })
 
 test_that("McNemar's Chi-squared test (without continuity correction) works", {
+  Performance <- matrix(
+    data = c(794, 86, 150, 570),
+    nrow = 2,
+    dimnames = list(
+      "1st Survey" = c("Approve", "Disapprove"),
+      "2nd Survey" = c("Approve", "Disapprove")
+    )
+  )
+  
   model <- mcnemar.test(Performance, correct = FALSE)
   
   expect_equal_models(
@@ -485,12 +534,12 @@ test_that("Exact binomial test (one-sided) works", {
 
 # Test: PP.test() --------------------------------------------------------
 
-set.seed(1)
-
-x <- rnorm(1000)
-y <- cumsum(x)
-
 test_that("Phillips-Perron unit root test works", {
+  set.seed(1)
+  
+  x <- rnorm(1000)
+  y <- cumsum(x)
+  
   model <- PP.test(x)
   
   expect_equal_models(
@@ -500,6 +549,11 @@ test_that("Phillips-Perron unit root test works", {
 })
 
 test_that("Phillips-Perron unit root test (long truncation parameter) works", {
+  set.seed(1)
+  
+  x <- rnorm(1000)
+  y <- cumsum(x)
+  
   model <- PP.test(y, lshort = FALSE)
   
   expect_equal_models(
@@ -510,11 +564,11 @@ test_that("Phillips-Perron unit root test (long truncation parameter) works", {
 
 # Test: Box.test() --------------------------------------------------------
 
-set.seed(1)
-
-x <- rnorm (100)
-
 test_that("Box-Pierce works", {
+  set.seed(1)
+
+  x <- rnorm (100)
+  
   model <- Box.test(x, lag = 1)
   
   expect_equal_models(
@@ -524,6 +578,10 @@ test_that("Box-Pierce works", {
 })
 
 test_that("Ljung-Pierce works", {
+  set.seed(1)
+
+  x <- rnorm (100)
+  
   model <- Box.test (x, lag = 2, type = "Ljung")
   
   expect_equal_models(
@@ -534,12 +592,12 @@ test_that("Ljung-Pierce works", {
 
 # Test: ansari.test() --------------------------------------------------------
 
-ramsay <- c(111, 107, 100, 99, 102, 106, 109, 108, 104, 99, 101, 96, 97, 102, 
-  107, 113, 116, 113, 110, 98)
-jung_parekh <- c(107, 108, 106, 98, 105, 103, 110, 105, 104, 100, 96, 108, 103, 
-  104, 114, 114, 113, 108, 106, 99)
-
 test_that("Ansari-Bradley test works", {
+  ramsay <- c(111, 107, 100, 99, 102, 106, 109, 108, 104, 99, 101, 96, 97, 102, 
+  107, 113, 116, 113, 110, 98)
+  jung_parekh <- c(107, 108, 106, 98, 105, 103, 110, 105, 104, 100, 96, 108, 
+    103, 104, 114, 114, 113, 108, 106, 99)
+  
   model <- suppressWarnings(ansari.test(ramsay, jung_parekh))
   
   expect_equal_models(
@@ -698,18 +756,6 @@ test_that("Friedman rank sum test works", {
 
 # Test: mantelhaen.test() -------------------------------------------------
 
-Rabbits <-
-  array(c(0, 0, 6, 5,
-    3, 0, 3, 6,
-    6, 2, 0, 4,
-    5, 6, 1, 0,
-    2, 5, 0, 0),
-  dim = c(2, 2, 5),
-  dimnames = list(
-  Delay = c("None", "1.5h"),
-  Response = c("Cured", "Died"),
-  Penicillin.Level = c("1/8", "1/4", "1/2", "1", "4")))
-
 test_that("Cochran-Mantel-Haenszel test works", {
   Satisfaction <- as.table(
     array(
@@ -738,6 +784,21 @@ test_that("Cochran-Mantel-Haenszel test works", {
 
 test_that("Mantel-Haenszel chi-squared test (with continuity correction) works", 
   {
+    Rabbits <- array(
+      c(
+        0, 0, 6, 5,
+        3, 0, 3, 6,
+        6, 2, 0, 4,
+        5, 6, 1, 0,
+        2, 5, 0, 0
+      ),
+      dim = c(2, 2, 5),
+      dimnames = list(
+      Delay = c("None", "1.5h"),
+      Response = c("Cured", "Died"),
+      Penicillin.Level = c("1/8", "1/4", "1/2", "1", "4"))
+    )
+    
     model <- mantelhaen.test(Rabbits)
     
     expect_equal_models(
@@ -748,6 +809,21 @@ test_that("Mantel-Haenszel chi-squared test (with continuity correction) works",
 )
 
 test_that("Exact conditional test of independence in 2 x 2 x k tables works", {
+  Rabbits <- array(
+    c(
+      0, 0, 6, 5,
+      3, 0, 3, 6,
+      6, 2, 0, 4,
+      5, 6, 1, 0,
+      2, 5, 0, 0
+    ),
+    dim = c(2, 2, 5),
+    dimnames = list(
+    Delay = c("None", "1.5h"),
+    Response = c("Cured", "Died"),
+    Penicillin.Level = c("1/8", "1/4", "1/2", "1", "4"))
+  )
+  
   model <- mantelhaen.test(Rabbits, exact = TRUE)
   
   expect_equal_models(

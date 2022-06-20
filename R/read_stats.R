@@ -31,7 +31,7 @@ read_stats <- function(file) {
   results <- jsonlite::read_json(file)
   
   # Look for character Inf's and convert them to numeric
-  results <- rapply(results, function(x) if(x == "Inf") Inf else x, 
+  results <- rapply(results, function(x) if (x == "Inf") Inf else x, 
     how = "replace")
   
   return(results)
