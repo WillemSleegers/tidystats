@@ -25,6 +25,11 @@
 #' @details
 #' Supported functions:
 #'
+#' \code{base}:
+#' \itemize{
+#'   \item \code{data.frame()}
+#' }
+#'
 #' \code{stats}:
 #' \itemize{
 #'   \item \code{anova()}
@@ -88,6 +93,13 @@
 #'   item code{trimfill()}
 #' }
 #'
+#' \code{marginaleffects}:
+#' \itemize{
+#'   \item \code{summary(marginaleffects())}
+#'   \item \code{summary(marginalmeans())}
+#'   \item \code{summary(comparisons())}
+#' }
+#'
 #' \code{BayesFactor}:
 #' \itemize{
 #'   \item \code{generalTestBF()}
@@ -146,12 +158,12 @@
 #'
 #' @export
 add_stats <- function(list, output, identifier = NULL, type = NULL,
-  preregistered = NULL, notes = NULL, args = NULL, class = NULL)
+  preregistered = NULL, notes = NULL, args = NULL, class = NULL, ...)
     UseMethod("add_stats", output)
 
 #' @export
 add_stats.default <- function(list, output, identifier = NULL, type = NULL,
-  preregistered = NULL, notes = NULL, args = NULL, class = NULL) {
+  preregistered = NULL, notes = NULL, args = NULL, class = NULL, ...) {
 
   # Create an identifier if it is not specified, else check whether it already
   # exists
@@ -176,7 +188,7 @@ add_stats.default <- function(list, output, identifier = NULL, type = NULL,
   }
 
   # Tidy the output
-  analysis <- tidy_stats(output, args = args)
+  analysis <- tidy_stats(output, args = args, ...)
 
   # Add type: primary, secondary, or exploratory
   if (!missing(type)) {

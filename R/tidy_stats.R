@@ -40,7 +40,7 @@
 #' str(list_sleep_test)
 #'
 #' @export
-tidy_stats <- function(x, args = NULL) UseMethod("tidy_stats")
+tidy_stats <- function(x, args = NULL, ...) UseMethod("tidy_stats")
 
 #' @describeIn tidy_stats tidy_stats method for class 'htest'
 #' @export
@@ -3690,7 +3690,7 @@ tidy_stats.rma.mv <- function(x, args = NULL) {
         rownames(vc) <- paste("σ²", seq_along(x$sigma2), sep = "")
       }
       analysis$groups <-
-        append(analysis$groups, df_to_group("Sigma", vc))
+        append(analysis$groups, df_to_group("Sigma", vc, na_rm = TRUE))
     }
     
     if (x$withG) {
@@ -3719,7 +3719,7 @@ tidy_stats.rma.mv <- function(x, args = NULL) {
         if (x$struct[1] == "ID")
           vc <- vc[1, , drop = FALSE]
         analysis$groups <-
-          append(analysis$groups, df_to_group("Tau", vc))
+          append(analysis$groups, df_to_group("Tau", vc, na_rm = TRUE))
       }
       
       if (is.element(x$struct[1], c("HCS", "HAR", "DIAG"))) {
@@ -3741,7 +3741,7 @@ tidy_stats.rma.mv <- function(x, args = NULL) {
         if (x$struct[1] == "DIAG")
           vc <- vc[seq_along(tau2), , drop = FALSE]
         analysis$groups <-
-          append(analysis$groups, df_to_group("Tau", vc))
+          append(analysis$groups, df_to_group("Tau", vc, na_rm = TRUE))
       }
       
       if (is.element(x$struct[1], c("UN", "UNR"))) {
@@ -3773,7 +3773,7 @@ tidy_stats.rma.mv <- function(x, args = NULL) {
         }
         
         analysis$groups <-
-          append(analysis$groups, df_to_group("Tau", vc))
+          append(analysis$groups, df_to_group("Tau", vc, na_rm = TRUE))
         
         
         if (length(x$rho) == 1L) {
@@ -3809,7 +3809,7 @@ tidy_stats.rma.mv <- function(x, args = NULL) {
             abbreviate(x$g.levels.f[[1]]))
         rownames(vc) <- x$g.levels.f[[1]]
         analysis$groups <-
-          append(analysis$groups, df_to_group("Rho", vc))
+          append(analysis$groups, df_to_group("Rho", vc, na_rm = TRUE))
       }
       
       if (is.element(x$struct[1], c("GEN"))) {
@@ -3826,7 +3826,7 @@ tidy_stats.rma.mv <- function(x, args = NULL) {
           abbreviate(x$g.names[-length(x$g.names)])
         vc <- cbind(vc, G.info)
         analysis$groups <-
-          append(analysis$groups, df_to_group("Tau", vc))
+          append(analysis$groups, df_to_group("Tau", vc, na_rm = TRUE))
         
       }
       
@@ -3835,7 +3835,7 @@ tidy_stats.rma.mv <- function(x, args = NULL) {
         colnames(vc) <- c("estimate", "square root", "fixed")
         rownames(vc) <- x$g.names[-length(x$g.names)]
         analysis$groups <-
-          append(analysis$groups, df_to_group("Tau", vc))
+          append(analysis$groups, df_to_group("Tau", vc, na_rm = TRUE))
         
       }
     }
@@ -3869,7 +3869,7 @@ tidy_stats.rma.mv <- function(x, args = NULL) {
         if (x$struct[2] == "ID")
           vc <- vc[1, , drop = FALSE]
         analysis$groups <-
-          append(analysis$groups, df_to_group("Gamma", vc))
+          append(analysis$groups, df_to_group("Gamma", vc, na_rm = TRUE))
         
       }
       
@@ -3895,7 +3895,7 @@ tidy_stats.rma.mv <- function(x, args = NULL) {
         if (x$struct[2] == "DIAG")
           vc <- vc[seq_along(gamma2), , drop = FALSE]
         analysis$groups <-
-          append(analysis$groups, df_to_group("Gamma", vc))
+          append(analysis$groups, df_to_group("Gamma", vc, na_rm = TRUE))
         
       }
       
@@ -3929,7 +3929,7 @@ tidy_stats.rma.mv <- function(x, args = NULL) {
           rownames(vc) <- paste("γ²", seq_along(x$h.levels.k), "  ", sep = "")
         }
         analysis$groups <-
-          append(analysis$groups, df_to_group("Gamma", vc))
+          append(analysis$groups, df_to_group("Gamma", vc, na_rm = TRUE))
         
         
         if (length(x$phi) == 1L) {
@@ -3966,7 +3966,7 @@ tidy_stats.rma.mv <- function(x, args = NULL) {
             abbreviate(x$h.levels.f[[1]])) ### FIXME: x$h.levels.f[[1]] may be numeric, in which case a wrapping 'header' is not recognized
         rownames(vc) <- x$h.levels.f[[1]]
         analysis$groups <-
-          append(analysis$groups, df_to_group("Phi", vc))
+          append(analysis$groups, df_to_group("Phi", vc, na_rm = TRUE))
       }
       
       if (is.element(x$struct[2], c("GEN"))) {
@@ -3983,7 +3983,7 @@ tidy_stats.rma.mv <- function(x, args = NULL) {
           abbreviate(x$h.names[-length(x$h.names)])
         vc <- cbind(vc, H.info)
         analysis$groups <-
-          append(analysis$groups, df_to_group("Gamma", vc))
+          append(analysis$groups, df_to_group("Gamma", vc, na_rm = TRUE))
         
       }
       
@@ -3992,7 +3992,7 @@ tidy_stats.rma.mv <- function(x, args = NULL) {
         colnames(vc) <- c("estimate", "square root", "fixed")
         rownames(vc) <- x$h.names[-length(x$h.names)]
         analysis$groups <-
-          append(analysis$groups, df_to_group("Gamma", vc))
+          append(analysis$groups, df_to_group("Gamma", vc, na_rm = TRUE))
         
       }
     }
@@ -4365,7 +4365,7 @@ tidy_stats.anova.rma <- function(x, args = NULL) {
        res.table <- res.table[-which(names(res.table) == "R²")]
 
     analysis$groups <-
-      append(analysis$groups, df_to_group("Likelihood ratio test of moderators", res.table))
+      append(analysis$groups, df_to_group("Likelihood ratio test of moderators", res.table, na_rm = TRUE))
   }
 
   # Add package information
@@ -4911,6 +4911,218 @@ tidy_stats.list.rma <- function(x, args = NULL) {
   
   # Add package information
   analysis <- add_package_info(analysis, "metafor")
+  
+  return(analysis)
+}
+
+
+#' @describeIn tidy_stats tidy_stats method for class 'data.frame'
+#' @export
+tidy_stats.data.frame <- function(x,
+                                  args = NULL,
+                                  symbols = NULL,
+                                  subscripts =
+                                    c("lower",
+                                      "upper"),
+                                  method_name = "Table from data frame",
+                                  table_name = "data.frame",
+                                  package_name = "base",
+                                  na_rm = FALSE,
+                                  ci_title = "CI",
+                                  ci_est_name = NULL,
+                                  ci_lim_names = c("CIlower", "CIupper"),
+                                  ci_level = 0.95) {
+  # Create the analysis list
+  analysis <- list(method = method_name)
+  
+  analysis$groups <- append(
+    analysis$groups,
+    df_to_group(
+      table_name,
+      x,
+      symbols,
+      subscripts,
+      na_rm = na_rm,
+      ci_title = ci_title,
+      ci_est_name = ci_est_name,
+      ci_lim_names = ci_lim_names,
+      ci_level = ci_level
+    )
+  )
+  
+  # Add package information
+  analysis <- add_package_info(analysis, package_name)
+  
+  return(analysis)
+}
+
+
+#' @describeIn tidy_stats tidy_stats method for class 'marginaleffects.summary'
+#' @export
+tidy_stats.marginaleffects.summary <- function(x, args = NULL) {
+  
+  out <- x
+  
+  # Create the analysis list
+  analysis <- list(method = paste0(attr(x, "model_type"), 
+                " (Prediction type: ", attr(x, "type"), ")"))
+  
+  if ("group" %in% colnames(out) &&
+      all(out$group == "main_marginaleffects")) {
+      out$group <- NULL
+  }
+  if (is.null(attr(x, "conf_level"))) {
+      ci_level <- NULL
+  } else {
+      ci_level <- attr(x, "conf_level")
+  }
+  if ("contrast" %in% colnames(out) && all(out$contrast == "")) {
+      out$contrast <- NULL
+  }
+  if ("type" %in% colnames(out) && length(unique(out$type)) == 1) {
+      out$type <- NULL
+  }
+  # rename
+  dict <- c("group" = "Group",
+            "term" = "Term",
+            "contrast" = "Contrast",
+            "estimate" = "Effect",
+            "statistic" = "z")
+  for (i in seq_along(dict)) {
+    colnames(out)[colnames(out) == names(dict)[i]] <- dict[i]
+  }
+  analysis$groups <- append(analysis$groups, 
+    df_to_group("Average marginal effects", as.data.frame(out), 
+      ci_est_name = "Effect", ci_level = ci_level))
+  
+  # Add package information
+  analysis <- add_package_info(analysis, "marginaleffects")
+  
+  return(analysis)
+}
+
+#' @describeIn tidy_stats tidy_stats method for class 'marginalmeans.summary'
+#' @export
+tidy_stats.marginalmeans.summary <- function(x, args = NULL) {
+  out <- x
+  # Create the analysis list
+  analysis <- list(method = paste0(attr(x, "model_type"), 
+                " (Prediction type: ", attr(x, "type"), ")"))
+  
+  if ("group" %in% colnames(out) &&
+      all(out$group == "main_marginaleffects")) {
+      out$group <- NULL
+  }
+  if (is.null(attr(x, "conf_level"))) {
+      ci_level <- NULL
+  } else {
+      ci_level <- attr(x, "conf_level")
+  }
+  # rename
+  dict <- c("group" = "Group",
+            "term" = "Term",
+            "contrast" = "Contrast",
+            "value" = "Value",
+            "estimate" = "Mean",
+            "statistic" = "z")
+  for (i in seq_along(dict)) {
+    colnames(out)[colnames(out) == names(dict)[i]] <- dict[i]
+  }
+  analysis$groups <- append(analysis$groups, 
+    df_to_group("Estimated marginal means", as.data.frame(out), 
+      ci_est_name = "Mean", ci_level = ci_level))
+  
+  # Add package information
+  analysis <- add_package_info(analysis, "marginaleffects")
+  
+  return(analysis)
+}
+
+#' @export
+tidy_stats.predictions.summaryDISABLED <- function(x, args = NULL) {
+  out <- x
+  # Create the analysis list
+  analysis <- list(method = paste0(attr(x, "model_type"),
+                " (Prediction type: ", attr(x, "type"), ")"))
+
+  if ("group" %in% colnames(out) &&
+      all(out$group == "main_marginaleffects")) {
+      out$group <- NULL
+  }
+  if (is.null(attr(x, "conf_level"))) {
+      ci_level <- NULL
+  } else {
+      ci_level <- attr(x, "conf_level")
+  }
+  if ("contrast" %in% colnames(out) && all(out$contrast == "")) {
+      out$contrast <- NULL
+  }
+  if ("type" %in% colnames(out) && length(unique(out$type)) == 1) {
+      out$type <- NULL
+  }
+  # rename
+  dict <- c("group" = "Group",
+            "term" = "Term",
+            "contrast" = "Contrast",
+            "estimate" = "Predicted",
+            "statistic" = "z")
+  for (i in seq_along(dict)) {
+    colnames(out)[colnames(out) == names(dict)[i]] <- dict[i]
+  }
+  analysis$groups <- append(analysis$groups,
+    df_to_group("Average Adjusted Predictions", as.data.frame(out),
+      ci_est_name = "Predicted", ci_level = ci_level))
+
+  # Add package information
+  analysis <- add_package_info(analysis, "marginaleffects")
+
+  return(analysis)
+}
+
+
+
+#' @describeIn tidy_stats tidy_stats method for class 'comparisons.summary'
+#' @export
+tidy_stats.comparisons.summary <- function(x, args = NULL) {
+  out <- x
+  # Create the analysis list
+  analysis <- list(method = paste0(attr(x, "model_type"), 
+                " (Prediction type: ", attr(x, "type"), ")"))
+  
+  if ("group" %in% colnames(out) &&
+      all(out$group == "main_marginaleffects")) {
+      out$group <- NULL
+  }
+  if (is.null(attr(x, "conf_level"))) {
+      ci_level <- NULL
+  } else {
+      ci_level <- attr(x, "conf_level")
+  }
+  if ("contrast" %in% colnames(out) && all(out$contrast == "")) {
+      out$contrast <- NULL
+  }
+  if ("type" %in% colnames(out) && length(unique(out$type)) == 1) {
+      out$type <- NULL
+  }
+  # rename
+  dict <- c("group" = "Group",
+            "term" = "Term",
+            "contrast" = "Contrast",
+            "estimate" = "Effect",
+            "statistic" = "z")
+  if (all(out$term == "interaction")) {
+    out[["term"]] <- NULL
+    colnames(out) <- gsub("^contrast_", "", colnames(out))
+  }
+  for (i in seq_along(dict)) {
+    colnames(out)[colnames(out) == names(dict)[i]] <- dict[i]
+  }
+  analysis$groups <- append(analysis$groups, 
+    df_to_group("Average contrasts", as.data.frame(out), 
+      ci_est_name = "Effect", ci_level = ci_level))
+  
+  # Add package information
+  analysis <- add_package_info(analysis, "marginaleffects")
   
   return(analysis)
 }

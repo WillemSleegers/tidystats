@@ -188,10 +188,9 @@ test_that("1-sample proportion test without continuity correction works", {
   expect_equal(tidy_model, tidy_model_test, tolerance = tolerance)
 })
 
+smokers  <- c(83, 90, 129, 70)
+patients <- c(86, 93, 136, 82)
 test_that("4-sample proportion test works", {
-  smokers  <- c(83, 90, 129, 70)
-  patients <- c(86, 93, 136, 82)
-
   model <- prop.test(smokers, patients)
 
   tidy_model <- tidy_stats(model)
