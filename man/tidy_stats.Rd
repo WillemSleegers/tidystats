@@ -3,6 +3,7 @@
 \name{tidy_stats}
 \alias{tidy_stats}
 \alias{tidy_stats.htest}
+\alias{tidy_stats.pairwise.htest}
 \alias{tidy_stats.lm}
 \alias{tidy_stats.glm}
 \alias{tidy_stats.anova}
@@ -33,6 +34,8 @@
 tidy_stats(x, args = NULL)
 
 \method{tidy_stats}{htest}(x, args = NULL)
+
+\method{tidy_stats}{pairwise.htest}(x, args = NULL)
 
 \method{tidy_stats}{lm}(x, args = NULL)
 
@@ -142,6 +145,8 @@ Currently supported functions:
 \section{Methods (by class)}{
 \itemize{
 \item \code{htest}: tidy_stats method for class 'htest'
+
+\item \code{pairwise.htest}: tidy_stats method for class 'pairwise.htest'
 
 \item \code{lm}: tidy_stats method for class 'lm'
 

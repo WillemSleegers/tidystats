@@ -300,6 +300,57 @@ tidy_stats.htest <- function(x, args = NULL) {
   return(analysis)
 }
 
+#' @describeIn tidy_stats tidy_stats method for class 'pairwise.htest'
+#' @export
+tidy_stats.pairwise.htest <- function(x, args = NULL) {
+  # Create the analysis list and set the name
+  analysis <- list(name = x$data.name)
+
+  # Add method to the analysis
+  analysis$method <- dplyr::if_else(
+    stringr::str_starts(x$method, "Pairwise"),
+    x$method,
+    paste("Pairwise", x$method)
+  )
+
+  # Check if there is 1 or more terms
+  # If 1, only create a statistics list
+  # If multiple, loop over terms and create separate lists for each term
+  if (nrow(x$p.value) == 1) {
+    statistics <- list()
+    statistics <- add_statistic(statistics, "p", x$p.value[1])
+    analysis$statistics <- statistics
+  } else {
+    groups <- list(name = "Pairs")
+    
+    p_values <- x$p.value |>
+      tidy_matrix(symmetric = FALSE) |>
+      tidyr::unite(name, name1, name2, sep = " - ")
+      
+    
+    for (i in 1:nrow(p_values)) {
+      group <- list(name = p_values$name[i])
+
+      statistics <- list()
+      statistics <- add_statistic(statistics, "p", p_values$value[i])
+      
+      group$statistics <- statistics
+      groups$groups <- append(groups$groups, list(group))
+    }
+
+    analysis$groups <- append(analysis$groups, list(groups))
+  }
+
+  # Add additional information
+  analysis$p_adjust_method <- x$p.adjust.method
+
+  # Add package information
+  analysis <- add_package_info(analysis, "stats")
+
+  return(analysis)
+}
+
+
 #' @describeIn tidy_stats tidy_stats method for class 'lm'
 #' @export
 tidy_stats.lm <- function(x, args = NULL) {
