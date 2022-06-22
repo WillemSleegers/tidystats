@@ -83,7 +83,7 @@ set.seed(1)
 
 # Get data
 heads <- rbinom(1, size = 100, prob = .5)
-smokers  <- c(83, 90, 129, 70)
+smokers <- c(83, 90, 129, 70)
 patients <- c(86, 93, 136, 82)
 
 # Run analyses
@@ -102,17 +102,11 @@ prop_test
 prop_test_correct
 prop_test_smokers
 
-
-# prop.trend.test()  --------------------------------------------------------------
-
-# Get data
-smokers  <- c(83, 90, 129, 70)
-patients <- c(86, 93, 136, 82)
-prop.test(smokers, patients)
+# prop.trend.test()  ------------------------------------------------------
 
 # Run analysis
-prop_trend_test = prop.trend.test(smokers, patients)
-prop_trend_test_scores = prop.trend.test(smokers, patients, c(0,0,0,1))
+prop_trend_test <- prop.trend.test(smokers, patients)
+prop_trend_test_scores <- prop.trend.test(smokers, patients, c(0, 0, 0, 1))
 
 # Add stats
 results <- results %>%
@@ -122,7 +116,6 @@ results <- results %>%
 # Inspect output
 prop_trend_test
 prop_trend_test_scores
-
 
 # wilcox.test() -----------------------------------------------------------
 
@@ -301,24 +294,28 @@ results <- add_stats(results, var_test)
 # Inspect output
 var_test
 
+# mauchly.test() ----------------------------------------------------------
 
-# mauchly.test() --------------------------------------------------------------
+# Get data
+example(SSD)
 
-# Get data: brings in the mlmfit and reacttime objects
-utils::example(SSD)
+idata <- data.frame(
+  deg = gl(3, 1, 6, labels = c(0, 4, 8)),
+  noise = gl(2, 3, 6, labels = c("A", "P"))
+)
 
 # Run analyses
-
-# traditional test of intrasubj. contrasts
-mauchly_test = mauchly.test(mlmfit, X = ~ 1)
-# tests using intra-subject 3x2 design
-idata <- data.frame(deg = gl(3, 1, 6, labels = c(0, 4, 8)),
-noise = gl(2, 3, 6, labels = c("A", "P")))
-mauchly_test_orthogonal = mauchly.test(mlmfit, X = ~ deg + noise, idata = idata)
-mauchly_test_spanned = mauchly.test(mlmfit,
-  M = ~ deg + noise,
-  X = ~ noise,
-  idata = idata)
+mauchly_test <- mauchly.test(mlmfit, X = ~ 1)
+mauchly_test_orthogonal <- mauchly.test(
+  mlmfit, 
+  X = ~ deg + noise, 
+  idata = idata
+)
+mauchly_test_spanned <- mauchly.test(
+  mlmfit, 
+  M = ~ deg + noise, X = ~ noise,
+  idata = idata
+)
 
 # Add stats
 results <- results %>%
@@ -331,19 +328,17 @@ mauchly_test
 mauchly_test_orthogonal
 mauchly_test_spanned
 
-
-# mcnemar.test()  --------------------------------------------------------------
+# mcnemar.test()  ---------------------------------------------------------
 
 # Get data
-Performance <-
-  matrix(
-    c(794, 86, 150, 570),
-    nrow = 2,
-    dimnames = list(
-      "1st Survey" = c("Approve", "Disapprove"),
-      "2nd Survey" = c("Approve", "Disapprove")
-    )
+Performance <- matrix(
+  data = c(794, 86, 150, 570),
+  nrow = 2,
+  dimnames = list(
+    "1st Survey" = c("Approve", "Disapprove"),
+    "2nd Survey" = c("Approve", "Disapprove")
   )
+)
 
 # Run analysis
 mcnemar_test <- mcnemar.test(Performance)
@@ -358,13 +353,11 @@ results <- results %>%
 mcnemar_test
 mcnemar_test_nocorrect
 
-
-# binom.test()  --------------------------------------------------------------
+# binom.test()  -----------------------------------------------------------
 
 # Run analysis
 binom_test <- binom.test(c(682, 243))
-binom_test_params <-
-  binom.test(c(682, 243), p = 3 / 4, alternative = "less")
+binom_test_params <- binom.test(c(682, 243), p = 3 / 4, alternative = "less")
 
 # Add stats
 results <- results %>%
@@ -377,14 +370,16 @@ binom_test_params
 
 # PP.test()  --------------------------------------------------------------
 
-# Get data
+# Set seed
 set.seed(1)
+
+# Get data
 x <- rnorm(1000)
-y <- cumsum(x) # has unit root
+y <- cumsum(x)
 
 # Run analysis
-pp_test = PP.test(x)
-pp_test_long = PP.test(y, lshort = FALSE)
+pp_test <- PP.test(x)
+pp_test_long <- PP.test(y, lshort = FALSE)
 
 # Add stats
 results <- results %>%
@@ -395,16 +390,17 @@ results <- results %>%
 pp_test
 pp_test_long
 
+# Box.test()  -------------------------------------------------------------
 
-# Box.test()  --------------------------------------------------------------
+# Set seed
+set.seed(1)
 
 # Get data
-set.seed(1)
-x <- rnorm (100)
+x <- rnorm(100)
 
 # Run analysis
 box_test <- Box.test(x, lag = 1)
-box_test_ljung <- Box.test (x, lag = 2, type = "Ljung")
+box_test_ljung <- Box.test(x, lag = 2, type = "Ljung")
 
 # Add stats
 results <- results %>%
@@ -415,19 +411,20 @@ results <- results %>%
 box_test
 box_test_ljung
 
+# ansari.test()  ----------------------------------------------------------
 
-# ansari.test()  --------------------------------------------------------------
+# Set seed
+set.seed(1)
 
 # Get data
-ramsay <- c(111, 107, 100, 99, 102, 106, 109, 108, 104, 99,
-  101, 96, 97, 102, 107, 113, 116, 113, 110, 98)
-jung.parekh <- c(107, 108, 106, 98, 105, 103, 110, 105, 104,
-  100, 96, 108, 103, 104, 114, 114, 113, 108, 106, 99)
+ramsay <- c(111, 107, 100, 99, 102, 106, 109, 108, 104, 99, 101, 96, 97, 102, 
+  107, 113, 116, 113, 110, 98)
+jung_parekh <- c(107, 108, 106, 98, 105, 103, 110, 105, 104, 100, 96, 108, 103, 
+  104, 114, 114, 113, 108, 106, 99)
 
-# Run analysis
-ansari_test = ansari.test(ramsay, jung.parekh)
-set.seed(1)
-ansari_test_ci = ansari.test(rnorm(100), rnorm(100, 0, 2), conf.int = TRUE)
+# Run analyses
+ansari_test <- ansari.test(ramsay, jung_parekh)
+ansari_test_ci <- ansari.test(rnorm(100), rnorm(100, 0, 2), conf.int = TRUE)
 
 # Add stats
 results <- results %>%
@@ -438,12 +435,16 @@ results <- results %>%
 ansari_test
 ansari_test_ci
 
-# mood.test()  --------------------------------------------------------------
+# mood.test()  ------------------------------------------------------------
 
-# (Data same as for ansari.test)
+# Get data
+ramsay <- c(111, 107, 100, 99, 102, 106, 109, 108, 104, 99,
+  101, 96, 97, 102, 107, 113, 116, 113, 110, 98)
+jung_parekh <- c(107, 108, 106, 98, 105, 103, 110, 105, 104,
+  100, 96, 108, 103, 104, 114, 114, 113, 108, 106, 99)
 
 # Run analysis
-mood_test <- mood.test(ramsay, jung.parekh)
+mood_test <- mood.test(ramsay, jung_parekh)
 
 # Add stats
 results <- add_stats(results, mood_test)
@@ -451,21 +452,22 @@ results <- add_stats(results, mood_test)
 # Inspect output
 mood_test
 
-
-# quade.test()  --------------------------------------------------------------
+# quade.test()  -----------------------------------------------------------
 
 # Get data
-dataFreq <- matrix(c( 5,  4,  7, 10, 12,
-     1,  3,  1,  0,  2,
+dataFreq <- matrix(
+  nrow = 7, 
+  byrow = TRUE,
+  data = c(5, 4, 7, 10, 12,
+    1,  3,  1,  0,  2,
     16, 12, 22, 22, 35,
-     5,  4,  3,  5,  4,
-    10,  9,  7, 13, 10,
+    5, 4, 3, 5, 4,
+    10, 9, 7, 13, 10,
     19, 18, 28, 37, 58,
-    10,  7,  6,  8,  7),
-  nrow = 7, byrow = TRUE,
-  dimnames =
-  list(Store = as.character(1:7),
-       Brand = LETTERS[1:5]))
+    10, 7, 6, 8, 7
+  ),
+  dimnames = list(Store = as.character(1:7), Brand = LETTERS[1:5])
+)
 
 # Run analysis
 quade_test <- quade.test(dataFreq)
@@ -476,10 +478,10 @@ results <- add_stats(results, quade_test)
 # Inspect output
 quade_test
 
-# bartlett.test()  --------------------------------------------------------------
+# bartlett.test()  --------------------------------------------------------
 
 # Run analysis
-bartlett_test = bartlett.test(InsectSprays$count, InsectSprays$spray)
+bartlett_test <- bartlett.test(InsectSprays$count, InsectSprays$spray)
 
 # Add stats
 results <- add_stats(results, bartlett_test)
@@ -487,10 +489,10 @@ results <- add_stats(results, bartlett_test)
 # Inspect output
 bartlett_test
 
-# fligner.test()  --------------------------------------------------------------
+# fligner.test()  ---------------------------------------------------------
 
 # Run analysis
-fligner_test = fligner.test(InsectSprays$count, InsectSprays$spray)
+fligner_test <- fligner.test(InsectSprays$count, InsectSprays$spray)
 
 # Add stats
 results <- add_stats(results, fligner_test)
@@ -498,14 +500,14 @@ results <- add_stats(results, fligner_test)
 # Inspect output
 fligner_test
 
-# poisson.test()  --------------------------------------------------------------
+# poisson.test()  ---------------------------------------------------------
 
 # Run analysis
-poisson_test = poisson.test(137, 24.19893)
-poisson_test_comparison = poisson.test(c(11, 6+8+7), c(800, 1083+1050+878))
-
-add_stats(results, poisson_test) 
-add_stats(results, poisson_test_comparison)
+poisson_test <- poisson.test(137, 24.19893)
+poisson_test_comparison <- poisson.test(
+  x = c(11, 6 + 8 + 7), 
+  T = c(800, 1083 + 1050 + 878)
+)
 
 # Add stats
 results <- results %>%
@@ -516,9 +518,9 @@ results <- results %>%
 poisson_test
 poisson_test_comparison
 
+# shapiro.test()  ---------------------------------------------------------
 
-# shapiro.test()  --------------------------------------------------------------
-
+# Set seed
 set.seed(1)
 
 # Run analysis
@@ -530,11 +532,14 @@ results <- add_stats(results, shapiro_test)
 # Inspect output
 shapiro_test
 
-# friedman.test()  --------------------------------------------------------------
+# friedman.test()  --------------------------------------------------------
 
 # Get data
-RoundingTimes <-
-  matrix(c(5.40, 5.50, 5.55,
+rounding_times <- matrix(
+  nrow = 22,
+  byrow = TRUE,
+  data = c(
+    5.40, 5.50, 5.55,
     5.85, 5.70, 5.75,
     5.20, 5.60, 5.50,
     5.55, 5.50, 5.40,
@@ -555,14 +560,13 @@ RoundingTimes <-
     5.50, 5.45, 5.25,
     5.65, 5.60, 5.40,
     5.70, 5.65, 5.55,
-    6.30, 6.30, 6.25),
-    nrow = 22,
-  byrow = TRUE,
-  dimnames = list(1:22,
-  c("Round Out", "Narrow Angle", "Wide Angle")))
+    6.30, 6.30, 6.25
+  ),
+  dimnames = list(1:22, c("Round Out", "Narrow Angle", "Wide Angle"))
+)
 
 # Run analysis
-friedman_test = friedman.test(RoundingTimes)
+friedman_test <- friedman.test(rounding_times)
 
 # Add stats
 results <- add_stats(results, friedman_test)
@@ -570,47 +574,48 @@ results <- add_stats(results, friedman_test)
 # Inspect output
 friedman_test
 
-
-# mantelhaen.test()  --------------------------------------------------------------
+# mantelhaen.test()  ------------------------------------------------------
 
 # Get data
-Satisfaction <-
-  as.table(array(c(1, 2, 0, 0, 3, 3, 1, 2,
-    11, 17, 8, 4, 2, 3, 5, 2,
-    1, 0, 0, 0, 1, 3, 0, 1,
-    2, 5, 7, 9, 1, 1, 3, 6),
-  dim = c(4, 4, 2),
-  dimnames =
-  list(Income =
-  c("<5000", "5000-15000",
-  "15000-25000", ">25000"),
-  "Job Satisfaction" =
-  c("V_D", "L_S", "M_S", "V_S"),
-  Gender = c("Female", "Male"))))
+Satisfaction <- as.table(
+  array(
+    dim = c(4, 4, 2),
+    data = c(
+      1, 2, 0, 0, 3, 3, 1, 2,
+      11, 17, 8, 4, 2, 3, 5, 2,
+      1, 0, 0, 0, 1, 3, 0, 1,
+      2, 5, 7, 9, 1, 1, 3, 6
+    ),
+    dimnames = list(
+      Income = c("<5000", "5000-15000", "15000-25000", ">25000"), 
+      `Job Satisfaction` = c("V_D", "L_S", "M_S", "V_S"),
+      Gender = c("Female", "Male")
+    )
+  )
+)
 
-Rabbits <-
-  array(c(0, 0, 6, 5,
-    3, 0, 3, 6,
-    6, 2, 0, 4,
-    5, 6, 1, 0,
-    2, 5, 0, 0),
+Rabbits <- array(
   dim = c(2, 2, 5),
+  data = c(
+      0, 0, 6, 5,
+      3, 0, 3, 6,
+      6, 2, 0, 4,
+      5, 6, 1, 0,
+      2, 5, 0, 0
+  ),
   dimnames = list(
-  Delay = c("None", "1.5h"),
-  Response = c("Cured", "Died"),
-  Penicillin.Level = c("1/8", "1/4", "1/2", "1", "4")))
+    Delay = c("None", "1.5h"),
+    Response = c("Cured", "Died"),
+    Penicillin.Level = c("1/8", "1/4", "1/2", "1", "4")
+  )
+)
 
-# Run analysis
-
-## Cochran-Mantel-Haenszel (without 2 by 2)
-mantelhaen_test = mantelhaen.test(Satisfaction)
-## Classical Mantel-Haenszel test
-mantelhaen_test_2by2 = mantelhaen.test(Rabbits)
-## Exact conditional test
-mantelhaen_test_2by2_exact = mantelhaen.test(Rabbits, exact = TRUE)
+# Run analyses
+mantelhaen_test <- mantelhaen.test(Satisfaction)
+mantelhaen_test_2by2 <- mantelhaen.test(Rabbits)
+mantelhaen_test_2by2_exact <- mantelhaen.test(Rabbits, exact = TRUE)
 
 # Add stats
-# results <- add_stats(results, SOME_test)
 results <- results %>%
   add_stats(mantelhaen_test) %>%
   add_stats(mantelhaen_test_2by2) %>%
@@ -621,11 +626,12 @@ mantelhaen_test
 mantelhaen_test_2by2
 mantelhaen_test_2by2_exact
 
-
 # tidy_stats_to_data_frame() ----------------------------------------------
 
 df <- tidy_stats_to_data_frame(results)
 
 # write_stats() -----------------------------------------------------------
 
-write_stats(results, "tests/testthat/data/htest.json")
+# NOTE: Only overwrite the existing file if we know everything works because
+# the file is used in the tests
+# write_stats(results, "tests/testthat/data/htest.json")

@@ -273,7 +273,7 @@
       },
       {
         "name": "p",
-        "value": 2.953589e-07
+        "value": 2.953589e-7
       }
     ],
     "package": {
@@ -283,7 +283,7 @@
   },
   "chi_squared_yates": {
     "name": "x",
-    "method": "Pearson's Chi-squared test with Yates' continuity correction",
+    "method": "Pearson's Chi-squared test",
     "statistics": [
       {
         "name": "statistic",
@@ -306,7 +306,7 @@
   },
   "chi_squared_prob": {
     "name": "y",
-    "method": "Chi-squared test for given probabilities",
+    "method": "Chi-squared test",
     "statistics": [
       {
         "name": "statistic",
@@ -328,8 +328,8 @@
     }
   },
   "prop_test": {
-    "name": "heads out of 100, null probability 0.5",
-    "method": "1-sample proportions test (with continuity correction)",
+    "name": "heads out of 100",
+    "method": "1-sample proportions test",
     "statistics": [
       {
         "name": "estimate",
@@ -364,8 +364,8 @@
     }
   },
   "prop_test_correct": {
-    "name": "heads out of 100, null probability 0.5",
-    "method": "1-sample proportions test (without continuity correction)",
+    "name": "heads out of 100",
+    "method": "1-sample proportions test",
     "statistics": [
       {
         "name": "estimate",
@@ -401,7 +401,7 @@
   },
   "prop_test_smokers": {
     "name": "smokers out of patients",
-    "method": "4-sample test for equality of proportions (without continuity correction)",
+    "method": "4-sample test for equality of proportions",
     "statistics": [
       {
         "name": "statistic",
@@ -426,7 +426,7 @@
     }
   },
   "prop_trend_test": {
-    "name": "smokers out of patients (scores: 1 2 3 4)",
+    "name": "smokers out of patients",
     "method": "Chi-squared Test for Trend in Proportions",
     "statistics": [
       {
@@ -449,7 +449,7 @@
     }
   },
   "prop_trend_test_scores": {
-    "name": "smokers out of patients (scores: 0 0 0 1)",
+    "name": "smokers out of patients",
     "method": "Chi-squared Test for Trend in Proportions",
     "statistics": [
       {
@@ -496,7 +496,7 @@
   },
   "wilcoxon_rank_sum_continuity": {
     "name": "Ozone by Month",
-    "method": "Wilcoxon rank sum test (with continuity correction)",
+    "method": "Wilcoxon rank sum test",
     "statistics": [
       {
         "name": "statistic",
@@ -611,7 +611,7 @@
       },
       {
         "name": "p",
-        "value": 6.900714e-06
+        "value": 6.900714e-6
       }
     ],
     "package": {
@@ -688,7 +688,7 @@
   },
   "fisher_test_simulated_p": {
     "name": "Job",
-    "method": "Fisher's Exact Test for Count Data (with simulated p-value)",
+    "method": "Fisher's Exact Test for Count Data",
     "statistics": [
       {
         "name": "p",
@@ -706,7 +706,7 @@
   },
   "fisher_test_hybrid": {
     "name": "MP6",
-    "method": "Fisher's Exact Test for Count Data (hybrid)",
+    "method": "Fisher's Exact Test for Count Data",
     "statistics": [
       {
         "name": "p",
@@ -719,7 +719,7 @@
     "hybrid_parameters": {
       "expect": 5,
       "percent": 80,
-      "Emin": 5
+      "Emin": 1
     },
     "package": {
       "name": "stats",
@@ -759,7 +759,7 @@
       },
       {
         "name": "p",
-        "value": 4.226692e-08
+        "value": 4.226692e-8
       }
     ],
     "alternative": {
@@ -781,7 +781,7 @@
       },
       {
         "name": "p",
-        "value": 1.033062e-07
+        "value": 1.033062e-7
       }
     ],
     "alternative": {
@@ -981,7 +981,7 @@
   },
   "mcnemar_test": {
     "name": "Performance",
-    "method": "McNemar's Chi-squared test (with continuity correction)",
+    "method": "McNemar's Chi-squared test",
     "statistics": [
       {
         "name": "statistic",
@@ -1041,20 +1041,12 @@
       {
         "name": "count",
         "symbol": "k",
-        "subscript": "successes",
         "value": 682
       },
       {
         "name": "count",
         "symbol": "n",
-        "subscript": "total",
         "value": 925
-      },
-      {
-        "name": "statistic",
-        "symbol": "P",
-        "subscript": "expected",
-        "value": 0.5
       },
       {
         "name": "p",
@@ -1086,20 +1078,12 @@
       {
         "name": "count",
         "symbol": "k",
-        "subscript": "successes",
         "value": 682
       },
       {
         "name": "count",
         "symbol": "n",
-        "subscript": "total",
         "value": 925
-      },
-      {
-        "name": "statistic",
-        "symbol": "P",
-        "subscript": "expected",
-        "value": 0.75
       },
       {
         "name": "p",
@@ -1121,11 +1105,13 @@
     "statistics": [
       {
         "name": "statistic",
-        "symbol": "Dickey-Fuller",
+        "symbol": "DF",
+        "subscript": "τ",
         "value": -33.056683
       },
       {
-        "name": "lag",
+        "name": "truncation lag",
+        "symbol": "k",
         "value": 7
       },
       {
@@ -1144,11 +1130,13 @@
     "statistics": [
       {
         "name": "statistic",
-        "symbol": "Dickey-Fuller",
+        "symbol": "DF",
+        "subscript": "τ",
         "value": -2.724437
       },
       {
-        "name": "lag",
+        "name": "truncation lag",
+        "symbol": "k",
         "value": 21
       },
       {
@@ -1208,7 +1196,7 @@
     }
   },
   "ansari_test": {
-    "name": "ramsay and jung.parekh",
+    "name": "ramsay and jung_parekh",
     "method": "Ansari-Bradley test",
     "statistics": [
       {
@@ -1236,7 +1224,7 @@
     "statistics": [
       {
         "name": "estimate",
-        "symbol": "ratio",
+        "symbol": "s",
         "value": 0.461553,
         "interval": "CI",
         "level": 0.95,
@@ -1250,7 +1238,7 @@
       },
       {
         "name": "p",
-        "value": 2.87734e-07
+        "value": 2.87734e-7
       }
     ],
     "alternative": {
@@ -1263,7 +1251,7 @@
     }
   },
   "mood_test": {
-    "name": "ramsay and jung.parekh",
+    "name": "ramsay and jung_parekh",
     "method": "Mood two-sample test of scale",
     "statistics": [
       {
@@ -1362,13 +1350,12 @@
     }
   },
   "poisson_test": {
-    "name": "137 time base: 24.19893",
+    "name": "137",
     "method": "Exact Poisson test",
     "statistics": [
       {
         "name": "estimate",
-        "symbol": "rate",
-        "subscript": "event",
+        "symbol": "λ",
         "value": 5.661407,
         "interval": "CI",
         "level": 0.95,
@@ -1378,13 +1365,11 @@
       {
         "name": "count",
         "symbol": "n",
-        "subscript": "total",
         "value": 137
       },
       {
-        "name": "statistic",
+        "name": "time base",
         "symbol": "T",
-        "subscript": "time base",
         "value": 24.19893
       },
       {
@@ -1402,13 +1387,12 @@
     }
   },
   "poisson_test_comparison": {
-    "name": "c(11, 6 + 8 + 7) time base: c(800, 1083 + 1050 + 878)",
+    "name": "c(11, 6 + 8 + 7)",
     "method": "Comparison of Poisson rates",
     "statistics": [
       {
         "name": "estimate",
-        "symbol": "ratio",
-        "subscript": "rate",
+        "symbol": "R",
         "value": 1.971488,
         "interval": "CI",
         "level": 0.95,
@@ -1418,11 +1402,10 @@
       {
         "name": "count",
         "symbol": "n",
-        "subscript": "event(1)",
         "value": 11
       },
       {
-        "name": "statistic",
+        "name": "expected count",
         "symbol": "n",
         "subscript": "expected",
         "value": 6.717397
@@ -1461,7 +1444,7 @@
     }
   },
   "friedman_test": {
-    "name": "RoundingTimes",
+    "name": "rounding_times",
     "method": "Friedman rank sum test",
     "statistics": [
       {
@@ -1508,7 +1491,7 @@
   },
   "mantelhaen_test_2by2": {
     "name": "Rabbits",
-    "method": "Mantel-Haenszel chi-squared test (with continuity correction)",
+    "method": "Mantel-Haenszel chi-squared test",
     "statistics": [
       {
         "name": "estimate",
@@ -1544,7 +1527,7 @@
   },
   "mantelhaen_test_2by2_exact": {
     "name": "Rabbits",
-    "method": "Exact conditional test of independence in 2 x 2 x k tables",
+    "method": "Exact conditional test of independence",
     "statistics": [
       {
         "name": "estimate",

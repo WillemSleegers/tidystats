@@ -4,104 +4,94 @@
     "method": "Pairwise t tests with pooled SD",
     "groups": [
       {
-        "name": "P-values",
+        "name": "Pairs",
         "groups": [
           {
-            "name": "Jun",
+            "name": "Jun - May",
             "statistics": [
               {
                 "name": "p",
-                "subscript": "May",
                 "value": 1
-              },
-              {
-                "name": "p",
-                "subscript": "Jun",
-                "value": "NA"
-              },
-              {
-                "name": "p",
-                "subscript": "Jul",
-                "value": "NA"
-              },
-              {
-                "name": "p",
-                "subscript": "Aug",
-                "value": "NA"
               }
             ]
           },
           {
-            "name": "Jul",
+            "name": "Jul - May",
             "statistics": [
               {
                 "name": "p",
-                "subscript": "May",
                 "value": 0.000264
-              },
+              }
+            ]
+          },
+          {
+            "name": "Jul - Jun",
+            "statistics": [
               {
                 "name": "p",
-                "subscript": "Jun",
                 "value": 0.051127
-              },
-              {
-                "name": "p",
-                "subscript": "Jul",
-                "value": "NA"
-              },
-              {
-                "name": "p",
-                "subscript": "Aug",
-                "value": "NA"
               }
             ]
           },
           {
-            "name": "Aug",
+            "name": "Aug - May",
             "statistics": [
               {
                 "name": "p",
-                "subscript": "May",
                 "value": 0.000195
-              },
-              {
-                "name": "p",
-                "subscript": "Jun",
-                "value": 0.049873
-              },
-              {
-                "name": "p",
-                "subscript": "Jul",
-                "value": 1
-              },
-              {
-                "name": "p",
-                "subscript": "Aug",
-                "value": "NA"
               }
             ]
           },
           {
-            "name": "Sep",
+            "name": "Aug - Jun",
             "statistics": [
               {
                 "name": "p",
-                "subscript": "May",
-                "value": 1
-              },
+                "value": 0.049873
+              }
+            ]
+          },
+          {
+            "name": "Aug - Jul",
+            "statistics": [
               {
                 "name": "p",
-                "subscript": "Jun",
                 "value": 1
-              },
+              }
+            ]
+          },
+          {
+            "name": "Sep - May",
+            "statistics": [
               {
                 "name": "p",
-                "subscript": "Jul",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "name": "Sep - Jun",
+            "statistics": [
+              {
+                "name": "p",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "name": "Sep - Jul",
+            "statistics": [
+              {
+                "name": "p",
                 "value": 0.004879
-              },
+              }
+            ]
+          },
+          {
+            "name": "Sep - Aug",
+            "statistics": [
               {
                 "name": "p",
-                "subscript": "Aug",
                 "value": 0.003878
               }
             ]
@@ -120,34 +110,31 @@
     "method": "Pairwise paired t tests",
     "groups": [
       {
-        "name": "P-values",
+        "name": "Pairs",
         "groups": [
           {
-            "name": "2",
+            "name": "2 - 1",
             "statistics": [
               {
                 "name": "p",
-                "subscript": "1",
                 "value": 1
-              },
-              {
-                "name": "p",
-                "subscript": "2",
-                "value": "NA"
               }
             ]
           },
           {
-            "name": "3",
+            "name": "3 - 1",
             "statistics": [
               {
                 "name": "p",
-                "subscript": "1",
                 "value": 0.614498
-              },
+              }
+            ]
+          },
+          {
+            "name": "3 - 2",
+            "statistics": [
               {
                 "name": "p",
-                "subscript": "2",
                 "value": 1
               }
             ]
@@ -166,104 +153,94 @@
     "method": "Pairwise t tests with non-pooled SD",
     "groups": [
       {
-        "name": "P-values",
+        "name": "Pairs",
         "groups": [
           {
-            "name": "Jun",
+            "name": "Jun - May",
             "statistics": [
               {
                 "name": "p",
-                "subscript": "May",
                 "value": 1
-              },
-              {
-                "name": "p",
-                "subscript": "Jun",
-                "value": "NA"
-              },
-              {
-                "name": "p",
-                "subscript": "Jul",
-                "value": "NA"
-              },
-              {
-                "name": "p",
-                "subscript": "Aug",
-                "value": "NA"
               }
             ]
           },
           {
-            "name": "Jul",
+            "name": "Jul - May",
             "statistics": [
               {
                 "name": "p",
-                "subscript": "May",
                 "value": 0.000265
-              },
+              }
+            ]
+          },
+          {
+            "name": "Jul - Jun",
+            "statistics": [
               {
                 "name": "p",
-                "subscript": "Jun",
                 "value": 0.021817
-              },
-              {
-                "name": "p",
-                "subscript": "Jul",
-                "value": "NA"
-              },
-              {
-                "name": "p",
-                "subscript": "Aug",
-                "value": "NA"
               }
             ]
           },
           {
-            "name": "Aug",
+            "name": "Aug - May",
             "statistics": [
               {
                 "name": "p",
-                "subscript": "May",
                 "value": 0.002169
-              },
-              {
-                "name": "p",
-                "subscript": "Jun",
-                "value": 0.042693
-              },
-              {
-                "name": "p",
-                "subscript": "Jul",
-                "value": 1
-              },
-              {
-                "name": "p",
-                "subscript": "Aug",
-                "value": "NA"
               }
             ]
           },
           {
-            "name": "Sep",
+            "name": "Aug - Jun",
             "statistics": [
               {
                 "name": "p",
-                "subscript": "May",
-                "value": 1
-              },
+                "value": 0.042693
+              }
+            ]
+          },
+          {
+            "name": "Aug - Jul",
+            "statistics": [
               {
                 "name": "p",
-                "subscript": "Jun",
                 "value": 1
-              },
+              }
+            ]
+          },
+          {
+            "name": "Sep - May",
+            "statistics": [
               {
                 "name": "p",
-                "subscript": "Jul",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "name": "Sep - Jun",
+            "statistics": [
+              {
+                "name": "p",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "name": "Sep - Jul",
+            "statistics": [
+              {
+                "name": "p",
                 "value": 0.007361
-              },
+              }
+            ]
+          },
+          {
+            "name": "Sep - Aug",
+            "statistics": [
               {
                 "name": "p",
-                "subscript": "Aug",
                 "value": 0.028683
               }
             ]
@@ -282,64 +259,58 @@
     "method": "Pairwise comparison of proportions",
     "groups": [
       {
-        "name": "P-values",
+        "name": "Pairs",
         "groups": [
           {
-            "name": "2",
+            "name": "2 - 1",
             "statistics": [
               {
                 "name": "p",
-                "subscript": "1",
                 "value": 1
-              },
-              {
-                "name": "p",
-                "subscript": "2",
-                "value": "NA"
-              },
-              {
-                "name": "p",
-                "subscript": "3",
-                "value": "NA"
               }
             ]
           },
           {
-            "name": "3",
+            "name": "3 - 1",
             "statistics": [
               {
                 "name": "p",
-                "subscript": "1",
                 "value": 1
-              },
-              {
-                "name": "p",
-                "subscript": "2",
-                "value": 1
-              },
-              {
-                "name": "p",
-                "subscript": "3",
-                "value": "NA"
               }
             ]
           },
           {
-            "name": "4",
+            "name": "3 - 2",
             "statistics": [
               {
                 "name": "p",
-                "subscript": "1",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "name": "4 - 1",
+            "statistics": [
+              {
+                "name": "p",
                 "value": 0.118565
-              },
+              }
+            ]
+          },
+          {
+            "name": "4 - 2",
+            "statistics": [
               {
                 "name": "p",
-                "subscript": "2",
                 "value": 0.093217
-              },
+              }
+            ]
+          },
+          {
+            "name": "4 - 3",
+            "statistics": [
               {
                 "name": "p",
-                "subscript": "3",
                 "value": 0.123768
               }
             ]
@@ -373,34 +344,31 @@
     "method": "Pairwise Wilcoxon signed rank exact test",
     "groups": [
       {
-        "name": "P-values",
+        "name": "Pairs",
         "groups": [
           {
-            "name": "trt1",
+            "name": "trt1 - ctrl",
             "statistics": [
               {
                 "name": "p",
-                "subscript": "ctrl",
                 "value": 0.375
-              },
-              {
-                "name": "p",
-                "subscript": "trt1",
-                "value": "NA"
               }
             ]
           },
           {
-            "name": "trt2",
+            "name": "trt2 - ctrl",
             "statistics": [
               {
                 "name": "p",
-                "subscript": "ctrl",
                 "value": 0.196289
-              },
+              }
+            ]
+          },
+          {
+            "name": "trt2 - trt1",
+            "statistics": [
               {
                 "name": "p",
-                "subscript": "trt1",
                 "value": 0.058594
               }
             ]

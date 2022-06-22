@@ -6,6 +6,9 @@
 #TODO: Replace some of the statistics extraction code with loops over all 
 #      columns and then fix the names after
 #TODO: Use pipes when adding statistics via add_statistic()?
+#TODO: Store all sample estimates in the case of a 4-sample chi-squared test?
+#TODO: Simply the method name of Kolmogorov-Smirnov tests?
+#TODO: Rename the name of degrees of freedom and related values to 'parameter'?
 
 # Update ------------------------------------------------------------------
 
