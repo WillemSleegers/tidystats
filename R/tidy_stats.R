@@ -40,76 +40,60 @@
 #' str(list_sleep_test)
 #'
 #' @export
-tidy_stats <- function(x, args = NULL, ...) UseMethod("tidy_stats")
+tidy_stats <- function(x, args = NULL) UseMethod("tidy_stats")
 
 #' @describeIn tidy_stats tidy_stats method for class 'htest'
 #' @export
 tidy_stats.htest <- function(x, args = NULL) {
-  # Create the analysis list and set the name
-  if (str_detect(x$data.name, ",\n using scores:")) {
-    x$data.name = paste0(gsub(" ,\n using scores:", " (scores:", x$data.name), ')')
-  }
-  analysis <- list(name = x$data.name)
+  analysis <- list()
 
-  # Reduce Mauchly's test's method to one element
-  if (x$method[1] == "Mauchly's test of sphericity") {
-      x$method = "Mauchly's test of sphericity"
-  }
+  # Set the analysis name
+  # Some names contain additional parameters; we remove those and potentially
+  # store them separately
+  name <- x$data.name
 
-  # Extract and clean up the method
-  method <- dplyr::case_when(
-    stringr::str_detect(x$method, "with simulated p-value") ~
-      stringr::str_replace(x$method, "with simulated p-value(.|\n|\t)+",
-        "(with simulated p-value)"),
-    stringr::str_detect(x$method, "with continuity correction") ~
-      stringr::str_replace(x$method, "with continuity correction",
-        "(with continuity correction)"),
-    stringr::str_detect(x$method, "without continuity correction") ~
-      stringr::str_replace(x$method, "without continuity correction",
-        "(without continuity correction)"),
-    stringr::str_detect(x$method, "hybrid using asym") ~
-      stringr::str_replace(x$method, "hybrid using asym(.)+", "(hybrid)"),
-    stringr::str_detect(x$method, "Two Sample t-test") ~ trimws(x$method),
-    stringr::str_detect(x$method, "One-way analysis of means") ~
-      "One-way analysis of means",
-    TRUE ~ x$method
-  )
+  name <- stringr::str_remove(name, pattern = " ,\n using scores: .*")
+  name <- stringr::str_remove(name, pattern = ", null probability .*")
+  name <- stringr::str_remove(name, pattern = " time base: .*")
 
-  # Add method to the analysis
+  analysis <- list(name = as.character(name))
+
+  # Set the analysis method
+  # Special case: Mauchly's test of sphericity has multiple method values
+  x$method <- x$method[[1]]
+  method <- x$method
+
+  method <- trimws(method) # To remove a space in the Two Sample t-test
+  method <- stringr::str_remove(method, " with Yates' continuity correction")
+  method <- stringr::str_remove(method, " for given probabilities")
+  method <- stringr::str_remove(method, " with continuity correction")
+  method <- stringr::str_remove(method, " without continuity correction")
+  method <- stringr::str_remove(method, " with simulated p-value\n.*")
+  method <- stringr::str_remove(method, " hybrid using asym\\.chisq\\. iff .*")
+  method <- stringr::str_remove(method, " \\(not assuming equal variances\\)")
+  method <- stringr::str_remove(method, " in [0-9]+ x [0-9] x k tables")
+
   analysis$method <- method
 
   # Create a list to add the statistics to
   statistics <- list()
 
-  # Extract statistics and add them to the statistics list, taking into account
-  # several special cases
-  # Special case: Calculate estimate for Two Sample t-tests
+  # Set the estimate, if there is one
   if (!is.null(x$estimate)) {
-
-    # Special case: Calculate the estimate as a mean difference in the case of
-    # a two sample t-test
-    # Special case: If there is more than 1 estimate, set the estimate to
-    # NULL to skip it
-    if (stringr::str_detect(method, "Two Sample t-test")) {
-      value <- x$estimate[[1]] - x$estimate[[2]]
-    } else if (length(x$estimate) > 1) {
-      value <- NULL
+    # Set the value of the estimate
+    # - Special case: Calculate the estimate as a mean difference in the case of
+    #   a two sample t-test
+    # - Special case: If there is more than 1 estimate, set the value to NA
+    if (length(x$estimate) > 1) {
+      if (stringr::str_detect(method, "Two Sample t-test")) {
+        value <- x$estimate[[1]] - x$estimate[[2]]
+      } else {
+        value <- NA
+      }
     } else {
       value <- x$estimate[[1]]
     }
 
-    # Set the name
-    name <- dplyr::case_when(
-      method == "One Sample t-test" ~ "mean",
-      stringr::str_detect(method, "Two Sample t-test") |
-        method == "Paired t-test"~ "mean difference",
-      names(x$estimate)[1] == "ratio of variances" ~ "variance ratio",
-      names(x$estimate)[1] == "probability of success" ~ "probability ratio",
-      method == "One Sample t-test" ~ "mean",
-      TRUE ~ names(x$estimate)
-    )
-
-    # Set the symbol
     # Explicitly ask for the first element because sometimes there are more, in
     # which case case_when() returns multiple values
     symbol <- dplyr::case_when(
@@ -121,34 +105,34 @@ tidy_stats.htest <- function(x, args = NULL) {
       names(x$estimate)[1] == "difference in location" ~ "Mdn",
       names(x$estimate)[1] == "ratio of variances" ~ "VR",
       names(x$estimate)[1] == "probability of success" ~ "P",
-      names(x$estimate)[1] == "ratio of scales" ~ "ratio",
-      names(x$estimate)[1] == "event rate" ~ "rate",
-      names(x$estimate)[1] == "rate ratio" ~ "ratio",
+      names(x$estimate)[1] == "ratio of scales" ~ "s",
+      names(x$estimate)[1] == "event rate" ~ "r",
+      names(x$estimate)[1] == "rate ratio" ~ "R",
       names(x$estimate)[1] == "common odds ratio" ~ "OR",
       stringr::str_detect(method, "t-test") ~ "M"
     )
 
-    # Special case: In the case of a paired t-test and two sample t-test (Welch
-    # or not), set the subscript to 'difference'
     subscript <- dplyr::case_when(
       stringr::str_detect(method, "Two Sample t-test") |
         method == "Paired t-test" ~ "diff.",
       names(x$estimate)[1] == "tau" ~ "τ",
       names(x$estimate)[1] == "rho" ~ "S",
-      names(x$estimate)[1] == "difference in location" ~ "diff.",
-      names(x$estimate)[1] == "event rate" ~ "event",
-      names(x$estimate)[1] == "rate ratio" ~ "rate"
+      names(x$estimate)[1] == "difference in location" ~ "diff."
     )
 
+    # Add the estimate
     statistics <- add_statistic(statistics, "estimate", value, symbol,
       subscript, "CI", attr(x$conf.int, "conf.level"), x$conf.int[1],
       x$conf.int[2])
   }
 
+  # Add the standard error
   statistics <- add_statistic(statistics, "SE", x$stderr)
 
-  # Set the symbol of the statistic
+  # Set the statistic
   if (!is.null(names(x$statistic))) {
+    value <- x$statistic[[1]]
+
     symbol <- dplyr::case_when(
       names(x$statistic) == "X-squared" ~ "χ²",
       names(x$statistic) == "Kruskal-Wallis chi-squared" ~ "χ²",
@@ -164,51 +148,75 @@ tidy_stats.htest <- function(x, args = NULL) {
       names(x$statistic) == "Friedman chi-squared" ~ "χ²",
       names(x$statistic) == "Cochran-Mantel-Haenszel M^2" ~ "CMH",
       names(x$statistic) == "Mantel-Haenszel X-squared" ~ "χ²",
+      names(x$statistic) == "Dickey-Fuller" ~ "DF",
       TRUE ~ names(x$statistic)
     )
-    subscript <- dplyr::case_when(
-      x$method == "Exact binomial test" ~ "successes",
-      names(x$statistic) == "number of events" ~ "total",
-      names(x$statistic) == "count1" ~ "event(1)"
-    )
-    name <-
-      ifelse(symbol %in% c("k", "n"),
-        "count",
-        "statistic")
+
+    if (names(x$statistic) == "Dickey-Fuller") {
+      subscript <- "τ"
+    } else {
+      subscript <- NA
+    }
+
+    name <- dplyr::if_else(symbol %in% c("k", "n"), "count", "statistic")
+
+    statistics = add_statistic(statistics, name, value, symbol, subscript)
   }
 
-  statistics = add_statistic(statistics, name, x$statistic[[1]], symbol, subscript)
+  # Set the parameter, if there is one/are any
+  if (!is.null(x$parameter)) {
+    # Special case: Sometimes there's both a numerator and denominator df
+    if (length(x$parameter) > 1) {
+      statistics <- add_statistic(
+        statistics,
+        "df numerator",
+        x$parameter[[1]],
+        "df",
+        "num."
+      )
+      statistics <- add_statistic(
+        statistics,
+        "df denominator",
+        x$parameter[[2]],
+        "df",
+        "den."
+      )
+    } else {
+      value <- x$parameter[[1]]
 
-  # Special case: One-way analysis of means has more than 1 df
-  if (length(x$parameter) > 1) {
-    statistics <-
-      add_statistic(statistics, "df numerator", x$parameter[[1]],
-                    "df", "num.")
-    statistics <- add_statistic(statistics, "df denominator",
-                                x$parameter[[2]], "df", "den.")
-  } else if (x$method == "Phillips-Perron Unit Root Test") {
-    statistics <-
-      add_statistic(statistics, 'lag', as.numeric(x$parameter))
-  } else if (x$method == "Exact binomial test") {
-    statistics <- statistics %>%
-      add_statistic("count", x$parameter[[1]], 'n', 'total') %>%
-      add_statistic("statistic", x$null.value[[1]], 'P', 'expected')
-  } else if (x$method == "Exact Poisson test") {
-    statistics <-
-      add_statistic(statistics, "statistic", x$parameter[[1]], 'T', 'time base')
-  } else if (x$method == "Comparison of Poisson rates") {
-    statistics <-
-      add_statistic(statistics, "statistic", x$parameter[[1]], 'n', 'expected')
-  } else{
-    statistics <- add_statistic(statistics, "df", x$parameter[[1]])
+      # Various special cases because not all parameters are degrees of freedom
+      subscript <- NA
+      symbol <- NA
+
+      if (method == "Phillips-Perron Unit Root Test") {
+        name <- "truncation lag"
+        symbol <- "k"
+      } else if (method == "Exact binomial test") {
+        name <- "count"
+        symbol <- "n"
+      } else if (method == "Exact Poisson test") {
+        name <- "time base"
+        symbol <- "T"
+      } else if (method == "Comparison of Poisson rates") {
+        name <- "expected count"
+        symbol <- "n"
+        subscript <- "expected"
+      } else {
+        name <- "df"
+      }
+
+      statistics <- add_statistic(statistics, name, value, symbol, subscript)
+    }
   }
 
+  # Set the p-value
   statistics <- add_statistic(statistics, "p", x$p.value)
 
   # Add statistics to the analysis
   analysis$statistics <- statistics
 
   # Add additional information
+  # Information about the alternative hypothesis
   if (!is.null(x$alternative)) {
     alternative <- list(direction = x$alternative)
 
@@ -219,11 +227,13 @@ tidy_stats.htest <- function(x, args = NULL) {
     analysis$alternative <- alternative
   }
 
+  # Number of simulations if the p-value was simulated
   if (stringr::str_detect(x$method, "simulated p-value")) {
     analysis$sim <- as.numeric(stringr::str_extract(x$method,
       "[0-9](e\\+)?([0-9].)?"))
   }
 
+  # Hybrid parameters
   if (stringr::str_detect(x$method, "hybrid")) {
     analysis$hybrid_parameters <- list(
       expect = readr::parse_number(
@@ -231,10 +241,11 @@ tidy_stats.htest <- function(x, args = NULL) {
       ),
       percent = readr::parse_number(stringr::str_extract(x$method,
         "perc=[0-9]+")),
-      Emin = readr::parse_number(stringr::str_extract(x$method, "exp=[0-9+]"))
+      Emin = readr::parse_number(stringr::str_extract(x$method, "Emin=[0-9+]"))
     )
   }
 
+  # Whether the variance was assumed to be equal
   if (x$method == "Welch Two Sample t-test") {
     analysis$var_equal <- FALSE
   } else if (x$method == " Two Sample t-test") {
@@ -252,7 +263,6 @@ tidy_stats.htest <- function(x, args = NULL) {
   return(analysis)
 }
 
-
 #' @describeIn tidy_stats tidy_stats method for class 'pairwise.htest'
 #' @export
 tidy_stats.pairwise.htest <- function(x, args = NULL) {
@@ -260,10 +270,11 @@ tidy_stats.pairwise.htest <- function(x, args = NULL) {
   analysis <- list(name = x$data.name)
 
   # Add method to the analysis
-  analysis$method <-
-    ifelse(startsWith(x$method, "Pairwise"),
-      x$method,
-      paste("Pairwise", x$method))
+  analysis$method <- dplyr::if_else(
+    stringr::str_starts(x$method, "Pairwise"),
+    x$method,
+    paste("Pairwise", x$method)
+  )
 
   # Check if there is 1 or more terms
   # If 1, only create a statistics list
@@ -273,20 +284,20 @@ tidy_stats.pairwise.htest <- function(x, args = NULL) {
     statistics <- add_statistic(statistics, "p", x$p.value[1])
     analysis$statistics <- statistics
   } else {
-    groups <- list(name = "P-values")
+    groups <- list(name = "Pairs")
 
-    for (i in 1:nrow(x$p.value)) {
-      group <- list(name = rownames(x$p.value)[i])
+    p_values <- x$p.value |>
+      tidy_matrix(symmetric = FALSE) |>
+      tidyr::unite(name, name1, name2, sep = " - ")
+
+
+    for (i in 1:nrow(p_values)) {
+      group <- list(name = p_values$name[i])
 
       statistics <- list()
-      for (j in 1:ncol(x$p.value)) {
-        statistics <-
-          add_statistic(statistics, "p",
-          x$p.value[i, j], subscript = colnames(x$p.value)[j])
-      }
+      statistics <- add_statistic(statistics, "p", p_values$value[i])
 
       group$statistics <- statistics
-
       groups$groups <- append(groups$groups, list(group))
     }
 
@@ -2935,13 +2946,13 @@ tidy_stats.rma.uni <- function(x, args = NULL) {
     analysis <- list(name = deparse(x$call[[2]]),
       method = method)
   }
-  
+
   # Model fit
   if (x$model == "rma.uni" || x$model == "rma.uni.selmodel") {
     # Create a group and statistics list for the model fit statistics
     group <- list(name = "Model")
     statistics <- list()
-    
+
     # Extract and add statistics to the statistics list
     statistics <- add_statistic(statistics, "I squared", x$I2, "I²")
     statistics <- add_statistic(statistics, "H squared", x$H2, "H²")
@@ -2954,13 +2965,13 @@ tidy_stats.rma.uni <- function(x, args = NULL) {
     }
     # Add statistics to the group
     group$statistics <- statistics
-    
+
     # Add the model group (if any) to a groups element on the analysis
     if (length(group$statistics) > 1) {
       analysis$groups <- append(analysis$groups, list(group))
     }
   }
-  
+
   # Heterogeneity
   # Create a group and statistics list for the Test for (Residual) Heterogeneity
   if (!is.na(x$QE)) {
@@ -3045,10 +3056,10 @@ tidy_stats.rma.uni <- function(x, args = NULL) {
   for (i in 1:length(coefs_v)) {
     # Create a new group list
     group <- list()
-    
+
     # Add the name and type of the coefficient
     group$name <- names(coefs_v)[i]
-    
+
     # Create a new statistics list
     statistics <- list()
     statistics <-
@@ -3067,16 +3078,16 @@ tidy_stats.rma.uni <- function(x, args = NULL) {
     statistics <-
       add_statistic(statistics, "statistic", x$zval[i], stat_type)
     statistics <- add_statistic(statistics, "p", x$pval[i])
-    
+
     # Add statistics to the group
     group$statistics <- statistics
-    
+
     # Add the group to the groups of the coefficients groups list
     groups$groups <- append(groups$groups, list(group))
   }
   # Add the coefficient groups to the statistics list
   analysis$groups <- append(analysis$groups, list(groups))
-  
+
   # Create a groups list for the second group of coefficients (if any)
   if (x$model == "rma.ls") {
     if (x$q > 1L && !is.na(x$QS)) {
@@ -3092,7 +3103,7 @@ tidy_stats.rma.uni <- function(x, args = NULL) {
         statistics <- add_statistic(statistics, "statistic", x$QS, "QS")
         statistics <- add_statistic(statistics, "df", x$QSdf[1])
       }
-      
+
       statistics <- add_statistic(statistics, "p", x$QSp)
       # Add statistics to the group
       group$statistics <- statistics
@@ -3143,7 +3154,7 @@ tidy_stats.rma.uni <- function(x, args = NULL) {
     # Add the coefficient groups to the statistics list
     analysis$groups <- append(analysis$groups, list(groups))
   }
-  
+
   if (x$model == "rma.uni.selmodel") {
     if (!is.na(x$LRT)) {
       statistics <- list()
@@ -3157,7 +3168,7 @@ tidy_stats.rma.uni <- function(x, args = NULL) {
       # Add the model group to a groups element on the analysis
       analysis$groups <- append(analysis$groups, list(group))
     }
-    
+
     groups <- list(name = "Coefficients (Selection)")
     if (x$type == "stepfun") {
        rnames <- rownames(x$ptable)
@@ -3188,12 +3199,12 @@ tidy_stats.rma.uni <- function(x, args = NULL) {
           upper = ifelse(is.na(x$ci.ub.delta[i][[1]]), "-", x$ci.ub.delta[i][[1]])
         )
       statistics <-
-        add_statistic(statistics, "SE", 
+        add_statistic(statistics, "SE",
           ifelse(is.na(x$se.delta[i][[1]]), "-", x$se.delta[i][[1]]))
       statistics <-
-        add_statistic(statistics, "statistic", 
+        add_statistic(statistics, "statistic",
           ifelse(is.na(x$zval.delta[i][[1]]), "-", x$zval.delta[i][[1]]), "z")
-      statistics <- add_statistic(statistics, "p", 
+      statistics <- add_statistic(statistics, "p",
         ifelse(is.na(x$pval.delta[i][[1]]), "-", x$pval.delta[i][[1]]))
       # Add statistics to the group
       group$statistics <- statistics
@@ -3203,10 +3214,10 @@ tidy_stats.rma.uni <- function(x, args = NULL) {
     # Add the coefficient groups to the statistics list
     analysis$groups <- append(analysis$groups, list(groups))
   }
-  
+
   # Add package information
   analysis <- add_package_info(analysis, "metafor")
-  
+
   return(analysis)
 }
 
@@ -3228,7 +3239,7 @@ tidy_stats.rma.mh <- function(x, args = NULL) {
   group$statistics <- statistics
   # Add the model group to a groups element on the analysis
   analysis$groups <- append(analysis$groups, list(group))
-  
+
   # Heterogeneity
   # Create a group and statistics list for the Test for (Residual) Heterogeneity
   if (!is.na(x$QE)) {
@@ -3318,7 +3329,7 @@ tidy_stats.rma.mh <- function(x, args = NULL) {
         # Add the model group to a groups element on the analysis
         analysis$groups <- append(analysis$groups, list(group))
       }
-      
+
       if (!is.na(x$TA)) {
         statistics <- list()
         group <- list(name = "Tarone's Test for Heterogeneity")
@@ -3346,7 +3357,7 @@ tidy_stats.rma.mh <- function(x, args = NULL) {
         analysis$groups <- append(analysis$groups, list(group))
       }
     }
-    
+
   } else {
     groups <- list(name = "Coefficients")
     for (i in 1:length(x$beta)) {
@@ -3380,10 +3391,10 @@ tidy_stats.rma.mh <- function(x, args = NULL) {
     # Add the coefficient groups to the statistics list
     analysis$groups <- append(analysis$groups, list(groups))
   }
-  
+
   # Add package information
   analysis <- add_package_info(analysis, "metafor")
-  
+
   return(analysis)
 }
 
@@ -3421,7 +3432,7 @@ tidy_stats.rma.peto <- function(x, args = NULL) {
     # Add the model group to a groups element on the analysis
     analysis$groups <- append(analysis$groups, list(group))
   }
-  
+
   # Loop over the coefficients and add statistics to a group list
   groups <- list(name = "Coefficients (log scale)")
   for (i in 1:length(x$beta)) {
@@ -3454,7 +3465,7 @@ tidy_stats.rma.peto <- function(x, args = NULL) {
   }
   # Add the coefficient groups to the statistics list
   analysis$groups <- append(analysis$groups, list(groups))
-  
+
   groups <- list(name = "Coefficients (OR scale)")
   for (i in 1:length(x$beta)) {
     # Create a new group list
@@ -3481,10 +3492,10 @@ tidy_stats.rma.peto <- function(x, args = NULL) {
   }
   # Add the coefficient groups to the statistics list
   analysis$groups <- append(analysis$groups, list(groups))
-  
+
   # Add package information
   analysis <- add_package_info(analysis, "metafor")
-  
+
   return(analysis)
 }
 
@@ -3514,7 +3525,7 @@ tidy_stats.rma.glmm <- function(x, args = NULL) {
     }
   }
   if (is.element(x$measure, c("OR", "IRR"))) {
-    
+
     if (x$model == "UM.FS")
       model_type = "Unconditional Model with Fixed Study Effects"
     if (x$model == "UM.RS")
@@ -3526,7 +3537,7 @@ tidy_stats.rma.glmm <- function(x, args = NULL) {
   }
   analysis <- list(name = deparse(x$call[[2]]),
                    method = paste0(method, " (", model_type, ")"))
-  
+
   statistics <- list()
   if (!is.element(x$method, c("FE", "EE", "CE"))) {
     # Model fit
@@ -3541,14 +3552,14 @@ tidy_stats.rma.glmm <- function(x, args = NULL) {
     statistics <-
       add_statistic(statistics, "Τau", x$tau2 ** 0.5, "τ")
   }
-  
+
   if (!is.na(x$sigma2)) {
     statistics <-
       add_statistic(statistics, "sigma squared", x$sigma2, "σ²")
     statistics <-
       add_statistic(statistics, "sigma", sqrt(x$sigma2), "σ")
   }
-  
+
   if (length(statistics) > 0) {
     group <- list(name = "Model")
     # Add statistics to the group
@@ -3561,7 +3572,7 @@ tidy_stats.rma.glmm <- function(x, args = NULL) {
   } else {
     h_type = "Residual Heterogeneity"
   }
-  
+
   # Heterogeneity
   # Create a group and statistics list for the Test for (Residual) Heterogeneity
   if (!is.na(x$QE.Wld)) {
@@ -3588,7 +3599,7 @@ tidy_stats.rma.glmm <- function(x, args = NULL) {
     # Add the model group to a groups element on the analysis
     analysis$groups <- append(analysis$groups, list(group))
   }
-  
+
   if (x$p > 1L && !is.na(x$QM)) {
     statistics <- list()
     group <- list(name = "Test of Moderators")
@@ -3610,7 +3621,7 @@ tidy_stats.rma.glmm <- function(x, args = NULL) {
     # Add the model group to a groups element on the analysis
     analysis$groups <- append(analysis$groups, list(group))
   }
-  
+
   # Create a groups list for the coefficients
   groups <- list(name = "Coefficients")
   if (is.element(x$test, c("knha", "adhoc", "t"))) {
@@ -3649,10 +3660,10 @@ tidy_stats.rma.glmm <- function(x, args = NULL) {
   }
   # Add the coefficient groups to the statistics list
   analysis$groups <- append(analysis$groups, list(groups))
-  
+
   # Add package information
   analysis <- add_package_info(analysis, "metafor")
-  
+
   return(analysis)
 }
 
@@ -3667,7 +3678,7 @@ tidy_stats.rma.mv <- function(x, args = NULL) {
   # Model fit
   # Create a group and statistics list for the model fit statistics
   group <- list(name = "Model")
-  
+
   if (x$withS || x$withG || x$withH) {
     tau2 <- x$tau2
     tau <- sqrt(x$tau2)
@@ -3692,7 +3703,7 @@ tidy_stats.rma.mv <- function(x, args = NULL) {
       analysis$groups <-
         append(analysis$groups, df_to_group("Sigma", vc, na_rm = TRUE))
     }
-    
+
     if (x$withG) {
       if (is.element(
         x$struct[1],
@@ -3721,7 +3732,7 @@ tidy_stats.rma.mv <- function(x, args = NULL) {
         analysis$groups <-
           append(analysis$groups, df_to_group("Tau", vc, na_rm = TRUE))
       }
-      
+
       if (is.element(x$struct[1], c("HCS", "HAR", "DIAG"))) {
         vc <-
           cbind(tau2,
@@ -3743,7 +3754,7 @@ tidy_stats.rma.mv <- function(x, args = NULL) {
         analysis$groups <-
           append(analysis$groups, df_to_group("Tau", vc, na_rm = TRUE))
       }
-      
+
       if (is.element(x$struct[1], c("UN", "UNR"))) {
         if (x$struct[1] == "UN") {
           vc <-
@@ -3771,11 +3782,11 @@ tidy_stats.rma.mv <- function(x, args = NULL) {
         } else {
           rownames(vc) <- paste("T²", seq_along(x$g.levels.k), " ", sep = "")
         }
-        
+
         analysis$groups <-
           append(analysis$groups, df_to_group("Tau", vc, na_rm = TRUE))
-        
-        
+
+
         if (length(x$rho) == 1L) {
           G <- matrix(NA_real_, nrow = 2, ncol = 2)
         } else {
@@ -3801,7 +3812,7 @@ tidy_stats.rma.mv <- function(x, args = NULL) {
         G.info[lower.tri(G.info)] <-
           ifelse(x$vc.fix$rho, "yes", "no")
         diag(G.info) <- "-"
-        
+
         vc <- cbind(G, "", G.info)
         colnames(vc) <-
           c(paste("ρ", abbreviate(x$g.levels.f[[1]]), sep = ""),
@@ -3811,13 +3822,13 @@ tidy_stats.rma.mv <- function(x, args = NULL) {
         analysis$groups <-
           append(analysis$groups, df_to_group("Rho", vc, na_rm = TRUE))
       }
-      
+
       if (is.element(x$struct[1], c("GEN"))) {
         vc <- cbind(tau2, tau, ifelse(x$vc.fix$tau2, "yes", "no"), "")
         colnames(vc) <-
           c("estimate", "square root", "fixed", "rho")
         rownames(vc) <- x$g.names[-length(x$g.names)]
-        
+
         G.info <- cov2cor(x$G)
         diag(G.info) <- "-"
         G.info[lower.tri(G.info)] <-
@@ -3827,23 +3838,23 @@ tidy_stats.rma.mv <- function(x, args = NULL) {
         vc <- cbind(vc, G.info)
         analysis$groups <-
           append(analysis$groups, df_to_group("Tau", vc, na_rm = TRUE))
-        
+
       }
-      
+
       if (is.element(x$struct[1], c("GDIAG"))) {
         vc <- cbind(tau2, tau, ifelse(x$vc.fix$tau2, "yes", "no"))
         colnames(vc) <- c("estimate", "square root", "fixed")
         rownames(vc) <- x$g.names[-length(x$g.names)]
         analysis$groups <-
           append(analysis$groups, df_to_group("Tau", vc, na_rm = TRUE))
-        
+
       }
     }
-    
+
     if (x$withH) {
       gamma2 <- x$gamma2
       gamma  <- sqrt(x$gamma2)
-      
+
       if (is.element(
         x$struct[2],
         c(
@@ -3870,9 +3881,9 @@ tidy_stats.rma.mv <- function(x, args = NULL) {
           vc <- vc[1, , drop = FALSE]
         analysis$groups <-
           append(analysis$groups, df_to_group("Gamma", vc, na_rm = TRUE))
-        
+
       }
-      
+
       if (is.element(x$struct[2], c("HCS", "HAR", "DIAG"))) {
         vc <-
           cbind(
@@ -3896,9 +3907,9 @@ tidy_stats.rma.mv <- function(x, args = NULL) {
           vc <- vc[seq_along(gamma2), , drop = FALSE]
         analysis$groups <-
           append(analysis$groups, df_to_group("Gamma", vc, na_rm = TRUE))
-        
+
       }
-      
+
       if (is.element(x$struct[2], c("UN", "UNR"))) {
         if (x$struct[2] == "UN") {
           vc <-
@@ -3930,8 +3941,8 @@ tidy_stats.rma.mv <- function(x, args = NULL) {
         }
         analysis$groups <-
           append(analysis$groups, df_to_group("Gamma", vc, na_rm = TRUE))
-        
-        
+
+
         if (length(x$phi) == 1L) {
           H <- matrix(NA_real_, nrow = 2, ncol = 2)
         } else {
@@ -3943,7 +3954,7 @@ tidy_stats.rma.mv <- function(x, args = NULL) {
         H[upper.tri(H)] <- t(H)[upper.tri(H)]
         diag(H) <- 1
         #H[upper.tri(H)] <- ""
-        
+
         if (length(x$phi) == 1L) {
           H.info <- matrix(NA_real_, nrow = 2, ncol = 2)
         } else {
@@ -3958,7 +3969,7 @@ tidy_stats.rma.mv <- function(x, args = NULL) {
         H.info[lower.tri(H.info)] <-
           ifelse(x$vc.fix$phi, "yes", "no")
         diag(H.info) <- "-"
-        
+
         vc <- cbind(H, "", H.info)
         colnames(vc) <-
           c(paste("φ", abbreviate(x$h.levels.f[[1]]), sep = ""),
@@ -3968,13 +3979,13 @@ tidy_stats.rma.mv <- function(x, args = NULL) {
         analysis$groups <-
           append(analysis$groups, df_to_group("Phi", vc, na_rm = TRUE))
       }
-      
+
       if (is.element(x$struct[2], c("GEN"))) {
         vc <- cbind(gamma2, gamma, ifelse(x$vc.fix$gamma2, "yes", "no"), "")
         colnames(vc) <-
           c("estimate", "square root", "fixed", "φ")
         rownames(vc) <- x$h.names[-length(x$h.names)]
-        
+
         H.info <- cov2cor(x$H)
         diag(H.info) <- "-"
         H.info[lower.tri(H.info)] <-
@@ -3984,16 +3995,16 @@ tidy_stats.rma.mv <- function(x, args = NULL) {
         vc <- cbind(vc, H.info)
         analysis$groups <-
           append(analysis$groups, df_to_group("Gamma", vc, na_rm = TRUE))
-        
+
       }
-      
+
       if (is.element(x$struct[2], c("GDIAG"))) {
         vc <- cbind(gamma2, gamma, ifelse(x$vc.fix$gamma2, "yes", "no"))
         colnames(vc) <- c("estimate", "square root", "fixed")
         rownames(vc) <- x$h.names[-length(x$h.names)]
         analysis$groups <-
           append(analysis$groups, df_to_group("Gamma", vc, na_rm = TRUE))
-        
+
       }
     }
   }
@@ -4080,10 +4091,10 @@ tidy_stats.rma.mv <- function(x, args = NULL) {
   # Add the coefficient groups to the statistics list
   analysis$groups <- append(analysis$groups, list(groups))
 
-  
+
   # Add package information
   analysis <- add_package_info(analysis, "metafor")
-  
+
   return(analysis)
 }
 
@@ -4162,7 +4173,7 @@ tidy_stats.anova.rma <- function(x, args = NULL) {
   } else {
     method = "Wald-Type Tests for 'rma' Objects"
   }
-  
+
   analysis <- list(method = method)
 
   # Moderators
@@ -4190,7 +4201,7 @@ tidy_stats.anova.rma <- function(x, args = NULL) {
     # Add the model group to a groups element on the analysis
     analysis$groups <- append(analysis$groups, list(group))
   }
-  
+
   if (x$type == "Wald.att") {
     statistics <- list()
     group <- list(name = "Test of Scale Coefficients")
@@ -4248,7 +4259,7 @@ tidy_stats.anova.rma <- function(x, args = NULL) {
     }
     # Add the coefficient groups to the statistics list
     analysis$groups <- append(analysis$groups, list(groups))
-    
+
     if (!is.na(x$QM)) {
       statistics <- list()
       if (x$m == 1) {
@@ -4311,7 +4322,7 @@ tidy_stats.anova.rma <- function(x, args = NULL) {
     }
     # Add the coefficient groups to the statistics list
     analysis$groups <- append(analysis$groups, list(groups))
-    
+
     if (!is.na(x$QS)) {
       statistics <- list()
       if (x$m == 1) {
@@ -4329,7 +4340,7 @@ tidy_stats.anova.rma <- function(x, args = NULL) {
         statistics <- add_statistic(statistics, "statistic", x$QS, "QS")
         statistics <- add_statistic(statistics, "df", x$QSdf[1])
       }
-      
+
       statistics <- add_statistic(statistics, "p", x$QSp)
       # Add statistics to the group
       group$statistics <- statistics
@@ -4337,7 +4348,7 @@ tidy_stats.anova.rma <- function(x, args = NULL) {
       analysis$groups <- append(analysis$groups, list(group))
     }
   }
-  
+
   if (x$type == "LRT") {
     res.table <- data.frame(c(x$parms.f, x$parms.r),
       c(x$fit.stats.f["AIC"], x$fit.stats.r["AIC"]),
@@ -4349,7 +4360,7 @@ tidy_stats.anova.rma <- function(x, args = NULL) {
       c(x$QE.f,  x$QE.r),
       c(x$tau2.f, x$tau2.r),
       c(NA, NA), stringsAsFactors=FALSE)
-  
+
     colnames(res.table) <- c("df", "AIC", "BIC", "AICc", "Log-Likelihood", "LRT", "p", "QE", "T²", "R²")
     rownames(res.table) <- c("Full", "Reduced")
     res.table["Full", c("LRT", "p")] <- NA
@@ -4387,7 +4398,7 @@ tidy_stats.permutest.rma.uni <- function(x, args = NULL) {
     } else {
       group <- list(name = "Test of Moderators")
     }
-    
+
     if (is.element(x$test, c("knha", "adhoc", "t"))) {
       statistics <- add_statistic(statistics, "statistic", x$QM, "F")
       statistics <- add_statistic(statistics, "df numerator",
@@ -4468,7 +4479,7 @@ tidy_stats.permutest.rma.uni <- function(x, args = NULL) {
       # Add the model group to a groups element on the analysis
       analysis$groups <- append(analysis$groups, list(group))
     }
-    
+
     groups <- list(name = "Coefficients (Scale)")
     # Loop over the coefficients and add statistics to a group list
     for (i in 1:length(x$alpha)) {
@@ -4552,7 +4563,7 @@ tidy_stats.tes <- function(x, args = NULL) {
     add_statistic(statistics, "statistic", x$X2, "χ²")
   statistics <- add_statistic(statistics, "df", 1)
   statistics <- add_statistic(statistics, "p", x$pval)
-  
+
   if (!is.null(x$theta.lim)) {
     if (!is.na(x$theta.lim[1])) {
       if (length(x$theta.lim) == 2L) {
@@ -4640,7 +4651,7 @@ tidy_stats.matreg <- function(x, args = NULL) {
   }
   # Add the coefficient groups to the statistics list
   analysis$groups <- append(analysis$groups, list(groups))
-  
+
   # Add package information
   analysis <- add_package_info(analysis, "metafor")
 
@@ -4660,7 +4671,7 @@ tidy_stats.ranktest <- function(x, args = NULL) {
     add_statistic(statistics, "statistic", x$tau[[1]], 'τ')
   statistics <-
     add_statistic(statistics, "p", x$pval)
-  
+
   analysis$statistics <- statistics
 
   # Add package information
@@ -4675,7 +4686,7 @@ tidy_stats.regtest <- function(x, args = NULL) {
   # Create the analysis list
   analysis <-
     list(method = "Regression Test for Funnel Plot Asymmetry")
-  
+
   statistics <- list()
   if (!is.null(x$est)) {
     statistics <-
@@ -4690,7 +4701,7 @@ tidy_stats.regtest <- function(x, args = NULL) {
         upper = x$ci.ub
       )
   }
-  
+
   if (is.na(x$ddf)) {
     statistics <-
       add_statistic(statistics, "statistic", x$zval, 'z')
@@ -4700,10 +4711,10 @@ tidy_stats.regtest <- function(x, args = NULL) {
     statistics <-
       add_statistic(statistics, "df", x$ddf)
   }
-  
+
   statistics <-
     add_statistic(statistics, "p", x$pval)
-  
+
   analysis$statistics <- statistics
 
   if (x$model == "lm") {
@@ -4742,23 +4753,23 @@ tidy_stats.fsn <- function(x, args = NULL) {
   # Create the analysis list
   analysis <-
     list(method = paste0("Fail-Safe N Analysis (", x$type, " approach)"))
-  
+
   statistics <- list()
-  
+
   if (x$type == "Rosenthal") {
     statistics <-
       add_statistic(statistics, "p", x$pval, subscript = "observed")
     statistics <-
       add_statistic(statistics, "p", x$alpha, subscript = "target")
   }
-  
+
   if (x$type == "Orwin" || x$type == "REM") {
     statistics <-
       add_statistic(statistics, "estimate", x$meanes, "b", subscript = "average")
     statistics <-
       add_statistic(statistics, "estimate", x$target, "b", subscript = "target")
   }
-  
+
   if (x$type == "Rosenberg") {
     statistics <-
       add_statistic(statistics, "estimate", x$meanes, "b", subscript = "average")
@@ -4767,15 +4778,15 @@ tidy_stats.fsn <- function(x, args = NULL) {
     statistics <-
       add_statistic(statistics, "p", x$alpha, subscript = "target")
   }
-  
+
   statistics <-
     add_statistic(statistics, "count", x$fsnum, "n", subscript = "failsafe")
-  
+
   analysis$statistics <- statistics
-  
+
   # Add package information
   analysis <- add_package_info(analysis, "metafor")
-  
+
   return(analysis)
 }
 
@@ -4787,7 +4798,7 @@ tidy_stats.hc.rma.uni <- function(x, args = NULL) {
   # Create the analysis list
   analysis <-
     list(method = "Henmi and Copas Meta-Analysis")
-  
+
   # Create a groups list for the coefficients
   groups <- list(name = "Coefficients")
   # Loop over the coefficients and add statistics to a group list
@@ -4796,7 +4807,7 @@ tidy_stats.hc.rma.uni <- function(x, args = NULL) {
     group <- list()
     # Add the name and type of the coefficient
     group$name <- x[[paste0("method", suffx)]]
-    
+
     # Create a new statistics list
     statistics <- list()
     statistics <-
@@ -4821,10 +4832,10 @@ tidy_stats.hc.rma.uni <- function(x, args = NULL) {
   }
   # Add the coefficient groups to the statistics list
   analysis$groups <- append(analysis$groups, list(groups))
-  
+
   # Add package information
   analysis <- add_package_info(analysis, "metafor")
-  
+
   return(analysis)
 }
 
@@ -4843,7 +4854,7 @@ tidy_stats.list.rma <- function(x, args = NULL) {
   out_df <- data.frame(out,
     row.names = x$slab,
     stringsAsFactors = FALSE)
-  
+
   out_df[] <- sapply(out_df, function(x)
     suppressWarnings(as.numeric(as.character(x))))
   out_df = Filter(function(x)
@@ -4851,7 +4862,7 @@ tidy_stats.list.rma <- function(x, args = NULL) {
   if (ncol(out_df) == 0 || nrow(out_df) < 1) {
     return(NULL)
   }
-  
+
   replacers2 = list(
     "tau" = "τ",
     "^2" = "²",
@@ -4863,9 +4874,9 @@ tidy_stats.list.rma <- function(x, args = NULL) {
     "se" = "SE",
     "2" = "²"
   )
-  
+
   for (replacer in names(replacers2)) {
-    colnames(out_df) = gsub(replacer, 
+    colnames(out_df) = gsub(replacer,
       replacers2[[replacer]], colnames(out_df), fixed = TRUE)
   }
   if (any(rownames(out_df) == "")) {
@@ -4908,10 +4919,10 @@ tidy_stats.list.rma <- function(x, args = NULL) {
   }
   # Add the coefficient groups to the statistics list
   analysis$groups <- append(analysis$groups, list(groups))
-  
+
   # Add package information
   analysis <- add_package_info(analysis, "metafor")
-  
+
   return(analysis)
 }
 
@@ -4934,7 +4945,7 @@ tidy_stats.data.frame <- function(x,
                                   ci_level = 0.95) {
   # Create the analysis list
   analysis <- list(method = method_name)
-  
+
   analysis$groups <- append(
     analysis$groups,
     df_to_group(
@@ -4949,10 +4960,10 @@ tidy_stats.data.frame <- function(x,
       ci_level = ci_level
     )
   )
-  
+
   # Add package information
   analysis <- add_package_info(analysis, package_name)
-  
+
   return(analysis)
 }
 
@@ -4960,13 +4971,13 @@ tidy_stats.data.frame <- function(x,
 #' @describeIn tidy_stats tidy_stats method for class 'marginaleffects.summary'
 #' @export
 tidy_stats.marginaleffects.summary <- function(x, args = NULL) {
-  
+
   out <- x
-  
+
   # Create the analysis list
-  analysis <- list(method = paste0(attr(x, "model_type"), 
+  analysis <- list(method = paste0(attr(x, "model_type"),
                 " (Prediction type: ", attr(x, "type"), ")"))
-  
+
   if ("group" %in% colnames(out) &&
       all(out$group == "main_marginaleffects")) {
       out$group <- NULL
@@ -4991,13 +5002,13 @@ tidy_stats.marginaleffects.summary <- function(x, args = NULL) {
   for (i in seq_along(dict)) {
     colnames(out)[colnames(out) == names(dict)[i]] <- dict[i]
   }
-  analysis$groups <- append(analysis$groups, 
-    df_to_group("Average marginal effects", as.data.frame(out), 
+  analysis$groups <- append(analysis$groups,
+    df_to_group("Average marginal effects", as.data.frame(out),
       ci_est_name = "Effect", ci_level = ci_level))
-  
+
   # Add package information
   analysis <- add_package_info(analysis, "marginaleffects")
-  
+
   return(analysis)
 }
 
@@ -5006,9 +5017,9 @@ tidy_stats.marginaleffects.summary <- function(x, args = NULL) {
 tidy_stats.marginalmeans.summary <- function(x, args = NULL) {
   out <- x
   # Create the analysis list
-  analysis <- list(method = paste0(attr(x, "model_type"), 
+  analysis <- list(method = paste0(attr(x, "model_type"),
                 " (Prediction type: ", attr(x, "type"), ")"))
-  
+
   if ("group" %in% colnames(out) &&
       all(out$group == "main_marginaleffects")) {
       out$group <- NULL
@@ -5028,13 +5039,13 @@ tidy_stats.marginalmeans.summary <- function(x, args = NULL) {
   for (i in seq_along(dict)) {
     colnames(out)[colnames(out) == names(dict)[i]] <- dict[i]
   }
-  analysis$groups <- append(analysis$groups, 
-    df_to_group("Estimated marginal means", as.data.frame(out), 
+  analysis$groups <- append(analysis$groups,
+    df_to_group("Estimated marginal means", as.data.frame(out),
       ci_est_name = "Mean", ci_level = ci_level))
-  
+
   # Add package information
   analysis <- add_package_info(analysis, "marginaleffects")
-  
+
   return(analysis)
 }
 
@@ -5085,9 +5096,9 @@ tidy_stats.predictions.summaryDISABLED <- function(x, args = NULL) {
 tidy_stats.comparisons.summary <- function(x, args = NULL) {
   out <- x
   # Create the analysis list
-  analysis <- list(method = paste0(attr(x, "model_type"), 
+  analysis <- list(method = paste0(attr(x, "model_type"),
                 " (Prediction type: ", attr(x, "type"), ")"))
-  
+
   if ("group" %in% colnames(out) &&
       all(out$group == "main_marginaleffects")) {
       out$group <- NULL
@@ -5116,13 +5127,13 @@ tidy_stats.comparisons.summary <- function(x, args = NULL) {
   for (i in seq_along(dict)) {
     colnames(out)[colnames(out) == names(dict)[i]] <- dict[i]
   }
-  analysis$groups <- append(analysis$groups, 
-    df_to_group("Average contrasts", as.data.frame(out), 
+  analysis$groups <- append(analysis$groups,
+    df_to_group("Average contrasts", as.data.frame(out),
       ci_est_name = "Effect", ci_level = ci_level))
-  
+
   # Add package information
   analysis <- add_package_info(analysis, "marginaleffects")
-  
+
   return(analysis)
 }
 
@@ -5146,17 +5157,17 @@ tidy_stats.summary_emm <- function(x, args = NULL) {
       }
     }
   }
-  
+
   for (i in which(sapply(x, is.matrix)))
     x[[i]] = NULL   # hide matrices
-  
+
   xc = as.matrix(format.data.frame(x, na.encode = FALSE))
   if (!is.matrix(xc))
     xc = t(as.matrix(xc))
   by.vars = attr(x, "by.vars")
   if (is.null(by.vars)) {
-    analysis$groups <- append(analysis$groups, 
-      df_to_group("EMMs Summary", as.data.frame(xc), 
+    analysis$groups <- append(analysis$groups,
+      df_to_group("EMMs Summary", as.data.frame(xc),
         ci_est_name = attr(x, "estName"), ci_level = ci_level))
   } else {
     # separate listing for each by variable
@@ -5167,15 +5178,15 @@ tidy_stats.summary_emm <- function(x, args = NULL) {
     for (lb in unique(lbls)) {
       rows = which(lbls == lb)
       levs = paste(paste0(by.vars, ": ", xc[rows[1], by.vars]), collapse = "; ")
-      analysis$groups <- append(analysis$groups, 
-        df_to_group(levs, as.data.frame(m[rows, , drop = FALSE]), 
+      analysis$groups <- append(analysis$groups,
+        df_to_group(levs, as.data.frame(m[rows, , drop = FALSE]),
           ci_est_name = attr(x, "estName"), ci_level = ci_level))
     }
   }
 
   # Add package information
   analysis <- add_package_info(analysis, "emmeans")
-  
+
   return(analysis)
 }
 
@@ -5186,6 +5197,6 @@ tidy_stats.emmGrid <- function(x, args = NULL) {
   if (require("emmeans")) {
     return(tidy_stats.summary_emm(summary(x)))
   } else {
-    stop("The 'emmeans' package needs to be loaded to add 'emmGrid' objects via add_stats in tidystats.") 
+    stop("The 'emmeans' package needs to be loaded to add 'emmGrid' objects via add_stats in tidystats.")
   }
 }
