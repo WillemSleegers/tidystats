@@ -21,7 +21,7 @@ emmeans_multi <- emmeans(warp_lm,  ~ wool | tension)
 emmeans_adjust <- emmeans(warp_lm, poly ~ tension | wool, adjust = "sidak")
 
 # Add stats
-results = results %>%
+results <- results %>%
   add_stats(emmeans_single) %>%
   add_stats(emmeans_multi) %>%
   add_stats(emmeans_adjust)
@@ -56,15 +56,14 @@ emmeans_test_joint
 # contrast() --------------------------------------------------------------------
 
 # Get data
-set.seed(1234)
-pigs.lm <- lm(log(conc) ~ source + factor(percent), data = pigs)
-pigs.emm <- emmeans(pigs.lm, "percent", type = "response")
+pigs_lm <- lm(log(conc) ~ source + factor(percent), data = pigs)
+pigs_emm <- emmeans(pigs_lm, "percent", type = "response")
 
 # Run analysis
-emmeans_contrast <- contrast(pigs.emm, "consec")
+emmeans_contrast <- contrast(pigs_emm, "consec")
 
 # Add stats
-results = results %>%
+results <- results %>%
   add_stats(emmeans_contrast)
 
 # Inspect output

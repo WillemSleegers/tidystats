@@ -19,14 +19,30 @@
 \alias{tidy_stats.gls}
 \alias{tidy_stats.BFBayesFactor}
 \alias{tidy_stats.afex_aov}
-\alias{tidy_stats.emmGrid}
-\alias{tidy_stats.summary_emm}
-\alias{tidy_stats.emm_list}
 \alias{tidy_stats.icclist}
 \alias{tidy_stats.effsize}
 \alias{tidy_stats.effectsize_difference}
 \alias{tidy_stats.confint}
 \alias{tidy_stats.psych}
+\alias{tidy_stats.rma.uni}
+\alias{tidy_stats.rma.mh}
+\alias{tidy_stats.rma.peto}
+\alias{tidy_stats.rma.glmm}
+\alias{tidy_stats.rma.mv}
+\alias{tidy_stats.confint.rma}
+\alias{tidy_stats.list.confint.rma}
+\alias{tidy_stats.anova.rma}
+\alias{tidy_stats.permutest.rma.uni}
+\alias{tidy_stats.tes}
+\alias{tidy_stats.matreg}
+\alias{tidy_stats.ranktest}
+\alias{tidy_stats.regtest}
+\alias{tidy_stats.fsn}
+\alias{tidy_stats.hc.rma.uni}
+\alias{tidy_stats.list.rma}
+\alias{tidy_stats.emmGrid}
+\alias{tidy_stats.summary_emm}
+\alias{tidy_stats.emm_list}
 \alias{tidy_stats.lavaan}
 \alias{tidy_stats.psychwip}
 \title{Tidy the output of a statistics object}
@@ -67,12 +83,6 @@ tidy_stats(x, args = NULL)
 
 \method{tidy_stats}{afex_aov}(x, args = NULL)
 
-\method{tidy_stats}{emmGrid}(x, args = NULL)
-
-\method{tidy_stats}{summary_emm}(x, args = NULL)
-
-\method{tidy_stats}{emm_list}(x, args = NULL)
-
 \method{tidy_stats}{icclist}(x, args = NULL)
 
 \method{tidy_stats}{effsize}(x, args = NULL)
@@ -82,6 +92,44 @@ tidy_stats(x, args = NULL)
 \method{tidy_stats}{confint}(x, args = NULL)
 
 \method{tidy_stats}{psych}(x, args = NULL)
+
+\method{tidy_stats}{rma.uni}(x, args = NULL)
+
+\method{tidy_stats}{rma.mh}(x, args = NULL)
+
+\method{tidy_stats}{rma.peto}(x, args = NULL)
+
+\method{tidy_stats}{rma.glmm}(x, args = NULL)
+
+\method{tidy_stats}{rma.mv}(x, args = NULL)
+
+\method{tidy_stats}{confint.rma}(x, args = NULL)
+
+\method{tidy_stats}{list.confint.rma}(x, args = NULL)
+
+\method{tidy_stats}{anova.rma}(x, args = NULL)
+
+\method{tidy_stats}{permutest.rma.uni}(x, args = NULL)
+
+\method{tidy_stats}{tes}(x, args = NULL)
+
+\method{tidy_stats}{matreg}(x, args = NULL)
+
+\method{tidy_stats}{ranktest}(x, args = NULL)
+
+\method{tidy_stats}{regtest}(x, args = NULL)
+
+\method{tidy_stats}{fsn}(x, args = NULL)
+
+\method{tidy_stats}{hc.rma.uni}(x, args = NULL)
+
+\method{tidy_stats}{list.rma}(x, args = NULL)
+
+\method{tidy_stats}{emmGrid}(x, args = NULL)
+
+\method{tidy_stats}{summary_emm}(x, args = NULL)
+
+\method{tidy_stats}{emm_list}(x, args = NULL)
 
 \method{tidy_stats}{lavaan}(x, args = list(fit.measures = TRUE))
 
@@ -178,12 +226,6 @@ Currently supported functions:
 
 \item \code{afex_aov}: tidy_stats method for class 'afex_aov'
 
-\item \code{emmGrid}: tidy_stats method for class 'emmGrid'
-
-\item \code{summary_emm}: tidy_stats method for class 'summary_emm'
-
-\item \code{emm_list}: tidy_stats method for class 'emm_list'
-
 \item \code{icclist}: tidy_stats method for class 'icclist'
 
 \item \code{effsize}: tidy_stats method for class 'effsize'
@@ -193,6 +235,44 @@ Currently supported functions:
 \item \code{confint}: tidy_stats method for class 'confint'
 
 \item \code{psych}: tidy_stats method for class 'psych'
+
+\item \code{rma.uni}: tidy_stats method for class 'rma.uni'
+
+\item \code{rma.mh}: tidy_stats method for class 'rma.mh'
+
+\item \code{rma.peto}: tidy_stats method for class 'rma.peto'
+
+\item \code{rma.glmm}: tidy_stats method for class 'rma.glmm'
+
+\item \code{rma.mv}: tidy_stats method for class 'rma.mv'
+
+\item \code{confint.rma}: tidy_stats method for class 'confint.rma'
+
+\item \code{list.confint.rma}: tidy_stats method for class 'list.confint.rma'
+
+\item \code{anova.rma}: tidy_stats method for class 'anova.rma'
+
+\item \code{permutest.rma.uni}: tidy_stats method for class 'permutest.rma.uni'
+
+\item \code{tes}: tidy_stats method for class 'tes'
+
+\item \code{matreg}: tidy_stats method for class 'matreg'
+
+\item \code{ranktest}: tidy_stats method for class 'ranktest'
+
+\item \code{regtest}: tidy_stats method for class 'regtest'
+
+\item \code{fsn}: tidy_stats method for class 'fsn'
+
+\item \code{hc.rma.uni}: tidy_stats method for class 'hc.rma.uni'
+
+\item \code{list.rma}: tidy_stats method for class 'list.rma'
+
+\item \code{emmGrid}: tidy_stats method for class 'emmGrid'
+
+\item \code{summary_emm}: tidy_stats method for class 'summary_emm'
+
+\item \code{emm_list}: tidy_stats method for class 'emm_list'
 
 \item \code{lavaan}: tidy_stats method for class 'lavaan'
 
