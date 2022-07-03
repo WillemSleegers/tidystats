@@ -2,7 +2,6 @@
 # Setup -------------------------------------------------------------------
 
 # Load packages
-library(tidystats)
 library(tidyverse)
 library(emmeans)
 
@@ -29,23 +28,19 @@ results <- results %>%
 # Inspect output
 emmeans_single
 emmeans_multi
-emmeans_adjust$emmeans
-emmeans_adjust$contrasts
+emmeans_adjust
 
 # test() ------------------------------------------------------------------
 
-# Get data
+# Run analysis
 pigs_lm <- lm(log(conc) ~ source + factor(percent), data = pigs)
-
 pigs_emm <- emmeans(pigs_lm, specs = "percent", type = "response")
 
-# Run analysis
-# For which percents is EMM non-inferior to 35, based on a 10% threshold?
 emmeans_test <- test(pigs_emm, null = log(35), delta = log(1.10), side = ">")
 emmeans_test_joint <- test(pigs_emm, joint = TRUE)
 
 # Add stats
-results = results %>%
+results <- results %>%
   add_stats(emmeans_test) %>%
   add_stats(emmeans_test_joint)
 
@@ -53,13 +48,35 @@ results = results %>%
 emmeans_test
 emmeans_test_joint
 
-# contrast() --------------------------------------------------------------------
+# contrast() -------------------------------------------------------------
 
-# Get data
-pigs_lm <- lm(log(conc) ~ source + factor(percent), data = pigs)
-pigs_emm <- emmeans(pigs_lm, "percent", type = "response")
+# Run analyses
+warp_lm <- lm(breaks ~ wool*tension, data = warpbreaks)
+warp_emm <- emmeans(warp_lm, ~ tension | wool)
 
-# Run analysis
+warp_contrast <- contrast(warp_emm, "poly")
+
+warp_contrast_eff <- contrast(
+  warp_emm, "eff", by = NULL, enhance.levels = c("wool", "tension")
+)  
+    
+
+## Note that the following are NOT the same:
+contrast(warp_emm, simple = c("wool", "tension"))
+contrast(warp_emm, simple = list("wool", "tension"))
+
+tw_emm <- contrast(warp_emm, 
+  interaction = c(tension = "poly", wool = "consec"), by = NULL
+)
+tw_emm
+
+# Use of scale and offset
+#   an unusual use of the famous stack-loss data...
+mod <- lm(Water.Temp ~ poly(stack.loss, degree = 2), data = stackloss)
+(emm <- emmeans(mod, "stack.loss", at = list(stack.loss = 10 * (1:4))))
+# Convert results from Celsius to Fahrenheit:
+confint(contrast(emm, "identity", scale = 9/5, offset = 32))
+
 emmeans_contrast <- contrast(pigs_emm, "consec")
 
 # Add stats

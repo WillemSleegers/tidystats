@@ -102,13 +102,14 @@
 #' 
 #' @export
 add_stats <- function(list, output, identifier = NULL, type = NULL, 
-  preregistered = NULL, notes = NULL, args = NULL, class = NULL) 
-    UseMethod("add_stats", output)
+  preregistered = NULL, notes = NULL, args = NULL, class = NULL) {
+  UseMethod("add_stats", output)  
+}
+    
 
 #' @export
 add_stats.default <- function(list, output, identifier = NULL, type = NULL,
   preregistered = NULL, notes = NULL, args = NULL, class = NULL) {
-
   # Create an identifier if it is not specified, else check whether it already
   # exists
   if (is.null(identifier)) {
@@ -135,7 +136,7 @@ add_stats.default <- function(list, output, identifier = NULL, type = NULL,
   analysis <- tidy_stats(output, args = args)
 
   # Add type: primary, secondary, or exploratory
-  if (!missing(type)) {
+  if (!is.null(type)) {
     if (type == "primary") {
       analysis$type <- "primary"  
     } else if (type == "secondary") {
@@ -149,7 +150,7 @@ add_stats.default <- function(list, output, identifier = NULL, type = NULL,
   }
   
   # Add whether the analysis was preregistered or not
-  if (!missing(preregistered)) {
+  if (!is.null(preregistered)) {
     if (preregistered) {
       analysis$preregistered <- "yes"
     } else {
@@ -158,7 +159,7 @@ add_stats.default <- function(list, output, identifier = NULL, type = NULL,
   }
   
   # Add notes
-  if (!missing(notes)) {
+  if (!is.null(notes)) {
     analysis$notes <- notes
   }
 
@@ -189,13 +190,20 @@ add_stats.list <- function(list, output, identifier = NULL, type = NULL,
       }
     }
   }
+  
+  # Run the default add_stats in case of a emm_list object
+  if ("emm_list" %in% class(output)) {
+    return(
+      add_stats.default(list, output, identifier, type, preregistered, notes)
+    )
+  }
 
   # Simply set analysis to output; we don't need to tidy the output because
   # they should already be tidy
   analysis <- output
   
   # Add type: primary, secondary, or exploratory
-  if (!missing(type)) {
+  if (!is.null(type)) {
     if (type == "primary") {
       analysis$type <- "primary"  
     } else if (type == "secondary") {
@@ -209,7 +217,7 @@ add_stats.list <- function(list, output, identifier = NULL, type = NULL,
   }
   
   # Add whether the analysis was preregistered or not
-  if (!missing(preregistered)) {
+  if (!is.null(preregistered)) {
     if (preregistered) {
       analysis$preregistered <- "yes"
     } else {
@@ -218,7 +226,7 @@ add_stats.list <- function(list, output, identifier = NULL, type = NULL,
   }
   
   # Add notes
-  if (!missing(notes)) {
+  if (!is.null(notes)) {
     analysis$notes <- notes
   }
 
