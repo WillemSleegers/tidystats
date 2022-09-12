@@ -592,4 +592,6 @@ df <- tidy_stats_to_data_frame(results)
 
 # write_stats() -----------------------------------------------------------
 
-write_stats(results, "tests/testthat/data/metafor.json")
+write_test_stats(results, "tests/testthat/data/metafor.json")
+
+# Cleanup -----------------------------------------------------------------

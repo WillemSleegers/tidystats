@@ -7,9 +7,9 @@ path <- system.file(
   package = "tidystats"
 )
 
-test_results <- read_stats(path)
+expected_statistics <- read_stats(path)
 
-# Test: pairwise.t.test() -------------------------------------------------
+# pairwise.t.test() -------------------------------------------------------
 
 test_that("pairwise t-tests with pooled SD works", {
   Month <- factor(airquality$Month, labels = month.abb[5:9])
@@ -18,11 +18,13 @@ test_that("pairwise t-tests with pooled SD works", {
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$pairwise_t_test
+    expected_tidy_model = expected_statistics$pairwise_t_test
   )
 })
 
 test_that("Pairwise t tests with non-pooled SD works", {
+  Month <- factor(airquality$Month, labels = month.abb[5:9])
+  
   model <- pairwise.t.test(
     airquality$Ozone,
     Month,
@@ -32,7 +34,7 @@ test_that("Pairwise t tests with non-pooled SD works", {
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$pairwise_t_test_nonpooled
+    expected_tidy_model = expected_statistics$pairwise_t_test_nonpooled
   )
 })
 
@@ -45,11 +47,11 @@ test_that("pairwise paired t-tests works", {
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$pairwise_t_test_paired
+    expected_tidy_model = expected_statistics$pairwise_t_test_paired
   )
 })
 
-# Test: pairwise.prop.test() ----------------------------------------------
+# pairwise.prop.test() ----------------------------------------------------
 
 test_that("pairwise comparison of proportions works", {
   smokers <- c(83, 90, 129, 70)
@@ -59,11 +61,11 @@ test_that("pairwise comparison of proportions works", {
 
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$pairwise_prop_test
+    expected_tidy_model = expected_statistics$pairwise_prop_test
   )
 })
 
-# Test: pairwise.wilcox.test() --------------------------------------------
+# pairwise.wilcox.test() --------------------------------------------------
 
 test_that("pairwise Wilcoxon rank sum exact test works", {
   model <- pairwise.wilcox.test(
@@ -73,7 +75,7 @@ test_that("pairwise Wilcoxon rank sum exact test works", {
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$pairwise_wilcox_test
+    expected_tidy_model = expected_statistics$pairwise_wilcox_test
   )
 })
 
@@ -87,6 +89,6 @@ test_that("pairwise Wilcoxon signed rank exact test works", {
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$pairwise_wilcox_test_paired
+    expected_tidy_model = expected_statistics$pairwise_wilcox_test_paired
   )
 })

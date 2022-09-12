@@ -100,4 +100,6 @@ mardia_x
 
 # Save stats --------------------------------------------------------------
 
-write_stats(results, "tests/testthat/data/psych.json")
+write_test_stats(results, "tests/testthat/data/psych.json")
+
+# Cleanup -----------------------------------------------------------------

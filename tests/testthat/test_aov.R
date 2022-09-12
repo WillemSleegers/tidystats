@@ -3,16 +3,16 @@
 
 # Load test data
 path <- system.file("tests/testthat/data/aov.json", package = "tidystats")
-test_results <- read_stats(path)
+expected_statistics <- read_stats(path)
 
-# Test: aov ---------------------------------------------------------------
+# aov() -------------------------------------------------------------------
 
 test_that("aov works", {
   model <- aov(yield ~ block + N * P * K, npk)
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$aov
+    expected_tidy_model = expected_statistics$aov
   )
 })
 
@@ -21,7 +21,7 @@ test_that("aov order works", {
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$aov_order
+    expected_tidy_model = expected_statistics$aov_order
   )
 })
 
@@ -30,6 +30,6 @@ test_that("aov error works", {
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$aov_error
+    expected_tidy_model = expected_statistics$aov_error
   )
 })

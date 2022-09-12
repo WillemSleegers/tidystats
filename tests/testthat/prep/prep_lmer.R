@@ -30,7 +30,7 @@ summary(lme4)
 summary(lme4_ML)
 summary(lme4_slopes)
 
-# anova(): anova.merMod ---------------------------------------------------
+# lme4::anova() ------------------------------------------------------------
 
 # Run analyses
 anova_lme4 <- anova(lme4)
@@ -65,7 +65,7 @@ summary(lmerTest1)
 summary(lmerTest2)
 summary(lmerTest_ML)
 
-# anova(): anova.lmerModLmerTest ------------------------------------------
+# lmerTest::anova() -------------------------------------------------------
 
 # Run analyses
 m0 <- lmerTest::lmer(Reaction ~ Days + (1 | Subject), sleepstudy)
@@ -92,7 +92,7 @@ df <- tidy_stats_to_data_frame(results)
 
 # write_stats() -----------------------------------------------------------
 
-write_stats(results, "tests/testthat/data/lmer.json")
+write_test_stats(results, "tests/testthat/data/lmer.json")
 
 # Cleanup -----------------------------------------------------------------
 

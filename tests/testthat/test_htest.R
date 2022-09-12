@@ -3,16 +3,16 @@
 
 # Load test data
 path <- system.file("tests/testthat/data/htest.json", package = "tidystats")
-test_results <- read_stats(path)
+expected_statistics <- read_stats(path)
 
-# Test: t.test() ----------------------------------------------------------
+# t.test() ----------------------------------------------------------------
 
 test_that("one sample t-test works", {
   model <- t.test(extra ~ 1, data = sleep)
 
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$t_test_one_sample
+    expected_tidy_model = expected_statistics$t_test_one_sample
   )
 })
 
@@ -21,7 +21,7 @@ test_that("two sample t-test works", {
 
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$t_test_two_sample
+    expected_tidy_model = expected_statistics$t_test_two_sample
   )
 })
 
@@ -30,7 +30,7 @@ test_that("Welch t-test works", {
 
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$t_test_welch
+    expected_tidy_model = expected_statistics$t_test_welch
   )
 })
 
@@ -39,11 +39,11 @@ test_that("paired t-test works", {
 
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$t_test_paired
+    expected_tidy_model = expected_statistics$t_test_paired
   )
 })
 
-# Test: cor.test() --------------------------------------------------------
+# cor.test() --------------------------------------------------------------
 
 test_that("pearson correlation works", {
   x <- c(44.4, 45.9, 41.9, 53.3, 44.7, 44.1, 50.7, 45.2, 60.1)
@@ -53,7 +53,7 @@ test_that("pearson correlation works", {
 
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$correlation_pearson
+    expected_tidy_model = expected_statistics$correlation_pearson
   )
 })
 
@@ -65,7 +65,7 @@ test_that("spearman correlation works", {
 
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$correlation_spearman
+    expected_tidy_model = expected_statistics$correlation_spearman
   )
 })
 
@@ -77,11 +77,11 @@ test_that("kendall correlation works", {
 
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$correlation_kendall
+    expected_tidy_model = expected_statistics$correlation_kendall
   )
 })
 
-# Test: chisq.test() ------------------------------------------------------
+# chisq.test() ------------------------------------------------------------
 
 test_that("pearson's chi-squared test works", {
   M <- as.table(
@@ -100,7 +100,7 @@ test_that("pearson's chi-squared test works", {
 
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$chi_squared
+    expected_tidy_model = expected_statistics$chi_squared
   )
 })
 
@@ -111,7 +111,7 @@ test_that("pearson's chi-squared test with yates' correction works", {
 
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$chi_squared_yates
+    expected_tidy_model = expected_statistics$chi_squared_yates
   )
 })
 
@@ -122,11 +122,11 @@ test_that("chi-squared test with for given probabilities works", {
 
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$chi_squared_prob
+    expected_tidy_model = expected_statistics$chi_squared_prob
   )
 })
 
-# Test: prop.test() -------------------------------------------------------
+# prop.test() -------------------------------------------------------------
 
 test_that("1-sample proportion test works", {
   set.seed(1)
@@ -137,7 +137,7 @@ test_that("1-sample proportion test works", {
 
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$prop_test
+    expected_tidy_model = expected_statistics$prop_test
   )
 })
 
@@ -150,7 +150,7 @@ test_that("1-sample proportion test without continuity correction works", {
 
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$prop_test_correct
+    expected_tidy_model = expected_statistics$prop_test_correct
   )
 })
 
@@ -162,11 +162,11 @@ test_that("4-sample proportion test works", {
 
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$prop_test_smokers
+    expected_tidy_model = expected_statistics$prop_test_smokers
   )
 })
 
-# Test: prop.test() -------------------------------------------------------
+# prop.test() -------------------------------------------------------------
 
 test_that("Chi-squared test for trend in proportions works", {
   smokers  <- c(83, 90, 129, 70)
@@ -176,7 +176,7 @@ test_that("Chi-squared test for trend in proportions works", {
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$prop_trend_test,
+    expected_tidy_model = expected_statistics$prop_trend_test,
   )
 })
 
@@ -192,11 +192,11 @@ test_that(
   
   expect_equal_models(
     model = model,  
-    tidy_model_test = test_results$prop_trend_test_scores
+    expected_tidy_model = expected_statistics$prop_trend_test_scores
   )
 })
 
-# Test: wilcox.test() -----------------------------------------------------
+# wilcox.test() -----------------------------------------------------------
 
 test_that("wilcoxon signed rank exact test works", {
   x <- c(1.83,  0.50,  1.62,  2.48, 1.68, 1.88, 1.55, 3.06, 1.30)
@@ -206,7 +206,7 @@ test_that("wilcoxon signed rank exact test works", {
 
   expect_equal_models(
     model = model,  
-    tidy_model_test = test_results$wilcoxon_signed_rank
+    expected_tidy_model = expected_statistics$wilcoxon_signed_rank
   )
 })
 
@@ -217,7 +217,7 @@ test_that("wilcoxon rank sum tests with continuity correction works", {
 
   expect_equal_models(
     model = model,  
-    tidy_model_test = test_results$wilcoxon_rank_sum_continuity
+    expected_tidy_model = expected_statistics$wilcoxon_rank_sum_continuity
   )
 })
 
@@ -230,7 +230,7 @@ test_that("wilcoxon rank sum tests works", {
 
   expect_equal_models(
     model = model,  
-    tidy_model_test = test_results$wilcoxon_rank_sum
+    expected_tidy_model = expected_statistics$wilcoxon_rank_sum
   )
 })
 
@@ -242,11 +242,11 @@ test_that("wilcoxon rank sum tests works", {
 
   expect_equal_models(
     model = model,  
-    tidy_model_test = test_results$wilcoxon_rank_sum_conf
+    expected_tidy_model = expected_statistics$wilcoxon_rank_sum_conf
   )
 })
 
-# Test: kruskal.test() ----------------------------------------------------
+# kruskal.test() ----------------------------------------------------------
 
 test_that("kruskal-wallis rank sum test works", {
   x <- c(2.9, 3.0, 2.5, 2.6, 3.2)
@@ -257,7 +257,7 @@ test_that("kruskal-wallis rank sum test works", {
 
   expect_equal_models(
     model = model,  
-    tidy_model_test = test_results$kruskal
+    expected_tidy_model = expected_statistics$kruskal
   )
 })
 
@@ -266,11 +266,11 @@ test_that("kruskal-wallis rank sum test with formula notation works", {
 
   expect_equal_models(
     model = model,  
-    tidy_model_test = test_results$kruskal_formula
+    expected_tidy_model = expected_statistics$kruskal_formula
   )
 })
 
-# Test: fisher.test() -----------------------------------------------------
+# fisher.test() -----------------------------------------------------------
 
 test_that("fisher's exact tests works", {
   TeaTasting <- matrix(c(3, 1, 1, 3), nrow = 2)
@@ -279,7 +279,7 @@ test_that("fisher's exact tests works", {
 
   expect_equal_models(
     model = model,  
-    tidy_model_test = test_results$fisher_test
+    expected_tidy_model = expected_statistics$fisher_test
   )
 })
 
@@ -290,7 +290,7 @@ test_that("fisher's exact tests without a confidence interval works", {
 
   expect_equal_models(
     model = model,  
-    tidy_model_test = test_results$fisher_test_no_CI
+    expected_tidy_model = expected_statistics$fisher_test_no_CI
   )
 })
 
@@ -301,7 +301,7 @@ test_that("fisher's exact tests on r x c tables works", {
 
   expect_equal_models(
     model = model,  
-    tidy_model_test = test_results$fisher_test_r_by_c
+    expected_tidy_model = expected_statistics$fisher_test_r_by_c
   )
 })
 
@@ -314,7 +314,7 @@ test_that("fisher's exact tests with simulated p-value works", {
 
   expect_equal_models(
     model = model,  
-    tidy_model_test = test_results$fisher_test_simulated_p
+    expected_tidy_model = expected_statistics$fisher_test_simulated_p
   )
 })
 
@@ -331,11 +331,11 @@ test_that("fisher's exact tests hybrid works", {
 
   expect_equal_models(
     model = model,  
-    tidy_model_test = test_results$fisher_test_hybrid
+    expected_tidy_model = expected_statistics$fisher_test_hybrid
   )
 })
 
-# Test: ks.test() ---------------------------------------------------------
+# ks.test() ---------------------------------------------------------------
 
 test_that("two-sample kolmogorov-smirnov test works", {
   set.seed(1)
@@ -347,7 +347,7 @@ test_that("two-sample kolmogorov-smirnov test works", {
   
   expect_equal_models(
     model = model,  
-    tidy_model_test = test_results$ks_test_two
+    expected_tidy_model = expected_statistics$ks_test_two
   )
 })
 
@@ -361,7 +361,7 @@ test_that("one-sample kolmogorov-smirnov test works", {
 
   expect_equal_models(
     model = model,  
-    tidy_model_test = test_results$ks_test_one
+    expected_tidy_model = expected_statistics$ks_test_one
   )
 })
 
@@ -375,7 +375,7 @@ test_that("inexact kolmogorov-smirnov test works", {
 
   expect_equal_models(
     model = model,  
-    tidy_model_test = test_results$ks_test_inexact
+    expected_tidy_model = expected_statistics$ks_test_inexact
   )
 })
 
@@ -389,18 +389,18 @@ test_that("greater alternative kolmogorov-smirnov test works", {
 
   expect_equal_models(
     model = model,  
-    tidy_model_test = test_results$ks_test_greater
+    expected_tidy_model = expected_statistics$ks_test_greater
   )
 })
 
-# Test: oneway.test() -----------------------------------------------------
+# oneway.test() -----------------------------------------------------------
 
 test_that("one-way analysis of means (not assuming equal variances) works", {
   model <- oneway.test(extra ~ group, data = sleep)
 
   expect_equal_models(
     model = model,  
-    tidy_model_test = test_results$oneway_test
+    expected_tidy_model = expected_statistics$oneway_test
   )
 })
 
@@ -409,11 +409,11 @@ test_that("one-way analysis of means (assuming equal variances) works", {
 
   expect_equal_models(
     model = model,  
-    tidy_model_test = test_results$oneway_test_equal_var
+    expected_tidy_model = expected_statistics$oneway_test_equal_var
   )
 })
 
-# Test: var.test() --------------------------------------------------------
+# var.test() --------------------------------------------------------------
 
 test_that("F test to compare two variances works", {
   set.seed(1)
@@ -425,11 +425,11 @@ test_that("F test to compare two variances works", {
 
   expect_equal_models(
     model = model,  
-    tidy_model_test = test_results$var_test
+    expected_tidy_model = expected_statistics$var_test
   )
 })
 
-# Test: mauchly.test() ----------------------------------------------------
+# mauchly.test() ----------------------------------------------------------
 
 test_that("Mauchly's test of sphericity (traditional) works", {
   invisible(capture.output(utils::example(SSD)))
@@ -438,7 +438,7 @@ test_that("Mauchly's test of sphericity (traditional) works", {
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$mauchly_test
+    expected_tidy_model = expected_statistics$mauchly_test
   )
 })
 
@@ -454,7 +454,7 @@ test_that("Mauchly's test of sphericity (inner projection) works", {
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$mauchly_test_orthogonal
+    expected_tidy_model = expected_statistics$mauchly_test_orthogonal
   )
 })
 
@@ -470,11 +470,11 @@ test_that("Mauchly's test of sphericity (outer projection) works", {
     
   expect_equal_models(
     model = model,
-    tidy_model_test = test_results$mauchly_test_spanned
+    expected_tidy_model = expected_statistics$mauchly_test_spanned
   )
 })
 
-# Test: mcnemar.test() --------------------------------------------------------
+# mcnemar.test() ----------------------------------------------------------
 
 test_that("McNemar's Chi-squared test (with continuity correction) works", {
   Performance <- matrix(
@@ -490,7 +490,7 @@ test_that("McNemar's Chi-squared test (with continuity correction) works", {
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$mcnemar_test
+    expected_tidy_model = expected_statistics$mcnemar_test
   )
 })
 
@@ -508,18 +508,18 @@ test_that("McNemar's Chi-squared test (without continuity correction) works", {
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$mcnemar_test_nocorrect
+    expected_tidy_model = expected_statistics$mcnemar_test_nocorrect
   )
 })
 
-# Test: binom.test() --------------------------------------------------------
+# binom.test() ------------------------------------------------------------
 
 test_that("Exact binomial test works", {
   model <- binom.test(c(682, 243))
     
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$binom_test
+    expected_tidy_model = expected_statistics$binom_test
   )
 })
 
@@ -528,11 +528,11 @@ test_that("Exact binomial test (one-sided) works", {
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$binom_test_params
+    expected_tidy_model = expected_statistics$binom_test_params
   )
 })
 
-# Test: PP.test() --------------------------------------------------------
+# PP.test() ---------------------------------------------------------------
 
 test_that("Phillips-Perron unit root test works", {
   set.seed(1)
@@ -544,7 +544,7 @@ test_that("Phillips-Perron unit root test works", {
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$pp_test
+    expected_tidy_model = expected_statistics$pp_test
   )
 })
 
@@ -558,11 +558,11 @@ test_that("Phillips-Perron unit root test (long truncation parameter) works", {
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$pp_test_long
+    expected_tidy_model = expected_statistics$pp_test_long
   )
 })
 
-# Test: Box.test() --------------------------------------------------------
+# Box.test() --------------------------------------------------------------
 
 test_that("Box-Pierce works", {
   set.seed(1)
@@ -573,7 +573,7 @@ test_that("Box-Pierce works", {
   
   expect_equal_models(
     model = model,
-    tidy_model_test = test_results$box_test
+    expected_tidy_model = expected_statistics$box_test
   )
 })
 
@@ -586,11 +586,11 @@ test_that("Ljung-Pierce works", {
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$box_test_ljung
+    expected_tidy_model = expected_statistics$box_test_ljung
   )
 })
 
-# Test: ansari.test() --------------------------------------------------------
+# ansari.test() -----------------------------------------------------------
 
 test_that("Ansari-Bradley test works", {
   ramsay <- c(111, 107, 100, 99, 102, 106, 109, 108, 104, 99, 101, 96, 97, 102, 
@@ -602,7 +602,7 @@ test_that("Ansari-Bradley test works", {
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$ansari_test
+    expected_tidy_model = expected_statistics$ansari_test
   )
 })
 
@@ -613,11 +613,11 @@ test_that("Ansari-Bradley test (with CI) works", {
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$ansari_test_ci
+    expected_tidy_model = expected_statistics$ansari_test_ci
   )
 })
 
-# Test: mood.test() --------------------------------------------------------
+# mood.test() -------------------------------------------------------------
 
 test_that("Mood two-sample test of scale works", {
   ramsay <- c(111, 107, 100, 99, 102, 106, 109, 108, 104, 99, 101, 96, 97, 102, 
@@ -629,11 +629,11 @@ test_that("Mood two-sample test of scale works", {
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$mood_test
+    expected_tidy_model = expected_statistics$mood_test
   )
 })
 
-# Test: quade.test() --------------------------------------------------------
+# quade.test() ------------------------------------------------------------
 
 test_that("Quade test works", {
   dataFreq <- matrix(
@@ -654,40 +654,40 @@ test_that("Quade test works", {
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$quade_test
+    expected_tidy_model = expected_statistics$quade_test
   )
 })
 
-# Test: bartlett.test() --------------------------------------------------------
+# bartlett.test() ---------------------------------------------------------
 
 test_that("Bartlett test of homogeneity of variances works", {
   model <- bartlett.test(InsectSprays$count, InsectSprays$spray)
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$bartlett_test
+    expected_tidy_model = expected_statistics$bartlett_test
   )
 })
 
-# Test: fligner.test() --------------------------------------------------------
+# fligner.test() ----------------------------------------------------------
 
 test_that("Fligner-Killeen test of homogeneity of variances works", {
   model <- fligner.test(InsectSprays$count, InsectSprays$spray)
       
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$fligner_test
+    expected_tidy_model = expected_statistics$fligner_test
   )
 })
 
-# Test: poisson.test() --------------------------------------------------------
+# poisson.test() ----------------------------------------------------------
 
 test_that("Exact Poisson test works", {
   model <- poisson.test(137, 24.19893)
   
   expect_equal_models(
     model = model,
-    tidy_model_test = test_results$poisson_test
+    expected_tidy_model = expected_statistics$poisson_test
   )
 })
 
@@ -696,11 +696,11 @@ test_that("Comparison of Poisson rates", {
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$poisson_test_comparison
+    expected_tidy_model = expected_statistics$poisson_test_comparison
   )
 })
 
-# Test: shapiro.test() --------------------------------------------------------
+# shapiro.test() ----------------------------------------------------------
 
 test_that("Shapiro-Wilk normality test works", {
   set.seed(1)
@@ -709,11 +709,11 @@ test_that("Shapiro-Wilk normality test works", {
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$shapiro_test
+    expected_tidy_model = expected_statistics$shapiro_test
   )
 })
 
-# Test: friedman.test() --------------------------------------------------------
+# friedman.test() ---------------------------------------------------------
 
 test_that("Friedman rank sum test works", {
   rounding_times <- matrix(
@@ -746,15 +746,15 @@ test_that("Friedman rank sum test works", {
     dimnames = list(1:22, c("Round Out", "Narrow Angle", "Wide Angle"))
   )
   
-  model <- friedman.test(RoundingTimes)
+  model <- friedman.test(rounding_times)
   
   expect_equal_models(
     model = model,
-    tidy_model_test = test_results$friedman_test
+    expected_tidy_model = expected_statistics$friedman_test
   )
 })
 
-# Test: mantelhaen.test() -------------------------------------------------
+# mantelhaen.test() -------------------------------------------------------
 
 test_that("Cochran-Mantel-Haenszel test works", {
   Satisfaction <- as.table(
@@ -778,7 +778,7 @@ test_that("Cochran-Mantel-Haenszel test works", {
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$mantelhaen_test
+    expected_tidy_model = expected_statistics$mantelhaen_test
   )
 })
 
@@ -803,7 +803,7 @@ test_that("Mantel-Haenszel chi-squared test (with continuity correction) works",
     
     expect_equal_models(
       model = model, 
-      tidy_model_test = test_results$mantelhaen_test_2by2
+      expected_tidy_model = expected_statistics$mantelhaen_test_2by2
     )
   }
 )
@@ -828,6 +828,6 @@ test_that("Exact conditional test of independence in 2 x 2 x k tables works", {
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$mantelhaen_test_2by2_exact
+    expected_tidy_model = expected_statistics$mantelhaen_test_2by2_exact
   )
 })

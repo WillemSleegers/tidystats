@@ -3,9 +3,9 @@
 
 # Load test data
 path <- system.file("tests/testthat/data/lm.json", package = "tidystats")
-test_results <- read_stats(path)
+expected_statistics <- read_stats(path)
 
-# Test: lm ----------------------------------------------------------------
+# lm() --------------------------------------------------------------------
 
 test_that("lm works", {
   ctl <- c(4.17, 5.58, 5.18, 6.11, 4.50, 4.61, 5.17, 4.53, 5.33, 5.14)
@@ -17,7 +17,7 @@ test_that("lm works", {
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$lm
+    expected_tidy_model = expected_statistics$lm
   )
 })
 
@@ -31,6 +31,6 @@ test_that("lm without an intercept works", {
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$lm_wo_intercept
+    expected_tidy_model = expected_statistics$lm_wo_intercept
   )
 })

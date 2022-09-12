@@ -2360,11 +2360,6 @@ tidy_stats.confint <- function(x, args = NULL) {
   # Create the analysis list
   analysis <- list()
   
-  # If there is only 1 parameter, set the name
-  if (length(rownames(x)) == 1) {
-    analysis$name <- rownames(x)[1]
-  }
-  
   # Set method
   analysis$method <- "Confidence intervals"
   
@@ -2372,33 +2367,22 @@ tidy_stats.confint <- function(x, args = NULL) {
   CI_bounds <- readr::parse_number(colnames(x))
   CI_level <- (CI_bounds[2] - CI_bounds[1]) / 100
   
-  # Check if there is 1 or more terms
-  # If 1, only create a statistics list
-  # If multiple, loop over terms and create separate lists for each term
-  if (length(rownames(x)) == 1) {
+  # Loop over coefficients and create separate lists for each coefficient
+  groups <- list(name = "Coefficients")
+  
+  for (i in 1:length(rownames(x))) {
+    group <- list(name = rownames(x)[i])
+    
     statistics <- list()
+    statistics <- add_statistic(statistics, "lower", x[i, 1])
+    statistics <- add_statistic(statistics, "upper", x[i, 2])
     
-    statistics <- add_statistic(statistics, "lower", x[1])
-    statistics <- add_statistic(statistics, "upper", x[2])
+    group$statistics <- statistics
     
-    analysis$statistics <- statistics
-  } else {
-    groups <- list(name = "Coefficients")
-    
-    for (i in 1:length(rownames(x))) {
-      group <- list(name = rownames(x)[i])
-       
-      statistics <- list()
-      statistics <- add_statistic(statistics, "lower", x[i, 1])
-      statistics <- add_statistic(statistics, "upper", x[i, 2])
-      
-      group$statistics <- statistics
-      
-      groups$groups <- append(groups$groups, list(group))
-    }
-    
-    analysis$groups <- append(analysis$groups, list(groups))
+    groups$groups <- append(groups$groups, list(group))
   }
+  
+  analysis$groups <- append(analysis$groups, list(groups))
   
   # Add additional information
   analysis$level <- CI_level

@@ -77,7 +77,7 @@
 #' # Load dplyr for access to the piping operator
 #' library(dplyr)
 #' 
-#' # Conduct statistical tests
+#' # Conduct the analyses
 #' # t-test:
 #' sleep_test <- t.test(extra ~ group, data = sleep, paired = TRUE)
 #' 
@@ -92,10 +92,10 @@
 #' npk_aov <- aov(yield ~ block + N*P*K, npk)
 #' 
 #' #' # Create an empty list
-#' results <- list()
+#' statistics <- list()
 #' 
-#' # Add output to the results list
-#' results <- results %>%
+#' # Add statistics to the list
+#' statistics <- statistics %>%
 #'   add_stats(sleep_test) %>%
 #'   add_stats(lm_D9, type = "primary", preregistered = TRUE) %>%
 #'   add_stats(npk_aov, notes = "An ANOVA example")
@@ -105,7 +105,6 @@ add_stats <- function(list, output, identifier = NULL, type = NULL,
   preregistered = NULL, notes = NULL, args = NULL, class = NULL) {
   UseMethod("add_stats", output)  
 }
-    
 
 #' @export
 add_stats.default <- function(list, output, identifier = NULL, type = NULL,

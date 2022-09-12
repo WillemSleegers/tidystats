@@ -1,5 +1,5 @@
 {
-  "sleep_test": {
+  "sleep_t_test": {
     "name": "extra by group",
     "method": "Paired t-test",
     "statistics": [
@@ -37,11 +37,11 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.1"
     },
     "type": "primary"
   },
-  "lm_D9": {
+  "D9_lm": {
     "name": "weight ~ group",
     "method": "Linear regression",
     "groups": [
@@ -150,7 +150,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.1"
     },
     "preregistered": "no"
   },
@@ -421,7 +421,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.1.3"
+      "version": "4.2.1"
     },
     "notes": "An ANOVA example"
   }

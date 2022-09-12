@@ -23,8 +23,8 @@ CI_fit <- confint(fit)
 CI_fit_wt <- confint(fit, "wt")
 
 glm_D93 <- glm(counts ~ outcome + treatment, data = D93, family = poisson())
-CI_glm_D93_MASS <- confint(glm_D93) # needs MASS to be installed
-CI_glm_D93_default <- confint.default(glm_D93)  # based on asymptotic normality
+CI_glm_D93_MASS <- confint(glm_D93)            # based on profile likelihood
+CI_glm_D93_default <- confint.default(glm_D93) # based on asymptotic normality
 
 # Add stats
 results <- results %>%
@@ -45,7 +45,7 @@ df <- tidy_stats_to_data_frame(results)
 
 # write_stats() -----------------------------------------------------------
 
-write_stats(results, "tests/testthat/data/confint.json")
+write_test_stats(results, "tests/testthat/data/confint.json")
 
 # Cleanup -----------------------------------------------------------------
 

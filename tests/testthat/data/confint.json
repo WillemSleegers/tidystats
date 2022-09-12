@@ -1,0 +1,270 @@
+{
+  "CI_fit": {
+    "method": "Confidence intervals",
+    "groups": [
+      {
+        "name": "Coefficients",
+        "groups": [
+          {
+            "name": "(Intercept)",
+            "statistics": [
+              {
+                "name": "lower",
+                "value": -0.774823
+              },
+              {
+                "name": "upper",
+                "value": 2.256118
+              }
+            ]
+          },
+          {
+            "name": "disp",
+            "statistics": [
+              {
+                "name": "lower",
+                "value": -0.002868
+              },
+              {
+                "name": "upper",
+                "value": 0.008274
+              }
+            ]
+          },
+          {
+            "name": "hp",
+            "statistics": [
+              {
+                "name": "lower",
+                "value": -0.001401
+              },
+              {
+                "name": "upper",
+                "value": 0.01195
+              }
+            ]
+          },
+          {
+            "name": "wt",
+            "statistics": [
+              {
+                "name": "lower",
+                "value": 0.380089
+              },
+              {
+                "name": "upper",
+                "value": 1.622518
+              }
+            ]
+          },
+          {
+            "name": "am",
+            "statistics": [
+              {
+                "name": "lower",
+                "value": -0.614678
+              },
+              {
+                "name": "upper",
+                "value": 0.926307
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "level": 0.95,
+    "package": {
+      "name": "stats",
+      "version": "4.2.1"
+    }
+  },
+  "CI_fit_wt": {
+    "method": "Confidence intervals",
+    "groups": [
+      {
+        "name": "Coefficients",
+        "groups": [
+          {
+            "name": "wt",
+            "statistics": [
+              {
+                "name": "lower",
+                "value": 0.380089
+              },
+              {
+                "name": "upper",
+                "value": 1.622518
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "level": 0.95,
+    "package": {
+      "name": "stats",
+      "version": "4.2.1"
+    }
+  },
+  "CI_glm_D93_MASS": {
+    "method": "Confidence intervals",
+    "groups": [
+      {
+        "name": "Coefficients",
+        "groups": [
+          {
+            "name": "(Intercept)",
+            "statistics": [
+              {
+                "name": "lower",
+                "value": 2.695822
+              },
+              {
+                "name": "upper",
+                "value": 3.366556
+              }
+            ]
+          },
+          {
+            "name": "outcome2",
+            "statistics": [
+              {
+                "name": "lower",
+                "value": -0.857702
+              },
+              {
+                "name": "upper",
+                "value": -0.062558
+              }
+            ]
+          },
+          {
+            "name": "outcome3",
+            "statistics": [
+              {
+                "name": "lower",
+                "value": -0.67537
+              },
+              {
+                "name": "upper",
+                "value": 0.082441
+              }
+            ]
+          },
+          {
+            "name": "treatment2",
+            "statistics": [
+              {
+                "name": "lower",
+                "value": -0.393255
+              },
+              {
+                "name": "upper",
+                "value": 0.393255
+              }
+            ]
+          },
+          {
+            "name": "treatment3",
+            "statistics": [
+              {
+                "name": "lower",
+                "value": -0.393255
+              },
+              {
+                "name": "upper",
+                "value": 0.393255
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "level": 0.95,
+    "package": {
+      "name": "stats",
+      "version": "4.2.1"
+    }
+  },
+  "CI_glm_D93_default": {
+    "method": "Confidence intervals",
+    "groups": [
+      {
+        "name": "Coefficients",
+        "groups": [
+          {
+            "name": "(Intercept)",
+            "statistics": [
+              {
+                "name": "lower",
+                "value": 2.709567
+              },
+              {
+                "name": "upper",
+                "value": 3.379478
+              }
+            ]
+          },
+          {
+            "name": "outcome2",
+            "statistics": [
+              {
+                "name": "lower",
+                "value": -0.850503
+              },
+              {
+                "name": "upper",
+                "value": -0.058008
+              }
+            ]
+          },
+          {
+            "name": "outcome3",
+            "statistics": [
+              {
+                "name": "lower",
+                "value": -0.670755
+              },
+              {
+                "name": "upper",
+                "value": 0.084781
+              }
+            ]
+          },
+          {
+            "name": "treatment2",
+            "statistics": [
+              {
+                "name": "lower",
+                "value": -0.391993
+              },
+              {
+                "name": "upper",
+                "value": 0.391993
+              }
+            ]
+          },
+          {
+            "name": "treatment3",
+            "statistics": [
+              {
+                "name": "lower",
+                "value": -0.391993
+              },
+              {
+                "name": "upper",
+                "value": 0.391993
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "level": 0.95,
+    "package": {
+      "name": "stats",
+      "version": "4.2.1"
+    }
+  }
+}
