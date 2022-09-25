@@ -14,6 +14,6 @@ Functions used under the hood in the \code{tidystats} package.
 }
 \section{Functions}{
 \itemize{
-\item \code{tidy_matrix}: Function to convert matrix objects to a tidy data frame.
-}}
+\item \code{tidy_matrix()}: Function to convert matrix objects to a tidy data frame.
 
+}}

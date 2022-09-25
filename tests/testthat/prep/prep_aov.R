@@ -2,7 +2,6 @@
 # Setup -------------------------------------------------------------------
 
 # Load packages
-library(tidystats)
 library(tidyverse)
 
 # Create an empty list

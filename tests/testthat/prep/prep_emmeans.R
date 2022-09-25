@@ -6,85 +6,101 @@ library(tidyverse)
 library(emmeans)
 
 # Create an empty list
-results <- list()
+statistics <- list()
 
 # emmeans() --------------------------------------------------------------------
 
 # Run analyses
 model <- lm(breaks ~ wool, data = warpbreaks)
-emmeans_single <- emmeans(model, specs = ~ wool)
+emm_spec <- emmeans(model, specs = ~ wool)
 
 warp_lm <- lm(breaks ~ wool * tension, data = warpbreaks)
-emmeans_multi <- emmeans(warp_lm,  ~ wool | tension)
+emm_specs <- emmeans(warp_lm,  ~ wool + tension)
+emm_spec_by <- emmeans(warp_lm,  ~ wool | tension)
 
-emmeans_adjust <- emmeans(warp_lm, poly ~ tension | wool, adjust = "sidak")
+iris_lm <- lm(Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width + Species, data = iris)
+emmeans(iris_lm, ~ Sepal.Width | Petal.Length + Species)
+
+emm_spec_by_adjust <- emmeans(warp_lm, poly ~ tension | wool, adjust = "sidak")
 
 # Add stats
-results <- results %>%
-  add_stats(emmeans_single) %>%
-  add_stats(emmeans_multi) %>%
-  add_stats(emmeans_adjust)
+statistics <- statistics %>%
+  add_stats(emm_spec) 
+  add_stats(emm_specs) %>%
+  add_stats(emm_spec_by) %>%
+  add_stats(emm_spec_by_adjust)
 
 # Inspect output
-emmeans_single
-emmeans_multi
-emmeans_adjust
+emm_spec
+emm_specs
+emm_spec_by
+emm_spec_by_adjust
 
 # test() ------------------------------------------------------------------
 
 # Run analysis
 pigs_lm <- lm(log(conc) ~ source + factor(percent), data = pigs)
-pigs_emm <- emmeans(pigs_lm, specs = "percent", type = "response")
+emmeans_response <- emmeans(pigs_lm, specs = "percent", type = "response")
 
-emmeans_test <- test(pigs_emm, null = log(35), delta = log(1.10), side = ">")
-emmeans_test_joint <- test(pigs_emm, joint = TRUE)
+emmeans_test <- test(
+  emmeans_response, 
+  null = log(35), 
+  delta = log(1.10), 
+  side = ">"
+)
+emmeans_test_joint <- test(emmeans_response, joint = TRUE)
 
 # Add stats
-results <- results %>%
+statistics <- statistics %>%
+  add_stats(emmeans_response) %>%
   add_stats(emmeans_test) %>%
   add_stats(emmeans_test_joint)
 
 # Inspect output
+emmeans_response
 emmeans_test
 emmeans_test_joint
 
 # contrast() -------------------------------------------------------------
 
 # Run analyses
-warp_lm <- lm(breaks ~ wool*tension, data = warpbreaks)
+warp_lm <- lm(breaks ~ wool * tension, data = warpbreaks)
 warp_emm <- emmeans(warp_lm, ~ tension | wool)
 
-warp_contrast <- contrast(warp_emm, "poly")
+warp_contrast_poly <- contrast(warp_emm, "poly")
+warp_constrast_simple <- contrast(warp_emm, simple = c("wool", "tension"))
+warp_contrast_list <- contrast(warp_emm, simple = list("wool", "tension"))
 
-warp_contrast_eff <- contrast(
-  warp_emm, "eff", by = NULL, enhance.levels = c("wool", "tension")
-)  
-    
-
-## Note that the following are NOT the same:
-contrast(warp_emm, simple = c("wool", "tension"))
-contrast(warp_emm, simple = list("wool", "tension"))
-
-tw_emm <- contrast(warp_emm, 
-  interaction = c(tension = "poly", wool = "consec"), by = NULL
+tw_emm <- contrast(
+  warp_emm, 
+  interaction = c(tension = "poly", wool = "consec"), 
+  by = NULL
 )
-tw_emm
 
-# Use of scale and offset
-#   an unusual use of the famous stack-loss data...
+iris_lm <- lm(Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width, data = iris)
+emmeans(iris_lm, specs = c("Sepal.Width", "Petal.Length"))
+iris_contrast <- contrast(
+  warp_emm, 
+  interaction = c(tension = "poly", wool = "consec"), 
+  by = NULL
+)
+
 mod <- lm(Water.Temp ~ poly(stack.loss, degree = 2), data = stackloss)
-(emm <- emmeans(mod, "stack.loss", at = list(stack.loss = 10 * (1:4))))
+emm <- emmeans(mod, "stack.loss", at = list(stack.loss = 10 * (1:4)))
+emm
+
 # Convert results from Celsius to Fahrenheit:
 confint(contrast(emm, "identity", scale = 9/5, offset = 32))
 
 emmeans_contrast <- contrast(pigs_emm, "consec")
 
 # Add stats
-results <- results %>%
-  add_stats(emmeans_contrast)
+statistics <- statistics %>%
+  add_stats(tw_emm)
 
 # Inspect output
 emmeans_contrast
+tw_emm
 
 # mvcontrast() ------------------------------------------------------------
 
@@ -96,8 +112,12 @@ MOats.emm <- emmeans(MOats.lm, ~ Variety | rep.meas)
 emmeans_mvcontrast <- mvcontrast(MOats.emm, "consec", show.ests = TRUE)
 
 # Test each mean against a specified null vector
-emmeans_mvcontrast_named <- mvcontrast(MOats.emm, "identity", name = "Variety", 
-  null = c(80, 100, 120, 140))
+emmeans_mvcontrast_named <- mvcontrast(
+  MOats.emm, 
+  "identity", 
+  name = "Variety", 
+  null = c(80, 100, 120, 140)
+)
 
 # Add stats
 results = results %>%
@@ -165,7 +185,6 @@ results = results %>%
 # Inspect output
 joint_tests_single
 joint_tests_multi
-
 
 # ref_grid() --------------------------------------------------------------
 
