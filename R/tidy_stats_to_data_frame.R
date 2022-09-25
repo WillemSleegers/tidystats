@@ -96,6 +96,7 @@ groups_to_data_frame <- function(x, level) {
   if ("statistics" %in% names(x)) {
     df <- purrr::map_df(x$statistics, function(x) return(x))
   }
+  
   # Check if there are groups, if so, convert them to a data frame (recursively)
   if ("groups" %in% names(x)) {
     df <- purrr::map_df(x$groups, groups_to_data_frame, level)
@@ -104,7 +105,7 @@ groups_to_data_frame <- function(x, level) {
   # Check if there's a name, if so, add it to the data frame and append the
   # level to the name
   if ("name" %in% names(x)) {
-    df <- dplyr::mutate(df, "group_name{level}" := x$name)
+    df <- dplyr::mutate(df, "group_name_{level}" := x$name)
   }
   
   return(df)

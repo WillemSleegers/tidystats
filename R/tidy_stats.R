@@ -4669,7 +4669,6 @@ tidy_stats.emmGrid <- function(x, args = NULL) {
   }
 }
   
-
 # Function to extract statistics from pri vars
 group_pri_vars_statistics <- function(df, pri_vars) {
   # Create a group for the pri var

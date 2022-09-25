@@ -6,7 +6,7 @@ library(tidyverse)
 library(emmeans)
 
 # Create an empty list
-results <- list()
+statistics <- list()
 
 # emmeans() --------------------------------------------------------------------
 
