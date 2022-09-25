@@ -3,25 +3,26 @@
 
 # Load test data
 path <- system.file("tests/testthat/data/main.json", package = "tidystats")
-test_results <- read_stats(path)
+expected_statistics <- read_stats(path)
 
 # Set options
 tolerance <- 0.001
 
-# Test: t-tests -----------------------------------------------------------
+# add_stats() -------------------------------------------------------------
 
 test_that("the t-test in main works", {
-  model <- t.test(extra ~ group, data = sleep, paired = TRUE)
+  sleep_t_test <- t.test(extra ~ group, data = sleep, paired = TRUE)
   
-  results <- add_stats(list(), model, type = "primary")
+  statistics <- add_stats(list(), sleep_t_test, type = "primary")
   
-  tidy_model <- results$model
-  tidy_model_test <- test_results$sleep_test
+  statistics$sleep_t_test$package <- NULL
+  expected_statistics$sleep_t_test$package <- NULL
   
-  tidy_model$package <- NULL
-  tidy_model_test$package <- NULL
-  
-  expect_equal(tidy_model, tidy_model_test, tolerance = tolerance)
+  expect_equal(
+    object = statistics$sleep_t_test, 
+    expected = expected_statistics$sleep_t_test, 
+    tolerance = tolerance
+  )
 })
 
 test_that("the linear regression in main works", {
@@ -31,29 +32,31 @@ test_that("the linear regression in main works", {
       4.17, 4.41, 3.59, 5.87, 3.83, 6.03, 4.89, 4.32, 4.69)
   )
   
-  model <- lm(weight ~ group, data = D9)
+  D9_lm <- lm(weight ~ group, data = D9)
   
-  results <- add_stats(list(), model, preregistered = FALSE)
+  statistics <- add_stats(list(), D9_lm, preregistered = FALSE)
   
-  tidy_model <- results$model
-  tidy_model_test <- test_results$lm_D9
+  statistics$D9_lm$package <- NULL
+  expected_statistics$D9_lm$package <- NULL  
   
-  tidy_model$package <- NULL
-  tidy_model_test$package <- NULL
-  
-  expect_equal(tidy_model, tidy_model_test, tolerance = tolerance)
+  expect_equal(
+    object = statistics$D9_lm, 
+    expected = expected_statistics$D9_lm, 
+    tolerance = tolerance
+  )
 })
 
 test_that("the ANOVA in main works", {
-  model <- aov(yield ~ block + N*P*K, npk)
+  npk_aov <- aov(yield ~ block + N*P*K, npk)
   
-  results <- add_stats(list(), model, notes = "An ANOVA example")
+  statistics <- add_stats(list(), npk_aov, notes = "An ANOVA example")
   
-  tidy_model <- results$model
-  tidy_model_test <- test_results$npk_aov
+  statistics$npk_aov$package <- NULL
+  expected_statistics$npk_aov$package <- NULL
   
-  tidy_model$package <- NULL
-  tidy_model_test$package <- NULL
-  
-  expect_equal(tidy_model, tidy_model_test, tolerance = tolerance)
+  expect_equal(
+    object = statistics$npk_aov, 
+    expected = expected_statistics$npk_aov, 
+    tolerance = tolerance
+  )
 })

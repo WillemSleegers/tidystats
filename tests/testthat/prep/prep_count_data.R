@@ -5,7 +5,7 @@
 library(tidyverse)
 
 # Create an empty list
-results <- list()
+statistics <- list()
 
 # count_data() ------------------------------------------------------------
 
@@ -23,7 +23,7 @@ grouped_group_na_rm <- quote_source %>%
   count_data(sex, na.rm = TRUE)
 
 # Add stats
-results <- results %>%
+statistics <- statistics %>%
   add_stats(no_group) %>%
   add_stats(single_group) %>%
   add_stats(two_groups) %>%
@@ -39,13 +39,13 @@ grouped_group_na_rm
 
 # tidy_stats_to_data_frame() ----------------------------------------------
 
-df <- tidy_stats_to_data_frame(results)
+df <- tidy_stats_to_data_frame(statistics)
 
 # write_stats() -----------------------------------------------------------
 
-write_stats(results, "tests/testthat/data/count_data.json")
+write_test_stats(statistics, "tests/testthat/data/count_data.json")
 
 # Cleanup -----------------------------------------------------------------
 
 rm(no_group, single_group, two_groups, grouped_group, grouped_group_na_rm, df,
-  results)
+  statistics)

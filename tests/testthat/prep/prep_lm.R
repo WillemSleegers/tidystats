@@ -6,7 +6,7 @@ library(tidystats)
 library(tidyverse)
 
 # Create an empty list
-results <- list()
+statistics <- list()
 
 # lm() --------------------------------------------------------------------
 
@@ -21,7 +21,7 @@ lm <- lm(weight ~ group)
 lm_wo_intercept <- lm(weight ~ group - 1) # omitting intercept
 
 # Add stats
-results <- results %>%
+statistics <- statistics %>%
   add_stats(lm) %>%
   add_stats(lm_wo_intercept)
 
@@ -31,8 +31,12 @@ summary(lm_wo_intercept)
 
 # tidy_stats_to_data_frame() ----------------------------------------------
 
-df <- tidy_stats_to_data_frame(results)
+df <- tidy_stats_to_data_frame(statistics)
 
 # write_stats() -----------------------------------------------------------
 
-write_stats(results, "tests/testthat/data/lm.json")
+write_test_stats(statistics, "tests/testthat/data/lm.json")
+
+# Cleanup -----------------------------------------------------------------
+
+rm(df, lm, lm_wo_intercept, statistics, choice, ctl, group, trt, weight)

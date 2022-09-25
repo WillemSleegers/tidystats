@@ -6,7 +6,7 @@ library(tidystats)
 library(tidyverse)
 
 # Create an empty list
-results <- list()
+statistics <- list()
 
 # pairwise.t.test() -------------------------------------------------------
 
@@ -28,7 +28,7 @@ pairwise_t_test_paired <- pairwise.t.test(
 )
 
 # Add stats
-results <- results %>%
+statistics <- statistics %>%
   add_stats(pairwise_t_test) %>%
   add_stats(pairwise_t_test_paired) %>%
   add_stats(pairwise_t_test_nonpooled)
@@ -48,7 +48,7 @@ patients <- c(86, 93, 136, 82)
 pairwise_prop_test <- pairwise.prop.test(smokers, patients)
 
 # Add stats
-results <- add_stats(results, pairwise_prop_test)
+statistics <- add_stats(statistics, pairwise_prop_test)
 
 # Inspect output
 pairwise_prop_test
@@ -68,7 +68,7 @@ pairwise_wilcox_test_paired <- pairwise.wilcox.test(
 )
 
 # Add stats
-results <- results %>%
+statistics <- statistics %>%
   add_stats(pairwise_wilcox_test) %>%
   add_stats(pairwise_wilcox_test_paired)
 
@@ -78,8 +78,10 @@ pairwise_wilcox_test_paired
 
 # tidy_stats_to_data_frame() ----------------------------------------------
 
-df <- tidy_stats_to_data_frame(results)
+df <- tidy_stats_to_data_frame(statistics)
 
 # write_stats() -----------------------------------------------------------
 
-write_stats(results, "tests/testthat/data/pairwise_htest.json")
+write_test_stats(statistics, "tests/testthat/data/pairwise_htest.json")
+
+# Cleanup -----------------------------------------------------------------

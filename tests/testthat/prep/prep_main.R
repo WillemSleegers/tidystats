@@ -6,7 +6,7 @@ library(tidystats)
 library(tidyverse)
 
 # Create an empty list
-results <- list()
+statistics <- list()
 
 # t.test(), lm(), and aov() -----------------------------------------------
 
@@ -18,29 +18,29 @@ D9 <- tibble(
 )
 
 # Run analyses
-sleep_test <- t.test(extra ~ group, data = sleep, paired = TRUE)
-lm_D9 <- lm(weight ~ group, data = D9)
+sleep_t_test <- t.test(extra ~ group, data = sleep, paired = TRUE)
+D9_lm <- lm(weight ~ group, data = D9)
 npk_aov <- aov(yield ~ block + N*P*K, npk)
 
 # Add stats
-results <- results %>%
-  add_stats(sleep_test, type = "primary") %>%
-  add_stats(lm_D9, preregistered = FALSE) %>%
+statistics <- statistics %>%
+  add_stats(sleep_t_test, type = "primary") %>%
+  add_stats(D9_lm, preregistered = FALSE) %>%
   add_stats(npk_aov, notes = "An ANOVA example")
 
 # Inspect output
-sleep_test
-lm_D9
+sleep_t_test
+D9_lm
 npk_aov
 
 # tidy_stats_to_data_frame() ----------------------------------------------
 
-df <- tidy_stats_to_data_frame(results)
+df <- tidy_stats_to_data_frame(statistics)
 
 # write_stats() -----------------------------------------------------------
 
-write_stats(results, "tests/testthat/data/main.json")
+write_test_stats(statistics, "tests/testthat/data/main.json")
 
 # Cleanup -----------------------------------------------------------------
 
-rm(sleep_test, D9, lm_D9, npk_aov, df, results)
+rm(sleep_t_test, D9, D9_lm, npk_aov, df, statistics)

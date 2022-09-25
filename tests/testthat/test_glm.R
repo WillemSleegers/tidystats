@@ -3,9 +3,9 @@
 
 # Load test data
 path <- system.file("tests/testthat/data/glm.json", package = "tidystats")
-test_results <- read_stats(path)
+expected_statistics <- read_stats(path)
 
-# Test: glm ---------------------------------------------------------------
+# glm() -------------------------------------------------------------------
 
 test_that("glm poisson works", {
   d.AD <- tibble::tibble(
@@ -18,7 +18,7 @@ test_that("glm poisson works", {
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$glm_poisson
+    expected_tidy_model = expected_statistics$glm_poisson
   )
 })
 
@@ -52,7 +52,7 @@ test_that("glm gaussian works", {
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$glm_gaussian
+    expected_tidy_model = expected_statistics$glm_gaussian
   )
 })
 
@@ -67,7 +67,7 @@ test_that("glm gamma works", {
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$glm_gamma
+    expected_tidy_model = expected_statistics$glm_gamma
   )
 })
 
@@ -82,7 +82,7 @@ test_that("glm gamma fs works", {
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$glm_gamma_fs
+    expected_tidy_model = expected_statistics$glm_gamma_fs
   )
 })
 
@@ -98,6 +98,6 @@ test_that("glm binomial works", {
   
   expect_equal_models(
     model = model, 
-    tidy_model_test = test_results$glm_binomial
+    expected_tidy_model = expected_statistics$glm_binomial
   )
 })

@@ -6,7 +6,7 @@ library(tidystats)
 library(tidyverse)
 
 # Create an empty list
-results <- list()
+statistics <- list()
 
 # glm() -------------------------------------------------------------------
 
@@ -69,7 +69,7 @@ glm_binomial <- glm(admit ~ gre + gpa + rank, data = admission,
   family = binomial(link = "logit"))
 
 # Add stats
-results <- results %>%
+statistics <- statistics %>%
   add_stats(glm_poisson) %>%
   add_stats(glm_gaussian) %>%
   add_stats(glm_gamma) %>%
@@ -85,13 +85,13 @@ summary(glm_binomial)
 
 # tidy_stats_to_data_frame() ----------------------------------------------
 
-df <- tidy_stats_to_data_frame(results)
+df <- tidy_stats_to_data_frame(statistics)
 
 # write_stats() -----------------------------------------------------------
 
-write_stats(results, "tests/testthat/data/glm.json")
+write_test_stats(statistics, "tests/testthat/data/glm.json")
 
 # Cleanup -----------------------------------------------------------------
 
 rm(admission, anorexia, clotting, d.AD, glm_binomial, glm_gamma, glm_gamma_fs,
-  glm_gaussian, glm_poisson, df, results)
+  glm_gaussian, glm_poisson, df, statistics)

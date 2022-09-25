@@ -5,7 +5,7 @@
 library(tidyverse)
 
 # Create an empty list
-results <- list()
+statistics <- list()
 
 # describe_data() ---------------------------------------------------------
 
@@ -33,7 +33,7 @@ multiple_vars_w_group <- quote_source %>%
 single_var_subset <- describe_data(quote_source, response, short = TRUE)
 
 # Add stats
-results <- results %>%
+statistics <- statistics %>%
   add_stats(single_var) %>%
   add_stats(single_var_w_group) %>%
   add_stats(multiple_vars) %>%
@@ -53,13 +53,14 @@ multiple_vars_w_group
 
 # tidy_stats_to_data_frame() ----------------------------------------------
 
-df <- tidy_stats_to_data_frame(results)
+df <- tidy_stats_to_data_frame(statistics)
 
 # write_stats() -----------------------------------------------------------
 
-write_stats(results, "tests/testthat/data/describe_data.json")
+write_test_stats(statistics, "tests/testthat/data/describe_data.json")
 
 # Cleanup -----------------------------------------------------------------
 
 rm(single_var, single_var_subset, single_var_w_group, single_var_w_groups, 
-  single_var_w_groups_wo_na, multiple_vars, multiple_vars_w_group, df, results) 
+  single_var_w_groups_wo_na, multiple_vars, multiple_vars_w_group, df, 
+  statistics) 

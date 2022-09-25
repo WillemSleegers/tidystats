@@ -7,6 +7,8 @@
 #' 
 #' @param m A matrix.
 
+# Matrices ----------------------------------------------------------------
+
 tidy_matrix <- function(m, symmetric = TRUE) {
   # Check whether there are row and column names
   if (!length(rownames(m)) > 0) {
@@ -38,6 +40,8 @@ tidy_matrix <- function(m, symmetric = TRUE) {
  
   return(df)   
 }
+
+# Tidying -----------------------------------------------------------------
 
 add_statistic <- function(list, name, value, symbol = NULL, subscript = NULL,
   interval = NULL, level = NULL, lower = NULL, upper = NULL) {
@@ -82,12 +86,30 @@ add_package_info <- function(list, package) {
   return(list)
 }
 
-expect_equal_models <- function(model, tidy_model_test, tolerance = 0.001) {
+# Testing -----------------------------------------------------------------
+
+expect_equal_models <- function(model, expected_tidy_model, tolerance = 0.001) {
+  # Convert model output to a tidystats list
   tidy_model <- tidy_stats(model)
   
+  # Set package information to NULL because this may have changed since the 
+  # data was last saved
   tidy_model$package <- NULL
-  tidy_model_test$package <- NULL
+  expected_tidy_model$package <- NULL
   
-  expect_equal(tidy_model, tidy_model_test, tolerance = tolerance)
+  # Test whether the two lists are equal
+  expect_equal(tidy_model, expected_tidy_model, tolerance = tolerance)
 }
+
+write_test_stats <- function(x, path, digits = 6) {
+  choice <- menu(
+    title = "Are you sure you want to save these (test) statistics?",
+    choices = c("Yes", "No")
+  )
+  
+  if (choice == 1) {
+    write_stats(x = x, path = path, digits = digits)
+  }
+}
+
 

@@ -6,7 +6,7 @@ library(tidystats)
 library(tidyverse)
 
 # Create an empty list
-results <- list()
+statistics <- list()
 
 # t.test() ----------------------------------------------------------------
 
@@ -17,7 +17,7 @@ t_test_welch <- t.test(extra ~ group, data = sleep)
 t_test_paired <- t.test(extra ~ group, data = sleep, paired = TRUE)
 
 # Add stats
-results <- results %>%
+statistics <- statistics %>%
   add_stats(t_test_one_sample) %>%
   add_stats(t_test_two_sample) %>%
   add_stats(t_test_welch) %>%
@@ -41,7 +41,7 @@ correlation_kendall <- cor.test(x, y, method = "kendall")
 correlation_spearman <- cor.test(x, y, method = "spearman")
 
 # Add stats
-results <- results %>%
+statistics <- statistics %>%
   add_stats(correlation_pearson) %>%
   add_stats(correlation_kendall) %>%
   add_stats(correlation_spearman)
@@ -66,7 +66,7 @@ chi_squared_yates <- chisq.test(x)
 chi_squared_prob <- chisq.test(y)
 
 # Add stats
-results <- results %>%
+statistics <- statistics %>%
   add_stats(chi_squared) %>%
   add_stats(chi_squared_yates) %>%
   add_stats(chi_squared_prob)
@@ -92,7 +92,7 @@ prop_test_correct <- prop.test(heads, 100, correct = FALSE)
 prop_test_smokers <- prop.test(smokers, patients)
 
 # Add stats
-results <- results %>%
+statistics <- statistics %>%
   add_stats(prop_test) %>%
   add_stats(prop_test_correct) %>%
   add_stats(prop_test_smokers)
@@ -109,7 +109,7 @@ prop_trend_test <- prop.trend.test(smokers, patients)
 prop_trend_test_scores <- prop.trend.test(smokers, patients, c(0, 0, 0, 1))
 
 # Add stats
-results <- results %>%
+statistics <- statistics %>%
   add_stats(prop_trend_test) %>%
   add_stats(prop_trend_test_scores)
 
@@ -139,7 +139,7 @@ wilcoxon_rank_sum <- wilcox.test(x, y, alternative = "greater", exact = FALSE,
 wilcoxon_rank_sum_conf <- wilcox.test(x, y, conf.int = TRUE, conf.level = .9)
 
 # Add stats
-results <- results %>%
+statistics <- statistics %>%
   add_stats(wilcoxon_signed_rank) %>%
   add_stats(wilcoxon_rank_sum_continuity) %>%
   add_stats(wilcoxon_rank_sum) %>%
@@ -163,7 +163,7 @@ kruskal <- kruskal.test(list(x, y, z))
 kruskal_formula <- kruskal.test(Ozone ~ Month, data = airquality)
 
 # Add stats
-results <- results %>%
+statistics <- statistics %>%
   add_stats(kruskal) %>%
   add_stats(kruskal_formula)
 
@@ -218,7 +218,7 @@ fisher_test_simulated_p <- fisher.test(Job, simulate.p.value = TRUE, B = 1e5)
 fisher_test_hybrid <- fisher.test(MP6, hybrid = TRUE)
 
 # Add stats
-results <- results %>%
+statistics <- statistics %>%
   add_stats(fisher_test) %>%
   add_stats(fisher_test_no_CI) %>%
   add_stats(fisher_test_r_by_c) %>%
@@ -248,7 +248,7 @@ ks_test_inexact <- ks.test(x + 2, "pgamma", 3, 2, exact = FALSE)
 ks_test_greater <- ks.test(x + 2, "pgamma", 3, 2, alternative = "greater")
 
 # Add stats
-results <- results %>%
+statistics <- statistics %>%
   add_stats(ks_test_two) %>%
   add_stats(ks_test_one) %>%
   add_stats(ks_test_inexact) %>%
@@ -268,7 +268,7 @@ oneway_test_equal_var <- oneway.test(extra ~ group, data = sleep,
   var.equal = TRUE)
 
 # Add stats
-results <- results %>%
+statistics <- statistics %>%
   add_stats(oneway_test) %>%
   add_stats(oneway_test_equal_var)
 
@@ -289,7 +289,7 @@ y <- rnorm(30, mean = 1, sd = 1)
 var_test <- var.test(x, y)
 
 # Add stats
-results <- add_stats(results, var_test)
+statistics <- add_stats(statistics, var_test)
 
 # Inspect output
 var_test
@@ -318,7 +318,7 @@ mauchly_test_spanned <- mauchly.test(
 )
 
 # Add stats
-results <- results %>%
+statistics <- statistics %>%
   add_stats(mauchly_test) %>%
   add_stats(mauchly_test_orthogonal) %>%
   add_stats(mauchly_test_spanned)
@@ -345,7 +345,7 @@ mcnemar_test <- mcnemar.test(Performance)
 mcnemar_test_nocorrect <- mcnemar.test(Performance, correct = FALSE)
 
 # Add stats
-results <- results %>%
+statistics <- statistics %>%
   add_stats(mcnemar_test) %>%
   add_stats(mcnemar_test_nocorrect)
 
@@ -360,7 +360,7 @@ binom_test <- binom.test(c(682, 243))
 binom_test_params <- binom.test(c(682, 243), p = 3 / 4, alternative = "less")
 
 # Add stats
-results <- results %>%
+statistics <- statistics %>%
   add_stats(binom_test) %>%
   add_stats(binom_test_params)
 
@@ -382,7 +382,7 @@ pp_test <- PP.test(x)
 pp_test_long <- PP.test(y, lshort = FALSE)
 
 # Add stats
-results <- results %>%
+statistics <- statistics %>%
   add_stats(pp_test) %>%
   add_stats(pp_test_long)
 
@@ -403,7 +403,7 @@ box_test <- Box.test(x, lag = 1)
 box_test_ljung <- Box.test(x, lag = 2, type = "Ljung")
 
 # Add stats
-results <- results %>%
+statistics <- statistics %>%
   add_stats(box_test) %>%
   add_stats(box_test_ljung)
 
@@ -427,7 +427,7 @@ ansari_test <- ansari.test(ramsay, jung_parekh)
 ansari_test_ci <- ansari.test(rnorm(100), rnorm(100, 0, 2), conf.int = TRUE)
 
 # Add stats
-results <- results %>%
+statistics <- statistics %>%
   add_stats(ansari_test) %>%
   add_stats(ansari_test_ci)
 
@@ -447,7 +447,7 @@ jung_parekh <- c(107, 108, 106, 98, 105, 103, 110, 105, 104,
 mood_test <- mood.test(ramsay, jung_parekh)
 
 # Add stats
-results <- add_stats(results, mood_test)
+statistics <- add_stats(statistics, mood_test)
 
 # Inspect output
 mood_test
@@ -473,7 +473,7 @@ dataFreq <- matrix(
 quade_test <- quade.test(dataFreq)
 
 # Add stats
-results <- add_stats(results, quade_test)
+statistics <- add_stats(statistics, quade_test)
 
 # Inspect output
 quade_test
@@ -484,7 +484,7 @@ quade_test
 bartlett_test <- bartlett.test(InsectSprays$count, InsectSprays$spray)
 
 # Add stats
-results <- add_stats(results, bartlett_test)
+statistics <- add_stats(statistics, bartlett_test)
 
 # Inspect output
 bartlett_test
@@ -495,7 +495,7 @@ bartlett_test
 fligner_test <- fligner.test(InsectSprays$count, InsectSprays$spray)
 
 # Add stats
-results <- add_stats(results, fligner_test)
+statistics <- add_stats(statistics, fligner_test)
 
 # Inspect output
 fligner_test
@@ -510,7 +510,7 @@ poisson_test_comparison <- poisson.test(
 )
 
 # Add stats
-results <- results %>%
+statistics <- statistics %>%
   add_stats(poisson_test) %>%
   add_stats(poisson_test_comparison)
 
@@ -527,7 +527,7 @@ set.seed(1)
 shapiro_test = shapiro.test(runif(100, min = 2, max = 4))
 
 # Add stats
-results <- add_stats(results, shapiro_test)
+statistics <- add_stats(statistics, shapiro_test)
 
 # Inspect output
 shapiro_test
@@ -569,7 +569,7 @@ rounding_times <- matrix(
 friedman_test <- friedman.test(rounding_times)
 
 # Add stats
-results <- add_stats(results, friedman_test)
+statistics <- add_stats(statistics, friedman_test)
 
 # Inspect output
 friedman_test
@@ -616,7 +616,7 @@ mantelhaen_test_2by2 <- mantelhaen.test(Rabbits)
 mantelhaen_test_2by2_exact <- mantelhaen.test(Rabbits, exact = TRUE)
 
 # Add stats
-results <- results %>%
+statistics <- statistics %>%
   add_stats(mantelhaen_test) %>%
   add_stats(mantelhaen_test_2by2) %>%
   add_stats(mantelhaen_test_2by2_exact)
@@ -628,10 +628,28 @@ mantelhaen_test_2by2_exact
 
 # tidy_stats_to_data_frame() ----------------------------------------------
 
-df <- tidy_stats_to_data_frame(results)
+df <- tidy_stats_to_data_frame(statistics)
 
 # write_stats() -----------------------------------------------------------
 
-# NOTE: Only overwrite the existing file if we know everything works because
-# the file is used in the tests
-# write_stats(results, "tests/testthat/data/htest.json")
+write_test_stats(statistics, "tests/testthat/data/htest.json")
+
+# Cleanup -----------------------------------------------------------------
+
+rm(ansari_test, ansari_test_ci, bartlett_test, binom_test, binom_test_params,
+  box_test, box_test_ljung, chi_squared, chi_squared_prob, chi_squared_yates,
+  Convictions, correlation_kendall, correlation_pearson, correlation_spearman,
+  dataFreq, df, fisher_test, fisher_test_hybrid, fisher_test_no_CI, 
+  fisher_test_r_by_c, fisher_test_simulated_p, fligner_test, friedman_test,
+  idata, Job, kruskal, kruskal_formula, ks_test_greater, ks_test_inexact,
+  ks_test_one, ks_test_two, mantelhaen_test, mantelhaen_test_2by2, 
+  mantelhaen_test_2by2_exact, mauchly_test, mauchly_test_orthogonal, 
+  mauchly_test_spanned, mcnemar_test, mcnemar_test_nocorrect, mlmfit,
+  mood_test, MP6, oneway_test, oneway_test_equal_var, Performance, poisson_test,
+  poisson_test_comparison, pp_test, pp_test_long, prop_test, prop_test_correct,
+  prop_test_smokers, prop_trend_test, prop_trend_test_scores, quade_test,
+  reacttime, rounding_times, shapiro_test, statistics, t_test_one_sample, 
+  t_test_paired, t_test_two_sample, t_test_welch, TeaTasting, var_test,
+  wilcoxon_rank_sum, wilcoxon_rank_sum_conf, wilcoxon_rank_sum_continuity, 
+  wilcoxon_signed_rank, heads, jung_parekh, M, patients, Rabbits, ramsay,
+  Satisfaction, smokers, x, y, z)
