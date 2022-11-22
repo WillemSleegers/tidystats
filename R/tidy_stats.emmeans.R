@@ -148,7 +148,7 @@ tidy_stats.summary_emm <- function(x, args = NULL) {
     names <- ""
     
     for (i in 1:length(by_vars)) {
-      names <- c(names, paste(by_vars[i], "=", df[by_vars[i]])
+      names <- c(names, paste(by_vars[i], "=", df[by_vars[i]]))
     }
     
     df[, by_vars]

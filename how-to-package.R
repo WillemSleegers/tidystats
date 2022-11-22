@@ -18,6 +18,8 @@ devtools::document()
 # Load the package
 devtools::load_all()
 
+# Installation ------------------------------------------------------------
+
 # Install the dev version
 devtools::install()
 #.rs.restartR()
@@ -39,7 +41,7 @@ devtools::test()
 
 # Create a vignette -------------------------------------------------------
 
-# usethis::use_vignette("read-and-use-a-tidystats-file")
+usethis::use_vignette("tidystats-development-adding-new-analyses")
 
 # Add a data set ----------------------------------------------------------
 

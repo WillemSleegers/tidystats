@@ -2296,9 +2296,15 @@ tidy_stats.effsize <- function(x, args = NULL) {
   # Extract statistics
   statistics <- list()
   
-  statistics <- add_statistic(statistics, x$name, x$estimate, interval = "CI",
-    level = x$conf.level, lower = x$conf.int[["lower"]], 
-    upper = x$conf.int[["upper"]])
+  statistics <- add_statistic(
+    list = statistics, 
+    name = x$name,
+    value = x$estimate, 
+    interval = "CI",
+    level = x$conf.level, 
+    lower = x$conf.int[["lower"]], 
+    upper = x$conf.int[["upper"]]
+  )
 
   # Add statistics to the analysis
   analysis$statistics <- statistics
@@ -2329,8 +2335,15 @@ tidy_stats.effectsize_difference <- function(x, args = NULL) {
   statistics <- list()
   
   # Special case: The name is equal to the method
-  statistics <- add_statistic(statistics, method , x$Cohens_d, 
-    interval = "CI", level = x$CI, lower = x$CI_low, upper = x$CI_high)
+  statistics <- add_statistic(
+    list = statistics, 
+    name = method, 
+    value = x$Cohens_d, 
+    interval = "CI",
+    level = x$CI, 
+    lower = x$CI_low, 
+    upper = x$CI_high
+  )
   
   # Add statistics to the analysis
   analysis$statistics <- statistics

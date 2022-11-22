@@ -132,6 +132,12 @@ tidy_stats(x, args = NULL)
 
 \method{tidy_stats}{emm_list}(x, args = NULL)
 
+\method{tidy_stats}{emmGrid}(x, args = NULL)
+
+\method{tidy_stats}{summary_emm}(x, args = NULL)
+
+\method{tidy_stats}{emm_list}(x, args = NULL)
+
 \method{tidy_stats}{lavaan}(x, args = list(fit.measures = TRUE))
 
 \method{tidy_stats}{psychwip}(x, args = NULL)
@@ -268,6 +274,12 @@ Currently supported functions:
 \item \code{tidy_stats(hc.rma.uni)}: tidy_stats method for class 'hc.rma.uni'
 
 \item \code{tidy_stats(list.rma)}: tidy_stats method for class 'list.rma'
+
+\item \code{tidy_stats(emmGrid)}: tidy_stats method for class 'emmGrid'
+
+\item \code{tidy_stats(summary_emm)}: tidy_stats method for class 'summary_emm'
+
+\item \code{tidy_stats(emm_list)}: tidy_stats method for class 'emm_list'
 
 \item \code{tidy_stats(emmGrid)}: tidy_stats method for class 'emmGrid'
 

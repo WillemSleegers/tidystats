@@ -1,0 +1,26 @@
+{
+  "cohens_d": {
+    "method": "Cohen's d",
+    "statistics": [
+      {
+        "name": "Cohen's d",
+        "value": -1.477947,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -2.265973,
+        "upper": -0.670569
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "paired": false,
+    "pooled_sd": true,
+    "proximate": false,
+    "package": {
+      "name": "effectsize",
+      "version": "0.8.2"
+    }
+  }
+}

@@ -52,6 +52,11 @@ tidy_stats_to_data_frame <- function(x) {
   df <- dplyr::relocate(df, dplyr::any_of("symbol"), .after = statistic_name)
   df <- dplyr::relocate(df, dplyr::any_of("lower"), .before = value)
   df <- dplyr::relocate(df, dplyr::any_of("upper"), .after = value)
+  df <- dplyr::relocate(
+    df, 
+    dplyr::any_of(c("interval", "level")), 
+    .after = dplyr::last_col()
+  )
   
   return(df)
 }
