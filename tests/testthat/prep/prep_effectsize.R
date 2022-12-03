@@ -21,7 +21,8 @@ cohens_d_paired <- cohens_d(Pair(extra[group == 1], extra[group == 2]) ~ 1,
 
 # Add stats
 statistics <- statistics %>%
-  add_stats(cohens_d)
+  add_stats(cohens_d) %>%
+  add_stats(cohens_d_not_pooled)
 
 # Inspect output
 cohens_d
@@ -33,6 +34,15 @@ cohens_d_paired
 
 # hedges_g() --------------------------------------------------------------
 
+# Run analyses
+hedges_g <- hedges_g(mpg ~ am, data = mtcars)
+
+# Add stats
+statistics <- statistics %>%
+  add_stats(hedges_g) 
+
+# Inspect output
+hedges_g
 
 # glass_delta() -----------------------------------------------------------
 
