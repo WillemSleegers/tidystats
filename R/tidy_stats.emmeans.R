@@ -146,6 +146,15 @@ tidy_stats.summary_emm <- function(x, args = NULL) {
     group <- group_vars(vars, df)
     
     analysis$groups <- append(analysis$groups, list(group))
+  } else if (length(by_vars > 0)) {
+    
+    names <- ""
+    
+    for (i in 1:length(by_vars)) {
+      names <- c(names, paste(by_vars[i], "=", df[by_vars[i]]))
+    }
+    
+    df[, by_vars]
   } else {
     statistics <- group_statistics(df)
       

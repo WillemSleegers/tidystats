@@ -8,8 +8,8 @@
 <meta name="description" content="tidystats">
 <title>Introduction to tidystats • tidystats</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Introduction to tidystats">
 <meta property="og:description" content="tidystats">
@@ -74,10 +74,10 @@
 
 
 <div class="row">
-  <main id="main"><div class="page-header">
+  <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Introduction to tidystats</h1>
             
-            <h4 data-toc-skip class="date">2022-03-20</h4>
+            <h4 data-toc-skip class="date">2022-11-22</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/WillemSleegers/tidystats/blob/HEAD/vignettes/introduction-to-tidystats.Rmd" class="external-link"><code>vignettes/introduction-to-tidystats.Rmd</code></a></small>
       <div class="d-none name"><code>introduction-to-tidystats.Rmd</code></div>
@@ -137,21 +137,21 @@ asked to what extent they agree with the quote, on a 9-point Likert
 scale ranging from 1 (disagreement) to 9 (agreement).</p>
 <p>We start with a bit of setup.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Load packages</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://willemsleegers.github.io/tidystats/" class="external-link">tidystats</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
-
-<span class="co"># Load data</span>
-<span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">tidystats</span><span class="fu">::</span><span class="va"><a href="../reference/quote_source.html">quote_source</a></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Load packages</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://willemsleegers.github.io/tidystats/" class="external-link">tidystats</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Load data</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">tidystats</span><span class="fu">::</span><span class="va"><a href="../reference/quote_source.html">quote_source</a></span></span></code></pre></div>
 <p>The main hypothesis is that people will like the quote more when it
 is attributed to George Washington compared to Osama Bin Laden. We test
 this hypothesis by first looking at the descriptives and then by
 conducting a <em>t</em>-test.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">descriptives</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">source</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/describe_data.html">describe_data</a></span><span class="op">(</span><span class="va">response</span>, short <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">descriptives</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">descriptives</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">source</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/describe_data.html">describe_data</a></span><span class="op">(</span><span class="va">response</span>, short <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">descriptives</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">var</th>
@@ -178,19 +178,19 @@ conducting a <em>t</em>-test.</p>
 </tbody>
 </table>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">t_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="va">source</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span>
-<span class="va">t_test</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Welch Two Sample t-test</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; data:  response by source</span>
-<span class="co">#&gt; t = -13, df = 6323, p-value &lt;2e-16</span>
-<span class="co">#&gt; alternative hypothesis: true difference in means between group Bin Laden and group Washington is not equal to 0</span>
-<span class="co">#&gt; 95 percent confidence interval:</span>
-<span class="co">#&gt;  -0.802 -0.589</span>
-<span class="co">#&gt; sample estimates:</span>
-<span class="co">#&gt;  mean in group Bin Laden mean in group Washington </span>
-<span class="co">#&gt;                     5.23                     5.93</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">t_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="va">source</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
+<span><span class="va">t_test</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Welch Two Sample t-test</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; data:  response by source</span></span>
+<span><span class="co">#&gt; t = -13, df = 6323, p-value &lt;2e-16</span></span>
+<span><span class="co">#&gt; alternative hypothesis: true difference in means between group Bin Laden and group Washington is not equal to 0</span></span>
+<span><span class="co">#&gt; 95 percent confidence interval:</span></span>
+<span><span class="co">#&gt;  -0.802 -0.589</span></span>
+<span><span class="co">#&gt; sample estimates:</span></span>
+<span><span class="co">#&gt;  mean in group Bin Laden mean in group Washington </span></span>
+<span><span class="co">#&gt;                     5.23                     5.93</span></span></code></pre></div>
 <p>Participants appear to rate the quote a bit more positively when it
 is attributed to George Washington.</p>
 <p>We can also perform some additional tests. For instance, does it
@@ -199,57 +199,57 @@ these questions, we can perform interaction tests using
 <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code>.</p>
 <p>The interaction with the participant being from the U.S. or not:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">lm_us_or_not</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="va">source</span> <span class="op">*</span> <span class="va">us_or_international</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">lm_us_or_not</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Call:</span>
-<span class="co">#&gt; lm(formula = response ~ source * us_or_international, data = data)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Residuals:</span>
-<span class="co">#&gt;    Min     1Q Median     3Q    Max </span>
-<span class="co">#&gt; -5.005 -1.228 -0.228  1.772  3.772 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Coefficients:</span>
-<span class="co">#&gt;                                        Estimate Std. Error t value Pr(&gt;|t|)    </span>
-<span class="co">#&gt; (Intercept)                              5.2488     0.0849   61.83  &lt; 2e-16 ***</span>
-<span class="co">#&gt; sourceWashington                         0.4052     0.1172    3.46  0.00055 ***</span>
-<span class="co">#&gt; us_or_internationalUS                   -0.0210     0.0955   -0.22  0.82589    </span>
-<span class="co">#&gt; sourceWashington:us_or_internationalUS   0.3717     0.1323    2.81  0.00497 ** </span>
-<span class="co">#&gt; ---</span>
-<span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Residual standard error: 2.16 on 6321 degrees of freedom</span>
-<span class="co">#&gt;   (18 observations deleted due to missingness)</span>
-<span class="co">#&gt; Multiple R-squared:  0.0275, Adjusted R-squared:  0.027 </span>
-<span class="co">#&gt; F-statistic: 59.5 on 3 and 6321 DF,  p-value: &lt;2e-16</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">lm_us_or_not</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="va">source</span> <span class="op">*</span> <span class="va">us_or_international</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">lm_us_or_not</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt; lm(formula = response ~ source * us_or_international, data = data)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Residuals:</span></span>
+<span><span class="co">#&gt;    Min     1Q Median     3Q    Max </span></span>
+<span><span class="co">#&gt; -5.005 -1.228 -0.228  1.772  3.772 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Coefficients:</span></span>
+<span><span class="co">#&gt;                                        Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span><span class="co">#&gt; (Intercept)                              5.2488     0.0849   61.83  &lt; 2e-16 ***</span></span>
+<span><span class="co">#&gt; sourceWashington                         0.4052     0.1172    3.46  0.00055 ***</span></span>
+<span><span class="co">#&gt; us_or_internationalUS                   -0.0210     0.0955   -0.22  0.82589    </span></span>
+<span><span class="co">#&gt; sourceWashington:us_or_internationalUS   0.3717     0.1323    2.81  0.00497 ** </span></span>
+<span><span class="co">#&gt; ---</span></span>
+<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Residual standard error: 2.16 on 6321 degrees of freedom</span></span>
+<span><span class="co">#&gt;   (18 observations deleted due to missingness)</span></span>
+<span><span class="co">#&gt; Multiple R-squared:  0.0275, Adjusted R-squared:  0.027 </span></span>
+<span><span class="co">#&gt; F-statistic: 59.5 on 3 and 6321 DF,  p-value: &lt;2e-16</span></span></code></pre></div>
 <p>The interaction is significant, so it appears to matter whether the
 participant is from the U.S. or not. In fact, participants from the U.S.
 show a stronger effect than those from outside the U.S.</p>
 <p>The interaction with the participant’s age:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">lm_age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="va">source</span> <span class="op">*</span> <span class="va">age</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">lm_age</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Call:</span>
-<span class="co">#&gt; lm(formula = response ~ source * age, data = data)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Residuals:</span>
-<span class="co">#&gt;    Min     1Q Median     3Q    Max </span>
-<span class="co">#&gt; -5.743 -1.202 -0.152  1.793  3.883 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Coefficients:</span>
-<span class="co">#&gt;                      Estimate Std. Error t value Pr(&gt;|t|)    </span>
-<span class="co">#&gt; (Intercept)           4.93370    0.09589   51.45  &lt; 2e-16 ***</span>
-<span class="co">#&gt; sourceWashington      0.55737    0.13558    4.11    4e-05 ***</span>
-<span class="co">#&gt; age                   0.01147    0.00336    3.41  0.00065 ***</span>
-<span class="co">#&gt; sourceWashington:age  0.00545    0.00478    1.14  0.25433    </span>
-<span class="co">#&gt; ---</span>
-<span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Residual standard error: 2.16 on 6308 degrees of freedom</span>
-<span class="co">#&gt;   (31 observations deleted due to missingness)</span>
-<span class="co">#&gt; Multiple R-squared:  0.0308, Adjusted R-squared:  0.0304 </span>
-<span class="co">#&gt; F-statistic: 66.9 on 3 and 6308 DF,  p-value: &lt;2e-16</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">lm_age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="va">source</span> <span class="op">*</span> <span class="va">age</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">lm_age</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt; lm(formula = response ~ source * age, data = data)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Residuals:</span></span>
+<span><span class="co">#&gt;    Min     1Q Median     3Q    Max </span></span>
+<span><span class="co">#&gt; -5.743 -1.202 -0.152  1.793  3.883 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Coefficients:</span></span>
+<span><span class="co">#&gt;                      Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span><span class="co">#&gt; (Intercept)           4.93370    0.09589   51.45  &lt; 2e-16 ***</span></span>
+<span><span class="co">#&gt; sourceWashington      0.55737    0.13558    4.11    4e-05 ***</span></span>
+<span><span class="co">#&gt; age                   0.01147    0.00336    3.41  0.00065 ***</span></span>
+<span><span class="co">#&gt; sourceWashington:age  0.00545    0.00478    1.14  0.25433    </span></span>
+<span><span class="co">#&gt; ---</span></span>
+<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Residual standard error: 2.16 on 6308 degrees of freedom</span></span>
+<span><span class="co">#&gt;   (31 observations deleted due to missingness)</span></span>
+<span><span class="co">#&gt; Multiple R-squared:  0.0308, Adjusted R-squared:  0.0304 </span></span>
+<span><span class="co">#&gt; F-statistic: 66.9 on 3 and 6308 DF,  p-value: &lt;2e-16</span></span></code></pre></div>
 <p>No significant interaction effect, so we do not have evidence for age
 changing the size of the effect.</p>
 <p>Let’s say these are the analyses we want to save the output of and
@@ -263,16 +263,16 @@ additional information about each analysis, such as whether it was
 preregistered, whether it was a primary, secondary, or exploratory
 analysis, or simply add some notes.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Create an empty list to store the analyses in</span>
-<span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="co"># Add the analyses</span>
-<span class="va">results</span> <span class="op">&lt;-</span> <span class="va">results</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">t_test</span>, preregistered <span class="op">=</span> <span class="cn">TRUE</span>, type <span class="op">=</span> <span class="st">"primary"</span>, 
-    notes <span class="op">=</span> <span class="st">"A t-test comparing the effect of source on the quote rating."</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">lm_us_or_not</span>, preregistered <span class="op">=</span> <span class="cn">FALSE</span>, type <span class="op">=</span> <span class="st">"exploratory"</span>, 
-    notes <span class="op">=</span> <span class="st">"Interaction effect with being from the U.S. or not."</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">lm_age</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Create an empty list to store the analyses in</span></span>
+<span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Add the analyses</span></span>
+<span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">results</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">t_test</span>, preregistered <span class="op">=</span> <span class="cn">TRUE</span>, type <span class="op">=</span> <span class="st">"primary"</span>, </span>
+<span>    notes <span class="op">=</span> <span class="st">"A t-test comparing the effect of source on the quote rating."</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">lm_us_or_not</span>, preregistered <span class="op">=</span> <span class="cn">FALSE</span>, type <span class="op">=</span> <span class="st">"exploratory"</span>, </span>
+<span>    notes <span class="op">=</span> <span class="st">"Interaction effect with being from the U.S. or not."</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">lm_age</span><span class="op">)</span></span></code></pre></div>
 <p>You can see that I added quite some information to the first and
 second analysis. This is recommended because it is easy to forget which
 analysis is which; and you might accidentally report the wrong analysis
@@ -282,7 +282,7 @@ understand each analysis.</p>
 <p>To save these analyses to a file, you can use the
 <code><a href="../reference/write_stats.html">write_stats()</a></code> function.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/write_stats.html">write_stats</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"lorge-curtiss-1936-replication.json"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/write_stats.html">write_stats</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"lorge-curtiss-1936-replication.json"</span><span class="op">)</span></span></code></pre></div>
 <p>Note the file extension: .json. These types of files are simply text
 files, but in a format that is machine-readable (unfortunately, not very
 human-readable). This file can be used to share with others so that they
@@ -312,8 +312,7 @@ attitudes. <em>The Journal of Social Psychology</em>, <em>7</em>,
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
-2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer>

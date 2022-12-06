@@ -1,0 +1,25 @@
+---
+title: "tidystats development: Adding new analyses"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{tidystats-development-adding-new-analyses}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(tidystats)
+```
+
+## Steps:
+
+1. Identify a new analysis function
+2. Inspect its help document and copy over the examples
+3. Run the examples and inspect the output of the analysis
