@@ -16,8 +16,9 @@ cohens_d_not_pooled <- cohens_d(mpg ~ am, data = mtcars, pooled_sd = FALSE)
 cohens_d_mu <- cohens_d(mpg ~ am, data = mtcars, mu = -5)
 cohens_d_less <- cohens_d(mpg ~ am, data = mtcars, alternative = "less")
 cohens_d_one_sample <- cohens_d(wt ~ 1, data = mtcars)
-cohens_d_paired <- cohens_d(Pair(extra[group == 1], extra[group == 2]) ~ 1, 
-                            data = sleep)
+cohens_d_paired <- cohens_d(
+  Pair(extra[group == 1], extra[group == 2]) ~ 1, data = sleep
+)
 
 # Add stats
 statistics <- statistics %>%
@@ -44,8 +45,9 @@ hedges_g_not_pooled <- hedges_g(mpg ~ am, data = mtcars, pooled_sd = FALSE)
 hedges_g_mu <- hedges_g(mpg ~ am, data = mtcars, mu = -5)
 hedges_g_less <- hedges_g(mpg ~ am, data = mtcars, alternative = "less")
 hedges_g_one_sample <- hedges_g(wt ~ 1, data = mtcars)
-hedges_g_paired <- hedges_g(Pair(extra[group == 1], extra[group == 2]) ~ 1, 
-                            data = sleep)
+hedges_g_paired <- hedges_g(
+  Pair(extra[group == 1], extra[group == 2]) ~ 1, data = sleep
+)
 
 # Add stats
 statistics <- statistics %>%
@@ -94,6 +96,7 @@ write_test_stats(statistics, "tests/testthat/data/effectsize.json")
 
 rm(
   statistics, cohens_d, cohens_d_not_pooled, cohens_d_mu, cohens_d_less, 
-  cohens_d_one_sample, cohens_d_paired, df
+  cohens_d_one_sample, cohens_d_paired, glass_delta, glass_delta_less, 
+  glass_delta_mu, hedges_g, hedges_g_less, hedges_g_mu, hedges_g_not_pooled,
+  hedges_g_one_sample, hedges_g_paired, df
 )
-
