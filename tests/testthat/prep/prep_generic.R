@@ -6,12 +6,12 @@ library(tidystats)
 library(tidyverse)
 
 # Create an empty list
-results <- list()
+statistics <- list()
 
 # BIC/AIC -----------------------------------------------------------------
 
-# Run analysis
-generic_ICs <- list(
+# Create generic list of statistics
+BIC_AIC <- list(
   name = "BIC/AIC",
   statistics = list(
     list(name = "BIC", value = 21.21),
@@ -20,23 +20,23 @@ generic_ICs <- list(
 )
 
 # Add stats
-results <- add_stats(
-  list = results, 
-  output = generic_ICs, 
+statistics <- add_stats(
+  list = statistics, 
+  output = BIC_AIC, 
   notes = "Wagenmakers (2007) method for calculating Bayes factors"
 )
 
 # Inspect output
-generic_ICs
+statistics
 
 # tidy_stats_to_data_frame() ----------------------------------------------
 
-df <- tidy_stats_to_data_frame(results)
+df <- tidy_stats_to_data_frame(statistics)
 
 # write_stats() -----------------------------------------------------------
 
-write_test_stats(results, "tests/testthat/data/generic.json")
+write_test_stats(statistics, "tests/testthat/data/generic.json")
 
 # Cleanup -----------------------------------------------------------------
 
-rm(generic_ICs, df, results)
+rm(BIC_AIC, df, statistics)

@@ -11,30 +11,34 @@ statistics <- list()
 # emmeans() --------------------------------------------------------------------
 
 # Run analyses
-model <- lm(breaks ~ wool, data = warpbreaks)
-emm_spec <- emmeans(model, specs = ~ wool)
+model <- lm(displ ~ year + cyl + drv + cty, data = mpg)
+emm_1_spec <- emmeans(model, specs = ~ year)
+emm_2_spec <- emmeans(model,  ~ year + cyl)
+emm_1_spec_1_by <- emmeans(model,  ~ year | cyl)
+emm_1_spec_1_by_flipped <- emmeans(model, ~ cyl | year)
+emm_2_spec_2_by <- emmeans(model, ~ year + cyl | drv + cty)
+emm_poly_adjust <- emmeans(model, poly ~ year | cyl, adjust = "sidak")
 
-warp_lm <- lm(breaks ~ wool * tension, data = warpbreaks)
-emm_specs <- emmeans(warp_lm,  ~ wool + tension)
-emm_spec_by <- emmeans(warp_lm,  ~ wool | tension)
-
-iris_lm <- lm(Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width + Species, data = iris)
-emmeans(iris_lm, ~ Sepal.Width | Petal.Length + Species)
-
-emm_spec_by_adjust <- emmeans(warp_lm, poly ~ tension | wool, adjust = "sidak")
+mpg_lm <- lm(displ ~ year + cyl + drv + cty, data = mpg)
+emm_2x2 <- emmeans(mpg_lm, ~ cyl + cty | year + drv)
+emm_2x2_flipped <- emmeans(mpg_lm, ~ year + drv | cyl + cty)
 
 # Add stats
 statistics <- statistics %>%
-  add_stats(emm_spec) 
+  add_stats(emm_spec) %>%
   add_stats(emm_specs) %>%
   add_stats(emm_spec_by) %>%
-  add_stats(emm_spec_by_adjust)
+  add_stats(emm_spec_by_adjust) %>%
+  add_stats(emm_2x2) %>%
+  add_stats(emm_2x2_flipped)
 
 # Inspect output
 emm_spec
 emm_specs
 emm_spec_by
 emm_spec_by_adjust
+emm_2x2
+emm_2x2_flipped
 
 # test() ------------------------------------------------------------------
 

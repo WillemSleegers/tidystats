@@ -1,6 +1,9 @@
 
 # Setup -------------------------------------------------------------------
 
+# Load package
+library(BayesFactor)
+
 # Load test data
 path <- system.file(
   "tests/testthat/data/BayesFactor.json", 
@@ -8,12 +11,9 @@ path <- system.file(
 )
 expected_statistics <- read_stats(path)
 
-# Load package
-library(BayesFactor)
-
 # generalTestBF() --------------------------------------------------------
 
-test_that("BayesFactor: generalTestBF works", {
+test_that("generalTestBF works", {
   data(puzzles)
   
   set.seed(1)
@@ -29,7 +29,7 @@ test_that("BayesFactor: generalTestBF works", {
 
 # lmBF() ------------------------------------------------------------------
 
-test_that("BayesFactor: lmBF works", {
+test_that("lmBF works", {
   data(puzzles)
   
   set.seed(1)
@@ -43,7 +43,7 @@ test_that("BayesFactor: lmBF works", {
   )
 })
 
-test_that("BayesFactor: another lmBF works", {
+test_that("another lmBF works", {
   data(puzzles)
   
   set.seed(1)
@@ -57,7 +57,7 @@ test_that("BayesFactor: another lmBF works", {
   )
 })
 
-test_that("BayesFactor: lmBF division works", {
+test_that("lmBF division works", {
   data(puzzles)
   
   set.seed(1)
@@ -76,7 +76,7 @@ test_that("BayesFactor: lmBF division works", {
 
 # regressionBF() ----------------------------------------------------------
 
-test_that("BayesFactor: regressionBF works", {
+test_that("regressionBF works", {
   data(attitude)
   
   model <- regressionBF(rating ~ ., data = attitude, progress = FALSE)
@@ -87,7 +87,7 @@ test_that("BayesFactor: regressionBF works", {
   )
 })
 
-test_that("BayesFactor: best regressionBF works", {
+test_that("best regressionBF works", {
   data(attitude)
   
   attitudeBF <- regressionBF(rating ~ ., data = attitude, progress = FALSE)
@@ -101,7 +101,7 @@ test_that("BayesFactor: best regressionBF works", {
 
 # ttestBF() ---------------------------------------------------------------
 
-test_that("BayesFactor: ttestBF works", {
+test_that("ttestBF works", {
   model <- ttestBF(x = sleep$extra[sleep$group == 1], 
     y = sleep$extra[sleep$group == 2], paired = TRUE)
   
@@ -113,7 +113,7 @@ test_that("BayesFactor: ttestBF works", {
 
 # anovaBF() ---------------------------------------------------------------
 
-test_that("BayesFactor: anovaBF works", {
+test_that("anovaBF works", {
   model <- anovaBF(extra ~ group + ID, data = sleep, whichRandom = "ID",
     progress = FALSE)
   
@@ -123,7 +123,7 @@ test_that("BayesFactor: anovaBF works", {
   )
 })
 
-test_that("BayesFactor: another anovaBF works", {
+test_that("another anovaBF works", {
   data(puzzles)
   
   model <- anovaBF(RT ~ shape * color + ID, data = puzzles, 
@@ -137,7 +137,7 @@ test_that("BayesFactor: another anovaBF works", {
 
 # correlationBF() ---------------------------------------------------------
 
-test_that("BayesFactor: correlationBF works", {
+test_that("correlationBF works", {
   model <- correlationBF(y = iris$Sepal.Length, x = iris$Sepal.Width)
   
   expect_equal_models(
@@ -148,7 +148,7 @@ test_that("BayesFactor: correlationBF works", {
 
 # contingencyTableBF() ----------------------------------------------------
 
-test_that("BayesFactor: contingencyTableBF works", {
+test_that("contingencyTableBF works", {
   model <- contingencyTableBF(raceDolls, sampleType = "indepMulti", 
     fixedMargin = "cols")
   
@@ -160,7 +160,7 @@ test_that("BayesFactor: contingencyTableBF works", {
 
 # proportionBF() ----------------------------------------------------------
 
-test_that("BayesFactor: proportionBF works", {
+test_that("proportionBF works", {
   model <- proportionBF(y = 15, N = 25, p = .5)
   
   expect_equal_models(
@@ -171,7 +171,7 @@ test_that("BayesFactor: proportionBF works", {
 
 # meta.ttestBF() ----------------------------------------------------------
 
-test_that("BayesFactor: meta.ttestBF works", {
+test_that("meta.ttestBF works", {
   t <- c(-0.15, 2.39, 2.42, 2.43)
   N <- c(100, 150, 97, 99)
   

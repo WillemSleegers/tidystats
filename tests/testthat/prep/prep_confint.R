@@ -5,7 +5,7 @@
 library(tidyverse)
 
 # Create an empty list
-results <- list()
+statistics <- list()
 
 # confint() ---------------------------------------------------------------
 
@@ -22,7 +22,7 @@ CI_fit <- confint(fit)
 CI_fit_wt <- confint(fit, "wt")
 
 glm_D93 <- glm(counts ~ outcome + treatment, data = D93, family = poisson())
-CI_glm_D93_MASS <- confint(glm_D93)            # based on profile likelihood
+CI_glm_D93_MASS <- confint(glm_D93) # based on profile likelihood
 CI_glm_D93_default <- confint.default(glm_D93) # based on asymptotic normality
 
 # Add stats
@@ -48,5 +48,7 @@ write_test_stats(results, "tests/testthat/data/confint.json")
 
 # Cleanup -----------------------------------------------------------------
 
-rm(CI_fit, CI_fit_wt, CI_glm_D93_MASS, CI_glm_D93_default, D93, fit, glm_D93,
-  df, results)
+rm(
+  CI_fit, CI_fit_wt, CI_glm_D93_MASS, CI_glm_D93_default, D93, fit, glm_D93,
+  df, results
+)

@@ -1,0 +1,1264 @@
+{
+  "lmerTest1": {
+    "name": "Reaction ~ Days + (Days | Subject)",
+    "method": "Linear mixed model",
+    "groups": [
+      {
+        "name": "Model",
+        "statistics": [
+          {
+            "name": "N",
+            "value": 180
+          }
+        ]
+      },
+      {
+        "name": "Random effects",
+        "groups": [
+          {
+            "name": "Subject",
+            "statistics": [
+              {
+                "name": "N",
+                "value": 18
+              }
+            ],
+            "groups": [
+              {
+                "name": "Variances",
+                "groups": [
+                  {
+                    "name": "(Intercept)",
+                    "statistics": [
+                      {
+                        "name": "standard deviation",
+                        "symbol": "SD",
+                        "value": 24.740658
+                      },
+                      {
+                        "name": "variance",
+                        "symbol": "var",
+                        "value": 612.100158
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Days",
+                    "statistics": [
+                      {
+                        "name": "standard deviation",
+                        "symbol": "SD",
+                        "value": 5.922138
+                      },
+                      {
+                        "name": "variance",
+                        "symbol": "var",
+                        "value": 35.071714
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "Correlations",
+                "groups": [
+                  {
+                    "name": "(Intercept) - Days",
+                    "statistics": [
+                      {
+                        "name": "correlation",
+                        "symbol": "r",
+                        "value": 0.065551
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Residual",
+            "statistics": [
+              {
+                "name": "standard deviation",
+                "symbol": "SD",
+                "value": 25.591796
+              },
+              {
+                "name": "variance",
+                "symbol": "var",
+                "value": 654.940008
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Fixed effects",
+        "groups": [
+          {
+            "name": "Coefficients",
+            "groups": [
+              {
+                "name": "(Intercept)",
+                "statistics": [
+                  {
+                    "name": "estimate",
+                    "symbol": "b",
+                    "value": 251.405105
+                  },
+                  {
+                    "name": "SE",
+                    "value": 6.824597
+                  },
+                  {
+                    "name": "df",
+                    "value": 16.999726
+                  },
+                  {
+                    "name": "statistic",
+                    "symbol": "t",
+                    "value": 36.83809
+                  },
+                  {
+                    "name": "p",
+                    "value": 1.171558e-17
+                  }
+                ]
+              },
+              {
+                "name": "Days",
+                "statistics": [
+                  {
+                    "name": "estimate",
+                    "symbol": "b",
+                    "value": 10.467286
+                  },
+                  {
+                    "name": "SE",
+                    "value": 1.54579
+                  },
+                  {
+                    "name": "df",
+                    "value": 16.999984
+                  },
+                  {
+                    "name": "statistic",
+                    "symbol": "t",
+                    "value": 6.771481
+                  },
+                  {
+                    "name": "p",
+                    "value": 3.263825e-06
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Correlations",
+            "groups": [
+              {
+                "name": "(Intercept) - Days",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": -0.137552
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "REML_criterion_at_convergence": 1743.628272,
+    "convergence_code": 0,
+    "package": {
+      "name": "lmerTest",
+      "version": "3.1-3"
+    }
+  },
+  "lmerTest2": {
+    "name": "Informed.liking ~ Gender + Information * Product + (1 | Consumer) + (1 | Consumer:Product)",
+    "method": "Linear mixed model",
+    "groups": [
+      {
+        "name": "Model",
+        "statistics": [
+          {
+            "name": "N",
+            "value": 648
+          }
+        ]
+      },
+      {
+        "name": "Random effects",
+        "groups": [
+          {
+            "name": "Consumer:Product",
+            "statistics": [
+              {
+                "name": "N",
+                "value": 324
+              }
+            ],
+            "groups": [
+              {
+                "name": "Variances",
+                "groups": [
+                  {
+                    "name": "(Intercept)",
+                    "statistics": [
+                      {
+                        "name": "standard deviation",
+                        "symbol": "SD",
+                        "value": 1.778268
+                      },
+                      {
+                        "name": "variance",
+                        "symbol": "var",
+                        "value": 3.162236
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Consumer",
+            "statistics": [
+              {
+                "name": "N",
+                "value": 81
+              }
+            ],
+            "groups": [
+              {
+                "name": "Variances",
+                "groups": [
+                  {
+                    "name": "(Intercept)",
+                    "statistics": [
+                      {
+                        "name": "standard deviation",
+                        "symbol": "SD",
+                        "value": 0.6129
+                      },
+                      {
+                        "name": "variance",
+                        "symbol": "var",
+                        "value": 0.375646
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Residual",
+            "statistics": [
+              {
+                "name": "standard deviation",
+                "symbol": "SD",
+                "value": 1.291308
+              },
+              {
+                "name": "variance",
+                "symbol": "var",
+                "value": 1.667477
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Fixed effects",
+        "groups": [
+          {
+            "name": "Coefficients",
+            "groups": [
+              {
+                "name": "(Intercept)",
+                "statistics": [
+                  {
+                    "name": "estimate",
+                    "symbol": "b",
+                    "value": 5.849029
+                  },
+                  {
+                    "name": "SE",
+                    "value": 0.28429
+                  },
+                  {
+                    "name": "df",
+                    "value": 322.336407
+                  },
+                  {
+                    "name": "statistic",
+                    "symbol": "t",
+                    "value": 20.574184
+                  },
+                  {
+                    "name": "p",
+                    "value": 1.173089e-60
+                  }
+                ]
+              },
+              {
+                "name": "Gender2",
+                "statistics": [
+                  {
+                    "name": "estimate",
+                    "symbol": "b",
+                    "value": -0.244284
+                  },
+                  {
+                    "name": "SE",
+                    "value": 0.260564
+                  },
+                  {
+                    "name": "df",
+                    "value": 79
+                  },
+                  {
+                    "name": "statistic",
+                    "symbol": "t",
+                    "value": -0.937517
+                  },
+                  {
+                    "name": "p",
+                    "value": 0.35135
+                  }
+                ]
+              },
+              {
+                "name": "Information2",
+                "statistics": [
+                  {
+                    "name": "estimate",
+                    "symbol": "b",
+                    "value": 0.160494
+                  },
+                  {
+                    "name": "SE",
+                    "value": 0.20291
+                  },
+                  {
+                    "name": "df",
+                    "value": 320.000002
+                  },
+                  {
+                    "name": "statistic",
+                    "symbol": "t",
+                    "value": 0.790963
+                  },
+                  {
+                    "name": "p",
+                    "value": 0.429552
+                  }
+                ]
+              },
+              {
+                "name": "Product2",
+                "statistics": [
+                  {
+                    "name": "estimate",
+                    "symbol": "b",
+                    "value": -0.82716
+                  },
+                  {
+                    "name": "SE",
+                    "value": 0.345329
+                  },
+                  {
+                    "name": "df",
+                    "value": 339.51232
+                  },
+                  {
+                    "name": "statistic",
+                    "symbol": "t",
+                    "value": -2.395282
+                  },
+                  {
+                    "name": "p",
+                    "value": 0.017149
+                  }
+                ]
+              },
+              {
+                "name": "Product3",
+                "statistics": [
+                  {
+                    "name": "estimate",
+                    "symbol": "b",
+                    "value": 0.148148
+                  },
+                  {
+                    "name": "SE",
+                    "value": 0.345329
+                  },
+                  {
+                    "name": "df",
+                    "value": 339.51232
+                  },
+                  {
+                    "name": "statistic",
+                    "symbol": "t",
+                    "value": 0.429006
+                  },
+                  {
+                    "name": "p",
+                    "value": 0.668191
+                  }
+                ]
+              },
+              {
+                "name": "Product4",
+                "statistics": [
+                  {
+                    "name": "estimate",
+                    "symbol": "b",
+                    "value": 0.296296
+                  },
+                  {
+                    "name": "SE",
+                    "value": 0.345329
+                  },
+                  {
+                    "name": "df",
+                    "value": 339.51232
+                  },
+                  {
+                    "name": "statistic",
+                    "symbol": "t",
+                    "value": 0.858011
+                  },
+                  {
+                    "name": "p",
+                    "value": 0.391491
+                  }
+                ]
+              },
+              {
+                "name": "Information2:Product2",
+                "statistics": [
+                  {
+                    "name": "estimate",
+                    "symbol": "b",
+                    "value": 0.246914
+                  },
+                  {
+                    "name": "SE",
+                    "value": 0.286957
+                  },
+                  {
+                    "name": "df",
+                    "value": 320.000002
+                  },
+                  {
+                    "name": "statistic",
+                    "symbol": "t",
+                    "value": 0.860454
+                  },
+                  {
+                    "name": "p",
+                    "value": 0.390183
+                  }
+                ]
+              },
+              {
+                "name": "Information2:Product3",
+                "statistics": [
+                  {
+                    "name": "estimate",
+                    "symbol": "b",
+                    "value": 0.271605
+                  },
+                  {
+                    "name": "SE",
+                    "value": 0.286957
+                  },
+                  {
+                    "name": "df",
+                    "value": 320.000002
+                  },
+                  {
+                    "name": "statistic",
+                    "symbol": "t",
+                    "value": 0.946499
+                  },
+                  {
+                    "name": "p",
+                    "value": 0.344608
+                  }
+                ]
+              },
+              {
+                "name": "Information2:Product4",
+                "statistics": [
+                  {
+                    "name": "estimate",
+                    "symbol": "b",
+                    "value": -0.358025
+                  },
+                  {
+                    "name": "SE",
+                    "value": 0.286957
+                  },
+                  {
+                    "name": "df",
+                    "value": 320.000002
+                  },
+                  {
+                    "name": "statistic",
+                    "symbol": "t",
+                    "value": -1.247658
+                  },
+                  {
+                    "name": "p",
+                    "value": 0.213069
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Correlations",
+            "groups": [
+              {
+                "name": "(Intercept) - Gender2",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": -0.452615
+                  }
+                ]
+              },
+              {
+                "name": "(Intercept) - Information2",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": -0.356871
+                  }
+                ]
+              },
+              {
+                "name": "(Intercept) - Product2",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": -0.607354
+                  }
+                ]
+              },
+              {
+                "name": "(Intercept) - Product3",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": -0.607354
+                  }
+                ]
+              },
+              {
+                "name": "(Intercept) - Product4",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": -0.607354
+                  }
+                ]
+              },
+              {
+                "name": "(Intercept) - Information2:Product2",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": 0.252346
+                  }
+                ]
+              },
+              {
+                "name": "(Intercept) - Information2:Product3",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": 0.252346
+                  }
+                ]
+              },
+              {
+                "name": "(Intercept) - Information2:Product4",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": 0.252346
+                  }
+                ]
+              },
+              {
+                "name": "Gender2 - Information2",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": 4.715156e-31
+                  }
+                ]
+              },
+              {
+                "name": "Gender2 - Product2",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": -1.649618e-14
+                  }
+                ]
+              },
+              {
+                "name": "Gender2 - Product3",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": -1.649618e-14
+                  }
+                ]
+              },
+              {
+                "name": "Gender2 - Product4",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": -1.649618e-14
+                  }
+                ]
+              },
+              {
+                "name": "Gender2 - Information2:Product2",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": -3.334118e-31
+                  }
+                ]
+              },
+              {
+                "name": "Gender2 - Information2:Product3",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": 5.774863e-31
+                  }
+                ]
+              },
+              {
+                "name": "Gender2 - Information2:Product4",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": -1.577722e-30
+                  }
+                ]
+              },
+              {
+                "name": "Information2 - Product2",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": 0.293792
+                  }
+                ]
+              },
+              {
+                "name": "Information2 - Product3",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": 0.293792
+                  }
+                ]
+              },
+              {
+                "name": "Information2 - Product4",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": 0.293792
+                  }
+                ]
+              },
+              {
+                "name": "Information2 - Information2:Product2",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": -0.707107
+                  }
+                ]
+              },
+              {
+                "name": "Information2 - Information2:Product3",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": -0.707107
+                  }
+                ]
+              },
+              {
+                "name": "Information2 - Information2:Product4",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": -0.707107
+                  }
+                ]
+              },
+              {
+                "name": "Product2 - Product3",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": 0.5
+                  }
+                ]
+              },
+              {
+                "name": "Product2 - Product4",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": 0.5
+                  }
+                ]
+              },
+              {
+                "name": "Product2 - Information2:Product2",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": -0.415484
+                  }
+                ]
+              },
+              {
+                "name": "Product2 - Information2:Product3",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": -0.207742
+                  }
+                ]
+              },
+              {
+                "name": "Product2 - Information2:Product4",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": -0.207742
+                  }
+                ]
+              },
+              {
+                "name": "Product3 - Product4",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": 0.5
+                  }
+                ]
+              },
+              {
+                "name": "Product3 - Information2:Product2",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": -0.207742
+                  }
+                ]
+              },
+              {
+                "name": "Product3 - Information2:Product3",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": -0.415484
+                  }
+                ]
+              },
+              {
+                "name": "Product3 - Information2:Product4",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": -0.207742
+                  }
+                ]
+              },
+              {
+                "name": "Product4 - Information2:Product2",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": -0.207742
+                  }
+                ]
+              },
+              {
+                "name": "Product4 - Information2:Product3",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": -0.207742
+                  }
+                ]
+              },
+              {
+                "name": "Product4 - Information2:Product4",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": -0.415484
+                  }
+                ]
+              },
+              {
+                "name": "Information2:Product2 - Information2:Product3",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": 0.5
+                  }
+                ]
+              },
+              {
+                "name": "Information2:Product2 - Information2:Product4",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": 0.5
+                  }
+                ]
+              },
+              {
+                "name": "Information2:Product3 - Information2:Product4",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": 0.5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "REML_criterion_at_convergence": 2705.503577,
+    "convergence_code": 0,
+    "package": {
+      "name": "lmerTest",
+      "version": "3.1-3"
+    }
+  },
+  "lmerTest_ML": {
+    "name": "Reaction ~ Days + (Days | Subject)",
+    "method": "Linear mixed model",
+    "groups": [
+      {
+        "name": "Model",
+        "statistics": [
+          {
+            "name": "AIC",
+            "value": 1763.939344
+          },
+          {
+            "name": "BIC",
+            "value": 1783.097086
+          },
+          {
+            "name": "log likelihood",
+            "symbol": "l",
+            "value": -875.969672
+          },
+          {
+            "name": "deviance",
+            "symbol": "D",
+            "value": 1751.939344
+          },
+          {
+            "name": "residual df",
+            "symbol": "df",
+            "subscript": "res.",
+            "value": 174
+          },
+          {
+            "name": "N",
+            "value": 180
+          }
+        ]
+      },
+      {
+        "name": "Random effects",
+        "groups": [
+          {
+            "name": "Subject",
+            "statistics": [
+              {
+                "name": "N",
+                "value": 18
+              }
+            ],
+            "groups": [
+              {
+                "name": "Variances",
+                "groups": [
+                  {
+                    "name": "(Intercept)",
+                    "statistics": [
+                      {
+                        "name": "standard deviation",
+                        "symbol": "SD",
+                        "value": 23.77976
+                      },
+                      {
+                        "name": "variance",
+                        "symbol": "var",
+                        "value": 565.476966
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Days",
+                    "statistics": [
+                      {
+                        "name": "standard deviation",
+                        "symbol": "SD",
+                        "value": 5.716799
+                      },
+                      {
+                        "name": "variance",
+                        "symbol": "var",
+                        "value": 32.681785
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "Correlations",
+                "groups": [
+                  {
+                    "name": "(Intercept) - Days",
+                    "statistics": [
+                      {
+                        "name": "correlation",
+                        "symbol": "r",
+                        "value": 0.081321
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Residual",
+            "statistics": [
+              {
+                "name": "standard deviation",
+                "symbol": "SD",
+                "value": 25.591907
+              },
+              {
+                "name": "variance",
+                "symbol": "var",
+                "value": 654.945706
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Fixed effects",
+        "groups": [
+          {
+            "name": "Coefficients",
+            "groups": [
+              {
+                "name": "(Intercept)",
+                "statistics": [
+                  {
+                    "name": "estimate",
+                    "symbol": "b",
+                    "value": 251.405105
+                  },
+                  {
+                    "name": "SE",
+                    "value": 6.632123
+                  },
+                  {
+                    "name": "df",
+                    "value": 18.001135
+                  },
+                  {
+                    "name": "statistic",
+                    "symbol": "t",
+                    "value": 37.907185
+                  },
+                  {
+                    "name": "p",
+                    "value": 1.263752e-18
+                  }
+                ]
+              },
+              {
+                "name": "Days",
+                "statistics": [
+                  {
+                    "name": "estimate",
+                    "symbol": "b",
+                    "value": 10.467286
+                  },
+                  {
+                    "name": "SE",
+                    "value": 1.50223
+                  },
+                  {
+                    "name": "df",
+                    "value": 18.000177
+                  },
+                  {
+                    "name": "statistic",
+                    "symbol": "t",
+                    "value": 6.967831
+                  },
+                  {
+                    "name": "p",
+                    "value": 1.652228e-06
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Correlations",
+            "groups": [
+              {
+                "name": "(Intercept) - Days",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": -0.13756
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "convergence_code": 0,
+    "package": {
+      "name": "lmerTest",
+      "version": "3.1-3"
+    }
+  },
+  "anova_lmerTest": {
+    "method": "ANOVA",
+    "groups": [
+      {
+        "name": "Terms",
+        "groups": [
+          {
+            "name": "Days",
+            "statistics": [
+              {
+                "name": "SS",
+                "value": 30030.93902
+              },
+              {
+                "name": "MS",
+                "value": 30030.93902
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 45.852962
+              },
+              {
+                "name": "p",
+                "value": 3.263825e-06
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.2.1"
+    }
+  },
+  "anova_lmerTest_lme4": {
+    "method": "ANOVA",
+    "groups": [
+      {
+        "name": "Terms",
+        "groups": [
+          {
+            "name": "Days",
+            "statistics": [
+              {
+                "name": "n parameters",
+                "symbol": "k",
+                "value": 1
+              },
+              {
+                "name": "SS",
+                "value": 30030.93902
+              },
+              {
+                "name": "MS",
+                "value": 30030.93902
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 45.852962
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.2.1"
+    }
+  },
+  "anova_lmerTest_fit": {
+    "method": "ANOVA",
+    "groups": [
+      {
+        "name": "Models",
+        "groups": [
+          {
+            "name": "m0",
+            "statistics": [
+              {
+                "name": "n parameters",
+                "symbol": "k",
+                "value": 4
+              },
+              {
+                "name": "AIC",
+                "value": 1802.078643
+              },
+              {
+                "name": "BIC",
+                "value": 1814.85047
+              },
+              {
+                "name": "log likelihood",
+                "symbol": "l",
+                "value": -897.039322
+              },
+              {
+                "name": "deviance",
+                "symbol": "D",
+                "value": 1794.078643
+              }
+            ]
+          },
+          {
+            "name": "m",
+            "statistics": [
+              {
+                "name": "n parameters",
+                "symbol": "k",
+                "value": 6
+              },
+              {
+                "name": "AIC",
+                "value": 1763.939344
+              },
+              {
+                "name": "BIC",
+                "value": 1783.097086
+              },
+              {
+                "name": "log likelihood",
+                "symbol": "l",
+                "value": -875.969672
+              },
+              {
+                "name": "deviance",
+                "symbol": "D",
+                "value": 1751.939344
+              },
+              {
+                "name": "statistic",
+                "symbol": "χ²",
+                "value": 42.139299
+              },
+              {
+                "name": "df",
+                "value": 2
+              },
+              {
+                "name": "p",
+                "value": 7.072413e-10
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.2.1"
+    }
+  }
+}

@@ -17,8 +17,13 @@ set.seed(1)
 data(puzzles)
 
 # Run analyses
-generalTestBF <- generalTestBF(RT ~ shape*color + ID, data = puzzles, 
-  whichRandom = "ID", neverExclude = "ID", progress = FALSE)
+generalTestBF <- generalTestBF(
+  RT ~ shape*color + ID, 
+  data = puzzles, 
+  whichRandom = "ID", 
+  neverExclude = "ID", 
+  progress = FALSE
+)
 
 # Add stats
 statistics <- add_stats(statistics, generalTestBF)
@@ -35,8 +40,11 @@ set.seed(1)
 data(puzzles)
 
 # Run analyses
-bfFull <- lmBF(RT ~ shape + color + shape:color + ID, data = puzzles, 
-  whichRandom = "ID", )
+bfFull <- lmBF(
+  RT ~ shape + color + shape:color + ID, 
+  data = puzzles, 
+  whichRandom = "ID"
+)
 bfMain <- lmBF(RT ~ shape + color + ID, data = puzzles, whichRandom = "ID")
 bfMainFull <- bfMain / bfFull
 
@@ -81,8 +89,11 @@ set.seed(1)
 diffScores <- sleep$extra[1:10] - sleep$extra[11:20]
 
 # Run analyses
-sleepTTestBF <- ttestBF(x = sleep$extra[sleep$group == 1], 
-  y = sleep$extra[sleep$group == 2], paired = TRUE)
+sleepTTestBF <- ttestBF(
+  x = sleep$extra[sleep$group == 1], 
+  y = sleep$extra[sleep$group == 2], 
+  paired = TRUE
+)
 sleepTTestBF_interval <- ttestBF(x = diffScores, nullInterval=c(-Inf,0))
 
 # Add stats
@@ -103,10 +114,19 @@ set.seed(1)
 data(puzzles)
 
 # Run analyses
-sleepAnovaBF <- anovaBF(extra ~ group + ID, data = sleep, whichRandom = "ID",
-    progress = FALSE)
-puzzlesAnovaBF = anovaBF(RT ~ shape * color + ID, data = puzzles, 
-  whichRandom = "ID", whichModels = 'top', progress = FALSE)
+sleepAnovaBF <- anovaBF(
+  extra ~ group + ID, 
+  data = sleep, 
+  whichRandom = "ID",
+  progress = FALSE
+)
+puzzlesAnovaBF = anovaBF(
+  RT ~ shape * color + ID, 
+  data = puzzles, 
+  whichRandom = "ID", 
+  whichModels = 'top', 
+  progress = FALSE
+)
 
 # Add stats
 statistics <- statistics %>%
@@ -140,8 +160,11 @@ set.seed(1)
 data(raceDolls)
 
 # Run analysis
-contingencyTableBF <- contingencyTableBF(raceDolls, sampleType = "indepMulti", 
-  fixedMargin = "cols")
+contingencyTableBF <- contingencyTableBF(
+  raceDolls, 
+  sampleType = "indepMulti", 
+  fixedMargin = "cols"
+)
 
 # Add stats
 statistics <- add_stats(statistics, contingencyTableBF)
@@ -191,7 +214,9 @@ write_test_stats(statistics, "tests/testthat/data/BayesFactor.json")
 
 # Cleanup -----------------------------------------------------------------
 
-rm(attitude, attitudeBF, attitudeBFBest, bfFull, bfMain, bfMainFull, 
+rm(
+  attitude, attitudeBF, attitudeBFBest, bfFull, bfMain, bfMainFull, 
   contingencyTableBF, correlationBF, generalTestBF, metaBF, proportionBF, 
   puzzles, puzzlesAnovaBF, raceDolls, sleepAnovaBF, sleepTTestBF, 
-  sleepTTestBF_interval, diffScores, N, t, df, statistics)
+  sleepTTestBF_interval, diffScores, N, t, df, statistics
+)

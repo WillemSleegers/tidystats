@@ -2,12 +2,11 @@
 # Setup -------------------------------------------------------------------
 
 # Load packages
-library(tidystats)
 library(tidyverse)
 library(marginaleffects)
 
 # Create an empty list
-results <- list()
+statistics <- list()
 
 # marginaleffects() -------------------------------------------------------
 

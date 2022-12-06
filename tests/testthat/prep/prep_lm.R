@@ -29,6 +29,37 @@ statistics <- statistics %>%
 summary(lm)
 summary(lm_wo_intercept)
 
+# anova() -----------------------------------------------------------------
+
+# Run analyses
+fit <- lm(sr ~ ., data = LifeCycleSavings)
+fit0 <- lm(sr ~ 1, data = LifeCycleSavings)
+fit1 <- update(fit0, . ~ . + pop15)
+fit2 <- update(fit1, . ~ . + pop75)
+fit3 <- update(fit2, . ~ . + dpi)
+fit4 <- update(fit3, . ~ . + ddpi)
+
+anova_lm <- anova(fit)
+anova_lm_fits <- anova(fit0, fit1, fit2, fit3, fit4, test = "F")
+anova_lm_order <- anova(fit4, fit2, fit0, test = "F")
+anova_lm_chisq <- anova(fit4, fit2, fit0, test = "Chisq")
+anova_lm_cp <- anova(fit4, fit2, fit0, test = "Cp")
+
+# Add stats
+statistics <- statistics %>%
+  add_stats(anova_lm) %>%
+  add_stats(anova_lm_fits) %>%
+  add_stats(anova_lm_order) %>%
+  add_stats(anova_lm_chisq) %>%
+  add_stats(anova_lm_cp)
+
+# Inspect output
+anova_lm
+anova_lm_fits
+anova_lm_order
+anova_lm_chisq
+anova_lm_cp
+
 # tidy_stats_to_data_frame() ----------------------------------------------
 
 df <- tidy_stats_to_data_frame(statistics)
@@ -39,4 +70,8 @@ write_test_stats(statistics, "tests/testthat/data/lm.json")
 
 # Cleanup -----------------------------------------------------------------
 
-rm(df, lm, lm_wo_intercept, statistics, choice, ctl, group, trt, weight)
+rm(
+  df, lm, lm_wo_intercept, statistics, ctl, group, trt, weight, 
+  fit, fit0, fit1, fit2, fit3, fit4, anova_lm, anova_lm_chisq, anova_lm_cp,
+  anova_lm_fits, anova_lm_order
+)

@@ -99,7 +99,9 @@ group_pri_vars_statistics <- function(df, pri_vars) {
 
 group_vars <- function(vars, df) {
   group <- list(name = vars[1])
-  levels <- levels(df[, vars[1]])
+  
+  # Convert to a factor in case it's a numeric value
+  levels <- levels(factor(df[, vars[1]]))
   
   for (i in 1:length(levels)) {
     group_level <- list(name = as.character(levels[i]))
@@ -138,35 +140,16 @@ tidy_stats.summary_emm <- function(x, args = NULL) {
   
   pri_vars <- attr(x, "pri.vars")
   by_vars <- attr(x, "by.vars")
+  vars <- c(by_vars, pri_vars)
   
-  if (length(pri_vars) > 0) {
-    group <- group_vars(pri_vars, df)
+  if (length(vars) > 0) {
+    group <- group_vars(vars, df)
     
     analysis$groups <- append(analysis$groups, list(group))
-  } else if (length(by_vars > 0)) {
-    
-    names <- ""
-    
-    for (i in 1:length(by_vars)) {
-      names <- c(names, paste(by_vars[i], "=", df[by_vars[i]])
-    }
-    
-    df[, by_vars]
   } else {
     statistics <- group_statistics(df)
       
     analysis$statistics <- statistics
-  }
-  
-  if (length(by_vars) > 0) {
-    group <- group_by_vars_statistics(df, by_vars, pri_vars)
-    
-    analysis$groups <- append(analysis$groups, list(group))
-  } else if (length(pri_vars) > 0) {
-    
-    
-  } else {
-    
   }
   
   analysis <- add_package_info(analysis, "emmeans")
