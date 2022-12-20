@@ -2298,7 +2298,7 @@ tidy_stats.effsize <- function(x, args = NULL) {
   
   statistics <- add_statistic(
     list = statistics, 
-    name = x$name,
+    name = x$method,
     value = x$estimate, 
     interval = "CI",
     level = x$conf.level, 
