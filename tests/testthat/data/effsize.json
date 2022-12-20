@@ -45,5 +45,22 @@
       "name": "effsize",
       "version": "0.8.1"
     }
+  },
+  "cliffs_delta": {
+    "method": "Cliff's Delta",
+    "statistics": [
+      {
+        "name": "delta",
+        "value": -0.25,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -0.726585,
+        "upper": 0.389006
+      }
+    ],
+    "package": {
+      "name": "effsize",
+      "version": "0.8.1"
+    }
   }
 }
