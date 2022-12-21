@@ -2290,26 +2290,26 @@ tidy_stats.icclist <- function(x, args = NULL) {
 #' @describeIn tidy_stats tidy_stats method for class 'effsize'
 #' @export
 tidy_stats.effsize <- function(x, args = NULL) {
-  # Create the analysis list and set the method
-  analysis <- list(method = x$method)
-  
-  # Extract statistics
+  analysis <- list(method = paste(x$method, "effect size"))
   statistics <- list()
+  
+  # Determine the symbol, which is different from what is stored in the name
+  # attribute in the case of a Cliff's Delta
+  symbol <- dplyr::if_else(x$name == "delta", "δ", x$name)
   
   statistics <- add_statistic(
     list = statistics, 
-    name = x$name,
+    name = x$method,
+    symbol = symbol,
     value = x$estimate, 
     interval = "CI",
     level = x$conf.level, 
     lower = x$conf.int[["lower"]], 
     upper = x$conf.int[["upper"]]
   )
-
-  # Add statistics to the analysis
+  
   analysis$statistics <- statistics
   
-  # Add package information
   analysis <- add_package_info(analysis, "effsize")
   
   return(analysis)
