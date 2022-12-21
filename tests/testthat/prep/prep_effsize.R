@@ -2,59 +2,56 @@
 # Setup -------------------------------------------------------------------
 
 # Load packages
-library(tidystats)
 library(tidyverse)
 library(effsize)
 
 # Create an empty list
 statistics <- list()
 
-# cohen.d -----------------------------------------------------------------
+# cohen.d() ---------------------------------------------------------------
 
 # Get data
 set.seed(1)
-treatment = rnorm(100,mean=10)
-control = rnorm(100,mean=12)
-d = (c(treatment,control))
-f = rep(c("Treatment","Control"),each=100)
+treatment <- rnorm(100, mean = 10)
+control <- rnorm(100, mean = 12)
+d <- c(treatment, control)
+f <- rep(c("Treatment", "Control"), each = 100)
 
 # Run analyses
 cohen_d <- cohen.d(d ~ f)
-cohen_d_hedges <- cohen.d(d ~ f, hedges.correction = TRUE)
+hedges_g <- cohen.d(d ~ f, hedges.correction = TRUE)
 
 # Add stats
 statistics <- statistics %>%
   add_stats(cohen_d) %>%
-  add_stats(cohen_d_hedges)
+  add_stats(hedges_g)
 
 # Inspect output
 cohen_d
-cohen_d_hedges
+hedges_g
 
-# VD.A -----------------------------------------------------------------
+# VD.A() ------------------------------------------------------------------
 
 # Run analyses
 vda <- VD.A(d ~f)
 
-# Add stas
-statistics <- statistics %>%
-  add_stats(vda)
+# Add stats
+statistics <- add_stats(statistics, vda)
 
 # Inspect output
 vda
 
-# cliff's delta -----------------------------------------------------------------
+# cliff.delta() -----------------------------------------------------------
 
 # Get data
-treatment <- c(10,10,20,20,20,30,30,30,40,50)
-control <- c(10,20,30,40,40,50)
+treatment <- c(10, 10, 20, 20, 20, 30, 30, 30, 40, 50)
+control <- c(10, 20, 30, 40, 40, 50)
 
 # Run analyses
 cliffs_delta <- cliff.delta(treatment, control, return.dm = TRUE)
 
 # Add stats
-statistics <- statistics %>%
-  add_stats(cliffs_delta)
+statistics <- add_stats(statistics, cliffs_delta)
 
 # Inspect output
 cliffs_delta
@@ -70,5 +67,6 @@ write_test_stats(statistics, "tests/testthat/data/effsize.json")
 # Cleanup -----------------------------------------------------------------
 
 rm(
-  statistics, cohen_d, cohen_d_hedges, vda, cliffs_delta, df
+  statistics, control, d, f, treatment, cohen_d, hedges_g, vda, cliffs_delta, 
+  df
 )

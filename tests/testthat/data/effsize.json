@@ -1,9 +1,10 @@
 {
   "cohen_d": {
-    "method": "Cohen's d",
+    "method": "Cohen's d effect size",
     "statistics": [
       {
-        "name": "d",
+        "name": "Cohen's d",
+        "symbol": "d",
         "value": 1.99598,
         "interval": "CI",
         "level": 0.95,
@@ -16,11 +17,12 @@
       "version": "0.8.1"
     }
   },
-  "cohen_d_hedges": {
-    "method": "Hedges's g",
+  "hedges_g": {
+    "method": "Hedges's g effect size",
     "statistics": [
       {
-        "name": "g",
+        "name": "Hedges's g",
+        "symbol": "g",
         "value": 1.988409,
         "interval": "CI",
         "level": 0.95,
@@ -34,10 +36,11 @@
     }
   },
   "vda": {
-    "method": "Vargha and Delaney A",
+    "method": "Vargha and Delaney A effect size",
     "statistics": [
       {
-        "name": "A",
+        "name": "Vargha and Delaney A",
+        "symbol": "A",
         "value": 0.9286
       }
     ],
@@ -47,10 +50,11 @@
     }
   },
   "cliffs_delta": {
-    "method": "Cliff's Delta",
+    "method": "Cliff's Delta effect size",
     "statistics": [
       {
-        "name": "delta",
+        "name": "Cliff's Delta",
+        "symbol": "δ",
         "value": -0.25,
         "interval": "CI",
         "level": 0.95,
