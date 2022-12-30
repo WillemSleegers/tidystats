@@ -3720,7 +3720,9 @@ tidy_stats.rma.mv <- function(x, args = NULL) {
         colnames(vc) <-
           c(paste("φ", abbreviate(x$h.levels.f[[1]]), sep = ""),
             "",
-            abbreviate(x$h.levels.f[[1]])) ### FIXME: x$h.levels.f[[1]] may be numeric, in which case a wrapping 'header' is not recognized
+            abbreviate(x$h.levels.f[[1]])) 
+        ### FIXME: x$h.levels.f[[1]] may be numeric, in which case a wrapping 
+        # 'header' is not recognized
         rownames(vc) <- x$h.levels.f[[1]]
         analysis$groups <-
           append(analysis$groups, df_to_group("Phi", vc))
@@ -4466,7 +4468,16 @@ tidy_stats.regtest <- function(x, args = NULL) {
     method <- "weighted regression with multiplicative dispersion"
   } else {
     method <-
-      paste(ifelse(is.element(x$method, c("FE", "EE", "CE")), "fixed-effects", "mixed-effects"), "meta-regression model")
+      paste(
+        ifelse(
+          is.element(
+            x$method, c("FE", "EE", "CE")
+          ), 
+          "fixed-effects", 
+          "mixed-effects"
+        ), 
+        "meta-regression model"
+      )
   }
   if (x$predictor == "sei") {
     method <- paste(method, ("(predictor: standard error)"))
@@ -4667,276 +4678,6 @@ tidy_stats.list.rma <- function(x, args = NULL) {
   
   # Add package information
   analysis <- add_package_info(analysis, "metafor")
-  
-  return(analysis)
-}
-
-#' @describeIn tidy_stats tidy_stats method for class 'emmGrid'
-#' @export
-tidy_stats.emmGrid <- function(x, args = NULL) {
-  if (require("emmeans")) {
-    return(tidy_stats(summary(x)))
-  } else {
-    stop(paste("The 'emmeans' package needs to be loaded to add 'emmGrid'", 
-      "objects via add_stats in tidystats."))
-  }
-}
-  
-# Function to extract statistics from pri vars
-group_pri_vars_statistics <- function(df, pri_vars) {
-  # Create a group for the pri var
-  group <- list(name = pri_vars)
-  
-  # Extract levels
-  levels <- unique(df[, pri_vars])
-
-  # Loop over the levels of the group
-  for (i in 1:length(levels)) {
-    # Create an empty terms group list
-    group_level <- list(name = as.character(levels[i]))
-    
-    # Create a statistics list
-    statistics <- list()
-    
-    # Add the statistics
-    statistics <- add_statistic(
-      statistics, "estimate", df$response[i], symbol = "ŷ"
-    )
-    statistics <- add_statistic(
-      statistics, 
-      name = "estimate", 
-      df$emmean[i], 
-      symbol = "EMM", 
-      interval = "CI", 
-      level = parse_number(attr(df, "mesg")), 
-      lower = df$lower.CL[i],
-      upper = df$upper.CL[i]
-    )
-    statistics <- add_statistic(statistics, "SE", df$SE[i])
-    statistics <- add_statistic(statistics, "df", df$df[i])
-    statistics <- add_statistic(
-      statistics, "statistic", df$t.ratio[i], symbol = "t"
-    )
-    statistics <- add_statistic(statistics, "p", df$p.value[i])
-    
-    # Add statistics to the term group
-    group_level$statistics <- statistics
-    
-    # Add the level group to the group
-    group$groups <- append(group$groups, list(group_level))
-  }
-  
-  return(group)
-}
-
-group_by_vars_statistics <- function(df, by_vars, pri_vars) {
-  # Create a group for the by var
-  group <- list(name = by_vars)
-  
-  # Loop over the levels of the by var
-  levels <- levels(df[, by_vars])
-  
-  for (i in 1:length(levels)) {
-    # Create a group for the level of the by var
-    group_level <- list()
-    
-    # Set the name
-    group_level$name <- levels[i]
-    
-    # Create a group with pri vars statistics
-    df_level <- dplyr::filter(
-      df, 
-      dplyr::if_all(dplyr::all_of(by_vars), ~ . == levels[i])
-    )
-    
-    group_pri <- group_pri_vars_statistics(df_level, pri_vars)
-    
-    # Add the pri group to the by level group
-    group_level$groups <- append(group_level$groups, list(group_pri))
-    
-    # Add the by level group to the by group
-    group$groups <- append(group$groups, list(group_level))
-  }
-  
-  return(group)
-}
-
-group_contrast_statistics <- function(df, pri_vars) {
-  # Create a group for the pri var
-  group <- list(name = pri_vars)
-  
-  # Extract levels
-  levels <- levels(df[, pri_vars])
-
-  # Loop over the levels of the group
-  for (i in 1:length(levels)) {
-    # Create an empty terms group list
-    group_level <- list(name = levels[i])
-    
-    # Loop over the contrasts
-    levels_contrast <- levels(df$contrast)
-    
-    for (j in 1:length(levels_contrast)) {
-      # Create a group for the contrast
-      group_contrast <- list(name = levels_contrast[j])
-      
-      # Subset the data frame to the relevant contrast
-      df_contrast <- dplyr::filter(df, contrast == levels_contrast[j])
-      
-      # Create a list for the statistics
-      statistics <- list()
-      
-      statistics <- add_statistic(
-        statistics, 
-        "estimate", 
-        df_contrast$estimate[j], 
-        "b"
-      )
-      statistics <- add_statistic(statistics, "SE", df_contrast$SE[j])
-      statistics <- add_statistic(statistics, "df", df_contrast$df[j])
-      statistics <- add_statistic(
-        statistics, 
-        "statistic", 
-        df_contrast$t.ratio[j], 
-        "t"
-      )
-      statistics <- add_statistic(statistics, "p", df_contrast$p.value[j])
-      
-      # Add the statistics to the contrast group
-      group_contrast$statistics <- statistics
-      
-      # Add the contrast group to the level group
-      group_level$groups <- append(group_level$groups, list(group_contrast))
-    }
-    
-    # Add the level group to the group
-    group$groups <- append(group$groups, list(group_level))
-  }
-  
-  return(group)
-}
-
-#' @describeIn tidy_stats tidy_stats method for class 'summary_emm'
-#' @export
-tidy_stats.summary_emm <- function(x, args = NULL) {
-  analysis <- list()
-  
-  # Convert object to a data frame
-  df <- as.data.frame(x)
-  
-  # Get by and pri vars
-  by_vars <- attr(x, "by.vars")
-  pri_vars <- attr(x, "pri.vars")
-  
-  # Get by vars statistics, if there are any
-  if (length(by_vars) > 0) {
-    # Set method
-    analysis$method <- "Estimated marginal means"
-    
-    group_by <- group_by_vars_statistics(df, by_vars, pri_vars)
-    
-    # Add the by group to the analysis 
-    analysis$groups <- append(analysis$groups, list(group_by))
-  } else if (length(pri_vars) > 0) {
-    # Set method
-    analysis$method <- "Estimated marginal means"
-    
-    # Get pri vars statistics, if there are any
-    group_pri <- group_pri_vars_statistics(df, pri_vars)
-    
-    analysis$groups <- append(analysis$groups, list(group_pri))
-  } else {
-    if ("contrast" %in% names(df)) {
-      # Set method
-      analysis$method <- "Estimated marginal means contrast"
-      
-      # Get contrast statistics
-      
-      
-    } else {
-      # Set method
-      analysis$method <- "Estimated marginal means test"
-      
-      # Get statistics
-      statistics <- list()
-      
-      statistics <- add_statistic(
-        statistics, "df numerator", df$df1, "df", "num."
-      )
-      statistics <- add_statistic(
-        statistics, "df denominator", df$df2, "df", "den."
-      )
-      statistics <- add_statistic(statistics, "statistic", df$F.ratio, "F")
-      statistics <- add_statistic(statistics, "p", df$p.value)
-      
-      analysis$statistics <- statistics
-    }
-  }
-  
-  # Set additional information
-  mesg <- attr(x, "mesg")
-  
-  # Add package information
-  analysis <- add_package_info(analysis, "emmeans")
-  
-  return(analysis)
-}
-
-#' @describeIn tidy_stats tidy_stats method for class 'emm_list'
-#' @export
-tidy_stats.emm_list <- function(x, args = NULL) {
-  analysis <- list()
-  
-  # Set method
-  analysis$method <- "Estimated marginal means"
-  
-  # Get the estimated marginal means and contrasts
-  emm <- summary(x$emmeans)
-  contrasts <- summary(x$contrasts)
-  
-  # Get by and pri vars
-  by_vars <- attr(emm, "by.vars")
-  pri_vars <- attr(emm, "pri.vars")
-  
-  # Create a group for the emmeans
-  group <- list(name = "Estimated marginal means")
-  
-  # Convert the estimated marginal means to a data frame
-  df_emm <- as.data.frame(emm)
-  
-  # Get by vars statistics, if there are any
-  if (length(by_vars) > 0) {
-    group_by <- group_by_vars_statistics(df_emm, by_vars, pri_vars)
-    
-    # Add the by group to the analysis 
-    group$groups <- append(group$groups, list(group_by))
-  } else {
-    # Get pri vars statistics
-    group_pri <- group_pri_vars_statistics(df_emm, pri_vars)
-    
-    group$groups <- append(group$groups, list(group_pri))
-  }
-  
-  # Add the estimated marginal means group to the analysis
-  analysis$groups <- append(analysis$groups, list(group))
-  
-  # Create a group for the contrasts
-  group <- list(name = "Contrasts")
-  
-  # Convert the contrasts to a data frame
-  df_contrasts <- as.data.frame(contrasts)
-  
-  # Get contrast statistics
-  group_contrasts <- group_contrast_statistics(df_contrasts, by_vars)
-  
-  # Add the contrasts group
-  group$groups <- append(group$groups, list(group_contrasts))
-  
-  # Add the contrasts group to the analysis
-  analysis$groups <- append(analysis$groups, list(group))
-  
-  # Add package information
-  analysis <- add_package_info(analysis, "emmeans")
   
   return(analysis)
 }

@@ -12,20 +12,23 @@ statistics <- list()
 
 # Run analyses
 model <- lm(displ ~ year + cyl + drv + cty, data = mpg)
-emm_1_spec <- emmeans(model, specs = ~ year)
-emm_2_spec <- emmeans(model,  ~ year + cyl)
-emm_1_spec_1_by <- emmeans(model,  ~ year | cyl)
-emm_1_spec_1_by_flipped <- emmeans(model, ~ cyl | year)
-emm_2_spec_2_by <- emmeans(model, ~ year + cyl | drv + cty)
-emm_poly_adjust <- emmeans(model, poly ~ year | cyl, adjust = "sidak")
+
+emm_year <- emmeans(model, specs = ~ year)
+emm_year_cyl <- emmeans(model,  ~ year + cyl)
+emm_year_by_cyl <- emmeans(model,  ~ year | cyl)
+emm_cyl_by_year <- emmeans(model, ~ cyl | year)
+emm_year_cyl_by_drv_cty <- emmeans(model, ~ year + cyl | drv + cty)
+emm_poly_year_by_cyl <- emmeans(model, poly ~ year | cyl, adjust = "sidak")
 
 mpg_lm <- lm(displ ~ year + cyl + drv + cty, data = mpg)
 emm_2x2 <- emmeans(mpg_lm, ~ cyl + cty | year + drv)
 emm_2x2_flipped <- emmeans(mpg_lm, ~ year + drv | cyl + cty)
 
 # Add stats
+statistics <- add_stats(statistics, emm_year_cyl_by_drv_cty)
+
 statistics <- statistics %>%
-  add_stats(emm_spec) %>%
+  add_stats(emm_year) %>%
   add_stats(emm_specs) %>%
   add_stats(emm_spec_by) %>%
   add_stats(emm_spec_by_adjust) %>%
@@ -212,8 +215,301 @@ df <- tidy_stats_to_data_frame(results)
 
 # write_stats() -----------------------------------------------------------
 
-write_test_stats(results, "tests/testthat/data/emmeans.json")
+write_test_stats(statistics, "tests/testthat/data/emmeans.json")
 
 # Cleanup -----------------------------------------------------------------
 
 
+
+
+
+
+
+# archive -----------------------------------------------------------------
+
+
+# emmeans -----------------------------------------------------------------
+
+group_statistics <- function(df) {
+  statistics <- list()
+  
+  statistics <- add_statistic(
+    statistics, "null", 
+    df$null, 
+    symbol = "ŷ",
+    subscript = "null"
+  )
+  statistics <- add_statistic(
+    statistics, 
+    name = "estimate", 
+    df$emmean, 
+    symbol = "EMM", 
+    interval = "CI", 
+    level = parse_number(attr(df, "mesg")), 
+    lower = df$lower.CL,
+    upper = df$upper.CL
+  )
+  statistics <- add_statistic(
+    statistics, "estimate", 
+    df$estimate, 
+    symbol = "b"
+  )
+  statistics <- add_statistic(
+    statistics, "estimate", 
+    df$response, 
+    symbol = "ŷ",
+    interval = "CI", 
+    level = parse_number(attr(df, "mesg")[2]), 
+    lower = df$lower.CL,
+    upper = df$upper.CL
+  )
+  statistics <- add_statistic(statistics, "SE", df$SE)
+  statistics <- add_statistic(
+    statistics, 
+    "statistic", 
+    df$t.ratio, 
+    symbol = "t"
+  )
+  statistics <- add_statistic(statistics, "statistic", df$F.ratio, "F")
+  statistics <- add_statistic(statistics, "df", df$df)
+  statistics <- add_statistic(
+    statistics, 
+    "df numerator", 
+    df$df1[i], 
+    "df", 
+    "num."
+  )
+  statistics <- add_statistic(
+    statistics, 
+    "df denominator", 
+    df$df2[i], 
+    "df", 
+    "den."
+  )
+  statistics <- add_statistic(statistics, "p", df$p.value)
+}
+
+group_pri_vars_statistics <- function(df, pri_vars) {
+  # Create a group for the pri var
+  group <- list(name = pri_vars)
+  
+  # Extract levels
+  levels <- unique(df[, pri_vars])
+  
+  # Loop over the levels of the group
+  for (i in 1:length(levels)) {
+    # Create an empty terms group list
+    group_level <- list(name = as.character(levels[i]))
+    
+    # Get statistics
+    statistics <- group_statistics(df[i, ])
+    
+    # Add statistics to the term group
+    group_level$statistics <- statistics
+    
+    # Add the level group to the group
+    group$groups <- append(group$groups, list(group_level))
+  }
+  
+  return(group)
+}
+
+group_vars <- function(vars, df) {
+  group <- list(name = vars[1])
+  
+  # Convert to a factor in case it's a numeric value
+  levels <- levels(factor(df[, vars[1]]))
+  
+  for (i in 1:length(levels)) {
+    group_level <- list(name = as.character(levels[i]))
+    df_level <- df[df[, vars[1]] == levels[i], ]
+    
+    if (length(vars) > 1) {
+      group_level_group <- group_vars(
+        vars[-1], 
+        df_level
+      )
+      group_level$groups <- append(group_level$groups, list(group_level_group))
+    } else {
+      group_level$statistics <- group_statistics(df_level)
+    }
+    
+    group$groups <- append(group$groups, list(group_level))
+  }
+  
+  return(group)
+}
+
+# Function to extract statistics from pri vars
+group_pri_vars_statistics <- function(df, pri_vars) {
+  # Create a group for the pri var
+  group <- list(name = pri_vars)
+  
+  # Extract levels
+  levels <- unique(df[, pri_vars])
+  
+  # Loop over the levels of the group
+  for (i in 1:length(levels)) {
+    # Create an empty terms group list
+    group_level <- list(name = as.character(levels[i]))
+    
+    # Create a statistics list
+    statistics <- list()
+    
+    # Add the statistics
+    statistics <- add_statistic(
+      statistics, "estimate", df$response[i], symbol = "ŷ"
+    )
+    statistics <- add_statistic(
+      statistics, 
+      name = "estimate", 
+      df$emmean[i], 
+      symbol = "EMM", 
+      interval = "CI", 
+      level = parse_number(attr(df, "mesg")), 
+      lower = df$lower.CL[i],
+      upper = df$upper.CL[i]
+    )
+    statistics <- add_statistic(statistics, "SE", df$SE[i])
+    statistics <- add_statistic(statistics, "df", df$df[i])
+    statistics <- add_statistic(
+      statistics, "statistic", df$t.ratio[i], symbol = "t"
+    )
+    statistics <- add_statistic(statistics, "p", df$p.value[i])
+    
+    # Add statistics to the term group
+    group_level$statistics <- statistics
+    
+    # Add the level group to the group
+    group$groups <- append(group$groups, list(group_level))
+  }
+  
+  return(group)
+}
+
+group_by_vars_statistics <- function(df, by_vars, pri_vars) {
+  # Create a group for the by var
+  group <- list(name = by_vars)
+  
+  # Loop over the levels of the by var
+  levels <- levels(df[, by_vars])
+  
+  for (i in 1:length(levels)) {
+    # Create a group for the level of the by var
+    group_level <- list()
+    
+    # Set the name
+    group_level$name <- levels[i]
+    
+    # Create a group with pri vars statistics
+    df_level <- dplyr::filter(
+      df, 
+      dplyr::if_all(dplyr::all_of(by_vars), ~ . == levels[i])
+    )
+    
+    group_pri <- group_pri_vars_statistics(df_level, pri_vars)
+    
+    # Add the pri group to the by level group
+    group_level$groups <- append(group_level$groups, list(group_pri))
+    
+    # Add the by level group to the by group
+    group$groups <- append(group$groups, list(group_level))
+  }
+  
+  return(group)
+}
+
+group_contrast_statistics <- function(df, pri_vars) {
+  # Create a group for the pri var
+  group <- list(name = pri_vars)
+  
+  # Extract levels
+  levels <- levels(df[, pri_vars])
+  
+  # Loop over the levels of the group
+  for (i in 1:length(levels)) {
+    # Create an empty terms group list
+    group_level <- list(name = levels[i])
+    
+    # Loop over the contrasts
+    levels_contrast <- levels(df$contrast)
+    
+    for (j in 1:length(levels_contrast)) {
+      # Create a group for the contrast
+      group_contrast <- list(name = levels_contrast[j])
+      
+      # Subset the data frame to the relevant contrast
+      df_contrast <- dplyr::filter(df, contrast == levels_contrast[j])
+      
+      # Create a list for the statistics
+      statistics <- list()
+      
+      statistics <- add_statistic(
+        statistics, 
+        "estimate", 
+        df_contrast$estimate[j], 
+        "b"
+      )
+      statistics <- add_statistic(statistics, "SE", df_contrast$SE[j])
+      statistics <- add_statistic(statistics, "df", df_contrast$df[j])
+      statistics <- add_statistic(
+        statistics, 
+        "statistic", 
+        df_contrast$t.ratio[j], 
+        "t"
+      )
+      statistics <- add_statistic(statistics, "p", df_contrast$p.value[j])
+      
+      # Add the statistics to the contrast group
+      group_contrast$statistics <- statistics
+      
+      # Add the contrast group to the level group
+      group_level$groups <- append(group_level$groups, list(group_contrast))
+    }
+    
+    # Add the level group to the group
+    group$groups <- append(group$groups, list(group_level))
+  }
+  
+  return(group)
+}
+
+
+
+analysis <- list()
+
+df <- as.data.frame(x)
+
+analysis$method <- dplyr::case_when(
+  attr(x, "estName") == "emmean" ~ "Estimated marginal means",
+  attr(x, "estName") == "estimate" ~ "Contrasts",
+  attr(x, "estName") == "response" ~ "Predicted estimated marginal means",
+  attr(x, "estName") == "F.ratio" & "F.ratio" %in% names(df) ~ "F test",
+)
+
+pri_vars <- attr(x, "pri.vars")
+by_vars <- attr(x, "by.vars")
+vars <- c(by_vars, pri_vars)
+
+if (length(vars) > 0) {
+  group <- group_vars(vars, df)
+  
+  analysis$groups <- append(analysis$groups, list(group))
+} else if (length(by_vars > 0)) {
+  
+  names <- ""
+  
+  for (i in 1:length(by_vars)) {
+    names <- c(names, paste(by_vars[i], "=", df[by_vars[i]]))
+  }
+  
+  df[, by_vars]
+} else {
+  statistics <- group_statistics(df)
+  
+  analysis$statistics <- statistics
+}
+
+analysis <- add_package_info(analysis, "emmeans")
+
+return(analysis)
