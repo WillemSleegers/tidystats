@@ -39,16 +39,12 @@
 #'
 #' @export
 write_stats <- function(x, path, digits = 6) {
-
-  # Check whether the arguments are supplied
-  if (!is.list(x)) {
-    stop("Argument 'x' is not a list.")
-  }
-  if (is.null(path)) {
-    stop("No path or connection found.")
-  }
-
-  # Write to disk
-  jsonlite::write_json(x, path = path, pretty = TRUE, auto_unbox = TRUE, 
-    digits = digits)
+  jsonlite::write_json(
+    x, 
+    path = path, 
+    pretty = TRUE, 
+    auto_unbox = TRUE, 
+    digits = digits,
+    na = "string"
+  )
 }

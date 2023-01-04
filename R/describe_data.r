@@ -52,7 +52,7 @@ describe_data <- function(data, ..., na.rm = TRUE, short = FALSE) {
   }
   
   # Check if the user provided any columns.
-  if (length(enquos(...)) == 0) {
+  if (length(rlang::enquos(...)) == 0) {
     stop("No columns found; please provide one or more columns.")
   }
   

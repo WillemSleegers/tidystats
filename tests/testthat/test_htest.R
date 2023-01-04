@@ -2,7 +2,7 @@
 # Setup -------------------------------------------------------------------
 
 # Load test data
-path <- system.file("tests/testthat/data/htest.json", package = "tidystats")
+path <- system.file("tests/data/htest.json", package = "tidystats")
 expected_statistics <- read_stats(path)
 
 # t.test() ----------------------------------------------------------------

@@ -34,7 +34,7 @@ usethis::use_package("lavaan", "Suggests")
 # usethis::use_test("add_stats")
 
 # Test a specific test
-testthat::test_file("tests/testthat/tests/test_main.R")
+testthat::test_file("tests/testthat/test_main.R")
 
 # Test all tests
 devtools::test()

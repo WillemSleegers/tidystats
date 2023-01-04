@@ -2,7 +2,7 @@
 # Setup -------------------------------------------------------------------
 
 # Load test data
-path <- system.file("tests/testthat/data/generic.json", package = "tidystats")
+path <- system.file("tests/data/generic.json", package = "tidystats")
 expected_statistics <- read_stats(path)
 
 # Generic statistics ------------------------------------------------------

@@ -2,11 +2,7 @@
 # Setup -------------------------------------------------------------------
 
 # Load test data
-path <- system.file(
-  "tests/testthat/data/pairwise_htest.json", 
-  package = "tidystats"
-)
-
+path <- system.file("tests/data/pairwise_htest.json", package = "tidystats")
 expected_statistics <- read_stats(path)
 
 # pairwise.t.test() -------------------------------------------------------

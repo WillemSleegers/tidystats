@@ -1,0 +1,1177 @@
+{
+  "single_var": {
+    "name": "response",
+    "method": "Descriptives",
+    "statistics": [
+      {
+        "name": "missing",
+        "value": 18
+      },
+      {
+        "name": "N",
+        "value": 6325
+      },
+      {
+        "name": "mean",
+        "symbol": "M",
+        "value": 5.588617
+      },
+      {
+        "name": "standard deviation",
+        "symbol": "SD",
+        "value": 2.189027
+      },
+      {
+        "name": "standard error",
+        "symbol": "SE",
+        "value": 0.027525
+      },
+      {
+        "name": "minimum",
+        "symbol": "min",
+        "value": 1
+      },
+      {
+        "name": "range",
+        "value": 8
+      },
+      {
+        "name": "median",
+        "symbol": "Mdn",
+        "value": 5
+      },
+      {
+        "name": "mode",
+        "value": 5
+      },
+      {
+        "name": "skew",
+        "value": -0.13714
+      },
+      {
+        "name": "kurtosis",
+        "value": 2.340773
+      }
+    ],
+    "package": {
+      "name": "tidystats",
+      "version": "0.6"
+    }
+  },
+  "single_var_w_group": {
+    "name": "response",
+    "method": "Descriptives",
+    "groups": [
+      {
+        "name": "source",
+        "groups": [
+          {
+            "name": "Bin Laden",
+            "statistics": [
+              {
+                "name": "missing",
+                "value": 18
+              },
+              {
+                "name": "N",
+                "value": 3083
+              },
+              {
+                "name": "mean",
+                "symbol": "M",
+                "value": 5.232241
+              },
+              {
+                "name": "standard deviation",
+                "symbol": "SD",
+                "value": 2.112639
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.038049
+              },
+              {
+                "name": "minimum",
+                "symbol": "min",
+                "value": 1
+              },
+              {
+                "name": "range",
+                "value": 8
+              },
+              {
+                "name": "median",
+                "symbol": "Mdn",
+                "value": 5
+              },
+              {
+                "name": "mode",
+                "value": 5
+              },
+              {
+                "name": "skew",
+                "value": -0.078144
+              },
+              {
+                "name": "kurtosis",
+                "value": 2.585193
+              }
+            ]
+          },
+          {
+            "name": "Washington",
+            "statistics": [
+              {
+                "name": "missing",
+                "value": 0
+              },
+              {
+                "name": "N",
+                "value": 3242
+              },
+              {
+                "name": "mean",
+                "symbol": "M",
+                "value": 5.927514
+              },
+              {
+                "name": "standard deviation",
+                "symbol": "SD",
+                "value": 2.206828
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.038758
+              },
+              {
+                "name": "minimum",
+                "symbol": "min",
+                "value": 1
+              },
+              {
+                "name": "range",
+                "value": 8
+              },
+              {
+                "name": "median",
+                "symbol": "Mdn",
+                "value": 6
+              },
+              {
+                "name": "mode",
+                "value": 5
+              },
+              {
+                "name": "skew",
+                "value": -0.234111
+              },
+              {
+                "name": "kurtosis",
+                "value": 2.180309
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "tidystats",
+      "version": "0.6"
+    }
+  },
+  "multiple_vars": {
+    "method": "Descriptives",
+    "groups": [
+      {
+        "name": "age",
+        "statistics": [
+          {
+            "name": "missing",
+            "value": 15
+          },
+          {
+            "name": "N",
+            "value": 6328
+          },
+          {
+            "name": "mean",
+            "symbol": "M",
+            "value": 25.97598
+          },
+          {
+            "name": "standard deviation",
+            "symbol": "SD",
+            "value": 11.351214
+          },
+          {
+            "name": "standard error",
+            "symbol": "SE",
+            "value": 0.142695
+          },
+          {
+            "name": "minimum",
+            "symbol": "min",
+            "value": 12
+          },
+          {
+            "name": "range",
+            "value": 88
+          },
+          {
+            "name": "median",
+            "symbol": "Mdn",
+            "value": 21
+          },
+          {
+            "name": "mode",
+            "value": 18
+          },
+          {
+            "name": "skew",
+            "value": 1.920995
+          },
+          {
+            "name": "kurtosis",
+            "value": 6.285366
+          }
+        ]
+      },
+      {
+        "name": "response",
+        "statistics": [
+          {
+            "name": "missing",
+            "value": 18
+          },
+          {
+            "name": "N",
+            "value": 6325
+          },
+          {
+            "name": "mean",
+            "symbol": "M",
+            "value": 5.588617
+          },
+          {
+            "name": "standard deviation",
+            "symbol": "SD",
+            "value": 2.189027
+          },
+          {
+            "name": "standard error",
+            "symbol": "SE",
+            "value": 0.027525
+          },
+          {
+            "name": "minimum",
+            "symbol": "min",
+            "value": 1
+          },
+          {
+            "name": "range",
+            "value": 8
+          },
+          {
+            "name": "median",
+            "symbol": "Mdn",
+            "value": 5
+          },
+          {
+            "name": "mode",
+            "value": 5
+          },
+          {
+            "name": "skew",
+            "value": -0.13714
+          },
+          {
+            "name": "kurtosis",
+            "value": 2.340773
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "tidystats",
+      "version": "0.6"
+    }
+  },
+  "single_var_w_groups": {
+    "name": "response",
+    "method": "Descriptives",
+    "groups": [
+      {
+        "name": "source",
+        "groups": [
+          {
+            "name": "Bin Laden",
+            "groups": [
+              {
+                "name": "sex",
+                "groups": [
+                  {
+                    "name": "female",
+                    "statistics": [
+                      {
+                        "name": "missing",
+                        "value": 12
+                      },
+                      {
+                        "name": "N",
+                        "value": 2055
+                      },
+                      {
+                        "name": "mean",
+                        "symbol": "M",
+                        "value": 5.118735
+                      },
+                      {
+                        "name": "standard deviation",
+                        "symbol": "SD",
+                        "value": 2.008142
+                      },
+                      {
+                        "name": "standard error",
+                        "symbol": "SE",
+                        "value": 0.044298
+                      },
+                      {
+                        "name": "minimum",
+                        "symbol": "min",
+                        "value": 1
+                      },
+                      {
+                        "name": "range",
+                        "value": 8
+                      },
+                      {
+                        "name": "median",
+                        "symbol": "Mdn",
+                        "value": 5
+                      },
+                      {
+                        "name": "mode",
+                        "value": 5
+                      },
+                      {
+                        "name": "skew",
+                        "value": -0.086827
+                      },
+                      {
+                        "name": "kurtosis",
+                        "value": 2.841797
+                      }
+                    ]
+                  },
+                  {
+                    "name": "male",
+                    "statistics": [
+                      {
+                        "name": "missing",
+                        "value": 4
+                      },
+                      {
+                        "name": "N",
+                        "value": 1025
+                      },
+                      {
+                        "name": "mean",
+                        "symbol": "M",
+                        "value": 5.466341
+                      },
+                      {
+                        "name": "standard deviation",
+                        "symbol": "SD",
+                        "value": 2.289815
+                      },
+                      {
+                        "name": "standard error",
+                        "symbol": "SE",
+                        "value": 0.071522
+                      },
+                      {
+                        "name": "minimum",
+                        "symbol": "min",
+                        "value": 1
+                      },
+                      {
+                        "name": "range",
+                        "value": 8
+                      },
+                      {
+                        "name": "median",
+                        "symbol": "Mdn",
+                        "value": 5
+                      },
+                      {
+                        "name": "mode",
+                        "value": 5
+                      },
+                      {
+                        "name": "skew",
+                        "value": -0.139926
+                      },
+                      {
+                        "name": "kurtosis",
+                        "value": 2.208684
+                      }
+                    ]
+                  },
+                  {
+                    "name": "NA",
+                    "statistics": [
+                      {
+                        "name": "missing",
+                        "value": 2
+                      },
+                      {
+                        "name": "N",
+                        "value": 3
+                      },
+                      {
+                        "name": "mean",
+                        "symbol": "M",
+                        "value": 3
+                      },
+                      {
+                        "name": "standard deviation",
+                        "symbol": "SD",
+                        "value": 1.732051
+                      },
+                      {
+                        "name": "standard error",
+                        "symbol": "SE",
+                        "value": 1
+                      },
+                      {
+                        "name": "minimum",
+                        "symbol": "min",
+                        "value": 2
+                      },
+                      {
+                        "name": "range",
+                        "value": 3
+                      },
+                      {
+                        "name": "median",
+                        "symbol": "Mdn",
+                        "value": 2
+                      },
+                      {
+                        "name": "mode",
+                        "value": 2
+                      },
+                      {
+                        "name": "skew",
+                        "value": 0.707107
+                      },
+                      {
+                        "name": "kurtosis",
+                        "value": 1.5
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Washington",
+            "groups": [
+              {
+                "name": "sex",
+                "groups": [
+                  {
+                    "name": "female",
+                    "statistics": [
+                      {
+                        "name": "missing",
+                        "value": 0
+                      },
+                      {
+                        "name": "N",
+                        "value": 2206
+                      },
+                      {
+                        "name": "mean",
+                        "symbol": "M",
+                        "value": 5.884406
+                      },
+                      {
+                        "name": "standard deviation",
+                        "symbol": "SD",
+                        "value": 2.11565
+                      },
+                      {
+                        "name": "standard error",
+                        "symbol": "SE",
+                        "value": 0.045044
+                      },
+                      {
+                        "name": "minimum",
+                        "symbol": "min",
+                        "value": 1
+                      },
+                      {
+                        "name": "range",
+                        "value": 8
+                      },
+                      {
+                        "name": "median",
+                        "symbol": "Mdn",
+                        "value": 6
+                      },
+                      {
+                        "name": "mode",
+                        "value": 5
+                      },
+                      {
+                        "name": "skew",
+                        "value": -0.166271
+                      },
+                      {
+                        "name": "kurtosis",
+                        "value": 2.257883
+                      }
+                    ]
+                  },
+                  {
+                    "name": "male",
+                    "statistics": [
+                      {
+                        "name": "missing",
+                        "value": 0
+                      },
+                      {
+                        "name": "N",
+                        "value": 1031
+                      },
+                      {
+                        "name": "mean",
+                        "symbol": "M",
+                        "value": 6.019399
+                      },
+                      {
+                        "name": "standard deviation",
+                        "symbol": "SD",
+                        "value": 2.382707
+                      },
+                      {
+                        "name": "standard error",
+                        "symbol": "SE",
+                        "value": 0.074206
+                      },
+                      {
+                        "name": "minimum",
+                        "symbol": "min",
+                        "value": 1
+                      },
+                      {
+                        "name": "range",
+                        "value": 8
+                      },
+                      {
+                        "name": "median",
+                        "symbol": "Mdn",
+                        "value": 6
+                      },
+                      {
+                        "name": "mode",
+                        "value": 9
+                      },
+                      {
+                        "name": "skew",
+                        "value": -0.356468
+                      },
+                      {
+                        "name": "kurtosis",
+                        "value": 2.050147
+                      }
+                    ]
+                  },
+                  {
+                    "name": "NA",
+                    "statistics": [
+                      {
+                        "name": "missing",
+                        "value": 0
+                      },
+                      {
+                        "name": "N",
+                        "value": 5
+                      },
+                      {
+                        "name": "mean",
+                        "symbol": "M",
+                        "value": 6
+                      },
+                      {
+                        "name": "standard deviation",
+                        "symbol": "SD",
+                        "value": 3.674235
+                      },
+                      {
+                        "name": "standard error",
+                        "symbol": "SE",
+                        "value": 1.643168
+                      },
+                      {
+                        "name": "minimum",
+                        "symbol": "min",
+                        "value": 2
+                      },
+                      {
+                        "name": "range",
+                        "value": 7
+                      },
+                      {
+                        "name": "median",
+                        "symbol": "Mdn",
+                        "value": 8
+                      },
+                      {
+                        "name": "mode",
+                        "value": 9
+                      },
+                      {
+                        "name": "skew",
+                        "value": -0.37191
+                      },
+                      {
+                        "name": "kurtosis",
+                        "value": 1.183128
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "tidystats",
+      "version": "0.6"
+    }
+  },
+  "single_var_w_groups_wo_na": {
+    "name": "response",
+    "method": "Descriptives",
+    "groups": [
+      {
+        "name": "source",
+        "groups": [
+          {
+            "name": "Bin Laden",
+            "groups": [
+              {
+                "name": "sex",
+                "groups": [
+                  {
+                    "name": "female",
+                    "statistics": [
+                      {
+                        "name": "missing",
+                        "value": 12
+                      },
+                      {
+                        "name": "N",
+                        "value": 2055
+                      },
+                      {
+                        "name": "mode",
+                        "value": 5
+                      }
+                    ]
+                  },
+                  {
+                    "name": "male",
+                    "statistics": [
+                      {
+                        "name": "missing",
+                        "value": 4
+                      },
+                      {
+                        "name": "N",
+                        "value": 1025
+                      },
+                      {
+                        "name": "mode",
+                        "value": 5
+                      }
+                    ]
+                  },
+                  {
+                    "name": "NA",
+                    "statistics": [
+                      {
+                        "name": "missing",
+                        "value": 2
+                      },
+                      {
+                        "name": "N",
+                        "value": 3
+                      },
+                      {
+                        "name": "mode",
+                        "value": 2
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Washington",
+            "groups": [
+              {
+                "name": "sex",
+                "groups": [
+                  {
+                    "name": "female",
+                    "statistics": [
+                      {
+                        "name": "missing",
+                        "value": 0
+                      },
+                      {
+                        "name": "N",
+                        "value": 2206
+                      },
+                      {
+                        "name": "mean",
+                        "symbol": "M",
+                        "value": 5.884406
+                      },
+                      {
+                        "name": "standard deviation",
+                        "symbol": "SD",
+                        "value": 2.11565
+                      },
+                      {
+                        "name": "standard error",
+                        "symbol": "SE",
+                        "value": 0.045044
+                      },
+                      {
+                        "name": "minimum",
+                        "symbol": "min",
+                        "value": 1
+                      },
+                      {
+                        "name": "range",
+                        "value": 8
+                      },
+                      {
+                        "name": "median",
+                        "symbol": "Mdn",
+                        "value": 6
+                      },
+                      {
+                        "name": "mode",
+                        "value": 5
+                      },
+                      {
+                        "name": "skew",
+                        "value": -0.166271
+                      },
+                      {
+                        "name": "kurtosis",
+                        "value": 2.257883
+                      }
+                    ]
+                  },
+                  {
+                    "name": "male",
+                    "statistics": [
+                      {
+                        "name": "missing",
+                        "value": 0
+                      },
+                      {
+                        "name": "N",
+                        "value": 1031
+                      },
+                      {
+                        "name": "mean",
+                        "symbol": "M",
+                        "value": 6.019399
+                      },
+                      {
+                        "name": "standard deviation",
+                        "symbol": "SD",
+                        "value": 2.382707
+                      },
+                      {
+                        "name": "standard error",
+                        "symbol": "SE",
+                        "value": 0.074206
+                      },
+                      {
+                        "name": "minimum",
+                        "symbol": "min",
+                        "value": 1
+                      },
+                      {
+                        "name": "range",
+                        "value": 8
+                      },
+                      {
+                        "name": "median",
+                        "symbol": "Mdn",
+                        "value": 6
+                      },
+                      {
+                        "name": "mode",
+                        "value": 9
+                      },
+                      {
+                        "name": "skew",
+                        "value": -0.356468
+                      },
+                      {
+                        "name": "kurtosis",
+                        "value": 2.050147
+                      }
+                    ]
+                  },
+                  {
+                    "name": "NA",
+                    "statistics": [
+                      {
+                        "name": "missing",
+                        "value": 0
+                      },
+                      {
+                        "name": "N",
+                        "value": 5
+                      },
+                      {
+                        "name": "mean",
+                        "symbol": "M",
+                        "value": 6
+                      },
+                      {
+                        "name": "standard deviation",
+                        "symbol": "SD",
+                        "value": 3.674235
+                      },
+                      {
+                        "name": "standard error",
+                        "symbol": "SE",
+                        "value": 1.643168
+                      },
+                      {
+                        "name": "minimum",
+                        "symbol": "min",
+                        "value": 2
+                      },
+                      {
+                        "name": "range",
+                        "value": 7
+                      },
+                      {
+                        "name": "median",
+                        "symbol": "Mdn",
+                        "value": 8
+                      },
+                      {
+                        "name": "mode",
+                        "value": 9
+                      },
+                      {
+                        "name": "skew",
+                        "value": -0.37191
+                      },
+                      {
+                        "name": "kurtosis",
+                        "value": 1.183128
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "tidystats",
+      "version": "0.6"
+    }
+  },
+  "multiple_vars_w_group": {
+    "method": "Descriptives",
+    "groups": [
+      {
+        "name": "age",
+        "groups": [
+          {
+            "name": "source",
+            "groups": [
+              {
+                "name": "Bin Laden",
+                "statistics": [
+                  {
+                    "name": "missing",
+                    "value": 6
+                  },
+                  {
+                    "name": "N",
+                    "value": 3095
+                  },
+                  {
+                    "name": "mean",
+                    "symbol": "M",
+                    "value": 26.086591
+                  },
+                  {
+                    "name": "standard deviation",
+                    "symbol": "SD",
+                    "value": 11.564702
+                  },
+                  {
+                    "name": "standard error",
+                    "symbol": "SE",
+                    "value": 0.207876
+                  },
+                  {
+                    "name": "minimum",
+                    "symbol": "min",
+                    "value": 13
+                  },
+                  {
+                    "name": "range",
+                    "value": 72
+                  },
+                  {
+                    "name": "median",
+                    "symbol": "Mdn",
+                    "value": 21
+                  },
+                  {
+                    "name": "mode",
+                    "value": 18
+                  },
+                  {
+                    "name": "skew",
+                    "value": 1.921052
+                  },
+                  {
+                    "name": "kurtosis",
+                    "value": 6.176264
+                  }
+                ]
+              },
+              {
+                "name": "Washington",
+                "statistics": [
+                  {
+                    "name": "missing",
+                    "value": 9
+                  },
+                  {
+                    "name": "N",
+                    "value": 3233
+                  },
+                  {
+                    "name": "mean",
+                    "symbol": "M",
+                    "value": 25.87009
+                  },
+                  {
+                    "name": "standard deviation",
+                    "symbol": "SD",
+                    "value": 11.14377
+                  },
+                  {
+                    "name": "standard error",
+                    "symbol": "SE",
+                    "value": 0.195988
+                  },
+                  {
+                    "name": "minimum",
+                    "symbol": "min",
+                    "value": 12
+                  },
+                  {
+                    "name": "range",
+                    "value": 88
+                  },
+                  {
+                    "name": "median",
+                    "symbol": "Mdn",
+                    "value": 21
+                  },
+                  {
+                    "name": "mode",
+                    "value": 18
+                  },
+                  {
+                    "name": "skew",
+                    "value": 1.917233
+                  },
+                  {
+                    "name": "kurtosis",
+                    "value": 6.38082
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "response",
+        "groups": [
+          {
+            "name": "source",
+            "groups": [
+              {
+                "name": "Bin Laden",
+                "statistics": [
+                  {
+                    "name": "missing",
+                    "value": 18
+                  },
+                  {
+                    "name": "N",
+                    "value": 3083
+                  },
+                  {
+                    "name": "mean",
+                    "symbol": "M",
+                    "value": 5.232241
+                  },
+                  {
+                    "name": "standard deviation",
+                    "symbol": "SD",
+                    "value": 2.112639
+                  },
+                  {
+                    "name": "standard error",
+                    "symbol": "SE",
+                    "value": 0.038049
+                  },
+                  {
+                    "name": "minimum",
+                    "symbol": "min",
+                    "value": 1
+                  },
+                  {
+                    "name": "range",
+                    "value": 8
+                  },
+                  {
+                    "name": "median",
+                    "symbol": "Mdn",
+                    "value": 5
+                  },
+                  {
+                    "name": "mode",
+                    "value": 5
+                  },
+                  {
+                    "name": "skew",
+                    "value": -0.078144
+                  },
+                  {
+                    "name": "kurtosis",
+                    "value": 2.585193
+                  }
+                ]
+              },
+              {
+                "name": "Washington",
+                "statistics": [
+                  {
+                    "name": "missing",
+                    "value": 0
+                  },
+                  {
+                    "name": "N",
+                    "value": 3242
+                  },
+                  {
+                    "name": "mean",
+                    "symbol": "M",
+                    "value": 5.927514
+                  },
+                  {
+                    "name": "standard deviation",
+                    "symbol": "SD",
+                    "value": 2.206828
+                  },
+                  {
+                    "name": "standard error",
+                    "symbol": "SE",
+                    "value": 0.038758
+                  },
+                  {
+                    "name": "minimum",
+                    "symbol": "min",
+                    "value": 1
+                  },
+                  {
+                    "name": "range",
+                    "value": 8
+                  },
+                  {
+                    "name": "median",
+                    "symbol": "Mdn",
+                    "value": 6
+                  },
+                  {
+                    "name": "mode",
+                    "value": 5
+                  },
+                  {
+                    "name": "skew",
+                    "value": -0.234111
+                  },
+                  {
+                    "name": "kurtosis",
+                    "value": 2.180309
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "tidystats",
+      "version": "0.6"
+    }
+  },
+  "single_var_subset": {
+    "name": "response",
+    "method": "Descriptives",
+    "statistics": [
+      {
+        "name": "N",
+        "value": 6325
+      },
+      {
+        "name": "mean",
+        "symbol": "M",
+        "value": 5.588617
+      },
+      {
+        "name": "standard deviation",
+        "symbol": "SD",
+        "value": 2.189027
+      }
+    ],
+    "package": {
+      "name": "tidystats",
+      "version": "0.6"
+    }
+  }
+}

@@ -5,10 +5,7 @@
 library(BayesFactor)
 
 # Load test data
-path <- system.file(
-  "tests/testthat/data/BayesFactor.json", 
-  package = "tidystats"
-)
+path <- system.file("tests/data/BayesFactor.json", package = "tidystats")
 expected_statistics <- read_stats(path)
 
 # generalTestBF() --------------------------------------------------------
@@ -64,8 +61,12 @@ test_that("lmBF division works", {
   
   bfFull <- lmBF(RT ~ shape + color + shape:color + ID, data = puzzles, 
     whichRandom = "ID", progress = FALSE)
+  
+  set.seed(1)
+  
   bfMain <- lmBF(RT ~ shape + color + ID, data = puzzles, whichRandom = "ID",
     progress = FALSE)
+  
   model <- bfMain / bfFull
   
   expect_equal_models(
@@ -114,6 +115,8 @@ test_that("ttestBF works", {
 # anovaBF() ---------------------------------------------------------------
 
 test_that("anovaBF works", {
+  set.seed(1)
+  
   model <- anovaBF(extra ~ group + ID, data = sleep, whichRandom = "ID",
     progress = FALSE)
   
@@ -125,6 +128,8 @@ test_that("anovaBF works", {
 
 test_that("another anovaBF works", {
   data(puzzles)
+  
+  set.seed(1)
   
   model <- anovaBF(RT ~ shape * color + ID, data = puzzles, 
     whichRandom = "ID", whichModels = 'top', progress = FALSE)
@@ -149,6 +154,10 @@ test_that("correlationBF works", {
 # contingencyTableBF() ----------------------------------------------------
 
 test_that("contingencyTableBF works", {
+  data(raceDolls)
+  
+  set.seed(1)
+  
   model <- contingencyTableBF(raceDolls, sampleType = "indepMulti", 
     fixedMargin = "cols")
   

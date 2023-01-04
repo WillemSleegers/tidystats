@@ -2,7 +2,7 @@
 # Setup -------------------------------------------------------------------
 
 # Load test data
-path <- system.file("tests/testthat/data/lm.json", package = "tidystats")
+path <- system.file("tests/data/lm.json", package = "tidystats")
 expected_statistics <- read_stats(path)
 
 # lm() --------------------------------------------------------------------
@@ -64,7 +64,9 @@ test_that("lm model comparison anova works", {
 
 test_that("lm model comparison anova in another order works", {
   fit0 <- lm(sr ~ 1, data = LifeCycleSavings)
+  fit1 <- update(fit0, . ~ . + pop15)
   fit2 <- update(fit1, . ~ . + pop75)
+  fit3 <- update(fit2, . ~ . + dpi)
   fit4 <- update(fit3, . ~ . + ddpi)
   
   model <- anova(fit4, fit2, fit0, test = "F")
@@ -77,7 +79,9 @@ test_that("lm model comparison anova in another order works", {
 
 test_that("lm model comparison anova chi-squared works", {
   fit0 <- lm(sr ~ 1, data = LifeCycleSavings)
+  fit1 <- update(fit0, . ~ . + pop15)
   fit2 <- update(fit1, . ~ . + pop75)
+  fit3 <- update(fit2, . ~ . + dpi)
   fit4 <- update(fit3, . ~ . + ddpi)
   
   model <- anova(fit4, fit2, fit0, test = "Chisq")
@@ -90,7 +94,9 @@ test_that("lm model comparison anova chi-squared works", {
 
 test_that("lm model comparison anova Cp works", {
   fit0 <- lm(sr ~ 1, data = LifeCycleSavings)
+  fit1 <- update(fit0, . ~ . + pop15)
   fit2 <- update(fit1, . ~ . + pop75)
+  fit3 <- update(fit2, . ~ . + dpi)
   fit4 <- update(fit3, . ~ . + ddpi)
   
   model <- anova(fit4, fit2, fit0, test = "Cp")
