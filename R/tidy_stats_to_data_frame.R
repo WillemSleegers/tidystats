@@ -107,12 +107,19 @@ groups_to_data_frame <- function(x, level) {
     df <- purrr::map_df(x$groups, groups_to_data_frame, level)
   }
   
-  # Check if there's a name, if so, add it to the data frame and append the
-  # level to the name
+  # Check if there's one or more names, if so, add them to the data frame and 
+  # append the level to the name
   if ("name" %in% names(x)) {
     df <- dplyr::mutate(df, "group_name_{level}" := x$name)
   }
   
+  if ("names" %in% names(x)) {
+    df <- dplyr::mutate(
+      df, 
+      "group_name_{level}_1" := x$names[[1]]$name,
+      "group_name_{level}_2" := x$names[[2]]$name,
+    )
+  }
+  
   return(df)
 }
-
