@@ -1,0 +1,318 @@
+{
+  "rcorr": {
+    "method": "Correlation",
+    "groups": [
+      {
+        "name": "Pairs",
+        "groups": [
+          {
+            "names": [
+              {
+                "name": "x"
+              },
+              {
+                "name": "y"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "r",
+                "value": 0
+              },
+              {
+                "name": "n",
+                "value": 5
+              },
+              {
+                "name": "p",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "x"
+              },
+              {
+                "name": "z"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "r",
+                "value": 1
+              },
+              {
+                "name": "n",
+                "value": 4
+              },
+              {
+                "name": "p",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "x"
+              },
+              {
+                "name": "v"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "r",
+                "value": 1
+              },
+              {
+                "name": "n",
+                "value": 5
+              },
+              {
+                "name": "p",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "y"
+              },
+              {
+                "name": "z"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "r",
+                "value": -0.745356
+              },
+              {
+                "name": "n",
+                "value": 4
+              },
+              {
+                "name": "p",
+                "value": 0.254644
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "y"
+              },
+              {
+                "name": "v"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "r",
+                "value": 0
+              },
+              {
+                "name": "n",
+                "value": 5
+              },
+              {
+                "name": "p",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "z"
+              },
+              {
+                "name": "v"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "r",
+                "value": 1
+              },
+              {
+                "name": "n",
+                "value": 4
+              },
+              {
+                "name": "p",
+                "value": 0
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "afex",
+      "version": "1.2-0"
+    }
+  },
+  "rcorr_spearman": {
+    "method": "Correlation",
+    "groups": [
+      {
+        "name": "Pairs",
+        "groups": [
+          {
+            "names": [
+              {
+                "name": "x"
+              },
+              {
+                "name": "y"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "r",
+                "value": 0
+              },
+              {
+                "name": "n",
+                "value": 5
+              },
+              {
+                "name": "p",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "x"
+              },
+              {
+                "name": "z"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "r",
+                "value": 1
+              },
+              {
+                "name": "n",
+                "value": 4
+              },
+              {
+                "name": "p",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "x"
+              },
+              {
+                "name": "v"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "r",
+                "value": 1
+              },
+              {
+                "name": "n",
+                "value": 5
+              },
+              {
+                "name": "p",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "y"
+              },
+              {
+                "name": "z"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "r",
+                "value": -0.632456
+              },
+              {
+                "name": "n",
+                "value": 4
+              },
+              {
+                "name": "p",
+                "value": 0.367544
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "y"
+              },
+              {
+                "name": "v"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "r",
+                "value": 0
+              },
+              {
+                "name": "n",
+                "value": 5
+              },
+              {
+                "name": "p",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "z"
+              },
+              {
+                "name": "v"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "r",
+                "value": 1
+              },
+              {
+                "name": "n",
+                "value": 4
+              },
+              {
+                "name": "p",
+                "value": 0
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "afex",
+      "version": "1.2-0"
+    }
+  }
+}
