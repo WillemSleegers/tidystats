@@ -1,68 +1,11 @@
 
 # Analysis: afex ----------------------------------------------------------
 
-
-# Analysis: confint() -----------------------------------------------------
-
-# Run analysis
-lm_confint <- lm(100/mpg ~ disp + hp + wt + am, data = mtcars)
-confint_lm_95 <- confint(lm_confint, level = .95)
-confint_lm_90 <- confint(lm_confint, level = .90)
-
-counts <- c(18,17,15,20,10,20,25,13,12)
-outcome <- gl(3, 1, 9); treatment <- gl(3, 3)
-glm_confint <- glm(counts ~ outcome + treatment, family = poisson())
-confint_glm_profile_likelihood <- confint(glm_confint)
-confint_glm_asymptotic_normality <- confint.default(glm_confint)
-
-# Add stats
-add_stats(list(), confint_lm_95, class = "confint")
-add_stats(list(), confint_lm_90, class = "confint")
-add_stats(list(), confint_glm_profile_likelihood, class = "confint")
-add_stats(list(), confint_glm_asymptotic_normality, class = "confint")
-
-# Add stats to model
-results <- results %>%
-  add_stats(lm_confint) %>%
-  add_stats(confint_lm_95, class = "confint") %>%
-  add_stats(confint_lm_90, class = "confint") %>%
-  add_stats_to_model(confint_lm_95, identifier = "lm_confint",
-    class = "confint") %>%
-  add_stats(confint_glm_profile_likelihood, class = "confint") %>%
-  add_stats(confint_glm_asymptotic_normality, class = "confint")
-
-
 # Analysis: psych ---------------------------------------------------------
 
 # Load package
 library(psych)
 
-# Analysis: psych’s alpha() -----------------------------------------------
-
-# Run alpha
-psych_alpha <- alpha(dplyr::select(epi, V1, V3, V8, V10, V13, V17,
-  V22, V25, V27, V39, V44, V46, V49, V53, V56))
-
-# Tidy stats
-tidy_stats(psych_alpha)
-
-# Add stats
-results <- add_stats(results, psych_alpha)
-
-# Analysis: psych’s corr.test() -------------------------------------------
-
-# Get some data
-attitude <- datasets::attitude
-
-# Run analysis
-psych_correlations <- corr.test(attitude, adjust = "none")
-print(psych_correlations, short = FALSE)
-
-# Tidy results
-tidy_stats(psych_correlations)
-
-# Add stats
-results <- add_stats(results, psych_correlations)
 
 # Analysis: psych's ICC ---------------------------------------------------
 
@@ -86,93 +29,6 @@ tidy_stats(psych_ICC)
 # Add stats
 results <- add_stats(results, psych_ICC)
 
-
-# Analysis: afex ----------------------------------------------------------
-
-# Load afex package
-library(afex)
-
-# Load data
-data(obk.long, package = "afex")
-
-# Perform analyses
-afex_aov_ez <- aov_ez("id", "value", obk.long, within = c("phase", "hour"),
-  between = c("treatment", "gender"), observed = "gender")
-afex_aov_car <- aov_car(value ~ treatment * gender + Error(id/(phase*hour)),
-  data = obk.long, observed = "gender")
-afex_aov_4 <- aov_4(value ~ treatment * gender + (phase*hour|id),
-  data = obk.long, observed = "gender")
-
-# Tidy stats
-tidy_stats(afex_aov_ez)
-tidy_stats(afex_aov_car)
-tidy_stats(afex_aov_4)
-
-# Load data
-data("sk2011.2")
-sk2_aff <- droplevels(sk2011.2[sk2011.2$what == "affirmation",])
-
-# Perform analysis
-sk_m1 <- mixed(response ~ instruction * inference * type +
-    (inference * type | id), sk2_aff)
-sk_m1
-
-# Tidy stats
-tidy_stats(sk_m1, args = list(summary = "lmer"))
-
-# Analysis: emmeans -------------------------------------------------------
-
-# Load packages
-library(emmeans)
-
-# Load data
-pigs <- as_tibble(pigs)
-
-# Perform analysis
-pigs.lm1 <- lm(log(conc) ~ source + factor(percent), data = pigs)
-pigs.lm1.emmeans <- emmeans(pigs.lm1, "percent")
-pigs.lm1.emmeans
-
-mtcars.1 <- lm(mpg ~ factor(cyl) + disp + I(disp^2), data = mtcars)
-mtcars.1.emmeans <- emmeans(mtcars.1, "cyl")
-mtcars.1.emmeans
-
-noise.lm <- lm(noise ~ size * type * side, data = auto.noise)
-noise.lm.emmeans <- emmeans(noise.lm, pairwise ~ size)
-noise.lm.emmeans
-
-emm_s.t.emmeans <- emmeans(noise.lm, pairwise ~ size | type)
-emm_s.t.emmeans
-
-noise.emm.emmeans <- emmeans(noise.lm, ~ size * side * type)
-noise.emm.emmeans
-
-# Tidy stats
-tidy_stats(pigs.lm1.emmeans)
-tidy_stats(mtcars.1.emmeans)
-tidy_stats(noise.emm.emmeans)
-
-# add_stats.data.frame() --------------------------------------------------
-
-# Create a tidy data frame
-x_squared_data <- data_frame(
-  statistic = c("X-squared", "df", "p"),
-  value = c(5.4885, 6, 0.4828),
-  method = "Chi-squared test of independence"
-)
-
-# Add stats
-results <- add_stats(results, x_squared_data, identifier = "x_squared")
-
-# Create another tidy data frame
-some_data <- tibble(
-  term = c("group1", "group1", "group2", "group2"),
-  statistic = c("t", "p", "t", "p"),
-  value = c(5.4885, 0.04, 4.828, 0.06),
-  method = "A test"
-)
-
-results <- add_stats(results, some_data, identifier = "some_data")
 
 # add_stats(): default identifier -----------------------------------------
 
