@@ -153,9 +153,12 @@ tidy_stats.lme <- function(x, args = NULL) {
       
       # Loop over the pairs
       for (i in 1:nrow(pairs)) {
-        group_RE_pair <- list(name = paste(pairs$name1[i], "-", pairs$name2[i]))
+        names <- list(
+          list(name = pairs$name1[i]),
+          list(name = pairs$name2[i])
+        )
+        group_RE_pair <- list(names = names)
         
-        # 
         statistics <- list()
         statistics <- add_statistic(statistics, "correlation", pairs$value[i], 
           "r")
@@ -221,9 +224,11 @@ tidy_stats.lme <- function(x, args = NULL) {
     
     # Loop over the pairs
     for (i in 1:nrow(fixed_cors)) {
-      group_FE_pair <- list(
-        name = paste(fixed_cors$name1[i], "-", fixed_cors$name2[i])
+      names <- list(
+        list(name = fixed_cors$name1[i]),
+        list(name = fixed_cors$name2[i])
       )
+      group_FE_pair <- list(names = names)
       
       statistics <- list()
       statistics <- add_statistic(statistics, "correlation", 
@@ -405,9 +410,12 @@ tidy_stats.nlme <- function(x, args = NULL) {
       
       # Loop over the pairs
       for (i in 1:nrow(pairs)) {
-        group_RE_pair <- list(name = paste(pairs$name1[i], "-", pairs$name2[i]))
+        names <- list(
+          list(name = pairs$name1[i]),
+          list(name = pairs$name2[i])
+        )
+        group_RE_pair <- list(names = names)
         
-        # 
         statistics <- list()
         statistics <- add_statistic(statistics, "correlation", pairs$value[i], 
           "r")
@@ -473,9 +481,11 @@ tidy_stats.nlme <- function(x, args = NULL) {
     
     # Loop over the pairs
     for (i in 1:nrow(fixed_cors)) {
-      group_FE_pair <- list(
-        name = paste(fixed_cors$name1[i], "-", fixed_cors$name2[i])
-      )
+      names <- list(
+          list(name = fixed_cors$name1[i]),
+          list(name = fixed_cors$name2[i])
+        )
+      group_FE_pair <- list(names = names)
       
       statistics <- list()
       statistics <- add_statistic(statistics, "correlation", 
@@ -623,9 +633,11 @@ tidy_stats.gls <- function(x, args = NULL) {
     
     # Loop over the pairs
     for (i in 1:nrow(fixed_cors)) {
-      group_correlation <- list(
-        name = paste(cors$name1[i], "-", cors$name2[i])
+      names <- list(
+        list(name = cors$name1[i]),
+        list(name = cors$name2[i])
       )
+      group_correlation <- list(names = names)
       
       statistics <- list()
       statistics <- add_statistic(statistics, "correlation", 

@@ -100,9 +100,11 @@ tidy_stats.lmerMod <- function(x, args = NULL) {
       
       # Loop over the correlations
       for (j in 1:nrow(cors)) {
-        group_RE_correlation <- list(
-          name = paste(cors$name1[j], "-", cors$name2[j])
+        names <- list(
+          list(name = cors$name1[i]),
+          list(name = cors$name2[i])
         )
+        group_RE_correlation <- list(names = names)
         
         statistics <- list()
         statistics <- add_statistic(statistics, "correlation", cors$value[j], 
@@ -195,9 +197,11 @@ tidy_stats.lmerMod <- function(x, args = NULL) {
     
     # Loop over the pairs
     for (i in 1:nrow(fixed_cors)) {
-      group_FE_pair <- list(
-        name = paste(fixed_cors$name1[i], "-", fixed_cors$name2[i])
-      )
+      names <- list(
+          list(name = fixed_cors$name1[i]),
+          list(name = fixed_cors$name2[i])
+        )
+      group_FE_pair <- list(names = names)
       
       statistics <- list()
       statistics <- add_statistic(statistics, "correlation", 
@@ -342,9 +346,11 @@ tidy_stats.lmerModLmerTest <- function(x, args = NULL) {
       
       # Loop over the correlations
       for (j in 1:nrow(cors)) {
-        group_RE_correlation <- list(
-          name = paste(cors$name1[j], "-", cors$name2[j])
+        names <- list(
+          list(name = cors$name1[i]),
+          list(name = cors$name2[i])
         )
+        group_RE_correlation <- list(names = names)
         
         statistics <- list()
         statistics <- add_statistic(statistics, "correlation", cors$value[j], 
@@ -438,9 +444,11 @@ tidy_stats.lmerModLmerTest <- function(x, args = NULL) {
     
     # Loop over the pairs
     for (i in 1:nrow(fixed_cors)) {
-      group_FE_pair <- list(
-        name = paste(fixed_cors$name1[i], "-", fixed_cors$name2[i])
-      )
+      names <- list(
+          list(name = fixed_cors$name1[i]),
+          list(name = fixed_cors$name2[i])
+        )
+      group_FE_pair <- list(names = names)
       
       statistics <- list()
       statistics <- add_statistic(statistics, "correlation", 

@@ -322,14 +322,15 @@ tidy_stats.pairwise.htest <- function(x, args = NULL) {
     analysis$statistics <- statistics
   } else {
     groups <- list(name = "Pairs")
-    
-    p_values <- x$p.value |>
-      tidy_matrix(symmetric = FALSE) |>
-      tidyr::unite(name, name1, name2, sep = " - ")
-      
+  
+    p_values <- tidy_matrix(x$p.value, symmetric = FALSE)
     
     for (i in 1:nrow(p_values)) {
-      group <- list(name = p_values$name[i])
+      names <- list(
+        list(name = p_values$name1[i]),
+        list(name = p_values$name2[i])
+      )
+      group <- list(names = names)
 
       statistics <- list()
       statistics <- add_statistic(statistics, "p", p_values$value[i])
