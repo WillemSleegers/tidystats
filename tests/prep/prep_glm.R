@@ -83,27 +83,26 @@ summary(glm_gamma)
 summary(glm_gamma_fs)
 summary(glm_binomial)
 
-
 # anova() -----------------------------------------------------------------
 
 # Get data
-d.AD <- tibble(
+d_AD <- tibble(
   treatment = gl(3, 3),
   outcome = gl(3, 1, 9),
   counts = c(18, 17, 15, 20, 10, 20, 25, 13, 12)
 )
 
 # Run analyses
-glm.D93 <- glm(counts ~ outcome + treatment, family = poisson())
-glm.D93a <- update(glm.D93, ~treatment * outcome)
+glm_D93 <- glm(counts ~ outcome + treatment, family = poisson(), data = d_AD)
+glm_D93a <- update(glm.D93, ~treatment * outcome)
 
-anova_glm <- anova(glm.D93)
-anova_glm_cp <- anova(glm.D93, test = "Cp")
-anova_glm_chisq <- anova(glm.D93, test = "Chisq")
-anova_glm_rao <- anova(glm.D93, glm.D93a, test = "Rao")
+anova_glm <- anova(glm_D93)
+anova_glm_cp <- anova(glm_D93, test = "Cp")
+anova_glm_chisq <- anova(glm_D93, test = "Chisq")
+anova_glm_rao <- anova(glm_D93, glm_D93a, test = "Rao")
 
 # Add stats
-results <- results %>%
+statistics <- statistics %>%
   add_stats(anova_glm) %>%
   add_stats(anova_glm_cp) %>%
   add_stats(anova_glm_chisq) %>%
@@ -125,6 +124,7 @@ write_test_stats(statistics, "tests/data/glm.json")
 # Cleanup -----------------------------------------------------------------
 
 rm(
-  admission, anorexia, clotting, d.AD, glm_binomial, glm_gamma, glm_gamma_fs,
-  glm_gaussian, glm_poisson, df, statistics
+  admission, anorexia, clotting, d_AD, glm_binomial, glm_gamma, glm_gamma_fs,
+  glm_gaussian, glm_poisson, glm_D93, glm_D93a, anova_glm, anova_glm_cp, 
+  anova_glm_chisq, anova_glm_rao, df, statistics
 )

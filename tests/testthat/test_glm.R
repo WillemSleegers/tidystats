@@ -101,3 +101,57 @@ test_that("glm binomial works", {
     expected_tidy_model = expected_statistics$glm_binomial
   )
 })
+
+test_that("glm anova works", {
+  d_AD <- tibble(
+    treatment = gl(3, 3),
+    outcome = gl(3, 1, 9),
+    counts = c(18, 17, 15, 20, 10, 20, 25, 13, 12)
+  )
+  
+  glm_D93 <- glm(counts ~ outcome + treatment, family = poisson(), data = d_AD)
+  glm_D93a <- update(glm.D93, ~treatment * outcome)
+  
+  model <- anova(glm_D93)
+  
+  expect_equal_models(
+    model = model, 
+    expected_tidy_model = expected_statistics$anova_glm
+  )
+})
+
+test_that("glm cp anova works", {
+  d_AD <- tibble(
+    treatment = gl(3, 3),
+    outcome = gl(3, 1, 9),
+    counts = c(18, 17, 15, 20, 10, 20, 25, 13, 12)
+  )
+  
+  glm_D93 <- glm(counts ~ outcome + treatment, family = poisson(), data = d_AD)
+  glm_D93a <- update(glm.D93, ~treatment * outcome)
+  
+  model <- anova(glm_D93, test = "Cp")
+  
+  expect_equal_models(
+    model = model, 
+    expected_tidy_model = expected_statistics$anova_glm_cp
+  )
+})
+
+test_that("glm rao anova works", {
+  d_AD <- tibble(
+    treatment = gl(3, 3),
+    outcome = gl(3, 1, 9),
+    counts = c(18, 17, 15, 20, 10, 20, 25, 13, 12)
+  )
+  
+  glm_D93 <- glm(counts ~ outcome + treatment, family = poisson(), data = d_AD)
+  glm_D93a <- update(glm.D93, ~treatment * outcome)
+  
+  model <- anova(glm_D93, glm_D93a, test = "Rao")
+  
+  expect_equal_models(
+    model = model, 
+    expected_tidy_model = expected_statistics$anova_glm_rao
+  )
+})

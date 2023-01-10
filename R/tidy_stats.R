@@ -522,13 +522,11 @@ tidy_stats.glm <- function(x, args = NULL) {
 #' @describeIn tidy_stats tidy_stats method for class 'anova'
 #' @export
 tidy_stats.anova <- function(x, args = NULL) {
-  # Create the analysis list
   analysis <- list()
   
-  # Extract the heading
+  # Extract the heading to figure out the type of ANOVA and name
   heading <- attr(x, "heading")
   
-  # Determine the method
   if (stringr::str_detect(heading[1], "Analysis of Deviance")) {
     method <- "ANODE"
   } else {
@@ -551,7 +549,7 @@ tidy_stats.anova <- function(x, args = NULL) {
   }
   
   # Check whether multiple models are being compared
-  if (sum(stringr::str_detect(heading, "Models:")) > 0) {
+  if (sum(stringr::str_detect(heading, "Models:|Model 1:")) > 0) {
     model_comparison = TRUE
   } else {
     model_comparison = FALSE
@@ -572,14 +570,7 @@ tidy_stats.anova <- function(x, args = NULL) {
       ), "Model [0-9+]: "
     )  
   }
-  
-  # Replace NULL with (Intercept) in the case of a single model ANODE
-  if (!model_comparison & method == "ANODE") {
-    if (rownames(x)[1] == "NULL") {
-      rownames(x)[1] <- "(Intercept)"
-    }
-  }
-  
+
   # Create an empty groups list to add model or term statistics to
   groups <- list(name = dplyr::if_else(model_comparison, "Models", "Terms"))
   
@@ -598,20 +589,19 @@ tidy_stats.anova <- function(x, args = NULL) {
     # Create a new statistics list and add statistics
     statistics <- list()
     
-    statistics <- add_statistic(statistics, "n parameters", x$npar[i], "k")
-    statistics <- add_statistic(statistics, "AIC", x$AIC[i])
-    statistics <- add_statistic(statistics, "BIC", x$BIC[i])
-    statistics <- add_statistic(statistics, "log likelihood", x$logLik[i], "l")
-    statistics <- add_statistic(statistics, "deviance", x$deviance[i], "D")
-    statistics <- add_statistic(statistics, "deviance", x$Deviance[i], "D")
-    statistics <- add_statistic(statistics, "residual deviance", 
-      x$`Resid. Dev`[i], "D", "res.")
-    statistics <- add_statistic(statistics, "RSS", x$RSS[i])
-    statistics <- add_statistic(statistics, "SS", x$`Sum Sq`[i])
-    statistics <- add_statistic(statistics, "SS", x$`Sum of Sq`[i])
-    statistics <- add_statistic(statistics, "MS", x$`Mean Sq`[i])
-    statistics <- add_statistic(statistics, "statistic", x$Chisq[i], 
-      "χ²")
+    statistics <- statistics %>%
+      add_statistic("n parameters", x$npar[i], "k") %>%
+      add_statistic("AIC", x$AIC[i]) %>%
+      add_statistic("BIC", x$BIC[i]) %>%
+      add_statistic("log likelihood", x$logLik[i], "l") %>%
+      add_statistic("deviance", x$deviance[i], "D") %>%
+      add_statistic("deviance", x$Deviance[i], "D") %>%
+      add_statistic("residual deviance", x$`Resid. Dev`[i], "D", "res.") %>%
+      add_statistic("RSS", x$RSS[i]) %>%
+      add_statistic("SS", x$`Sum Sq`[i]) %>%
+      add_statistic("SS", x$`Sum of Sq`[i]) %>%
+      add_statistic("MS", x$`Mean Sq`[i]) %>%
+      add_statistic("statistic", x$Chisq[i], "χ²")
     
     if ("F" %in% names(x)) {
       statistics <- add_statistic(statistics, "statistic", x$`F`[i], "F")  
@@ -630,39 +620,28 @@ tidy_stats.anova <- function(x, args = NULL) {
         statistics <- add_statistic(statistics, "df", x$Df[i])
       }
     } else {
-      statistics <- add_statistic(statistics, "df", x$Df[i])
-      statistics <- add_statistic(statistics, "residual df", x$Res.Df[i], "df",
-        "res.")
-      statistics <- add_statistic(statistics, "residual df", x$`Res. Df`[i], 
-        "df", "res.")
-      statistics <- add_statistic(statistics, "df numerator", x$NumDF[i], "df",
-        "num.")
-      statistics <- add_statistic(statistics, "df denominator", x$DenDF[i], 
-        "df", "den.")
+      statistics <- statistics %>%
+        add_statistic("df", x$Df[i]) %>%
+        add_statistic("residual df", x$`Resid. Df`[i], "df", "res.") %>%
+        add_statistic("residual df", x$Res.Df[i], "df", "res.") %>%
+        add_statistic("residual df", x$`Res. Df`[i], "df", "res.") %>%
+        add_statistic("df numerator", x$NumDF[i], "df", "num.") %>%
+        add_statistic("df denominator", x$DenDF[i], "df", "den.")
     }
     
-    statistics <- add_statistic(statistics, "Rao", x$Rao[i])
-    statistics <- add_statistic(statistics, "p", x$`Pr(>F)`[i])
-    statistics <- add_statistic(statistics, "p", x$`Pr(>Chisq)`[i])
-    statistics <- add_statistic(statistics, "Cp", x$Cp[i])
+    statistics <- statistics %>%
+      add_statistic("Rao", x$Rao[i]) %>%
+      add_statistic("p", x$`Pr(>F)`[i]) %>%
+      add_statistic("p", x$`Pr(>Chisq)`[i]) %>%
+      add_statistic("p", x$`Pr(>Chi)`[i]) %>%
+      add_statistic("Cp", x$Cp[i])
     
-    # Add statistics to the group
     group$statistics <- statistics
-    
-    # Add the group to the groups list
     groups$groups <- append(groups$groups, list(group))
   }
   
-  # Add the groups to the groups list on the analysis list
   analysis$groups <- append(analysis$groups, list(groups))
   
-  # Add additional information
-  if (method == "ANODE" & model_comparison) {
-    analysis$family <- stringr::str_extract(heading, "(?<=Model: ).*(?=,)")
-    analysis$link <- stringr::str_extract(heading, "(?<=link: ).*")
-  }
-  
-  # Add package information
   analysis <- add_package_info(analysis, "stats")
   
   return(analysis)
