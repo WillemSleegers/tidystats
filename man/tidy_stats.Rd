@@ -2,9 +2,9 @@
 % Please edit documentation in R/tidy_stats.BFBayesFactor.r,
 %   R/tidy_stats.Hmisc.r, R/tidy_stats.R, R/tidy_stats.afex.r,
 %   R/tidy_stats.effectsize.r, R/tidy_stats.effsize.r, R/tidy_stats.emmeans.r,
-%   R/tidy_stats.irr.r, R/tidy_stats.lmerMod.r, R/tidy_stats.metafor.r,
-%   R/tidy_stats.nlme.r, R/tidy_stats.psych.r, R/tidy_stats.tidystats.r,
-%   R/work-in-progress.r
+%   R/tidy_stats.irr.r, R/tidy_stats.lmerMod.r, R/tidy_stats.marginaleffects.R,
+%   R/tidy_stats.metafor.r, R/tidy_stats.nlme.r, R/tidy_stats.psych.r,
+%   R/tidy_stats.tidystats.r, R/work-in-progress.r
 \name{tidy_stats.BFBayesFactor}
 \alias{tidy_stats.BFBayesFactor}
 \alias{tidy_stats.rcorr}
@@ -26,6 +26,7 @@
 \alias{tidy_stats.icclist}
 \alias{tidy_stats.lmerMod}
 \alias{tidy_stats.lmerModLmerTest}
+\alias{tidy_stats.marginaleffects}
 \alias{tidy_stats.rma.uni}
 \alias{tidy_stats.rma.mh}
 \alias{tidy_stats.rma.peto}
@@ -93,6 +94,8 @@ tidy_stats(x, args = NULL)
 
 \method{tidy_stats}{lmerModLmerTest}(x, args = NULL)
 
+\method{tidy_stats}{marginaleffects}(x, args = NULL)
+
 \method{tidy_stats}{rma.uni}(x, args = NULL)
 
 \method{tidy_stats}{rma.mh}(x, args = NULL)
@@ -148,13 +151,13 @@ tidy_stats(x, args = NULL)
 }
 \description{
 \code{tidy_stats} is used to convert the output of a statistical object to a
-list of organized statistics. The \code{tidy_stats} function is automatically 
-run when \code{add_stats} is used, so there is generally no need to use this 
-function explicitly. It can be used, however, to peek at how the output of a 
+list of organized statistics. The \code{tidy_stats} function is automatically
+run when \code{add_stats} is used, so there is generally no need to use this
+function explicitly. It can be used, however, to peek at how the output of a
 specific analysis will be organized.
 }
 \details{
-Please note that not all statistical tests are supported. See 'Details' 
+Please note that not all statistical tests are supported. See 'Details'
 below for a list of supported statistical tests.
 
 
@@ -238,6 +241,8 @@ Currently supported functions:
 
 \item \code{tidy_stats(lmerModLmerTest)}: tidy_stats method for class 'lmerModLmerTest'
 
+\item \code{tidy_stats(marginaleffects)}: tidy_stats method for class 'marginaleffects'
+
 \item \code{tidy_stats(rma.uni)}: tidy_stats method for class 'rma.uni'
 
 \item \code{tidy_stats(rma.mh)}: tidy_stats method for class 'rma.mh'
@@ -302,7 +307,7 @@ weight <- c(ctl, trt)
 lm_D9 <- lm(weight ~ group)
 
 # ANOVA:
-npk_aov <- aov(yield ~ block + N*P*K, npk)
+npk_aov <- aov(yield ~ block + N * P * K, npk)
 
 # Tidy the statistics and store each analysis in a separate variable
 list_sleep_test <- tidy_stats(sleep_test)

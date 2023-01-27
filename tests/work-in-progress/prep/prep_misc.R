@@ -10,13 +10,17 @@ library(psych)
 # Analysis: psych's ICC ---------------------------------------------------
 
 # Load data
-sf <- matrix(ncol = 4, byrow = TRUE,
-  c(9,  2, 5, 8,
-    6,  1, 3, 2,
-    8,  4, 6, 8,
-    7,  1, 2, 6,
+sf <- matrix(
+  ncol = 4, byrow = TRUE,
+  c(
+    9, 2, 5, 8,
+    6, 1, 3, 2,
+    8, 4, 6, 8,
+    7, 1, 2, 6,
     10, 5, 6, 9,
-    6,  2, 4, 7))
+    6, 2, 4, 7
+  )
+)
 colnames(sf) <- paste("J", 1:4, sep = "")
 rownames(sf) <- paste("S", 1:6, sep = "")
 
@@ -61,13 +65,17 @@ cox %>%
 library(metafor)
 
 # Get data
-dat <- escalc(measure = "RR", ai = tpos, bi = tneg, ci = cpos, di = cneg,
-  data = dat.bcg)
+dat <- escalc(
+  measure = "RR", ai = tpos, bi = tneg, ci = cpos, di = cneg,
+  data = dat.bcg
+)
 
 # Run univariate meta-analyses
 rma_uni <- rma(yi, vi, data = dat, method = "REML", level = 90)
-rma_uni_mods <- rma(yi, vi, mods = cbind(ablat, year), data = dat,
-  method = "REML")
+rma_uni_mods <- rma(yi, vi,
+  mods = cbind(ablat, year), data = dat,
+  method = "REML"
+)
 
 rma_uni
 rma_uni_mods
@@ -85,8 +93,10 @@ results <- results %>%
 
 # Prepare data
 # Change data into long format
-dat.long <- to.long(measure = "OR", ai = tpos, bi = tneg, ci = cpos, di = cneg,
-  data = dat.bcg)
+dat.long <- to.long(
+  measure = "OR", ai = tpos, bi = tneg, ci = cpos, di = cneg,
+  data = dat.bcg
+)
 
 # Set levels of group variable
 levels(dat.long$group) <- c("exp", "con")
@@ -99,10 +109,14 @@ dat.long <- escalc(measure = "PLO", xi = out1, mi = out2, data = dat.long)
 dat.long$effect <- 1:nrow(dat.long)
 
 # Bivariate random-effects model using rma.mv()
-rma_mv <- rma.mv(yi, vi, random = ~ group | study/effect, struct="UN",
-  data = dat.long)
-rma_mv_mods <- rma.mv(yi, vi, mods = ~ group, random = ~ group | study,
-  struct="UN", data=dat.long)
+rma_mv <- rma.mv(yi, vi,
+  random = ~ group | study / effect, struct = "UN",
+  data = dat.long
+)
+rma_mv_mods <- rma.mv(yi, vi,
+  mods = ~group, random = ~ group | study,
+  struct = "UN", data = dat.long
+)
 
 rma_mv
 rma_mv_mods
@@ -137,8 +151,10 @@ report("meta_analysis_mods", term = "ablat", results = results)
 
 dat.bcg
 
-res <- rma(ai=tpos, bi=tneg, ci=cpos, di=cneg, data=dat.bcg, measure="RR",
-  slab=paste(author, year, sep=", "), method="REML")
+res <- rma(
+  ai = tpos, bi = tneg, ci = cpos, di = cneg, data = dat.bcg, measure = "RR",
+  slab = paste(author, year, sep = ", "), method = "REML"
+)
 tidy_stats(res)
 results <- list()
 results <- add_stats(results, res, identifier = "marino_meta_analysis")
@@ -158,7 +174,7 @@ z <- c(1, 2, 3, 4, NA)
 v <- c(1, 2, 3, 4, 5)
 
 # Perform analysis
-rcorr_correlations <- rcorr(cbind(x,y,z,v))
+rcorr_correlations <- rcorr(cbind(x, y, z, v))
 rcorr_correlations
 
 rcorr_correlations$r[upper.tri(rcorr_correlations$r, diag = TRUE)] <- NA
@@ -199,9 +215,12 @@ if (TRUE) {
 }
 
 output <- select(output, -term_nr, -statistic, -method)
-output <- select(output, c("var",
+output <- select(output, c(
+  "var",
   names(sort(colSums(is.na(select(output, -var))),
-    decreasing = T))))
+    decreasing = T
+  ))
+))
 
 # Analysis: anova()
 anova(model3_1)
@@ -218,14 +237,17 @@ anova(model5_1, model5_2)
 data <- iris
 
 model7_1 <- summary(manova(cbind(Sepal.Length, Petal.Length) ~ Species,
-  data = iris), test = "Roy")
+  data = iris
+), test = "Roy")
 model7_2 <- summary(manova(cbind(Sepal.Length, Petal.Length) ~ Species,
-  data = iris), test = "")
+  data = iris
+), test = "")
 model7_3 <- summary(manova(cbind(Sepal.Length, Petal.Length) ~ Species,
-  data = iris), test = "Roy")
+  data = iris
+), test = "Roy")
 
 model7_4 <- summary(manova(cbind(Sepal.Length, Petal.Length) ~ Species *
-    Petal.Width , data = iris), test = "Roy")
+  Petal.Width, data = iris), test = "Roy")
 
 # tidyversity
 # Install and load tidyversity
@@ -256,17 +278,22 @@ polcom %>%
 # Robust and quasi- models
 polcom %>%
   dplyr::mutate(polarize = abs(therm_1 - therm_2)) %>%
-  tidy_regression(polarize ~ news_1 + ambiv_sexism_1, type = "quasipoisson",
-    robust = TRUE) %>%
+  tidy_regression(polarize ~ news_1 + ambiv_sexism_1,
+    type = "quasipoisson",
+    robust = TRUE
+  ) %>%
   tidy_summary()
 
 # ANOVA
 polcom %>%
-  dplyr::mutate(sex = ifelse(sex == 1, "Male", "Female"),
+  dplyr::mutate(
+    sex = ifelse(sex == 1, "Male", "Female"),
     vote_choice = dplyr::case_when(
       vote_2016_choice == 1 ~ "Clinton",
       vote_2016_choice == 2 ~ "Trump",
-      TRUE ~ "Other")) %>%
+      TRUE ~ "Other"
+    )
+  ) %>%
   tidy_anova(pp_party ~ sex * vote_choice) %>%
   tidy_summary()
 
@@ -277,13 +304,17 @@ polcom %>%
 
 # Structural equation modeling (SEM)
 polcom %>%
-  dplyr::mutate(therm_2 = 10 - therm_2 / 10,
-    therm_1 = therm_1 / 10) %>%
-  tidy_sem(news =~ news_1 + news_2 + news_3 + news_4 + news_5 + news_6,
-    ambiv_sexism =~ ambiv_sexism_1 + ambiv_sexism_2 + ambiv_sexism_3 +
+  dplyr::mutate(
+    therm_2 = 10 - therm_2 / 10,
+    therm_1 = therm_1 / 10
+  ) %>%
+  tidy_sem(
+    news = ~ news_1 + news_2 + news_3 + news_4 + news_5 + news_6,
+    ambiv_sexism = ~ ambiv_sexism_1 + ambiv_sexism_2 + ambiv_sexism_3 +
       ambiv_sexism_4 + ambiv_sexism_5 + ambiv_sexism_6,
-    partisan =~ a*therm_1 + a*therm_2,
-    ambiv_sexism ~ age + hhinc + edu + news + partisan) %>%
+    partisan = ~ a * therm_1 + a * therm_2,
+    ambiv_sexism ~ age + hhinc + edu + news + partisan
+  ) %>%
   tidy_summary()
 
 # Cronbach's alpha
@@ -296,151 +327,15 @@ library(ppcor)
 
 # Get data
 y.data <- data.frame(
-  hl = c(7,15,19,15,21,22,57,15,20,18),
-  disp = c(0.000,0.964,0.000,0.000,0.921,0.000,0.000,1.006,0.000,1.011),
-  deg = c(9,2,3,4,1,3,1,3,6,1),
-  BC = c(1.78e-02,1.05e-06,1.37e-05,7.18e-03,0.00e+00,0.00e+00,0.00e+00,
-    4.48e-03,2.10e-06,0.00e+00)
+  hl = c(7, 15, 19, 15, 21, 22, 57, 15, 20, 18),
+  disp = c(0.000, 0.964, 0.000, 0.000, 0.921, 0.000, 0.000, 1.006, 0.000, 1.011),
+  deg = c(9, 2, 3, 4, 1, 3, 1, 3, 6, 1),
+  BC = c(
+    1.78e-02, 1.05e-06, 1.37e-05, 7.18e-03, 0.00e+00, 0.00e+00, 0.00e+00,
+    4.48e-03, 2.10e-06, 0.00e+00
+  )
 )
 
 # Run analysis
-pcor_correlation <- pcor.test(y.data$hl, y.data$disp, y.data[,c("deg","BC")])
+pcor_correlation <- pcor.test(y.data$hl, y.data$disp, y.data[, c("deg", "BC")])
 pcor_correlation
-
-# Inspect model -----------------------------------------------------------
-
-inspect(results)
-inspect(lm_)
-inspect(results, glm_gamma)
-
-
-
-
-cox
-
-cox <- mutate(cox, MS = if_else(condition == "mortality salience", 1, 0))
-
-lm_simple <- lm(call_parent ~ condition, data = cox)
-summary(lm_simple)
-
-library(psych)
-
-model <- lm(PA2 ~ factor(Film), data = affect)
-summary(model)
-
-
-
-
-
-# Test updating -----------------------------------------------------------
-
-# Create two empty tidystats lists
-results_wrong <- list()
-results_good <- list()
-
-# Perform a wrond and incorrect test
-t_test_wrong <- t.test(extra ~ group, data = sleep)
-t_test_good <- t.test(extra ~ group, data = sleep, paired = TRUE)
-
-# Add analysis to the first tidystats list
-results_wrong <- add_stats(results_wrong, t_test_wrong, 
-  identifier = "main_test")
-
-# And to the second, making sure the identifier is the same between the lists
-results_good <- add_stats(results_good, t_test_good, 
-  identifier = "main_test")
-
-# Save the results
-write_stats(results_wrong, "docs/tests/results_wrong.json")
-write_stats(results_good, "docs/tests/results_good.json")
-
-
-temp <- jsonlite::read_json("docs/tests/test_correct.json")
-temp2 <- jsonlite::fromJSON("docs/tests/test_correct.json")
-
-
-jsonlite::fromJSON("docs/tests/test_correct.json") %>%
-  map_df(as.data.frame)
-
-# Covariance matrix
-
-vcov(lm_multiple)
-
-summary(lm_simple)
-vcov(lm_simple, complete = F)
-
-summary_simple <- summary(lm_simple)
-
-cox %>%
-  mutate(
-    condition2 = if_else(condition == "mortality salience", 1, 0),
-    intercept = mean(call_parent)) %>%
-  select(call_parent, intercept, condition2) %>%
-  cov()
-
-summary_simple$cov
-
-
-summary_simple$cov.unscaled * summary_simple$sigma^2
-tidy_vcov <- vcov(lm_interaction) %>%
-  as_tibble(rownames = "coefficient1") %>%
-  gather("coefficient2", "value", -coefficient1) %>%
-  mutate(
-    statistic = if_else(coefficient1 == coefficient2, "variance", 
-      "covariance"),
-    coefficient2 = if_else(statistic == "variance", NA_character_, 
-      coefficient2)
-  ) %>%
-  unite(term, coefficient1, coefficient2, sep = " * ") %>%
-  mutate(term = str_remove(term, " \\* NA"))
-
-tidy_vcov %>%
-  separate(term, into = c("coefficient1", "coefficient2"), sep = " \\* ", 
-    fill = "right") %>%
-  select(-statistic) %>%
-  mutate(coefficient2 = if_else(is.na(coefficient2), coefficient1, 
-    coefficient2)) %>%
-  spread(coefficient2, value)
-
-
-
-lm_interaction <- lm(call_parent ~ condition, data = cox)
-summary(lm_interaction)
-
-data <- cox %>%
-  mutate(condition2 = if_else(condition == "mortality salience", 1, 0)) %>%
-  select(call_parent, condition2)
-  
-
-cov(data)
-
-b <- 0.6959799 / 0.25125628
-a <- mean(data$call_parent) - b * mean(data$condition2)
-
-a
-b
-
-#
-# 1. Generate some data.
-#
-n <- 10        # Data set size
-p <- 2         # Number of regressors
-set.seed(17)
-z <- matrix(rnorm(n*(p+1)), nrow=n, dimnames=list(NULL, paste0("x", 1:(p+1))))
-y <- z[, p+1]
-x <- z[, -(p+1), drop=FALSE]; 
-#
-# 2. Find the OLS coefficients from the covariances only.
-#
-a <- cov(x)
-b <- cov(x,y)
-beta.hat <- solve(a, b)[, 1]  # Coefficients from the covariance matrix
-
-lm(x3 ~ x1 + x2, data = data.frame(z))
-
-#
-# 2a. Find the intercept from the means and coefficients.
-#
-y.bar <- mean(y)
-x.bar <- colMeans(x)
-intercept <- y.bar - x.bar %*% beta.hat  

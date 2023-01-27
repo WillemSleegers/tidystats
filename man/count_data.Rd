@@ -15,12 +15,12 @@ frame, separated by commas.}
 \item{na.rm}{Logical. Should missing values (including NaN) be removed?}
 }
 \description{
-\code{count_data} returns the number and percentage of observations for 
+\code{count_data} returns the number and percentage of observations for
 categorical variables.
 }
 \details{
 The data frame can be grouped using \strong{dplyr}'s \code{group_by}
-so that the number of observations will be calculated within each group 
+so that the number of observations will be calculated within each group
 level.
 }
 \examples{

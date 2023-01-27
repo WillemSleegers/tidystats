@@ -1,19 +1,19 @@
 #' Tidy the output of a statistics object
-#' 
+#'
 #' \code{tidy_stats} is used to convert the output of a statistical object to a
-#' list of organized statistics. The \code{tidy_stats} function is automatically 
-#' run when \code{add_stats} is used, so there is generally no need to use this 
-#' function explicitly. It can be used, however, to peek at how the output of a 
-#' specific analysis will be organized. 
-#' 
-#' Please note that not all statistical tests are supported. See 'Details' 
+#' list of organized statistics. The \code{tidy_stats} function is automatically
+#' run when \code{add_stats} is used, so there is generally no need to use this
+#' function explicitly. It can be used, however, to peek at how the output of a
+#' specific analysis will be organized.
+#'
+#' Please note that not all statistical tests are supported. See 'Details'
 #' below for a list of supported statistical tests.
-#' 
+#'
 #' @param x The output of a statistical test.
-#' 
-#' @details 
+#'
+#' @details
 #' Currently supported functions:
-#' 
+#'
 #' \code{stats}:
 #' \itemize{
 #'   \item \code{t.test()}
@@ -27,12 +27,12 @@
 #'   \item \code{aov()}
 #'   \item \code{anova()}
 #' }
-#' 
+#'
 #' \code{lme4}/\code{lmerTest}:
 #' \itemize{
 #'   \item \code{lmer()}
 #' }
-#' 
+#'
 #' \code{BayesFactor}:
 #' \itemize{
 #'   \item \code{generalTestBF()}
@@ -45,37 +45,37 @@
 #'   \item \code{proportionBF()}
 #'   \item \code{meta.ttestBF()}
 #' }
-#' 
+#'
 #' \code{tidystats}:
 #' \itemize{
 #'   \item \code{describe_data()}
 #'   \item \code{count_data()}
 #' }
-#' 
-#' @examples 
+#'
+#' @examples
 #' # Conduct statistical tests
 #' # t-test:
 #' sleep_test <- t.test(extra ~ group, data = sleep, paired = TRUE)
-#' 
+#'
 #' # lm:
 #' ctl <- c(4.17, 5.58, 5.18, 6.11, 4.50, 4.61, 5.17, 4.53, 5.33, 5.14)
 #' trt <- c(4.81, 4.17, 4.41, 3.59, 5.87, 3.83, 6.03, 4.89, 4.32, 4.69)
 #' group <- gl(2, 10, 20, labels = c("Ctl", "Trt"))
 #' weight <- c(ctl, trt)
 #' lm_D9 <- lm(weight ~ group)
-#' 
+#'
 #' # ANOVA:
-#' npk_aov <- aov(yield ~ block + N*P*K, npk)
-#' 
+#' npk_aov <- aov(yield ~ block + N * P * K, npk)
+#'
 #' # Tidy the statistics and store each analysis in a separate variable
 #' list_sleep_test <- tidy_stats(sleep_test)
 #' list_lm_D9 <- tidy_stats(lm_D9)
 #' list_npk_aov <- tidy_stats(npk_aov)
-#' 
+#'
 #' # Now you can inspect each of these variables, e.g.,:
 #' names(list_sleep_test)
 #' str(list_sleep_test)
-#' 
+#'
 #' @export
 tidy_stats <- function(x, args = NULL) UseMethod("tidy_stats")
 
@@ -83,23 +83,23 @@ tidy_stats <- function(x, args = NULL) UseMethod("tidy_stats")
 #' @export
 tidy_stats.htest <- function(x, args = NULL) {
   analysis <- list()
-  
+
   # Set the analysis name
   # Some names contain additional parameters; we remove those and potentially
   # store them separately
   name <- x$data.name
-  
+
   name <- stringr::str_remove(name, pattern = " ,\n using scores: .*")
   name <- stringr::str_remove(name, pattern = ", null probability .*")
   name <- stringr::str_remove(name, pattern = " time base: .*")
-  
+
   analysis <- list(name = as.character(name))
 
   # Set the analysis method
   # Special case: Mauchly's test of sphericity has multiple method values
   x$method <- x$method[[1]]
   method <- x$method
-  
+
   method <- trimws(method) # To remove a space in the Two Sample t-test
   method <- stringr::str_remove(method, " with Yates' continuity correction")
   method <- stringr::str_remove(method, " for given probabilities")
@@ -123,7 +123,7 @@ tidy_stats.htest <- function(x, args = NULL) {
     # - Special case: If there is more than 1 estimate, set the value to NA
     if (length(x$estimate) > 1) {
       if (stringr::str_detect(method, "Two Sample t-test")) {
-        value <- x$estimate[[1]] - x$estimate[[2]]        
+        value <- x$estimate[[1]] - x$estimate[[2]]
       } else {
         value <- NA
       }
@@ -158,9 +158,11 @@ tidy_stats.htest <- function(x, args = NULL) {
     )
 
     # Add the estimate
-    statistics <- add_statistic(statistics, "estimate", value, symbol,
+    statistics <- add_statistic(
+      statistics, "estimate", value, symbol,
       subscript, "CI", attr(x$conf.int, "conf.level"), x$conf.int[1],
-      x$conf.int[2])
+      x$conf.int[2]
+    )
   }
 
   # Add the standard error
@@ -169,7 +171,7 @@ tidy_stats.htest <- function(x, args = NULL) {
   # Set the statistic
   if (!is.null(names(x$statistic))) {
     value <- x$statistic[[1]]
-    
+
     symbol <- dplyr::case_when(
       names(x$statistic) == "X-squared" ~ "χ²",
       names(x$statistic) == "Kruskal-Wallis chi-squared" ~ "χ²",
@@ -188,16 +190,16 @@ tidy_stats.htest <- function(x, args = NULL) {
       names(x$statistic) == "Dickey-Fuller" ~ "DF",
       TRUE ~ names(x$statistic)
     )
-    
+
     if (names(x$statistic) == "Dickey-Fuller") {
-      subscript <- "τ"  
+      subscript <- "τ"
     } else {
       subscript <- NA
     }
-    
+
     name <- dplyr::if_else(symbol %in% c("k", "n"), "count", "statistic")
-    
-    statistics = add_statistic(statistics, name, value, symbol, subscript)
+
+    statistics <- add_statistic(statistics, name, value, symbol, subscript)
   }
 
   # Set the parameter, if there is one/are any
@@ -205,26 +207,26 @@ tidy_stats.htest <- function(x, args = NULL) {
     # Special case: Sometimes there's both a numerator and denominator df
     if (length(x$parameter) > 1) {
       statistics <- add_statistic(
-        statistics, 
-        "df numerator", 
-        x$parameter[[1]], 
-        "df", 
+        statistics,
+        "df numerator",
+        x$parameter[[1]],
+        "df",
         "num."
       )
       statistics <- add_statistic(
-        statistics, 
+        statistics,
         "df denominator",
-        x$parameter[[2]], 
-        "df", 
+        x$parameter[[2]],
+        "df",
         "den."
       )
     } else {
       value <- x$parameter[[1]]
-      
+
       # Various special cases because not all parameters are degrees of freedom
       subscript <- NA
       symbol <- NA
-      
+
       if (method == "Phillips-Perron Unit Root Test") {
         name <- "truncation lag"
         symbol <- "k"
@@ -241,11 +243,11 @@ tidy_stats.htest <- function(x, args = NULL) {
       } else {
         name <- "df"
       }
-      
+
       statistics <- add_statistic(statistics, name, value, symbol, subscript)
     }
   }
-  
+
   # Set the p-value
   statistics <- add_statistic(statistics, "p", x$p.value)
 
@@ -266,8 +268,10 @@ tidy_stats.htest <- function(x, args = NULL) {
 
   # Number of simulations if the p-value was simulated
   if (stringr::str_detect(x$method, "simulated p-value")) {
-    analysis$sim <- as.numeric(stringr::str_extract(x$method,
-      "[0-9](e\\+)?([0-9].)?"))
+    analysis$sim <- as.numeric(stringr::str_extract(
+      x$method,
+      "[0-9](e\\+)?([0-9].)?"
+    ))
   }
 
   # Hybrid parameters
@@ -276,8 +280,10 @@ tidy_stats.htest <- function(x, args = NULL) {
       expect = readr::parse_number(
         stringr::str_extract(x$method, "exp=[0-9+]")
       ),
-      percent = readr::parse_number(stringr::str_extract(x$method,
-        "perc=[0-9]+")),
+      percent = readr::parse_number(stringr::str_extract(
+        x$method,
+        "perc=[0-9]+"
+      )),
       Emin = readr::parse_number(stringr::str_extract(x$method, "Emin=[0-9+]"))
     )
   }
@@ -289,8 +295,10 @@ tidy_stats.htest <- function(x, args = NULL) {
     analysis$var_equal <- TRUE
   } else if (x$method == "One-way analysis of means") {
     analysis$var_equal <- TRUE
-  } else if (stringr::str_detect(x$method,
-      "\\(not assuming equal variances\\)")) {
+  } else if (stringr::str_detect(
+    x$method,
+    "\\(not assuming equal variances\\)"
+  )) {
     analysis$var_equal <- FALSE
   }
 
@@ -322,9 +330,9 @@ tidy_stats.pairwise.htest <- function(x, args = NULL) {
     analysis$statistics <- statistics
   } else {
     groups <- list(name = "Pairs")
-  
+
     p_values <- tidy_matrix(x$p.value, symmetric = FALSE)
-    
+
     for (i in 1:nrow(p_values)) {
       names <- list(
         list(name = p_values$name1[i]),
@@ -334,7 +342,7 @@ tidy_stats.pairwise.htest <- function(x, args = NULL) {
 
       statistics <- list()
       statistics <- add_statistic(statistics, "p", p_values$value[i])
-      
+
       group$statistics <- statistics
       groups$groups <- append(groups$groups, list(group))
     }
@@ -360,75 +368,93 @@ tidy_stats.lm <- function(x, args = NULL) {
     name = deparse(x$call[[2]]),
     method = "Linear regression"
   )
-  
+
   # Get summary statistics
   summary <- summary(x)
-  
+
   # Model fit
   # Create a group and statistics list for the model fit statistics
   group <- list(name = "Model")
   statistics <- list()
-  
+
   # Extract and add statistics to the statistics list
   statistics <- add_statistic(statistics, "R squared", summary$r.squared, "R²")
-  statistics <- add_statistic(statistics, "adj. R squared", 
-    summary$adj.r.squared, "R²", "adj.")
-  statistics <- add_statistic(statistics, "statistic", summary$fstatistic[[1]], 
-    "F")
-  statistics <- add_statistic(statistics, "df numerator", 
-    summary$fstatistic[[2]], "df", "num.")
-  statistics <- add_statistic(statistics, "df denominator", 
-    summary$fstatistic[[3]], "df", "den.")
-  statistics <- add_statistic(statistics, "p", 
-    stats::pf(summary$fstatistic[[1]], summary$fstatistic[[2]], 
-      summary$fstatistic[[3]], lower.tail = FALSE))
-  statistics <- add_statistic(statistics, "sigma", summary$sigma, "s", 
-    "res.")
+  statistics <- add_statistic(
+    statistics, "adj. R squared",
+    summary$adj.r.squared, "R²", "adj."
+  )
+  statistics <- add_statistic(
+    statistics, "statistic", summary$fstatistic[[1]],
+    "F"
+  )
+  statistics <- add_statistic(
+    statistics, "df numerator",
+    summary$fstatistic[[2]], "df", "num."
+  )
+  statistics <- add_statistic(
+    statistics, "df denominator",
+    summary$fstatistic[[3]], "df", "den."
+  )
+  statistics <- add_statistic(
+    statistics, "p",
+    stats::pf(summary$fstatistic[[1]], summary$fstatistic[[2]],
+      summary$fstatistic[[3]],
+      lower.tail = FALSE
+    )
+  )
+  statistics <- add_statistic(
+    statistics, "sigma", summary$sigma, "s",
+    "res."
+  )
 
   # Add statistics to the group
   group$statistics <- statistics
-  
+
   # Add the model group to a groups element on the analysis
   analysis$groups <- append(analysis$groups, list(group))
-  
+
   # Create a groups list for the coefficients
   groups <- list(name = "Coefficients")
-  
+
   # Extract statistics of the coefficients
   coefs <- stats::coef(summary)
-  
+
   # Loop over the coefficients and add statistics to a group list
   for (i in 1:nrow(coefs)) {
     # Create a new group list
     group <- list()
-    
+
     # Add the name and type of the coefficient
     group$name <- rownames(coefs)[i]
-    
-    # Create a new statistics list 
+
+    # Create a new statistics list
     statistics <- list()
-    
-    statistics <- add_statistic(statistics, "estimate", coefs[i, "Estimate"], 
-      "b")
+
+    statistics <- add_statistic(
+      statistics, "estimate", coefs[i, "Estimate"],
+      "b"
+    )
     statistics <- add_statistic(statistics, "SE", coefs[i, "Std. Error"])
-    statistics <- add_statistic(statistics, "statistic", coefs[i, "t value"], 
-      "t")
+    statistics <- add_statistic(
+      statistics, "statistic", coefs[i, "t value"],
+      "t"
+    )
     statistics <- add_statistic(statistics, "df", summary$df[2])
     statistics <- add_statistic(statistics, "p", coefs[i, "Pr(>|t|)"])
-    
+
     # Add statistics to the group
     group$statistics <- statistics
-    
+
     # Add the group to the groups of the coefficients groups list
     groups$groups <- append(groups$groups, list(group))
   }
-  
+
   # Add the coefficient groups to the statistics list
   analysis$groups <- append(analysis$groups, list(groups))
-  
+
   # Add package information
   analysis <- add_package_info(analysis, "stats")
-  
+
   return(analysis)
 }
 
@@ -440,82 +466,94 @@ tidy_stats.glm <- function(x, args = NULL) {
     name = deparse(x$call[[2]]),
     method = "Generalized linear regression"
   )
-  
+
   # Get summary statistics
   summary <- summary(x)
-  
+
   # Model fit
   # Create a group and statistics list for the model fit statistics
   group <- list(name = "Model")
   statistics <- list()
-  
+
   # Extract and add statistics to the statistics list
-  statistics <- add_statistic(statistics, "null deviance", 
-    summary$null.deviance, "D", "null")
-  statistics <- add_statistic(statistics, "residual deviance", summary$deviance,
-    "D", "res.")
-  statistics <- add_statistic(statistics, "null df", summary$df.null, "df", 
-    "null")
-  statistics <- add_statistic(statistics, "residual df", summary$df.residual,
-    "df", "res.")
+  statistics <- add_statistic(
+    statistics, "null deviance",
+    summary$null.deviance, "D", "null"
+  )
+  statistics <- add_statistic(
+    statistics, "residual deviance", summary$deviance,
+    "D", "res."
+  )
+  statistics <- add_statistic(
+    statistics, "null df", summary$df.null, "df",
+    "null"
+  )
+  statistics <- add_statistic(
+    statistics, "residual df", summary$df.residual,
+    "df", "res."
+  )
   statistics <- add_statistic(statistics, "AIC", summary$aic)
-  
+
   # Add statistics to the model group
   group$statistics <- statistics
-  
+
   # Add the group to a statistics element on the analysis
   analysis$groups <- append(analysis$groups, list(group))
-  
+
   # Create a (new) groups list for the coefficients
   groups <- list(name = "Coefficients")
-  
+
   # Extract statistics of the coefficients
   coefs <- stats::coef(summary)
-  
+
   # Loop over the coefficients and add statistics to a group list
   for (i in 1:nrow(coefs)) {
     # Create a new group list
     group <- list()
-    
+
     # Add the name and type of the coefficient
     group$name <- rownames(coefs)[i]
-    
-    # Create a new statistics list 
+
+    # Create a new statistics list
     statistics <- list()
-    
-    statistics <- add_statistic(statistics, "estimate", coefs[i, "Estimate"], 
-      "b")
+
+    statistics <- add_statistic(
+      statistics, "estimate", coefs[i, "Estimate"],
+      "b"
+    )
     statistics <- add_statistic(statistics, "SE", coefs[i, "Std. Error"])
-    statistics <- add_statistic(statistics, "statistic", coefs[i, 3], 
-      dplyr::if_else(colnames(coefs)[3] == "z value", "z", "t"))
+    statistics <- add_statistic(
+      statistics, "statistic", coefs[i, 3],
+      dplyr::if_else(colnames(coefs)[3] == "z value", "z", "t")
+    )
     statistics <- add_statistic(statistics, "df", summary$df[2])
     statistics <- add_statistic(statistics, "p", coefs[i, 4])
-    
+
     # Add statistics to the group
     group$statistics <- statistics
-    
+
     # Add the group to the groups of the coefficients groups list
     groups$groups <- append(groups$groups, list(group))
   }
-  
+
   # Add the coefficient groups to the statistics list
   analysis$groups <- append(analysis$groups, list(groups))
-  
+
   # Add additional information
   analysis$family <- x$family$family
   analysis$link <- x$family$link
-  
+
   if (!is.null(summary$dispersion)) {
     analysis$dispersion <- summary$dispersion
   }
-  
+
   if (!is.null(summary$fisher_scoring_iterations)) {
     analysis$iterations <- summary$iter
   }
-  
+
   # Add package information
   analysis <- add_package_info(analysis, "stats")
-  
+
   return(analysis)
 }
 
@@ -523,16 +561,16 @@ tidy_stats.glm <- function(x, args = NULL) {
 #' @export
 tidy_stats.anova <- function(x, args = NULL) {
   analysis <- list()
-  
+
   # Extract the heading to figure out the type of ANOVA and name
   heading <- attr(x, "heading")
-  
+
   if (stringr::str_detect(heading[1], "Analysis of Deviance")) {
     method <- "ANODE"
   } else {
     method <- "ANOVA"
   }
-  
+
   # Determine and set the name, if there is one
   if (sum(stringr::str_detect(heading, "Response: ")) > 0) {
     if (length(heading) == 1) {
@@ -547,48 +585,48 @@ tidy_stats.anova <- function(x, args = NULL) {
       )
     }
   }
-  
+
   # Check whether multiple models are being compared
   if (sum(stringr::str_detect(heading, "Models:|Model 1:")) > 0) {
-    model_comparison = TRUE
+    model_comparison <- TRUE
   } else {
-    model_comparison = FALSE
+    model_comparison <- FALSE
   }
-  
+
   # Set the method
   analysis$method <- method
-  
+
   # Trim spaces from the rownames
   rownames(x) <- stringr::str_trim(rownames(x))
-  
+
   # Replace the numeric names with model names in case of a model comparison
   # ANOVA
   if (model_comparison) {
     x$name <- stringr::str_remove(
       unlist(stringr::str_split(
-        heading[2], "\n")
-      ), "Model [0-9+]: "
-    )  
+        heading[2], "\n"
+      )), "Model [0-9+]: "
+    )
   }
 
   # Create an empty groups list to add model or term statistics to
   groups <- list(name = dplyr::if_else(model_comparison, "Models", "Terms"))
-  
-  # Loop over each row 
+
+  # Loop over each row
   for (i in 1:nrow(x)) {
     # Create a new group list
     group <- list()
-    
+
     # Set the name
     if (!is.null(rownames(x)[i])) {
       group$name <- rownames(x)[i]
     } else if (!is.null(x$name[i])) {
-      group$name <- x$name[i] #TODO: Check if this one is necessary
+      group$name <- x$name[i] # TODO: Check if this one is necessary
     }
-    
+
     # Create a new statistics list and add statistics
     statistics <- list()
-    
+
     statistics <- statistics %>%
       add_statistic("n parameters", x$npar[i], "k") %>%
       add_statistic("AIC", x$AIC[i]) %>%
@@ -602,20 +640,24 @@ tidy_stats.anova <- function(x, args = NULL) {
       add_statistic("SS", x$`Sum of Sq`[i]) %>%
       add_statistic("MS", x$`Mean Sq`[i]) %>%
       add_statistic("statistic", x$Chisq[i], "χ²")
-    
+
     if ("F" %in% names(x)) {
-      statistics <- add_statistic(statistics, "statistic", x$`F`[i], "F")  
+      statistics <- add_statistic(statistics, "statistic", x$`F`[i], "F")
     } else {
-      statistics <- add_statistic(statistics, "statistic", x$`F value`[i], "F")  
+      statistics <- add_statistic(statistics, "statistic", x$`F value`[i], "F")
     }
-    
+
     # Special case: Degrees of freedom
     if (method == "ANOVA" & !model_comparison) {
       if (rownames(x)[i] != "Residuals") {
-        statistics <- add_statistic(statistics, "df numerator", x$Df[i], "df",
-          "num.")
-        statistics <- add_statistic(statistics, "df denominator", 
-          x$Df[[nrow(x)]], "df", "den.")
+        statistics <- add_statistic(
+          statistics, "df numerator", x$Df[i], "df",
+          "num."
+        )
+        statistics <- add_statistic(
+          statistics, "df denominator",
+          x$Df[[nrow(x)]], "df", "den."
+        )
       } else {
         statistics <- add_statistic(statistics, "df", x$Df[i])
       }
@@ -628,22 +670,22 @@ tidy_stats.anova <- function(x, args = NULL) {
         add_statistic("df numerator", x$NumDF[i], "df", "num.") %>%
         add_statistic("df denominator", x$DenDF[i], "df", "den.")
     }
-    
+
     statistics <- statistics %>%
       add_statistic("Rao", x$Rao[i]) %>%
       add_statistic("p", x$`Pr(>F)`[i]) %>%
       add_statistic("p", x$`Pr(>Chisq)`[i]) %>%
       add_statistic("p", x$`Pr(>Chi)`[i]) %>%
       add_statistic("Cp", x$Cp[i])
-    
+
     group$statistics <- statistics
     groups$groups <- append(groups$groups, list(group))
   }
-  
+
   analysis$groups <- append(analysis$groups, list(groups))
-  
+
   analysis <- add_package_info(analysis, "stats")
-  
+
   return(analysis)
 }
 
@@ -655,55 +697,61 @@ tidy_stats.aov <- function(x, args = NULL) {
     name = deparse(x$call[[2]]),
     method = "ANOVA"
   )
-  
+
   # Get term statistics
   terms <- summary(x)[[1]]
-  
+
   # Trim spaces from the names of the terms
   rownames(terms) <- stringr::str_trim(rownames(terms))
-  
+
   # Create an empty groups list to add term statistics to
   groups <- list(name = "Terms")
-  
-  # Loop over the terms 
+
+  # Loop over the terms
   for (i in 1:nrow(terms)) {
     # Create a new group list
     group <- list(name = rownames(terms)[i])
-    
+
     # Create a new statistics list and add the term's statistics
     statistics <- list()
-    
+
     statistics <- add_statistic(statistics, "SS", terms$`Sum Sq`[i])
     statistics <- add_statistic(statistics, "MS", terms$`Mean Sq`[i])
-    
+
     # Special case: Extract different statistics depending on whether the term
     # is the Residuals term or not
     if (i != nrow(terms)) {
-      statistics <- add_statistic(statistics, "statistic", terms$`F value`[i], 
-        "F")
-      statistics <- add_statistic(statistics, "df numerator", terms$Df[i], "df",
-        "num.")
-      statistics <- add_statistic(statistics, "df denominator", 
-        terms$Df[[nrow(terms)]], "df", "den.")
-      
+      statistics <- add_statistic(
+        statistics, "statistic", terms$`F value`[i],
+        "F"
+      )
+      statistics <- add_statistic(
+        statistics, "df numerator", terms$Df[i], "df",
+        "num."
+      )
+      statistics <- add_statistic(
+        statistics, "df denominator",
+        terms$Df[[nrow(terms)]], "df", "den."
+      )
+
       statistics <- add_statistic(statistics, "p", terms$`Pr(>F)`[i])
     } else {
       statistics <- add_statistic(statistics, "df", terms$Df[i])
     }
-    
+
     # Add statistics to the group
     group$statistics <- statistics
-    
+
     # Add the group to the groups list
     groups$groups <- append(groups$groups, list(group))
   }
-  
+
   # Add the groups to the groups list on the analysis list
   analysis$groups <- append(analysis$groups, list(groups))
-  
+
   # Add package information
   analysis <- add_package_info(analysis, "stats")
-  
+
   return(analysis)
 }
 
@@ -715,70 +763,76 @@ tidy_stats.aovlist <- function(x, args = NULL) {
     name = deparse(attr(x, "call")),
     method = "ANOVA"
   )
-  
+
   # Create a groups list to the the error strata in
   groups_error <- list(name = "Error terms")
-  
+
   # Loop over the error strata
   for (i in 1:length(names(summary(x)))) {
     # Create a group for the error stratum
     group_error <- list(name = names(summary(x))[i])
-    
+
     # Get term statistics of the current error stratum
     terms <- summary(x)[[i]][[1]]
-    
+
     # Trim spaces from the names of the terms
     rownames(terms) <- stringr::str_trim(rownames(terms))
-    
+
     # Create an empty groups list to add term statistics to
     groups <- list(name = "Terms")
-    
-    # Loop over the terms 
+
+    # Loop over the terms
     for (j in 1:nrow(terms)) {
       # Create a new group list
       group <- list(name = rownames(terms)[j])
-      
+
       # Create a new statistics list and add the term's statistics
       statistics <- list()
-      
+
       statistics <- add_statistic(statistics, "SS", terms$`Sum Sq`[j])
       statistics <- add_statistic(statistics, "MS", terms$`Mean Sq`[j])
-      
+
       # Special case: Extract different statistics depending on whether the term
       # is the Residuals term or not
       if (j != nrow(terms)) {
-        statistics <- add_statistic(statistics, "statistic", terms$`F value`[j], 
-          "F")
-        statistics <- add_statistic(statistics, "df numerator", terms$Df[j], 
-          "df", "num.")
-        statistics <- add_statistic(statistics, "df denominator", 
-          terms$Df[[nrow(terms)]], "df", "den.")
-        
+        statistics <- add_statistic(
+          statistics, "statistic", terms$`F value`[j],
+          "F"
+        )
+        statistics <- add_statistic(
+          statistics, "df numerator", terms$Df[j],
+          "df", "num."
+        )
+        statistics <- add_statistic(
+          statistics, "df denominator",
+          terms$Df[[nrow(terms)]], "df", "den."
+        )
+
         statistics <- add_statistic(statistics, "p", terms$`Pr(>F)`[j])
       } else {
         statistics <- add_statistic(statistics, "df", terms$Df[j])
       }
-      
+
       # Add statistics to the group
       group$statistics <- statistics
-      
+
       # Add the group to the groups list
       groups$groups <- append(groups$groups, list(group))
     }
-    
+
     # Add the term group to the error groups
     group_error$groups <- append(group_error$groups, list(groups))
-    
+
     # Add the error group to the error strata groups
     groups_error$groups <- append(groups_error$groups, list(group_error))
   }
 
   # Add the error stratum groups to the analysis
   analysis$groups <- append(analysis$groups, list(groups_error))
- 
+
   # Add package information
   analysis <- add_package_info(analysis, "stats")
-  
+
   return(analysis)
 }
 
@@ -787,36 +841,36 @@ tidy_stats.aovlist <- function(x, args = NULL) {
 tidy_stats.confint <- function(x, args = NULL) {
   # Create the analysis list
   analysis <- list()
-  
+
   # Set method
   analysis$method <- "Confidence intervals"
-  
+
   # Extract confidence level
   CI_bounds <- readr::parse_number(colnames(x))
   CI_level <- (CI_bounds[2] - CI_bounds[1]) / 100
-  
+
   # Loop over coefficients and create separate lists for each coefficient
   groups <- list(name = "Coefficients")
-  
+
   for (i in 1:length(rownames(x))) {
     group <- list(name = rownames(x)[i])
-    
+
     statistics <- list()
     statistics <- add_statistic(statistics, "lower", x[i, 1])
     statistics <- add_statistic(statistics, "upper", x[i, 2])
-    
+
     group$statistics <- statistics
-    
+
     groups$groups <- append(groups$groups, list(group))
   }
-  
+
   analysis$groups <- append(analysis$groups, list(groups))
-  
+
   # Add additional information
   analysis$level <- CI_level
-  
+
   # Add package information
   analysis <- add_package_info(analysis, "stats")
-  
+
   return(analysis)
 }
