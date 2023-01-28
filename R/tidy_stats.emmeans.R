@@ -9,22 +9,29 @@ tidy_stats.emmGrid <- function(x, args = NULL) {
 tidy_stats.summary_emm <- function(x, args = NULL) {
   analysis <- list()
 
+  analysis$method <- dplyr::case_when(
+    "contrast" %in% names(x) ~ "Contrasts",
+    TRUE ~ "Estimated marginal means"
+  )
+
   df <- as.data.frame(x)
 
   by_vars <- attr(x, "by.vars")
   pri_vars <- attr(x, "pri.vars")
   vars <- c(by_vars, pri_vars)
 
-  df <- dplyr::mutate(df, dplyr::across(dplyr::any_of(vars), as.factor))
+  cl_names <- attr(x, "clNames")
+  mesg <- attr(x, "mesg")
+  cl_level <- mesg |>
+    paste(mesg, collapse = "") |>
+    stringr::str_extract("(?<=Confidence level used: )0.[0-9]+") |>
+    as.numeric()
 
   group_statistics <- function(vars, df) {
     var <- vars[1]
     group <- list(name = var)
 
-    levels <- levels(df[, var])
-    cl_names <- attr(x, "clNames")
-    cl_level <- str_extract(attr(x, "mesg"), "Confidence level used: ", )
-
+    levels <- unique(df[, var])
 
     for (level in levels) {
       group_level <- list(name = level)
@@ -36,16 +43,30 @@ tidy_stats.summary_emm <- function(x, args = NULL) {
           list(group_statistics(vars[-1], group_df))
         )
       } else {
-        statistics <- list() %>%
+        statistics <- list() |>
           add_statistic(
             "EMM",
             group_df$emmean,
             interval = "CI",
-            lower = group_df[, clNames[1]],
-            upper = group_df[, clNames[2]]
-          ) %>%
-          add_statistic("SE", group_df$SE) %>%
-          add_statistic("df", group_df$df)
+            level = cl_level,
+            lower = group_df[, cl_names[1]],
+            upper = group_df[, cl_names[2]]
+          ) |>
+          add_statistic(
+            "estimate",
+            group_df$estimate,
+            symbol = "b"
+          ) |>
+          add_statistic(
+            "estimate",
+            group_df$response,
+            symbol = "b"
+          ) |>
+          add_statistic("SE", group_df$SE) |>
+          add_statistic("statistic", group_df$t.ratio, symbol = "t") |>
+          add_statistic("df", group_df$df) |>
+          add_statistic("p", group_df$p.value)
+
         group_level$statistics <- statistics
       }
 
@@ -57,7 +78,9 @@ tidy_stats.summary_emm <- function(x, args = NULL) {
 
   analysis$groups <- append(analysis$groups, list(group_statistics(vars, df)))
 
-  analysis$type <- attr(x, "type")
+  analysis <- add_attribute(analysis, x, "adjust")
+  analysis <- add_attribute(analysis, x, "type")
+  analysis <- add_attribute(analysis, x, "linkname")
 
   analysis <- add_package_info(analysis, "emmeans")
 
@@ -69,10 +92,21 @@ tidy_stats.summary_emm <- function(x, args = NULL) {
 tidy_stats.emm_list <- function(x, args = NULL) {
   analysis <- list()
 
-  for (i in i:length(x)) {
-    group <- tidy_stats.emmGrid(x[[i]])
+  names <- names(x)
 
-    # Remove package information because we'll set it at the analysis level
+  for (name in names) {
+    group <- list(
+      name = dplyr::case_when(
+        name == "emmeans" ~ "Estimated marginal means",
+        name == "contrasts" ~ "Contrasts",
+        TRUE ~ name
+      )
+    )
+
+    group <- append(group, tidy_stats.emmGrid(x[[name]]))
+
+    # Remove package information because we need to set it only once here and
+    # not for every group
     group$package <- NULL
 
     analysis$groups <- append(analysis$groups, list(group))
