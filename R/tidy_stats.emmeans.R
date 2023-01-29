@@ -9,10 +9,14 @@ tidy_stats.emmGrid <- function(x, args = NULL) {
 tidy_stats.summary_emm <- function(x, args = NULL) {
   analysis <- list()
 
-  analysis$method <- dplyr::case_when(
+  method <- dplyr::case_when(
     "contrast" %in% names(x) ~ "Contrasts",
+    str_detect(attr(x, "estName"), "\\.trend") ~
+      "Estimated marginal means of linear trends",
     TRUE ~ "Estimated marginal means"
   )
+
+  analysis$method <- method
 
   df <- as.data.frame(x)
 
@@ -20,16 +24,20 @@ tidy_stats.summary_emm <- function(x, args = NULL) {
   # We can't use the by.vars and pri.vars attributes because they're not always
   # provided (e.g., in the case of contrasts from mvcontrast())
   vars <- names(x)[
-    !names(x) %in% c(
-      "emmean", "estimate", "T.square", "response",
-      "SE",
-      "t.ratio",
-      "F.ratio",
-      "df", "df1", "df2",
-      "p.value",
-      "lower.CL", "upper.CL",
-      "null"
-    )
+    !stringr::str_detect(names(x), paste(
+      c(
+        "emmean", "estimate", "T.square", "response", "effect.size",
+        ".+\\.trend", "prediction",
+        "SE",
+        "t.ratio",
+        "F.ratio",
+        "df", "df1", "df2",
+        "p.value",
+        "lower.CL", "upper.CL",
+        "null"
+      ),
+      collapse = "|"
+    ))
   ]
 
   cl_names <- attr(x, "clNames")
@@ -75,9 +83,38 @@ tidy_stats.summary_emm <- function(x, args = NULL) {
           ) |>
           add_statistic(
             "estimate",
+            group_df$prediction,
+            symbol = "b"
+          ) |>
+          add_statistic(
+            "estimate",
             group_df$T.square,
             symbol = "t²"
           ) |>
+          add_statistic(
+            "estimate",
+            group_df$effect.size,
+            symbol = "b",
+            interval = "CI",
+            level = cl_level,
+            lower = group_df[, cl_names[1]],
+            upper = group_df[, cl_names[2]]
+          )
+
+        if (method == "Estimated marginal means of linear trends") {
+          statistics <- add_statistic(
+            statistics,
+            "estimate",
+            group_df[[attr(x, "estName")]],
+            symbol = "b",
+            interval = "CI",
+            level = cl_level,
+            lower = group_df[, cl_names[1]],
+            upper = group_df[, cl_names[2]]
+          )
+        }
+
+        statistics <- statistics |>
           add_statistic("SE", group_df$SE) |>
           add_statistic("statistic", group_df$t.ratio, symbol = "t") |>
           add_statistic("statistic", group_df$F.ratio, symbol = "F") |>
