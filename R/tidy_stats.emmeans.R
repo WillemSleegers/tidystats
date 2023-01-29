@@ -16,14 +16,25 @@ tidy_stats.summary_emm <- function(x, args = NULL) {
 
   df <- as.data.frame(x)
 
-  by_vars <- attr(x, "by.vars")
-  pri_vars <- attr(x, "pri.vars")
-  vars <- c(by_vars, pri_vars)
+  # Create a vector of variable names to loop over
+  # We can't use the by.vars and pri.vars attributes because they're not always
+  # provided (e.g., in the case of contrasts from mvcontrast())
+  vars <- names(x)[
+    !names(x) %in% c(
+      "emmean", "estimate", "T.square", "response",
+      "SE",
+      "t.ratio",
+      "F.ratio",
+      "df", "df1", "df2",
+      "p.value",
+      "lower.CL", "upper.CL",
+      "null"
+    )
+  ]
 
   cl_names <- attr(x, "clNames")
-  mesg <- attr(x, "mesg")
-  cl_level <- mesg |>
-    paste(mesg, collapse = "") |>
+  cl_level <- attr(x, "mesg") |>
+    paste(collapse = "") |>
     stringr::str_extract("(?<=Confidence level used: )0.[0-9]+") |>
     as.numeric()
 
@@ -79,7 +90,6 @@ tidy_stats.summary_emm <- function(x, args = NULL) {
             "df denominator", group_df$df2,
             symbol = "df", subscript = "den."
           ) |>
-          add_statistic("df", group_df$df) |>
           add_statistic("p", group_df$p.value)
 
         group_level$statistics <- statistics
@@ -91,7 +101,7 @@ tidy_stats.summary_emm <- function(x, args = NULL) {
     return(group)
   }
 
-  if (!is.null(vars)) {
+  if (length(vars) > 0) {
     analysis$groups <- append(analysis$groups, list(group_statistics(vars, df)))
   } else {
     analysis$statistics <- list() |>
@@ -132,7 +142,7 @@ tidy_stats.emm_list <- function(x, args = NULL) {
       )
     )
 
-    group <- append(group, tidy_stats.emmGrid(x[[name]]))
+    group <- append(group, tidy_stats(x[[name]]))
 
     # Remove package information because we need to set it only once here and
     # not for every group

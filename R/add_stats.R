@@ -129,7 +129,6 @@ add_stats <- function(list, output, identifier = NULL, type = NULL,
   }
 
   # Tidy the output
-  print(class(output))
   analysis <- tidy_stats(output, args = args)
 
   # Add type: primary, secondary, or exploratory

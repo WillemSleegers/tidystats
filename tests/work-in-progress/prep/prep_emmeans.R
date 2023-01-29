@@ -101,15 +101,13 @@ pigs_test_joint
 # mvcontrast() ------------------------------------------------------------
 
 # Get data
-MOats_lm <- lm(yield ~ Variety + Block, data = MOats)
-MOats_emm <- emmeans(MOats_lm, ~ Variety | rep.meas)
+moats_lm <- lm(yield ~ Variety + Block, data = MOats)
+moats_emm <- emmeans(moats_lm, ~ Variety | rep.meas)
 
-# Run analysis
-MOats_mvcontrast <- mvcontrast(MOats_emm, "consec", show.ests = TRUE)
-
-# Test each mean against a specified null vector
-MOats_mvcontrast_null <- mvcontrast(
-  MOats_emm,
+# Run analyses
+moats_mvcontrast <- mvcontrast(moats_emm, "consec", show.ests = TRUE)
+moats_mvcontrast_null <- mvcontrast(
+  moats_emm,
   "identity",
   name = "Variety",
   null = c(80, 100, 120, 140)
@@ -117,18 +115,18 @@ MOats_mvcontrast_null <- mvcontrast(
 
 # Add stats
 statistics <- statistics %>%
-  add_stats(MOats_mvcontrast, class = "emm_list") %>%
-  add_stats(MOats_mvcontrast_null)
+  add_stats(moats_mvcontrast, class = "emm_list") %>%
+  add_stats(moats_mvcontrast_null)
 
 # Inspect output
-MOats_mvcontrast
-MOats_mvcontrast_null
+moats_mvcontrast
+moats_mvcontrast_null
 
 # eff_size() --------------------------------------------------------------
 
 # Run analysis
-fiber.lm <- lm(strength ~ diameter + machine, data = fiber)
-emm <- emmeans(fiber.lm, "machine")
+fiber_lm <- lm(strength ~ diameter + machine, data = fiber)
+emm <- emmeans(fiber_lm, "machine")
 emmeans_eff_size <- eff_size(
   emm,
   sigma = sigma(fiber.lm), edf = df.residual(fiber.lm)
@@ -144,19 +142,19 @@ emmeans_eff_size
 # emtrends() --------------------------------------------------------------
 
 # Run analysis
-fiber.lm <- lm(strength ~ diameter * machine, data = fiber)
+fiber_lm <- lm(strength ~ diameter * machine, data = fiber)
 # Suppose we want trends relative to sqrt(diameter)...
-emtrends_basic <- emtrends(fiber.lm, ~ machine | diameter,
+emtrends_basic <- emtrends(fiber_lm, ~ machine | diameter,
   var = "sqrt(diameter)", at = list(diameter = c(20, 30))
 )
 
 # Obtaining a reference grid
-mtcars.lm <- lm(mpg ~ poly(disp, degree = 2) * (factor(cyl) + factor(am)),
+mtcars_lm <- lm(mpg ~ poly(disp, degree = 2) * (factor(cyl) + factor(am)),
   data = mtcars
 )
 
 # Center trends at mean disp for each no. of cylinders
-emtrends_cov_reduce <- emtrends(mtcars.lm,
+emtrends_cov_reduce <- emtrends(mtcars_lm,
   var = "disp",
   cov.reduce = disp ~ factor(cyl)
 )
@@ -173,12 +171,12 @@ emtrends_cov_reduce
 # joint_tests() -----------------------------------------------------------
 
 # Get data
-pigs.lm <- lm(log(conc) ~ source * factor(percent), data = pigs)
+pigs_lm <- lm(log(conc) ~ source * factor(percent), data = pigs)
 
 # Run analysis
-joint_tests_single <- joint_tests(pigs.lm)
+joint_tests_single <- joint_tests(pigs_lm)
 ## separate joint tests of 'percent'
-joint_tests_multi <- joint_tests(pigs.lm, by = "source")
+joint_tests_multi <- joint_tests(pigs_lm, by = "source")
 
 # Add stats
 results <- results %>%
@@ -192,10 +190,10 @@ joint_tests_multi
 # ref_grid() --------------------------------------------------------------
 
 # Get data
-fiber.lm <- lm(strength ~ machine * diameter, data = fiber)
+fiber_lm <- lm(strength ~ machine * diameter, data = fiber)
 
 # Run analysis
-ref_grid_results <- ref_grid(fiber.lm)
+ref_grid_results <- ref_grid(fiber_lm)
 
 # Add stats
 results <- results %>%
@@ -242,7 +240,7 @@ write_stats(results, "test_results.json")
 
 
 
-noise.lm <- lm(noise / 10 ~ size * type * side, data = auto.noise)
+noise_lm <- lm(noise / 10 ~ size * type * side, data = auto.noise)
 anova(noise.lm)
 emmeans(noise.lm, pairwise ~ size)
 emmeans(noise.lm, ~ size * side * type)
