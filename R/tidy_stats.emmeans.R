@@ -62,8 +62,23 @@ tidy_stats.summary_emm <- function(x, args = NULL) {
             group_df$response,
             symbol = "b"
           ) |>
+          add_statistic(
+            "estimate",
+            group_df$T.square,
+            symbol = "t²"
+          ) |>
           add_statistic("SE", group_df$SE) |>
           add_statistic("statistic", group_df$t.ratio, symbol = "t") |>
+          add_statistic("statistic", group_df$F.ratio, symbol = "F") |>
+          add_statistic("df", group_df$df) |>
+          add_statistic(
+            "df numerator", group_df$df1,
+            symbol = "df", subscript = "num."
+          ) |>
+          add_statistic(
+            "df denominator", group_df$df2,
+            symbol = "df", subscript = "den."
+          ) |>
           add_statistic("df", group_df$df) |>
           add_statistic("p", group_df$p.value)
 
@@ -76,7 +91,21 @@ tidy_stats.summary_emm <- function(x, args = NULL) {
     return(group)
   }
 
-  analysis$groups <- append(analysis$groups, list(group_statistics(vars, df)))
+  if (!is.null(vars)) {
+    analysis$groups <- append(analysis$groups, list(group_statistics(vars, df)))
+  } else {
+    analysis$statistics <- list() |>
+      add_statistic("statistic", df$F.ratio, symbol = "F") |>
+      add_statistic(
+        "df numerator", df$df1,
+        symbol = "df", subscript = "num."
+      ) |>
+      add_statistic(
+        "df denominator", df$df2,
+        symbol = "df", subscript = "den."
+      ) |>
+      add_statistic("p", df$p.value)
+  }
 
   analysis <- add_attribute(analysis, x, "adjust")
   analysis <- add_attribute(analysis, x, "type")

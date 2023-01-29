@@ -104,21 +104,15 @@
 add_stats <- function(list, output, identifier = NULL, type = NULL,
                       preregistered = NULL, notes = NULL, args = NULL,
                       class = NULL) {
-  UseMethod("add_stats", output)
-}
-
-#' @export
-add_stats.default <- function(list, output, identifier = NULL, type = NULL,
-                              preregistered = NULL, notes = NULL, args = NULL,
-                              class = NULL) {
   # Create an identifier if it is not specified, else check whether it already
   # exists
   if (is.null(identifier)) {
     if (deparse(substitute(output)) == ".") {
-      identifier <- paste0("M", formatC(length(list) + 1,
-        width = "1",
-        format = "d"
-      ))
+      identifier <- paste0(
+        "M", formatC(length(list) + 1,
+          width = "1", format = "d"
+        )
+      )
     } else {
       identifier <- deparse(substitute(output))
     }
@@ -130,83 +124,13 @@ add_stats.default <- function(list, output, identifier = NULL, type = NULL,
     }
   }
 
-  # Add a class if one is provided
   if (!is.null(class)) {
     class(output) <- append(class(output), class, after = 0)
   }
 
   # Tidy the output
+  print(class(output))
   analysis <- tidy_stats(output, args = args)
-
-  # Add type: primary, secondary, or exploratory
-  if (!is.null(type)) {
-    if (type == "primary") {
-      analysis$type <- "primary"
-    } else if (type == "secondary") {
-      analysis$type <- "secondary"
-    } else if (type == "exploratory") {
-      analysis$type <- "exploratory"
-    } else {
-      warning(paste(
-        "Unknown type; type should be either 'primary',",
-        "'secondary', or 'exploratory'."
-      ))
-    }
-  }
-
-  # Add whether the analysis was preregistered or not
-  if (!is.null(preregistered)) {
-    if (preregistered) {
-      analysis$preregistered <- "yes"
-    } else {
-      analysis$preregistered <- "no"
-    }
-  }
-
-  # Add notes
-  if (!is.null(notes)) {
-    analysis$notes <- notes
-  }
-
-  # Add the new analysis to the list
-  list[[identifier]] <- analysis
-
-  # Return the new list
-  return(list)
-}
-
-#' @export
-add_stats.list <- function(list, output, identifier = NULL, type = NULL,
-                           preregistered = NULL, notes = NULL) {
-  # Create an identifier if it is not specified, else check whether it already
-  # exists
-  if (is.null(identifier)) {
-    if (deparse(substitute(output)) == ".") {
-      identifier <- paste0("M", formatC(length(list) + 1,
-        width = "1",
-        format = "d"
-      ))
-    } else {
-      identifier <- deparse(substitute(output))
-    }
-  } else {
-    if (!is.null(names(list))) {
-      if (identifier %in% names(list)) {
-        stop("Identifier already exists.")
-      }
-    }
-  }
-
-  # Run the default add_stats in case of a emm_list object
-  if ("emm_list" %in% class(output)) {
-    return(
-      add_stats.default(list, output, identifier, type, preregistered, notes)
-    )
-  }
-
-  # Simply set analysis to output; we don't need to tidy the output because
-  # they should already be tidy
-  analysis <- output
 
   # Add type: primary, secondary, or exploratory
   if (!is.null(type)) {

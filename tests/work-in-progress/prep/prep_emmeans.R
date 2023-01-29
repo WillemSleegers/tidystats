@@ -101,28 +101,28 @@ pigs_test_joint
 # mvcontrast() ------------------------------------------------------------
 
 # Get data
-MOats.lm <- lm(yield ~ Variety + Block, data = MOats)
-MOats.emm <- emmeans(MOats.lm, ~ Variety | rep.meas)
+MOats_lm <- lm(yield ~ Variety + Block, data = MOats)
+MOats_emm <- emmeans(MOats_lm, ~ Variety | rep.meas)
 
 # Run analysis
-emmeans_mvcontrast <- mvcontrast(MOats.emm, "consec", show.ests = TRUE)
+MOats_mvcontrast <- mvcontrast(MOats_emm, "consec", show.ests = TRUE)
 
 # Test each mean against a specified null vector
-emmeans_mvcontrast_named <- mvcontrast(
-  MOats.emm,
+MOats_mvcontrast_null <- mvcontrast(
+  MOats_emm,
   "identity",
   name = "Variety",
   null = c(80, 100, 120, 140)
 )
 
 # Add stats
-results <- results %>%
-  add_stats(emmeans_mvcontrast) %>%
-  add_stats(emmeans_mvcontrast_named)
+statistics <- statistics %>%
+  add_stats(MOats_mvcontrast, class = "emm_list") %>%
+  add_stats(MOats_mvcontrast_null)
 
 # Inspect output
-emmeans_mvcontrast
-emmeans_mvcontrast_named
+MOats_mvcontrast
+MOats_mvcontrast_null
 
 # eff_size() --------------------------------------------------------------
 
