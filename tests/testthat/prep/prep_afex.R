@@ -7,29 +7,33 @@ library(tidyverse)
 library(afex)
 
 # Create an empty list
-results <- list()
+statistics <- list()
 
 # aov_ez() ----------------------------------------------------------------
 
-# Load data
+# Get data
 data(md_12.1)
 
-# Run tests
+# Run analyses
 aov_ez <- aov_ez("id", "rt", md_12.1, within = c("angle", "noise"), 
   anova_table = list(correction = "none", es = "none"))
 aov_ez_default <- aov_ez("id", "rt", md_12.1, within = c("angle", "noise"))
 
-aov_ez
-aov_ez_default
+# Add stats
+statistics <- statistics %>%
+  add_stats(aov_ez) %>%
+  add_stats(aov_ez_default)
 
-# Tidy stats
-
+# Inspect output 
+summary(aov_ez)
+summary(aov_ez_default)
 
 # aov_car() ---------------------------------------------------------------
 
-# Load data
+# Get data
 data(obk.long, package = "afex")
 
+# Run analyses
 aov_car <- aov_car(value ~ treatment * gender + Error(id/(phase*hour)), 
   data = obk.long, observed = "gender")
 aov_car_covariate <- aov_car(value ~ treatment * gender + age + 
@@ -47,16 +51,23 @@ aov_car_no_df_no_MSE <- aov_car(value ~ treatment * gender +
     Error(id/(phase*hour)), data = obk.long,observed = "gender", 
   anova_table = list(correction = "none", MSE = FALSE))
 
-aov_car
-aov_car_covariate
-aov_car_aggregate
-aov_car_aggregate_both
-aov_car_within
-aov_car_no_df_pes
-aov_car_no_df_no_MSE
+# Add stats
+statistics <- statistics %>%
+  add_stats(aov_car) %>%
+  add_stats(aov_car_covariate) %>%
+  add_stats(aov_car_aggregate_both) %>%
+  add_stats(aov_car_within) %>%
+  add_stats(aov_car_no_df_pes) %>%
+  add_stats(aov_car_no_df_no_MSE)
 
-# Tidy stats
-
+# Inspect output
+summary(aov_car)
+summar(aov_car_covariate)
+summary(aov_car_aggregate)
+summary(aov_car_aggregate_both)
+summary(aov_car_within)
+summary(aov_car_no_df_pes)
+summary(aov_car_no_df_no_MSE)
 
 # Add stats
 

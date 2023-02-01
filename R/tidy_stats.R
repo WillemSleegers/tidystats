@@ -2203,7 +2203,7 @@ tidy_stats.BFBayesFactor <- function(x, args = NULL) {
 #' @export
 tidy_stats.afex_aov <- function(x, args = NULL) {
   # Create the analysis list and set the name and method
-  analysis <- list(name = attr(x, "dv"), method = "ANOVA")
+  analysis <- list(method = "ANOVA")
 
   # Get term statistics
   terms <- x$anova_table
@@ -2242,7 +2242,7 @@ tidy_stats.afex_aov <- function(x, args = NULL) {
   # Add additional information
   analysis$anova_type <- attr(x, "type")
   analysis$p_adjustment_method <- attr(x$anova_table, "p_adjust_method")
-  analysis$sphericity_correction_method <- attr(x$anova_table, "correction")
+  analysis$sphericity_correction_method <- attr(x$anova_table, "correction") 
   
   # Add package information
   analysis <- add_package_info(analysis, "afex")
