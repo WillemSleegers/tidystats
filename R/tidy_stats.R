@@ -2219,15 +2219,50 @@ tidy_stats.afex_aov <- function(x, args = NULL) {
     # Create a new statistics list and add the term's statistics
     statistics <- list()
     
-    statistics <- add_statistic(statistics, "df numerator", terms$`num Df`[i],
-      "df", "num.")
-    statistics <- add_statistic(statistics, "df denominator", terms$`den Df`[i],
-      "df", "den.")
-    statistics <- add_statistic(statistics, "MSE", terms$MSE[i])
-    statistics <- add_statistic(statistics, "statistic", terms$`F`[i], "F")
-    statistics <- add_statistic(statistics, "ges", terms$ges[i], "η²", "G")
-    statistics <- add_statistic(statistics, "pes", terms$pes[i], "η²", "p")
-    statistics <- add_statistic(statistics, "p", terms$`Pr(>F)`[i])
+    statistics <- add_statistic(
+      statistics, 
+      name = "df numerator", 
+      value = terms$`num Df`[i],
+      symbol = "df", 
+      subscript = "num."
+    )
+    statistics <- add_statistic(
+      statistics, 
+      name = "df denominator", 
+      value = terms$`den Df`[i],
+      symbol = "df", 
+      subscript = "den."
+      )
+    statistics <- add_statistic(
+      statistics, 
+      name = "MSE", 
+      value = terms$MSE[i]
+      )
+    statistics <- add_statistic(
+      statistics, 
+      name = "statistic", 
+      value = terms$`F`[i], 
+      symbol = "F"
+      )
+    statistics <- add_statistic(
+      statistics, 
+      name = "ges", 
+      value = terms$ges[i], 
+      symbol = "η²", 
+      subscript = "G"
+      )
+    statistics <- add_statistic(
+      statistics, 
+      name = "pes", 
+      value = terms$pes[i], 
+      symbol = "η²", 
+      subscript = "p"
+      )
+    statistics <- add_statistic(
+      statistics, 
+      name = "p", 
+      value = terms$`Pr(>F)`[i]
+      )
     
     # Add statistics to the group
     group$statistics <- statistics
