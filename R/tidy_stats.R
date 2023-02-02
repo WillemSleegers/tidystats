@@ -333,7 +333,7 @@ tidy_stats.pairwise.htest <- function(x, args = NULL) {
 
     p_values <- tidy_matrix(x$p.value, symmetric = FALSE)
 
-    for (i in 1:nrow(p_values)) {
+    for (i in seq_len(nrow(p_values))) {
       names <- list(
         list(name = p_values$name1[i]),
         list(name = p_values$name2[i])
@@ -420,7 +420,7 @@ tidy_stats.lm <- function(x, args = NULL) {
   coefs <- stats::coef(summary)
 
   # Loop over the coefficients and add statistics to a group list
-  for (i in 1:nrow(coefs)) {
+  for (i in seq_len(nrow(coefs))) {
     # Create a new group list
     group <- list()
 
@@ -507,7 +507,7 @@ tidy_stats.glm <- function(x, args = NULL) {
   coefs <- stats::coef(summary)
 
   # Loop over the coefficients and add statistics to a group list
-  for (i in 1:nrow(coefs)) {
+  for (i in seq_len(nrow(coefs))) {
     # Create a new group list
     group <- list()
 
@@ -613,7 +613,7 @@ tidy_stats.anova <- function(x, args = NULL) {
   groups <- list(name = dplyr::if_else(model_comparison, "Models", "Terms"))
 
   # Loop over each row
-  for (i in 1:nrow(x)) {
+  for (i in seq_len(nrow(x))) {
     # Create a new group list
     group <- list()
 
@@ -648,7 +648,7 @@ tidy_stats.anova <- function(x, args = NULL) {
     }
 
     # Special case: Degrees of freedom
-    if (method == "ANOVA" & !model_comparison) {
+    if (method == "ANOVA" && !model_comparison) {
       if (rownames(x)[i] != "Residuals") {
         statistics <- add_statistic(
           statistics, "df numerator", x$Df[i], "df",
@@ -708,7 +708,7 @@ tidy_stats.aov <- function(x, args = NULL) {
   groups <- list(name = "Terms")
 
   # Loop over the terms
-  for (i in 1:nrow(terms)) {
+  for (i in seq_len(nrow(terms))) {
     # Create a new group list
     group <- list(name = rownames(terms)[i])
 
@@ -768,7 +768,7 @@ tidy_stats.aovlist <- function(x, args = NULL) {
   groups_error <- list(name = "Error terms")
 
   # Loop over the error strata
-  for (i in 1:length(names(summary(x)))) {
+  for (i in seq_along(names(summary(x)))) {
     # Create a group for the error stratum
     group_error <- list(name = names(summary(x))[i])
 
@@ -782,7 +782,7 @@ tidy_stats.aovlist <- function(x, args = NULL) {
     groups <- list(name = "Terms")
 
     # Loop over the terms
-    for (j in 1:nrow(terms)) {
+    for (j in seq_len(nrow(terms))) {
       # Create a new group list
       group <- list(name = rownames(terms)[j])
 
@@ -852,7 +852,7 @@ tidy_stats.confint <- function(x, args = NULL) {
   # Loop over coefficients and create separate lists for each coefficient
   groups <- list(name = "Coefficients")
 
-  for (i in 1:length(rownames(x))) {
+  for (i in seq_along(rownames(x))) {
     group <- list(name = rownames(x)[i])
 
     statistics <- list()
@@ -863,89 +863,4 @@ tidy_stats.confint <- function(x, args = NULL) {
 
     groups$groups <- append(groups$groups, list(group))
   }
-
-#' @describeIn tidy_stats tidy_stats method for class 'afex_aov'
-#' @export
-tidy_stats.afex_aov <- function(x, args = NULL) {
-  # Create the analysis list and set the name and method
-  analysis <- list(method = "ANOVA")
-
-  # Get term statistics
-  terms <- x$anova_table
-  
-  # Create an empty groups list to add term statistics to
-  groups <- list(name = "Terms")
-  
-  # Loop over the terms 
-  for (i in 1:nrow(terms)) {
-    # Create a new group list
-    group <- list(name = rownames(terms)[i])
-    
-    # Create a new statistics list and add the term's statistics
-    statistics <- list()
-    
-    statistics <- add_statistic(
-      statistics, 
-      name = "df numerator", 
-      value = terms$`num Df`[i],
-      symbol = "df", 
-      subscript = "num."
-    )
-    statistics <- add_statistic(
-      statistics, 
-      name = "df denominator", 
-      value = terms$`den Df`[i],
-      symbol = "df", 
-      subscript = "den."
-      )
-    statistics <- add_statistic(
-      statistics, 
-      name = "MSE", 
-      value = terms$MSE[i]
-      )
-    statistics <- add_statistic(
-      statistics, 
-      name = "statistic", 
-      value = terms$`F`[i], 
-      symbol = "F"
-      )
-    statistics <- add_statistic(
-      statistics, 
-      name = "ges", 
-      value = terms$ges[i], 
-      symbol = "η²", 
-      subscript = "G"
-      )
-    statistics <- add_statistic(
-      statistics, 
-      name = "pes", 
-      value = terms$pes[i], 
-      symbol = "η²", 
-      subscript = "p"
-      )
-    statistics <- add_statistic(
-      statistics, 
-      name = "p", 
-      value = terms$`Pr(>F)`[i]
-      )
-    
-    # Add statistics to the group
-    group$statistics <- statistics
-    
-    # Add the group to the groups list
-    groups$groups <- append(groups$groups, list(group))
-  }
-  
-  # Add the groups to the groups list on the analysis list
-  analysis$groups <- append(analysis$groups, list(groups))
-  
-  # Add additional information
-  analysis$anova_type <- attr(x, "type")
-  analysis$p_adjustment_method <- attr(x$anova_table, "p_adjust_method")
-  analysis$sphericity_correction_method <- attr(x$anova_table, "correction") 
-  
-  # Add package information
-  analysis <- add_package_info(analysis, "afex")
-  
-  return(analysis)
 }

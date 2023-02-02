@@ -3,25 +3,25 @@
 tidy_stats.effsize <- function(x, args = NULL) {
   analysis <- list(method = paste(x$method, "effect size"))
   statistics <- list()
-  
+
   # Determine the symbol, which is different from what is stored in the name
   # attribute in the case of a Cliff's Delta
   symbol <- dplyr::if_else(x$name == "delta", "δ", x$name)
-  
+
   statistics <- add_statistic(
-    list = statistics, 
+    list = statistics,
     name = x$method,
     symbol = symbol,
-    value = x$estimate, 
+    value = x$estimate,
     interval = "CI",
-    level = x$conf.level, 
-    lower = x$conf.int[["lower"]], 
+    level = x$conf.level,
+    lower = x$conf.int[["lower"]],
     upper = x$conf.int[["upper"]]
   )
-  
+
   analysis$statistics <- statistics
-  
+
   analysis <- add_package_info(analysis, "effsize")
-  
+
   return(analysis)
 }
