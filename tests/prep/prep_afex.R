@@ -187,9 +187,6 @@ mixed1_orig <- mixed(
   check_contrasts = FALSE
 )
 
-# Add stats
-
-
 # tidy_stats_to_data_frame() ----------------------------------------------
 
 df <- tidy_stats_to_data_frame(statistics)

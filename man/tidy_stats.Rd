@@ -48,6 +48,7 @@
 \alias{tidy_stats.anova.lme}
 \alias{tidy_stats.gls}
 \alias{tidy_stats.psych}
+\alias{tidy_stats.tidystats}
 \alias{tidy_stats.tidystats_descriptives}
 \alias{tidy_stats.tidystats_counts}
 \alias{tidy_stats.lavaan}
@@ -137,6 +138,8 @@ tidy_stats(x, args = NULL)
 \method{tidy_stats}{gls}(x, args = NULL)
 
 \method{tidy_stats}{psych}(x, args = NULL)
+
+\method{tidy_stats}{tidystats}(x, args = NULL)
 
 \method{tidy_stats}{tidystats_descriptives}(x, args = NULL)
 
@@ -284,6 +287,8 @@ Currently supported functions:
 \item \code{tidy_stats(gls)}: tidy_stats method for class 'gls'
 
 \item \code{tidy_stats(psych)}: tidy_stats method for class 'psych'
+
+\item \code{tidy_stats(tidystats)}: tidy_stats method for class 'tidystats'
 
 \item \code{tidy_stats(tidystats_descriptives)}: tidy_stats method for class 'tidystats_descriptives'
 

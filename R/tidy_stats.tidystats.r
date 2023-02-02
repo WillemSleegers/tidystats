@@ -1,7 +1,12 @@
+#' @describeIn tidy_stats tidy_stats method for class 'tidystats'
+#' @export
+tidy_stats.tidystats <- function(x, args = NULL) {
+  return(x)
+}
+
 #' @describeIn tidy_stats tidy_stats method for class 'tidystats_descriptives'
 #' @export
 tidy_stats.tidystats_descriptives <- function(x, args = NULL) {
-  # Create the analysis list
   analysis <- list()
 
   # Extract variable information

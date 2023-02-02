@@ -10,14 +10,14 @@ tidy_stats_to_data_frame(x)
 \item{x}{A tidystats list.}
 }
 \description{
-\code{tidy_stats_to_data_frame} converts a tidystats list to a data frame, 
+\code{tidy_stats_to_data_frame} converts a tidystats list to a data frame,
 which can then be used to extract specific statistics using standard
 subsetting functions (e.g., \code{dplyr::filter()}).
 }
 \examples{
 # Load dplyr for access to the piping operator
 library(dplyr)
-  
+
 # t-test:
 sleep_test <- t.test(extra ~ group, data = sleep, paired = TRUE)
 
@@ -29,7 +29,7 @@ weight <- c(ctl, trt)
 lm_D9 <- lm(weight ~ group)
 
 # ANOVA:
-npk_aov <- aov(yield ~ block + N*P*K, npk)
+npk_aov <- aov(yield ~ block + N * P * K, npk)
 
 #' # Create an empty list
 results <- list()
@@ -39,7 +39,7 @@ results <- results \%>\%
   add_stats(sleep_test) \%>\%
   add_stats(lm_D9, type = "primary", preregistered = TRUE) \%>\%
   add_stats(npk_aov, notes = "An ANOVA example")
-  
+
 # Convert the list to a data frame
 results_df <- tidy_stats_to_data_frame(results)
 
