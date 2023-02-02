@@ -1,0 +1,170 @@
+{
+  "ICC_anxiety": {
+    "method": "ICC",
+    "statistics": [
+      {
+        "name": "N subjects",
+        "symbol": "N",
+        "subscript": "subjects",
+        "value": 20
+      },
+      {
+        "name": "N raters",
+        "symbol": "N",
+        "subscript": "raters",
+        "value": 3
+      },
+      {
+        "name": "ICC(A,1)",
+        "value": 0.197998,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -0.038911,
+        "upper": 0.493574
+      },
+      {
+        "name": "statistic",
+        "symbol": "F",
+        "value": 1.826772
+      },
+      {
+        "name": "df numerator",
+        "symbol": "df",
+        "subscript": "num.",
+        "value": 19
+      },
+      {
+        "name": "df denominator",
+        "symbol": "df",
+        "subscript": "den.",
+        "value": 39.746041
+      },
+      {
+        "name": "p",
+        "value": 0.054266
+      }
+    ],
+    "model": "twoway",
+    "type": "agreement",
+    "unit": "single",
+    "alernative": {
+      "null_value": 0
+    },
+    "package": {
+      "name": "irr",
+      "version": "0.84.1"
+    }
+  },
+  "ICC_high_consistency": {
+    "method": "ICC",
+    "statistics": [
+      {
+        "name": "N subjects",
+        "symbol": "N",
+        "subscript": "subjects",
+        "value": 20
+      },
+      {
+        "name": "N raters",
+        "symbol": "N",
+        "subscript": "raters",
+        "value": 3
+      },
+      {
+        "name": "ICC(C,1)",
+        "value": 0.845615,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.70808,
+        "upper": 0.929968
+      },
+      {
+        "name": "statistic",
+        "symbol": "F",
+        "value": 17.431948
+      },
+      {
+        "name": "df numerator",
+        "symbol": "df",
+        "subscript": "num.",
+        "value": 19
+      },
+      {
+        "name": "df denominator",
+        "symbol": "df",
+        "subscript": "den.",
+        "value": 38
+      },
+      {
+        "name": "p",
+        "value": 2.852714e-13
+      }
+    ],
+    "model": "twoway",
+    "type": "consistency",
+    "unit": "single",
+    "alernative": {
+      "null_value": 0
+    },
+    "package": {
+      "name": "irr",
+      "version": "0.84.1"
+    }
+  },
+  "ICC_low_agreement": {
+    "method": "ICC",
+    "statistics": [
+      {
+        "name": "N subjects",
+        "symbol": "N",
+        "subscript": "subjects",
+        "value": 20
+      },
+      {
+        "name": "N raters",
+        "symbol": "N",
+        "subscript": "raters",
+        "value": 3
+      },
+      {
+        "name": "ICC(A,1)",
+        "value": 0.106051,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -0.002193,
+        "upper": 0.345521
+      },
+      {
+        "name": "statistic",
+        "symbol": "F",
+        "value": 17.431948
+      },
+      {
+        "name": "df numerator",
+        "symbol": "df",
+        "subscript": "num.",
+        "value": 19
+      },
+      {
+        "name": "df denominator",
+        "symbol": "df",
+        "subscript": "den.",
+        "value": 2.345547
+      },
+      {
+        "name": "p",
+        "value": 0.037717
+      }
+    ],
+    "model": "twoway",
+    "type": "agreement",
+    "unit": "single",
+    "alernative": {
+      "null_value": 0
+    },
+    "package": {
+      "name": "irr",
+      "version": "0.84.1"
+    }
+  }
+}

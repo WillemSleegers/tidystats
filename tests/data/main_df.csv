@@ -1,0 +1,68 @@
+identifier,analysis_name,group_name_1,group_name_2,statistic_name,symbol,subscript,lower,value,upper,interval,level
+sleep_t_test,extra by group,NA,NA,estimate,M,diff.,-2.4598857632769824,-1.58,-0.7001142367230176,CI,0.95
+sleep_t_test,extra by group,NA,NA,SE,NA,NA,NA,0.38895872388839525,NA,NA,NA
+sleep_t_test,extra by group,NA,NA,statistic,t,NA,NA,-4.062127683382037,NA,NA,NA
+sleep_t_test,extra by group,NA,NA,df,NA,NA,NA,9,NA,NA,NA
+sleep_t_test,extra by group,NA,NA,p,NA,NA,NA,0.00283289019738427,NA,NA,NA
+D9_lm,weight ~ group,Model,NA,R squared,R²,NA,NA,0.07307759899038559,NA,NA,NA
+D9_lm,weight ~ group,Model,NA,adj. R squared,R²,adj.,NA,0.021581910045406993,NA,NA,NA
+D9_lm,weight ~ group,Model,NA,statistic,F,NA,NA,1.41910129736232,NA,NA,NA
+D9_lm,weight ~ group,Model,NA,df numerator,df,num.,NA,1,NA,NA,NA
+D9_lm,weight ~ group,Model,NA,df denominator,df,den.,NA,18,NA,NA,NA
+D9_lm,weight ~ group,Model,NA,p,NA,NA,NA,0.24902316597300547,NA,NA,NA
+D9_lm,weight ~ group,Model,NA,sigma,s,res.,NA,0.6963894982934002,NA,NA,NA
+D9_lm,weight ~ group,Coefficients,(Intercept),estimate,b,NA,NA,5.031999999999999,NA,NA,NA
+D9_lm,weight ~ group,Coefficients,(Intercept),SE,NA,NA,NA,0.22021769532290852,NA,NA,NA
+D9_lm,weight ~ group,Coefficients,(Intercept),statistic,t,NA,NA,22.850116529561813,NA,NA,NA
+D9_lm,weight ~ group,Coefficients,(Intercept),df,NA,NA,NA,18,NA,NA,NA
+D9_lm,weight ~ group,Coefficients,(Intercept),p,NA,NA,NA,9.547127635904312e-15,NA,NA,NA
+D9_lm,weight ~ group,Coefficients,groupTrt,estimate,b,NA,NA,-0.3709999999999996,NA,NA,NA
+D9_lm,weight ~ group,Coefficients,groupTrt,SE,NA,NA,NA,0.3114348514002034,NA,NA,NA
+D9_lm,weight ~ group,Coefficients,groupTrt,statistic,t,NA,NA,-1.1912603818487006,NA,NA,NA
+D9_lm,weight ~ group,Coefficients,groupTrt,df,NA,NA,NA,18,NA,NA,NA
+D9_lm,weight ~ group,Coefficients,groupTrt,p,NA,NA,NA,0.24902316597300672,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,block,SS,NA,NA,NA,343.2949999999998,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,block,MS,NA,NA,NA,68.65899999999996,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,block,statistic,F,NA,NA,4.446666426798118,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,block,df numerator,df,num.,NA,5,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,block,df denominator,df,den.,NA,12,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,block,p,NA,NA,NA,0.01593879020819388,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,N,SS,NA,NA,NA,189.2816666666663,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,N,MS,NA,NA,NA,189.2816666666663,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,N,statistic,F,NA,NA,12.25873421365091,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,N,df numerator,df,num.,NA,1,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,N,df denominator,df,den.,NA,12,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,N,p,NA,NA,NA,0.004371811825799369,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,P,SS,NA,NA,NA,8.401666666666669,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,P,MS,NA,NA,NA,8.401666666666669,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,P,statistic,F,NA,NA,0.5441298168603613,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,P,df numerator,df,num.,NA,1,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,P,df denominator,df,den.,NA,12,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,P,p,NA,NA,NA,0.47490409267443423,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,K,SS,NA,NA,NA,95.20166666666648,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,K,MS,NA,NA,NA,95.20166666666648,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,K,statistic,F,NA,NA,6.165689202317126,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,K,df numerator,df,num.,NA,1,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,K,df denominator,df,den.,NA,12,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,K,p,NA,NA,NA,0.02879505350023265,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,N:P,SS,NA,NA,NA,21.28166666666666,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,N:P,MS,NA,NA,NA,21.28166666666666,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,N:P,statistic,F,NA,NA,1.3782966934120116,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,N:P,df numerator,df,num.,NA,1,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,N:P,df denominator,df,den.,NA,12,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,N:P,p,NA,NA,NA,0.26316528287716795,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,N:K,SS,NA,NA,NA,33.13500000000005,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,N:K,MS,NA,NA,NA,33.13500000000005,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,N:K,statistic,F,NA,NA,2.1459720073399837,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,N:K,df numerator,df,num.,NA,1,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,N:K,df denominator,df,den.,NA,12,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,N:K,p,NA,NA,NA,0.16864787850049204,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,P:K,SS,NA,NA,NA,0.4816666666666795,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,P:K,MS,NA,NA,NA,0.4816666666666795,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,P:K,statistic,F,NA,NA,0.031194905191955682,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,P:K,df numerator,df,num.,NA,1,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,P:K,df denominator,df,den.,NA,12,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,P:K,p,NA,NA,NA,0.8627520856854055,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,Residuals,SS,NA,NA,NA,185.28666666666643,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,Residuals,MS,NA,NA,NA,15.440555555555536,NA,NA,NA
+npk_aov,yield ~ block + N * P * K,Terms,Residuals,df,NA,NA,NA,12,NA,NA,NA

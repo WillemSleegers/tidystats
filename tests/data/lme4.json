@@ -1,0 +1,603 @@
+{
+  "lme4": {
+    "name": "Reaction ~ Days + (1 | Subject)",
+    "method": "Linear mixed model",
+    "groups": [
+      {
+        "name": "Model",
+        "statistics": [
+          {
+            "name": "N",
+            "value": 180
+          }
+        ]
+      },
+      {
+        "name": "Random effects",
+        "groups": [
+          {
+            "name": "Subject",
+            "statistics": [
+              {
+                "name": "N",
+                "value": 18
+              }
+            ],
+            "groups": [
+              {
+                "name": "Variances",
+                "groups": [
+                  {
+                    "name": "(Intercept)",
+                    "statistics": [
+                      {
+                        "name": "standard deviation",
+                        "symbol": "SD",
+                        "value": 37.123827
+                      },
+                      {
+                        "name": "variance",
+                        "symbol": "var",
+                        "value": 1378.178514
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Residual",
+            "statistics": [
+              {
+                "name": "standard deviation",
+                "symbol": "SD",
+                "value": 30.991234
+              },
+              {
+                "name": "variance",
+                "symbol": "var",
+                "value": 960.456579
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Fixed effects",
+        "groups": [
+          {
+            "name": "Coefficients",
+            "groups": [
+              {
+                "name": "(Intercept)",
+                "statistics": [
+                  {
+                    "name": "estimate",
+                    "symbol": "b",
+                    "value": 251.405105
+                  },
+                  {
+                    "name": "SE",
+                    "value": 9.746716
+                  },
+                  {
+                    "name": "statistic",
+                    "symbol": "t",
+                    "value": 25.793826
+                  }
+                ]
+              },
+              {
+                "name": "Days",
+                "statistics": [
+                  {
+                    "name": "estimate",
+                    "symbol": "b",
+                    "value": 10.467286
+                  },
+                  {
+                    "name": "SE",
+                    "value": 0.804221
+                  },
+                  {
+                    "name": "statistic",
+                    "symbol": "t",
+                    "value": 13.015428
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Correlations",
+            "groups": [
+              {
+                "name": "(Intercept) - Days",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": -0.371304
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "REML_criterion_at_convergence": 1786.465085,
+    "convergence_code": 0,
+    "package": {
+      "name": "lme4",
+      "version": "1.1-30"
+    }
+  },
+  "lme4_ML": {
+    "name": "Reaction ~ Days + (1 | Subject)",
+    "method": "Linear mixed model",
+    "groups": [
+      {
+        "name": "Model",
+        "statistics": [
+          {
+            "name": "AIC",
+            "value": 1802.078643
+          },
+          {
+            "name": "BIC",
+            "value": 1814.85047
+          },
+          {
+            "name": "log likelihood",
+            "symbol": "l",
+            "value": -897.039322
+          },
+          {
+            "name": "deviance",
+            "symbol": "D",
+            "value": 1794.078643
+          },
+          {
+            "name": "residual df",
+            "symbol": "df",
+            "subscript": "res.",
+            "value": 176
+          },
+          {
+            "name": "N",
+            "value": 180
+          }
+        ]
+      },
+      {
+        "name": "Random effects",
+        "groups": [
+          {
+            "name": "Subject",
+            "statistics": [
+              {
+                "name": "N",
+                "value": 18
+              }
+            ],
+            "groups": [
+              {
+                "name": "Variances",
+                "groups": [
+                  {
+                    "name": "(Intercept)",
+                    "statistics": [
+                      {
+                        "name": "standard deviation",
+                        "symbol": "SD",
+                        "value": 36.012082
+                      },
+                      {
+                        "name": "variance",
+                        "symbol": "var",
+                        "value": 1296.870045
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Residual",
+            "statistics": [
+              {
+                "name": "standard deviation",
+                "symbol": "SD",
+                "value": 30.895434
+              },
+              {
+                "name": "variance",
+                "symbol": "var",
+                "value": 954.527834
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Fixed effects",
+        "groups": [
+          {
+            "name": "Coefficients",
+            "groups": [
+              {
+                "name": "(Intercept)",
+                "statistics": [
+                  {
+                    "name": "estimate",
+                    "symbol": "b",
+                    "value": 251.405105
+                  },
+                  {
+                    "name": "SE",
+                    "value": 9.506185
+                  },
+                  {
+                    "name": "statistic",
+                    "symbol": "t",
+                    "value": 26.446477
+                  }
+                ]
+              },
+              {
+                "name": "Days",
+                "statistics": [
+                  {
+                    "name": "estimate",
+                    "symbol": "b",
+                    "value": 10.467286
+                  },
+                  {
+                    "name": "SE",
+                    "value": 0.801735
+                  },
+                  {
+                    "name": "statistic",
+                    "symbol": "t",
+                    "value": 13.055786
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Correlations",
+            "groups": [
+              {
+                "name": "(Intercept) - Days",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": -0.379522
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "convergence_code": 0,
+    "package": {
+      "name": "lme4",
+      "version": "1.1-30"
+    }
+  },
+  "lme4_slopes": {
+    "name": "Reaction ~ Days + (Days | Subject)",
+    "method": "Linear mixed model",
+    "groups": [
+      {
+        "name": "Model",
+        "statistics": [
+          {
+            "name": "AIC",
+            "value": 1763.939344
+          },
+          {
+            "name": "BIC",
+            "value": 1783.097086
+          },
+          {
+            "name": "log likelihood",
+            "symbol": "l",
+            "value": -875.969672
+          },
+          {
+            "name": "deviance",
+            "symbol": "D",
+            "value": 1751.939344
+          },
+          {
+            "name": "residual df",
+            "symbol": "df",
+            "subscript": "res.",
+            "value": 174
+          },
+          {
+            "name": "N",
+            "value": 180
+          }
+        ]
+      },
+      {
+        "name": "Random effects",
+        "groups": [
+          {
+            "name": "Subject",
+            "statistics": [
+              {
+                "name": "N",
+                "value": 18
+              }
+            ],
+            "groups": [
+              {
+                "name": "Variances",
+                "groups": [
+                  {
+                    "name": "(Intercept)",
+                    "statistics": [
+                      {
+                        "name": "standard deviation",
+                        "symbol": "SD",
+                        "value": 23.77976
+                      },
+                      {
+                        "name": "variance",
+                        "symbol": "var",
+                        "value": 565.476966
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Days",
+                    "statistics": [
+                      {
+                        "name": "standard deviation",
+                        "symbol": "SD",
+                        "value": 5.716799
+                      },
+                      {
+                        "name": "variance",
+                        "symbol": "var",
+                        "value": 32.681785
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "Correlations",
+                "groups": [
+                  {
+                    "name": "(Intercept) - Days",
+                    "statistics": [
+                      {
+                        "name": "correlation",
+                        "symbol": "r",
+                        "value": 0.081321
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Residual",
+            "statistics": [
+              {
+                "name": "standard deviation",
+                "symbol": "SD",
+                "value": 25.591907
+              },
+              {
+                "name": "variance",
+                "symbol": "var",
+                "value": 654.945706
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Fixed effects",
+        "groups": [
+          {
+            "name": "Coefficients",
+            "groups": [
+              {
+                "name": "(Intercept)",
+                "statistics": [
+                  {
+                    "name": "estimate",
+                    "symbol": "b",
+                    "value": 251.405105
+                  },
+                  {
+                    "name": "SE",
+                    "value": 6.632123
+                  },
+                  {
+                    "name": "statistic",
+                    "symbol": "t",
+                    "value": 37.907185
+                  }
+                ]
+              },
+              {
+                "name": "Days",
+                "statistics": [
+                  {
+                    "name": "estimate",
+                    "symbol": "b",
+                    "value": 10.467286
+                  },
+                  {
+                    "name": "SE",
+                    "value": 1.50223
+                  },
+                  {
+                    "name": "statistic",
+                    "symbol": "t",
+                    "value": 6.967831
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Correlations",
+            "groups": [
+              {
+                "name": "(Intercept) - Days",
+                "statistics": [
+                  {
+                    "name": "correlation",
+                    "symbol": "r",
+                    "value": -0.13756
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "convergence_code": 0,
+    "package": {
+      "name": "lme4",
+      "version": "1.1-30"
+    }
+  },
+  "anova_lme4": {
+    "method": "ANOVA",
+    "groups": [
+      {
+        "name": "Terms",
+        "groups": [
+          {
+            "name": "Days",
+            "statistics": [
+              {
+                "name": "n parameters",
+                "symbol": "k",
+                "value": 1
+              },
+              {
+                "name": "SS",
+                "value": 162702.65191
+              },
+              {
+                "name": "MS",
+                "value": 162702.65191
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 169.401361
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.2.1"
+    }
+  },
+  "anova_models": {
+    "method": "ANOVA",
+    "groups": [
+      {
+        "name": "Models",
+        "groups": [
+          {
+            "name": "lme4",
+            "statistics": [
+              {
+                "name": "n parameters",
+                "symbol": "k",
+                "value": 4
+              },
+              {
+                "name": "AIC",
+                "value": 1802.078643
+              },
+              {
+                "name": "BIC",
+                "value": 1814.85047
+              },
+              {
+                "name": "log likelihood",
+                "symbol": "l",
+                "value": -897.039322
+              },
+              {
+                "name": "deviance",
+                "symbol": "D",
+                "value": 1794.078643
+              }
+            ]
+          },
+          {
+            "name": "lme4_slopes",
+            "statistics": [
+              {
+                "name": "n parameters",
+                "symbol": "k",
+                "value": 6
+              },
+              {
+                "name": "AIC",
+                "value": 1763.939344
+              },
+              {
+                "name": "BIC",
+                "value": 1783.097086
+              },
+              {
+                "name": "log likelihood",
+                "symbol": "l",
+                "value": -875.969672
+              },
+              {
+                "name": "deviance",
+                "symbol": "D",
+                "value": 1751.939344
+              },
+              {
+                "name": "statistic",
+                "symbol": "χ²",
+                "value": 42.139299
+              },
+              {
+                "name": "df",
+                "value": 2
+              },
+              {
+                "name": "p",
+                "value": 7.072413e-10
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.2.1"
+    }
+  }
+}

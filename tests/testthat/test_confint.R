@@ -2,7 +2,7 @@
 # Setup -------------------------------------------------------------------
 
 # Load test data
-path <- system.file("tests/testthat/data/confint.json", package = "tidystats")
+path <- system.file("tests/data/confint.json", package = "tidystats")
 expected_statistics <- read_stats(path)
 
 # lm() --------------------------------------------------------------------
@@ -32,7 +32,7 @@ test_that("single coefficient confint works", {
 })
 
 test_that("profile likelihood confint works", {
-  D93 <- tibble(
+  D93 <- tibble::tibble(
     counts = c(18, 17, 15, 20, 10, 20, 25, 13, 12),
     outcome = gl(3, 1, 9),
     treatment = gl(3, 3)  
@@ -50,7 +50,7 @@ test_that("profile likelihood confint works", {
 })
 
 test_that("asymptotic normality confint works", {
-  D93 <- tibble(
+  D93 <- tibble::tibble(
     counts = c(18, 17, 15, 20, 10, 20, 25, 13, 12),
     outcome = gl(3, 1, 9),
     treatment = gl(3, 3)  

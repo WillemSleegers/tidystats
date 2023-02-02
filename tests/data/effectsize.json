@@ -1,0 +1,355 @@
+{
+  "cohens_d": {
+    "method": "Cohen's d",
+    "statistics": [
+      {
+        "name": "Cohen's d",
+        "value": -1.477947,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -2.265973,
+        "upper": -0.670569
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "paired": false,
+    "pooled_sd": true,
+    "proximate": false,
+    "package": {
+      "name": "effectsize",
+      "version": "0.8.2"
+    }
+  },
+  "cohens_d_not_pooled": {
+    "method": "Cohen's d",
+    "statistics": [
+      {
+        "name": "Cohen's d",
+        "value": -1.411046,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -2.260021,
+        "upper": -0.534226
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "paired": false,
+    "pooled_sd": false,
+    "proximate": false,
+    "package": {
+      "name": "effectsize",
+      "version": "0.8.2"
+    }
+  },
+  "cohens_d_mu": {
+    "method": "Cohen's d",
+    "statistics": [
+      {
+        "name": "Cohen's d",
+        "value": -0.457961,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -1.169095,
+        "upper": 0.26058
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": -5
+    },
+    "paired": false,
+    "pooled_sd": true,
+    "proximate": false,
+    "package": {
+      "name": "effectsize",
+      "version": "0.8.2"
+    }
+  },
+  "cohens_d_less": {
+    "method": "Cohen's d",
+    "statistics": [
+      {
+        "name": "Cohen's d",
+        "value": -1.477947,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": "-Inf",
+        "upper": -0.797779
+      }
+    ],
+    "alternative": {
+      "direction": "less",
+      "null_value": 0
+    },
+    "paired": false,
+    "pooled_sd": true,
+    "proximate": false,
+    "package": {
+      "name": "effectsize",
+      "version": "0.8.2"
+    }
+  },
+  "cohens_d_one_sample": {
+    "method": "Cohen's d",
+    "statistics": [
+      {
+        "name": "Cohen's d",
+        "value": 3.288084,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 2.398357,
+        "upper": 4.168372
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "paired": true,
+    "proximate": false,
+    "package": {
+      "name": "effectsize",
+      "version": "0.8.2"
+    }
+  },
+  "cohens_d_paired": {
+    "method": "Cohen's d",
+    "statistics": [
+      {
+        "name": "Cohen's d",
+        "value": -1.284558,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -2.118017,
+        "upper": -0.414628
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "paired": true,
+    "proximate": false,
+    "package": {
+      "name": "effectsize",
+      "version": "0.8.2"
+    }
+  },
+  "hedges_g": {
+    "method": "Hedge's g",
+    "statistics": [
+      {
+        "name": "Hedge's g",
+        "value": -1.440635,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -2.208767,
+        "upper": -0.65364
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "paired": false,
+    "pooled_sd": true,
+    "proximate": false,
+    "package": {
+      "name": "effectsize",
+      "version": "0.8.2"
+    }
+  },
+  "hedges_g_not_pooled": {
+    "method": "Hedge's g",
+    "statistics": [
+      {
+        "name": "Hedge's g",
+        "value": -1.352384,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -2.166064,
+        "upper": -0.512016
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "paired": false,
+    "pooled_sd": false,
+    "proximate": false,
+    "package": {
+      "name": "effectsize",
+      "version": "0.8.2"
+    }
+  },
+  "hedges_g_mu": {
+    "method": "Hedge's g",
+    "statistics": [
+      {
+        "name": "Hedge's g",
+        "value": -0.4464,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -1.13958,
+        "upper": 0.254002
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": -5
+    },
+    "paired": false,
+    "pooled_sd": true,
+    "proximate": false,
+    "package": {
+      "name": "effectsize",
+      "version": "0.8.2"
+    }
+  },
+  "hedges_g_less": {
+    "method": "Hedge's g",
+    "statistics": [
+      {
+        "name": "Hedge's g",
+        "value": -1.440635,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": "-Inf",
+        "upper": -0.777638
+      }
+    ],
+    "alternative": {
+      "direction": "less",
+      "null_value": 0
+    },
+    "paired": false,
+    "pooled_sd": true,
+    "proximate": false,
+    "package": {
+      "name": "effectsize",
+      "version": "0.8.2"
+    }
+  },
+  "hedges_g_one_sample": {
+    "method": "Hedge's g",
+    "statistics": [
+      {
+        "name": "Hedge's g",
+        "value": 3.207777,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 2.339781,
+        "upper": 4.066566
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "paired": true,
+    "proximate": false,
+    "package": {
+      "name": "effectsize",
+      "version": "0.8.2"
+    }
+  },
+  "hedges_g_paired": {
+    "method": "Hedge's g",
+    "statistics": [
+      {
+        "name": "Hedge's g",
+        "value": -1.173925,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -1.935602,
+        "upper": -0.378918
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "paired": true,
+    "proximate": false,
+    "package": {
+      "name": "effectsize",
+      "version": "0.8.2"
+    }
+  },
+  "glass_delta": {
+    "method": "Glass' delta",
+    "statistics": [
+      {
+        "name": "Glass' delta",
+        "value": -1.174886,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -1.927446,
+        "upper": -0.39169
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "paired": false,
+    "proximate": false,
+    "package": {
+      "name": "effectsize",
+      "version": "0.8.2"
+    }
+  },
+  "glass_delta_mu": {
+    "method": "Glass' delta",
+    "statistics": [
+      {
+        "name": "Glass' delta",
+        "value": -0.364054,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -0.984968,
+        "upper": 0.271069
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": -5
+    },
+    "paired": false,
+    "proximate": false,
+    "package": {
+      "name": "effectsize",
+      "version": "0.8.2"
+    }
+  },
+  "glass_delta_less": {
+    "method": "Glass' delta",
+    "statistics": [
+      {
+        "name": "Glass' delta",
+        "value": -1.174886,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": "-Inf",
+        "upper": -0.511544
+      }
+    ],
+    "alternative": {
+      "direction": "less",
+      "null_value": 0
+    },
+    "paired": false,
+    "proximate": false,
+    "package": {
+      "name": "effectsize",
+      "version": "0.8.2"
+    }
+  }
+}

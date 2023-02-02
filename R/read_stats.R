@@ -17,7 +17,6 @@
 #'
 #' @export
 read_stats <- function(file) {
-  # Check the file extension and throw a warning if it's not a .json file
   if (tools::file_ext(file) != "json") {
     warning(
       paste(
@@ -27,12 +26,14 @@ read_stats <- function(file) {
     )
   }
   
-  # Use the jsonlite read_json function to read in the data
   results <- jsonlite::read_json(file)
   
   # Look for character Inf's and convert them to numeric
-  results <- rapply(results, function(x) if (x == "Inf") Inf else x, 
-    how = "replace")
+  results <- rapply(
+    results, 
+    function(x) ifelse(x %in% c("Inf", "-Inf"), as.numeric(x), x), 
+    how = "replace"
+  )
   
   return(results)
 }

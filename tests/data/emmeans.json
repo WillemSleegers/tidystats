@@ -1,0 +1,189 @@
+{
+  "emm_year_cyl_by_drv_cty": {
+    "groups": [
+      {
+        "name": "drv",
+        "groups": [
+          {
+            "name": "4",
+            "groups": [
+              {
+                "name": "cty",
+                "groups": [
+                  {
+                    "name": "16.8589743589744",
+                    "groups": [
+                      {
+                        "name": "year",
+                        "groups": [
+                          {
+                            "name": "1999",
+                            "groups": [
+                              {
+                                "name": "cyl",
+                                "groups": [
+                                  {
+                                    "name": "5.88888888888889",
+                                    "statistics": [
+                                      {
+                                        "name": "EMM",
+                                        "value": 3.517085
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "name": "2008",
+                            "groups": [
+                              {
+                                "name": "cyl",
+                                "groups": [
+                                  {
+                                    "name": "5.88888888888889",
+                                    "statistics": [
+                                      {
+                                        "name": "EMM",
+                                        "value": 3.623948
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "f",
+            "groups": [
+              {
+                "name": "cty",
+                "groups": [
+                  {
+                    "name": "16.8589743589744",
+                    "groups": [
+                      {
+                        "name": "year",
+                        "groups": [
+                          {
+                            "name": "1999",
+                            "groups": [
+                              {
+                                "name": "cyl",
+                                "groups": [
+                                  {
+                                    "name": "5.88888888888889",
+                                    "statistics": [
+                                      {
+                                        "name": "EMM",
+                                        "value": 3.189212
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "name": "2008",
+                            "groups": [
+                              {
+                                "name": "cyl",
+                                "groups": [
+                                  {
+                                    "name": "5.88888888888889",
+                                    "statistics": [
+                                      {
+                                        "name": "EMM",
+                                        "value": 3.296076
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "r",
+            "groups": [
+              {
+                "name": "cty",
+                "groups": [
+                  {
+                    "name": "16.8589743589744",
+                    "groups": [
+                      {
+                        "name": "year",
+                        "groups": [
+                          {
+                            "name": "1999",
+                            "groups": [
+                              {
+                                "name": "cyl",
+                                "groups": [
+                                  {
+                                    "name": "5.88888888888889",
+                                    "statistics": [
+                                      {
+                                        "name": "EMM",
+                                        "value": 3.983229
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "name": "2008",
+                            "groups": [
+                              {
+                                "name": "cyl",
+                                "groups": [
+                                  {
+                                    "name": "5.88888888888889",
+                                    "statistics": [
+                                      {
+                                        "name": "EMM",
+                                        "value": 4.090093
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "emmeans",
+      "version": "1.8.3"
+    }
+  }
+}

@@ -32,7 +32,7 @@ weight <- c(ctl, trt)
 lm_D9 <- lm(weight ~ group)
 
 # ANOVA:
-npk_aov <- aov(yield ~ block + N*P*K, npk)
+npk_aov <- aov(yield ~ block + N * P * K, npk)
 
 #' # Create an empty list
 results <- list()

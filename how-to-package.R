@@ -1,14 +1,14 @@
 
 # Todos -------------------------------------------------------------------
 
-#TODO: Rename certain terms to contrasts?
-#TODO: # Call deviance dfs df numerator and df denominator?
-#TODO: Replace some of the statistics extraction code with loops over all 
+# TODO: Rename certain terms to contrasts?
+# TODO: # Call deviance dfs df numerator and df denominator?
+# TODO: Replace some of the statistics extraction code with loops over all
 #      columns and then fix the names after
-#TODO: Use pipes when adding statistics via add_statistic()?
-#TODO: Store all sample estimates in the case of a 4-sample chi-squared test?
-#TODO: Simply the method name of Kolmogorov-Smirnov tests?
-#TODO: Rename the name of degrees of freedom and related values to 'parameter'?
+# TODO: Use pipes when adding statistics via add_statistic()?
+# TODO: Store all sample estimates in the case of a 4-sample chi-squared test?
+# TODO: Simplify the method name of Kolmogorov-Smirnov tests?
+# TODO: Rename the name of degrees of freedom and related values to 'parameter'?
 
 # Update ------------------------------------------------------------------
 
@@ -22,7 +22,7 @@ devtools::load_all()
 
 # Install the dev version
 devtools::install()
-#.rs.restartR()
+# .rs.restartR()
 
 # Add dependency ----------------------------------------------------------
 
@@ -34,10 +34,11 @@ usethis::use_package("lavaan", "Suggests")
 # usethis::use_test("add_stats")
 
 # Test a specific test
-testthat::test_file("tests/testthat/test_main.R")
+testthat::test_file("tests/testthat/test_irr.R")
 
 # Test all tests
 devtools::test()
+testthat::test_dir(path = "tests/testthat/tests/")
 
 # Create a vignette -------------------------------------------------------
 
@@ -80,8 +81,8 @@ devtools::test()
 # Check package
 # devtools::load_all()
 devtools::check()
-devtools::check(args = c('--run-donttest')) # Without examples test
-devtools::check(args = c('--as-cran'))
+devtools::check(args = c("--run-donttest")) # Without examples test
+devtools::check(args = c("--as-cran"))
 
 # run R CMD check on CRAN’s servers
 devtools::check_win_devel()

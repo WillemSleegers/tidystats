@@ -1,0 +1,16 @@
+{
+  "BIC_AIC": {
+    "name": "BIC/AIC",
+    "statistics": [
+      {
+        "name": "BIC",
+        "value": 21.21
+      },
+      {
+        "name": "AIC",
+        "value": 478.21
+      }
+    ],
+    "notes": "Wagenmakers (2007) method for calculating Bayes factors"
+  }
+}

@@ -2,7 +2,7 @@
 # Setup -------------------------------------------------------------------
 
 # Load test data
-path <- system.file("tests/testthat/data/lm.json", package = "tidystats")
+path <- system.file("tests/data/lm.json", package = "tidystats")
 expected_statistics <- read_stats(path)
 
 # lm() --------------------------------------------------------------------
@@ -32,5 +32,77 @@ test_that("lm without an intercept works", {
   expect_equal_models(
     model = model, 
     expected_tidy_model = expected_statistics$lm_wo_intercept
+  )
+})
+
+test_that("lm anova works", {
+  fit <- lm(sr ~ ., data = LifeCycleSavings)
+  
+  model <- anova(fit)
+  
+  expect_equal_models(
+    model = model, 
+    expected_tidy_model = expected_statistics$anova_lm
+  )
+})
+
+test_that("lm model comparison anova works", {
+  fit <- lm(sr ~ ., data = LifeCycleSavings)
+  fit0 <- lm(sr ~ 1, data = LifeCycleSavings)
+  fit1 <- update(fit0, . ~ . + pop15)
+  fit2 <- update(fit1, . ~ . + pop75)
+  fit3 <- update(fit2, . ~ . + dpi)
+  fit4 <- update(fit3, . ~ . + ddpi)
+  
+  model <- anova(fit0, fit1, fit2, fit3, fit4, test = "F")
+  
+  expect_equal_models(
+    model = model, 
+    expected_tidy_model = expected_statistics$anova_lm_fits
+  )
+})
+
+test_that("lm model comparison anova in another order works", {
+  fit0 <- lm(sr ~ 1, data = LifeCycleSavings)
+  fit1 <- update(fit0, . ~ . + pop15)
+  fit2 <- update(fit1, . ~ . + pop75)
+  fit3 <- update(fit2, . ~ . + dpi)
+  fit4 <- update(fit3, . ~ . + ddpi)
+  
+  model <- anova(fit4, fit2, fit0, test = "F")
+  
+  expect_equal_models(
+    model = model, 
+    expected_tidy_model = expected_statistics$anova_lm_order
+  )
+})
+
+test_that("lm model comparison anova chi-squared works", {
+  fit0 <- lm(sr ~ 1, data = LifeCycleSavings)
+  fit1 <- update(fit0, . ~ . + pop15)
+  fit2 <- update(fit1, . ~ . + pop75)
+  fit3 <- update(fit2, . ~ . + dpi)
+  fit4 <- update(fit3, . ~ . + ddpi)
+  
+  model <- anova(fit4, fit2, fit0, test = "Chisq")
+  
+  expect_equal_models(
+    model = model, 
+    expected_tidy_model = expected_statistics$anova_lm_chisq
+  )
+})
+
+test_that("lm model comparison anova Cp works", {
+  fit0 <- lm(sr ~ 1, data = LifeCycleSavings)
+  fit1 <- update(fit0, . ~ . + pop15)
+  fit2 <- update(fit1, . ~ . + pop75)
+  fit3 <- update(fit2, . ~ . + dpi)
+  fit4 <- update(fit3, . ~ . + ddpi)
+  
+  model <- anova(fit4, fit2, fit0, test = "Cp")
+  
+  expect_equal_models(
+    model = model, 
+    expected_tidy_model = expected_statistics$anova_lm_cp
   )
 })

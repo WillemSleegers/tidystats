@@ -14,6 +14,8 @@
 * Added support for the `test()` function on the result of `contrast()` on the result of `emmeans()` from the `emmeans` package.
 * Added support for `lme()`, `nlme()`, `gls()`, and `anova()` from the `nlme` package.
 * Added support for the `pairwise.t.test()`, `pairwise.prop.test()`, and `pairwise.wilcox.test()` from the `stats` package.
+* Added support for the `effectsize` package.
+* Added support for the `effsize` package.
 
 ## Changes
 * Renamed the `results` argument in `add_stats()` to `list`

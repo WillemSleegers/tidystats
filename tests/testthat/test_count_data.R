@@ -2,10 +2,7 @@
 # Setup -------------------------------------------------------------------
 
 # Load test data
-path <- system.file(
-  "tests/testthat/data/count_data.json", 
-  package = "tidystats"
-)
+path <- system.file("tests/data/count_data.json", package = "tidystats")
 expected_statistics <- read_stats(path)
 
 # count_data() ------------------------------------------------------------
@@ -50,7 +47,7 @@ test_that("grouped count data with one group works", {
 
 test_that("grouped count data with one group without missings works", {
   model <- quote_source |>
-    group_by(source) |>
+    dplyr::group_by(source) |>
     count_data(sex, na.rm = TRUE)
   
   expect_equal_models(

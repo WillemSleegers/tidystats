@@ -1,0 +1,826 @@
+{
+  "lm": {
+    "name": "weight ~ group",
+    "method": "Linear regression",
+    "groups": [
+      {
+        "name": "Model",
+        "statistics": [
+          {
+            "name": "R squared",
+            "symbol": "R²",
+            "value": 0.073078
+          },
+          {
+            "name": "adj. R squared",
+            "symbol": "R²",
+            "subscript": "adj.",
+            "value": 0.021582
+          },
+          {
+            "name": "statistic",
+            "symbol": "F",
+            "value": 1.419101
+          },
+          {
+            "name": "df numerator",
+            "symbol": "df",
+            "subscript": "num.",
+            "value": 1
+          },
+          {
+            "name": "df denominator",
+            "symbol": "df",
+            "subscript": "den.",
+            "value": 18
+          },
+          {
+            "name": "p",
+            "value": 0.249023
+          },
+          {
+            "name": "sigma",
+            "symbol": "s",
+            "subscript": "res.",
+            "value": 0.696389
+          }
+        ]
+      },
+      {
+        "name": "Coefficients",
+        "groups": [
+          {
+            "name": "(Intercept)",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 5.032
+              },
+              {
+                "name": "SE",
+                "value": 0.220218
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 22.850117
+              },
+              {
+                "name": "df",
+                "value": 18
+              },
+              {
+                "name": "p",
+                "value": 9.547128e-15
+              }
+            ]
+          },
+          {
+            "name": "groupTrt",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": -0.371
+              },
+              {
+                "name": "SE",
+                "value": 0.311435
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": -1.19126
+              },
+              {
+                "name": "df",
+                "value": 18
+              },
+              {
+                "name": "p",
+                "value": 0.249023
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.2.1"
+    }
+  },
+  "lm_wo_intercept": {
+    "name": "weight ~ group - 1",
+    "method": "Linear regression",
+    "groups": [
+      {
+        "name": "Model",
+        "statistics": [
+          {
+            "name": "R squared",
+            "symbol": "R²",
+            "value": 0.981783
+          },
+          {
+            "name": "adj. R squared",
+            "symbol": "R²",
+            "subscript": "adj.",
+            "value": 0.979759
+          },
+          {
+            "name": "statistic",
+            "symbol": "F",
+            "value": 485.051413
+          },
+          {
+            "name": "df numerator",
+            "symbol": "df",
+            "subscript": "num.",
+            "value": 2
+          },
+          {
+            "name": "df denominator",
+            "symbol": "df",
+            "subscript": "den.",
+            "value": 18
+          },
+          {
+            "name": "p",
+            "value": 2.209191e-16
+          },
+          {
+            "name": "sigma",
+            "symbol": "s",
+            "subscript": "res.",
+            "value": 0.696389
+          }
+        ]
+      },
+      {
+        "name": "Coefficients",
+        "groups": [
+          {
+            "name": "groupCtl",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 5.032
+              },
+              {
+                "name": "SE",
+                "value": 0.220218
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 22.850117
+              },
+              {
+                "name": "df",
+                "value": 18
+              },
+              {
+                "name": "p",
+                "value": 9.547128e-15
+              }
+            ]
+          },
+          {
+            "name": "groupTrt",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 4.661
+              },
+              {
+                "name": "SE",
+                "value": 0.220218
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 21.16542
+              },
+              {
+                "name": "df",
+                "value": 18
+              },
+              {
+                "name": "p",
+                "value": 3.615345e-14
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.2.1"
+    }
+  },
+  "anova_lm": {
+    "name": "sr  ~  pop15 + pop75 + dpi + ddpi",
+    "method": "ANOVA",
+    "groups": [
+      {
+        "name": "Terms",
+        "groups": [
+          {
+            "name": "pop15",
+            "statistics": [
+              {
+                "name": "SS",
+                "value": 204.117565
+              },
+              {
+                "name": "MS",
+                "value": 204.117565
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 14.115732
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 45
+              },
+              {
+                "name": "p",
+                "value": 0.000492
+              }
+            ]
+          },
+          {
+            "name": "pop75",
+            "statistics": [
+              {
+                "name": "SS",
+                "value": 53.34271
+              },
+              {
+                "name": "MS",
+                "value": 53.34271
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 3.68891
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 45
+              },
+              {
+                "name": "p",
+                "value": 0.061125
+              }
+            ]
+          },
+          {
+            "name": "dpi",
+            "statistics": [
+              {
+                "name": "SS",
+                "value": 12.400946
+              },
+              {
+                "name": "MS",
+                "value": 12.400946
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.857586
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 45
+              },
+              {
+                "name": "p",
+                "value": 0.359355
+              }
+            ]
+          },
+          {
+            "name": "ddpi",
+            "statistics": [
+              {
+                "name": "SS",
+                "value": 63.054031
+              },
+              {
+                "name": "MS",
+                "value": 63.054031
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 4.360496
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 45
+              },
+              {
+                "name": "p",
+                "value": 0.042471
+              }
+            ]
+          },
+          {
+            "name": "Residuals",
+            "statistics": [
+              {
+                "name": "SS",
+                "value": 650.712998
+              },
+              {
+                "name": "MS",
+                "value": 14.460289
+              },
+              {
+                "name": "df",
+                "value": 45
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.2.1"
+    }
+  },
+  "anova_lm_fits": {
+    "method": "ANOVA",
+    "groups": [
+      {
+        "name": "Terms",
+        "groups": [
+          {
+            "name": "1",
+            "statistics": [
+              {
+                "name": "RSS",
+                "value": 983.62825
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "name": "2",
+            "statistics": [
+              {
+                "name": "RSS",
+                "value": 779.510685
+              },
+              {
+                "name": "SS",
+                "value": 204.117565
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 14.115732
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 1
+              },
+              {
+                "name": "p",
+                "value": 0.000492
+              }
+            ]
+          },
+          {
+            "name": "3",
+            "statistics": [
+              {
+                "name": "RSS",
+                "value": 726.167975
+              },
+              {
+                "name": "SS",
+                "value": 53.34271
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 3.68891
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 1
+              },
+              {
+                "name": "p",
+                "value": 0.061125
+              }
+            ]
+          },
+          {
+            "name": "4",
+            "statistics": [
+              {
+                "name": "RSS",
+                "value": 713.767029
+              },
+              {
+                "name": "SS",
+                "value": 12.400946
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.857586
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 1
+              },
+              {
+                "name": "p",
+                "value": 0.359355
+              }
+            ]
+          },
+          {
+            "name": "5",
+            "statistics": [
+              {
+                "name": "RSS",
+                "value": 650.712998
+              },
+              {
+                "name": "SS",
+                "value": 63.054031
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 4.360496
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 1
+              },
+              {
+                "name": "p",
+                "value": 0.042471
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.2.1"
+    }
+  },
+  "anova_lm_order": {
+    "method": "ANOVA",
+    "groups": [
+      {
+        "name": "Terms",
+        "groups": [
+          {
+            "name": "1",
+            "statistics": [
+              {
+                "name": "RSS",
+                "value": 650.712998
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": -2
+              }
+            ]
+          },
+          {
+            "name": "2",
+            "statistics": [
+              {
+                "name": "RSS",
+                "value": 726.167975
+              },
+              {
+                "name": "SS",
+                "value": -75.454977
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 2.609041
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": -2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": -2
+              },
+              {
+                "name": "p",
+                "value": 0.084709
+              }
+            ]
+          },
+          {
+            "name": "3",
+            "statistics": [
+              {
+                "name": "RSS",
+                "value": 983.62825
+              },
+              {
+                "name": "SS",
+                "value": -257.460275
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 8.902321
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": -2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": -2
+              },
+              {
+                "name": "p",
+                "value": 0.000553
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.2.1"
+    }
+  },
+  "anova_lm_chisq": {
+    "method": "ANOVA",
+    "groups": [
+      {
+        "name": "Terms",
+        "groups": [
+          {
+            "name": "1",
+            "statistics": [
+              {
+                "name": "RSS",
+                "value": 650.712998
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": -2
+              }
+            ]
+          },
+          {
+            "name": "2",
+            "statistics": [
+              {
+                "name": "RSS",
+                "value": 726.167975
+              },
+              {
+                "name": "SS",
+                "value": -75.454977
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": -2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": -2
+              }
+            ]
+          },
+          {
+            "name": "3",
+            "statistics": [
+              {
+                "name": "RSS",
+                "value": 983.62825
+              },
+              {
+                "name": "SS",
+                "value": -257.460275
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": -2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": -2
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.2.1"
+    }
+  },
+  "anova_lm_cp": {
+    "method": "ANOVA",
+    "groups": [
+      {
+        "name": "Terms",
+        "groups": [
+          {
+            "name": "1",
+            "statistics": [
+              {
+                "name": "RSS",
+                "value": 650.712998
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": -2
+              },
+              {
+                "name": "Cp",
+                "value": 795.315887
+              }
+            ]
+          },
+          {
+            "name": "2",
+            "statistics": [
+              {
+                "name": "RSS",
+                "value": 726.167975
+              },
+              {
+                "name": "SS",
+                "value": -75.454977
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": -2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": -2
+              },
+              {
+                "name": "Cp",
+                "value": 812.929708
+              }
+            ]
+          },
+          {
+            "name": "3",
+            "statistics": [
+              {
+                "name": "RSS",
+                "value": 983.62825
+              },
+              {
+                "name": "SS",
+                "value": -257.460275
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": -2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": -2
+              },
+              {
+                "name": "Cp",
+                "value": 1012.548828
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "stats",
+      "version": "4.2.1"
+    }
+  }
+}
