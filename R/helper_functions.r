@@ -1,8 +1,8 @@
 #' Helper functions in tidystats
 #'
-#' @description Functions used under the hood in the \code{tidystats} package.
-#'
-#' @describeIn tidy_matrix
+#' Functions used under the hood in the [tidystats] package.
+
+#' @describeIn helper_functions
 #' Function to convert matrix objects to a tidy data frame.
 #'
 #' @param m A matrix.
@@ -10,7 +10,6 @@
 # Matrices ----------------------------------------------------------------
 
 tidy_matrix <- function(m, symmetric = TRUE) {
-  # Check whether there are row and column names
   if (!length(rownames(m)) > 0) {
     stop("Matrix has no row names.")
   }
@@ -19,7 +18,6 @@ tidy_matrix <- function(m, symmetric = TRUE) {
     stop("Matrix has no column names.")
   }
 
-  # Check if the matrix is indeed symmetric
   if (symmetric) {
     if (sum(rownames(m) == colnames(m)) != length(rownames(m))) {
       stop("Matrix row and column names do not match.")
@@ -31,7 +29,6 @@ tidy_matrix <- function(m, symmetric = TRUE) {
     m[lower.tri(m, diag = TRUE)] <- NA
   }
 
-  # Tidy the matrix into a data frame
   df <- m %>%
     as.matrix() %>%
     tibble::as_tibble(rownames = "name1") %>%
@@ -42,6 +39,10 @@ tidy_matrix <- function(m, symmetric = TRUE) {
 }
 
 # Tidying -----------------------------------------------------------------
+
+#' @describeIn helper_functions
+#' Function to add a statistic to list. It helps create the list and ignores 
+#' NULL values.
 
 add_statistic <- function(list, name, value, symbol = NULL, subscript = NULL,
                           interval = NULL, level = NULL, lower = NULL,

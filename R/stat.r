@@ -1,7 +1,7 @@
 #' Create a custom statistic
 #'
-#' \code{stat} can be used to create your own statistic to add to a custom
-#' statistics object using \code{stats}.
+#' `stat()` can be used to create your own statistic to add to a custom
+#' statistics object using [stats()].
 #'
 #' @param name A string specifying the name of the statistic.
 #' @param value The numeric value of the statistic.
@@ -15,8 +15,6 @@
 #'   interval.
 #' @param lower The numeric value of the lower bound of the statistic.
 #' @param upper The numeric value of the upper bound of the statistic.
-#'
-#' @examples
 #'
 #' @export
 stat <- function(name, value, symbol = NULL, subscript = NULL,

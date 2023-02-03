@@ -19,6 +19,9 @@
 
 ## Changes
 * Renamed the `results` argument in `add_stats()` to `list`
+* Removed the multiplication by 100 in `count_data()`'s `pct` column to make it 
+  easier to present the numbers as percentages (e.g., using 
+  `scales::label_percent()`)
 * Improved names in `anova()` tests.
 
 ## Misc

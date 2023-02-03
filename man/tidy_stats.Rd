@@ -2,9 +2,9 @@
 % Please edit documentation in R/tidy_stats.BFBayesFactor.r,
 %   R/tidy_stats.Hmisc.r, R/tidy_stats.R, R/tidy_stats.afex.r,
 %   R/tidy_stats.effectsize.r, R/tidy_stats.effsize.r, R/tidy_stats.emmeans.R,
-%   R/tidy_stats.irr.r, R/tidy_stats.lmerMod.r, R/tidy_stats.marginaleffects.R,
-%   R/tidy_stats.metafor.r, R/tidy_stats.nlme.r, R/tidy_stats.psych.r,
-%   R/tidy_stats.tidystats.r, R/work-in-progress.R
+%   R/tidy_stats.irr.r, R/tidy_stats.lavaan.r, R/tidy_stats.lmerMod.r,
+%   R/tidy_stats.marginaleffects.R, R/tidy_stats.metafor.r, R/tidy_stats.nlme.r,
+%   R/tidy_stats.psych.r, R/tidy_stats.tidystats.r
 \name{tidy_stats.BFBayesFactor}
 \alias{tidy_stats.BFBayesFactor}
 \alias{tidy_stats.rcorr}
@@ -24,6 +24,7 @@
 \alias{tidy_stats.summary_emm}
 \alias{tidy_stats.emm_list}
 \alias{tidy_stats.icclist}
+\alias{tidy_stats.lavaan}
 \alias{tidy_stats.lmerMod}
 \alias{tidy_stats.lmerModLmerTest}
 \alias{tidy_stats.marginaleffects}
@@ -51,8 +52,6 @@
 \alias{tidy_stats.tidystats}
 \alias{tidy_stats.tidystats_descriptives}
 \alias{tidy_stats.tidystats_counts}
-\alias{tidy_stats.lavaan}
-\alias{tidy_stats.psychwip}
 \title{Tidy the output of a statistics object}
 \usage{
 \method{tidy_stats}{BFBayesFactor}(x, args = NULL)
@@ -90,6 +89,8 @@ tidy_stats(x, args = NULL)
 \method{tidy_stats}{emm_list}(x, args = NULL)
 
 \method{tidy_stats}{icclist}(x, args = NULL)
+
+\method{tidy_stats}{lavaan}(x, args = NULL)
 
 \method{tidy_stats}{lmerMod}(x, args = NULL)
 
@@ -144,10 +145,6 @@ tidy_stats(x, args = NULL)
 \method{tidy_stats}{tidystats_descriptives}(x, args = NULL)
 
 \method{tidy_stats}{tidystats_counts}(x, args = NULL)
-
-\method{tidy_stats}{lavaan}(x, args = list(fit.measures = TRUE))
-
-\method{tidy_stats}{psychwip}(x, args = NULL)
 }
 \arguments{
 \item{x}{The output of a statistical test.}
@@ -163,45 +160,44 @@ specific analysis will be organized.
 Please note that not all statistical tests are supported. See 'Details'
 below for a list of supported statistical tests.
 
-
 Currently supported functions:
 
 \code{stats}:
 \itemize{
-  \item \code{t.test()}
-  \item \code{cor.test()}
-  \item \code{chisq.test()}
-  \item \code{wilcox.test()}
-  \item \code{fisher.test()}
-  \item \code{oneway.test()}
-  \item \code{lm()}
-  \item \code{glm()}
-  \item \code{aov()}
-  \item \code{anova()}
+\item \code{t.test()}
+\item \code{cor.test()}
+\item \code{chisq.test()}
+\item \code{wilcox.test()}
+\item \code{fisher.test()}
+\item \code{oneway.test()}
+\item \code{lm()}
+\item \code{glm()}
+\item \code{aov()}
+\item \code{anova()}
 }
 
 \code{lme4}/\code{lmerTest}:
 \itemize{
-  \item \code{lmer()}
+\item \code{lmer()}
 }
 
 \code{BayesFactor}:
 \itemize{
-  \item \code{generalTestBF()}
-  \item \code{lmBF()}
-  \item \code{regressionBF()}
-  \item \code{ttestBF()}
-  \item \code{anovaBF()}
-  \item \code{correlationBF()}
-  \item \code{contingencyTableBF()}
-  \item \code{proportionBF()}
-  \item \code{meta.ttestBF()}
+\item \code{generalTestBF()}
+\item \code{lmBF()}
+\item \code{regressionBF()}
+\item \code{ttestBF()}
+\item \code{anovaBF()}
+\item \code{correlationBF()}
+\item \code{contingencyTableBF()}
+\item \code{proportionBF()}
+\item \code{meta.ttestBF()}
 }
 
 \code{tidystats}:
 \itemize{
-  \item \code{describe_data()}
-  \item \code{count_data()}
+\item \code{describe_data()}
+\item \code{count_data()}
 }
 }
 \section{Methods (by class)}{
@@ -239,6 +235,8 @@ Currently supported functions:
 \item \code{tidy_stats(emm_list)}: tidy_stats method for class 'emm_list'
 
 \item \code{tidy_stats(icclist)}: tidy_stats method for class 'icclist'
+
+\item \code{tidy_stats(lavaan)}: tidy_stats method for class 'lavaan'
 
 \item \code{tidy_stats(lmerMod)}: tidy_stats method for class 'lmerMod'
 
@@ -293,10 +291,6 @@ Currently supported functions:
 \item \code{tidy_stats(tidystats_descriptives)}: tidy_stats method for class 'tidystats_descriptives'
 
 \item \code{tidy_stats(tidystats_counts)}: tidy_stats method for class 'tidystats_counts'
-
-\item \code{tidy_stats(lavaan)}: tidy_stats method for class 'lavaan'
-
-\item \code{tidy_stats(psychwip)}: tidy_stats method for class 'psych'
 
 }}
 \examples{

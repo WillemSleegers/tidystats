@@ -7,8 +7,6 @@
 #'   the statistics.
 #' @param statistics A vector of statistics created with \code{stat()}.
 #'
-#' @examples
-#'
 #' @export
 stats <- function(method, statistics) {
   stats <- list()

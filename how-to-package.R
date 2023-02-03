@@ -10,13 +10,17 @@
 # TODO: Simplify the method name of Kolmogorov-Smirnov tests?
 # TODO: Rename the name of degrees of freedom and related values to 'parameter'?
 
-# Update ------------------------------------------------------------------
+# Load functions ----------------------------------------------------------
+
+devtools::load_all()
+
+# Documentation -----------------------------------------------------------
+
+# Run once
+# usethis::use_roxygen_md()
 
 # Update documentation
 devtools::document()
-
-# Load the package
-devtools::load_all()
 
 # Installation ------------------------------------------------------------
 

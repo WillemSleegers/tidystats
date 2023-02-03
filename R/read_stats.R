@@ -1,7 +1,7 @@
 #' Read a .json file that was produced with \code{write_stats}
 #'
-#' \code{read_stats} can read in a .json file containing the statistical output
-#' that was produced with \code{write_stats}. It returns a list containing the
+#' `read_stats()` can read in a .json file containing the statistical output
+#' that was produced with [write_stats()]. It returns a list containing the
 #' results, with the identifier as the name for each list element.
 #'
 #' @param file A string; specifying the path to the tidystats data file.
@@ -21,7 +21,7 @@ read_stats <- function(file) {
     warning(
       paste(
         "The file does not have a .json file extension;",
-        "make sure to check whether you have specified the correct file."
+        "make sure you have specified the correct file."
       )
     )
   }

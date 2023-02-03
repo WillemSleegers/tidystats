@@ -2,18 +2,34 @@
 % Please edit documentation in R/helper_functions.r
 \name{tidy_matrix}
 \alias{tidy_matrix}
+\alias{add_statistic}
 \title{Helper functions in tidystats}
 \usage{
 tidy_matrix(m, symmetric = TRUE)
+
+add_statistic(
+  list,
+  name,
+  value,
+  symbol = NULL,
+  subscript = NULL,
+  interval = NULL,
+  level = NULL,
+  lower = NULL,
+  upper = NULL
+)
 }
 \arguments{
 \item{m}{A matrix.}
 }
 \description{
-Functions used under the hood in the \code{tidystats} package.
+Functions used under the hood in the \link{tidystats} package.
 }
 \section{Functions}{
 \itemize{
 \item \code{tidy_matrix()}: Function to convert matrix objects to a tidy data frame.
+
+\item \code{add_statistic()}: Function to add a statistic to list. It helps create the list and ignores
+NULL values.
 
 }}

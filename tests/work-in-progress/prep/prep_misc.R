@@ -34,27 +34,6 @@ tidy_stats(psych_ICC)
 results <- add_stats(results, psych_ICC)
 
 
-# add_stats(): default identifier -----------------------------------------
-
-# Statistical test
-add_stats(list(), t_test_one_sample)
-
-# Statistical test with piping
-t.test(cox$call_parent, alternative = "greater") %>%
-  add_stats(list(), .)
-
-# Data frame
-cox_avoidance <- cox %>%
-  describe_data(avoidance) %>%
-  tidy_describe_data()
-
-add_stats(list(), cox_avoidance)
-
-# Data frame with piping
-cox %>%
-  describe_data(avoidance) %>%
-  tidy_describe_data() %>%
-  add_stats(list(), ., type = "d")
 
 
 # In progress -------------------------------------------------------------

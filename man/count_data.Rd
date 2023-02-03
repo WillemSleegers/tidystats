@@ -12,33 +12,26 @@ count_data(data, ..., na.rm = FALSE)
 \item{...}{One or more unquoted (categorical) column names from the data
 frame, separated by commas.}
 
-\item{na.rm}{Logical. Should missing values (including NaN) be removed?}
+\item{na.rm}{A boolean specifying whether missing values (including NaN)
+should be removed.}
 }
 \description{
 \code{count_data} returns the number and percentage of observations for
 categorical variables.
 }
 \details{
-The data frame can be grouped using \strong{dplyr}'s \code{group_by}
+The data frame can be grouped using \code{\link[dplyr:group_by]{dplyr::group_by()}}
 so that the number of observations will be calculated within each group
 level.
 }
 \examples{
-# Load dplyr for access to the \%>\% operator and group_by()
-library(dplyr)
-
-# 1 variable
 count_data(quote_source, source)
-
-# 2 variables
 count_data(quote_source, source, sex)
-
-# Ignore missing values
 count_data(quote_source, source, sex, na.rm = TRUE)
 
-# Use group_by() to get percentages within each group
-quote_source \%>\%
-  group_by(source) \%>\%
+# Use dplyr::group_by() to get percentages within each group
+quote_source |>
+  dplyr::group_by(source) |>
   count_data(sex)
 
 }

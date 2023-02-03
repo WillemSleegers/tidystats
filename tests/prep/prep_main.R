@@ -34,6 +34,13 @@ sleep_t_test
 summary(D9_lm)
 summary(npk_aov)
 
+# add_stats(): default identifier -----------------------------------------
+
+# Statistical test with piping
+
+t.test(quote_source$response, alternative = "greater") %>%
+  add_stats(statistics, .)
+
 # tidy_stats_to_data_frame() ----------------------------------------------
 
 df <- tidy_stats_to_data_frame(statistics)

@@ -37,6 +37,6 @@ interval.}
 \item{upper}{The numeric value of the upper bound of the statistic.}
 }
 \description{
-\code{stat} can be used to create your own statistic to add to a custom
-statistics object using \code{stats}.
+\code{stat()} can be used to create your own statistic to add to a custom
+statistics object using \code{\link[=stats]{stats()}}.
 }

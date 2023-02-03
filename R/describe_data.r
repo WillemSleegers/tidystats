@@ -1,44 +1,40 @@
 #' Calculate common descriptive statistics
 #'
-#' \code{describe_data} returns a set of common descriptive statistics
+#' `describe_data` returns a set of common descriptive statistics
 #' (e.g., n, mean, sd) for numeric variables.
 #'
 #' @param data A data frame.
 #' @param ... One or more unquoted column names from the data frame.
-#' @param na.rm Logical. Should missing values (including NaN) be excluded in
-#' calculating the descriptives? The default is TRUE.
-#' @param short Logical. Should only a subset of descriptives be reported? If
-#' set to TRUE, only the N, M, and SD will be returned. The default is FALSE.
+#' @param na.rm A boolean indicating whether missing values (including NaN) 
+#'   should be excluded in calculating the descriptives? The default is TRUE.
+#' @param short A boolean indicating whether only a subset of descriptives 
+#'   should be reported? If set to TRUE, only the N, M, and SD will be returned.
+#'   The default is FALSE.
 #'
-#' @details The data can be grouped using \code{dplyr::group_by} so that
+#' @details The data can be grouped using [dplyr::group_by()] so that
 #' descriptives will be calculated for each group level.
 #'
 #' When na.rm is set to FALSE, a percentage column will be added to the output
 #' that contains the percentage of non-missing data.
 #'
-#' Skew and kurtosis are based on the \code{skewness} and \code{kurtosis}
-#' functions of the \code{moments} package (Komsta & Novomestky, 2015).
+#' Skew and kurtosis are based on the [skewness()] and 
+#' [kurtosis()] functions (Komsta & Novomestky, 2015).
 #'
 #' Percentages are calculated based on the total of non-missing observations.
 #' When na.rm is set to FALSE, percentages are based on the total of missing and
 #' non-missing observations.
 #'
 #' @examples
-#' # Load the dplyr package for access to the %>% operator and group_by()
-#' library(dplyr)
-#'
-#' # Inspect descriptives of the response column from the 'quote_source' data
-#' # frame included in tidystats
 #' describe_data(quote_source, response)
+#' 
+#' describe_data(quote_source, response, na.rm = FALSE)
 #'
-#' # Repeat the former, now for each level of the source column
-#' quote_source %>%
-#'   group_by(source) %>%
+#' quote_source |>
+#'   dplyr::group_by(source) |>
 #'   describe_data(response)
 #'
-#' # Only inspect the total N, mean, and standard deviation
-#' quote_source %>%
-#'   group_by(source) %>%
+#' quote_source |>
+#'   dplyr::group_by(source) |>
 #'   describe_data(response, short = TRUE)
 #'
 #' @importFrom dplyr %>%
@@ -78,13 +74,10 @@ describe_data <- function(data, ..., na.rm = TRUE, short = FALSE) {
     )
   }
 
-  # Store grouping columns
   grouping <- dplyr::group_vars(data)
 
-  # Select only the variables and grouping columns from the data
   data <- dplyr::select(data, dplyr::all_of(grouping), ...)
 
-  # Make the data long
   data <- tidyr::pivot_longer(data,
     cols = -dplyr::all_of(grouping),
     names_to = "var"
@@ -122,8 +115,6 @@ describe_data <- function(data, ..., na.rm = TRUE, short = FALSE) {
     )
 
   # Add percentage if na.rm = FALSE (if na.rm = TRUE it would always be 100)
-  # Note that depending on the value of na.rm, we either ignore or include the
-  # number of missing observations
   if (!na.rm) {
     output <- dplyr::mutate(output, pct = N / sum(N + missing) * 100)
   }
@@ -138,7 +129,6 @@ describe_data <- function(data, ..., na.rm = TRUE, short = FALSE) {
     output <- dplyr::relocate(output, var, dplyr::all_of(grouping))
   }
 
-  # Sort data by var
   output <- dplyr::arrange(output, var)
 
   # Add a tidystats class so we can use the tidy_stats() function to parse the

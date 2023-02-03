@@ -7,26 +7,26 @@
 \format{
 A data frame with 6343 rows and 15 columns:
 \describe{
-  \item{ID}{participant number}
-  \item{source}{attributed source of the quote: Washington or Bin
-    Laden}
-  \item{response}{evaluation of the quote on a 9-point Likert
-    scale, with 1 indicating disagreement and 9 indicating agreement}
-  \item{age}{participant's age}
-  \item{sex}{participant's sex}
-  \item{citizenship}{participant's citizenship}
-  \item{race}{participant's race}
-  \item{major}{participant's major}
-  \item{native_language}{participant's native language}
-  \item{referrer}{location of where the study was conducted}
-  \item{compensation}{how the participant was compensated for their
-    participation}
-  \item{recruitment}{how the participant was recruited}
-  \item{separation}{description of how the study was administered in
-    terms of participant isolation}
-  \item{us_or_international}{whether the study was conducted in the US or
-   outside of the US (international)}
-  \item{lab_or_online}{whether the study was conducted in the lab or online}
+\item{ID}{participant number}
+\item{source}{attributed source of the quote: Washington or Bin
+Laden}
+\item{response}{evaluation of the quote on a 9-point Likert
+scale, with 1 indicating disagreement and 9 indicating agreement}
+\item{age}{participant's age}
+\item{sex}{participant's sex}
+\item{citizenship}{participant's citizenship}
+\item{race}{participant's race}
+\item{major}{participant's major}
+\item{native_language}{participant's native language}
+\item{referrer}{location of where the study was conducted}
+\item{compensation}{how the participant was compensated for their
+participation}
+\item{recruitment}{how the participant was recruited}
+\item{separation}{description of how the study was administered in
+terms of participant isolation}
+\item{us_or_international}{whether the study was conducted in the US or
+outside of the US (international)}
+\item{lab_or_online}{whether the study was conducted in the lab or online}
 }
 }
 \usage{

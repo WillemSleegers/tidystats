@@ -1,5 +1,5 @@
 #' @describeIn tidy_stats tidy_stats method for class 'lavaan'
-tidy_stats.lavaan <- function(x, args = list(fit.measures = TRUE)) {
+tidy_stats.lavaan <- function(x, args = NULL) {
   output <- list()
 
   # Set method
@@ -314,110 +314,6 @@ tidy_stats.lavaan <- function(x, args = list(fit.measures = TRUE)) {
   } else {
     # Add groups to output
     output$groups <- groups
-  }
-
-  return(output)
-}
-
-#' @describeIn tidy_stats tidy_stats method for class 'psych'
-#' @export
-tidy_stats.psychwip <- function(x, args = NULL) {
-  output <- list()
-
-  # Check the kind of psych object
-  if ("corr.test" %in% class(x)) {
-    output$method <- "Correlations"
-
-    # Create an empty pairs list
-    pairs <- list()
-
-    # Extract variable names
-    rownames <- rownames(x$r)
-    colnames <- colnames(x$r)
-
-    # Determine whether the correlation matrix is symmetric or asymmetric
-    if (identical(rownames, colnames)) {
-      I <- choose(length(rownames), 2)
-      symmetric <- TRUE
-    } else {
-      I <- length(rownames) * length(colnames)
-      symmetric <- FALSE
-    }
-
-    # Tidy statistics
-    rs <- tidy_matrix(x$r, symmetric = symmetric)
-    SEs <- tidy_matrix(x$se, symmetric = symmetric)
-    ts <- tidy_matrix(x$t, symmetric = symmetric)
-    ps <- tidy_matrix(t(x$p), symmetric = symmetric)
-    ps_adjusted <- tidy_matrix(x$p, symmetric = symmetric)
-
-    # Check if there are confidence intervals
-    if (!is.null(x$ci)) {
-      # Figure out the level
-      alpha <- as.character(x$Call)[which(names(x$Call) == "alpha")]
-
-      if (length(alpha) == 0) {
-        level <- .95
-      } else {
-        level <- 1 - as.numeric(alpha)
-      }
-    }
-
-    if (length(x$n) == 1) {
-      n <- x$n
-    } else {
-      ns <- tidy_matrix(x$n, symmetric = symmetric)
-    }
-
-    # Loop over the pairs
-    for (i in 1:I) {
-      pair <- list()
-
-      # Set names
-      names <- list()
-      names[[1]] <- rs$name1[i]
-      names[[2]] <- rs$name2[i]
-      pair$names <- names
-
-      # Set statistics
-      if (length(x$n) == 1) {
-        pair$statistics$n <- n
-      } else {
-        pair$statistics$n <- ns$value[i]
-      }
-      pair$statistics$estimate$name <- "r"
-      pair$statistics$estimate$value <- rs$value[i]
-      pair$statistics$SE <- SEs$value[i]
-      pair$statistics$statistic$name <- "t"
-      pair$statistics$statistic$value <- ts$value[i]
-      pair$statistics$p <- ps$value[i]
-
-      if (x$adjust != "none") {
-        pair$statistics$p_adjusted <- ps_adjusted$value[i]
-      }
-
-      if (!is.null(x$ci)) {
-        pair$statistics$CI$CI_level <- level
-        pair$statistics$CI$CI_lower <- x$ci$lower[i]
-        pair$statistics$CI$CI_upper <- x$ci$upper[i]
-      }
-
-      if (!is.null(x$ci)) {
-        pair$statistics$CI_adjusted$CI_level <- level
-        pair$statistics$CI_adjusted$CI_lower <- x$ci.adj$lower[i]
-        pair$statistics$CI_adjusted$CI_upper <- x$ci.adj$upper[i]
-      }
-
-      pairs[[i]] <- pair
-    }
-
-    # Add pairs to output
-    output$pairs <- pairs
-
-    # Set multiple test adjustment method
-    output$multiple_test_adjustment <- x$adjust
-  } else {
-    stop("Sorry, tidystats does not (yet) support this kind of analysis.")
   }
 
   return(output)
