@@ -1,8 +1,9 @@
-url: https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats
+url: https://willemsleegers.github.io/tidystats/,
+  https://github.com/WillemSleegers/tidystats
 
 reference:
   - title: Main functions
-    desc:  Essential functionality
+    desc: Essential functionality
     contents:
       - add_stats
       - write_stats
@@ -10,12 +11,12 @@ reference:
       - tidy_stats
       - tidy_stats_to_data_frame
   - title: Analysis functions
-    desc:  Functions for performing analyses such as calculating descriptives
+    desc: Functions for performing analyses such as calculating descriptives
     contents:
       - count_data
       - describe_data
   - title: Helper functions
-    desc:  Functions used under the hood
+    desc: Functions used under the hood
     contents:
       - tidy_matrix
   - title: Data sets

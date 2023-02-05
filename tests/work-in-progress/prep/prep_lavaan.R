@@ -1,5 +1,3 @@
-
-
 # Todo --------------------------------------------------------------------
 
 # - Add support for groups
@@ -20,7 +18,7 @@ results <- list()
 
 # cfa ---------------------------------------------------------------------
 
-HS.model <- "visual  =~ x1 + x2 + x3 
+HS.model <- "visual  =~ x1 + x2 + x3
              textual =~ x4 + x5 + x6
              speed   =~ x7 + x8 + x9"
 
@@ -46,13 +44,15 @@ HS.model <- "# three-factor model
                x8 ~ 1
                x9 ~ 1"
 
-fit_intercepts <- cfa(HS.model, data = HolzingerSwineford1939, 
-  meanstructure = TRUE)
+fit_intercepts <- cfa(HS.model,
+  data = HolzingerSwineford1939,
+  meanstructure = TRUE
+)
 summary(fit_intercepts)
 
-HS.model <- ' visual  =~ x1 + x2 + x3
+HS.model <- " visual  =~ x1 + x2 + x3
               textual =~ x4 + x5 + x6
-              speed   =~ x7 + x8 + x9 '
+              speed   =~ x7 + x8 + x9 "
 
 fit_groups <- cfa(HS.model, data = HolzingerSwineford1939, group = "school")
 summary(fit_groups)
@@ -81,10 +81,10 @@ temp <- tidy_stats(fit, args = list(standardized = TRUE))
 
 set.seed(1234)
 X <- rnorm(100)
-M <- 0.5*X + rnorm(100)
-Y <- 0.7*M + rnorm(100)
+M <- 0.5 * X + rnorm(100)
+Y <- 0.7 * M + rnorm(100)
 Data <- data.frame(X = X, Y = Y, M = M)
-model <- ' # direct effect
+model <- " # direct effect
              Y ~ c*X
            # mediator
              M ~ a*X
@@ -93,19 +93,21 @@ model <- ' # direct effect
              ab := a*b
            # total effect
              total := c + (a*b)
-         '
+         "
 fit_defined_parameters <- sem(model, data = Data)
 summary(fit_defined_parameters)
 
 # lavaan ------------------------------------------------------------------
 
 # The Holzinger and Swineford (1939) example
-HS_model <- 'visual  =~ x1 + x2 + x3
+HS_model <- "visual  =~ x1 + x2 + x3
              textual =~ x4 + x5 + x6
-             speed   =~ x7 + x8 + x9'
+             speed   =~ x7 + x8 + x9"
 
-fit <- lavaan(HS_model, data = HolzingerSwineford1939, auto.var = TRUE, 
-  auto.fix.first = TRUE, auto.cov.lv.x = TRUE)
+fit <- lavaan(HS_model,
+  data = HolzingerSwineford1939, auto.var = TRUE,
+  auto.fix.first = TRUE, auto.cov.lv.x = TRUE
+)
 summary(fit)
 summary(fit, fit.measures = TRUE)
 summary(fit, standardized = TRUE)

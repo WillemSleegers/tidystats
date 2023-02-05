@@ -1,4 +1,3 @@
-
 # Todos -------------------------------------------------------------------
 
 # TODO: Rename certain terms to contrasts?
@@ -12,7 +11,7 @@
 
 # Load functions ----------------------------------------------------------
 
-devtools::load_all()
+pkgload::load_all()
 
 # Documentation -----------------------------------------------------------
 
@@ -21,6 +20,9 @@ devtools::load_all()
 
 # Update documentation
 devtools::document()
+
+# Inspect documentation
+pkgload::dev_help("add_stats")
 
 # Installation ------------------------------------------------------------
 

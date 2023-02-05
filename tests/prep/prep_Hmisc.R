@@ -1,11 +1,7 @@
-
 # Setup -------------------------------------------------------------------
 
-# Load packages
 library(Hmisc)
-library(tidyverse)
 
-# Create an empty list
 statistics <- list()
 
 # rcorr() -----------------------------------------------------------------
@@ -18,8 +14,8 @@ v <- c(1, 2, 3, 4, 5)
 rcorr <- rcorr(cbind(x, y, z, v), type = "pearson")
 rcorr_spearman <- rcorr(cbind(x, y, z, v), type = "spearman")
 
-statistics <- statistics %>%
-  add_stats(rcorr) %>%
+statistics <- statistics |>
+  add_stats(rcorr) |>
   add_stats(rcorr_spearman)
 
 rcorr

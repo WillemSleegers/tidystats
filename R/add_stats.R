@@ -40,7 +40,7 @@
 #' Supported classes:
 #' | Function    | Class name  |
 #' | ------------| ------------|
-#' | [confint()] | confint     |
+#' | [confint()] | confint     | 
 #' 
 #' @examples
 #' # Conduct several analyses
