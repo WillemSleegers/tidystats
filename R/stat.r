@@ -16,6 +16,9 @@
 #' @param lower The numeric value of the lower bound of the statistic.
 #' @param upper The numeric value of the upper bound of the statistic.
 #'
+#' @examples
+#' stat(name = "N", value = nrow(sleep))
+#'
 #' @export
 stat <- function(name, value, symbol = NULL, subscript = NULL,
                  interval = NULL, level = NULL, lower = NULL,

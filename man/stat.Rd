@@ -40,3 +40,7 @@ interval.}
 \code{stat()} can be used to create your own statistic to add to a custom
 statistics object using \code{\link[=stats]{stats()}}.
 }
+\examples{
+stat(name = "N", value = nrow(sleep))
+
+}

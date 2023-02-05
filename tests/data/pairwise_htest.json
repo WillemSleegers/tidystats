@@ -7,7 +7,14 @@
         "name": "Pairs",
         "groups": [
           {
-            "name": "Jun - May",
+            "names": [
+              {
+                "name": "Jun"
+              },
+              {
+                "name": "May"
+              }
+            ],
             "statistics": [
               {
                 "name": "p",
@@ -16,7 +23,14 @@
             ]
           },
           {
-            "name": "Jul - May",
+            "names": [
+              {
+                "name": "Jul"
+              },
+              {
+                "name": "May"
+              }
+            ],
             "statistics": [
               {
                 "name": "p",
@@ -25,7 +39,14 @@
             ]
           },
           {
-            "name": "Jul - Jun",
+            "names": [
+              {
+                "name": "Jul"
+              },
+              {
+                "name": "Jun"
+              }
+            ],
             "statistics": [
               {
                 "name": "p",
@@ -34,7 +55,14 @@
             ]
           },
           {
-            "name": "Aug - May",
+            "names": [
+              {
+                "name": "Aug"
+              },
+              {
+                "name": "May"
+              }
+            ],
             "statistics": [
               {
                 "name": "p",
@@ -43,7 +71,14 @@
             ]
           },
           {
-            "name": "Aug - Jun",
+            "names": [
+              {
+                "name": "Aug"
+              },
+              {
+                "name": "Jun"
+              }
+            ],
             "statistics": [
               {
                 "name": "p",
@@ -52,7 +87,14 @@
             ]
           },
           {
-            "name": "Aug - Jul",
+            "names": [
+              {
+                "name": "Aug"
+              },
+              {
+                "name": "Jul"
+              }
+            ],
             "statistics": [
               {
                 "name": "p",
@@ -61,7 +103,14 @@
             ]
           },
           {
-            "name": "Sep - May",
+            "names": [
+              {
+                "name": "Sep"
+              },
+              {
+                "name": "May"
+              }
+            ],
             "statistics": [
               {
                 "name": "p",
@@ -70,7 +119,14 @@
             ]
           },
           {
-            "name": "Sep - Jun",
+            "names": [
+              {
+                "name": "Sep"
+              },
+              {
+                "name": "Jun"
+              }
+            ],
             "statistics": [
               {
                 "name": "p",
@@ -79,7 +135,14 @@
             ]
           },
           {
-            "name": "Sep - Jul",
+            "names": [
+              {
+                "name": "Sep"
+              },
+              {
+                "name": "Jul"
+              }
+            ],
             "statistics": [
               {
                 "name": "p",
@@ -88,7 +151,14 @@
             ]
           },
           {
-            "name": "Sep - Aug",
+            "names": [
+              {
+                "name": "Sep"
+              },
+              {
+                "name": "Aug"
+              }
+            ],
             "statistics": [
               {
                 "name": "p",
@@ -102,7 +172,7 @@
     "p_adjust_method": "holm",
     "package": {
       "name": "stats",
-      "version": "4.2.0"
+      "version": "4.2.2"
     }
   },
   "pairwise_t_test_paired": {
@@ -113,7 +183,14 @@
         "name": "Pairs",
         "groups": [
           {
-            "name": "2 - 1",
+            "names": [
+              {
+                "name": "2"
+              },
+              {
+                "name": "1"
+              }
+            ],
             "statistics": [
               {
                 "name": "p",
@@ -122,7 +199,14 @@
             ]
           },
           {
-            "name": "3 - 1",
+            "names": [
+              {
+                "name": "3"
+              },
+              {
+                "name": "1"
+              }
+            ],
             "statistics": [
               {
                 "name": "p",
@@ -131,7 +215,14 @@
             ]
           },
           {
-            "name": "3 - 2",
+            "names": [
+              {
+                "name": "3"
+              },
+              {
+                "name": "2"
+              }
+            ],
             "statistics": [
               {
                 "name": "p",
@@ -145,7 +236,7 @@
     "p_adjust_method": "holm",
     "package": {
       "name": "stats",
-      "version": "4.2.0"
+      "version": "4.2.2"
     }
   },
   "pairwise_t_test_nonpooled": {
@@ -156,7 +247,14 @@
         "name": "Pairs",
         "groups": [
           {
-            "name": "Jun - May",
+            "names": [
+              {
+                "name": "Jun"
+              },
+              {
+                "name": "May"
+              }
+            ],
             "statistics": [
               {
                 "name": "p",
@@ -165,7 +263,14 @@
             ]
           },
           {
-            "name": "Jul - May",
+            "names": [
+              {
+                "name": "Jul"
+              },
+              {
+                "name": "May"
+              }
+            ],
             "statistics": [
               {
                 "name": "p",
@@ -174,7 +279,14 @@
             ]
           },
           {
-            "name": "Jul - Jun",
+            "names": [
+              {
+                "name": "Jul"
+              },
+              {
+                "name": "Jun"
+              }
+            ],
             "statistics": [
               {
                 "name": "p",
@@ -183,7 +295,14 @@
             ]
           },
           {
-            "name": "Aug - May",
+            "names": [
+              {
+                "name": "Aug"
+              },
+              {
+                "name": "May"
+              }
+            ],
             "statistics": [
               {
                 "name": "p",
@@ -192,7 +311,14 @@
             ]
           },
           {
-            "name": "Aug - Jun",
+            "names": [
+              {
+                "name": "Aug"
+              },
+              {
+                "name": "Jun"
+              }
+            ],
             "statistics": [
               {
                 "name": "p",
@@ -201,7 +327,14 @@
             ]
           },
           {
-            "name": "Aug - Jul",
+            "names": [
+              {
+                "name": "Aug"
+              },
+              {
+                "name": "Jul"
+              }
+            ],
             "statistics": [
               {
                 "name": "p",
@@ -210,7 +343,14 @@
             ]
           },
           {
-            "name": "Sep - May",
+            "names": [
+              {
+                "name": "Sep"
+              },
+              {
+                "name": "May"
+              }
+            ],
             "statistics": [
               {
                 "name": "p",
@@ -219,7 +359,14 @@
             ]
           },
           {
-            "name": "Sep - Jun",
+            "names": [
+              {
+                "name": "Sep"
+              },
+              {
+                "name": "Jun"
+              }
+            ],
             "statistics": [
               {
                 "name": "p",
@@ -228,7 +375,14 @@
             ]
           },
           {
-            "name": "Sep - Jul",
+            "names": [
+              {
+                "name": "Sep"
+              },
+              {
+                "name": "Jul"
+              }
+            ],
             "statistics": [
               {
                 "name": "p",
@@ -237,7 +391,14 @@
             ]
           },
           {
-            "name": "Sep - Aug",
+            "names": [
+              {
+                "name": "Sep"
+              },
+              {
+                "name": "Aug"
+              }
+            ],
             "statistics": [
               {
                 "name": "p",
@@ -251,7 +412,7 @@
     "p_adjust_method": "bonferroni",
     "package": {
       "name": "stats",
-      "version": "4.2.0"
+      "version": "4.2.2"
     }
   },
   "pairwise_prop_test": {
@@ -262,7 +423,14 @@
         "name": "Pairs",
         "groups": [
           {
-            "name": "2 - 1",
+            "names": [
+              {
+                "name": "2"
+              },
+              {
+                "name": "1"
+              }
+            ],
             "statistics": [
               {
                 "name": "p",
@@ -271,7 +439,14 @@
             ]
           },
           {
-            "name": "3 - 1",
+            "names": [
+              {
+                "name": "3"
+              },
+              {
+                "name": "1"
+              }
+            ],
             "statistics": [
               {
                 "name": "p",
@@ -280,7 +455,14 @@
             ]
           },
           {
-            "name": "3 - 2",
+            "names": [
+              {
+                "name": "3"
+              },
+              {
+                "name": "2"
+              }
+            ],
             "statistics": [
               {
                 "name": "p",
@@ -289,7 +471,14 @@
             ]
           },
           {
-            "name": "4 - 1",
+            "names": [
+              {
+                "name": "4"
+              },
+              {
+                "name": "1"
+              }
+            ],
             "statistics": [
               {
                 "name": "p",
@@ -298,7 +487,14 @@
             ]
           },
           {
-            "name": "4 - 2",
+            "names": [
+              {
+                "name": "4"
+              },
+              {
+                "name": "2"
+              }
+            ],
             "statistics": [
               {
                 "name": "p",
@@ -307,7 +503,14 @@
             ]
           },
           {
-            "name": "4 - 3",
+            "names": [
+              {
+                "name": "4"
+              },
+              {
+                "name": "3"
+              }
+            ],
             "statistics": [
               {
                 "name": "p",
@@ -321,7 +524,7 @@
     "p_adjust_method": "holm",
     "package": {
       "name": "stats",
-      "version": "4.2.0"
+      "version": "4.2.2"
     }
   },
   "pairwise_wilcox_test": {
@@ -336,7 +539,7 @@
     "p_adjust_method": "holm",
     "package": {
       "name": "stats",
-      "version": "4.2.0"
+      "version": "4.2.2"
     }
   },
   "pairwise_wilcox_test_paired": {
@@ -347,7 +550,14 @@
         "name": "Pairs",
         "groups": [
           {
-            "name": "trt1 - ctrl",
+            "names": [
+              {
+                "name": "trt1"
+              },
+              {
+                "name": "ctrl"
+              }
+            ],
             "statistics": [
               {
                 "name": "p",
@@ -356,7 +566,14 @@
             ]
           },
           {
-            "name": "trt2 - ctrl",
+            "names": [
+              {
+                "name": "trt2"
+              },
+              {
+                "name": "ctrl"
+              }
+            ],
             "statistics": [
               {
                 "name": "p",
@@ -365,7 +582,14 @@
             ]
           },
           {
-            "name": "trt2 - trt1",
+            "names": [
+              {
+                "name": "trt2"
+              },
+              {
+                "name": "trt1"
+              }
+            ],
             "statistics": [
               {
                 "name": "p",
@@ -379,7 +603,7 @@
     "p_adjust_method": "BH",
     "package": {
       "name": "stats",
-      "version": "4.2.0"
+      "version": "4.2.2"
     }
   }
 }

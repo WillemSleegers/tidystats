@@ -1,19 +1,19 @@
 # Setup -------------------------------------------------------------------
 
-library(lmerTest)
-
 statistics <- list()
 
 # lmer() ------------------------------------------------------------------
 
-lmerTest1 <- lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
-lmerTest2 <- lmer(
+lmerTest1 <- lmerTest::lmer(
+  Reaction ~ Days + (Days | Subject), lme4::sleepstudy
+)
+lmerTest2 <- lmerTest::lmer(
   Informed.liking ~
     Gender + Information * Product + (1 | Consumer) + (1 | Consumer:Product),
-  data = ham
+  data = lmerTest::ham
 )
-lmerTest_ML <- lmer(
-  Reaction ~ Days + (Days | Subject), sleepstudy,
+lmerTest_ML <- lmerTest::lmer(
+  Reaction ~ Days + (Days | Subject), lme4::sleepstudy,
   REML = FALSE
 )
 

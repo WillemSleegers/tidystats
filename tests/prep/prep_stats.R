@@ -9,7 +9,7 @@ lm2 <- update(lm1, . ~ . - Examination)
 
 BF10 <- 1 / exp((BIC(lm2) - BIC(lm1)) / 2)
 
-stats <- stats(
+BF_stats <- stats(
   method = "BF BIC method",
   statistics = c(
     stat(name = "BF", value = BF10, subscript = "10"),
@@ -19,7 +19,7 @@ stats <- stats(
 
 statistics <- add_stats(
   list = statistics,
-  output = stats,
+  output = BF_stats,
   notes = "Wagenmakers (2007) method for calculating Bayes factors"
 )
 
@@ -31,8 +31,8 @@ df <- tidy_stats_to_data_frame(statistics)
 
 # write_stats() -----------------------------------------------------------
 
-write_test_stats(statistics, "tests/data/generic.json")
+write_test_stats(statistics, "tests/data/stats.json")
 
 # Cleanup -----------------------------------------------------------------
 
-rm(BIC_AIC, df, statistics)
+rm(df, statistics, BF10, BF_stats, lm1, lm2)

@@ -36,12 +36,12 @@
 #' |                   | [contingencyTableBF()], [proportionBF()],             |
 #' |                   | [meta.ttestBF()]                                      |
 #' | `tidystats`       | [describe_data()], [count_data()]                     |
-#' 
+#'
 #' Supported classes:
 #' | Function    | Class name  |
 #' | ------------| ------------|
-#' | [confint()] | confint     | 
-#' 
+#' | [confint()] | confint     |
+#'
 #' @examples
 #' # Conduct several analyses
 #' sleep_test <- t.test(extra ~ group, data = sleep, paired = TRUE)

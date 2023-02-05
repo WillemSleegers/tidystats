@@ -1,4 +1,3 @@
-
 # Setup -------------------------------------------------------------------
 
 # Load test data
@@ -9,40 +8,40 @@ expected_statistics <- read_stats(path)
 
 test_that("pairwise t-tests with pooled SD works", {
   Month <- factor(airquality$Month, labels = month.abb[5:9])
-  
+
   model <- pairwise.t.test(airquality$Ozone, Month)
-  
+
   expect_equal_models(
-    model = model, 
+    model = model,
     expected_tidy_model = expected_statistics$pairwise_t_test
   )
 })
 
 test_that("Pairwise t tests with non-pooled SD works", {
   Month <- factor(airquality$Month, labels = month.abb[5:9])
-  
+
   model <- pairwise.t.test(
     airquality$Ozone,
     Month,
     p.adjust.method = "bonf",
     pool.sd = FALSE
   )
-  
+
   expect_equal_models(
-    model = model, 
+    model = model,
     expected_tidy_model = expected_statistics$pairwise_t_test_nonpooled
   )
 })
 
 test_that("pairwise paired t-tests works", {
   model <- pairwise.t.test(
-    c(1, 2, 3, 1, 2, 4), 
-    c(1, 1, 2, 2, 3, 3), 
+    c(1, 2, 3, 1, 2, 4),
+    c(1, 1, 2, 2, 3, 3),
     paired = TRUE
   )
-  
+
   expect_equal_models(
-    model = model, 
+    model = model,
     expected_tidy_model = expected_statistics$pairwise_t_test_paired
   )
 })
@@ -52,11 +51,11 @@ test_that("pairwise paired t-tests works", {
 test_that("pairwise comparison of proportions works", {
   smokers <- c(83, 90, 129, 70)
   patients <- c(86, 93, 136, 82)
-  
+
   model <- suppressWarnings(pairwise.prop.test(smokers, patients))
 
   expect_equal_models(
-    model = model, 
+    model = model,
     expected_tidy_model = expected_statistics$pairwise_prop_test
   )
 })
@@ -65,26 +64,26 @@ test_that("pairwise comparison of proportions works", {
 
 test_that("pairwise Wilcoxon rank sum exact test works", {
   model <- pairwise.wilcox.test(
-    c(1, 2, 3, 4, 5, 6, 7, 8, 9, 11), 
+    c(1, 2, 3, 4, 5, 6, 7, 8, 9, 11),
     c(1, 1, 1, 1, 1, 2, 2, 2, 2, 2)
   )
-  
+
   expect_equal_models(
-    model = model, 
+    model = model,
     expected_tidy_model = expected_statistics$pairwise_wilcox_test
   )
 })
 
 test_that("pairwise Wilcoxon signed rank exact test works", {
   model <- pairwise.wilcox.test(
-    PlantGrowth$weight, 
+    PlantGrowth$weight,
     PlantGrowth$group,
-    p.adjust.method = "BH", 
+    p.adjust.method = "BH",
     paired = TRUE
   )
-  
+
   expect_equal_models(
-    model = model, 
+    model = model,
     expected_tidy_model = expected_statistics$pairwise_wilcox_test_paired
   )
 })

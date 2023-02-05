@@ -1,6 +1,6 @@
 # Setup -------------------------------------------------------------------
 
-path <- system.file("tests/data/lmer.json", package = "tidystats")
+path <- system.file("tests/data/lme4.json", package = "tidystats")
 expected_statistics <- read_stats(path)
 
 # lmer() ------------------------------------------------------------------

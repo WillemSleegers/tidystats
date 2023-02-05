@@ -5,13 +5,13 @@ statistics <- list()
 # glm() -------------------------------------------------------------------
 
 # Get data
-d.AD <- tibble(
+d.AD <- tibble::tibble(
   treatment = gl(3, 3),
   outcome = gl(3, 1, 9),
   counts = c(18, 17, 15, 20, 10, 20, 25, 13, 12)
 )
 
-anorexia <- tibble(
+anorexia <- tibble::tibble(
   Treat = c(
     "Cont", "Cont", "Cont", "Cont", "Cont", "Cont", "Cont", "Cont", "Cont",
     "Cont", "Cont", "Cont", "Cont", "Cont", "Cont", "Cont", "Cont", "Cont",
@@ -39,13 +39,13 @@ anorexia <- tibble(
   )
 )
 
-clotting <- tibble(
+clotting <- tibble::tibble(
   u = c(5, 10, 15, 20, 30, 40, 60, 80, 100),
   lot1 = c(118, 58, 42, 35, 27, 25, 21, 19, 18),
   lot2 = c(69, 35, 26, 21, 18, 16, 13, 12, 12)
 )
 
-admission <- tibble(
+admission <- tibble::tibble(
   admit = c(0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0),
   gre = c(380, 660, 800, 640, 520, 760, 560, 400, 540, 700, 800),
   gpa = c(3.61, 3.67, 4.00, 3.19, 2.93, 3.00, 2.98, 3.08, 3.39, 3.92, 4.00),

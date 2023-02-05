@@ -1,7 +1,7 @@
-
 # Setup -------------------------------------------------------------------
 
-# Load test data
+library(Hmisc)
+
 path <- system.file("tests/data/Hmisc.json", package = "tidystats")
 expected_statistics <- read_stats(path)
 
@@ -14,9 +14,9 @@ test_that("Hmisc's rcorr works", {
   v <- c(1, 2, 3, 4, 5)
 
   model <- rcorr(cbind(x, y, z, v))
-  
+
   expect_equal_models(
-    model = model, 
+    model = model,
     expected_tidy_model = expected_statistics$rcorr
   )
 })

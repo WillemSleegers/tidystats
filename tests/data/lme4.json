@@ -113,7 +113,14 @@
             "name": "Correlations",
             "groups": [
               {
-                "name": "(Intercept) - Days",
+                "names": [
+                  {
+                    "name": "(Intercept)"
+                  },
+                  {
+                    "name": "Days"
+                  }
+                ],
                 "statistics": [
                   {
                     "name": "correlation",
@@ -131,7 +138,7 @@
     "convergence_code": 0,
     "package": {
       "name": "lme4",
-      "version": "1.1-30"
+      "version": "1.1-31"
     }
   },
   "lme4_ML": {
@@ -272,7 +279,14 @@
             "name": "Correlations",
             "groups": [
               {
-                "name": "(Intercept) - Days",
+                "names": [
+                  {
+                    "name": "(Intercept)"
+                  },
+                  {
+                    "name": "Days"
+                  }
+                ],
                 "statistics": [
                   {
                     "name": "correlation",
@@ -289,40 +303,16 @@
     "convergence_code": 0,
     "package": {
       "name": "lme4",
-      "version": "1.1-30"
+      "version": "1.1-31"
     }
   },
   "lme4_slopes": {
-    "name": "Reaction ~ Days + (Days | Subject)",
+    "name": "Reaction ~ Days + ((1 | Subject) + (0 + Days | Subject))",
     "method": "Linear mixed model",
     "groups": [
       {
         "name": "Model",
         "statistics": [
-          {
-            "name": "AIC",
-            "value": 1763.939344
-          },
-          {
-            "name": "BIC",
-            "value": 1783.097086
-          },
-          {
-            "name": "log likelihood",
-            "symbol": "l",
-            "value": -875.969672
-          },
-          {
-            "name": "deviance",
-            "symbol": "D",
-            "value": 1751.939344
-          },
-          {
-            "name": "residual df",
-            "symbol": "df",
-            "subscript": "res.",
-            "value": 174
-          },
           {
             "name": "N",
             "value": 180
@@ -350,42 +340,37 @@
                       {
                         "name": "standard deviation",
                         "symbol": "SD",
-                        "value": 23.77976
+                        "value": 25.051328
                       },
                       {
                         "name": "variance",
                         "symbol": "var",
-                        "value": 565.476966
+                        "value": 627.569051
                       }
                     ]
-                  },
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Subject.1",
+            "groups": [
+              {
+                "name": "Variances",
+                "groups": [
                   {
                     "name": "Days",
                     "statistics": [
                       {
                         "name": "standard deviation",
                         "symbol": "SD",
-                        "value": 5.716799
+                        "value": 5.988187
                       },
                       {
                         "name": "variance",
                         "symbol": "var",
-                        "value": 32.681785
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "name": "Correlations",
-                "groups": [
-                  {
-                    "name": "(Intercept) - Days",
-                    "statistics": [
-                      {
-                        "name": "correlation",
-                        "symbol": "r",
-                        "value": 0.081321
+                        "value": 35.85838
                       }
                     ]
                   }
@@ -399,12 +384,12 @@
               {
                 "name": "standard deviation",
                 "symbol": "SD",
-                "value": 25.591907
+                "value": 25.565279
               },
               {
                 "name": "variance",
                 "symbol": "var",
-                "value": 654.945706
+                "value": 653.583501
               }
             ]
           }
@@ -426,12 +411,12 @@
                   },
                   {
                     "name": "SE",
-                    "value": 6.632123
+                    "value": 6.885381
                   },
                   {
                     "name": "statistic",
                     "symbol": "t",
-                    "value": 37.907185
+                    "value": 36.512883
                   }
                 ]
               },
@@ -445,12 +430,12 @@
                   },
                   {
                     "name": "SE",
-                    "value": 1.50223
+                    "value": 1.559569
                   },
                   {
                     "name": "statistic",
                     "symbol": "t",
-                    "value": 6.967831
+                    "value": 6.711653
                   }
                 ]
               }
@@ -460,12 +445,19 @@
             "name": "Correlations",
             "groups": [
               {
-                "name": "(Intercept) - Days",
+                "names": [
+                  {
+                    "name": "(Intercept)"
+                  },
+                  {
+                    "name": "Days"
+                  }
+                ],
                 "statistics": [
                   {
                     "name": "correlation",
                     "symbol": "r",
-                    "value": -0.13756
+                    "value": -0.18444
                   }
                 ]
               }
@@ -474,10 +466,11 @@
         ]
       }
     ],
+    "REML_criterion_at_convergence": 1743.669294,
     "convergence_code": 0,
     "package": {
       "name": "lme4",
-      "version": "1.1-30"
+      "version": "1.1-31"
     }
   },
   "anova_lme4": {
@@ -514,7 +507,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "anova_models": {
@@ -557,38 +550,38 @@
               {
                 "name": "n parameters",
                 "symbol": "k",
-                "value": 6
+                "value": 5
               },
               {
                 "name": "AIC",
-                "value": 1763.939344
+                "value": 1762.003255
               },
               {
                 "name": "BIC",
-                "value": 1783.097086
+                "value": 1777.968039
               },
               {
                 "name": "log likelihood",
                 "symbol": "l",
-                "value": -875.969672
+                "value": -876.001628
               },
               {
                 "name": "deviance",
                 "symbol": "D",
-                "value": 1751.939344
+                "value": 1752.003255
               },
               {
                 "name": "statistic",
                 "symbol": "χ²",
-                "value": 42.139299
+                "value": 42.075388
               },
               {
                 "name": "df",
-                "value": 2
+                "value": 1
               },
               {
                 "name": "p",
-                "value": 7.072413e-10
+                "value": 8.782158e-11
               }
             ]
           }
@@ -597,7 +590,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   }
 }

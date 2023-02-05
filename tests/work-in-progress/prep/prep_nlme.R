@@ -1,17 +1,20 @@
-
 # Setup -------------------------------------------------------------------
 
-# Load packages
-library(tidyverse)
 library(nlme)
 
-results <- list()
+statistics <- list()
 
 # lme() -------------------------------------------------------------------
 
 # Run models
-lme_fm1 <- lme(distance ~ age, data = Orthodont, random = ~ 1 + age| Subject/Sex)
-lme_fm2 <- lme(distance ~ age + Sex, data = Orthodont, random = ~ 1)
+lme_fm1 <- lme(
+  distance ~ age,
+  data = Orthodont, random = ~ 1 + age | Subject / Sex
+)
+lme_fm2 <- lme(
+  distance ~ age + Sex,
+  data = Orthodont, random = ~1
+)
 
 summary(lme_fm1)
 summary(lme_fm2)
@@ -28,9 +31,11 @@ results <- results %>%
 # nlme() ------------------------------------------------------------------
 
 # Run models
-nlme_fm1 <- nlme(height ~ SSasymp(age, Asym, R0, lrc), data = Loblolly, 
-  fixed = Asym + R0 + lrc ~ 1, random = Asym ~ 1, 
-  start = c(Asym = 103, R0 = -8.5, lrc = -3.3))
+nlme_fm1 <- nlme(height ~ SSasymp(age, Asym, R0, lrc),
+  data = Loblolly,
+  fixed = Asym + R0 + lrc ~ 1, random = Asym ~ 1,
+  start = c(Asym = 103, R0 = -8.5, lrc = -3.3)
+)
 nlme_fm2 <- update(nlme_fm1, random = pdDiag(Asym + lrc ~ 1))
 
 summary(nlme_fm1)
@@ -48,8 +53,9 @@ results <- results %>%
 # gls() -------------------------------------------------------------------
 
 # Run models
-gls_fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary, 
-  correlation = corAR1(form = ~ 1 | Mare))
+gls_fm1 <- gls(follicles ~ sin(2 * pi * Time) + cos(2 * pi * Time), Ovary,
+  correlation = corAR1(form = ~ 1 | Mare)
+)
 gls_fm2 <- update(gls_fm1, weights = varPower())
 
 summary(gls_fm1)
@@ -75,9 +81,10 @@ fm2 <- update(fm1, random = pdDiag(~age))
 anova_fm1_fm2 <- anova(fm1, fm2)
 anova_fm1_fm2
 
-fm1Orth.gls <- gls(distance ~ Sex * I(age - 11), Orthodont, 
-  correlation = corSymm(form = ~ 1 | Subject), 
-  weights = varIdent(form = ~ 1 | age))
+fm1Orth.gls <- gls(distance ~ Sex * I(age - 11), Orthodont,
+  correlation = corSymm(form = ~ 1 | Subject),
+  weights = varIdent(form = ~ 1 | age)
+)
 fm2Orth.gls <- update(fm1Orth.gls, corr = corCompSymm(form = ~ 1 | Subject))
 anova_fm10_fm20 <- anova(fm1Orth.gls, fm2Orth.gls)
 anova_fm10_fm20
@@ -90,25 +97,27 @@ fm4Orth.gls <- update(fm3Orth.gls, weights = varIdent(form = ~ 1 | Sex))
 anova_fm30_fm40 <- anova(fm3Orth.gls, fm4Orth.gls)
 anova_fm30_fm40
 
-fm3Orth.lme <- lme(distance ~ Sex*I(age-11), data = Orthodont, 
-  random = ~ I(age-11) | Subject, 
-  weights = varIdent(form = ~ 1 | Sex))
+fm3Orth.lme <- lme(distance ~ Sex * I(age - 11),
+  data = Orthodont,
+  random = ~ I(age - 11) | Subject,
+  weights = varIdent(form = ~ 1 | Sex)
+)
 
 anova_fm30_fm40_no_test <- anova(fm3Orth.lme, fm4Orth.gls, test = FALSE)
 anova_fm30_fm40_no_test
 
 op <- options(contrasts = c("contr.treatment", "contr.poly"))
 
-fm1BW.lme <- lme(weight ~ Time * Diet, BodyWeight, random = ~ Time)
+fm1BW.lme <- lme(weight ~ Time * Diet, BodyWeight, random = ~Time)
 fm2BW.lme <- update(fm1BW.lme, weights = varPower())
 
 anova_fm2BW <- anova(fm2BW.lme, L = c("Time:Diet2" = 1, "Time:Diet3" = -1))
 anova_fm2BW
 
-fm1Theo.lis <- nlsList(conc ~ SSfol(Dose, Time, lKe, lKa, lCl), data=Theoph)
+fm1Theo.lis <- nlsList(conc ~ SSfol(Dose, Time, lKe, lKa, lCl), data = Theoph)
 fm1Theo.nlme <- nlme(fm1Theo.lis)
-fm2Theo.nlme <- update(fm1Theo.nlme, random= pdDiag(lKe+lKa+lCl~1) )
-fm3Theo.nlme <- update(fm2Theo.nlme, random= pdDiag(    lKa+lCl~1) )
+fm2Theo.nlme <- update(fm1Theo.nlme, random = pdDiag(lKe + lKa + lCl ~ 1))
+fm3Theo.nlme <- update(fm2Theo.nlme, random = pdDiag(lKa + lCl ~ 1))
 
 # Comparing the 3 nlme models
 anova_fm1_fm3_fm2 <- anova(fm1Theo.nlme, fm3Theo.nlme, fm2Theo.nlme)
@@ -135,7 +144,7 @@ results <- results %>%
   add_stats(anova_fm30_fm40) %>%
   add_stats(anova_fm30_fm40_no_test) %>%
   add_stats(anova_fm2BW) %>%
-  add_stats(anova_fm1_fm3_fm2) 
+  add_stats(anova_fm1_fm3_fm2)
 
 # Write stats -------------------------------------------------------------
 
@@ -147,21 +156,24 @@ write_stats(results, "inst/test_data/nlme.json")
 library(nlme)
 library(aomisc)
 data(WinterWheat)
-WinterWheat <- WinterWheat[WinterWheat$Genotype != "SIMETO" & 
-    WinterWheat$Genotype != "SOLEX",]
+WinterWheat <- WinterWheat[WinterWheat$Genotype != "SIMETO" &
+  WinterWheat$Genotype != "SOLEX", ]
 WinterWheat$Genotype <- factor(WinterWheat$Genotype)
 WinterWheat$Year <- factor(WinterWheat$Year)
 WinterWheat$Block <- factor(WinterWheat$Block)
 
-EnvVarMod <- lme(Yield ~ Genotype, 
-  random = list(Year = pdSymm(~Genotype - 1), 
-    Year = pdIdent(~Block - 1)),
+EnvVarMod <- lme(Yield ~ Genotype,
+  random = list(
+    Year = pdSymm(~ Genotype - 1),
+    Year = pdIdent(~ Block - 1)
+  ),
   control = list(opt = "optim", maxIter = 100),
-  data=WinterWheat)
+  data = WinterWheat
+)
 
 varcor <- VarCorr(EnvVarMod)
 
 
 
 
-test <- nlme(distance ~ age + Sex, data = Orthodont, random = ~ 1)
+test <- nlme(distance ~ age + Sex, data = Orthodont, random = ~1)

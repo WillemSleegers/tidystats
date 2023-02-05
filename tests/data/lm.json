@@ -108,7 +108,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "lm_wo_intercept": {
@@ -220,7 +220,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "anova_lm": {
@@ -388,14 +388,14 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "anova_lm_fits": {
     "method": "ANOVA",
     "groups": [
       {
-        "name": "Terms",
+        "name": "Models",
         "groups": [
           {
             "name": "1",
@@ -405,10 +405,10 @@
                 "value": 983.62825
               },
               {
-                "name": "df denominator",
+                "name": "residual df",
                 "symbol": "df",
-                "subscript": "den.",
-                "value": 1
+                "subscript": "res.",
+                "value": 49
               }
             ]
           },
@@ -429,16 +429,14 @@
                 "value": 14.115732
               },
               {
-                "name": "df numerator",
-                "symbol": "df",
-                "subscript": "num.",
+                "name": "df",
                 "value": 1
               },
               {
-                "name": "df denominator",
+                "name": "residual df",
                 "symbol": "df",
-                "subscript": "den.",
-                "value": 1
+                "subscript": "res.",
+                "value": 48
               },
               {
                 "name": "p",
@@ -463,16 +461,14 @@
                 "value": 3.68891
               },
               {
-                "name": "df numerator",
-                "symbol": "df",
-                "subscript": "num.",
+                "name": "df",
                 "value": 1
               },
               {
-                "name": "df denominator",
+                "name": "residual df",
                 "symbol": "df",
-                "subscript": "den.",
-                "value": 1
+                "subscript": "res.",
+                "value": 47
               },
               {
                 "name": "p",
@@ -497,16 +493,14 @@
                 "value": 0.857586
               },
               {
-                "name": "df numerator",
-                "symbol": "df",
-                "subscript": "num.",
+                "name": "df",
                 "value": 1
               },
               {
-                "name": "df denominator",
+                "name": "residual df",
                 "symbol": "df",
-                "subscript": "den.",
-                "value": 1
+                "subscript": "res.",
+                "value": 46
               },
               {
                 "name": "p",
@@ -531,16 +525,14 @@
                 "value": 4.360496
               },
               {
-                "name": "df numerator",
-                "symbol": "df",
-                "subscript": "num.",
+                "name": "df",
                 "value": 1
               },
               {
-                "name": "df denominator",
+                "name": "residual df",
                 "symbol": "df",
-                "subscript": "den.",
-                "value": 1
+                "subscript": "res.",
+                "value": 45
               },
               {
                 "name": "p",
@@ -553,14 +545,14 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "anova_lm_order": {
     "method": "ANOVA",
     "groups": [
       {
-        "name": "Terms",
+        "name": "Models",
         "groups": [
           {
             "name": "1",
@@ -570,10 +562,10 @@
                 "value": 650.712998
               },
               {
-                "name": "df denominator",
+                "name": "residual df",
                 "symbol": "df",
-                "subscript": "den.",
-                "value": -2
+                "subscript": "res.",
+                "value": 45
               }
             ]
           },
@@ -594,16 +586,14 @@
                 "value": 2.609041
               },
               {
-                "name": "df numerator",
-                "symbol": "df",
-                "subscript": "num.",
+                "name": "df",
                 "value": -2
               },
               {
-                "name": "df denominator",
+                "name": "residual df",
                 "symbol": "df",
-                "subscript": "den.",
-                "value": -2
+                "subscript": "res.",
+                "value": 47
               },
               {
                 "name": "p",
@@ -628,16 +618,14 @@
                 "value": 8.902321
               },
               {
-                "name": "df numerator",
-                "symbol": "df",
-                "subscript": "num.",
+                "name": "df",
                 "value": -2
               },
               {
-                "name": "df denominator",
+                "name": "residual df",
                 "symbol": "df",
-                "subscript": "den.",
-                "value": -2
+                "subscript": "res.",
+                "value": 49
               },
               {
                 "name": "p",
@@ -650,14 +638,14 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "anova_lm_chisq": {
     "method": "ANOVA",
     "groups": [
       {
-        "name": "Terms",
+        "name": "Models",
         "groups": [
           {
             "name": "1",
@@ -667,10 +655,10 @@
                 "value": 650.712998
               },
               {
-                "name": "df denominator",
+                "name": "residual df",
                 "symbol": "df",
-                "subscript": "den.",
-                "value": -2
+                "subscript": "res.",
+                "value": 45
               }
             ]
           },
@@ -686,16 +674,18 @@
                 "value": -75.454977
               },
               {
-                "name": "df numerator",
-                "symbol": "df",
-                "subscript": "num.",
+                "name": "df",
                 "value": -2
               },
               {
-                "name": "df denominator",
+                "name": "residual df",
                 "symbol": "df",
-                "subscript": "den.",
-                "value": -2
+                "subscript": "res.",
+                "value": 47
+              },
+              {
+                "name": "p",
+                "value": 0.073605
               }
             ]
           },
@@ -711,16 +701,18 @@
                 "value": -257.460275
               },
               {
-                "name": "df numerator",
-                "symbol": "df",
-                "subscript": "num.",
+                "name": "df",
                 "value": -2
               },
               {
-                "name": "df denominator",
+                "name": "residual df",
                 "symbol": "df",
-                "subscript": "den.",
-                "value": -2
+                "subscript": "res.",
+                "value": 49
+              },
+              {
+                "name": "p",
+                "value": 0.000136
               }
             ]
           }
@@ -729,14 +721,14 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "anova_lm_cp": {
     "method": "ANOVA",
     "groups": [
       {
-        "name": "Terms",
+        "name": "Models",
         "groups": [
           {
             "name": "1",
@@ -746,10 +738,10 @@
                 "value": 650.712998
               },
               {
-                "name": "df denominator",
+                "name": "residual df",
                 "symbol": "df",
-                "subscript": "den.",
-                "value": -2
+                "subscript": "res.",
+                "value": 45
               },
               {
                 "name": "Cp",
@@ -769,16 +761,14 @@
                 "value": -75.454977
               },
               {
-                "name": "df numerator",
-                "symbol": "df",
-                "subscript": "num.",
+                "name": "df",
                 "value": -2
               },
               {
-                "name": "df denominator",
+                "name": "residual df",
                 "symbol": "df",
-                "subscript": "den.",
-                "value": -2
+                "subscript": "res.",
+                "value": 47
               },
               {
                 "name": "Cp",
@@ -798,16 +788,14 @@
                 "value": -257.460275
               },
               {
-                "name": "df numerator",
-                "symbol": "df",
-                "subscript": "num.",
+                "name": "df",
                 "value": -2
               },
               {
-                "name": "df denominator",
+                "name": "residual df",
                 "symbol": "df",
-                "subscript": "den.",
-                "value": -2
+                "subscript": "res.",
+                "value": 49
               },
               {
                 "name": "Cp",
@@ -820,7 +808,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   }
 }

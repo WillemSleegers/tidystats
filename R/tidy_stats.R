@@ -839,28 +839,28 @@ tidy_stats.aovlist <- function(x, args = NULL) {
 #' @describeIn tidy_stats tidy_stats method for class 'confint'
 #' @export
 tidy_stats.confint <- function(x, args = NULL) {
-  # Create the analysis list
   analysis <- list()
 
-  # Set method
   analysis$method <- "Confidence intervals"
 
-  # Extract confidence level
-  CI_bounds <- readr::parse_number(colnames(x))
-  CI_level <- (CI_bounds[2] - CI_bounds[1]) / 100
-
-  # Loop over coefficients and create separate lists for each coefficient
   groups <- list(name = "Coefficients")
 
   for (i in seq_along(rownames(x))) {
     group <- list(name = rownames(x)[i])
 
-    statistics <- list()
-    statistics <- add_statistic(statistics, "lower", x[i, 1])
-    statistics <- add_statistic(statistics, "upper", x[i, 2])
-
-    group$statistics <- statistics
+    group$statistics <- list() |>
+      add_statistic("lower", x[i, 1]) |>
+      add_statistic("upper", x[i, 2])
 
     groups$groups <- append(groups$groups, list(group))
   }
+
+  analysis$groups <- append(analysis$groups, list(groups))
+
+  bounds <- readr::parse_number(colnames(x))
+  analysis$level <- diff(bounds) / 100
+
+  analysis <- add_package_info(analysis, "stats")
+
+  return(analysis)
 }

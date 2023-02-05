@@ -6,11 +6,13 @@ expected_statistics <- read_stats(path)
 # lmer() ------------------------------------------------------------------
 
 test_that("lmerTest 1 works", {
-  model <- lmerTest::lmer(Reaction ~ Days + (Days | Subject), lme4::sleepstudy)
+  model <- lmerTest::lmer(
+    Reaction ~ Days + (Days | Subject), lme4::sleepstudy
+  )
 
   expect_equal_models(
     model = model,
-    expected_tidy_model = expected_statistics$lme4
+    expected_tidy_model = expected_statistics$lmerTest1
   )
 })
 

@@ -169,7 +169,10 @@ rma_glmm_cmel
 
 # Get data
 ### calculate log odds ratios and corresponding sampling variances
-dat <- escalc(measure = "OR", ai = tpos, bi = tneg, ci = cpos, di = cneg, data = dat.bcg)
+dat <- escalc(
+  measure = "OR", ai = tpos, bi = tneg, ci = cpos, di = cneg,
+  data = dat.bcg
+)
 
 # Run analyses
 
@@ -177,11 +180,18 @@ dat <- escalc(measure = "OR", ai = tpos, bi = tneg, ci = cpos, di = cneg, data =
 rma_mv <- rma.mv(yi, vi, random = ~ 1 | trial, data = dat)
 
 ### multilevel model with random effects
-rma_mv_mm <- rma.mv(yi, vi, random = ~ 1 | district / school, data = dat.konstantopoulos2011)
+rma_mv_mm <- rma.mv(
+  yi, vi,
+  random = ~ 1 | district / school,
+  data = dat.konstantopoulos2011
+)
 
 ### change data into long format
-dat.long <- to.long(measure = "OR", ai = tpos, bi = tneg, ci = cpos, di = cneg, data = dat.bcg)
-### set levels of group variable ("exp" = experimental/vaccinated; "con" = control/non-vaccinated)
+dat.long <- to.long(
+  measure = "OR", ai = tpos, bi = tneg, ci = cpos, di = cneg,
+  data = dat.bcg
+)
+
 levels(dat.long$group) <- c("exp", "con")
 ### set "con" to reference level
 dat.long$group <- relevel(dat.long$group, ref = "con")
@@ -189,7 +199,11 @@ dat.long$group <- relevel(dat.long$group, ref = "con")
 dat.long <- escalc(measure = "PLO", xi = out1, mi = out2, data = dat.long)
 
 ### fit bivariate random-effects model using rma.mv()
-rma_mv_biv <- rma.mv(yi, vi, mods = ~group, random = ~ group | study, struct = "UN", data = dat.long)
+rma_mv_biv <- rma.mv(
+  yi, vi,
+  mods = ~group, random = ~ group | study, struct = "UN",
+  data = dat.long
+)
 
 
 results <- results %>%
@@ -208,11 +222,14 @@ rma_mv_mm
 rma_mv_biv
 
 
-# confint.rma() --------------------------------------------------------------------
+# confint.rma() -----------------------------------------------------------
 
 # Get data
 ### calculate log risk ratios and corresponding sampling variances
-dat <- escalc(measure = "RR", ai = tpos, bi = tneg, ci = cpos, di = cneg, data = dat.bcg)
+dat <- escalc(
+  measure = "RR",
+  ai = tpos, bi = tneg, ci = cpos, di = cneg, data = dat.bcg
+)
 
 # Run analyses
 
@@ -220,16 +237,29 @@ dat <- escalc(measure = "RR", ai = tpos, bi = tneg, ci = cpos, di = cneg, data =
 confint_rma_uni <- confint(res <- rma(yi, vi, data = dat, method = "REML"))
 
 ### multilevel random-effects model
-confint_rma_mv <- confint(rma.mv(yi, vi, random = ~ 1 | district / school, data = dat.konstantopoulos2011))
+confint_rma_mv <- confint(
+  rma.mv(yi, vi,
+    random = ~ 1 | district / school,
+    data = dat.konstantopoulos2011
+  )
+)
 
 ### multivariate parameterization of the model
-res <- rma.mv(yi, vi, random = ~ school | district, data = dat.konstantopoulos2011)
+res <- rma.mv(
+  yi, vi,
+  random = ~ school | district, data = dat.konstantopoulos2011
+)
 confint_rma_mv_para <- confint(res)
 confint_rma_mv_single <- confint(res, tau2 = 1)
 confint_rma_mv_ci80 <- confint(res, level = .8)
 
 ### rma.mh (same as peta)
-confint_rma_mh <- confint(rma.mh(measure = "OR", ai = tpos, bi = tneg, ci = cpos, di = cneg, data = dat.bcg))
+confint_rma_mh <- confint(
+  rma.mh(
+    measure = "OR", ai = tpos, bi = tneg, ci = cpos, di = cneg,
+    data = dat.bcg
+  )
+)
 
 # Add stats
 results <- results %>%
@@ -248,16 +278,21 @@ confint_rma_mv_single
 confint_rma_mv_ci80
 confint_rma_mh
 
-# anova.rma() --------------------------------------------------------------------
+# anova.rma() -------------------------------------------------------------
 
 ### calculate log risk ratios and corresponding sampling variances
-dat <- escalc(measure = "RR", ai = tpos, bi = tneg, ci = cpos, di = cneg, data = dat.bcg)
+dat <- escalc(
+  measure = "RR", ai = tpos, bi = tneg, ci = cpos, di = cneg,
+  data = dat.bcg
+)
 
 ### fit random-effects model
 res1 <- rma(yi, vi, data = dat, method = "ML")
 
-### fit mixed-effects model with two moderators (absolute latitude and publication year)
-res2 <- rma(yi, vi, mods = ~ ablat + year, data = dat, method = "ML")
+res2 <- rma(
+  yi, vi,
+  mods = ~ ablat + year, data = dat, method = "ML"
+)
 
 ### Wald-type test of the two moderators
 anova_rma_wald <- anova(res2)
@@ -275,7 +310,10 @@ anova_rma_wald_comb <- anova(res2, X = c(1, 35, 1970))
 dat <- dat.konstantopoulos2011
 res <- rma.mv(yi, vi, random = ~ 1 | district / school, data = dat)
 ### likelihood ratio test of the district-level variance component
-res0 <- rma.mv(yi, vi, random = ~ 1 | district / school, data = dat, sigma2 = c(0, NA))
+res0 <- rma.mv(
+  yi, vi,
+  random = ~ 1 | district / school, data = dat, sigma2 = c(0, NA)
+)
 anova_rma_lrt_complex <- anova(res, res0)
 
 results <- results %>%
@@ -297,10 +335,13 @@ anova_rma_wald_comb
 anova_rma_lrt_complex
 
 
-# permutest() --------------------------------------------------------------------
+# permutest() -------------------------------------------------------------
 
 # Get data
-dat <- escalc(measure = "RR", ai = tpos, bi = tneg, ci = cpos, di = cneg, data = dat.bcg)
+dat <- escalc(
+  measure = "RR", ai = tpos, bi = tneg, ci = cpos, di = cneg,
+  data = dat.bcg
+)
 
 # Run analyses
 ### random-effects model
@@ -310,7 +351,7 @@ res <- rma(yi, vi, data = dat)
 set.seed(1234) # for reproducibility
 permutest_single <- permutest(res, iter = 5)
 
-### mixed-effects model with two moderators (absolute latitude and publication year)
+
 res <- rma(yi, vi, mods = ~ ablat + year, data = dat)
 
 ### permutation test (approximate only; exact not feasible)
@@ -343,7 +384,10 @@ permutest_ls
 # Get data
 
 ### calculate log risk ratios and corresponding sampling variances
-dat <- escalc(measure = "RR", ai = x.a, n1i = n.a, ci = x.p, n2i = n.p, data = dat.dorn2007)
+dat <- escalc(
+  measure = "RR", ai = x.a, n1i = n.a, ci = x.p, n2i = n.p,
+  data = dat.dorn2007
+)
 
 ### conduct test of excess significance (using test="chi2" to speed things up)
 tes_result <- tes(yi, vi, data = dat, test = "chi2")
@@ -366,20 +410,31 @@ V <- tmp$V
 dat <- tmp$dat
 ### turn var1.var2 into a factor with the desired order of levels
 dat$var1.var2 <- factor(dat$var1.var2,
-  levels = c("acog.perf", "asom.perf", "conf.perf", "acog.asom", "acog.conf", "asom.conf")
+  levels = c(
+    "acog.perf", "asom.perf", "conf.perf", "acog.asom", "acog.conf", "asom.conf"
+  )
 )
 ### multivariate random-effects model
-res <- rma.mv(yi, V, mods = ~ var1.var2 - 1, random = ~ var1.var2 | study, struct = "UN", data = dat)
+res <- rma.mv(
+  yi, V,
+  mods = ~ var1.var2 - 1, random = ~ var1.var2 | study, struct = "UN",
+  data = dat
+)
 ### restructure estimated mean correlations into a 4x4 matrix
 R <- vec2mat(coef(res))
 rownames(R) <- colnames(R) <- c("perf", "acog", "asom", "conf")
-### fit regression model with 'perf' as outcome and 'acog', 'asom', and 'conf' as predictors
+
 matreg_base <- matreg(1, 2:4, R = R, V = vcov(res))
 
 ### a different example based on van Houwelingen et al. (2002)
 ### create dataset in long format
-dat.long <- to.long(measure = "OR", ai = tpos, bi = tneg, ci = cpos, di = cneg, data = dat.colditz1994)
-dat.long <- escalc(measure = "PLO", xi = out1, mi = out2, data = dat.long)
+dat.long <- to.long(
+  measure = "OR", ai = tpos, bi = tneg, ci = cpos, di = cneg,
+  data = dat.colditz1994
+)
+dat.long <- escalc(
+  measure = "PLO", xi = out1, mi = out2, data = dat.long
+)
 dat.long$tpos <- dat.long$tneg <- dat.long$cpos <- dat.long$cneg <- NULL
 levels(dat.long$group) <- c("CON", "EXP")
 ### fit bivariate model
@@ -388,7 +443,10 @@ res <- rma.mv(yi, vi,
   data = dat.long, method = "ML"
 )
 ### regression of log(odds)_EXP on log(odds)_CON
-matreg_biv <- matreg(y = 2, x = 1, R = res$G, cov = TRUE, means = coef(res), n = res$g.levels.comb.k)
+matreg_biv <- matreg(
+  y = 2, x = 1, R = res$G,
+  cov = TRUE, means = coef(res), n = res$g.levels.comb.k
+)
 
 # Add stats
 results <- results %>%
@@ -399,11 +457,14 @@ results <- results %>%
 matreg_base
 matreg_biv
 
-
-# ranktest() --------------------------------------------------------------------
+# ranktest() --------------------------------------------------------------
 
 ### calculate log risk ratios and corresponding sampling variances
-dat <- escalc(measure = "RR", ai = tpos, bi = tneg, ci = cpos, di = cneg, data = dat.bcg)
+dat <- escalc(
+  measure = "RR",
+  ai = tpos, bi = tneg, ci = cpos, di = cneg,
+  data = dat.bcg
+)
 ### carry out the rank correlation test
 rank_test <- ranktest(yi, vi, data = dat)
 
@@ -418,8 +479,11 @@ rank_test
 
 ### copy data into 'dat' and examine data
 dat <- dat.egger2001
-### calculate log odds ratios and corresponding sampling variances (but remove ISIS-4 trial)
-dat <- escalc(measure = "OR", ai = ai, n1i = n1i, ci = ci, n2i = n2i, data = dat, subset = -16)
+
+dat <- escalc(
+  measure = "OR", ai = ai, n1i = n1i, ci = ci, n2i = n2i,
+  data = dat, subset = -16
+)
 ### classical Egger test
 regtest_egge <- regtest(yi, vi, data = dat, model = "lm")
 ### mixed-effects meta-regression version of the Egger test
@@ -439,10 +503,12 @@ regtest_mixed
 regtest_pred
 
 
-# trimfill() --------------------------------------------------------------------
+# trimfill() --------------------------------------------------------------
 
 ### calculate log risk ratios and corresponding sampling variances
-dat <- escalc(measure = "RR", ai = tpos, bi = tneg, ci = cpos, di = cneg, data = dat.bcg)
+dat <- escalc(
+  measure = "RR", ai = tpos, bi = tneg, ci = cpos, di = cneg, data = dat.bcg
+)
 ### meta-analysis of the log risk ratios using an equal-effects model
 res <- rma(yi, vi, data = dat, method = "EE")
 trimfill_result <- trimfill(res)
@@ -454,7 +520,7 @@ results <- results %>%
 # Inspect output
 trimfill_result
 
-# selmodel() --------------------------------------------------------------------
+# selmodel() --------------------------------------------------------------
 
 ### example from Citkowicz and Vevea (2017) for beta selection model
 # copy data into 'dat' and examine data
@@ -466,19 +532,25 @@ selmodel_beta <- selmodel(res, type = "beta")
 
 ### example from Preston et al. (2004)
 # calculate log odds ratios and corresponding sampling variances
-dat <- escalc(measure = "OR", ai = ai, n1i = n1i, ci = ci, n2i = n2i, data = dat.hahn2001, drop00 = TRUE)
+dat <- escalc(
+  measure = "OR",
+  ai = ai, n1i = n1i, ci = ci, n2i = n2i,
+  data = dat.hahn2001, drop00 = TRUE
+)
 # fit equal-effects model
 res <- rma(yi, vi, data = dat, method = "EE")
 # fit half-normal selection models
 selmodel_halfnorm <- selmodel(res, type = "halfnorm", alternative = "less")
 
-### meta-analysis on the effect of environmental tobacco smoke on lung cancer risk
-# copy data into 'dat' and examine data
+
+
 dat <- dat.hackshaw1998
-# fit random-effects model
 res <- rma(yi, vi, data = dat, method = "ML")
 # step function selection model
-selmodel_stepfun <- selmodel(res, type = "stepfun", alternative = "greater", steps = c(.025, .10, .50, 1))
+selmodel_stepfun <- selmodel(
+  res,
+  type = "stepfun", alternative = "greater", steps = c(.025, .10, .50, 1)
+)
 
 # Add stats
 results <- results %>%
@@ -494,10 +566,16 @@ selmodel_stepfun
 # fsn() --------------------------------------------------------------------
 
 ### calculate log risk ratios and corresponding sampling variances
-dat <- escalc(measure = "RR", ai = tpos, bi = tneg, ci = cpos, di = cneg, data = dat.bcg)
+dat <- escalc(
+  measure = "RR", ai = tpos, bi = tneg, ci = cpos, di = cneg,
+  data = dat.bcg
+)
 ### fail-safe N computations
 fsn_rosenthal <- fsn(yi, vi, data = dat)
-fsn_orwin <- fsn(yi, data = dat, type = "Orwin", target = log(0.95)) # target corresponds to a 5% risk reduction
+fsn_orwin <- fsn(
+  yi,
+  data = dat, type = "Orwin", target = log(0.95)
+) # target corresponds to a 5% risk reduction
 fsn_rosenberg <- fsn(yi, vi, data = dat, type = "Rosenberg")
 
 # Add stats
@@ -514,7 +592,10 @@ fsn_rosenberg
 # hc() --------------------------------------------------------------------
 
 ### calculate log odds ratios and corresponding sampling variances
-dat <- escalc(measure = "OR", ai = ai, n1i = n1i, ci = ci, n2i = n2i, data = dat.lee2004)
+dat <- escalc(
+  measure = "OR", ai = ai, n1i = n1i, ci = ci, n2i = n2i,
+  data = dat.lee2004
+)
 ### meta-analysis based on log odds ratios
 res <- rma(yi, vi, data = dat)
 ### use method by Henmi and Copas (2010) as a sensitivity analysis
@@ -550,7 +631,11 @@ robust_multi_rem <- robust(res, cluster = district)
 dat <- dat.berkey1998
 V <- vcalc(vi = 1, cluster = author, rvars = c(v1i, v2i), data = dat)
 ### fit multivariate model
-res <- rma.mv(yi, V, mods = ~ outcome - 1, random = ~ outcome | trial, struct = "UN", data = dat)
+res <- rma.mv(
+  yi, V,
+  mods = ~ outcome - 1, random = ~ outcome | trial,
+  struct = "UN", data = dat
+)
 ### obtain results based on sandwich method
 robust_mv <- robust(res, cluster = trial)
 
@@ -568,14 +653,20 @@ robust_mv
 # cumul() --------------------------------------------------------------------
 
 ### calculate log risk ratios and corresponding sampling variances
-dat <- escalc(measure = "RR", ai = tpos, bi = tneg, ci = cpos, di = cneg, data = dat.bcg)
+dat <- escalc(
+  measure = "RR", ai = tpos, bi = tneg, ci = cpos, di = cneg,
+  data = dat.bcg
+)
 ### fit random-effects model
 res <- rma(yi, vi, data = dat)
 ### cumulative meta-analysis (in the order of publication year)
 cumul_uni <- cumul(res, transf = exp, order = year)
 
 ### meta-analysis of the (log) risk ratios using the Mantel-Haenszel method
-res <- rma.mh(measure = "RR", ai = tpos, bi = tneg, ci = cpos, di = cneg, data = dat.bcg)
+res <- rma.mh(
+  measure = "RR", ai = tpos, bi = tneg, ci = cpos, di = cneg,
+  data = dat.bcg
+)
 ### cumulative meta-analysis
 cumul_mh <- cumul(res, order = year)
 

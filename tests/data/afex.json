@@ -1,0 +1,5937 @@
+{
+  "aov_ez": {
+    "method": "ANOVA",
+    "groups": [
+      {
+        "name": "Terms",
+        "groups": [
+          {
+            "name": "angle",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 18
+              },
+              {
+                "name": "MSE",
+                "value": 3560
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 40.719101
+              },
+              {
+                "name": "p",
+                "value": 2.086763e-07
+              }
+            ]
+          },
+          {
+            "name": "noise",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 9
+              },
+              {
+                "name": "MSE",
+                "value": 8460
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 33.765957
+              },
+              {
+                "name": "p",
+                "value": 0.000256
+              }
+            ]
+          },
+          {
+            "name": "angle:noise",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 18
+              },
+              {
+                "name": "MSE",
+                "value": 1160
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 45.310345
+              },
+              {
+                "name": "p",
+                "value": 9.424093e-08
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "anova_type": 3,
+    "p_adjustment_method": "none",
+    "sphericity_correction_method": "none",
+    "package": {
+      "name": "afex",
+      "version": "1.2-1"
+    }
+  },
+  "aov_ez_default": {
+    "method": "ANOVA",
+    "groups": [
+      {
+        "name": "Terms",
+        "groups": [
+          {
+            "name": "angle",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1.923273
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 17.309457
+              },
+              {
+                "name": "MSE",
+                "value": 3702.022472
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 40.719101
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.390118
+              },
+              {
+                "name": "p",
+                "value": 3.401705e-07
+              }
+            ]
+          },
+          {
+            "name": "noise",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 9
+              },
+              {
+                "name": "MSE",
+                "value": 8460
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 33.765957
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.386602
+              },
+              {
+                "name": "p",
+                "value": 0.000256
+              }
+            ]
+          },
+          {
+            "name": "angle:noise",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1.807954
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 16.271587
+              },
+              {
+                "name": "MSE",
+                "value": 1283.218391
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 45.310345
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.188266
+              },
+              {
+                "name": "p",
+                "value": 3.453931e-07
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "anova_type": 3,
+    "p_adjustment_method": "none",
+    "sphericity_correction_method": "GG",
+    "package": {
+      "name": "afex",
+      "version": "1.2-1"
+    }
+  },
+  "aov_ez_covariate": {
+    "method": "ANOVA",
+    "groups": [
+      {
+        "name": "Terms",
+        "groups": [
+          {
+            "name": "treatment",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 9
+              },
+              {
+                "name": "MSE",
+                "value": 23.961842
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 3.576519
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.201867
+              },
+              {
+                "name": "p",
+                "value": 0.071936
+              }
+            ]
+          },
+          {
+            "name": "gender",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 9
+              },
+              {
+                "name": "MSE",
+                "value": 23.961842
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 3.947874
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.139593
+              },
+              {
+                "name": "p",
+                "value": 0.078183
+              }
+            ]
+          },
+          {
+            "name": "age",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 9
+              },
+              {
+                "name": "MSE",
+                "value": 23.961842
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.517447
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.018296
+              },
+              {
+                "name": "p",
+                "value": 0.490189
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 9
+              },
+              {
+                "name": "MSE",
+                "value": 23.961842
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 1.283955
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.090799
+              },
+              {
+                "name": "p",
+                "value": 0.32318
+              }
+            ]
+          },
+          {
+            "name": "phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1.697443
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 15.276986
+              },
+              {
+                "name": "MSE",
+                "value": 3.909435
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 20.281063
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.165693
+              },
+              {
+                "name": "p",
+                "value": 0.000084
+              }
+            ]
+          },
+          {
+            "name": "treatment:phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.394886
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 15.276986
+              },
+              {
+                "name": "MSE",
+                "value": 3.909435
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 6.073238
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.106299
+              },
+              {
+                "name": "p",
+                "value": 0.00516
+              }
+            ]
+          },
+          {
+            "name": "gender:phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1.697443
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 15.276986
+              },
+              {
+                "name": "MSE",
+                "value": 3.909435
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.246268
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.002412
+              },
+              {
+                "name": "p",
+                "value": 0.749399
+              }
+            ]
+          },
+          {
+            "name": "age:phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1.697443
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 15.276986
+              },
+              {
+                "name": "MSE",
+                "value": 3.909435
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 3.097236
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.030329
+              },
+              {
+                "name": "p",
+                "value": 0.080734
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender:phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.394886
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 15.276986
+              },
+              {
+                "name": "MSE",
+                "value": 3.909435
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 1.601438
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.031364
+              },
+              {
+                "name": "p",
+                "value": 0.22797
+              }
+            ]
+          },
+          {
+            "name": "hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2.136699
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 19.230288
+              },
+              {
+                "name": "MSE",
+                "value": 2.475024
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 20.519229
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.138025
+              },
+              {
+                "name": "p",
+                "value": 0.000013
+              }
+            ]
+          },
+          {
+            "name": "treatment:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 4.273397
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 19.230288
+              },
+              {
+                "name": "MSE",
+                "value": 2.475024
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.713627
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.011015
+              },
+              {
+                "name": "p",
+                "value": 0.601078
+              }
+            ]
+          },
+          {
+            "name": "gender:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2.136699
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 19.230288
+              },
+              {
+                "name": "MSE",
+                "value": 2.475024
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.708371
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.005528
+              },
+              {
+                "name": "p",
+                "value": 0.513721
+              }
+            ]
+          },
+          {
+            "name": "age:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2.136699
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 19.230288
+              },
+              {
+                "name": "MSE",
+                "value": 2.475024
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 2.818361
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.021994
+              },
+              {
+                "name": "p",
+                "value": 0.08155
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 4.273397
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 19.230288
+              },
+              {
+                "name": "MSE",
+                "value": 2.475024
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.589519
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.009201
+              },
+              {
+                "name": "p",
+                "value": 0.684353
+              }
+            ]
+          },
+          {
+            "name": "phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.484657
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 31.361916
+              },
+              {
+                "name": "MSE",
+                "value": 2.825945
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.991381
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.014201
+              },
+              {
+                "name": "p",
+                "value": 0.41868
+              }
+            ]
+          },
+          {
+            "name": "treatment:phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 6.969315
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 31.361916
+              },
+              {
+                "name": "MSE",
+                "value": 2.825945
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.334051
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.009615
+              },
+              {
+                "name": "p",
+                "value": 0.931785
+              }
+            ]
+          },
+          {
+            "name": "gender:phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.484657
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 31.361916
+              },
+              {
+                "name": "MSE",
+                "value": 2.825945
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.898851
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.013061
+              },
+              {
+                "name": "p",
+                "value": 0.465193
+              }
+            ]
+          },
+          {
+            "name": "age:phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.484657
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 31.361916
+              },
+              {
+                "name": "MSE",
+                "value": 2.825945
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.765641
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.011126
+              },
+              {
+                "name": "p",
+                "value": 0.539515
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender:phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 6.969315
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 31.361916
+              },
+              {
+                "name": "MSE",
+                "value": 2.825945
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.651042
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.018921
+              },
+              {
+                "name": "p",
+                "value": 0.710092
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "anova_type": 3,
+    "p_adjustment_method": "none",
+    "sphericity_correction_method": "GG",
+    "package": {
+      "name": "afex",
+      "version": "1.2-1"
+    }
+  },
+  "aov_ez_aggregate": {
+    "method": "ANOVA",
+    "groups": [
+      {
+        "name": "Terms",
+        "groups": [
+          {
+            "name": "treatment",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 10
+              },
+              {
+                "name": "MSE",
+                "value": 7.601852
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 3.940495
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.258774
+              },
+              {
+                "name": "p",
+                "value": 0.054707
+              }
+            ]
+          },
+          {
+            "name": "gender",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 10
+              },
+              {
+                "name": "MSE",
+                "value": 7.601852
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 3.659121
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.162094
+              },
+              {
+                "name": "p",
+                "value": 0.0848
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 10
+              },
+              {
+                "name": "MSE",
+                "value": 7.601852
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 2.855473
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.252987
+              },
+              {
+                "name": "p",
+                "value": 0.104469
+              }
+            ]
+          },
+          {
+            "name": "hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1.841126
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 18.41126
+              },
+              {
+                "name": "MSE",
+                "value": 1.131554
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 16.68567
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.168447
+              },
+              {
+                "name": "p",
+                "value": 0.000098
+              }
+            ]
+          },
+          {
+            "name": "treatment:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.682252
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 18.41126
+              },
+              {
+                "name": "MSE",
+                "value": 1.131554
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.093333
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.002261
+              },
+              {
+                "name": "p",
+                "value": 0.978623
+              }
+            ]
+          },
+          {
+            "name": "gender:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1.841126
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 18.41126
+              },
+              {
+                "name": "MSE",
+                "value": 1.131554
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.450268
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.005466
+              },
+              {
+                "name": "p",
+                "value": 0.628434
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.682252
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 18.41126
+              },
+              {
+                "name": "MSE",
+                "value": 1.131554
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.620438
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.015065
+              },
+              {
+                "name": "p",
+                "value": 0.641362
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "anova_type": 3,
+    "p_adjustment_method": "none",
+    "sphericity_correction_method": "GG",
+    "package": {
+      "name": "afex",
+      "version": "1.2-1"
+    }
+  },
+  "aov_ez_aggregate_both": {
+    "method": "ANOVA",
+    "groups": [
+      {
+        "name": "Terms",
+        "groups": [
+          {
+            "name": "treatment",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 10
+              },
+              {
+                "name": "MSE",
+                "value": 1.52037
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 3.940495
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.289199
+              },
+              {
+                "name": "p",
+                "value": 0.054707
+              }
+            ]
+          },
+          {
+            "name": "gender",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 10
+              },
+              {
+                "name": "MSE",
+                "value": 1.52037
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 3.659121
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.188906
+              },
+              {
+                "name": "p",
+                "value": 0.0848
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 10
+              },
+              {
+                "name": "MSE",
+                "value": 1.52037
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 2.855473
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.294834
+              },
+              {
+                "name": "p",
+                "value": 0.104469
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "anova_type": 3,
+    "p_adjustment_method": "none",
+    "sphericity_correction_method": "none",
+    "package": {
+      "name": "afex",
+      "version": "1.2-1"
+    }
+  },
+  "aov_ez_p": {
+    "method": "ANOVA",
+    "groups": [
+      {
+        "name": "Terms",
+        "groups": [
+          {
+            "name": "treatment",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 13
+              },
+              {
+                "name": "MSE",
+                "value": 32.044872
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 2.913883
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.210952
+              },
+              {
+                "name": "p",
+                "value": 0.360164
+              }
+            ]
+          },
+          {
+            "name": "phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1.74142
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 22.638458
+              },
+              {
+                "name": "MSE",
+                "value": 4.071243
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 19.29395
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.163758
+              },
+              {
+                "name": "p",
+                "value": 0.000143
+              }
+            ]
+          },
+          {
+            "name": "treatment:phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.48284
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 22.638458
+              },
+              {
+                "name": "MSE",
+                "value": 4.071243
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 5.43038
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.099288
+              },
+              {
+                "name": "p",
+                "value": 0.021507
+              }
+            ]
+          },
+          {
+            "name": "hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1.954688
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 25.410946
+              },
+              {
+                "name": "MSE",
+                "value": 2.865469
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 18.43818
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.128804
+              },
+              {
+                "name": "p",
+                "value": 0.000088
+              }
+            ]
+          },
+          {
+            "name": "treatment:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.909376
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 25.410946
+              },
+              {
+                "name": "MSE",
+                "value": 2.865469
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.07981
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.001278
+              },
+              {
+                "name": "p",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "name": "phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 4.022609
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 52.293921
+              },
+              {
+                "name": "MSE",
+                "value": 2.236534
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 1.346174
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.017043
+              },
+              {
+                "name": "p",
+                "value": 0.79562
+              }
+            ]
+          },
+          {
+            "name": "treatment:phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 8.045219
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 52.293921
+              },
+              {
+                "name": "MSE",
+                "value": 2.236534
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.331206
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.008459
+              },
+              {
+                "name": "p",
+                "value": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "anova_type": 3,
+    "p_adjustment_method": "holm",
+    "sphericity_correction_method": "GG",
+    "package": {
+      "name": "afex",
+      "version": "1.2-1"
+    }
+  },
+  "aov_car": {
+    "method": "ANOVA",
+    "groups": [
+      {
+        "name": "Terms",
+        "groups": [
+          {
+            "name": "treatment",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 10
+              },
+              {
+                "name": "MSE",
+                "value": 22.805556
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 3.940495
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.198249
+              },
+              {
+                "name": "p",
+                "value": 0.054707
+              }
+            ]
+          },
+          {
+            "name": "gender",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 10
+              },
+              {
+                "name": "MSE",
+                "value": 22.805556
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 3.659121
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.114806
+              },
+              {
+                "name": "p",
+                "value": 0.0848
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 10
+              },
+              {
+                "name": "MSE",
+                "value": 22.805556
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 2.855473
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.179183
+              },
+              {
+                "name": "p",
+                "value": 0.104469
+              }
+            ]
+          },
+          {
+            "name": "phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1.59907
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 15.990695
+              },
+              {
+                "name": "MSE",
+                "value": 5.020281
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 16.13292
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.151233
+              },
+              {
+                "name": "p",
+                "value": 0.000281
+              }
+            ]
+          },
+          {
+            "name": "treatment:phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.198139
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 15.990695
+              },
+              {
+                "name": "MSE",
+                "value": 5.020281
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 4.850984
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.096782
+              },
+              {
+                "name": "p",
+                "value": 0.012691
+              }
+            ]
+          },
+          {
+            "name": "gender:phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1.59907
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 15.990695
+              },
+              {
+                "name": "MSE",
+                "value": 5.020281
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.282782
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.003123
+              },
+              {
+                "name": "p",
+                "value": 0.70896
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender:phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.198139
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 15.990695
+              },
+              {
+                "name": "MSE",
+                "value": 5.020281
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.636602
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.014062
+              },
+              {
+                "name": "p",
+                "value": 0.611621
+              }
+            ]
+          },
+          {
+            "name": "hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1.841126
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 18.41126
+              },
+              {
+                "name": "MSE",
+                "value": 3.394662
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 16.68567
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.125472
+              },
+              {
+                "name": "p",
+                "value": 0.000098
+              }
+            ]
+          },
+          {
+            "name": "treatment:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.682252
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 18.41126
+              },
+              {
+                "name": "MSE",
+                "value": 3.394662
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.093333
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.001603
+              },
+              {
+                "name": "p",
+                "value": 0.978623
+              }
+            ]
+          },
+          {
+            "name": "gender:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1.841126
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 18.41126
+              },
+              {
+                "name": "MSE",
+                "value": 3.394662
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.450268
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.003872
+              },
+              {
+                "name": "p",
+                "value": 0.628434
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.682252
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 18.41126
+              },
+              {
+                "name": "MSE",
+                "value": 3.394662
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.620438
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.01067
+              },
+              {
+                "name": "p",
+                "value": 0.641362
+              }
+            ]
+          },
+          {
+            "name": "phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.59601
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 35.960101
+              },
+              {
+                "name": "MSE",
+                "value": 2.67426
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 1.179904
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.015371
+              },
+              {
+                "name": "p",
+                "value": 0.334521
+              }
+            ]
+          },
+          {
+            "name": "treatment:phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 7.19202
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 35.960101
+              },
+              {
+                "name": "MSE",
+                "value": 2.67426
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.345292
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.009054
+              },
+              {
+                "name": "p",
+                "value": 0.930372
+              }
+            ]
+          },
+          {
+            "name": "gender:phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.59601
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 35.960101
+              },
+              {
+                "name": "MSE",
+                "value": 2.67426
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.931293
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.012321
+              },
+              {
+                "name": "p",
+                "value": 0.449078
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender:phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 7.19202
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 35.960101
+              },
+              {
+                "name": "MSE",
+                "value": 2.67426
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.735936
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.019473
+              },
+              {
+                "name": "p",
+                "value": 0.646345
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "anova_type": 3,
+    "p_adjustment_method": "none",
+    "sphericity_correction_method": "GG",
+    "package": {
+      "name": "afex",
+      "version": "1.2-1"
+    }
+  },
+  "aov_car_covariate": {
+    "method": "ANOVA",
+    "groups": [
+      {
+        "name": "Terms",
+        "groups": [
+          {
+            "name": "treatment",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 9
+              },
+              {
+                "name": "MSE",
+                "value": 23.961842
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 3.576519
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.201867
+              },
+              {
+                "name": "p",
+                "value": 0.071936
+              }
+            ]
+          },
+          {
+            "name": "gender",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 9
+              },
+              {
+                "name": "MSE",
+                "value": 23.961842
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 3.947874
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.139593
+              },
+              {
+                "name": "p",
+                "value": 0.078183
+              }
+            ]
+          },
+          {
+            "name": "age",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 9
+              },
+              {
+                "name": "MSE",
+                "value": 23.961842
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.517447
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.018296
+              },
+              {
+                "name": "p",
+                "value": 0.490189
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 9
+              },
+              {
+                "name": "MSE",
+                "value": 23.961842
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 1.283955
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.090799
+              },
+              {
+                "name": "p",
+                "value": 0.32318
+              }
+            ]
+          },
+          {
+            "name": "phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1.697443
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 15.276986
+              },
+              {
+                "name": "MSE",
+                "value": 3.909435
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 20.281063
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.165693
+              },
+              {
+                "name": "p",
+                "value": 0.000084
+              }
+            ]
+          },
+          {
+            "name": "treatment:phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.394886
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 15.276986
+              },
+              {
+                "name": "MSE",
+                "value": 3.909435
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 6.073238
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.106299
+              },
+              {
+                "name": "p",
+                "value": 0.00516
+              }
+            ]
+          },
+          {
+            "name": "gender:phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1.697443
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 15.276986
+              },
+              {
+                "name": "MSE",
+                "value": 3.909435
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.246268
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.002412
+              },
+              {
+                "name": "p",
+                "value": 0.749399
+              }
+            ]
+          },
+          {
+            "name": "age:phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1.697443
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 15.276986
+              },
+              {
+                "name": "MSE",
+                "value": 3.909435
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 3.097236
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.030329
+              },
+              {
+                "name": "p",
+                "value": 0.080734
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender:phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.394886
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 15.276986
+              },
+              {
+                "name": "MSE",
+                "value": 3.909435
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 1.601438
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.031364
+              },
+              {
+                "name": "p",
+                "value": 0.22797
+              }
+            ]
+          },
+          {
+            "name": "hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2.136699
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 19.230288
+              },
+              {
+                "name": "MSE",
+                "value": 2.475024
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 20.519229
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.138025
+              },
+              {
+                "name": "p",
+                "value": 0.000013
+              }
+            ]
+          },
+          {
+            "name": "treatment:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 4.273397
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 19.230288
+              },
+              {
+                "name": "MSE",
+                "value": 2.475024
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.713627
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.011015
+              },
+              {
+                "name": "p",
+                "value": 0.601078
+              }
+            ]
+          },
+          {
+            "name": "gender:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2.136699
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 19.230288
+              },
+              {
+                "name": "MSE",
+                "value": 2.475024
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.708371
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.005528
+              },
+              {
+                "name": "p",
+                "value": 0.513721
+              }
+            ]
+          },
+          {
+            "name": "age:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2.136699
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 19.230288
+              },
+              {
+                "name": "MSE",
+                "value": 2.475024
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 2.818361
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.021994
+              },
+              {
+                "name": "p",
+                "value": 0.08155
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 4.273397
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 19.230288
+              },
+              {
+                "name": "MSE",
+                "value": 2.475024
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.589519
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.009201
+              },
+              {
+                "name": "p",
+                "value": 0.684353
+              }
+            ]
+          },
+          {
+            "name": "phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.484657
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 31.361916
+              },
+              {
+                "name": "MSE",
+                "value": 2.825945
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.991381
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.014201
+              },
+              {
+                "name": "p",
+                "value": 0.41868
+              }
+            ]
+          },
+          {
+            "name": "treatment:phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 6.969315
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 31.361916
+              },
+              {
+                "name": "MSE",
+                "value": 2.825945
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.334051
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.009615
+              },
+              {
+                "name": "p",
+                "value": 0.931785
+              }
+            ]
+          },
+          {
+            "name": "gender:phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.484657
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 31.361916
+              },
+              {
+                "name": "MSE",
+                "value": 2.825945
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.898851
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.013061
+              },
+              {
+                "name": "p",
+                "value": 0.465193
+              }
+            ]
+          },
+          {
+            "name": "age:phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.484657
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 31.361916
+              },
+              {
+                "name": "MSE",
+                "value": 2.825945
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.765641
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.011126
+              },
+              {
+                "name": "p",
+                "value": 0.539515
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender:phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 6.969315
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 31.361916
+              },
+              {
+                "name": "MSE",
+                "value": 2.825945
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.651042
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.018921
+              },
+              {
+                "name": "p",
+                "value": 0.710092
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "anova_type": 3,
+    "p_adjustment_method": "none",
+    "sphericity_correction_method": "GG",
+    "package": {
+      "name": "afex",
+      "version": "1.2-1"
+    }
+  },
+  "aov_car_aggregate": {
+    "method": "ANOVA",
+    "groups": [
+      {
+        "name": "Terms",
+        "groups": [
+          {
+            "name": "treatment",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 10
+              },
+              {
+                "name": "MSE",
+                "value": 7.601852
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 3.940495
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.258774
+              },
+              {
+                "name": "p",
+                "value": 0.054707
+              }
+            ]
+          },
+          {
+            "name": "gender",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 10
+              },
+              {
+                "name": "MSE",
+                "value": 7.601852
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 3.659121
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.162094
+              },
+              {
+                "name": "p",
+                "value": 0.0848
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 10
+              },
+              {
+                "name": "MSE",
+                "value": 7.601852
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 2.855473
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.252987
+              },
+              {
+                "name": "p",
+                "value": 0.104469
+              }
+            ]
+          },
+          {
+            "name": "hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1.841126
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 18.41126
+              },
+              {
+                "name": "MSE",
+                "value": 1.131554
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 16.68567
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.168447
+              },
+              {
+                "name": "p",
+                "value": 0.000098
+              }
+            ]
+          },
+          {
+            "name": "treatment:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.682252
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 18.41126
+              },
+              {
+                "name": "MSE",
+                "value": 1.131554
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.093333
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.002261
+              },
+              {
+                "name": "p",
+                "value": 0.978623
+              }
+            ]
+          },
+          {
+            "name": "gender:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1.841126
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 18.41126
+              },
+              {
+                "name": "MSE",
+                "value": 1.131554
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.450268
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.005466
+              },
+              {
+                "name": "p",
+                "value": 0.628434
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.682252
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 18.41126
+              },
+              {
+                "name": "MSE",
+                "value": 1.131554
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.620438
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.015065
+              },
+              {
+                "name": "p",
+                "value": 0.641362
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "anova_type": 3,
+    "p_adjustment_method": "none",
+    "sphericity_correction_method": "GG",
+    "package": {
+      "name": "afex",
+      "version": "1.2-1"
+    }
+  },
+  "aov_car_aggregate_both": {
+    "method": "ANOVA",
+    "groups": [
+      {
+        "name": "Terms",
+        "groups": [
+          {
+            "name": "treatment",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 10
+              },
+              {
+                "name": "MSE",
+                "value": 1.52037
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 3.940495
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.289199
+              },
+              {
+                "name": "p",
+                "value": 0.054707
+              }
+            ]
+          },
+          {
+            "name": "gender",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 10
+              },
+              {
+                "name": "MSE",
+                "value": 1.52037
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 3.659121
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.188906
+              },
+              {
+                "name": "p",
+                "value": 0.0848
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 10
+              },
+              {
+                "name": "MSE",
+                "value": 1.52037
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 2.855473
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.294834
+              },
+              {
+                "name": "p",
+                "value": 0.104469
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "anova_type": 3,
+    "p_adjustment_method": "none",
+    "sphericity_correction_method": "none",
+    "package": {
+      "name": "afex",
+      "version": "1.2-1"
+    }
+  },
+  "aov_car_within": {
+    "method": "ANOVA",
+    "groups": [
+      {
+        "name": "Terms",
+        "groups": [
+          {
+            "name": "phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1.544044
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 23.160665
+              },
+              {
+                "name": "MSE",
+                "value": 7.30405
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 14.852217
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.147366
+              },
+              {
+                "name": "p",
+                "value": 0.000189
+              }
+            ]
+          },
+          {
+            "name": "hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1.993669
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 29.905039
+              },
+              {
+                "name": "MSE",
+                "value": 2.464746
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 21.630865
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.098838
+              },
+              {
+                "name": "p",
+                "value": 1.578258e-06
+              }
+            ]
+          },
+          {
+            "name": "phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 4.103799
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 61.556987
+              },
+              {
+                "name": "MSE",
+                "value": 1.996795
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 1.352542
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.011307
+              },
+              {
+                "name": "p",
+                "value": 0.260236
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "anova_type": 3,
+    "p_adjustment_method": "none",
+    "sphericity_correction_method": "GG",
+    "package": {
+      "name": "afex",
+      "version": "1.2-1"
+    }
+  },
+  "aov_car_no_df_pes": {
+    "method": "ANOVA",
+    "groups": [
+      {
+        "name": "Terms",
+        "groups": [
+          {
+            "name": "treatment",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 10
+              },
+              {
+                "name": "MSE",
+                "value": 22.805556
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 3.940495
+              },
+              {
+                "name": "pes",
+                "symbol": "η²",
+                "subscript": "p",
+                "value": 0.440747
+              },
+              {
+                "name": "p",
+                "value": 0.054707
+              }
+            ]
+          },
+          {
+            "name": "gender",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 10
+              },
+              {
+                "name": "MSE",
+                "value": 22.805556
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 3.659121
+              },
+              {
+                "name": "pes",
+                "symbol": "η²",
+                "subscript": "p",
+                "value": 0.267888
+              },
+              {
+                "name": "p",
+                "value": 0.0848
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 10
+              },
+              {
+                "name": "MSE",
+                "value": 22.805556
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 2.855473
+              },
+              {
+                "name": "pes",
+                "symbol": "η²",
+                "subscript": "p",
+                "value": 0.363501
+              },
+              {
+                "name": "p",
+                "value": 0.104469
+              }
+            ]
+          },
+          {
+            "name": "phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 20
+              },
+              {
+                "name": "MSE",
+                "value": 4.013889
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 16.13292
+              },
+              {
+                "name": "pes",
+                "symbol": "η²",
+                "subscript": "p",
+                "value": 0.617341
+              },
+              {
+                "name": "p",
+                "value": 0.000067
+              }
+            ]
+          },
+          {
+            "name": "treatment:phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 4
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 20
+              },
+              {
+                "name": "MSE",
+                "value": 4.013889
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 4.850984
+              },
+              {
+                "name": "pes",
+                "symbol": "η²",
+                "subscript": "p",
+                "value": 0.492436
+              },
+              {
+                "name": "p",
+                "value": 0.006723
+              }
+            ]
+          },
+          {
+            "name": "gender:phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 20
+              },
+              {
+                "name": "MSE",
+                "value": 4.013889
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.282782
+              },
+              {
+                "name": "pes",
+                "symbol": "η²",
+                "subscript": "p",
+                "value": 0.027501
+              },
+              {
+                "name": "p",
+                "value": 0.756647
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender:phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 4
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 20
+              },
+              {
+                "name": "MSE",
+                "value": 4.013889
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.636602
+              },
+              {
+                "name": "pes",
+                "symbol": "η²",
+                "subscript": "p",
+                "value": 0.112941
+              },
+              {
+                "name": "p",
+                "value": 0.642369
+              }
+            ]
+          },
+          {
+            "name": "hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 4
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 40
+              },
+              {
+                "name": "MSE",
+                "value": 1.5625
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 16.68567
+              },
+              {
+                "name": "pes",
+                "symbol": "η²",
+                "subscript": "p",
+                "value": 0.625267
+              },
+              {
+                "name": "p",
+                "value": 4.026643e-08
+              }
+            ]
+          },
+          {
+            "name": "treatment:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 8
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 40
+              },
+              {
+                "name": "MSE",
+                "value": 1.5625
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.093333
+              },
+              {
+                "name": "pes",
+                "symbol": "η²",
+                "subscript": "p",
+                "value": 0.018325
+              },
+              {
+                "name": "p",
+                "value": 0.999245
+              }
+            ]
+          },
+          {
+            "name": "gender:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 4
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 40
+              },
+              {
+                "name": "MSE",
+                "value": 1.5625
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.450268
+              },
+              {
+                "name": "pes",
+                "symbol": "η²",
+                "subscript": "p",
+                "value": 0.043087
+              },
+              {
+                "name": "p",
+                "value": 0.771559
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 8
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 40
+              },
+              {
+                "name": "MSE",
+                "value": 1.5625
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.620438
+              },
+              {
+                "name": "pes",
+                "symbol": "η²",
+                "subscript": "p",
+                "value": 0.11039
+              },
+              {
+                "name": "p",
+                "value": 0.755484
+              }
+            ]
+          },
+          {
+            "name": "phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 8
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 80
+              },
+              {
+                "name": "MSE",
+                "value": 1.202083
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 1.179904
+              },
+              {
+                "name": "pes",
+                "symbol": "η²",
+                "subscript": "p",
+                "value": 0.105538
+              },
+              {
+                "name": "p",
+                "value": 0.321587
+              }
+            ]
+          },
+          {
+            "name": "treatment:phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 16
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 80
+              },
+              {
+                "name": "MSE",
+                "value": 1.202083
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.345292
+              },
+              {
+                "name": "pes",
+                "symbol": "η²",
+                "subscript": "p",
+                "value": 0.064597
+              },
+              {
+                "name": "p",
+                "value": 0.990125
+              }
+            ]
+          },
+          {
+            "name": "gender:phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 8
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 80
+              },
+              {
+                "name": "MSE",
+                "value": 1.202083
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.931293
+              },
+              {
+                "name": "pes",
+                "symbol": "η²",
+                "subscript": "p",
+                "value": 0.085195
+              },
+              {
+                "name": "p",
+                "value": 0.495612
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender:phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 16
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 80
+              },
+              {
+                "name": "MSE",
+                "value": 1.202083
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.735936
+              },
+              {
+                "name": "pes",
+                "symbol": "η²",
+                "subscript": "p",
+                "value": 0.128303
+              },
+              {
+                "name": "p",
+                "value": 0.749562
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "anova_type": 3,
+    "p_adjustment_method": "none",
+    "sphericity_correction_method": "none",
+    "package": {
+      "name": "afex",
+      "version": "1.2-1"
+    }
+  },
+  "aov_car_no_df_no_MSE": {
+    "method": "ANOVA",
+    "groups": [
+      {
+        "name": "Terms",
+        "groups": [
+          {
+            "name": "treatment",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 10
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 3.940495
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.198249
+              },
+              {
+                "name": "p",
+                "value": 0.054707
+              }
+            ]
+          },
+          {
+            "name": "gender",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 10
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 3.659121
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.114806
+              },
+              {
+                "name": "p",
+                "value": 0.0848
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 10
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 2.855473
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.179183
+              },
+              {
+                "name": "p",
+                "value": 0.104469
+              }
+            ]
+          },
+          {
+            "name": "phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 20
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 16.13292
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.151233
+              },
+              {
+                "name": "p",
+                "value": 0.000067
+              }
+            ]
+          },
+          {
+            "name": "treatment:phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 4
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 20
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 4.850984
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.096782
+              },
+              {
+                "name": "p",
+                "value": 0.006723
+              }
+            ]
+          },
+          {
+            "name": "gender:phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 20
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.282782
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.003123
+              },
+              {
+                "name": "p",
+                "value": 0.756647
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender:phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 4
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 20
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.636602
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.014062
+              },
+              {
+                "name": "p",
+                "value": 0.642369
+              }
+            ]
+          },
+          {
+            "name": "hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 4
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 40
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 16.68567
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.125472
+              },
+              {
+                "name": "p",
+                "value": 4.026643e-08
+              }
+            ]
+          },
+          {
+            "name": "treatment:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 8
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 40
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.093333
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.001603
+              },
+              {
+                "name": "p",
+                "value": 0.999245
+              }
+            ]
+          },
+          {
+            "name": "gender:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 4
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 40
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.450268
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.003872
+              },
+              {
+                "name": "p",
+                "value": 0.771559
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 8
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 40
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.620438
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.01067
+              },
+              {
+                "name": "p",
+                "value": 0.755484
+              }
+            ]
+          },
+          {
+            "name": "phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 8
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 80
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 1.179904
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.015371
+              },
+              {
+                "name": "p",
+                "value": 0.321587
+              }
+            ]
+          },
+          {
+            "name": "treatment:phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 16
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 80
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.345292
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.009054
+              },
+              {
+                "name": "p",
+                "value": 0.990125
+              }
+            ]
+          },
+          {
+            "name": "gender:phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 8
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 80
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.931293
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.012321
+              },
+              {
+                "name": "p",
+                "value": 0.495612
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender:phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 16
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 80
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.735936
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.019473
+              },
+              {
+                "name": "p",
+                "value": 0.749562
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "anova_type": 3,
+    "p_adjustment_method": "none",
+    "sphericity_correction_method": "none",
+    "package": {
+      "name": "afex",
+      "version": "1.2-1"
+    }
+  },
+  "aov_4": {
+    "method": "ANOVA",
+    "groups": [
+      {
+        "name": "Terms",
+        "groups": [
+          {
+            "name": "treatment",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 10
+              },
+              {
+                "name": "MSE",
+                "value": 22.805556
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 3.940495
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.198249
+              },
+              {
+                "name": "p",
+                "value": 0.054707
+              }
+            ]
+          },
+          {
+            "name": "gender",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 10
+              },
+              {
+                "name": "MSE",
+                "value": 22.805556
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 3.659121
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.114806
+              },
+              {
+                "name": "p",
+                "value": 0.0848
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 10
+              },
+              {
+                "name": "MSE",
+                "value": 22.805556
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 2.855473
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.179183
+              },
+              {
+                "name": "p",
+                "value": 0.104469
+              }
+            ]
+          },
+          {
+            "name": "phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1.59907
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 15.990695
+              },
+              {
+                "name": "MSE",
+                "value": 5.020281
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 16.13292
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.151233
+              },
+              {
+                "name": "p",
+                "value": 0.000281
+              }
+            ]
+          },
+          {
+            "name": "treatment:phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.198139
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 15.990695
+              },
+              {
+                "name": "MSE",
+                "value": 5.020281
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 4.850984
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.096782
+              },
+              {
+                "name": "p",
+                "value": 0.012691
+              }
+            ]
+          },
+          {
+            "name": "gender:phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1.59907
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 15.990695
+              },
+              {
+                "name": "MSE",
+                "value": 5.020281
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.282782
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.003123
+              },
+              {
+                "name": "p",
+                "value": 0.70896
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender:phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.198139
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 15.990695
+              },
+              {
+                "name": "MSE",
+                "value": 5.020281
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.636602
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.014062
+              },
+              {
+                "name": "p",
+                "value": 0.611621
+              }
+            ]
+          },
+          {
+            "name": "hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1.841126
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 18.41126
+              },
+              {
+                "name": "MSE",
+                "value": 3.394662
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 16.68567
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.125472
+              },
+              {
+                "name": "p",
+                "value": 0.000098
+              }
+            ]
+          },
+          {
+            "name": "treatment:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.682252
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 18.41126
+              },
+              {
+                "name": "MSE",
+                "value": 3.394662
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.093333
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.001603
+              },
+              {
+                "name": "p",
+                "value": 0.978623
+              }
+            ]
+          },
+          {
+            "name": "gender:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1.841126
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 18.41126
+              },
+              {
+                "name": "MSE",
+                "value": 3.394662
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.450268
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.003872
+              },
+              {
+                "name": "p",
+                "value": 0.628434
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.682252
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 18.41126
+              },
+              {
+                "name": "MSE",
+                "value": 3.394662
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.620438
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.01067
+              },
+              {
+                "name": "p",
+                "value": 0.641362
+              }
+            ]
+          },
+          {
+            "name": "phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.59601
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 35.960101
+              },
+              {
+                "name": "MSE",
+                "value": 2.67426
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 1.179904
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.015371
+              },
+              {
+                "name": "p",
+                "value": 0.334521
+              }
+            ]
+          },
+          {
+            "name": "treatment:phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 7.19202
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 35.960101
+              },
+              {
+                "name": "MSE",
+                "value": 2.67426
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.345292
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.009054
+              },
+              {
+                "name": "p",
+                "value": 0.930372
+              }
+            ]
+          },
+          {
+            "name": "gender:phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.59601
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 35.960101
+              },
+              {
+                "name": "MSE",
+                "value": 2.67426
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.931293
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.012321
+              },
+              {
+                "name": "p",
+                "value": 0.449078
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender:phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 7.19202
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 35.960101
+              },
+              {
+                "name": "MSE",
+                "value": 2.67426
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.735936
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.019473
+              },
+              {
+                "name": "p",
+                "value": 0.646345
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "anova_type": 3,
+    "p_adjustment_method": "none",
+    "sphericity_correction_method": "GG",
+    "package": {
+      "name": "afex",
+      "version": "1.2-1"
+    }
+  },
+  "aov_4_covariate": {
+    "method": "ANOVA",
+    "groups": [
+      {
+        "name": "Terms",
+        "groups": [
+          {
+            "name": "treatment",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 9
+              },
+              {
+                "name": "MSE",
+                "value": 23.961842
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 3.576519
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.201867
+              },
+              {
+                "name": "p",
+                "value": 0.071936
+              }
+            ]
+          },
+          {
+            "name": "gender",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 9
+              },
+              {
+                "name": "MSE",
+                "value": 23.961842
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 3.947874
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.139593
+              },
+              {
+                "name": "p",
+                "value": 0.078183
+              }
+            ]
+          },
+          {
+            "name": "age",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 9
+              },
+              {
+                "name": "MSE",
+                "value": 23.961842
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.517447
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.018296
+              },
+              {
+                "name": "p",
+                "value": 0.490189
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 9
+              },
+              {
+                "name": "MSE",
+                "value": 23.961842
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 1.283955
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.090799
+              },
+              {
+                "name": "p",
+                "value": 0.32318
+              }
+            ]
+          },
+          {
+            "name": "phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1.697443
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 15.276986
+              },
+              {
+                "name": "MSE",
+                "value": 3.909435
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 20.281063
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.165693
+              },
+              {
+                "name": "p",
+                "value": 0.000084
+              }
+            ]
+          },
+          {
+            "name": "treatment:phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.394886
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 15.276986
+              },
+              {
+                "name": "MSE",
+                "value": 3.909435
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 6.073238
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.106299
+              },
+              {
+                "name": "p",
+                "value": 0.00516
+              }
+            ]
+          },
+          {
+            "name": "gender:phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1.697443
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 15.276986
+              },
+              {
+                "name": "MSE",
+                "value": 3.909435
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.246268
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.002412
+              },
+              {
+                "name": "p",
+                "value": 0.749399
+              }
+            ]
+          },
+          {
+            "name": "age:phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1.697443
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 15.276986
+              },
+              {
+                "name": "MSE",
+                "value": 3.909435
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 3.097236
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.030329
+              },
+              {
+                "name": "p",
+                "value": 0.080734
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender:phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.394886
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 15.276986
+              },
+              {
+                "name": "MSE",
+                "value": 3.909435
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 1.601438
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.031364
+              },
+              {
+                "name": "p",
+                "value": 0.22797
+              }
+            ]
+          },
+          {
+            "name": "hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2.136699
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 19.230288
+              },
+              {
+                "name": "MSE",
+                "value": 2.475024
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 20.519229
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.138025
+              },
+              {
+                "name": "p",
+                "value": 0.000013
+              }
+            ]
+          },
+          {
+            "name": "treatment:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 4.273397
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 19.230288
+              },
+              {
+                "name": "MSE",
+                "value": 2.475024
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.713627
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.011015
+              },
+              {
+                "name": "p",
+                "value": 0.601078
+              }
+            ]
+          },
+          {
+            "name": "gender:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2.136699
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 19.230288
+              },
+              {
+                "name": "MSE",
+                "value": 2.475024
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.708371
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.005528
+              },
+              {
+                "name": "p",
+                "value": 0.513721
+              }
+            ]
+          },
+          {
+            "name": "age:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2.136699
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 19.230288
+              },
+              {
+                "name": "MSE",
+                "value": 2.475024
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 2.818361
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.021994
+              },
+              {
+                "name": "p",
+                "value": 0.08155
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 4.273397
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 19.230288
+              },
+              {
+                "name": "MSE",
+                "value": 2.475024
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.589519
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.009201
+              },
+              {
+                "name": "p",
+                "value": 0.684353
+              }
+            ]
+          },
+          {
+            "name": "phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.484657
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 31.361916
+              },
+              {
+                "name": "MSE",
+                "value": 2.825945
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.991381
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.014201
+              },
+              {
+                "name": "p",
+                "value": 0.41868
+              }
+            ]
+          },
+          {
+            "name": "treatment:phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 6.969315
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 31.361916
+              },
+              {
+                "name": "MSE",
+                "value": 2.825945
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.334051
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.009615
+              },
+              {
+                "name": "p",
+                "value": 0.931785
+              }
+            ]
+          },
+          {
+            "name": "gender:phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.484657
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 31.361916
+              },
+              {
+                "name": "MSE",
+                "value": 2.825945
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.898851
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.013061
+              },
+              {
+                "name": "p",
+                "value": 0.465193
+              }
+            ]
+          },
+          {
+            "name": "age:phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3.484657
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 31.361916
+              },
+              {
+                "name": "MSE",
+                "value": 2.825945
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.765641
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.011126
+              },
+              {
+                "name": "p",
+                "value": 0.539515
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender:phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 6.969315
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 31.361916
+              },
+              {
+                "name": "MSE",
+                "value": 2.825945
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.651042
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.018921
+              },
+              {
+                "name": "p",
+                "value": 0.710092
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "anova_type": 3,
+    "p_adjustment_method": "none",
+    "sphericity_correction_method": "GG",
+    "package": {
+      "name": "afex",
+      "version": "1.2-1"
+    }
+  },
+  "aov_4_aggregate_both": {
+    "method": "ANOVA",
+    "groups": [
+      {
+        "name": "Terms",
+        "groups": [
+          {
+            "name": "treatment",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 10
+              },
+              {
+                "name": "MSE",
+                "value": 1.52037
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 3.940495
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.289199
+              },
+              {
+                "name": "p",
+                "value": 0.054707
+              }
+            ]
+          },
+          {
+            "name": "gender",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 10
+              },
+              {
+                "name": "MSE",
+                "value": 1.52037
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 3.659121
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.188906
+              },
+              {
+                "name": "p",
+                "value": 0.0848
+              }
+            ]
+          },
+          {
+            "name": "treatment:gender",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 10
+              },
+              {
+                "name": "MSE",
+                "value": 1.52037
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 2.855473
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.294834
+              },
+              {
+                "name": "p",
+                "value": 0.104469
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "anova_type": 3,
+    "p_adjustment_method": "none",
+    "sphericity_correction_method": "none",
+    "package": {
+      "name": "afex",
+      "version": "1.2-1"
+    }
+  },
+  "aov_4_within": {
+    "method": "ANOVA",
+    "groups": [
+      {
+        "name": "Terms",
+        "groups": [
+          {
+            "name": "phase",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1.544044
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 23.160665
+              },
+              {
+                "name": "MSE",
+                "value": 7.30405
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 14.852217
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.147366
+              },
+              {
+                "name": "p",
+                "value": 0.000189
+              }
+            ]
+          },
+          {
+            "name": "hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1.993669
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 29.905039
+              },
+              {
+                "name": "MSE",
+                "value": 2.464746
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 21.630865
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.098838
+              },
+              {
+                "name": "p",
+                "value": 1.578258e-06
+              }
+            ]
+          },
+          {
+            "name": "phase:hour",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 4.103799
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 61.556987
+              },
+              {
+                "name": "MSE",
+                "value": 1.996795
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 1.352542
+              },
+              {
+                "name": "ges",
+                "symbol": "η²",
+                "subscript": "G",
+                "value": 0.011307
+              },
+              {
+                "name": "p",
+                "value": 0.260236
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "anova_type": 3,
+    "p_adjustment_method": "none",
+    "sphericity_correction_method": "GG",
+    "package": {
+      "name": "afex",
+      "version": "1.2-1"
+    }
+  }
+}

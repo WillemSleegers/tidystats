@@ -18,7 +18,7 @@ glm_D93 <- glm(counts ~ outcome + treatment, data = D93, family = poisson())
 CI_glm_D93_MASS <- confint(glm_D93) # based on profile likelihood
 CI_glm_D93_default <- confint.default(glm_D93) # based on asymptotic normality
 
-results <- results |>
+statistics <- statistics |>
   add_stats(CI_fit, class = "confint") |>
   add_stats(CI_fit_wt, class = "confint") |>
   add_stats(CI_glm_D93_MASS, class = "confint") |>
@@ -31,7 +31,7 @@ CI_glm_D93_default
 
 # tidy_stats_to_data_frame() ----------------------------------------------
 
-df <- tidy_stats_to_data_frame(results)
+df <- tidy_stats_to_data_frame(statistics)
 
 # write_stats() -----------------------------------------------------------
 
@@ -41,5 +41,5 @@ write_test_stats(results, "tests/data/confint.json")
 
 rm(
   CI_fit, CI_fit_wt, CI_glm_D93_MASS, CI_glm_D93_default, D93, fit, glm_D93,
-  df, results
+  df, statistics
 )

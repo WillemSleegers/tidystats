@@ -1,18 +1,15 @@
 # Setup -------------------------------------------------------------------
 
-library(lme4)
-
 statistics <- list()
 
 # lmer() ------------------------------------------------------------------
 
-lme4 <- lmer(Reaction ~ Days + (1 | Subject), sleepstudy)
-lme4_ML <- lmer(Reaction ~ Days + (1 | Subject), sleepstudy, REML = FALSE)
-lme4_slopes <- lmer(
-  Reaction ~ Days + (Days | Subject),
-  sleepstudy,
+lme4 <- lme4::lmer(Reaction ~ Days + (1 | Subject), lme4::sleepstudy)
+lme4_ML <- lme4::lmer(
+  Reaction ~ Days + (1 | Subject), lme4::sleepstudy,
   REML = FALSE
 )
+lme4_slopes <- lme4::lmer(Reaction ~ Days + (Days || Subject), lme4::sleepstudy)
 
 statistics <- statistics |>
   add_stats(lme4) |>

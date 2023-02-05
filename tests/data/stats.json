@@ -1,0 +1,18 @@
+{
+  "BF_stats": {
+    "method": "BF BIC method",
+    "statistics": [
+      {
+        "name": "BF",
+        "value": 3.820709,
+        "subscript": "10"
+      },
+      {
+        "name": "BF",
+        "value": 0.261732,
+        "subscript": "01"
+      }
+    ],
+    "notes": "Wagenmakers (2007) method for calculating Bayes factors"
+  }
+}
