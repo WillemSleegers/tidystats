@@ -163,17 +163,37 @@ aov_4_within
 
 data("Machines", package = "MEMSS")
 data(md_15.1)
+data(md_16.1)
 
-m1 <- mixed(score ~ Machine + (Machine | Worker), data = Machines)
-m2 <- mixed(
+mixed <- mixed(
+  score ~ Machine + (Machine | Worker), 
+  data = Machines)
+
+mixed_expand_RE <- mixed(
   score ~ Machine + (Machine || Worker),
   data = Machines, expand_re = TRUE
 )
-t15.4a <- mixed(iq ~ timecat + (1 + time | id), data = md_15.1)
-mixed1_orig <- mixed(
-  severity ~ sex + (1 | id), md_16.1,
+
+mixed_random_interecept <-  mixed(
+  iq ~ timecat + (1 + time | id), 
+  data = md_15.1)
+
+mixed_contrast <- mixed(
+  severity ~ sex + (1 | id), 
+  data = md_16.1,
   check_contrasts = FALSE
 )
+
+statistics <- statistics |>
+  add_stats(mixed) |>
+  add_stats(mixed_expand_RE) |>
+  add_stats(mixed_random_interecept) |>
+  add_stats(mixed_contrast)
+
+mixed
+mixed_expand_RE
+mixed_random_interecept
+mixed_contrast
 
 # tidy_stats_to_data_frame() ----------------------------------------------
 
@@ -190,5 +210,6 @@ rm(
   aov_ez_p, aov_car, aov_car_covariate, aov_ez_covariate, aov_car_aggregate,
   aov_car_aggregate_both, aov_car_within, aov_car_no_df_pes,
   aov_car_no_df_no_MSE, aov_4, aov_4_covariate, aov_4_aggregate_both,
-  aov_4_within, df, statistics, md_12.1, obk.long
+  aov_4_within, mixed, mixed_expand_RE, mixed_random_interecept,
+  mixed_contrast, df, statistics, md_12.1, obk.long, md_15.1, md_16.1
 )
