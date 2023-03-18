@@ -36,7 +36,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "t_test_two_sample": {
@@ -78,7 +78,7 @@
     "var_equal": true,
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "t_test_welch": {
@@ -120,7 +120,7 @@
     "var_equal": false,
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "t_test_paired": {
@@ -161,7 +161,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "correlation_pearson": {
@@ -197,7 +197,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "correlation_kendall": {
@@ -226,7 +226,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "correlation_spearman": {
@@ -255,7 +255,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "chi_squared": {
@@ -278,7 +278,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "chi_squared_yates": {
@@ -301,7 +301,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "chi_squared_prob": {
@@ -324,7 +324,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "prop_test": {
@@ -360,7 +360,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "prop_test_correct": {
@@ -396,7 +396,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "prop_test_smokers": {
@@ -422,7 +422,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "prop_trend_test": {
@@ -445,7 +445,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "prop_trend_test_scores": {
@@ -468,7 +468,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "wilcoxon_signed_rank": {
@@ -491,7 +491,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "wilcoxon_rank_sum_continuity": {
@@ -514,7 +514,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "wilcoxon_rank_sum": {
@@ -537,7 +537,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "wilcoxon_rank_sum_conf": {
@@ -570,7 +570,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "kruskal": {
@@ -593,7 +593,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "kruskal_formula": {
@@ -616,7 +616,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "fisher_test": {
@@ -643,7 +643,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "fisher_test_no_CI": {
@@ -666,7 +666,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "fisher_test_r_by_c": {
@@ -683,7 +683,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "fisher_test_simulated_p": {
@@ -701,7 +701,7 @@
     "sim": 100000,
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "fisher_test_hybrid": {
@@ -723,7 +723,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "ks_test_two": {
@@ -745,7 +745,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "ks_test_one": {
@@ -767,7 +767,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "ks_test_inexact": {
@@ -789,7 +789,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "ks_test_greater": {
@@ -811,7 +811,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "oneway_test": {
@@ -843,7 +843,7 @@
     "var_equal": false,
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "oneway_test_equal_var": {
@@ -875,7 +875,7 @@
     "var_equal": true,
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "var_test": {
@@ -919,7 +919,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "mauchly_test": {
@@ -938,7 +938,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "mauchly_test_orthogonal": {
@@ -957,7 +957,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "mauchly_test_spanned": {
@@ -976,7 +976,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "mcnemar_test": {
@@ -999,7 +999,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "mcnemar_test_nocorrect": {
@@ -1022,7 +1022,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "binom_test": {
@@ -1031,7 +1031,8 @@
     "statistics": [
       {
         "name": "estimate",
-        "symbol": "P",
+        "symbol": "p",
+        "subscript": "success",
         "value": 0.737297,
         "interval": "CI",
         "level": 0.95,
@@ -1039,12 +1040,12 @@
         "upper": 0.765407
       },
       {
-        "name": "count",
+        "name": "statistic",
         "symbol": "k",
         "value": 682
       },
       {
-        "name": "count",
+        "name": "number of trials",
         "symbol": "n",
         "value": 925
       },
@@ -1059,7 +1060,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "binom_test_params": {
@@ -1068,7 +1069,8 @@
     "statistics": [
       {
         "name": "estimate",
-        "symbol": "P",
+        "symbol": "p",
+        "subscript": "success",
         "value": 0.737297,
         "interval": "CI",
         "level": 0.95,
@@ -1076,12 +1078,12 @@
         "upper": 0.761055
       },
       {
-        "name": "count",
+        "name": "statistic",
         "symbol": "k",
         "value": 682
       },
       {
-        "name": "count",
+        "name": "number of trials",
         "symbol": "n",
         "value": 925
       },
@@ -1096,7 +1098,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "pp_test": {
@@ -1121,7 +1123,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "pp_test_long": {
@@ -1146,7 +1148,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "box_test": {
@@ -1169,7 +1171,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "box_test_ljung": {
@@ -1192,7 +1194,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "ansari_test": {
@@ -1215,7 +1217,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "ansari_test_ci": {
@@ -1247,7 +1249,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "mood_test": {
@@ -1269,7 +1271,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "quade_test": {
@@ -1300,7 +1302,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "bartlett_test": {
@@ -1323,7 +1325,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "fligner_test": {
@@ -1346,7 +1348,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "poisson_test": {
@@ -1355,7 +1357,7 @@
     "statistics": [
       {
         "name": "estimate",
-        "symbol": "r",
+        "symbol": "λ",
         "value": 5.661407,
         "interval": "CI",
         "level": 0.95,
@@ -1363,7 +1365,7 @@
         "upper": 6.692709
       },
       {
-        "name": "count",
+        "name": "statistic",
         "symbol": "n",
         "value": 137
       },
@@ -1383,7 +1385,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "poisson_test_comparison": {
@@ -1392,7 +1394,7 @@
     "statistics": [
       {
         "name": "estimate",
-        "symbol": "R",
+        "symbol": "RR",
         "value": 1.971488,
         "interval": "CI",
         "level": 0.95,
@@ -1400,7 +1402,7 @@
         "upper": 4.277266
       },
       {
-        "name": "count",
+        "name": "statistic",
         "symbol": "n",
         "value": 11
       },
@@ -1421,7 +1423,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "shapiro_test": {
@@ -1440,7 +1442,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "friedman_test": {
@@ -1463,7 +1465,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "mantelhaen_test": {
@@ -1486,7 +1488,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "mantelhaen_test_2by2": {
@@ -1522,7 +1524,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   },
   "mantelhaen_test_2by2_exact": {
@@ -1554,7 +1556,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.2.1"
+      "version": "4.2.2"
     }
   }
 }

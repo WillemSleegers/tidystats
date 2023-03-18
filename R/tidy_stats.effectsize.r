@@ -2,26 +2,36 @@
 #' @export
 tidy_stats.effectsize_difference <- function(x, args = NULL) {
   analysis <- list()
-  
-  method <- dplyr::case_when(
-    "Cohens_d" %in% names(x) ~ "Cohen's d",
-    "Hedges_g" %in% names(x) ~ "Hedge's g",
-    "Glass_delta" %in% names(x) ~ "Glass' delta"
-  )
+
+  if ("Cohens_d" %in% names(x)) {
+    method <- "Cohen's d effect size"
+    name <- "Cohen's d"
+    symbol <- "d"
+  } else if ("Hedges_g" %in% names(x)) {
+    method <- "Hedge's g effect size"
+    name <- "Hedge's g"
+    symbol <- "g"
+  } else {
+    method <- "Glass' delta effect size"
+    name <- "Glass' delta"
+    symbol <- "δ"
+  }
+
   analysis$method <- method
-   
+
   statistics <- list()
   statistics <- add_statistic(
-    list = statistics, 
-    name = method, 
-    value = x[[1]], 
+    list = statistics,
+    name = name,
+    value = x[[1]],
+    symbol = symbol,
     interval = "CI",
-    level = x[[2]], 
-    lower = x[[3]], 
+    level = x[[2]],
+    lower = x[[3]],
     upper = x[[4]]
   )
   analysis$statistics <- statistics
-  
+
   analysis$alternative <- list(
     direction = attr(x, "alternative"),
     null_value = attr(x, "mu")
@@ -30,8 +40,8 @@ tidy_stats.effectsize_difference <- function(x, args = NULL) {
   analysis$correction <- attr(x, "correction")
   analysis$pooled_sd <- attr(x, "pooled_sd")
   analysis$proximate <- attr(x, "approximate")
-  
+
   analysis <- add_package_info(analysis, "effectsize")
-  
+
   return(analysis)
 }

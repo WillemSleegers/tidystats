@@ -1,8 +1,8 @@
 #' @describeIn tidy_stats tidy_stats method for class 'rma.uni'
 #' @export
 tidy_stats.rma.uni <- function(x, args = NULL) {
-  # Create the analysis list and set the name and method
   method = "Meta-Analysis via Linear Models"
+  
   if (x$model == "rma.ls") {
     method = "Location-Scale Model"
   } else {

@@ -7,6 +7,8 @@ tidy_stats.psych <- function(x, args = NULL) {
     analysis <- tidy_stats.psych.corr.test(x)
   } else if ("mardia" %in% class(x)) {
     analysis <- tidy_stats.psych.mardia(x)
+  } else if ("ICC" %in% class(x)) {
+    analysis <- tidy_stats.psych.ICC(x)
   }
 
   analysis <- add_package_info(analysis, "psych")
@@ -17,52 +19,58 @@ tidy_stats.psych <- function(x, args = NULL) {
 tidy_stats.psych.alpha <- function(x) {
   analysis <- list(method = "Reliability analysis")
 
-  # Create a statistics list for the total statistics and CI
-  statistics <- list()
-
-  statistics <- add_statistic(statistics, "unstandardized alpha",
-    x$total$raw_alpha,
-    symbol = "α", subscript = "Σ"
-  )
-  statistics <- add_statistic(statistics, "standardized alpha",
-    x$total$std.alpha,
-    symbol = "α", subscript = "R"
-  )
-  statistics <- add_statistic(statistics, "Guttman's Lambda 6 reliability",
-    x$total$`G6(smc)`,
-    symbol = "Guttman's λ", subscript = "6"
-  )
-  statistics <- add_statistic(statistics, "mean interitem correlation",
-    x$total$average_r,
-    symbol = "IIC", subscript = "M"
-  )
-  statistics <- add_statistic(statistics, "signal-to-noise ratio",
-    x$total$`S/N`,
-    symbol = "S/N"
-  )
-  statistics <- add_statistic(statistics, "standard error", x$total$ase,
-    symbol = "SE"
-  )
-  statistics <- add_statistic(statistics, "mean", x$total$mean,
-    symbol = "M"
-  )
-  statistics <- add_statistic(statistics, "standard deviation", x$total$sd,
-    symbol = "SD"
-  )
-  statistics <- add_statistic(statistics, "median interitem correlation",
-    x$total$median_r,
-    symbol = "IIC", subscript = "Mdn"
-  )
-
-  # Add the statistics to the analysis
-  analysis$statistics <- statistics
+  analysis$statistics <- list() |>
+    add_statistic(
+      name = "unstandardized alpha",
+      value = x$total$raw_alpha,
+      symbol = "α", subscript = "Σ"
+    ) |>
+    add_statistic(
+      name = "standardized alpha",
+      value = x$total$std.alpha,
+      symbol = "α", subscript = "R"
+    ) |>
+    add_statistic(
+      name = "Guttman's Lambda 6 reliability",
+      value = x$total$`G6(smc)`,
+      symbol = "Guttman's λ", subscript = "6"
+    ) |>
+    add_statistic(
+      name = "mean interitem correlation",
+      value = x$total$average_r,
+      symbol = "IIC", subscript = "M"
+    ) |>
+    add_statistic(
+      name = "signal-to-noise ratio",
+      value = x$total$`S/N`,
+      symbol = "S/N"
+    ) |>
+    add_statistic(
+      name = "standard error",
+      value = x$total$ase,
+      symbol = "SE"
+    ) |>
+    add_statistic(
+      name = "mean",
+      value = x$total$mean,
+      symbol = "M"
+    ) |>
+    add_statistic(
+      name = "standard deviation",
+      value = x$total$sd,
+      symbol = "SD"
+    ) |>
+    add_statistic(
+      name = "median interitem correlation",
+      value = x$total$median_r,
+      symbol = "IIC", subscript = "Mdn"
+    )
 
   # Create a group for the 95% confidence boundaries, if there are any
   if (!is.null(x$feldt) || !is.null(x$total$ase) || !is.null(x$boot.ci)) {
     group <- list(name = "95% confidence boundaries")
 
     if (!is.null(x$feldt)) {
-      # Feldt group
       group_feldt <- list(name = "Feldt")
       statistics <- list()
 
@@ -75,7 +83,6 @@ tidy_stats.psych.alpha <- function(x) {
       group$groups <- append(group$groups, list(group_feldt))
     }
 
-    # Duhachek group
     if (!is.null(x$total$ase)) {
       group_duhachek <- list(name = "Duhachek")
       statistics <- list()
@@ -90,7 +97,6 @@ tidy_stats.psych.alpha <- function(x) {
       group$groups <- append(group$groups, list(group_duhachek))
     }
 
-    # Bootstrapped group
     if (!is.null(x$boot.ci)) {
       group_bootstrapped <- list(name = "bootstrapped")
       statistics <- list()
@@ -393,4 +399,51 @@ tidy_stats.psych.mardia <- function(x) {
 
   group$statistics <- statistics
   analysis$groups <- append(analysis$groups, list(group))
+}
+
+tidy_stats.psych.ICC <- function(x) {
+  analysis <- list(method = "Intraclass Correlations")
+
+  results <- x$results
+
+  analysis$statistics <- list() |>
+    add_statistic(
+      name = "Number of subjects",
+      value = x$n.obs,
+    ) |>
+    add_statistic(
+      name = "Number of judges",
+      value = x$n.judge
+    )
+
+  for (i in seq_len(nrow(results))) {
+    group <- list(
+      name = rownames(results)[i],
+      type = results$type[i]
+    )
+
+    group$statistics <- list() |>
+      add_statistic(
+        name = "ICC",
+        value = results$ICC[i],
+        interval = "CI",
+        level = 1 - x$Call$alpha,
+        lower = results$`lower bound`[i],
+        upper = results$`upper bound`[i]
+      ) |>
+      add_statistic("statistic", results$F[i], symbol = "F") |>
+      add_statistic(
+        "df numerator", results$df1[i],
+        symbol = "df", subscript = "num."
+      ) |>
+      add_statistic(
+        "df denominator", results$df2[i],
+        symbol = "df", subscript = "den."
+      ) |>
+      add_statistic("p", results$p[i])
+
+    analysis$groups <- append(analysis$groups, list(group))
+  }
+
+  return(analysis)
 }

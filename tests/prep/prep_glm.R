@@ -88,7 +88,7 @@ d_AD <- tibble::tibble(
 )
 
 glm_D93 <- glm(counts ~ outcome + treatment, family = poisson(), data = d_AD)
-glm_D93a <- update(glm.D93, ~ treatment * outcome)
+glm_D93a <- update(glm_D93, ~ treatment * outcome)
 
 anova_glm <- anova(glm_D93)
 anova_glm_cp <- anova(glm_D93, test = "Cp")

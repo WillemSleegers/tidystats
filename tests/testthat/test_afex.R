@@ -218,11 +218,12 @@ test_that("aov_car no df-correction and no MSE works", {
 
 test_that("mixed simple model with random-slopes works", {
   data("Machines", package = "MEMSS")
-  
+
   model <- mixed(
-    score ~ Machine + (Machine | Worker), 
-    data = Machines)
-  
+    score ~ Machine + (Machine | Worker),
+    data = Machines
+  )
+
   expect_equal_models(
     model = model,
     expected_tidy_model = expected_statistics$mixed
@@ -231,12 +232,12 @@ test_that("mixed simple model with random-slopes works", {
 
 test_that("mixed with expanded random effects terms works", {
   data("Machines", package = "MEMSS")
-  
+
   model <- mixed(
     score ~ Machine + (Machine || Worker),
     data = Machines, expand_re = TRUE
   )
-  
+
   expect_equal_models(
     model = model,
     expected_tidy_model = expected_statistics$mixed_expand_RE
@@ -245,11 +246,12 @@ test_that("mixed with expanded random effects terms works", {
 
 test_that("mixed with random intercept plus random slope works", {
   data(md_15.1)
-  
+
   model <- mixed(
-    iq ~ timecat + (1 + time | id), 
-    data = md_15.1)
-  
+    iq ~ timecat + (1 + time | id),
+    data = md_15.1
+  )
+
   expect_equal_models(
     model = model,
     expected_tidy_model = expected_statistics$mixed_random_interecept
@@ -258,17 +260,15 @@ test_that("mixed with random intercept plus random slope works", {
 
 test_that("mixed with treatment contrasts checked works", {
   data(md_16.1)
-  
+
   model <- mixed(
-    severity ~ sex + (1 | id), 
+    severity ~ sex + (1 | id),
     data = md_16.1,
     check_contrasts = FALSE
   )
-  
+
   expect_equal_models(
     model = model,
     expected_tidy_model = expected_statistics$mixed_contrast
   )
 })
-
-

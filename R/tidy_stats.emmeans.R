@@ -11,7 +11,7 @@ tidy_stats.summary_emm <- function(x, args = NULL) {
 
   method <- dplyr::case_when(
     "contrast" %in% names(x) ~ "Contrasts",
-    str_detect(attr(x, "estName"), "\\.trend") ~
+    stringr::str_detect(attr(x, "estName"), "\\.trend") ~
       "Estimated marginal means of linear trends",
     TRUE ~ "Estimated marginal means"
   )

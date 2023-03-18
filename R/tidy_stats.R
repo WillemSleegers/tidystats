@@ -141,10 +141,10 @@ tidy_stats.htest <- function(x, args = NULL) {
       names(x$estimate)[1] == "p" ~ "p̂",
       names(x$estimate)[1] == "difference in location" ~ "Mdn",
       names(x$estimate)[1] == "ratio of variances" ~ "VR",
-      names(x$estimate)[1] == "probability of success" ~ "P",
+      names(x$estimate)[1] == "probability of success" ~ "p",
       names(x$estimate)[1] == "ratio of scales" ~ "s",
-      names(x$estimate)[1] == "event rate" ~ "r",
-      names(x$estimate)[1] == "rate ratio" ~ "R",
+      names(x$estimate)[1] == "event rate" ~ "λ",
+      names(x$estimate)[1] == "rate ratio" ~ "RR",
       names(x$estimate)[1] == "common odds ratio" ~ "OR",
       stringr::str_detect(method, "t-test") ~ "M"
     )
@@ -154,7 +154,8 @@ tidy_stats.htest <- function(x, args = NULL) {
         method == "Paired t-test" ~ "diff.",
       names(x$estimate)[1] == "tau" ~ "τ",
       names(x$estimate)[1] == "rho" ~ "S",
-      names(x$estimate)[1] == "difference in location" ~ "diff."
+      names(x$estimate)[1] == "difference in location" ~ "diff.",
+      names(x$estimate)[1] == "probability of success" ~ "success"
     )
 
     # Add the estimate
@@ -197,7 +198,7 @@ tidy_stats.htest <- function(x, args = NULL) {
       subscript <- NA
     }
 
-    name <- dplyr::if_else(symbol %in% c("k", "n"), "count", "statistic")
+    name <- "statistic"
 
     statistics <- add_statistic(statistics, name, value, symbol, subscript)
   }
@@ -231,7 +232,7 @@ tidy_stats.htest <- function(x, args = NULL) {
         name <- "truncation lag"
         symbol <- "k"
       } else if (method == "Exact binomial test") {
-        name <- "count"
+        name <- "number of trials"
         symbol <- "n"
       } else if (method == "Exact Poisson test") {
         name <- "time base"
@@ -363,54 +364,32 @@ tidy_stats.pairwise.htest <- function(x, args = NULL) {
 #' @describeIn tidy_stats tidy_stats method for class 'lm'
 #' @export
 tidy_stats.lm <- function(x, args = NULL) {
-  # Create the analysis list and set the name and method
   analysis <- list(
     name = deparse(x$call[[2]]),
     method = "Linear regression"
   )
 
-  # Get summary statistics
   summary <- summary(x)
 
   # Model fit
-  # Create a group and statistics list for the model fit statistics
   group <- list(name = "Model")
-  statistics <- list()
+  group$statistics <- list() |>
+    add_statistic("R squared", summary$r.squared, "R²") |>
+    add_statistic("adj. R squared", summary$adj.r.squared, "R²", "adj.") |>
+    add_statistic("statistic", summary$fstatistic[[1]], "F") |>
+    add_statistic("df numerator", summary$fstatistic[[2]], "df", "num.") |>
+    add_statistic("df denominator", summary$fstatistic[[3]], "df", "den.") |>
+    add_statistic(
+      "p",
+      stats::pf(
+        summary$fstatistic[[1]],
+        summary$fstatistic[[2]],
+        summary$fstatistic[[3]],
+        lower.tail = FALSE
+      )
+    ) |>
+    add_statistic("sigma", summary$sigma, "s", "res.")
 
-  # Extract and add statistics to the statistics list
-  statistics <- add_statistic(statistics, "R squared", summary$r.squared, "R²")
-  statistics <- add_statistic(
-    statistics, "adj. R squared",
-    summary$adj.r.squared, "R²", "adj."
-  )
-  statistics <- add_statistic(
-    statistics, "statistic", summary$fstatistic[[1]],
-    "F"
-  )
-  statistics <- add_statistic(
-    statistics, "df numerator",
-    summary$fstatistic[[2]], "df", "num."
-  )
-  statistics <- add_statistic(
-    statistics, "df denominator",
-    summary$fstatistic[[3]], "df", "den."
-  )
-  statistics <- add_statistic(
-    statistics, "p",
-    stats::pf(summary$fstatistic[[1]], summary$fstatistic[[2]],
-      summary$fstatistic[[3]],
-      lower.tail = FALSE
-    )
-  )
-  statistics <- add_statistic(
-    statistics, "sigma", summary$sigma, "s",
-    "res."
-  )
-
-  # Add statistics to the group
-  group$statistics <- statistics
-
-  # Add the model group to a groups element on the analysis
   analysis$groups <- append(analysis$groups, list(group))
 
   # Create a groups list for the coefficients
@@ -627,55 +606,46 @@ tidy_stats.anova <- function(x, args = NULL) {
     # Create a new statistics list and add statistics
     statistics <- list()
 
-    statistics <- statistics %>%
-      add_statistic("n parameters", x$npar[i], "k") %>%
-      add_statistic("AIC", x$AIC[i]) %>%
-      add_statistic("BIC", x$BIC[i]) %>%
-      add_statistic("log likelihood", x$logLik[i], "l") %>%
-      add_statistic("deviance", x$deviance[i], "D") %>%
-      add_statistic("deviance", x$Deviance[i], "D") %>%
-      add_statistic("residual deviance", x$`Resid. Dev`[i], "D", "res.") %>%
-      add_statistic("RSS", x$RSS[i]) %>%
-      add_statistic("SS", x$`Sum Sq`[i]) %>%
-      add_statistic("SS", x$`Sum of Sq`[i]) %>%
-      add_statistic("MS", x$`Mean Sq`[i]) %>%
-      add_statistic("statistic", x$Chisq[i], "χ²")
-
-    if ("F" %in% names(x)) {
-      statistics <- add_statistic(statistics, "statistic", x$`F`[i], "F")
-    } else {
-      statistics <- add_statistic(statistics, "statistic", x$`F value`[i], "F")
-    }
+    statistics <- statistics |>
+      add_statistic("n parameters", x$npar[i], "k") |>
+      add_statistic("AIC", x$AIC[i]) |>
+      add_statistic("BIC", x$BIC[i]) |>
+      add_statistic("log likelihood", x$logLik[i], "l") |>
+      add_statistic("deviance", x$deviance[i], "D") |>
+      add_statistic("deviance", x$Deviance[i], "D") |>
+      add_statistic("residual deviance", x$`Resid. Dev`[i], "D", "res.") |>
+      add_statistic("RSS", x$RSS[i]) |>
+      add_statistic("SS", x$`Sum Sq`[i]) |>
+      add_statistic("SS", x$`Sum of Sq`[i]) |>
+      add_statistic("MS", x$`Mean Sq`[i]) |>
+      add_statistic("statistic", x$Chisq[i], "χ²") |>
+      add_statistic("statistic", x[i, "F"], "F") |>
+      add_statistic("statistic", x$`F value`[i], "F")
 
     # Special case: Degrees of freedom
-    if (method == "ANOVA" && !model_comparison) {
-      if (rownames(x)[i] != "Residuals") {
-        statistics <- add_statistic(
-          statistics, "df numerator", x$Df[i], "df",
-          "num."
-        )
-        statistics <- add_statistic(
-          statistics, "df denominator",
-          x$Df[[nrow(x)]], "df", "den."
-        )
+    if (rownames(x)[length(rownames(x))] == "Residuals") {
+      if (i == length(rownames(x)) && rownames(x)[i] == "Residuals") {
+        statistics <- add_statistic(statistics, "df", x$Df[i], "df")
       } else {
-        statistics <- add_statistic(statistics, "df", x$Df[i])
+        statistics <- statistics |>
+          add_statistic("df numerator", x$Df[i], "df", "num.") |>
+          add_statistic("df denominator", x$Df[[nrow(x)]], "df", "den.")
       }
     } else {
-      statistics <- statistics %>%
-        add_statistic("df", x$Df[i]) %>%
-        add_statistic("residual df", x$`Resid. Df`[i], "df", "res.") %>%
-        add_statistic("residual df", x$Res.Df[i], "df", "res.") %>%
-        add_statistic("residual df", x$`Res. Df`[i], "df", "res.") %>%
-        add_statistic("df numerator", x$NumDF[i], "df", "num.") %>%
+      statistics <- statistics |>
+        add_statistic("df", x$Df[i]) |>
+        add_statistic("residual df", x$`Resid. Df`[i], "df", "res.") |>
+        add_statistic("residual df", x$Res.Df[i], "df", "res.") |>
+        add_statistic("residual df", x$`Res. Df`[i], "df", "res.") |>
+        add_statistic("df numerator", x$NumDF[i], "df", "num.") |>
         add_statistic("df denominator", x$DenDF[i], "df", "den.")
     }
 
-    statistics <- statistics %>%
-      add_statistic("Rao", x$Rao[i]) %>%
-      add_statistic("p", x$`Pr(>F)`[i]) %>%
-      add_statistic("p", x$`Pr(>Chisq)`[i]) %>%
-      add_statistic("p", x$`Pr(>Chi)`[i]) %>%
+    statistics <- statistics |>
+      add_statistic("Rao", x$Rao[i]) |>
+      add_statistic("p", x$`Pr(>F)`[i]) |>
+      add_statistic("p", x$`Pr(>Chisq)`[i]) |>
+      add_statistic("p", x$`Pr(>Chi)`[i]) |>
       add_statistic("Cp", x$Cp[i])
 
     group$statistics <- statistics
@@ -715,26 +685,22 @@ tidy_stats.aov <- function(x, args = NULL) {
     # Create a new statistics list and add the term's statistics
     statistics <- list()
 
-    statistics <- add_statistic(statistics, "SS", terms$`Sum Sq`[i])
-    statistics <- add_statistic(statistics, "MS", terms$`Mean Sq`[i])
+    statistics <- statistics |>
+      add_statistic("SS", terms$`Sum Sq`[i]) |>
+      add_statistic("MS", terms$`Mean Sq`[i])
 
     # Special case: Extract different statistics depending on whether the term
     # is the Residuals term or not
     if (i != nrow(terms)) {
-      statistics <- add_statistic(
-        statistics, "statistic", terms$`F value`[i],
-        "F"
-      )
-      statistics <- add_statistic(
-        statistics, "df numerator", terms$Df[i], "df",
-        "num."
-      )
-      statistics <- add_statistic(
-        statistics, "df denominator",
-        terms$Df[[nrow(terms)]], "df", "den."
-      )
-
-      statistics <- add_statistic(statistics, "p", terms$`Pr(>F)`[i])
+      statistics <- statistics |>
+        add_statistic("statistic", terms$`F value`[i], "F") |>
+        add_statistic("df numerator", terms$Df[i], "df", "num.") |>
+        add_statistic(
+          "df denominator",
+          terms$Df[[nrow(terms)]],
+          "df", "den."
+        ) |>
+        add_statistic("p", terms$`Pr(>F)`[i])
     } else {
       statistics <- add_statistic(statistics, "df", terms$Df[i])
     }

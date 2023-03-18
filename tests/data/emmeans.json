@@ -1,56 +1,1888 @@
 {
-  "emm_year_cyl_by_drv_cty": {
+  "warp_emm": {
+    "method": "Estimated marginal means",
     "groups": [
       {
-        "name": "drv",
+        "name": "tension",
         "groups": [
           {
-            "name": "4",
+            "name": "L",
             "groups": [
               {
-                "name": "cty",
+                "name": "wool",
                 "groups": [
                   {
-                    "name": "16.8589743589744",
+                    "name": "A",
+                    "statistics": [
+                      {
+                        "name": "EMM",
+                        "value": 44.555556,
+                        "interval": "CI",
+                        "level": 0.95,
+                        "lower": 37.22325,
+                        "upper": 51.887861
+                      },
+                      {
+                        "name": "SE",
+                        "value": 3.646761
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      }
+                    ]
+                  },
+                  {
+                    "name": "B",
+                    "statistics": [
+                      {
+                        "name": "EMM",
+                        "value": 28.222222,
+                        "interval": "CI",
+                        "level": 0.95,
+                        "lower": 20.889917,
+                        "upper": 35.554527
+                      },
+                      {
+                        "name": "SE",
+                        "value": 3.646761
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "M",
+            "groups": [
+              {
+                "name": "wool",
+                "groups": [
+                  {
+                    "name": "A",
+                    "statistics": [
+                      {
+                        "name": "EMM",
+                        "value": 24,
+                        "interval": "CI",
+                        "level": 0.95,
+                        "lower": 16.667695,
+                        "upper": 31.332305
+                      },
+                      {
+                        "name": "SE",
+                        "value": 3.646761
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      }
+                    ]
+                  },
+                  {
+                    "name": "B",
+                    "statistics": [
+                      {
+                        "name": "EMM",
+                        "value": 28.777778,
+                        "interval": "CI",
+                        "level": 0.95,
+                        "lower": 21.445473,
+                        "upper": 36.110083
+                      },
+                      {
+                        "name": "SE",
+                        "value": 3.646761
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "H",
+            "groups": [
+              {
+                "name": "wool",
+                "groups": [
+                  {
+                    "name": "A",
+                    "statistics": [
+                      {
+                        "name": "EMM",
+                        "value": 24.555556,
+                        "interval": "CI",
+                        "level": 0.95,
+                        "lower": 17.22325,
+                        "upper": 31.887861
+                      },
+                      {
+                        "name": "SE",
+                        "value": 3.646761
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      }
+                    ]
+                  },
+                  {
+                    "name": "B",
+                    "statistics": [
+                      {
+                        "name": "EMM",
+                        "value": 18.777778,
+                        "interval": "CI",
+                        "level": 0.95,
+                        "lower": 11.445473,
+                        "upper": 26.110083
+                      },
+                      {
+                        "name": "SE",
+                        "value": 3.646761
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "adjust": "none",
+    "type": "link",
+    "package": {
+      "name": "emmeans",
+      "version": "1.8.4-1"
+    }
+  },
+  "warp_emm_poly": {
+    "groups": [
+      {
+        "name": "Estimated marginal means",
+        "method": "Estimated marginal means",
+        "groups": [
+          {
+            "name": "tension",
+            "groups": [
+              {
+                "name": "L",
+                "groups": [
+                  {
+                    "name": "wool",
                     "groups": [
                       {
-                        "name": "year",
+                        "name": "A",
+                        "statistics": [
+                          {
+                            "name": "EMM",
+                            "value": 44.555556,
+                            "interval": "CI",
+                            "level": 0.95,
+                            "lower": 37.22325,
+                            "upper": 51.887861
+                          },
+                          {
+                            "name": "SE",
+                            "value": 3.646761
+                          },
+                          {
+                            "name": "df",
+                            "value": 48
+                          }
+                        ]
+                      },
+                      {
+                        "name": "B",
+                        "statistics": [
+                          {
+                            "name": "EMM",
+                            "value": 28.222222,
+                            "interval": "CI",
+                            "level": 0.95,
+                            "lower": 20.889917,
+                            "upper": 35.554527
+                          },
+                          {
+                            "name": "SE",
+                            "value": 3.646761
+                          },
+                          {
+                            "name": "df",
+                            "value": 48
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "M",
+                "groups": [
+                  {
+                    "name": "wool",
+                    "groups": [
+                      {
+                        "name": "A",
+                        "statistics": [
+                          {
+                            "name": "EMM",
+                            "value": 24,
+                            "interval": "CI",
+                            "level": 0.95,
+                            "lower": 16.667695,
+                            "upper": 31.332305
+                          },
+                          {
+                            "name": "SE",
+                            "value": 3.646761
+                          },
+                          {
+                            "name": "df",
+                            "value": 48
+                          }
+                        ]
+                      },
+                      {
+                        "name": "B",
+                        "statistics": [
+                          {
+                            "name": "EMM",
+                            "value": 28.777778,
+                            "interval": "CI",
+                            "level": 0.95,
+                            "lower": 21.445473,
+                            "upper": 36.110083
+                          },
+                          {
+                            "name": "SE",
+                            "value": 3.646761
+                          },
+                          {
+                            "name": "df",
+                            "value": 48
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "H",
+                "groups": [
+                  {
+                    "name": "wool",
+                    "groups": [
+                      {
+                        "name": "A",
+                        "statistics": [
+                          {
+                            "name": "EMM",
+                            "value": 24.555556,
+                            "interval": "CI",
+                            "level": 0.95,
+                            "lower": 17.22325,
+                            "upper": 31.887861
+                          },
+                          {
+                            "name": "SE",
+                            "value": 3.646761
+                          },
+                          {
+                            "name": "df",
+                            "value": 48
+                          }
+                        ]
+                      },
+                      {
+                        "name": "B",
+                        "statistics": [
+                          {
+                            "name": "EMM",
+                            "value": 18.777778,
+                            "interval": "CI",
+                            "level": 0.95,
+                            "lower": 11.445473,
+                            "upper": 26.110083
+                          },
+                          {
+                            "name": "SE",
+                            "value": 3.646761
+                          },
+                          {
+                            "name": "df",
+                            "value": 48
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "adjust": "none",
+        "type": "link"
+      },
+      {
+        "name": "Contrasts",
+        "method": "Contrasts",
+        "groups": [
+          {
+            "name": "contrast",
+            "groups": [
+              {
+                "name": "linear",
+                "groups": [
+                  {
+                    "name": "wool",
+                    "groups": [
+                      {
+                        "name": "A",
+                        "statistics": [
+                          {
+                            "name": "estimate",
+                            "symbol": "b",
+                            "value": -20
+                          },
+                          {
+                            "name": "SE",
+                            "value": 5.157299
+                          },
+                          {
+                            "name": "statistic",
+                            "symbol": "t",
+                            "value": -3.877999
+                          },
+                          {
+                            "name": "df",
+                            "value": 48
+                          },
+                          {
+                            "name": "p",
+                            "value": 0.00064
+                          }
+                        ]
+                      },
+                      {
+                        "name": "B",
+                        "statistics": [
+                          {
+                            "name": "estimate",
+                            "symbol": "b",
+                            "value": -9.444444
+                          },
+                          {
+                            "name": "SE",
+                            "value": 5.157299
+                          },
+                          {
+                            "name": "statistic",
+                            "symbol": "t",
+                            "value": -1.831277
+                          },
+                          {
+                            "name": "df",
+                            "value": 48
+                          },
+                          {
+                            "name": "p",
+                            "value": 0.141171
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "quadratic",
+                "groups": [
+                  {
+                    "name": "wool",
+                    "groups": [
+                      {
+                        "name": "A",
+                        "statistics": [
+                          {
+                            "name": "estimate",
+                            "symbol": "b",
+                            "value": 21.111111
+                          },
+                          {
+                            "name": "SE",
+                            "value": 8.932705
+                          },
+                          {
+                            "name": "statistic",
+                            "symbol": "t",
+                            "value": 2.36335
+                          },
+                          {
+                            "name": "df",
+                            "value": 48
+                          },
+                          {
+                            "name": "p",
+                            "value": 0.043923
+                          }
+                        ]
+                      },
+                      {
+                        "name": "B",
+                        "statistics": [
+                          {
+                            "name": "estimate",
+                            "symbol": "b",
+                            "value": -10.555556
+                          },
+                          {
+                            "name": "SE",
+                            "value": 8.932705
+                          },
+                          {
+                            "name": "statistic",
+                            "symbol": "t",
+                            "value": -1.181675
+                          },
+                          {
+                            "name": "df",
+                            "value": 48
+                          },
+                          {
+                            "name": "p",
+                            "value": 0.427187
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "adjust": "sidak",
+        "type": "link"
+      }
+    ],
+    "package": {
+      "name": "emmeans",
+      "version": "1.8.4-1"
+    }
+  },
+  "warp_emm_adjust": {
+    "method": "Estimated marginal means",
+    "groups": [
+      {
+        "name": "tension",
+        "groups": [
+          {
+            "name": "L",
+            "groups": [
+              {
+                "name": "wool",
+                "groups": [
+                  {
+                    "name": "A",
+                    "statistics": [
+                      {
+                        "name": "EMM",
+                        "value": 44.555556,
+                        "interval": "CI",
+                        "level": 0.95,
+                        "lower": 35.533761,
+                        "upper": 53.57735
+                      },
+                      {
+                        "name": "SE",
+                        "value": 3.646761
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      }
+                    ]
+                  },
+                  {
+                    "name": "B",
+                    "statistics": [
+                      {
+                        "name": "EMM",
+                        "value": 28.222222,
+                        "interval": "CI",
+                        "level": 0.95,
+                        "lower": 19.200428,
+                        "upper": 37.244016
+                      },
+                      {
+                        "name": "SE",
+                        "value": 3.646761
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "M",
+            "groups": [
+              {
+                "name": "wool",
+                "groups": [
+                  {
+                    "name": "A",
+                    "statistics": [
+                      {
+                        "name": "EMM",
+                        "value": 24,
+                        "interval": "CI",
+                        "level": 0.95,
+                        "lower": 14.978206,
+                        "upper": 33.021794
+                      },
+                      {
+                        "name": "SE",
+                        "value": 3.646761
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      }
+                    ]
+                  },
+                  {
+                    "name": "B",
+                    "statistics": [
+                      {
+                        "name": "EMM",
+                        "value": 28.777778,
+                        "interval": "CI",
+                        "level": 0.95,
+                        "lower": 19.755984,
+                        "upper": 37.799572
+                      },
+                      {
+                        "name": "SE",
+                        "value": 3.646761
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "H",
+            "groups": [
+              {
+                "name": "wool",
+                "groups": [
+                  {
+                    "name": "A",
+                    "statistics": [
+                      {
+                        "name": "EMM",
+                        "value": 24.555556,
+                        "interval": "CI",
+                        "level": 0.95,
+                        "lower": 15.533761,
+                        "upper": 33.57735
+                      },
+                      {
+                        "name": "SE",
+                        "value": 3.646761
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      }
+                    ]
+                  },
+                  {
+                    "name": "B",
+                    "statistics": [
+                      {
+                        "name": "EMM",
+                        "value": 18.777778,
+                        "interval": "CI",
+                        "level": 0.95,
+                        "lower": 9.755984,
+                        "upper": 27.799572
+                      },
+                      {
+                        "name": "SE",
+                        "value": 3.646761
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "adjust": "sidak",
+    "type": "link",
+    "package": {
+      "name": "emmeans",
+      "version": "1.8.4-1"
+    }
+  },
+  "warp_emm_confint": {
+    "method": "Estimated marginal means",
+    "groups": [
+      {
+        "name": "tension",
+        "groups": [
+          {
+            "name": "L",
+            "groups": [
+              {
+                "name": "wool",
+                "groups": [
+                  {
+                    "name": "A",
+                    "statistics": [
+                      {
+                        "name": "EMM",
+                        "value": 44.555556,
+                        "interval": "CI",
+                        "level": 0.9,
+                        "lower": 38.439119,
+                        "upper": 50.671992
+                      },
+                      {
+                        "name": "SE",
+                        "value": 3.646761
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      }
+                    ]
+                  },
+                  {
+                    "name": "B",
+                    "statistics": [
+                      {
+                        "name": "EMM",
+                        "value": 28.222222,
+                        "interval": "CI",
+                        "level": 0.9,
+                        "lower": 22.105786,
+                        "upper": 34.338659
+                      },
+                      {
+                        "name": "SE",
+                        "value": 3.646761
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "M",
+            "groups": [
+              {
+                "name": "wool",
+                "groups": [
+                  {
+                    "name": "A",
+                    "statistics": [
+                      {
+                        "name": "EMM",
+                        "value": 24,
+                        "interval": "CI",
+                        "level": 0.9,
+                        "lower": 17.883564,
+                        "upper": 30.116436
+                      },
+                      {
+                        "name": "SE",
+                        "value": 3.646761
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      }
+                    ]
+                  },
+                  {
+                    "name": "B",
+                    "statistics": [
+                      {
+                        "name": "EMM",
+                        "value": 28.777778,
+                        "interval": "CI",
+                        "level": 0.9,
+                        "lower": 22.661341,
+                        "upper": 34.894214
+                      },
+                      {
+                        "name": "SE",
+                        "value": 3.646761
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "H",
+            "groups": [
+              {
+                "name": "wool",
+                "groups": [
+                  {
+                    "name": "A",
+                    "statistics": [
+                      {
+                        "name": "EMM",
+                        "value": 24.555556,
+                        "interval": "CI",
+                        "level": 0.9,
+                        "lower": 18.439119,
+                        "upper": 30.671992
+                      },
+                      {
+                        "name": "SE",
+                        "value": 3.646761
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      }
+                    ]
+                  },
+                  {
+                    "name": "B",
+                    "statistics": [
+                      {
+                        "name": "EMM",
+                        "value": 18.777778,
+                        "interval": "CI",
+                        "level": 0.9,
+                        "lower": 12.661341,
+                        "upper": 24.894214
+                      },
+                      {
+                        "name": "SE",
+                        "value": 3.646761
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "adjust": "none",
+    "type": "link",
+    "package": {
+      "name": "emmeans",
+      "version": "1.8.4-1"
+    }
+  },
+  "warp_contrast_poly": {
+    "method": "Contrasts",
+    "groups": [
+      {
+        "name": "contrast",
+        "groups": [
+          {
+            "name": "linear",
+            "groups": [
+              {
+                "name": "wool",
+                "groups": [
+                  {
+                    "name": "A",
+                    "statistics": [
+                      {
+                        "name": "estimate",
+                        "symbol": "b",
+                        "value": -20
+                      },
+                      {
+                        "name": "SE",
+                        "value": 5.157299
+                      },
+                      {
+                        "name": "statistic",
+                        "symbol": "t",
+                        "value": -3.877999
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      },
+                      {
+                        "name": "p",
+                        "value": 0.00032
+                      }
+                    ]
+                  },
+                  {
+                    "name": "B",
+                    "statistics": [
+                      {
+                        "name": "estimate",
+                        "symbol": "b",
+                        "value": -9.444444
+                      },
+                      {
+                        "name": "SE",
+                        "value": 5.157299
+                      },
+                      {
+                        "name": "statistic",
+                        "symbol": "t",
+                        "value": -1.831277
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      },
+                      {
+                        "name": "p",
+                        "value": 0.07327
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "quadratic",
+            "groups": [
+              {
+                "name": "wool",
+                "groups": [
+                  {
+                    "name": "A",
+                    "statistics": [
+                      {
+                        "name": "estimate",
+                        "symbol": "b",
+                        "value": 21.111111
+                      },
+                      {
+                        "name": "SE",
+                        "value": 8.932705
+                      },
+                      {
+                        "name": "statistic",
+                        "symbol": "t",
+                        "value": 2.36335
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      },
+                      {
+                        "name": "p",
+                        "value": 0.022208
+                      }
+                    ]
+                  },
+                  {
+                    "name": "B",
+                    "statistics": [
+                      {
+                        "name": "estimate",
+                        "symbol": "b",
+                        "value": -10.555556
+                      },
+                      {
+                        "name": "SE",
+                        "value": 8.932705
+                      },
+                      {
+                        "name": "statistic",
+                        "symbol": "t",
+                        "value": -1.181675
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      },
+                      {
+                        "name": "p",
+                        "value": 0.243156
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "adjust": "none",
+    "type": "link",
+    "package": {
+      "name": "emmeans",
+      "version": "1.8.4-1"
+    }
+  },
+  "warp_pairs": {
+    "method": "Contrasts",
+    "groups": [
+      {
+        "name": "contrast",
+        "groups": [
+          {
+            "name": "L - M",
+            "groups": [
+              {
+                "name": "wool",
+                "groups": [
+                  {
+                    "name": "A",
+                    "statistics": [
+                      {
+                        "name": "estimate",
+                        "symbol": "b",
+                        "value": 20.555556
+                      },
+                      {
+                        "name": "SE",
+                        "value": 5.157299
+                      },
+                      {
+                        "name": "statistic",
+                        "symbol": "t",
+                        "value": 3.985721
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      },
+                      {
+                        "name": "p",
+                        "value": 0.000657
+                      }
+                    ]
+                  },
+                  {
+                    "name": "B",
+                    "statistics": [
+                      {
+                        "name": "estimate",
+                        "symbol": "b",
+                        "value": -0.555556
+                      },
+                      {
+                        "name": "SE",
+                        "value": 5.157299
+                      },
+                      {
+                        "name": "statistic",
+                        "symbol": "t",
+                        "value": -0.107722
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      },
+                      {
+                        "name": "p",
+                        "value": 0.993624
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "L - H",
+            "groups": [
+              {
+                "name": "wool",
+                "groups": [
+                  {
+                    "name": "A",
+                    "statistics": [
+                      {
+                        "name": "estimate",
+                        "symbol": "b",
+                        "value": 20
+                      },
+                      {
+                        "name": "SE",
+                        "value": 5.157299
+                      },
+                      {
+                        "name": "statistic",
+                        "symbol": "t",
+                        "value": 3.877999
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      },
+                      {
+                        "name": "p",
+                        "value": 0.000919
+                      }
+                    ]
+                  },
+                  {
+                    "name": "B",
+                    "statistics": [
+                      {
+                        "name": "estimate",
+                        "symbol": "b",
+                        "value": 9.444444
+                      },
+                      {
+                        "name": "SE",
+                        "value": 5.157299
+                      },
+                      {
+                        "name": "statistic",
+                        "symbol": "t",
+                        "value": 1.831277
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      },
+                      {
+                        "name": "p",
+                        "value": 0.170352
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "M - H",
+            "groups": [
+              {
+                "name": "wool",
+                "groups": [
+                  {
+                    "name": "A",
+                    "statistics": [
+                      {
+                        "name": "estimate",
+                        "symbol": "b",
+                        "value": -0.555556
+                      },
+                      {
+                        "name": "SE",
+                        "value": 5.157299
+                      },
+                      {
+                        "name": "statistic",
+                        "symbol": "t",
+                        "value": -0.107722
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      },
+                      {
+                        "name": "p",
+                        "value": 0.993624
+                      }
+                    ]
+                  },
+                  {
+                    "name": "B",
+                    "statistics": [
+                      {
+                        "name": "estimate",
+                        "symbol": "b",
+                        "value": 10
+                      },
+                      {
+                        "name": "SE",
+                        "value": 5.157299
+                      },
+                      {
+                        "name": "statistic",
+                        "symbol": "t",
+                        "value": 1.938999
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      },
+                      {
+                        "name": "p",
+                        "value": 0.138857
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "adjust": "tukey",
+    "type": "link",
+    "package": {
+      "name": "emmeans",
+      "version": "1.8.4-1"
+    }
+  },
+  "warp_contrast_eff": {
+    "method": "Contrasts",
+    "groups": [
+      {
+        "name": "contrast",
+        "groups": [
+          {
+            "name": "tensionL woolA effect",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 16.407407
+              },
+              {
+                "name": "SE",
+                "value": 3.329022
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 4.928596
+              },
+              {
+                "name": "df",
+                "value": 48
+              },
+              {
+                "name": "p",
+                "value": 0.000062
+              }
+            ]
+          },
+          {
+            "name": "tensionM woolA effect",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": -4.148148
+              },
+              {
+                "name": "SE",
+                "value": 3.329022
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": -1.246056
+              },
+              {
+                "name": "df",
+                "value": 48
+              },
+              {
+                "name": "p",
+                "value": 0.428855
+              }
+            ]
+          },
+          {
+            "name": "tensionH woolA effect",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": -3.592593
+              },
+              {
+                "name": "SE",
+                "value": 3.329022
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": -1.079173
+              },
+              {
+                "name": "df",
+                "value": 48
+              },
+              {
+                "name": "p",
+                "value": 0.428855
+              }
+            ]
+          },
+          {
+            "name": "tensionL woolB effect",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 0.074074
+              },
+              {
+                "name": "SE",
+                "value": 3.329022
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 0.022251
+              },
+              {
+                "name": "df",
+                "value": 48
+              },
+              {
+                "name": "p",
+                "value": 0.98234
+              }
+            ]
+          },
+          {
+            "name": "tensionM woolB effect",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 0.62963
+              },
+              {
+                "name": "SE",
+                "value": 3.329022
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 0.189133
+              },
+              {
+                "name": "df",
+                "value": 48
+              },
+              {
+                "name": "p",
+                "value": 0.98234
+              }
+            ]
+          },
+          {
+            "name": "tensionH woolB effect",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": -9.37037
+              },
+              {
+                "name": "SE",
+                "value": 3.329022
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": -2.814751
+              },
+              {
+                "name": "df",
+                "value": 48
+              },
+              {
+                "name": "p",
+                "value": 0.021175
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "adjust": "fdr",
+    "type": "link",
+    "package": {
+      "name": "emmeans",
+      "version": "1.8.4-1"
+    }
+  },
+  "warp_pairs_simple": {
+    "method": "Contrasts",
+    "groups": [
+      {
+        "name": "contrast",
+        "groups": [
+          {
+            "name": "A - B",
+            "groups": [
+              {
+                "name": "tension",
+                "groups": [
+                  {
+                    "name": "L",
+                    "statistics": [
+                      {
+                        "name": "estimate",
+                        "symbol": "b",
+                        "value": 16.333333
+                      },
+                      {
+                        "name": "SE",
+                        "value": 5.157299
+                      },
+                      {
+                        "name": "statistic",
+                        "symbol": "t",
+                        "value": 3.167032
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      },
+                      {
+                        "name": "p",
+                        "value": 0.002677
+                      }
+                    ]
+                  },
+                  {
+                    "name": "M",
+                    "statistics": [
+                      {
+                        "name": "estimate",
+                        "symbol": "b",
+                        "value": -4.777778
+                      },
+                      {
+                        "name": "SE",
+                        "value": 5.157299
+                      },
+                      {
+                        "name": "statistic",
+                        "symbol": "t",
+                        "value": -0.926411
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      },
+                      {
+                        "name": "p",
+                        "value": 0.358867
+                      }
+                    ]
+                  },
+                  {
+                    "name": "H",
+                    "statistics": [
+                      {
+                        "name": "estimate",
+                        "symbol": "b",
+                        "value": 5.777778
+                      },
+                      {
+                        "name": "SE",
+                        "value": 5.157299
+                      },
+                      {
+                        "name": "statistic",
+                        "symbol": "t",
+                        "value": 1.120311
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      },
+                      {
+                        "name": "p",
+                        "value": 0.268156
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "adjust": "none",
+    "type": "link",
+    "package": {
+      "name": "emmeans",
+      "version": "1.8.4-1"
+    }
+  },
+  "warp_pairs_each": {
+    "groups": [
+      {
+        "name": "simple contrasts for tension",
+        "method": "Contrasts",
+        "groups": [
+          {
+            "name": "contrast",
+            "groups": [
+              {
+                "name": "L - M",
+                "groups": [
+                  {
+                    "name": "wool",
+                    "groups": [
+                      {
+                        "name": "A",
+                        "statistics": [
+                          {
+                            "name": "estimate",
+                            "symbol": "b",
+                            "value": 20.555556
+                          },
+                          {
+                            "name": "SE",
+                            "value": 5.157299
+                          },
+                          {
+                            "name": "statistic",
+                            "symbol": "t",
+                            "value": 3.985721
+                          },
+                          {
+                            "name": "df",
+                            "value": 48
+                          },
+                          {
+                            "name": "p",
+                            "value": 0.000657
+                          }
+                        ]
+                      },
+                      {
+                        "name": "B",
+                        "statistics": [
+                          {
+                            "name": "estimate",
+                            "symbol": "b",
+                            "value": -0.555556
+                          },
+                          {
+                            "name": "SE",
+                            "value": 5.157299
+                          },
+                          {
+                            "name": "statistic",
+                            "symbol": "t",
+                            "value": -0.107722
+                          },
+                          {
+                            "name": "df",
+                            "value": 48
+                          },
+                          {
+                            "name": "p",
+                            "value": 0.993624
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "L - H",
+                "groups": [
+                  {
+                    "name": "wool",
+                    "groups": [
+                      {
+                        "name": "A",
+                        "statistics": [
+                          {
+                            "name": "estimate",
+                            "symbol": "b",
+                            "value": 20
+                          },
+                          {
+                            "name": "SE",
+                            "value": 5.157299
+                          },
+                          {
+                            "name": "statistic",
+                            "symbol": "t",
+                            "value": 3.877999
+                          },
+                          {
+                            "name": "df",
+                            "value": 48
+                          },
+                          {
+                            "name": "p",
+                            "value": 0.000919
+                          }
+                        ]
+                      },
+                      {
+                        "name": "B",
+                        "statistics": [
+                          {
+                            "name": "estimate",
+                            "symbol": "b",
+                            "value": 9.444444
+                          },
+                          {
+                            "name": "SE",
+                            "value": 5.157299
+                          },
+                          {
+                            "name": "statistic",
+                            "symbol": "t",
+                            "value": 1.831277
+                          },
+                          {
+                            "name": "df",
+                            "value": 48
+                          },
+                          {
+                            "name": "p",
+                            "value": 0.170352
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "M - H",
+                "groups": [
+                  {
+                    "name": "wool",
+                    "groups": [
+                      {
+                        "name": "A",
+                        "statistics": [
+                          {
+                            "name": "estimate",
+                            "symbol": "b",
+                            "value": -0.555556
+                          },
+                          {
+                            "name": "SE",
+                            "value": 5.157299
+                          },
+                          {
+                            "name": "statistic",
+                            "symbol": "t",
+                            "value": -0.107722
+                          },
+                          {
+                            "name": "df",
+                            "value": 48
+                          },
+                          {
+                            "name": "p",
+                            "value": 0.993624
+                          }
+                        ]
+                      },
+                      {
+                        "name": "B",
+                        "statistics": [
+                          {
+                            "name": "estimate",
+                            "symbol": "b",
+                            "value": 10
+                          },
+                          {
+                            "name": "SE",
+                            "value": 5.157299
+                          },
+                          {
+                            "name": "statistic",
+                            "symbol": "t",
+                            "value": 1.938999
+                          },
+                          {
+                            "name": "df",
+                            "value": 48
+                          },
+                          {
+                            "name": "p",
+                            "value": 0.138857
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "adjust": "tukey",
+        "type": "link"
+      },
+      {
+        "name": "simple contrasts for wool",
+        "method": "Contrasts",
+        "groups": [
+          {
+            "name": "contrast",
+            "groups": [
+              {
+                "name": "A - B",
+                "groups": [
+                  {
+                    "name": "tension",
+                    "groups": [
+                      {
+                        "name": "L",
+                        "statistics": [
+                          {
+                            "name": "estimate",
+                            "symbol": "b",
+                            "value": 16.333333
+                          },
+                          {
+                            "name": "SE",
+                            "value": 5.157299
+                          },
+                          {
+                            "name": "statistic",
+                            "symbol": "t",
+                            "value": 3.167032
+                          },
+                          {
+                            "name": "df",
+                            "value": 48
+                          },
+                          {
+                            "name": "p",
+                            "value": 0.002677
+                          }
+                        ]
+                      },
+                      {
+                        "name": "M",
+                        "statistics": [
+                          {
+                            "name": "estimate",
+                            "symbol": "b",
+                            "value": -4.777778
+                          },
+                          {
+                            "name": "SE",
+                            "value": 5.157299
+                          },
+                          {
+                            "name": "statistic",
+                            "symbol": "t",
+                            "value": -0.926411
+                          },
+                          {
+                            "name": "df",
+                            "value": 48
+                          },
+                          {
+                            "name": "p",
+                            "value": 0.358867
+                          }
+                        ]
+                      },
+                      {
+                        "name": "H",
+                        "statistics": [
+                          {
+                            "name": "estimate",
+                            "symbol": "b",
+                            "value": 5.777778
+                          },
+                          {
+                            "name": "SE",
+                            "value": 5.157299
+                          },
+                          {
+                            "name": "statistic",
+                            "symbol": "t",
+                            "value": 1.120311
+                          },
+                          {
+                            "name": "df",
+                            "value": 48
+                          },
+                          {
+                            "name": "p",
+                            "value": 0.268156
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "adjust": "none",
+        "type": "link"
+      }
+    ],
+    "package": {
+      "name": "emmeans",
+      "version": "1.8.4-1"
+    }
+  },
+  "warp_pairs_each_combined": {
+    "method": "Contrasts",
+    "groups": [
+      {
+        "name": "wool",
+        "groups": [
+          {
+            "name": "A",
+            "groups": [
+              {
+                "name": "tension",
+                "groups": [
+                  {
+                    "name": ".",
+                    "groups": [
+                      {
+                        "name": "contrast",
                         "groups": [
                           {
-                            "name": "1999",
-                            "groups": [
+                            "name": "L - M",
+                            "statistics": [
                               {
-                                "name": "cyl",
-                                "groups": [
-                                  {
-                                    "name": "5.88888888888889",
-                                    "statistics": [
-                                      {
-                                        "name": "EMM",
-                                        "value": 3.517085
-                                      }
-                                    ]
-                                  }
-                                ]
+                                "name": "estimate",
+                                "symbol": "b",
+                                "value": 20.555556
+                              },
+                              {
+                                "name": "SE",
+                                "value": 5.157299
+                              },
+                              {
+                                "name": "statistic",
+                                "symbol": "t",
+                                "value": 3.985721
+                              },
+                              {
+                                "name": "df",
+                                "value": 48
+                              },
+                              {
+                                "name": "p",
+                                "value": 0.002053
                               }
                             ]
                           },
                           {
-                            "name": "2008",
-                            "groups": [
+                            "name": "L - H",
+                            "statistics": [
                               {
-                                "name": "cyl",
-                                "groups": [
-                                  {
-                                    "name": "5.88888888888889",
-                                    "statistics": [
-                                      {
-                                        "name": "EMM",
-                                        "value": 3.623948
-                                      }
-                                    ]
-                                  }
-                                ]
+                                "name": "estimate",
+                                "symbol": "b",
+                                "value": 20
+                              },
+                              {
+                                "name": "SE",
+                                "value": 5.157299
+                              },
+                              {
+                                "name": "statistic",
+                                "symbol": "t",
+                                "value": 3.877999
+                              },
+                              {
+                                "name": "df",
+                                "value": 48
+                              },
+                              {
+                                "name": "p",
+                                "value": 0.002879
+                              }
+                            ]
+                          },
+                          {
+                            "name": "M - H",
+                            "statistics": [
+                              {
+                                "name": "estimate",
+                                "symbol": "b",
+                                "value": -0.555556
+                              },
+                              {
+                                "name": "SE",
+                                "value": 5.157299
+                              },
+                              {
+                                "name": "statistic",
+                                "symbol": "t",
+                                "value": -0.107722
+                              },
+                              {
+                                "name": "df",
+                                "value": 48
+                              },
+                              {
+                                "name": "p",
+                                "value": 1
                               }
                             ]
                           }
@@ -63,52 +1895,95 @@
             ]
           },
           {
-            "name": "f",
+            "name": "B",
             "groups": [
               {
-                "name": "cty",
+                "name": "tension",
                 "groups": [
                   {
-                    "name": "16.8589743589744",
+                    "name": ".",
                     "groups": [
                       {
-                        "name": "year",
+                        "name": "contrast",
                         "groups": [
                           {
-                            "name": "1999",
-                            "groups": [
+                            "name": "L - M",
+                            "statistics": [
                               {
-                                "name": "cyl",
-                                "groups": [
-                                  {
-                                    "name": "5.88888888888889",
-                                    "statistics": [
-                                      {
-                                        "name": "EMM",
-                                        "value": 3.189212
-                                      }
-                                    ]
-                                  }
-                                ]
+                                "name": "estimate",
+                                "symbol": "b",
+                                "value": -0.555556
+                              },
+                              {
+                                "name": "SE",
+                                "value": 5.157299
+                              },
+                              {
+                                "name": "statistic",
+                                "symbol": "t",
+                                "value": -0.107722
+                              },
+                              {
+                                "name": "df",
+                                "value": 48
+                              },
+                              {
+                                "name": "p",
+                                "value": 1
                               }
                             ]
                           },
                           {
-                            "name": "2008",
-                            "groups": [
+                            "name": "L - H",
+                            "statistics": [
                               {
-                                "name": "cyl",
-                                "groups": [
-                                  {
-                                    "name": "5.88888888888889",
-                                    "statistics": [
-                                      {
-                                        "name": "EMM",
-                                        "value": 3.296076
-                                      }
-                                    ]
-                                  }
-                                ]
+                                "name": "estimate",
+                                "symbol": "b",
+                                "value": 9.444444
+                              },
+                              {
+                                "name": "SE",
+                                "value": 5.157299
+                              },
+                              {
+                                "name": "statistic",
+                                "symbol": "t",
+                                "value": 1.831277
+                              },
+                              {
+                                "name": "df",
+                                "value": 48
+                              },
+                              {
+                                "name": "p",
+                                "value": 0.659426
+                              }
+                            ]
+                          },
+                          {
+                            "name": "M - H",
+                            "statistics": [
+                              {
+                                "name": "estimate",
+                                "symbol": "b",
+                                "value": 10
+                              },
+                              {
+                                "name": "SE",
+                                "value": 5.157299
+                              },
+                              {
+                                "name": "statistic",
+                                "symbol": "t",
+                                "value": 1.938999
+                              },
+                              {
+                                "name": "df",
+                                "value": 48
+                              },
+                              {
+                                "name": "p",
+                                "value": 0.525531
                               }
                             ]
                           }
@@ -121,52 +1996,115 @@
             ]
           },
           {
-            "name": "r",
+            "name": ".",
             "groups": [
               {
-                "name": "cty",
+                "name": "tension",
                 "groups": [
                   {
-                    "name": "16.8589743589744",
+                    "name": "L",
                     "groups": [
                       {
-                        "name": "year",
+                        "name": "contrast",
                         "groups": [
                           {
-                            "name": "1999",
-                            "groups": [
+                            "name": "A - B",
+                            "statistics": [
                               {
-                                "name": "cyl",
-                                "groups": [
-                                  {
-                                    "name": "5.88888888888889",
-                                    "statistics": [
-                                      {
-                                        "name": "EMM",
-                                        "value": 3.983229
-                                      }
-                                    ]
-                                  }
-                                ]
+                                "name": "estimate",
+                                "symbol": "b",
+                                "value": 16.333333
+                              },
+                              {
+                                "name": "SE",
+                                "value": 5.157299
+                              },
+                              {
+                                "name": "statistic",
+                                "symbol": "t",
+                                "value": 3.167032
+                              },
+                              {
+                                "name": "df",
+                                "value": 48
+                              },
+                              {
+                                "name": "p",
+                                "value": 0.024091
                               }
                             ]
-                          },
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "M",
+                    "groups": [
+                      {
+                        "name": "contrast",
+                        "groups": [
                           {
-                            "name": "2008",
-                            "groups": [
+                            "name": "A - B",
+                            "statistics": [
                               {
-                                "name": "cyl",
-                                "groups": [
-                                  {
-                                    "name": "5.88888888888889",
-                                    "statistics": [
-                                      {
-                                        "name": "EMM",
-                                        "value": 4.090093
-                                      }
-                                    ]
-                                  }
-                                ]
+                                "name": "estimate",
+                                "symbol": "b",
+                                "value": -4.777778
+                              },
+                              {
+                                "name": "SE",
+                                "value": 5.157299
+                              },
+                              {
+                                "name": "statistic",
+                                "symbol": "t",
+                                "value": -0.926411
+                              },
+                              {
+                                "name": "df",
+                                "value": 48
+                              },
+                              {
+                                "name": "p",
+                                "value": 1
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "H",
+                    "groups": [
+                      {
+                        "name": "contrast",
+                        "groups": [
+                          {
+                            "name": "A - B",
+                            "statistics": [
+                              {
+                                "name": "estimate",
+                                "symbol": "b",
+                                "value": 5.777778
+                              },
+                              {
+                                "name": "SE",
+                                "value": 5.157299
+                              },
+                              {
+                                "name": "statistic",
+                                "symbol": "t",
+                                "value": 1.120311
+                              },
+                              {
+                                "name": "df",
+                                "value": 48
+                              },
+                              {
+                                "name": "p",
+                                "value": 1
                               }
                             ]
                           }
@@ -181,9 +2119,1533 @@
         ]
       }
     ],
+    "adjust": "bonferroni",
+    "type": "link",
     "package": {
       "name": "emmeans",
-      "version": "1.8.3"
+      "version": "1.8.4-1"
+    }
+  },
+  "tw_emm": {
+    "method": "Estimated marginal means",
+    "groups": [
+      {
+        "name": "tension_poly",
+        "groups": [
+          {
+            "name": "linear",
+            "groups": [
+              {
+                "name": "wool_consec",
+                "groups": [
+                  {
+                    "name": "B - A",
+                    "statistics": [
+                      {
+                        "name": "estimate",
+                        "symbol": "b",
+                        "value": 10.555556
+                      },
+                      {
+                        "name": "SE",
+                        "value": 7.293523
+                      },
+                      {
+                        "name": "statistic",
+                        "symbol": "t",
+                        "value": 1.447251
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      },
+                      {
+                        "name": "p",
+                        "value": 0.154327
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "quadratic",
+            "groups": [
+              {
+                "name": "wool_consec",
+                "groups": [
+                  {
+                    "name": "B - A",
+                    "statistics": [
+                      {
+                        "name": "estimate",
+                        "symbol": "b",
+                        "value": -31.666667
+                      },
+                      {
+                        "name": "SE",
+                        "value": 12.632752
+                      },
+                      {
+                        "name": "statistic",
+                        "symbol": "t",
+                        "value": -2.506712
+                      },
+                      {
+                        "name": "df",
+                        "value": 48
+                      },
+                      {
+                        "name": "p",
+                        "value": 0.015626
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "adjust": "none",
+    "type": "link",
+    "package": {
+      "name": "emmeans",
+      "version": "1.8.4-1"
+    }
+  },
+  "pigs_test": {
+    "method": "Estimated marginal means",
+    "groups": [
+      {
+        "name": "percent",
+        "groups": [
+          {
+            "name": 9,
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 31.352904
+              },
+              {
+                "name": "SE",
+                "value": 1.281961
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": -0.360276
+              },
+              {
+                "name": "df",
+                "value": 23
+              },
+              {
+                "name": "p",
+                "value": 0.639036
+              }
+            ]
+          },
+          {
+            "name": 12,
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 37.519522
+              },
+              {
+                "name": "SE",
+                "value": 1.439849
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 4.294964
+              },
+              {
+                "name": "df",
+                "value": 23
+              },
+              {
+                "name": "p",
+                "value": 0.000135
+              }
+            ]
+          },
+          {
+            "name": 15,
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 38.96664
+              },
+              {
+                "name": "SE",
+                "value": 1.70401
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 4.634534
+              },
+              {
+                "name": "df",
+                "value": 23
+              },
+              {
+                "name": "p",
+                "value": 0.000058
+              }
+            ]
+          },
+          {
+            "name": 18,
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 42.315614
+              },
+              {
+                "name": "SE",
+                "value": 2.241048
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 5.383622
+              },
+              {
+                "name": "df",
+                "value": 23
+              },
+              {
+                "name": "p",
+                "value": 9.051296e-06
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "adjust": "none",
+    "type": "response",
+    "linkname": "log",
+    "package": {
+      "name": "emmeans",
+      "version": "1.8.4-1"
+    }
+  },
+  "pigs_test_joint": {
+    "method": "Estimated marginal means",
+    "statistics": [
+      {
+        "name": "statistic",
+        "symbol": "F",
+        "value": 7.981
+      },
+      {
+        "name": "df numerator",
+        "symbol": "df",
+        "subscript": "num.",
+        "value": 3
+      },
+      {
+        "name": "df denominator",
+        "symbol": "df",
+        "subscript": "den.",
+        "value": 23
+      },
+      {
+        "name": "p",
+        "value": 0.0008
+      }
+    ],
+    "package": {
+      "name": "emmeans",
+      "version": "1.8.4-1"
+    }
+  },
+  "moats_mvcontrast": {
+    "groups": [
+      {
+        "name": "estimates",
+        "method": "Contrasts",
+        "groups": [
+          {
+            "name": "rep.meas",
+            "groups": [
+              {
+                "name": "rep.meas0",
+                "groups": [
+                  {
+                    "name": "contrast",
+                    "groups": [
+                      {
+                        "name": "Marvellous - Golden Rain",
+                        "statistics": [
+                          {
+                            "name": "estimate",
+                            "symbol": "b",
+                            "value": 6.666667
+                          },
+                          {
+                            "name": "SE",
+                            "value": 7.835579
+                          },
+                          {
+                            "name": "statistic",
+                            "symbol": "t",
+                            "value": 0.85082
+                          },
+                          {
+                            "name": "df",
+                            "value": 10
+                          },
+                          {
+                            "name": "p",
+                            "value": 0.414778
+                          }
+                        ]
+                      },
+                      {
+                        "name": "Victory - Marvellous",
+                        "statistics": [
+                          {
+                            "name": "estimate",
+                            "symbol": "b",
+                            "value": -15.166667
+                          },
+                          {
+                            "name": "SE",
+                            "value": 7.835579
+                          },
+                          {
+                            "name": "statistic",
+                            "symbol": "t",
+                            "value": -1.935615
+                          },
+                          {
+                            "name": "df",
+                            "value": 10
+                          },
+                          {
+                            "name": "p",
+                            "value": 0.081672
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "rep.meas0.2",
+                "groups": [
+                  {
+                    "name": "contrast",
+                    "groups": [
+                      {
+                        "name": "Marvellous - Golden Rain",
+                        "statistics": [
+                          {
+                            "name": "estimate",
+                            "symbol": "b",
+                            "value": 10
+                          },
+                          {
+                            "name": "SE",
+                            "value": 9.336706
+                          },
+                          {
+                            "name": "statistic",
+                            "symbol": "t",
+                            "value": 1.071042
+                          },
+                          {
+                            "name": "df",
+                            "value": 10
+                          },
+                          {
+                            "name": "p",
+                            "value": 0.309319
+                          }
+                        ]
+                      },
+                      {
+                        "name": "Victory - Marvellous",
+                        "statistics": [
+                          {
+                            "name": "estimate",
+                            "symbol": "b",
+                            "value": -18.833333
+                          },
+                          {
+                            "name": "SE",
+                            "value": 9.336706
+                          },
+                          {
+                            "name": "statistic",
+                            "symbol": "t",
+                            "value": -2.017128
+                          },
+                          {
+                            "name": "df",
+                            "value": 10
+                          },
+                          {
+                            "name": "p",
+                            "value": 0.071321
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "rep.meas0.4",
+                "groups": [
+                  {
+                    "name": "contrast",
+                    "groups": [
+                      {
+                        "name": "Marvellous - Golden Rain",
+                        "statistics": [
+                          {
+                            "name": "estimate",
+                            "symbol": "b",
+                            "value": 2.5
+                          },
+                          {
+                            "name": "SE",
+                            "value": 12.297094
+                          },
+                          {
+                            "name": "statistic",
+                            "symbol": "t",
+                            "value": 0.2033
+                          },
+                          {
+                            "name": "df",
+                            "value": 10
+                          },
+                          {
+                            "name": "p",
+                            "value": 0.842978
+                          }
+                        ]
+                      },
+                      {
+                        "name": "Victory - Marvellous",
+                        "statistics": [
+                          {
+                            "name": "estimate",
+                            "symbol": "b",
+                            "value": -6.333333
+                          },
+                          {
+                            "name": "SE",
+                            "value": 12.297094
+                          },
+                          {
+                            "name": "statistic",
+                            "symbol": "t",
+                            "value": -0.515027
+                          },
+                          {
+                            "name": "df",
+                            "value": 10
+                          },
+                          {
+                            "name": "p",
+                            "value": 0.617726
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "rep.meas0.6",
+                "groups": [
+                  {
+                    "name": "contrast",
+                    "groups": [
+                      {
+                        "name": "Marvellous - Golden Rain",
+                        "statistics": [
+                          {
+                            "name": "estimate",
+                            "symbol": "b",
+                            "value": 2
+                          },
+                          {
+                            "name": "SE",
+                            "value": 10.328314
+                          },
+                          {
+                            "name": "statistic",
+                            "symbol": "t",
+                            "value": 0.193642
+                          },
+                          {
+                            "name": "df",
+                            "value": 10
+                          },
+                          {
+                            "name": "p",
+                            "value": 0.850333
+                          }
+                        ]
+                      },
+                      {
+                        "name": "Victory - Marvellous",
+                        "statistics": [
+                          {
+                            "name": "estimate",
+                            "symbol": "b",
+                            "value": -8.333333
+                          },
+                          {
+                            "name": "SE",
+                            "value": 10.328314
+                          },
+                          {
+                            "name": "statistic",
+                            "symbol": "t",
+                            "value": -0.806844
+                          },
+                          {
+                            "name": "df",
+                            "value": 10
+                          },
+                          {
+                            "name": "p",
+                            "value": 0.438525
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "adjust": "none",
+        "type": "link"
+      },
+      {
+        "name": "tests",
+        "method": "Contrasts",
+        "groups": [
+          {
+            "name": "contrast",
+            "groups": [
+              {
+                "name": "Marvellous - Golden Rain",
+                "statistics": [
+                  {
+                    "name": "estimate",
+                    "symbol": "t²",
+                    "value": 3.081872
+                  },
+                  {
+                    "name": "statistic",
+                    "symbol": "F",
+                    "value": 0.539328
+                  },
+                  {
+                    "name": "df numerator",
+                    "symbol": "df",
+                    "subscript": "num.",
+                    "value": 4
+                  },
+                  {
+                    "name": "df denominator",
+                    "symbol": "df",
+                    "subscript": "den.",
+                    "value": 7
+                  },
+                  {
+                    "name": "p",
+                    "value": 0.917367
+                  }
+                ]
+              },
+              {
+                "name": "Victory - Marvellous",
+                "statistics": [
+                  {
+                    "name": "estimate",
+                    "symbol": "t²",
+                    "value": 9.180642
+                  },
+                  {
+                    "name": "statistic",
+                    "symbol": "F",
+                    "value": 1.606612
+                  },
+                  {
+                    "name": "df numerator",
+                    "symbol": "df",
+                    "subscript": "num.",
+                    "value": 4
+                  },
+                  {
+                    "name": "df denominator",
+                    "symbol": "df",
+                    "subscript": "den.",
+                    "value": 7
+                  },
+                  {
+                    "name": "p",
+                    "value": 0.47255
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "emmeans",
+      "version": "1.8.4-1"
+    }
+  },
+  "moats_mvcontrast_null": {
+    "method": "Estimated marginal means",
+    "groups": [
+      {
+        "name": "Variety",
+        "groups": [
+          {
+            "name": "Golden Rain",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "t²",
+                "value": 10.000548
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 1.750096
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 4
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 7
+              },
+              {
+                "name": "p",
+                "value": 0.566286
+              }
+            ]
+          },
+          {
+            "name": "Marvellous",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "t²",
+                "value": 26.627543
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 4.65982
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 4
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 7
+              },
+              {
+                "name": "p",
+                "value": 0.10886
+              }
+            ]
+          },
+          {
+            "name": "Victory",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "t²",
+                "value": 10.232107
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 1.790619
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 4
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 7
+              },
+              {
+                "name": "p",
+                "value": 0.552569
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "emmeans",
+      "version": "1.8.4-1"
+    }
+  },
+  "fiber_eff_size": {
+    "method": "Contrasts",
+    "groups": [
+      {
+        "name": "contrast",
+        "groups": [
+          {
+            "name": "A - B",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": -0.650019,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -2.080621,
+                "upper": 0.780584
+              },
+              {
+                "name": "SE",
+                "value": 0.649983
+              },
+              {
+                "name": "df",
+                "value": 11
+              }
+            ]
+          },
+          {
+            "name": "A - C",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 0.993106,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.604133,
+                "upper": 2.590344
+              },
+              {
+                "name": "SE",
+                "value": 0.725692
+              },
+              {
+                "name": "df",
+                "value": 11
+              }
+            ]
+          },
+          {
+            "name": "B - C",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 1.643124,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.118368,
+                "upper": 3.404617
+              },
+              {
+                "name": "SE",
+                "value": 0.80032
+              },
+              {
+                "name": "df",
+                "value": 11
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "adjust": "none",
+    "type": "link",
+    "package": {
+      "name": "emmeans",
+      "version": "1.8.4-1"
+    }
+  },
+  "moats_eff_size": {
+    "method": "Contrasts",
+    "groups": [
+      {
+        "name": "contrast",
+        "groups": [
+          {
+            "name": "Golden Rain - Marvellous",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": -0.237215,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -1.294905,
+                "upper": 0.820474
+              },
+              {
+                "name": "SE",
+                "value": 0.49623
+              },
+              {
+                "name": "df",
+                "value": 15
+              }
+            ]
+          },
+          {
+            "name": "Golden Rain - Victory",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 0.308193,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.752264,
+                "upper": 1.36865
+              },
+              {
+                "name": "SE",
+                "value": 0.497529
+              },
+              {
+                "name": "df",
+                "value": 15
+              }
+            ]
+          },
+          {
+            "name": "Marvellous - Victory",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 0.545408,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.529409,
+                "upper": 1.620226
+              },
+              {
+                "name": "SE",
+                "value": 0.504266
+              },
+              {
+                "name": "df",
+                "value": 15
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "adjust": "none",
+    "type": "link",
+    "package": {
+      "name": "emmeans",
+      "version": "1.8.4-1"
+    }
+  },
+  "fiber_trends": {
+    "method": "Estimated marginal means of linear trends",
+    "groups": [
+      {
+        "name": "machine",
+        "groups": [
+          {
+            "name": "A",
+            "groups": [
+              {
+                "name": "diameter",
+                "groups": [
+                  {
+                    "name": 20,
+                    "statistics": [
+                      {
+                        "name": "estimate",
+                        "symbol": "b",
+                        "value": 9.879062,
+                        "interval": "CI",
+                        "level": 0.95,
+                        "lower": 5.95977,
+                        "upper": 13.798353
+                      },
+                      {
+                        "name": "SE",
+                        "value": 1.732546
+                      },
+                      {
+                        "name": "df",
+                        "value": 9
+                      }
+                    ]
+                  },
+                  {
+                    "name": 30,
+                    "statistics": [
+                      {
+                        "name": "estimate",
+                        "symbol": "b",
+                        "value": 12.098474,
+                        "interval": "CI",
+                        "level": 0.95,
+                        "lower": 7.298681,
+                        "upper": 16.898266
+                      },
+                      {
+                        "name": "SE",
+                        "value": 2.121777
+                      },
+                      {
+                        "name": "df",
+                        "value": 9
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "B",
+            "groups": [
+              {
+                "name": "diameter",
+                "groups": [
+                  {
+                    "name": 20,
+                    "statistics": [
+                      {
+                        "name": "estimate",
+                        "symbol": "b",
+                        "value": 7.668148,
+                        "interval": "CI",
+                        "level": 0.95,
+                        "lower": 3.1385,
+                        "upper": 12.197795
+                      },
+                      {
+                        "name": "SE",
+                        "value": 2.002357
+                      },
+                      {
+                        "name": "df",
+                        "value": 9
+                      }
+                    ]
+                  },
+                  {
+                    "name": 30,
+                    "statistics": [
+                      {
+                        "name": "estimate",
+                        "symbol": "b",
+                        "value": 9.39086,
+                        "interval": "CI",
+                        "level": 0.95,
+                        "lower": 3.84359,
+                        "upper": 14.938129
+                      },
+                      {
+                        "name": "SE",
+                        "value": 2.452203
+                      },
+                      {
+                        "name": "df",
+                        "value": 9
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "C",
+            "groups": [
+              {
+                "name": "diameter",
+                "groups": [
+                  {
+                    "name": 20,
+                    "statistics": [
+                      {
+                        "name": "estimate",
+                        "symbol": "b",
+                        "value": 7.73126,
+                        "interval": "CI",
+                        "level": 0.95,
+                        "lower": 3.520399,
+                        "upper": 11.942121
+                      },
+                      {
+                        "name": "SE",
+                        "value": 1.861436
+                      },
+                      {
+                        "name": "df",
+                        "value": 9
+                      }
+                    ]
+                  },
+                  {
+                    "name": 30,
+                    "statistics": [
+                      {
+                        "name": "estimate",
+                        "symbol": "b",
+                        "value": 9.468151,
+                        "interval": "CI",
+                        "level": 0.95,
+                        "lower": 4.311286,
+                        "upper": 14.625016
+                      },
+                      {
+                        "name": "SE",
+                        "value": 2.279623
+                      },
+                      {
+                        "name": "df",
+                        "value": 9
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "adjust": "none",
+    "type": "link",
+    "package": {
+      "name": "emmeans",
+      "version": "1.8.4-1"
+    }
+  },
+  "mtcars_trends": {
+    "method": "Estimated marginal means of linear trends",
+    "groups": [
+      {
+        "name": "disp",
+        "groups": [
+          {
+            "name": 105.136364,
+            "groups": [
+              {
+                "name": "cyl",
+                "groups": [
+                  {
+                    "name": 4,
+                    "groups": [
+                      {
+                        "name": "am",
+                        "groups": [
+                          {
+                            "name": 0,
+                            "statistics": [
+                              {
+                                "name": "estimate",
+                                "symbol": "b",
+                                "value": -0.094852
+                              },
+                              {
+                                "name": "SE",
+                                "value": 0.082857
+                              },
+                              {
+                                "name": "df",
+                                "value": 20
+                              }
+                            ]
+                          },
+                          {
+                            "name": 1,
+                            "statistics": [
+                              {
+                                "name": "estimate",
+                                "symbol": "b",
+                                "value": -0.121208
+                              },
+                              {
+                                "name": "SE",
+                                "value": 0.033808
+                              },
+                              {
+                                "name": "df",
+                                "value": 20
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": 183.314286,
+            "groups": [
+              {
+                "name": "cyl",
+                "groups": [
+                  {
+                    "name": 6,
+                    "groups": [
+                      {
+                        "name": "am",
+                        "groups": [
+                          {
+                            "name": 0,
+                            "statistics": [
+                              {
+                                "name": "estimate",
+                                "symbol": "b",
+                                "value": -0.0024
+                              },
+                              {
+                                "name": "SE",
+                                "value": 0.049619
+                              },
+                              {
+                                "name": "df",
+                                "value": 20
+                              }
+                            ]
+                          },
+                          {
+                            "name": 1,
+                            "statistics": [
+                              {
+                                "name": "estimate",
+                                "symbol": "b",
+                                "value": -0.021737
+                              },
+                              {
+                                "name": "SE",
+                                "value": 0.057327
+                              },
+                              {
+                                "name": "df",
+                                "value": 20
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": 353.1,
+            "groups": [
+              {
+                "name": "cyl",
+                "groups": [
+                  {
+                    "name": 8,
+                    "groups": [
+                      {
+                        "name": "am",
+                        "groups": [
+                          {
+                            "name": 0,
+                            "statistics": [
+                              {
+                                "name": "estimate",
+                                "symbol": "b",
+                                "value": -0.010609
+                              },
+                              {
+                                "name": "SE",
+                                "value": 0.010525
+                              },
+                              {
+                                "name": "df",
+                                "value": 20
+                              }
+                            ]
+                          },
+                          {
+                            "name": 1,
+                            "statistics": [
+                              {
+                                "name": "estimate",
+                                "symbol": "b",
+                                "value": -0.014702
+                              },
+                              {
+                                "name": "SE",
+                                "value": 0.064543
+                              },
+                              {
+                                "name": "df",
+                                "value": 20
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "adjust": "none",
+    "type": "link",
+    "package": {
+      "name": "emmeans",
+      "version": "1.8.4-1"
+    }
+  },
+  "pigs_joint_tests": {
+    "method": "Estimated marginal means",
+    "groups": [
+      {
+        "name": "model term",
+        "groups": [
+          {
+            "name": "source",
+            "statistics": [
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 30.256
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 17
+              },
+              {
+                "name": "p",
+                "value": 2.506905e-06
+              }
+            ]
+          },
+          {
+            "name": "percent",
+            "statistics": [
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 8.214
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 17
+              },
+              {
+                "name": "p",
+                "value": 0.001348
+              }
+            ]
+          },
+          {
+            "name": "source:percent",
+            "statistics": [
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 0.926
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 6
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 17
+              },
+              {
+                "name": "p",
+                "value": 0.501099
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "emmeans",
+      "version": "1.8.4-1"
+    }
+  },
+  "pigs_joint_tests_by": {
+    "method": "Estimated marginal means",
+    "groups": [
+      {
+        "name": "model term",
+        "groups": [
+          {
+            "name": "percent",
+            "groups": [
+              {
+                "name": "source",
+                "groups": [
+                  {
+                    "name": "fish",
+                    "statistics": [
+                      {
+                        "name": "statistic",
+                        "symbol": "F",
+                        "value": 1.712
+                      },
+                      {
+                        "name": "df numerator",
+                        "symbol": "df",
+                        "subscript": "num.",
+                        "value": 3
+                      },
+                      {
+                        "name": "df denominator",
+                        "symbol": "df",
+                        "subscript": "den.",
+                        "value": 17
+                      },
+                      {
+                        "name": "p",
+                        "value": 0.202262
+                      }
+                    ]
+                  },
+                  {
+                    "name": "soy",
+                    "statistics": [
+                      {
+                        "name": "statistic",
+                        "symbol": "F",
+                        "value": 1.29
+                      },
+                      {
+                        "name": "df numerator",
+                        "symbol": "df",
+                        "subscript": "num.",
+                        "value": 3
+                      },
+                      {
+                        "name": "df denominator",
+                        "symbol": "df",
+                        "subscript": "den.",
+                        "value": 17
+                      },
+                      {
+                        "name": "p",
+                        "value": 0.30974
+                      }
+                    ]
+                  },
+                  {
+                    "name": "skim",
+                    "statistics": [
+                      {
+                        "name": "statistic",
+                        "symbol": "F",
+                        "value": 6.676
+                      },
+                      {
+                        "name": "df numerator",
+                        "symbol": "df",
+                        "subscript": "num.",
+                        "value": 3
+                      },
+                      {
+                        "name": "df denominator",
+                        "symbol": "df",
+                        "subscript": "den.",
+                        "value": 17
+                      },
+                      {
+                        "name": "p",
+                        "value": 0.003523
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "emmeans",
+      "version": "1.8.4-1"
+    }
+  },
+  "fiber_ref_grid": {
+    "method": "Estimated marginal means",
+    "groups": [
+      {
+        "name": "machine",
+        "groups": [
+          {
+            "name": "A",
+            "groups": [
+              {
+                "name": "diameter",
+                "groups": [
+                  {
+                    "name": 24.133333,
+                    "statistics": [
+                      {
+                        "name": "estimate",
+                        "symbol": "b",
+                        "value": 40.222103
+                      },
+                      {
+                        "name": "SE",
+                        "value": 0.777017
+                      },
+                      {
+                        "name": "df",
+                        "value": 9
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "B",
+            "groups": [
+              {
+                "name": "diameter",
+                "groups": [
+                  {
+                    "name": 24.133333,
+                    "statistics": [
+                      {
+                        "name": "estimate",
+                        "symbol": "b",
+                        "value": 41.6
+                      },
+                      {
+                        "name": "SE",
+                        "value": 0.857695
+                      },
+                      {
+                        "name": "df",
+                        "value": 9
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "C",
+            "groups": [
+              {
+                "name": "diameter",
+                "groups": [
+                  {
+                    "name": 24.133333,
+                    "statistics": [
+                      {
+                        "name": "estimate",
+                        "symbol": "b",
+                        "value": 38.534979
+                      },
+                      {
+                        "name": "SE",
+                        "value": 0.966229
+                      },
+                      {
+                        "name": "df",
+                        "value": 9
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "adjust": "none",
+    "type": "link",
+    "package": {
+      "name": "emmeans",
+      "version": "1.8.4-1"
     }
   }
 }

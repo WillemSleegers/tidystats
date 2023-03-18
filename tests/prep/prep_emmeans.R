@@ -189,7 +189,7 @@ df <- tidy_stats_to_data_frame(statistics)
 
 # write_stats() -----------------------------------------------------------
 
-write_test_stats(statistics, "tests/testthat/data/emmeans.json")
+write_test_stats(statistics, "./tests/data/emmeans.json")
 
 # Cleanup -----------------------------------------------------------------
 

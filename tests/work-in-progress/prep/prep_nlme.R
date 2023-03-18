@@ -6,27 +6,29 @@ statistics <- list()
 
 # lme() -------------------------------------------------------------------
 
-# Run models
 lme_fm1 <- lme(
   distance ~ age,
-  data = Orthodont, random = ~ 1 + age | Subject / Sex
+  random = ~ 1 + age | Subject / Sex,
+  data = Orthodont
 )
-lme_fm2 <- lme(
-  distance ~ age + Sex,
-  data = Orthodont, random = ~1
-)
+lme_fm2 <- lme(distance ~ age + Sex, data = Orthodont, random = ~1)
+
+statistics <- statistics |>
+  add_stats(lme_fm1) |>
+  add_stats(lme_fm2)
 
 summary(lme_fm1)
 summary(lme_fm2)
 
-# Tidy stats
-temp <- tidy_stats(lme_fm1)
-temp <- tidy_stats(lme_fm2)
 
-# Add stats
-results <- results %>%
-  add_stats(lme_fm1) %>%
-  add_stats(lme_fm2)
+lme(
+  distance ~ age,
+  random = ~ 1 + age | Subject / Sex,
+  data = Orthodont
+)
+
+
+
 
 # nlme() ------------------------------------------------------------------
 
@@ -46,8 +48,8 @@ temp <- tidy_stats(nlme_fm1)
 temp <- tidy_stats(nlme_fm2)
 
 # Add stats
-results <- results %>%
-  add_stats(nlme_fm1) %>%
+results <- results |>
+  add_stats(nlme_fm1) |>
   add_stats(nlme_fm2)
 
 # gls() -------------------------------------------------------------------
@@ -66,8 +68,8 @@ temp <- tidy_stats(gls_fm1)
 temp <- tidy_stats(gls_fm2)
 
 # Add stats
-results <- results %>%
-  add_stats(gls_fm1) %>%
+results <- results |>
+  add_stats(gls_fm1) |>
   add_stats(gls_fm2)
 
 # anova() -----------------------------------------------------------------
@@ -149,31 +151,3 @@ results <- results %>%
 # Write stats -------------------------------------------------------------
 
 write_stats(results, "inst/test_data/nlme.json")
-
-
-
-
-library(nlme)
-library(aomisc)
-data(WinterWheat)
-WinterWheat <- WinterWheat[WinterWheat$Genotype != "SIMETO" &
-  WinterWheat$Genotype != "SOLEX", ]
-WinterWheat$Genotype <- factor(WinterWheat$Genotype)
-WinterWheat$Year <- factor(WinterWheat$Year)
-WinterWheat$Block <- factor(WinterWheat$Block)
-
-EnvVarMod <- lme(Yield ~ Genotype,
-  random = list(
-    Year = pdSymm(~ Genotype - 1),
-    Year = pdIdent(~ Block - 1)
-  ),
-  control = list(opt = "optim", maxIter = 100),
-  data = WinterWheat
-)
-
-varcor <- VarCorr(EnvVarMod)
-
-
-
-
-test <- nlme(distance ~ age + Sex, data = Orthodont, random = ~1)

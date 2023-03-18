@@ -6,11 +6,9 @@ statistics <- list()
 
 # slopes() ----------------------------------------------------------------
 
-# Run analyses
 mod <- glm(am ~ hp * wt, data = mtcars, family = binomial)
 mfx <- slopes(mod)
 
-mfx
 summary(mfx)
 avg_slopes(mod, by = TRUE)
 slopes(mod, newdata = datagrid())
@@ -23,17 +21,19 @@ slopes(mod,
     hp = c(100, 110),
     grid_type = "counterfactual"
   )
-)
+) |>
+  summary()
 
 
-slopes(mod, vcov = sandwich::vcovHC(mod))
+slopes(mod, vcov = sandwich::vcovHC(mod)) |>
+  summary()
 
 mod <- lm(mpg ~ wt + drat, data = mtcars)
 slopes(
   mod,
   newdata = "mean",
   hypothesis = "wt = drat"
-)
+) |> summary()
 slopes(
   mod,
   newdata = "mean",

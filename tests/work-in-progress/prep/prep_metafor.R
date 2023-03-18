@@ -1,16 +1,11 @@
 # Setup -------------------------------------------------------------------
 
-# Load packages
-library(tidystats)
-library(tidyverse)
 library(metafor)
 
-# Create an empty list
 results <- list()
 
 # rma.uni() ---------------------------------------------------------------
 
-# Get data
 dat <- escalc(
   measure = "RR",
   ai = tpos,
@@ -22,7 +17,6 @@ dat <- escalc(
 bangertdrowns2004 <- dat.bangertdrowns2004
 bangertdrowns2004$ni100 <- bangertdrowns2004$ni / 100
 
-# Run analyses
 rma_uni <- rma(yi, vi, data = dat, method = "REML")
 rma_uni_mods <- rma(yi ~ ablat + year, vi, data = dat)
 rma_uni_pairwise <- rma(yi, vi, mods = ~ factor(alloc) - 1, data = dat)
@@ -44,7 +38,6 @@ rma_uni_ls_diff <- rma(
   data = bangertdrowns2004
 )
 
-# Add stats
 results <- results %>%
   add_stats(rma_uni) %>%
   add_stats(rma_uni_mods) %>%
@@ -55,7 +48,6 @@ results <- results %>%
   add_stats(rma_uni_ls_pred) %>%
   add_stats(rma_uni_ls_diff)
 
-# Inspect output
 rma_uni
 rma_uni_mods
 rma_uni_pairwise

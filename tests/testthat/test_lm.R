@@ -1,6 +1,5 @@
 # Setup -------------------------------------------------------------------
 
-# Load test data
 path <- system.file("tests/data/lm.json", package = "tidystats")
 expected_statistics <- read_stats(path)
 

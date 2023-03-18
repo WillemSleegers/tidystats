@@ -28,8 +28,8 @@ summary(lmerTest_ML)
 
 # anova() -----------------------------------------------------------------
 
-m0 <- lmer(Reaction ~ Days + (1 | Subject), sleepstudy)
-m <- lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
+m0 <- lmerTest::lmer(Reaction ~ Days + (1 | Subject), lme4::sleepstudy)
+m <- lmerTest::lmer(Reaction ~ Days + (Days | Subject), lme4::sleepstudy)
 
 anova_lmerTest <- anova(m)
 anova_lmerTest_lme4 <- anova(m, ddf = "lme4")

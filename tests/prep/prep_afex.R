@@ -42,14 +42,16 @@ aov_ez_aggregate <- aov_ez(
   obk.long,
   c("treatment", "gender"),
   "hour",
-  observed = "gender"
+  observed = "gender",
+  fun_aggregate = mean
 )
 aov_ez_aggregate_both <- aov_ez(
   "id",
   "value",
   obk.long,
   between = c("treatment", "gender"),
-  observed = "gender"
+  observed = "gender",
+  fun_aggregate = mean
 )
 aov_ez_p <- aov_ez(
   "id", "value",
@@ -141,7 +143,8 @@ aov_4_covariate <- aov_4(
 aov_4_aggregate_both <- aov_4(
   value ~ treatment * gender + (1 | id),
   data = obk.long,
-  observed = c("gender")
+  observed = c("gender"),
+  fun_aggregate = mean
 )
 aov_4_within <- aov_4(
   value ~ (phase * hour | id),
@@ -166,20 +169,22 @@ data(md_15.1)
 data(md_16.1)
 
 mixed <- mixed(
-  score ~ Machine + (Machine | Worker), 
-  data = Machines)
+  score ~ Machine + (Machine | Worker),
+  data = Machines
+)
 
 mixed_expand_RE <- mixed(
   score ~ Machine + (Machine || Worker),
   data = Machines, expand_re = TRUE
 )
 
-mixed_random_interecept <-  mixed(
-  iq ~ timecat + (1 + time | id), 
-  data = md_15.1)
+mixed_random_interecept <- mixed(
+  iq ~ timecat + (1 + time | id),
+  data = md_15.1
+)
 
 mixed_contrast <- mixed(
-  severity ~ sex + (1 | id), 
+  severity ~ sex + (1 | id),
   data = md_16.1,
   check_contrasts = FALSE
 )
@@ -211,5 +216,6 @@ rm(
   aov_car_aggregate_both, aov_car_within, aov_car_no_df_pes,
   aov_car_no_df_no_MSE, aov_4, aov_4_covariate, aov_4_aggregate_both,
   aov_4_within, mixed, mixed_expand_RE, mixed_random_interecept,
-  mixed_contrast, df, statistics, md_12.1, obk.long, md_15.1, md_16.1
+  mixed_contrast, df, statistics, md_12.1, obk.long, md_15.1, md_16.1,
+  Machines
 )

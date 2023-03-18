@@ -38,9 +38,10 @@
 #' | `tidystats`       | [describe_data()], [count_data()]                     |
 #'
 #' Supported classes:
-#' | Function    | Class name  |
-#' | ------------| ------------|
-#' | [confint()] | confint     |
+#' | Package   | Function                       | Class name  |
+#' | ----------| -------------------------------| ------------|
+#' | `stats`   | [confint()]                    | confint     |
+#' | `emmeans` | [mvcontrast(show.ests = TRUE)] | emm_list    |
 #'
 #' @examples
 #' # Conduct several analyses

@@ -84,6 +84,28 @@ results <- results |>
 mardia_attitude
 mardia_x
 
+# ICC() -------------------------------------------------------------------
+
+sf <- matrix(
+  ncol = 4, byrow = TRUE,
+  c(
+    9, 2, 5, 8,
+    6, 1, 3, 2,
+    8, 4, 6, 8,
+    7, 1, 2, 6,
+    10, 5, 6, 9,
+    6, 2, 4, 7
+  )
+)
+colnames(sf) <- paste("J", 1:4, sep = "")
+rownames(sf) <- paste("S", 1:6, sep = "")
+
+icc <- ICC(sf, lmer = FALSE, alpha = .2)
+
+statistics <- add_stats(statistics, icc)
+
+icc
+
 # Save stats --------------------------------------------------------------
 
 write_test_stats(results, "tests/data/psych.json")

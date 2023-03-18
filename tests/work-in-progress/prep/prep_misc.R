@@ -1,29 +1,3 @@
-# Analysis: psych's ICC ---------------------------------------------------
-
-# Load data
-sf <- matrix(
-  ncol = 4, byrow = TRUE,
-  c(
-    9, 2, 5, 8,
-    6, 1, 3, 2,
-    8, 4, 6, 8,
-    7, 1, 2, 6,
-    10, 5, 6, 9,
-    6, 2, 4, 7
-  )
-)
-colnames(sf) <- paste("J", 1:4, sep = "")
-rownames(sf) <- paste("S", 1:6, sep = "")
-
-# Perform analysis
-psych_ICC <- ICC(sf, lmer = FALSE)
-
-# Tidy stats
-tidy_stats(psych_ICC)
-
-# Add stats
-results <- add_stats(results, psych_ICC)
-
 # MANOVA
 
 data <- iris
@@ -31,86 +5,31 @@ data <- iris
 model7_1 <- summary(manova(cbind(Sepal.Length, Petal.Length) ~ Species,
   data = iris
 ), test = "Roy")
+
+model7_1
+
 model7_2 <- summary(manova(cbind(Sepal.Length, Petal.Length) ~ Species,
   data = iris
-), test = "")
+), test = "Pillai")
+model7_2
+
 model7_3 <- summary(manova(cbind(Sepal.Length, Petal.Length) ~ Species,
   data = iris
-), test = "Roy")
+), test = "Wilks")
+model7_3
 
 model7_4 <- summary(manova(cbind(Sepal.Length, Petal.Length) ~ Species *
-  Petal.Width, data = iris), test = "Roy")
+  Petal.Width, data = iris), test = "Hotelling-Lawley")
+model7_4
 
-# tidyversity
-# Install and load tidyversity
-# install_github("mkearney/tidyversity")
-library(tidyversity)
-
-# Ordinary Least Squares (OLS)
-TVM_1 <- tidy_regression(polcom, follow_trump ~ news_1 + ambiv_sexism_1)
-tidy_summary(TVM_1)
-
-# Logistic (dichotomous)
-polcom %>%
-  tidy_regression(follow_trump ~ news_1 + ambiv_sexism_1, type = "logistic") %>%
-  tidy_summary()
-
-# Poisson (count)
-polcom %>%
-  dplyr::mutate(polarize = abs(therm_1 - therm_2)) %>%
-  tidy_regression(polarize ~ news_1 + ambiv_sexism_1, type = "poisson") %>%
-  tidy_summary()
-
-# Negative binomial (overdispersed)
-polcom %>%
-  dplyr::mutate(polarize = abs(therm_1 - therm_2)) %>%
-  tidy_regression(polarize ~ news_1 + ambiv_sexism_1, type = "negbinom") %>%
-  tidy_summary()
-
-# Robust and quasi- models
-polcom %>%
-  dplyr::mutate(polarize = abs(therm_1 - therm_2)) %>%
-  tidy_regression(polarize ~ news_1 + ambiv_sexism_1,
-    type = "quasipoisson",
-    robust = TRUE
-  ) %>%
-  tidy_summary()
-
-# ANOVA
-polcom %>%
-  dplyr::mutate(
-    sex = ifelse(sex == 1, "Male", "Female"),
-    vote_choice = dplyr::case_when(
-      vote_2016_choice == 1 ~ "Clinton",
-      vote_2016_choice == 2 ~ "Trump",
-      TRUE ~ "Other"
-    )
-  ) %>%
-  tidy_anova(pp_party ~ sex * vote_choice) %>%
-  tidy_summary()
-
-# t-tests
-polcom %>%
-  tidy_ttest(pp_ideology ~ follow_trump) %>%
-  tidy_summary()
-
-# Structural equation modeling (SEM)
-polcom %>%
-  dplyr::mutate(
-    therm_2 = 10 - therm_2 / 10,
-    therm_1 = therm_1 / 10
-  ) %>%
-  tidy_sem(
-    news = ~ news_1 + news_2 + news_3 + news_4 + news_5 + news_6,
-    ambiv_sexism = ~ ambiv_sexism_1 + ambiv_sexism_2 + ambiv_sexism_3 +
-      ambiv_sexism_4 + ambiv_sexism_5 + ambiv_sexism_6,
-    partisan = ~ a * therm_1 + a * therm_2,
-    ambiv_sexism ~ age + hhinc + edu + news + partisan
-  ) %>%
-  tidy_summary()
-
-# Cronbach's alpha
-cronbachs_alpha(polcom, ambiv_sexism_1:ambiv_sexism_6)
+## Set orthogonal contrasts.
+op <- options(contrasts = c("contr.helmert", "contr.poly"))
+## Fake a 2nd response variable
+npk2 <- within(npk, foo <- rnorm(24))
+(npk2.aov <- manova(cbind(yield, foo) ~ block + N * P * K, npk2))
+summary(npk2.aov)
+(npk2.aovE <- manova(cbind(yield, foo) ~ N * P * K + Error(block), npk2))
+summary(npk2.aovE)
 
 # Analysis: ppcor’s pcor.test() -------------------------------------------
 
