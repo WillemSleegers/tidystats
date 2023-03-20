@@ -41,7 +41,7 @@ tidy_matrix <- function(m, symmetric = TRUE) {
 # Tidying -----------------------------------------------------------------
 
 #' @describeIn helper_functions
-#' Function to add a statistic to list. It helps create the list and ignores 
+#' Function to add a statistic to list. It helps create the list and ignores
 #' NULL values.
 
 add_statistic <- function(list, name, value, symbol = NULL, subscript = NULL,
@@ -62,7 +62,12 @@ add_statistic <- function(list, name, value, symbol = NULL, subscript = NULL,
 
       new_list$value <- value
 
-      if (!is.null(level)) {
+      if (
+        !is.null(level) &&
+          !is.null(interval) &&
+          !is.null(lower) &&
+          !is.null(upper)
+      ) {
         if (!is.na(level)) {
           new_list$interval <- interval
           new_list$level <- level

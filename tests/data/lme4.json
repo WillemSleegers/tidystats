@@ -138,7 +138,7 @@
     "convergence_code": 0,
     "package": {
       "name": "lme4",
-      "version": "1.1-31"
+      "version": "1.1-32"
     }
   },
   "lme4_ML": {
@@ -303,7 +303,7 @@
     "convergence_code": 0,
     "package": {
       "name": "lme4",
-      "version": "1.1-31"
+      "version": "1.1-32"
     }
   },
   "lme4_slopes": {
@@ -346,31 +346,6 @@
                         "name": "variance",
                         "symbol": "var",
                         "value": 627.569051
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "name": "Subject.1",
-            "groups": [
-              {
-                "name": "Variances",
-                "groups": [
-                  {
-                    "name": "Days",
-                    "statistics": [
-                      {
-                        "name": "standard deviation",
-                        "symbol": "SD",
-                        "value": 5.988187
-                      },
-                      {
-                        "name": "variance",
-                        "symbol": "var",
-                        "value": 35.85838
                       }
                     ]
                   }
@@ -470,7 +445,7 @@
     "convergence_code": 0,
     "package": {
       "name": "lme4",
-      "version": "1.1-31"
+      "version": "1.1-32"
     }
   },
   "anova_lme4": {

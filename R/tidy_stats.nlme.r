@@ -60,9 +60,11 @@ tidy_stats.lme <- function(x, args = NULL) {
   group_RE$groups <- append(group_RE$groups, list(group_variances))
 
   # Random effects - Pairs
+  corr
 
+  t(combn(rownames(corr), 2))
 
-
+  m <- matrix(c("A", "B", "C"))
 
   for (i in 1:x$dims$Q) {
     groups <- list(name = names(RE)[i])

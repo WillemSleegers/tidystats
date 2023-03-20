@@ -19,7 +19,9 @@ tidy_stats.psych <- function(x, args = NULL) {
 tidy_stats.psych.alpha <- function(x) {
   analysis <- list(method = "Reliability analysis")
 
-  analysis$statistics <- list() |>
+  group <- list(name = "Reliability analysis")
+
+  group$statistics <- list() |>
     add_statistic(
       name = "unstandardized alpha",
       value = x$total$raw_alpha,
@@ -65,6 +67,8 @@ tidy_stats.psych.alpha <- function(x) {
       value = x$total$median_r,
       symbol = "IIC", subscript = "Mdn"
     )
+
+  analysis$groups <- append(analysis$groups, list(group))
 
   # Create a group for the 95% confidence boundaries, if there are any
   if (!is.null(x$feldt) || !is.null(x$total$ase) || !is.null(x$boot.ci)) {
@@ -231,174 +235,148 @@ tidy_stats.psych.alpha <- function(x) {
 }
 
 tidy_stats.psych.corr.test <- function(x) {
-  analysis <- list(method = "Correlation") # TODO detect kendall or spearman
+  # TODO detect kendall or spearman
+  analysis <- list(method = "Correlation")
 
-  if (x$adjust == "none") {
-    warning("Only saving unadjusted statistics.")
+  if (x$sym) {
+    pairs <- t(combn(rownames(x$r), 2))
   } else {
-    warning("Only saving adjusted statistics.")
+    pairs <- expand.grid(rownames(x$r), colnames(x$r))
   }
 
-  # Check if there is only 1 pair, or multiple
-  if (length(rownames(x$r)) == 1) {
-    # Create a list for the statistics of this single pair
-    # statistics <- list()
+  alpha <- as.character(x$Call)[which(names(x$Call) == "alpha")]
+  if (length(alpha) == 0) {
+    level <- .95
+  } else {
+    level <- 1 - as.numeric(alpha)
+  }
 
-    # TODO: figure out number of pairs
+  # Unadjusted statistics
+  group_pairs <- list(name = "Pairs (unadjusted)")
+
+  for (i in seq_len(nrow(pairs))) {
+    group <- list(names = list(
+      list(name = pairs[i, 1]),
+      list(name = pairs[i, 2])
+    ))
+
+    if (length(x$n) == 1) {
+      n <- x$n
+    } else {
+      n <- x$n[pairs[i, 1], pairs[i, 2]]
+    }
+
+    statistics <- list() |>
+      add_statistic("n", n) |>
+      add_statistic(
+        "estimate",
+        x$r[pairs[i, 1], pairs[i, 2]],
+        symbol = "r",
+        interval = "CI",
+        level = level,
+        lower = x$ci2$lower[i],
+        upper = x$ci2$upper[i]
+      ) |>
+      add_statistic("standard error", x$se[pairs[i, 1], pairs[i, 2]], "SE") |>
+      add_statistic("statistic", x$t[pairs[i, 1], pairs[i, 2]], "t") |>
+      add_statistic("df", n - 2) |>
+      add_statistic("p", x$p[pairs[i, 1], pairs[i, 2]])
+
+    group$statistics <- statistics
+    group_pairs$groups <- append(group_pairs$groups, list(group))
+  }
+
+  # Adjusted statistics
+  if (x$adjust != "none") {
+    group_pairs_adjusted <- list(name = "Pairs (adjusted)")
+
+    for (i in seq_len(nrow(pairs))) {
+      group <- list(names = list(
+        list(name = pairs[i, 1]),
+        list(name = pairs[i, 2])
+      ))
+
+      if (length(x$n) == 1) {
+        n <- x$n
+      } else {
+        n <- x$n[pairs[i, 1], pairs[i, 2]]
+      }
+
+      statistics <- list() |>
+        add_statistic("n", n) |>
+        add_statistic(
+          "estimate",
+          x$r[pairs[i, 1], pairs[i, 2]],
+          symbol = "r",
+          interval = "CI",
+          level = level,
+          lower = x$ci.adj$lower[i],
+          upper = x$ci.adj$upper[i]
+        ) |>
+        add_statistic("standard error", x$se[pairs[i, 1], pairs[i, 2]], "SE") |>
+        add_statistic("statistic", x$t[pairs[i, 1], pairs[i, 2]], "t") |>
+        add_statistic("df", n - 2) |>
+        add_statistic("p", x$ci2$p.adj[i]) |>
+        add_statistic("p", x$ci2$pa[i])
+
+      group$statistics <- statistics
+      group_pairs_adjusted$groups <- append(
+        group_pairs_adjusted$groups,
+        list(group)
+      )
+    }
+  }
+
+  if (x$adjust == "none") {
+    analysis$groups <- append(analysis$groups, list(group_pairs))
+  } else {
+    analysis$groups <- append(analysis$groups, list(group_pairs))
+    analysis$groups <- append(analysis$groups, list(group_pairs_adjusted))
   }
 
   analysis$adjust <- x$adjust
 
-  output$method <- "Correlations"
-
-  # Create an empty pairs list
-  pairs <- list()
-
-  # Extract variable names
-  rownames <- rownames(x$r)
-  colnames <- colnames(x$r)
-
-  # Determine whether the correlation matrix is symmetric or asymmetric
-  if (identical(rownames, colnames)) {
-    I <- choose(length(rownames), 2)
-    symmetric <- TRUE
-  } else {
-    I <- length(rownames) * length(colnames)
-    symmetric <- FALSE
-  }
-
-  # Tidy statistics
-  rs <- tidy_matrix(x$r, symmetric = symmetric)
-  SEs <- tidy_matrix(x$se, symmetric = symmetric)
-  ts <- tidy_matrix(x$t, symmetric = symmetric)
-  ps <- tidy_matrix(t(x$p), symmetric = symmetric)
-  ps_adjusted <- tidy_matrix(x$p, symmetric = symmetric)
-
-  # Check if there are confidence intervals
-  if (!is.null(x$ci)) {
-    # Figure out the level
-    alpha <- as.character(x$Call)[which(names(x$Call) == "alpha")]
-
-    if (length(alpha) == 0) {
-      level <- .95
-    } else {
-      level <- 1 - as.numeric(alpha)
-    }
-  }
-
-  if (length(x$n) == 1) {
-    n <- x$n
-  } else {
-    ns <- tidy_matrix(x$n, symmetric = symmetric)
-  }
-
-  # Loop over the pairs
-  for (i in 1:I) {
-    pair <- list()
-
-    # Set names
-    names <- list()
-    names[[1]] <- rs$name1[i]
-    names[[2]] <- rs$name2[i]
-    pair$names <- names
-
-    # Set statistics
-    if (length(x$n) == 1) {
-      pair$statistics$n <- n
-    } else {
-      pair$statistics$n <- ns$value[i]
-    }
-    pair$statistics$estimate$name <- "r"
-    pair$statistics$estimate$value <- rs$value[i]
-    pair$statistics$SE <- SEs$value[i]
-    pair$statistics$statistic$name <- "t"
-    pair$statistics$statistic$value <- ts$value[i]
-    pair$statistics$p <- ps$value[i]
-
-    if (x$adjust != "none") {
-      pair$statistics$p_adjusted <- ps_adjusted$value[i]
-    }
-
-    if (!is.null(x$ci)) {
-      pair$statistics$CI$CI_level <- level
-      pair$statistics$CI$CI_lower <- x$ci$lower[i]
-      pair$statistics$CI$CI_upper <- x$ci$upper[i]
-    }
-
-    if (!is.null(x$ci)) {
-      pair$statistics$CI_adjusted$CI_level <- level
-      pair$statistics$CI_adjusted$CI_lower <- x$ci.adj$lower[i]
-      pair$statistics$CI_adjusted$CI_upper <- x$ci.adj$upper[i]
-    }
-
-    pairs[[i]] <- pair
-  }
-
-  # Add pairs to output
-  output$pairs <- pairs
-
-  # Set multiple test adjustment method
-  output$multiple_test_adjustment <- x$adjust
+  return(analysis)
 }
 
 tidy_stats.psych.mardia <- function(x) {
   analysis <- list(method = "Mardia's test")
 
-  statistics <- list()
-
-  statistics <- add_statistic(statistics, "number of observations", x$n.obs,
-    symbol = "N"
-  )
-  statistics <- add_statistic(statistics, "number of variables", x$n.var,
-    symbol = "k"
-  )
-
-  analysis$statistics <- statistics
-
   # Create a group for the skew statistics
-  group <- list(name = "skew")
+  group <- list(name = "Skew")
 
-  statistics <- list()
+  group$statistics <- list() |>
+    add_statistic("number of observations", x$n.obs, symbol = "n") |>
+    add_statistic("number of variables", x$n.var, symbol = "k") |>
+    add_statistic("estimate", x$b1p, symbol = "b", subscript = "1, p") |>
+    add_statistic("skew", x$skew) |>
+    add_statistic("p", x$p.skew)
 
-  statistics <- add_statistic(statistics, "estimate", x$b1p,
-    symbol = "b",
-    subscript = "1, p"
-  )
-  statistics <- add_statistic(statistics, "skew", x$skew)
-  statistics <- add_statistic(statistics, "p", x$p.skew)
-
-  group$statistics <- statistics
   analysis$groups <- append(analysis$groups, list(group))
 
   # Create a group for the small sample skew statistics
-  group <- list(name = "small sample skew")
+  group <- list(name = "Small sample skew")
 
-  statistics <- list()
+  group$statistics <- list() |>
+    add_statistic("number of observations", x$n.obs, symbol = "n") |>
+    add_statistic("number of variables", x$n.var, symbol = "k") |>
+    add_statistic("estimate", x$b1p, symbol = "b", subscript = "1, p") |>
+    add_statistic("skew", x$small.skew) |>
+    add_statistic("p", x$p.small)
 
-  statistics <- add_statistic(statistics, "estimate", x$b1p,
-    symbol = "b",
-    subscript = "1, p"
-  )
-  statistics <- add_statistic(statistics, "skew", x$small.skew)
-  statistics <- add_statistic(statistics, "p", x$p.small)
-
-  group$statistics <- statistics
   analysis$groups <- append(analysis$groups, list(group))
 
   # Create a group for the kurtosis statistics
   group <- list(name = "kurtosis")
 
-  statistics <- list()
+  group$statistics <- list() |>
+    add_statistic("estimate", x$b2p, symbol = "b", subscript = "2, p") |>
+    add_statistic("kurtosis", x$kurtosis) |>
+    add_statistic("p", x$p.kurt)
 
-  statistics <- add_statistic(statistics, "estimate", x$b2p,
-    symbol = "b",
-    subscript = "2, p"
-  )
-  statistics <- add_statistic(statistics, "kurtosis", x$kurtosis)
-  statistics <- add_statistic(statistics, "p", x$p.kurt)
-
-  group$statistics <- statistics
   analysis$groups <- append(analysis$groups, list(group))
+
+  return(analysis)
 }
 
 tidy_stats.psych.ICC <- function(x) {
@@ -406,15 +384,7 @@ tidy_stats.psych.ICC <- function(x) {
 
   results <- x$results
 
-  analysis$statistics <- list() |>
-    add_statistic(
-      name = "Number of subjects",
-      value = x$n.obs,
-    ) |>
-    add_statistic(
-      name = "Number of judges",
-      value = x$n.judge
-    )
+  group_coefficients <- list(name = "Intraclass correlation coefficients")
 
   for (i in seq_len(nrow(results))) {
     group <- list(
@@ -423,6 +393,16 @@ tidy_stats.psych.ICC <- function(x) {
     )
 
     group$statistics <- list() |>
+      add_statistic(
+        name = "Number of subjects",
+        value = x$n.obs,
+        symbol = "n"
+      ) |>
+      add_statistic(
+        name = "Number of judges",
+        value = x$n.judge,
+        symbol = "k"
+      ) |>
       add_statistic(
         name = "ICC",
         value = results$ICC[i],
@@ -442,8 +422,10 @@ tidy_stats.psych.ICC <- function(x) {
       ) |>
       add_statistic("p", results$p[i])
 
-    analysis$groups <- append(analysis$groups, list(group))
+    group_coefficients$groups <- append(group_coefficients$groups, list(group))
   }
+
+  analysis$groups <- append(analysis$groups, list(group_coefficients))
 
   return(analysis)
 }

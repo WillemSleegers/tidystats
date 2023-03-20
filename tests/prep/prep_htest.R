@@ -314,7 +314,7 @@ statistics <- statistics |>
 binom_test
 binom_test_params
 
-# PP.test()  --------------------------------------------------------------
+# PP.test() ---------------------------------------------------------------
 
 set.seed(1)
 
@@ -331,7 +331,7 @@ statistics <- statistics |>
 pp_test
 pp_test_long
 
-# Box.test()  -------------------------------------------------------------
+# Box.test() --------------------------------------------------------------
 
 set.seed(1)
 
@@ -347,7 +347,7 @@ statistics <- statistics |>
 box_test
 box_test_ljung
 
-# ansari.test()  ----------------------------------------------------------
+# ansari.test() -----------------------------------------------------------
 
 set.seed(1)
 
@@ -370,7 +370,7 @@ statistics <- statistics |>
 ansari_test
 ansari_test_ci
 
-# mood.test()  ------------------------------------------------------------
+# mood.test() -------------------------------------------------------------
 
 ramsay <- c(
   111, 107, 100, 99, 102, 106, 109, 108, 104, 99,
@@ -387,7 +387,7 @@ statistics <- add_stats(statistics, mood_test)
 
 mood_test
 
-# quade.test()  -----------------------------------------------------------
+# quade.test() ------------------------------------------------------------
 
 dataFreq <- matrix(
   nrow = 7,
@@ -410,7 +410,7 @@ statistics <- add_stats(statistics, quade_test)
 
 quade_test
 
-# bartlett.test()  --------------------------------------------------------
+# bartlett.test() ---------------------------------------------------------
 
 bartlett_test <- bartlett.test(InsectSprays$count, InsectSprays$spray)
 
@@ -418,7 +418,7 @@ statistics <- add_stats(statistics, bartlett_test)
 
 bartlett_test
 
-# fligner.test()  ---------------------------------------------------------
+# fligner.test() ----------------------------------------------------------
 
 fligner_test <- fligner.test(InsectSprays$count, InsectSprays$spray)
 
@@ -426,7 +426,7 @@ statistics <- add_stats(statistics, fligner_test)
 
 fligner_test
 
-# poisson.test()  ---------------------------------------------------------
+# poisson.test() ----------------------------------------------------------
 
 poisson_test <- poisson.test(137, 24.19893)
 poisson_test_comparison <- poisson.test(
@@ -441,7 +441,7 @@ statistics <- statistics |>
 poisson_test
 poisson_test_comparison
 
-# shapiro.test()  ---------------------------------------------------------
+# shapiro.test() ----------------------------------------------------------
 
 set.seed(1)
 
@@ -451,7 +451,7 @@ statistics <- add_stats(statistics, shapiro_test)
 
 shapiro_test
 
-# friedman.test()  --------------------------------------------------------
+# friedman.test() ---------------------------------------------------------
 
 rounding_times <- matrix(
   nrow = 22,
@@ -489,7 +489,7 @@ statistics <- add_stats(statistics, friedman_test)
 
 friedman_test
 
-# mantelhaen.test()  ------------------------------------------------------
+# mantelhaen.test() -------------------------------------------------------
 
 Satisfaction <- as.table(
   array(

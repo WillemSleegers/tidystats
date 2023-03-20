@@ -1,44 +1,47 @@
 {
   "alpha_r4": {
     "method": "Reliability analysis",
-    "statistics": [
-      {
-        "name": "unstandardized alpha",
-        "symbol": "α",
-        "subscript": "Σ",
-        "value": 0.742055
-      },
-      {
-        "name": "standardized alpha",
-        "symbol": "α",
-        "subscript": "R",
-        "value": 0.742055
-      },
-      {
-        "name": "Guttman's Lambda 6 reliability",
-        "symbol": "Guttman's λ",
-        "subscript": "6",
-        "value": 0.693574
-      },
-      {
-        "name": "mean interitem correlation",
-        "symbol": "IIC",
-        "subscript": "M",
-        "value": 0.418333
-      },
-      {
-        "name": "signal-to-noise ratio",
-        "symbol": "S/N",
-        "value": 2.876791
-      },
-      {
-        "name": "median interitem correlation",
-        "symbol": "IIC",
-        "subscript": "Mdn",
-        "value": 0.41
-      }
-    ],
     "groups": [
+      {
+        "name": "Reliability analysis",
+        "statistics": [
+          {
+            "name": "unstandardized alpha",
+            "symbol": "α",
+            "subscript": "Σ",
+            "value": 0.742055
+          },
+          {
+            "name": "standardized alpha",
+            "symbol": "α",
+            "subscript": "R",
+            "value": 0.742055
+          },
+          {
+            "name": "Guttman's Lambda 6 reliability",
+            "symbol": "Guttman's λ",
+            "subscript": "6",
+            "value": 0.693574
+          },
+          {
+            "name": "mean interitem correlation",
+            "symbol": "IIC",
+            "subscript": "M",
+            "value": 0.418333
+          },
+          {
+            "name": "signal-to-noise ratio",
+            "symbol": "S/N",
+            "value": 2.876791
+          },
+          {
+            "name": "median interitem correlation",
+            "symbol": "IIC",
+            "subscript": "Mdn",
+            "value": 0.41
+          }
+        ]
+      },
       {
         "name": "95% confidence boundaries",
         "groups": [
@@ -230,49 +233,52 @@
     ],
     "package": {
       "name": "psych",
-      "version": "2.2.3"
+      "version": "2.2.9"
     }
   },
   "alpha_r9": {
     "method": "Reliability analysis",
-    "statistics": [
-      {
-        "name": "unstandardized alpha",
-        "symbol": "α",
-        "subscript": "Σ",
-        "value": 0.763085
-      },
-      {
-        "name": "standardized alpha",
-        "symbol": "α",
-        "subscript": "R",
-        "value": 0.763085
-      },
-      {
-        "name": "Guttman's Lambda 6 reliability",
-        "symbol": "Guttman's λ",
-        "subscript": "6",
-        "value": 0.757925
-      },
-      {
-        "name": "mean interitem correlation",
-        "symbol": "IIC",
-        "subscript": "M",
-        "value": 0.263558
-      },
-      {
-        "name": "signal-to-noise ratio",
-        "symbol": "S/N",
-        "value": 3.220927
-      },
-      {
-        "name": "median interitem correlation",
-        "symbol": "IIC",
-        "subscript": "Mdn",
-        "value": 0.246
-      }
-    ],
     "groups": [
+      {
+        "name": "Reliability analysis",
+        "statistics": [
+          {
+            "name": "unstandardized alpha",
+            "symbol": "α",
+            "subscript": "Σ",
+            "value": 0.763085
+          },
+          {
+            "name": "standardized alpha",
+            "symbol": "α",
+            "subscript": "R",
+            "value": 0.763085
+          },
+          {
+            "name": "Guttman's Lambda 6 reliability",
+            "symbol": "Guttman's λ",
+            "subscript": "6",
+            "value": 0.757925
+          },
+          {
+            "name": "mean interitem correlation",
+            "symbol": "IIC",
+            "subscript": "M",
+            "value": 0.263558
+          },
+          {
+            "name": "signal-to-noise ratio",
+            "symbol": "S/N",
+            "value": 3.220927
+          },
+          {
+            "name": "median interitem correlation",
+            "symbol": "IIC",
+            "subscript": "Mdn",
+            "value": 0.246
+          }
+        ]
+      },
       {
         "name": "95% confidence boundaries",
         "groups": [
@@ -634,64 +640,67 @@
     ],
     "package": {
       "name": "psych",
-      "version": "2.2.3"
+      "version": "2.2.9"
     }
   },
   "alpha_two_f": {
     "method": "Reliability analysis",
-    "statistics": [
-      {
-        "name": "unstandardized alpha",
-        "symbol": "α",
-        "subscript": "Σ",
-        "value": 0.581637
-      },
-      {
-        "name": "standardized alpha",
-        "symbol": "α",
-        "subscript": "R",
-        "value": 0.581485
-      },
-      {
-        "name": "Guttman's Lambda 6 reliability",
-        "symbol": "Guttman's λ",
-        "subscript": "6",
-        "value": 0.617879
-      },
-      {
-        "name": "mean interitem correlation",
-        "symbol": "IIC",
-        "subscript": "M",
-        "value": 0.147975
-      },
-      {
-        "name": "signal-to-noise ratio",
-        "symbol": "S/N",
-        "value": 1.389398
-      },
-      {
-        "name": "standard error",
-        "symbol": "SE",
-        "value": 0.028804
-      },
-      {
-        "name": "mean",
-        "symbol": "M",
-        "value": 0.071793
-      },
-      {
-        "name": "standard deviation",
-        "symbol": "SD",
-        "value": 0.505845
-      },
-      {
-        "name": "median interitem correlation",
-        "symbol": "IIC",
-        "subscript": "Mdn",
-        "value": 0.051061
-      }
-    ],
     "groups": [
+      {
+        "name": "Reliability analysis",
+        "statistics": [
+          {
+            "name": "unstandardized alpha",
+            "symbol": "α",
+            "subscript": "Σ",
+            "value": 0.581637
+          },
+          {
+            "name": "standardized alpha",
+            "symbol": "α",
+            "subscript": "R",
+            "value": 0.581485
+          },
+          {
+            "name": "Guttman's Lambda 6 reliability",
+            "symbol": "Guttman's λ",
+            "subscript": "6",
+            "value": 0.617879
+          },
+          {
+            "name": "mean interitem correlation",
+            "symbol": "IIC",
+            "subscript": "M",
+            "value": 0.147975
+          },
+          {
+            "name": "signal-to-noise ratio",
+            "symbol": "S/N",
+            "value": 1.389398
+          },
+          {
+            "name": "standard error",
+            "symbol": "SE",
+            "value": 0.028804
+          },
+          {
+            "name": "mean",
+            "symbol": "M",
+            "value": 0.071793
+          },
+          {
+            "name": "standard deviation",
+            "symbol": "SD",
+            "value": 0.505845
+          },
+          {
+            "name": "median interitem correlation",
+            "symbol": "IIC",
+            "subscript": "Mdn",
+            "value": 0.051061
+          }
+        ]
+      },
       {
         "name": "95% confidence boundaries",
         "groups": [
@@ -729,11 +738,11 @@
               {
                 "name": "alpha",
                 "symbol": "α",
-                "value": 0.583389,
+                "value": 0.580869,
                 "interval": "CI",
                 "level": 0.95,
-                "lower": 0.526474,
-                "upper": 0.633585
+                "lower": 0.521549,
+                "upper": 0.628998
               }
             ]
           }
@@ -1230,49 +1239,52 @@
     ],
     "package": {
       "name": "psych",
-      "version": "2.2.3"
+      "version": "2.2.9"
     }
   },
   "alpha_cov_two": {
     "method": "Reliability analysis",
-    "statistics": [
-      {
-        "name": "unstandardized alpha",
-        "symbol": "α",
-        "subscript": "Σ",
-        "value": 0.581637
-      },
-      {
-        "name": "standardized alpha",
-        "symbol": "α",
-        "subscript": "R",
-        "value": 0.581485
-      },
-      {
-        "name": "Guttman's Lambda 6 reliability",
-        "symbol": "Guttman's λ",
-        "subscript": "6",
-        "value": 0.617879
-      },
-      {
-        "name": "mean interitem correlation",
-        "symbol": "IIC",
-        "subscript": "M",
-        "value": 0.147975
-      },
-      {
-        "name": "signal-to-noise ratio",
-        "symbol": "S/N",
-        "value": 1.389398
-      },
-      {
-        "name": "median interitem correlation",
-        "symbol": "IIC",
-        "subscript": "Mdn",
-        "value": 0.051061
-      }
-    ],
     "groups": [
+      {
+        "name": "Reliability analysis",
+        "statistics": [
+          {
+            "name": "unstandardized alpha",
+            "symbol": "α",
+            "subscript": "Σ",
+            "value": 0.581637
+          },
+          {
+            "name": "standardized alpha",
+            "symbol": "α",
+            "subscript": "R",
+            "value": 0.581485
+          },
+          {
+            "name": "Guttman's Lambda 6 reliability",
+            "symbol": "Guttman's λ",
+            "subscript": "6",
+            "value": 0.617879
+          },
+          {
+            "name": "mean interitem correlation",
+            "symbol": "IIC",
+            "subscript": "M",
+            "value": 0.147975
+          },
+          {
+            "name": "signal-to-noise ratio",
+            "symbol": "S/N",
+            "value": 1.389398
+          },
+          {
+            "name": "median interitem correlation",
+            "symbol": "IIC",
+            "subscript": "Mdn",
+            "value": 0.051061
+          }
+        ]
+      },
       {
         "name": "95% confidence boundaries",
         "groups": [
@@ -1600,64 +1612,67 @@
     ],
     "package": {
       "name": "psych",
-      "version": "2.2.3"
+      "version": "2.2.9"
     }
   },
   "alpha_two_f_check": {
     "method": "Reliability analysis",
-    "statistics": [
-      {
-        "name": "unstandardized alpha",
-        "symbol": "α",
-        "subscript": "Σ",
-        "value": 0.581637
-      },
-      {
-        "name": "standardized alpha",
-        "symbol": "α",
-        "subscript": "R",
-        "value": 0.581485
-      },
-      {
-        "name": "Guttman's Lambda 6 reliability",
-        "symbol": "Guttman's λ",
-        "subscript": "6",
-        "value": 0.617879
-      },
-      {
-        "name": "mean interitem correlation",
-        "symbol": "IIC",
-        "subscript": "M",
-        "value": 0.147975
-      },
-      {
-        "name": "signal-to-noise ratio",
-        "symbol": "S/N",
-        "value": 1.389398
-      },
-      {
-        "name": "standard error",
-        "symbol": "SE",
-        "value": 0.028804
-      },
-      {
-        "name": "mean",
-        "symbol": "M",
-        "value": 0.071793
-      },
-      {
-        "name": "standard deviation",
-        "symbol": "SD",
-        "value": 0.505845
-      },
-      {
-        "name": "median interitem correlation",
-        "symbol": "IIC",
-        "subscript": "Mdn",
-        "value": 0.051061
-      }
-    ],
     "groups": [
+      {
+        "name": "Reliability analysis",
+        "statistics": [
+          {
+            "name": "unstandardized alpha",
+            "symbol": "α",
+            "subscript": "Σ",
+            "value": 0.581637
+          },
+          {
+            "name": "standardized alpha",
+            "symbol": "α",
+            "subscript": "R",
+            "value": 0.581485
+          },
+          {
+            "name": "Guttman's Lambda 6 reliability",
+            "symbol": "Guttman's λ",
+            "subscript": "6",
+            "value": 0.617879
+          },
+          {
+            "name": "mean interitem correlation",
+            "symbol": "IIC",
+            "subscript": "M",
+            "value": 0.147975
+          },
+          {
+            "name": "signal-to-noise ratio",
+            "symbol": "S/N",
+            "value": 1.389398
+          },
+          {
+            "name": "standard error",
+            "symbol": "SE",
+            "value": 0.028804
+          },
+          {
+            "name": "mean",
+            "symbol": "M",
+            "value": 0.071793
+          },
+          {
+            "name": "standard deviation",
+            "symbol": "SD",
+            "value": 0.505845
+          },
+          {
+            "name": "median interitem correlation",
+            "symbol": "IIC",
+            "subscript": "Mdn",
+            "value": 0.051061
+          }
+        ]
+      },
       {
         "name": "95% confidence boundaries",
         "groups": [
@@ -2182,64 +2197,67 @@
     ],
     "package": {
       "name": "psych",
-      "version": "2.2.3"
+      "version": "2.2.9"
     }
   },
   "alpha_a4": {
     "method": "Reliability analysis",
-    "statistics": [
-      {
-        "name": "unstandardized alpha",
-        "symbol": "α",
-        "subscript": "Σ",
-        "value": 0.727225
-      },
-      {
-        "name": "standardized alpha",
-        "symbol": "α",
-        "subscript": "R",
-        "value": 0.728544
-      },
-      {
-        "name": "Guttman's Lambda 6 reliability",
-        "symbol": "Guttman's λ",
-        "subscript": "6",
-        "value": 0.679466
-      },
-      {
-        "name": "mean interitem correlation",
-        "symbol": "IIC",
-        "subscript": "M",
-        "value": 0.401542
-      },
-      {
-        "name": "signal-to-noise ratio",
-        "symbol": "S/N",
-        "value": 2.68384
-      },
-      {
-        "name": "standard error",
-        "symbol": "SE",
-        "value": 0.019994
-      },
-      {
-        "name": "mean",
-        "symbol": "M",
-        "value": -0.0125
-      },
-      {
-        "name": "standard deviation",
-        "symbol": "SD",
-        "value": 0.755553
-      },
-      {
-        "name": "median interitem correlation",
-        "symbol": "IIC",
-        "subscript": "Mdn",
-        "value": 0.400449
-      }
-    ],
     "groups": [
+      {
+        "name": "Reliability analysis",
+        "statistics": [
+          {
+            "name": "unstandardized alpha",
+            "symbol": "α",
+            "subscript": "Σ",
+            "value": 0.727225
+          },
+          {
+            "name": "standardized alpha",
+            "symbol": "α",
+            "subscript": "R",
+            "value": 0.728544
+          },
+          {
+            "name": "Guttman's Lambda 6 reliability",
+            "symbol": "Guttman's λ",
+            "subscript": "6",
+            "value": 0.679466
+          },
+          {
+            "name": "mean interitem correlation",
+            "symbol": "IIC",
+            "subscript": "M",
+            "value": 0.401542
+          },
+          {
+            "name": "signal-to-noise ratio",
+            "symbol": "S/N",
+            "value": 2.68384
+          },
+          {
+            "name": "standard error",
+            "symbol": "SE",
+            "value": 0.019994
+          },
+          {
+            "name": "mean",
+            "symbol": "M",
+            "value": -0.0125
+          },
+          {
+            "name": "standard deviation",
+            "symbol": "SD",
+            "value": 0.755553
+          },
+          {
+            "name": "median interitem correlation",
+            "symbol": "IIC",
+            "subscript": "Mdn",
+            "value": 0.400449
+          }
+        ]
+      },
       {
         "name": "95% confidence boundaries",
         "groups": [
@@ -2544,7 +2562,4253 @@
     ],
     "package": {
       "name": "psych",
-      "version": "2.2.3"
+      "version": "2.2.9"
+    }
+  },
+  "ct": {
+    "method": "Correlation",
+    "groups": [
+      {
+        "name": "Pairs (unadjusted)",
+        "groups": [
+          {
+            "names": [
+              {
+                "name": "rating"
+              },
+              {
+                "name": "complaints"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.825418,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.662013,
+                "upper": 0.913914
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.106685
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 7.736978
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 4.174133e-07
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "rating"
+              },
+              {
+                "name": "privileges"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.426117,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.07779,
+                "upper": 0.681729
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.170966
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 2.492404
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.18877
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "rating"
+              },
+              {
+                "name": "learning"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.623678,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.339748,
+                "upper": 0.803424
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.147724
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 4.221919
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.004161
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "rating"
+              },
+              {
+                "name": "raises"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.590139,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.291939,
+                "upper": 0.783771
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.152566
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 3.868098
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.009565
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "rating"
+              },
+              {
+                "name": "critical"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.156439,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.216004,
+                "upper": 0.48914
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.186655
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 0.838117
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "rating"
+              },
+              {
+                "name": "advance"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.155086,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.217326,
+                "upper": 0.488085
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.186696
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 0.83069
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "complaints"
+              },
+              {
+                "name": "privileges"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.558288,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.247875,
+                "upper": 0.764742
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.156789
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 3.560771
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.018837
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "complaints"
+              },
+              {
+                "name": "learning"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.596736,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.301226,
+                "upper": 0.787668
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.151646
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 3.935045
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.0085
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "complaints"
+              },
+              {
+                "name": "raises"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.669197,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.407069,
+                "upper": 0.829485
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.14043
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 4.765353
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.001054
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "complaints"
+              },
+              {
+                "name": "critical"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.187714,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.185071,
+                "upper": 0.513272
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.185623
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 1.011267
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "complaints"
+              },
+              {
+                "name": "advance"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.22458,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.147635,
+                "upper": 0.541071
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.184155
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 1.219515
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "privileges"
+              },
+              {
+                "name": "learning"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.493331,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.161823,
+                "upper": 0.724783
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.164385
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 3.001077
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.067229
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "privileges"
+              },
+              {
+                "name": "raises"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.445478,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.101498,
+                "upper": 0.694315
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.169194
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 2.632935
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.149859
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "privileges"
+              },
+              {
+                "name": "critical"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.147233,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.224969,
+                "upper": 0.481939
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.186923
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 0.787669
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "privileges"
+              },
+              {
+                "name": "advance"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.343293,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.019372,
+                "upper": 0.626125
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.177497
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 1.934075
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.506153
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "learning"
+              },
+              {
+                "name": "raises"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.640314,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.364019,
+                "upper": 0.813029
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.14516
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 4.411103
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.002629
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "learning"
+              },
+              {
+                "name": "critical"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.115965,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.254956,
+                "upper": 0.457136
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.187707
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 0.617799
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "learning"
+              },
+              {
+                "name": "advance"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.53162,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.211943,
+                "upper": 0.748527
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.160065
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 3.321279
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.032507
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "raises"
+              },
+              {
+                "name": "critical"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.376883,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.019224,
+                "upper": 0.649028
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.175047
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 2.15304
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.36069
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "raises"
+              },
+              {
+                "name": "advance"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.574186,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.269709,
+                "upper": 0.774285
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.154724
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 3.711024
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.013602
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "critical"
+              },
+              {
+                "name": "advance"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.283343,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.085671,
+                "upper": 0.583998
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.181237
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 1.563381
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.904373
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Pairs (adjusted)",
+        "groups": [
+          {
+            "names": [
+              {
+                "name": "rating"
+              },
+              {
+                "name": "complaints"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.825418,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.529108,
+                "upper": 0.942308
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.106685
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 7.736978
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 4.174133e-07
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "rating"
+              },
+              {
+                "name": "privileges"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.426117,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.084867,
+                "upper": 0.759637
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.170966
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 2.492404
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.18877
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "rating"
+              },
+              {
+                "name": "learning"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.623678,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.154086,
+                "upper": 0.863433
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.147724
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 4.221919
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.004161
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "rating"
+              },
+              {
+                "name": "raises"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.590139,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.108726,
+                "upper": 0.847328
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.152566
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 3.868098
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.009565
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "rating"
+              },
+              {
+                "name": "critical"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.156439,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.312171,
+                "upper": 0.563821
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.186655
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 0.838117
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "rating"
+              },
+              {
+                "name": "advance"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.155086,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.29531,
+                "upper": 0.549084
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.186696
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 0.83069
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "complaints"
+              },
+              {
+                "name": "privileges"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.558288,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.069484,
+                "upper": 0.830917
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.156789
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 3.560771
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.018837
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "complaints"
+              },
+              {
+                "name": "learning"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.596736,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.115236,
+                "upper": 0.851167
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.151646
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 3.935045
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.0085
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "complaints"
+              },
+              {
+                "name": "raises"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.669197,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.223603,
+                "upper": 0.883419
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.14043
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 4.765353
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.001054
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "complaints"
+              },
+              {
+                "name": "critical"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.187714,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.296567,
+                "upper": 0.595203
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.185623
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 1.011267
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "complaints"
+              },
+              {
+                "name": "advance"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.22458,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.272219,
+                "upper": 0.626848
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.184155
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 1.219515
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "privileges"
+              },
+              {
+                "name": "learning"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.493331,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.010966,
+                "upper": 0.797561
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.164385
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 3.001077
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.067229
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "privileges"
+              },
+              {
+                "name": "raises"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.445478,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.066951,
+                "upper": 0.771952
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.169194
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 2.632935
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.149859
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "privileges"
+              },
+              {
+                "name": "critical"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.147233,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.275723,
+                "upper": 0.522425
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.186923
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 0.787669
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "privileges"
+              },
+              {
+                "name": "advance"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.343293,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.166834,
+                "upper": 0.708443
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.177497
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 1.934075
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.506153
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "learning"
+              },
+              {
+                "name": "raises"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.640314,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.177943,
+                "upper": 0.871084
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.14516
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 4.411103
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.002629
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "learning"
+              },
+              {
+                "name": "critical"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.115965,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.254956,
+                "upper": 0.457136
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.187707
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 0.617799
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "learning"
+              },
+              {
+                "name": "advance"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.53162,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.036105,
+                "upper": 0.817316
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.160065
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 3.321279
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.032507
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "raises"
+              },
+              {
+                "name": "critical"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.376883,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.136372,
+                "upper": 0.730627
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.175047
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 2.15304
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.36069
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "raises"
+              },
+              {
+                "name": "advance"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.574186,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.088633,
+                "upper": 0.839248
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.154724
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 3.711024
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.013602
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "critical"
+              },
+              {
+                "name": "advance"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.283343,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.222608,
+                "upper": 0.669052
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.181237
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 1.563381
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.904373
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "adjust": "holm",
+    "package": {
+      "name": "psych",
+      "version": "2.2.9"
+    }
+  },
+  "cts": {
+    "method": "Correlation",
+    "groups": [
+      {
+        "name": "Pairs (unadjusted)",
+        "groups": [
+          {
+            "names": [
+              {
+                "name": "rating"
+              },
+              {
+                "name": "learning"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.623678,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.339748,
+                "upper": 0.803424
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.147724
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 4.221919
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.000231
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "complaints"
+              },
+              {
+                "name": "learning"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.596736,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.301226,
+                "upper": 0.787668
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.151646
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 3.935045
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.0005
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "privileges"
+              },
+              {
+                "name": "learning"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.493331,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.161823,
+                "upper": 0.724783
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.164385
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 3.001077
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.005602
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "rating"
+              },
+              {
+                "name": "raises"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.590139,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.291939,
+                "upper": 0.783771
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.152566
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 3.868098
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.000598
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "complaints"
+              },
+              {
+                "name": "raises"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.669197,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.407069,
+                "upper": 0.829485
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.14043
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 4.765353
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.000053
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "privileges"
+              },
+              {
+                "name": "raises"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.445478,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.101498,
+                "upper": 0.694315
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.169194
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 2.632935
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.013624
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "rating"
+              },
+              {
+                "name": "critical"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.156439,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.216004,
+                "upper": 0.48914
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.186655
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 0.838117
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.409063
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "complaints"
+              },
+              {
+                "name": "critical"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.187714,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.185071,
+                "upper": 0.513272
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.185623
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 1.011267
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.320548
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "privileges"
+              },
+              {
+                "name": "critical"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.147233,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.224969,
+                "upper": 0.481939
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.186923
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 0.787669
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.437508
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Pairs (adjusted)",
+        "groups": [
+          {
+            "names": [
+              {
+                "name": "rating"
+              },
+              {
+                "name": "learning"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.623678,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.201958,
+                "upper": 0.850299
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.147724
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 4.221919
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.001849
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "complaints"
+              },
+              {
+                "name": "learning"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.596736,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.168722,
+                "upper": 0.835407
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.151646
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 3.935045
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.0035
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "privileges"
+              },
+              {
+                "name": "learning"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.493331,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.044705,
+                "upper": 0.776372
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.164385
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 3.001077
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.028012
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "rating"
+              },
+              {
+                "name": "raises"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.590139,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.168523,
+                "upper": 0.829213
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.152566
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 3.868098
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.003587
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "complaints"
+              },
+              {
+                "name": "raises"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.669197,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.268864,
+                "upper": 0.872376
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.14043
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 4.765353
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.000474
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "privileges"
+              },
+              {
+                "name": "raises"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.445478,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.001639,
+                "upper": 0.744156
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.169194
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 2.632935
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.054494
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "rating"
+              },
+              {
+                "name": "critical"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.156439,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.266994,
+                "upper": 0.529243
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.186655
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 0.838117
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.961644
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "complaints"
+              },
+              {
+                "name": "critical"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.187714,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.264327,
+                "upper": 0.572133
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.185623
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 1.011267
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.961644
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "privileges"
+              },
+              {
+                "name": "critical"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 30
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.147233,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.224969,
+                "upper": 0.481939
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.186923
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 0.787669
+              },
+              {
+                "name": "df",
+                "value": 28
+              },
+              {
+                "name": "p",
+                "value": 0.961644
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "adjust": "holm",
+    "package": {
+      "name": "psych",
+      "version": "2.2.9"
+    }
+  },
+  "sats": {
+    "method": "Correlation",
+    "groups": [
+      {
+        "name": "Pairs (unadjusted)",
+        "groups": [
+          {
+            "names": [
+              {
+                "name": "gender"
+              },
+              {
+                "name": "ACT"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 700
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": -0.036503,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.110308,
+                "upper": 0.037701
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.037825
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": -0.965053
+              },
+              {
+                "name": "df",
+                "value": 698
+              },
+              {
+                "name": "p",
+                "value": 0.334853
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "education"
+              },
+              {
+                "name": "ACT"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 700
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.154829,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.081663,
+                "upper": 0.226335
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.037394
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 4.14046
+              },
+              {
+                "name": "df",
+                "value": 698
+              },
+              {
+                "name": "p",
+                "value": 0.000039
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "age"
+              },
+              {
+                "name": "ACT"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 700
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.110546,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.036744,
+                "upper": 0.183149
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.037619
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 2.938611
+              },
+              {
+                "name": "df",
+                "value": 698
+              },
+              {
+                "name": "p",
+                "value": 0.003406
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "gender"
+              },
+              {
+                "name": "SATV"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 700
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": -0.018843,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.092817,
+                "upper": 0.055337
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.037844
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": -0.497925
+              },
+              {
+                "name": "df",
+                "value": 698
+              },
+              {
+                "name": "p",
+                "value": 0.618694
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "education"
+              },
+              {
+                "name": "SATV"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 700
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.046477,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.027721,
+                "upper": 0.120166
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.03781
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 1.229234
+              },
+              {
+                "name": "df",
+                "value": 698
+              },
+              {
+                "name": "p",
+                "value": 0.219398
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "age"
+              },
+              {
+                "name": "SATV"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 700
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": -0.042354,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.116092,
+                "upper": 0.031849
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.037817
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": -1.119983
+              },
+              {
+                "name": "df",
+                "value": 698
+              },
+              {
+                "name": "p",
+                "value": 0.263106
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "gender"
+              },
+              {
+                "name": "SATQ"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 687
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": -0.165303,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.237172,
+                "upper": -0.091635
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.037682
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": -4.386752
+              },
+              {
+                "name": "df",
+                "value": 685
+              },
+              {
+                "name": "p",
+                "value": 0.000013
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "education"
+              },
+              {
+                "name": "SATQ"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 687
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.034626,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.04028,
+                "upper": 0.109144
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.038185
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 0.906785
+              },
+              {
+                "name": "df",
+                "value": 685
+              },
+              {
+                "name": "p",
+                "value": 0.364839
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "age"
+              },
+              {
+                "name": "SATQ"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 687
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": -0.033944,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.10847,
+                "upper": 0.040961
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.038186
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": -0.88892
+              },
+              {
+                "name": "df",
+                "value": 685
+              },
+              {
+                "name": "p",
+                "value": 0.374358
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "adjust": "none",
+    "package": {
+      "name": "psych",
+      "version": "2.2.9"
+    }
+  },
+  "sats_no_ci": {
+    "method": "Correlation",
+    "groups": [
+      {
+        "name": "Pairs (unadjusted)",
+        "groups": [
+          {
+            "names": [
+              {
+                "name": "gender"
+              },
+              {
+                "name": "ACT"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 700
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": -0.036503
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.037825
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": -0.965053
+              },
+              {
+                "name": "df",
+                "value": 698
+              },
+              {
+                "name": "p",
+                "value": 0.334853
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "education"
+              },
+              {
+                "name": "ACT"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 700
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.154829
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.037394
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 4.14046
+              },
+              {
+                "name": "df",
+                "value": 698
+              },
+              {
+                "name": "p",
+                "value": 0.000039
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "age"
+              },
+              {
+                "name": "ACT"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 700
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.110546
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.037619
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 2.938611
+              },
+              {
+                "name": "df",
+                "value": 698
+              },
+              {
+                "name": "p",
+                "value": 0.003406
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "gender"
+              },
+              {
+                "name": "SATV"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 700
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": -0.018843
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.037844
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": -0.497925
+              },
+              {
+                "name": "df",
+                "value": 698
+              },
+              {
+                "name": "p",
+                "value": 0.618694
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "education"
+              },
+              {
+                "name": "SATV"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 700
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.046477
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.03781
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 1.229234
+              },
+              {
+                "name": "df",
+                "value": 698
+              },
+              {
+                "name": "p",
+                "value": 0.219398
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "age"
+              },
+              {
+                "name": "SATV"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 700
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": -0.042354
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.037817
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": -1.119983
+              },
+              {
+                "name": "df",
+                "value": 698
+              },
+              {
+                "name": "p",
+                "value": 0.263106
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "gender"
+              },
+              {
+                "name": "SATQ"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 687
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": -0.165303
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.037682
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": -4.386752
+              },
+              {
+                "name": "df",
+                "value": 685
+              },
+              {
+                "name": "p",
+                "value": 0.000013
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "education"
+              },
+              {
+                "name": "SATQ"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 687
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.034626
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.038185
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 0.906785
+              },
+              {
+                "name": "df",
+                "value": 685
+              },
+              {
+                "name": "p",
+                "value": 0.364839
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "age"
+              },
+              {
+                "name": "SATQ"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 687
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": -0.033944
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.038186
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": -0.88892
+              },
+              {
+                "name": "df",
+                "value": 685
+              },
+              {
+                "name": "p",
+                "value": 0.374358
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "adjust": "none",
+    "package": {
+      "name": "psych",
+      "version": "2.2.9"
+    }
+  },
+  "sats_alpha": {
+    "method": "Correlation",
+    "groups": [
+      {
+        "name": "Pairs (unadjusted)",
+        "groups": [
+          {
+            "names": [
+              {
+                "name": "gender"
+              },
+              {
+                "name": "ACT"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 700
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": -0.036503,
+                "interval": "CI",
+                "level": 0.9,
+                "lower": -0.098502,
+                "upper": 0.025778
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.037825
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": -0.965053
+              },
+              {
+                "name": "df",
+                "value": 698
+              },
+              {
+                "name": "p",
+                "value": 0.334853
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "education"
+              },
+              {
+                "name": "ACT"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 700
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.154829,
+                "interval": "CI",
+                "level": 0.9,
+                "lower": 0.093507,
+                "upper": 0.214981
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.037394
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 4.14046
+              },
+              {
+                "name": "df",
+                "value": 698
+              },
+              {
+                "name": "p",
+                "value": 0.000039
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "age"
+              },
+              {
+                "name": "ACT"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 700
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.110546,
+                "interval": "CI",
+                "level": 0.9,
+                "lower": 0.048658,
+                "upper": 0.171589
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.037619
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 2.938611
+              },
+              {
+                "name": "df",
+                "value": 698
+              },
+              {
+                "name": "p",
+                "value": 0.003406
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "gender"
+              },
+              {
+                "name": "SATV"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 700
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": -0.018843,
+                "interval": "CI",
+                "level": 0.9,
+                "lower": -0.080971,
+                "upper": 0.04343
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.037844
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": -0.497925
+              },
+              {
+                "name": "df",
+                "value": 698
+              },
+              {
+                "name": "p",
+                "value": 0.618694
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "education"
+              },
+              {
+                "name": "SATV"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 700
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.046477,
+                "interval": "CI",
+                "level": 0.9,
+                "lower": -0.015792,
+                "upper": 0.108386
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.03781
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 1.229234
+              },
+              {
+                "name": "df",
+                "value": 698
+              },
+              {
+                "name": "p",
+                "value": 0.219398
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "age"
+              },
+              {
+                "name": "SATV"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 700
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": -0.042354,
+                "interval": "CI",
+                "level": 0.9,
+                "lower": -0.104302,
+                "upper": 0.019921
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.037817
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": -1.119983
+              },
+              {
+                "name": "df",
+                "value": 698
+              },
+              {
+                "name": "p",
+                "value": 0.263106
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "gender"
+              },
+              {
+                "name": "SATQ"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 687
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": -0.165303,
+                "interval": "CI",
+                "level": 0.9,
+                "lower": -0.225769,
+                "upper": -0.103569
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.037682
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": -4.386752
+              },
+              {
+                "name": "df",
+                "value": 685
+              },
+              {
+                "name": "p",
+                "value": 0.000013
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "education"
+              },
+              {
+                "name": "SATQ"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 687
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": 0.034626,
+                "interval": "CI",
+                "level": 0.9,
+                "lower": -0.028245,
+                "upper": 0.097224
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.038185
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": 0.906785
+              },
+              {
+                "name": "df",
+                "value": 685
+              },
+              {
+                "name": "p",
+                "value": 0.364839
+              }
+            ]
+          },
+          {
+            "names": [
+              {
+                "name": "age"
+              },
+              {
+                "name": "SATQ"
+              }
+            ],
+            "statistics": [
+              {
+                "name": "n",
+                "value": 687
+              },
+              {
+                "name": "estimate",
+                "symbol": "r",
+                "value": -0.033944,
+                "interval": "CI",
+                "level": 0.9,
+                "lower": -0.096548,
+                "upper": 0.028927
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.038186
+              },
+              {
+                "name": "statistic",
+                "symbol": "t",
+                "value": -0.88892
+              },
+              {
+                "name": "df",
+                "value": 685
+              },
+              {
+                "name": "p",
+                "value": 0.374358
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "adjust": "none",
+    "package": {
+      "name": "psych",
+      "version": "2.2.9"
+    }
+  },
+  "mardia_attitude": {
+    "method": "Mardia's test",
+    "groups": [
+      {
+        "name": "Skew",
+        "statistics": [
+          {
+            "name": "number of observations",
+            "symbol": "n",
+            "value": 30
+          },
+          {
+            "name": "number of variables",
+            "symbol": "k",
+            "value": 7
+          },
+          {
+            "name": "estimate",
+            "symbol": "b",
+            "subscript": "1, p",
+            "value": 20.089318
+          },
+          {
+            "name": "skew",
+            "value": 100.44659
+          },
+          {
+            "name": "p",
+            "value": 0.106551
+          }
+        ]
+      },
+      {
+        "name": "Small sample skew",
+        "statistics": [
+          {
+            "name": "number of observations",
+            "symbol": "n",
+            "value": 30
+          },
+          {
+            "name": "number of variables",
+            "symbol": "k",
+            "value": 7
+          },
+          {
+            "name": "estimate",
+            "symbol": "b",
+            "subscript": "1, p",
+            "value": 20.089318
+          },
+          {
+            "name": "skew",
+            "value": 113.230702
+          },
+          {
+            "name": "p",
+            "value": 0.018461
+          }
+        ]
+      },
+      {
+        "name": "kurtosis",
+        "statistics": [
+          {
+            "name": "estimate",
+            "symbol": "b",
+            "subscript": "2, p",
+            "value": 61.910545
+          },
+          {
+            "name": "kurtosis",
+            "value": -0.2658
+          },
+          {
+            "name": "p",
+            "value": 0.790393
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "psych",
+      "version": "2.2.9"
+    }
+  },
+  "mardia_x": {
+    "method": "Mardia's test",
+    "groups": [
+      {
+        "name": "Skew",
+        "statistics": [
+          {
+            "name": "number of observations",
+            "symbol": "n",
+            "value": 100
+          },
+          {
+            "name": "number of variables",
+            "symbol": "k",
+            "value": 10
+          },
+          {
+            "name": "estimate",
+            "symbol": "b",
+            "subscript": "1, p",
+            "value": 10.929444
+          },
+          {
+            "name": "skew",
+            "value": 182.157407
+          },
+          {
+            "name": "p",
+            "value": 0.970423
+          }
+        ]
+      },
+      {
+        "name": "Small sample skew",
+        "statistics": [
+          {
+            "name": "number of observations",
+            "symbol": "n",
+            "value": 100
+          },
+          {
+            "name": "number of variables",
+            "symbol": "k",
+            "value": 10
+          },
+          {
+            "name": "estimate",
+            "symbol": "b",
+            "subscript": "1, p",
+            "value": 10.929444
+          },
+          {
+            "name": "skew",
+            "value": 188.640891
+          },
+          {
+            "name": "p",
+            "value": 0.938268
+          }
+        ]
+      },
+      {
+        "name": "kurtosis",
+        "statistics": [
+          {
+            "name": "estimate",
+            "symbol": "b",
+            "subscript": "2, p",
+            "value": 115.253624
+          },
+          {
+            "name": "kurtosis",
+            "value": -1.531886
+          },
+          {
+            "name": "p",
+            "value": 0.125551
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "psych",
+      "version": "2.2.9"
+    }
+  },
+  "icc": {
+    "method": "Intraclass Correlations",
+    "groups": [
+      {
+        "name": "Intraclass correlation coefficients",
+        "groups": [
+          {
+            "name": "Single_raters_absolute",
+            "type": "ICC1",
+            "statistics": [
+              {
+                "name": "Number of subjects",
+                "symbol": "n",
+                "value": 6
+              },
+              {
+                "name": "Number of judges",
+                "symbol": "k",
+                "value": 4
+              },
+              {
+                "name": "ICC",
+                "value": 0.165742,
+                "interval": "CI",
+                "level": 0.8,
+                "lower": -0.047857,
+                "upper": 0.544102
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 1.794678
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 5
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 18
+              },
+              {
+                "name": "p",
+                "value": 0.164769
+              }
+            ]
+          },
+          {
+            "name": "Single_random_raters",
+            "type": "ICC2",
+            "statistics": [
+              {
+                "name": "Number of subjects",
+                "symbol": "n",
+                "value": 6
+              },
+              {
+                "name": "Number of judges",
+                "symbol": "k",
+                "value": 4
+              },
+              {
+                "name": "ICC",
+                "value": 0.289764,
+                "interval": "CI",
+                "level": 0.8,
+                "lower": 0.078846,
+                "upper": 0.602257
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 11.027248
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 5
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 15
+              },
+              {
+                "name": "p",
+                "value": 0.000135
+              }
+            ]
+          },
+          {
+            "name": "Single_fixed_raters",
+            "type": "ICC3",
+            "statistics": [
+              {
+                "name": "Number of subjects",
+                "symbol": "n",
+                "value": 6
+              },
+              {
+                "name": "Number of judges",
+                "symbol": "k",
+                "value": 4
+              },
+              {
+                "name": "ICC",
+                "value": 0.714841,
+                "interval": "CI",
+                "level": 0.8,
+                "lower": 0.490534,
+                "upper": 0.896658
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 11.027248
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 5
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 15
+              },
+              {
+                "name": "p",
+                "value": 0.000135
+              }
+            ]
+          },
+          {
+            "name": "Average_raters_absolute",
+            "type": "ICC1k",
+            "statistics": [
+              {
+                "name": "Number of subjects",
+                "symbol": "n",
+                "value": 6
+              },
+              {
+                "name": "Number of judges",
+                "symbol": "k",
+                "value": 4
+              },
+              {
+                "name": "ICC",
+                "value": 0.442797,
+                "interval": "CI",
+                "level": 0.8,
+                "lower": -0.223521,
+                "upper": 0.826807
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 1.794678
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 5
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 18
+              },
+              {
+                "name": "p",
+                "value": 0.164769
+              }
+            ]
+          },
+          {
+            "name": "Average_random_raters",
+            "type": "ICC2k",
+            "statistics": [
+              {
+                "name": "Number of subjects",
+                "symbol": "n",
+                "value": 6
+              },
+              {
+                "name": "Number of judges",
+                "symbol": "k",
+                "value": 4
+              },
+              {
+                "name": "ICC",
+                "value": 0.620051,
+                "interval": "CI",
+                "level": 0.8,
+                "lower": 0.255054,
+                "upper": 0.858292
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 11.027248
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 5
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 15
+              },
+              {
+                "name": "p",
+                "value": 0.000135
+              }
+            ]
+          },
+          {
+            "name": "Average_fixed_raters",
+            "type": "ICC3k",
+            "statistics": [
+              {
+                "name": "Number of subjects",
+                "symbol": "n",
+                "value": 6
+              },
+              {
+                "name": "Number of judges",
+                "symbol": "k",
+                "value": 4
+              },
+              {
+                "name": "ICC",
+                "value": 0.909316,
+                "interval": "CI",
+                "level": 0.8,
+                "lower": 0.793872,
+                "upper": 0.971994
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 11.027248
+              },
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 5
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 15
+              },
+              {
+                "name": "p",
+                "value": 0.000135
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "psych",
+      "version": "2.2.9"
     }
   }
 }
