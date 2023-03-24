@@ -1,123 +1,296 @@
 # Todo --------------------------------------------------------------------
 
-# - Add support for groups
-# - Add support for intercepts
-# - Add support for Defined Parameters
-# - Add support for fitted values
-# - Add support for residuals
+# - cfa(): added intercepts, groups, measurement invariance, EFA
+# - sem(): added defined parameter (mediation), multilevel, ESEM
+# - Added growth() for latent growth curve models
+# - lavTestLRT() for measurement invariance returns an object with fit
+#   statistics
+# - fitted values and residuals need the fit instead of summary object,
+# but maybe not relevant for tidystats
+
+# fitted covariance matrix (maybe not needed for tidystats)
+# fitted.values(fit_cfa)
+# unstandardized residual (maybe not needed for tidystats)
+# resid(fit_cfa)
 
 # Setup -------------------------------------------------------------------
 
-# Load packages
-library(tidyverse)
-library(tidystats)
 library(lavaan)
 
-# Create an empty list
-results <- list()
+statistics <- list()
 
-# cfa ---------------------------------------------------------------------
+# cfa() -------------------------------------------------------------------
 
-HS.model <- "visual  =~ x1 + x2 + x3
-             textual =~ x4 + x5 + x6
-             speed   =~ x7 + x8 + x9"
+HS_model <- "
+    visual  =~ x1 + x2 + x3
+    textual =~ x4 + x5 + x6
+    speed   =~ x7 + x8 + x9
+"
 
-fit <- cfa(HS.model, data = HolzingerSwineford1939)
-summary(fit)
-summary(fit, fit.measures = TRUE)
+cfa <- cfa(HS_model, data = HolzingerSwineford1939)
 
-temp <- tidy_stats(fit)
-temp <- tidy_stats(fit, args = list(fit.measures = FALSE))
+HS_model_intercepts <- "
+    # three-factor model
+    visual  =~ x1 + x2 + x3
+    textual =~ x4 + x5 + x6
+    speed   =~ x7 + x8 + x9
+    # intercepts
+    x1 ~ 1
+    x2 ~ 1
+    x3 ~ 1
+    x4 ~ 1
+    x5 ~ 1
+    x6 ~ 1
+    x7 ~ 1
+    x8 ~ 1
+    x9 ~ 1
+"
 
-HS.model <- "# three-factor model
-               visual  =~ x1 + x2 + x3
-               textual =~ x4 + x5 + x6
-               speed   =~ x7 + x8 + x9
-             # intercepts
-               x1 ~ 1
-               x2 ~ 1
-               x3 ~ 1
-               x4 ~ 1
-               x5 ~ 1
-               x6 ~ 1
-               x7 ~ 1
-               x8 ~ 1
-               x9 ~ 1"
-
-fit_intercepts <- cfa(HS.model,
+cfa_intercepts <- cfa(
+  HS_model_intercepts,
   data = HolzingerSwineford1939,
   meanstructure = TRUE
 )
-summary(fit_intercepts)
 
-HS.model <- " visual  =~ x1 + x2 + x3
-              textual =~ x4 + x5 + x6
-              speed   =~ x7 + x8 + x9 "
+efa_model <- '
+    efa("efa")*f1 +
+    efa("efa")*f2 +
+    efa("efa")*f3 =~ x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9
+'
 
-fit_groups <- cfa(HS.model, data = HolzingerSwineford1939, group = "school")
-summary(fit_groups)
+cfa_efa <- cfa(efa_model, data = HolzingerSwineford1939)
 
+# multiple groups
+fit_groups <- cfa(
+  HS.model,
+  data = HolzingerSwineford1939,
+  group = "school"
+)
+summary_groups <- summary(
+  fit_groups,
+  fit.measures = TRUE
+)
+
+# measurement invariance
+# configural invariance
+fit1 <- cfa(
+  HS.model,
+  data = HolzingerSwineford1939,
+  group = "school"
+)
+# weak invariance
+fit2 <- cfa(
+  HS.model,
+  data = HolzingerSwineford1939,
+  group = "school",
+  group.equal = "loadings"
+)
+# strong invariance
+fit3 <- cfa(
+  HS.model,
+  data = HolzingerSwineford1939,
+  group = "school",
+  group.equal = c("intercepts", "loadings")
+)
+# model comparison tests (this contains fit statistics to compare models)
+# it already looks like summary$fit
+summary_invariance <- lavTestLRT(fit1, fit2, fit3)
+
+statistics <- statistics |>
+  add_stats(cfa)
+
+add_stats(statistics, cfa)
+
+add_stats(summary_intercepts) |>
+  add_stats(summary_efa) |>
+  add_stats(summary_invariance)
+
+summary(fit_cfa)
+
+
+summary(
+  fit_cfa,
+  standardized = TRUE,
+  fit.measures = TRUE
+)
+summary_intercepts <- summary(
+  fit_intercepts,
+  fit.measures = TRUE,
+  standardized = TRUE
+)
+
+summary_efa <- summary(
+  fit_efa,
+  standardized = TRUE,
+  fit.measures = TRUE
+)
 
 # SEM ---------------------------------------------------------------------
 
-model <- "# measurement model
-            ind60 =~ x1 + x2 + x3
-            dem60 =~ y1 + y2 + y3 + y4
-            dem65 =~ y5 + y6 + y7 + y8
-          # regressions
-            dem60 ~ ind60
-            dem65 ~ ind60 + dem60
-          # residual correlations
-            y1 ~~ y5
-            y2 ~~ y4 + y6
-            y3 ~~ y7
-            y4 ~~ y8
-            y6 ~~ y8"
+model <- "
+    # measurement model
+    ind60 =~ x1 + x2 + x3
+    dem60 =~ y1 + y2 + y3 + y4
+    dem65 =~ y5 + y6 + y7 + y8
+    # regressions
+    dem60 ~ ind60
+    dem65 ~ ind60 + dem60
+    # residual correlations
+    y1 ~~ y5
+    y2 ~~ y4 + y6
+    y3 ~~ y7
+    y4 ~~ y8
+    y6 ~~ y8
+"
 
-fit <- sem(model, data = PoliticalDemocracy)
-summary(fit, standardized = TRUE)
+fit_sem <- sem(
+  model,
+  data = PoliticalDemocracy
+)
+summary_sem <- summary(
+  fit_sem,
+  standardized = TRUE,
+  fit.measures = TRUE
+)
 
-temp <- tidy_stats(fit, args = list(standardized = TRUE))
-
+# mediation
 set.seed(1234)
 X <- rnorm(100)
 M <- 0.5 * X + rnorm(100)
 Y <- 0.7 * M + rnorm(100)
 Data <- data.frame(X = X, Y = Y, M = M)
-model <- " # direct effect
-             Y ~ c*X
-           # mediator
-             M ~ a*X
-             Y ~ b*M
-           # indirect effect (a*b)
-             ab := a*b
-           # total effect
-             total := c + (a*b)
-         "
-fit_defined_parameters <- sem(model, data = Data)
-summary(fit_defined_parameters)
+
+model.mediation <- "
+    # direct effect
+    Y ~ c*X
+    # mediator
+    M ~ a*X
+    Y ~ b*M
+    # indirect effect (a*b)
+    ab := a*b
+    # total effect
+    total := c + (a*b)
+"
+
+fit_defined_parameters <- sem(
+  model.mediation,
+  data = Data
+)
+summary_definied_parameters <- summary(fit_defined_parameters)
+
+# multilevel
+model.multilevel <- "
+    level: 1
+    fw =~ y1 + y2 + y3
+    fw ~ x1 + x2 + x3
+    level: 2
+    fb =~ y1 + y2 + y3
+    fb ~ w1 + w2
+"
+
+fit_multilevel <- sem(
+  model = model.multilevel,
+  data = Demo.twolevel,
+  cluster = "cluster"
+)
+summary_multilevel <- summary(
+  fit_multilevel,
+  standardized = TRUE,
+  fit.measures = TRUE
+)
+
+# exploratory SEM
+ex5_25 <- read.table("http://statmodel.com/usersguide/chap5/ex5.25.dat")
+names(ex5_25) <- paste0("y", 1:12)
+
+model.esem <- '
+    # efa block
+    efa("efa1")*f1 +
+    efa("efa1")*f2 =~ y1 + y2 + y3 + y4 + y5 + y6
+
+    # cfa block
+    f3 =~ y7 + y8 + y9
+    f4 =~ y10 + y11 + y12
+
+    # regressions
+    f3 ~ f1 + f2
+    f4 ~ f3
+'
+fit_esem <- sem(
+  model = model.esem,
+  data = ex5_25,
+  rotation = "geomin",
+  information = "observed",
+  rotation.args = list(
+    rstarts = 30,
+    row.weights = "none",
+    algorithm = "gpa",
+    std.ov = TRUE,
+    geomin.epsilon = 0.0001
+  )
+)
+summary_esem <- summary(
+  fit_esem,
+  standardized = TRUE,
+  fit.measures = TRUE
+)
+
+statistics <- statistics |>
+  add_stats(summary_sem) |>
+  add_stats(summary_definied_parameters) |>
+  add_stats(summary_multilevel) |>
+  add_stats(summary_esem)
+
+# growth() ----------------------------------------------------------------
+model.growth <- " i =~ 1*t1 + 1*t2 + 1*t3 + 1*t4
+           s =~ 0*t1 + 1*t2 + 2*t3 + 3*t4 "
+fit_growth <- growth(
+  model.growth,
+  data = Demo.growth
+)
+summary_growth <- summary(
+  fit,
+  fit.measures = TRUE,
+  standardized = TRUE
+)
+
+statistics <- statistics |>
+  add_stats(summary_growth)
 
 # lavaan ------------------------------------------------------------------
 
-# The Holzinger and Swineford (1939) example
-HS_model <- "visual  =~ x1 + x2 + x3
-             textual =~ x4 + x5 + x6
-             speed   =~ x7 + x8 + x9"
-
-fit <- lavaan(HS_model,
+fit_lavaan <- lavaan(
+  HS.model,
   data = HolzingerSwineford1939, auto.var = TRUE,
   auto.fix.first = TRUE, auto.cov.lv.x = TRUE
 )
-summary(fit)
-summary(fit, fit.measures = TRUE)
-summary(fit, standardized = TRUE)
-summary(fit, ci = TRUE)
-summary(fit, fit.measures = TRUE, standardized = TRUE, ci = TRUE)
 
-# Tidy stats
-x <- tidy_stats.lavaan(fit, args = list(fit.measures = TRUE))
-x <- tidy_stats.lavaan(fit, args = list(standardized = TRUE))
-x <- tidy_stats.lavaan(fit, args = list(ci = TRUE))
+summary_lavaan <- summary(
+  fit_lavaan,
+  standardized = TRUE,
+  fit.measures = TRUE
+)
 
-# Add stats
-results <- add_stats(results, fit, args = list(fit.measures = TRUE))
+statistics <- statistics |>
+  add_stats(summary_lavaan)
+
+# tidy_stats_to_data_frame() ----------------------------------------------
+
+df <- tidy_stats_to_data_frame(statistics)
+
+# write_stats() -----------------------------------------------------------
+
+write_test_stats(statistics, "tests/data/lavaan.json")
+
+# Cleanup -----------------------------------------------------------------
+
+rm(
+  statistics, summary_cfa, summary_intercepts, summary_efa,
+  summary_invariance, summary_sem, summary_definied_parameters,
+  summary_multilevel, summary_esem, summary_growth,
+  summary_lavaan, fit_cfa, fit_intercepts, fit_groups, fit_efa,
+  fit1, fit2, fit3, fit_sem, fit_defined_parameters, ex5_25,
+  fit_esem, fit_multilevel, fit_growth, fith_lavaan, HS.model,
+  HS.model.intercepts, efa.model, model, model.mediation,
+  model.multilevel, model.esem, model.growth, df
+)

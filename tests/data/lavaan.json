@@ -1,0 +1,502 @@
+{
+  "cfa": {
+    "method": "Confirmatory factor analysis",
+    "groups": [
+      {
+        "name": "Model Test User Model",
+        "statistics": [
+          {
+            "name": "n",
+            "value": 301
+          },
+          {
+            "name": "k",
+            "value": 21
+          },
+          {
+            "name": "statistic",
+            "symbol": "χ²",
+            "value": 85.305522
+          },
+          {
+            "name": "df",
+            "value": 24
+          },
+          {
+            "name": "p",
+            "value": 8.502553e-09
+          }
+        ]
+      },
+      {
+        "name": "Latent variables",
+        "groups": [
+          {
+            "name": "visual =~ x1",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 1
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "name": "visual =~ x2",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 0.5535
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.099665
+              },
+              {
+                "name": "statistic",
+                "symbol": "z",
+                "value": 5.553601
+              },
+              {
+                "name": "p",
+                "value": 5.553601
+              }
+            ]
+          },
+          {
+            "name": "visual =~ x3",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 0.72937
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.10911
+              },
+              {
+                "name": "statistic",
+                "symbol": "z",
+                "value": 6.684742
+              },
+              {
+                "name": "p",
+                "value": 6.684742
+              }
+            ]
+          },
+          {
+            "name": "textual =~ x4",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 1
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "name": "textual =~ x5",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 1.113077
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.06542
+              },
+              {
+                "name": "statistic",
+                "symbol": "z",
+                "value": 17.014288
+              },
+              {
+                "name": "p",
+                "value": 17.014288
+              }
+            ]
+          },
+          {
+            "name": "textual =~ x6",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 0.926146
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.055449
+              },
+              {
+                "name": "statistic",
+                "symbol": "z",
+                "value": 16.702711
+              },
+              {
+                "name": "p",
+                "value": 16.702711
+              }
+            ]
+          },
+          {
+            "name": "speed =~ x7",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 1
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "name": "speed =~ x8",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 1.179951
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.164987
+              },
+              {
+                "name": "statistic",
+                "symbol": "z",
+                "value": 7.151799
+              },
+              {
+                "name": "p",
+                "value": 7.151799
+              }
+            ]
+          },
+          {
+            "name": "speed =~ x9",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 1.08153
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.151167
+              },
+              {
+                "name": "statistic",
+                "symbol": "z",
+                "value": 7.154518
+              },
+              {
+                "name": "p",
+                "value": 7.154518
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Covariances",
+        "groups": [
+          {
+            "name": "visual =~ textual",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 1
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "name": "visual =~ speed",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 0.5535
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.099665
+              },
+              {
+                "name": "statistic",
+                "symbol": "z",
+                "value": 5.553601
+              },
+              {
+                "name": "p",
+                "value": 5.553601
+              }
+            ]
+          },
+          {
+            "name": "textual =~ speed",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 0.72937
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.10911
+              },
+              {
+                "name": "statistic",
+                "symbol": "z",
+                "value": 6.684742
+              },
+              {
+                "name": "p",
+                "value": 6.684742
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Variances",
+        "groups": [
+          {
+            "name": "x1",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 1
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "name": "x2",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 0.5535
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.099665
+              },
+              {
+                "name": "statistic",
+                "symbol": "z",
+                "value": 5.553601
+              },
+              {
+                "name": "p",
+                "value": 5.553601
+              }
+            ]
+          },
+          {
+            "name": "x3",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 0.72937
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.10911
+              },
+              {
+                "name": "statistic",
+                "symbol": "z",
+                "value": 6.684742
+              },
+              {
+                "name": "p",
+                "value": 6.684742
+              }
+            ]
+          },
+          {
+            "name": "x4",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 1
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "name": "x5",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 1.113077
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.06542
+              },
+              {
+                "name": "statistic",
+                "symbol": "z",
+                "value": 17.014288
+              },
+              {
+                "name": "p",
+                "value": 17.014288
+              }
+            ]
+          },
+          {
+            "name": "x6",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 0.926146
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.055449
+              },
+              {
+                "name": "statistic",
+                "symbol": "z",
+                "value": 16.702711
+              },
+              {
+                "name": "p",
+                "value": 16.702711
+              }
+            ]
+          },
+          {
+            "name": "x7",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 1
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "name": "x8",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 1.179951
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.164987
+              },
+              {
+                "name": "statistic",
+                "symbol": "z",
+                "value": 7.151799
+              },
+              {
+                "name": "p",
+                "value": 7.151799
+              }
+            ]
+          },
+          {
+            "name": "x9",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 1.08153
+              },
+              {
+                "name": "standard error",
+                "symbol": "SE",
+                "value": 0.151167
+              },
+              {
+                "name": "statistic",
+                "symbol": "z",
+                "value": 7.154518
+              },
+              {
+                "name": "p",
+                "value": 7.154518
+              }
+            ]
+          },
+          {
+            "name": "visual",
+            "statistics": []
+          },
+          {
+            "name": "textual",
+            "statistics": []
+          },
+          {
+            "name": "speed",
+            "statistics": []
+          }
+        ]
+      }
+    ],
+    "estimator": "ML"
+  }
+}
