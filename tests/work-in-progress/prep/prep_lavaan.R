@@ -1,6 +1,5 @@
 # Todo --------------------------------------------------------------------
 
-# - cfa(): added intercepts, groups, measurement invariance, EFA
 # - sem(): added defined parameter (mediation), multilevel, ESEM
 # - Added growth() for latent growth curve models
 # - lavTestLRT() for measurement invariance returns an object with fit
@@ -26,8 +25,8 @@ HS_model <- "
     textual =~ x4 + x5 + x6
     speed   =~ x7 + x8 + x9
 "
-
 cfa <- cfa(HS_model, data = HolzingerSwineford1939)
+cfa_groups <- cfa(HS_model, data = HolzingerSwineford1939, group = "school")
 
 HS_model_intercepts <- "
     # three-factor model
@@ -45,7 +44,6 @@ HS_model_intercepts <- "
     x8 ~ 1
     x9 ~ 1
 "
-
 cfa_intercepts <- cfa(
   HS_model_intercepts,
   data = HolzingerSwineford1939,
@@ -57,77 +55,22 @@ efa_model <- '
     efa("efa")*f2 +
     efa("efa")*f3 =~ x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9
 '
-
 cfa_efa <- cfa(efa_model, data = HolzingerSwineford1939)
 
-# multiple groups
-fit_groups <- cfa(
-  HS.model,
-  data = HolzingerSwineford1939,
-  group = "school"
-)
-summary_groups <- summary(
-  fit_groups,
-  fit.measures = TRUE
-)
-
-# measurement invariance
-# configural invariance
-fit1 <- cfa(
-  HS.model,
-  data = HolzingerSwineford1939,
-  group = "school"
-)
-# weak invariance
-fit2 <- cfa(
-  HS.model,
-  data = HolzingerSwineford1939,
-  group = "school",
-  group.equal = "loadings"
-)
-# strong invariance
-fit3 <- cfa(
-  HS.model,
-  data = HolzingerSwineford1939,
-  group = "school",
-  group.equal = c("intercepts", "loadings")
-)
-# model comparison tests (this contains fit statistics to compare models)
-# it already looks like summary$fit
-summary_invariance <- lavTestLRT(fit1, fit2, fit3)
-
 statistics <- statistics |>
-  add_stats(cfa)
+  add_stats(cfa) |>
+  add_stats(cfa_groups) |>
+  add_stats(cfa_intercepts) |>
+  add_stats(cfa_efa)
 
-add_stats(statistics, cfa)
+summary(cfa, standardized = TRUE, fit.measures = TRUE)
+summary(cfa_groups, standardized = TRUE, fit.measures = TRUE)
+summary(cfa_intercepts, standardized = TRUE, fit.measures = TRUE)
+summary(cfa_efa, standardized = TRUE, fit.measures = TRUE)
 
-add_stats(summary_intercepts) |>
-  add_stats(summary_efa) |>
-  add_stats(summary_invariance)
+# sem() -------------------------------------------------------------------
 
-summary(fit_cfa)
-
-
-summary(
-  fit_cfa,
-  standardized = TRUE,
-  fit.measures = TRUE
-)
-summary_intercepts <- summary(
-  fit_intercepts,
-  fit.measures = TRUE,
-  standardized = TRUE
-)
-
-summary_efa <- summary(
-  fit_efa,
-  standardized = TRUE,
-  fit.measures = TRUE
-)
-
-# SEM ---------------------------------------------------------------------
-
-model <- "
+sem_model <- "
     # measurement model
     ind60 =~ x1 + x2 + x3
     dem60 =~ y1 + y2 + y3 + y4
@@ -143,24 +86,15 @@ model <- "
     y6 ~~ y8
 "
 
-fit_sem <- sem(
-  model,
-  data = PoliticalDemocracy
-)
-summary_sem <- summary(
-  fit_sem,
-  standardized = TRUE,
-  fit.measures = TRUE
-)
+sem <- sem(sem_model, data = PoliticalDemocracy)
 
-# mediation
 set.seed(1234)
 X <- rnorm(100)
 M <- 0.5 * X + rnorm(100)
 Y <- 0.7 * M + rnorm(100)
-Data <- data.frame(X = X, Y = Y, M = M)
+data <- data.frame(X = X, Y = Y, M = M)
 
-model.mediation <- "
+sem_mediation_model <- "
     # direct effect
     Y ~ c*X
     # mediator
@@ -172,14 +106,9 @@ model.mediation <- "
     total := c + (a*b)
 "
 
-fit_defined_parameters <- sem(
-  model.mediation,
-  data = Data
-)
-summary_definied_parameters <- summary(fit_defined_parameters)
+mediation <- sem(sem_mediation_model, data = data)
 
-# multilevel
-model.multilevel <- "
+sem_multilevel_model <- "
     level: 1
     fw =~ y1 + y2 + y3
     fw ~ x1 + x2 + x3
@@ -188,18 +117,11 @@ model.multilevel <- "
     fb ~ w1 + w2
 "
 
-fit_multilevel <- sem(
-  model = model.multilevel,
-  data = Demo.twolevel,
-  cluster = "cluster"
-)
-summary_multilevel <- summary(
-  fit_multilevel,
-  standardized = TRUE,
-  fit.measures = TRUE
+sem_multilevel <- sem(
+  sem_multilevel_model,
+  data = Demo.twolevel, cluster = "cluster"
 )
 
-# exploratory SEM
 ex5_25 <- read.table("http://statmodel.com/usersguide/chap5/ex5.25.dat")
 names(ex5_25) <- paste0("y", 1:12)
 
@@ -241,23 +163,11 @@ statistics <- statistics |>
   add_stats(summary_multilevel) |>
   add_stats(summary_esem)
 
-# growth() ----------------------------------------------------------------
-model.growth <- " i =~ 1*t1 + 1*t2 + 1*t3 + 1*t4
-           s =~ 0*t1 + 1*t2 + 2*t3 + 3*t4 "
-fit_growth <- growth(
-  model.growth,
-  data = Demo.growth
-)
-summary_growth <- summary(
-  fit,
-  fit.measures = TRUE,
-  standardized = TRUE
-)
+summary(sem, standardized = TRUE, fit.measures = TRUE)
+summary(mediation)
+summary(multilevel, standardized = TRUE, fit.measures = TRUE)
 
-statistics <- statistics |>
-  add_stats(summary_growth)
-
-# lavaan ------------------------------------------------------------------
+# lavaan() ----------------------------------------------------------------
 
 fit_lavaan <- lavaan(
   HS.model,
@@ -273,6 +183,50 @@ summary_lavaan <- summary(
 
 statistics <- statistics |>
   add_stats(summary_lavaan)
+
+
+# lavTestLRT() ------------------------------------------------------------
+
+HS_model <- "
+    visual  =~ x1 + x2 + x3
+    textual =~ x4 + x5 + x6
+    speed   =~ x7 + x8 + x9
+"
+
+fit1 <- cfa(
+  HS_model,
+  data = HolzingerSwineford1939,
+  group = "school"
+)
+
+fit2 <- cfa(
+  HS_model,
+  data = HolzingerSwineford1939,
+  group = "school",
+  group.equal = "loadings"
+)
+fit3 <- cfa(
+  HS_model,
+  data = HolzingerSwineford1939,
+  group = "school",
+  group.equal = c("intercepts", "loadings")
+)
+
+lrt <- lavTestLRT(fit1, fit2, fit3)
+lrt
+
+# growth() ----------------------------------------------------------------
+
+model_growth <- "
+  i =~ 1*t1 + 1*t2 + 1*t3 + 1*t4
+  s =~ 0*t1 + 1*t2 + 2*t3 + 3*t4
+"
+
+growth <- growth(model_growth, data = Demo.growth)
+
+statistics <- add_stats(statistics, growth)
+
+summary(growth, fit.measures = TRUE, standardized = TRUE)
 
 # tidy_stats_to_data_frame() ----------------------------------------------
 
