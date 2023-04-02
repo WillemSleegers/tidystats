@@ -12,7 +12,8 @@ data(engel)
 rq_median <- rq(
   stack.loss ~ stack.x,
   tau = .5,
-  stackloss)
+  stackloss
+  )
 
 rq_sequence <- rq(
   foodexp ~ income,
@@ -31,9 +32,20 @@ summary(rq_sequence)
 
 data(barro)
 
-fit1 <- rq(y.net ~ lgdp2 + fse2 + gedy2 + Iy2 + gcony2, data = barro)
-fit2 <- rq(y.net ~ lgdp2 + fse2 + gedy2 + Iy2 + gcony2, data = barro,tau=.75)
-fit3 <- rq(y.net ~ lgdp2 + fse2 + gedy2 + Iy2 + gcony2, data = barro,tau=.25)
+fit1 <- rq(
+  y.net ~ lgdp2 + fse2 + gedy2 + Iy2 + gcony2, 
+  data = barro
+  )
+fit2 <- rq(
+  y.net ~ lgdp2 + fse2 + gedy2 + Iy2 + gcony2, 
+  data = barro,
+  tau=.75
+  )
+fit3 <- rq(
+  y.net ~ lgdp2 + fse2 + gedy2 + Iy2 + gcony2, 
+  data = barro,
+  tau=.25
+  )
 
 anova_joint <- anova(fit1,fit2,fit3)
 anova_distinct <- anova(fit1,fit2,fit3,joint=FALSE)
