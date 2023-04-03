@@ -1,10 +1,11 @@
 #' Create a custom statistics object
 #'
-#' \code{stats} can be used to create your own statistics object to add to a
-#' statistics list via \code{add_stats()}.
+#' \code{custom_stats} can be used to create your own statistics object to add
+#' to a statistics list via \code{add_stats()}. This can be used to add a single
+#' statistic or a group of statistics. Note that multiple groups of statistics
+#' are not supported.
 #'
-#' @param method A string; specifying the path to type of method used to obtain
-#'   the statistics.
+#' @param method A string; specifying the method used to obtain the statistics.
 #' @param statistics A vector of statistics created with \code{stat()}.
 #'
 #' @examples
@@ -15,8 +16,8 @@
 #'
 #' BF10 <- 1 / exp((BIC(lm2) - BIC(lm1)) / 2)
 #'
-#' stats <- stats(
-#'   method = "BF BIC method",
+#' BIC_BFs <- custom_stats(
+#'   method = "Wagenmakers (2007) method for calculating Bayes factors",
 #'   statistics = c(
 #'     stat(name = "BF", value = BF10, subscript = "10"),
 #'     stat(name = "BF", value = 1 / BF10, subscript = "01")
@@ -25,14 +26,10 @@
 #'
 #' statistics <- list()
 #'
-#' statistics <- add_stats(
-#'   list = statistics,
-#'   output = stats,
-#'   notes = "Wagenmakers (2007) method for calculating Bayes factors"
-#' )
+#' statistics <- add_stats(statistics, BIC_BFs)
 #'
 #' @export
-stats <- function(method, statistics) {
+custom_stats <- function(method, statistics) {
   stats <- list()
   for (stat in statistics) {
     stats <- append(stats, list(stat))

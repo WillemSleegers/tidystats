@@ -18,6 +18,7 @@
 \alias{tidy_stats.aovlist}
 \alias{tidy_stats.confint}
 \alias{tidy_stats.afex_aov}
+\alias{tidy_stats.mixed}
 \alias{tidy_stats.effectsize_difference}
 \alias{tidy_stats.effsize}
 \alias{tidy_stats.emmGrid}
@@ -77,6 +78,8 @@ tidy_stats(x, args = NULL)
 \method{tidy_stats}{confint}(x, args = NULL)
 
 \method{tidy_stats}{afex_aov}(x, args = NULL)
+
+\method{tidy_stats}{mixed}(x, args = NULL)
 
 \method{tidy_stats}{effectsize_difference}(x, args = NULL)
 
@@ -223,6 +226,8 @@ Currently supported functions:
 \item \code{tidy_stats(confint)}: tidy_stats method for class 'confint'
 
 \item \code{tidy_stats(afex_aov)}: tidy_stats method for class 'afex_aov'
+
+\item \code{tidy_stats(mixed)}: tidy_stats method for class 'afex_aov'
 
 \item \code{tidy_stats(effectsize_difference)}: tidy_stats method for class 'effectsize_difference'
 

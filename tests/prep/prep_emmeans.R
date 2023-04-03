@@ -155,7 +155,6 @@ statistics <- statistics |>
   add_stats(mtcars_trends)
 
 fiber_trends
-mtcars_trends
 summary(mtcars_trends)
 
 # joint_tests() -----------------------------------------------------------

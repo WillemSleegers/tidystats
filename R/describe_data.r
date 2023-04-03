@@ -5,9 +5,11 @@
 #'
 #' @param data A data frame.
 #' @param ... One or more unquoted column names from the data frame.
-#' @param na.rm A boolean indicating whether missing values (including NaN) 
+#' @param na.rm A boolean indicating whether missing values (including NaN)
 #'   should be excluded in calculating the descriptives? The default is TRUE.
-#' @param short A boolean indicating whether only a subset of descriptives 
+#' @param prop A boolean indicating whether to calculate proportions instead of
+#'   percentages. The default is FALSE.
+#' @param short A boolean indicating whether only a subset of descriptives
 #'   should be reported? If set to TRUE, only the N, M, and SD will be returned.
 #'   The default is FALSE.
 #'
@@ -17,7 +19,7 @@
 #' When na.rm is set to FALSE, a percentage column will be added to the output
 #' that contains the percentage of non-missing data.
 #'
-#' Skew and kurtosis are based on the [skewness()] and 
+#' Skew and kurtosis are based on the [skewness()] and
 #' [kurtosis()] functions (Komsta & Novomestky, 2015).
 #'
 #' Percentages are calculated based on the total of non-missing observations.
@@ -26,7 +28,7 @@
 #'
 #' @examples
 #' describe_data(quote_source, response)
-#' 
+#'
 #' describe_data(quote_source, response, na.rm = FALSE)
 #'
 #' quote_source |>
@@ -40,7 +42,8 @@
 #' @importFrom dplyr %>%
 #'
 #' @export
-describe_data <- function(data, ..., na.rm = TRUE, short = FALSE) {
+describe_data <- function(
+    data, ..., na.rm = TRUE, prop = FALSE, short = FALSE) {
   # Check if 'data' is actually a data frame
   if (!"data.frame" %in% class(data)) {
     stop("'data' is not a data frame.")
@@ -114,17 +117,22 @@ describe_data <- function(data, ..., na.rm = TRUE, short = FALSE) {
       )^2)
     )
 
-  # Add percentage if na.rm = FALSE (if na.rm = TRUE it would always be 100)
+  # Add proportion or percentage if na.rm = FALSE
+  # (if na.rm = TRUE it would always be 100)
   if (!na.rm) {
-    output <- dplyr::mutate(output, pct = N / sum(N + missing) * 100)
+    if (prop) {
+      output <- dplyr::mutate(output, prop = N / sum(N + missing))
+    } else {
+      output <- dplyr::mutate(output, pct = N / sum(N + missing) * 100)
+    }
   }
 
   # Reorder the columns and return only a subset if short was set to TRUE
   if (short) {
-    output <- dplyr::select(output, dplyr::all_of(c(
-      "var", grouping, "N", "M",
-      "SD"
-    )))
+    output <- dplyr::select(
+      output,
+      dplyr::all_of(c("var", grouping, "N", "M", "SD"))
+    )
   } else {
     output <- dplyr::relocate(output, var, dplyr::all_of(grouping))
   }

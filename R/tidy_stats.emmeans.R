@@ -1,11 +1,9 @@
 #' @describeIn tidy_stats tidy_stats method for class 'emmGrid'
-#' @export
 tidy_stats.emmGrid <- function(x, args = NULL) {
   return(tidy_stats(summary(x)))
 }
 
 #' @describeIn tidy_stats tidy_stats method for class 'summary_emm'
-#' @export
 tidy_stats.summary_emm <- function(x, args = NULL) {
   analysis <- list()
 
@@ -164,7 +162,6 @@ tidy_stats.summary_emm <- function(x, args = NULL) {
 }
 
 #' @describeIn tidy_stats tidy_stats method for class 'emm_list'
-#' @export
 tidy_stats.emm_list <- function(x, args = NULL) {
   analysis <- list()
 

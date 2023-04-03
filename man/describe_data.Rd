@@ -4,7 +4,7 @@
 \alias{describe_data}
 \title{Calculate common descriptive statistics}
 \usage{
-describe_data(data, ..., na.rm = TRUE, short = FALSE)
+describe_data(data, ..., na.rm = TRUE, prop = FALSE, short = FALSE)
 }
 \arguments{
 \item{data}{A data frame.}
@@ -13,6 +13,9 @@ describe_data(data, ..., na.rm = TRUE, short = FALSE)
 
 \item{na.rm}{A boolean indicating whether missing values (including NaN)
 should be excluded in calculating the descriptives? The default is TRUE.}
+
+\item{prop}{A boolean indicating whether to calculate proportions instead of
+percentages. The default is FALSE.}
 
 \item{short}{A boolean indicating whether only a subset of descriptives
 should be reported? If set to TRUE, only the N, M, and SD will be returned.

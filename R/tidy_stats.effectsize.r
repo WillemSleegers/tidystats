@@ -1,5 +1,4 @@
 #' @describeIn tidy_stats tidy_stats method for class 'effectsize_difference'
-#' @export
 tidy_stats.effectsize_difference <- function(x, args = NULL) {
   analysis <- list()
 

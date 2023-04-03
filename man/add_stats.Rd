@@ -61,9 +61,10 @@ Supported functions:\tabular{ll}{
 }
 
 
-Supported classes:\tabular{ll}{
-   Function \tab Class name \cr
-   \code{\link[=confint]{confint()}} \tab confint \cr
+Supported classes:\tabular{lll}{
+   Package \tab Function \tab Class name \cr
+   \code{stats} \tab \code{\link[=confint]{confint()}} \tab confint \cr
+   \code{emmeans} \tab \link{mvcontrast(show.ests = TRUE)} \tab emm_list \cr
 }
 }
 \examples{

@@ -1,11 +1,9 @@
 #' @describeIn tidy_stats tidy_stats method for class 'tidystats'
-#' @export
 tidy_stats.tidystats <- function(x, args = NULL) {
   return(x)
 }
 
 #' @describeIn tidy_stats tidy_stats method for class 'tidystats_descriptives'
-#' @export
 tidy_stats.tidystats_descriptives <- function(x, args = NULL) {
   analysis <- list()
 
@@ -120,37 +118,21 @@ tidy_stats.tidystats_descriptives <- function(x, args = NULL) {
 }
 
 #' @describeIn tidy_stats tidy_stats method for class 'tidystats_counts'
-#' @export
 tidy_stats.tidystats_counts <- function(x, args = NULL) {
-  # Create the analysis list
-  analysis <- list()
+  analysis <- list(method = "Counts")
 
-  # Add method
-  analysis$method <- "Counts"
-
-  # Create a loop function to recursively create groups and extract the
-  # statistics
   loop <- function(df, list, group_names, depth) {
     if (length(group_names) == depth) {
-      # Create a list to store the statistics in
-      statistics <- list()
-
-      # Add statistics
-      statistics <- add_statistic(statistics, "n", df$n)
-      statistics <- add_statistic(statistics, "pct", df$pct, "%")
-
-      # Add statistics to the group
-      list$statistics <- statistics
+      list$statistics <- list() |>
+        add_statistic("n", df$n) |>
+        add_statistic("proportion", df$prop, symbol = "p") |>
+        add_statistic("pct", df$pct, "%")
     } else {
-      # Increment the depth
       depth <- depth + 1
 
-      # Create a groups list
       groups <- list(name = group_names[depth])
 
-      # Loop over the groups
       for (group_name in unique(dplyr::pull(df, groups$name))) {
-        # Subset the data so it only has data of the current group
         df_group <- df[df[, depth + 1] == group_name, ]
 
         if (!is.na(group_name)) {
@@ -165,7 +147,6 @@ tidy_stats.tidystats_counts <- function(x, args = NULL) {
           )
         }
 
-        # Create a group list
         group <- list()
 
         # Set the name to the string NA if it is missing
@@ -175,30 +156,25 @@ tidy_stats.tidystats_counts <- function(x, args = NULL) {
           group$name <- group_name
         }
 
-        # Loop again
         groups$groups <- append(groups$groups, list(loop(
           df_group, group,
           group_names, depth
         )))
       }
 
-      # Add the groups to the list's groups
       list$groups <- append(list$groups, list(groups))
     }
 
     return(list)
   }
 
-  # Extract grouping variables
-  group_names <- names(x)[!names(x) %in% c("n", "pct")]
+  group_names <- names(x)[!names(x) %in% c("n", "prop", "pct")]
 
   # Convert the data frame to a base data frame to disable warnings
   df <- as.data.frame(x)
 
-  # Loop over the groups and extract the statistics
   analysis <- loop(df, analysis, group_names, 0)
 
-  # Add package information
   analysis <- add_package_info(analysis, "tidystats")
 
   return(analysis)

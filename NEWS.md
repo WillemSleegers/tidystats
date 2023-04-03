@@ -1,9 +1,11 @@
 # tidystats 0.6
 
 ## Meta
+
 * Redesigned the tidystats structure to be more expandable.
 
 ## New
+
 * Added two new arguments to `add_stats()`: `args` and `class`. The `args` argument can be used to supply additional arguments to customize which statistics are extracted from a particular analysis. For a list of supported functions, see the Details section in the help document of `add_stats()`. The `class` argument can be used to explicitly indicate the class of the analysis you want to add. Sometimes the output of a particular analysis returns an object with insufficient information for `tidystats` to know how to extract the statistics. By using the `class` argument, you can tell `tidystats` what kind of object it is so that it can nevertheless extract the statistics. For a list of supported classes, see the Details section of the help document of `add_stats()`.
 * Added support for the `confint()` function from the `stats` package using the new `class` argument in `add_stats().
 * Added support for the `alpha()` function from the `psych` package.
@@ -18,13 +20,17 @@
 * Added support for the `effsize` package.
 
 ## Changes
+
 * Renamed the `results` argument in `add_stats()` to `list`
-* Removed the multiplication by 100 in `count_data()`'s `pct` column to make it 
-  easier to present the numbers as percentages (e.g., using 
+* Removed the multiplication by 100 in `count_data()`'s `pct` column to make it
+  easier to present the numbers as percentages (e.g., using
   `scales::label_percent()`)
+* Added a new argument to `describe_data()` and `count_data()` to obtain
+  percentages instead of proportions.
 * Improved names in `anova()` tests.
 
 ## Misc
+
 * Removed info message that is displayed when the package is loaded.
 
 # tidystats 0.5.1
@@ -38,6 +44,7 @@
 * Fixed GitHub issue #8.
 
 ## Changes
+
 * Removed automatically setting the method to 'Generic test' when adding a custom test. This means you can set the method yourself now.
 * Renames the `variable` column to `var` in `describe_data()`.
 * `describe_data()` now (again) has support for multiple variables. You can provide more than 1 column name (separated by commas) to calculate descriptives for each variable.
@@ -84,6 +91,7 @@
 # tidystats 0.4
 
 ## Breaking changes
+
 * `tidystats` has been completely redesigned in terms of how statistics are combined together. While previously the output of statistical models was converted to a tidy data frame, the output is now converted to a list, with an entirely different structure. The reason for this change is that lists are more machine-readable, enabling more interesting features down the line. It is still possible to convert the list of statistics to a single data frame with a new function called `tidy_stats_to_data_frame()`.
 * The significant changes made to `tidystats` has resulted in the loss of some previously supported statistical functions. For a list of currently supported statistical functions, see the help document of `add_stats()` or the README.
 * All `report` functions have been removed for now. These may return (if I get the impression these are liked) but for now I am focusing my development time on creating a Word add-in that will enable researchers to use a `tidystats`-produced file for reporting statistics in Microsoft Word.
@@ -91,10 +99,12 @@
 * `count_data()` has been removed.
 
 ## Changes
+
 * `add_stats()` now has a `type` argument to specify whether an analysis was a primary analysis, secondary analysis, or exploratory analysis.
 * `add_stats()` now has a `preregistered` argument to specify whether an analysis was preregistered or not.
 
 ## New
+
 * Added an example dataset called 'quote_source' containing data of a replication of Lorge & Curtiss (1936) that was part of the Many Labs project (Klein et al., 2014)
 
 # tidystats 0.3

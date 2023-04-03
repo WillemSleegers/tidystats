@@ -1,5 +1,4 @@
 #' @describeIn tidy_stats tidy_stats method for class 'lmerMod'
-#' @export
 tidy_stats.lmerMod <- function(x, args = NULL) {
   analysis <- list(
     name = deparse(attr(x@frame, "formula")),

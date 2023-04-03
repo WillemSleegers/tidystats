@@ -1,0 +1,588 @@
+{
+  "pred": {
+    "method": "Average (marginal) estimates",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "b",
+        "value": 20.090625,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 19.000527,
+        "upper": 21.180723
+      },
+      {
+        "name": "SE",
+        "value": 0.556183
+      },
+      {
+        "name": "statistic",
+        "symbol": "z",
+        "value": 36.122361
+      },
+      {
+        "name": "p",
+        "value": 1.010874e-285
+      }
+    ]
+  },
+  "pred_grid": {
+    "method": "Average (marginal) estimates",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "b",
+        "value": 26.005846,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 23.971204,
+        "upper": 28.040489
+      },
+      {
+        "name": "SE",
+        "value": 1.038102
+      },
+      {
+        "name": "statistic",
+        "symbol": "z",
+        "value": 25.051345
+      },
+      {
+        "name": "p",
+        "value": 1.687915e-138
+      }
+    ]
+  },
+  "pred_by": {
+    "method": "Average (marginal) estimates",
+    "groups": [
+      {
+        "name": "am",
+        "groups": [
+          {
+            "name": "0",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 17.147368,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 15.915147,
+                "upper": 18.37959
+              },
+              {
+                "name": "SE",
+                "value": 0.628696
+              },
+              {
+                "name": "statistic",
+                "symbol": "z",
+                "value": 27.274494
+              },
+              {
+                "name": "p",
+                "value": 8.515193e-164
+              }
+            ]
+          },
+          {
+            "name": "1",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 24.392308,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 22.902624,
+                "upper": 25.881991
+              },
+              {
+                "name": "SE",
+                "value": 0.760057
+              },
+              {
+                "name": "statistic",
+                "symbol": "z",
+                "value": 32.092755
+              },
+              {
+                "name": "p",
+                "value": 5.564398e-226
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "pred_by_two": {
+    "method": "Average (marginal) estimates",
+    "groups": [
+      {
+        "name": "am",
+        "groups": [
+          {
+            "name": "0",
+            "groups": [
+              {
+                "name": "vs",
+                "groups": [
+                  {
+                    "name": "0",
+                    "statistics": [
+                      {
+                        "name": "estimate",
+                        "symbol": "b",
+                        "value": 15.05,
+                        "interval": "CI",
+                        "level": 0.95,
+                        "lower": 13.499488,
+                        "upper": 16.600512
+                      },
+                      {
+                        "name": "SE",
+                        "value": 0.791092
+                      },
+                      {
+                        "name": "statistic",
+                        "symbol": "z",
+                        "value": 19.024338
+                      },
+                      {
+                        "name": "p",
+                        "value": 1.072334e-80
+                      }
+                    ]
+                  },
+                  {
+                    "name": "1",
+                    "statistics": [
+                      {
+                        "name": "estimate",
+                        "symbol": "b",
+                        "value": 20.742857,
+                        "interval": "CI",
+                        "level": 0.95,
+                        "lower": 18.712761,
+                        "upper": 22.772953
+                      },
+                      {
+                        "name": "SE",
+                        "value": 1.035782
+                      },
+                      {
+                        "name": "statistic",
+                        "symbol": "z",
+                        "value": 20.026268
+                      },
+                      {
+                        "name": "p",
+                        "value": 3.251278e-89
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "1",
+            "groups": [
+              {
+                "name": "vs",
+                "groups": [
+                  {
+                    "name": "0",
+                    "statistics": [
+                      {
+                        "name": "estimate",
+                        "symbol": "b",
+                        "value": 19.75,
+                        "interval": "CI",
+                        "level": 0.95,
+                        "lower": 17.557245,
+                        "upper": 21.942755
+                      },
+                      {
+                        "name": "SE",
+                        "value": 1.118773
+                      },
+                      {
+                        "name": "statistic",
+                        "symbol": "z",
+                        "value": 17.65327
+                      },
+                      {
+                        "name": "p",
+                        "value": 9.60319e-70
+                      }
+                    ]
+                  },
+                  {
+                    "name": "1",
+                    "statistics": [
+                      {
+                        "name": "estimate",
+                        "symbol": "b",
+                        "value": 28.371429,
+                        "interval": "CI",
+                        "level": 0.95,
+                        "lower": 26.341332,
+                        "upper": 30.401525
+                      },
+                      {
+                        "name": "SE",
+                        "value": 1.035782
+                      },
+                      {
+                        "name": "statistic",
+                        "symbol": "z",
+                        "value": 27.391301
+                      },
+                      {
+                        "name": "p",
+                        "value": 3.481678e-165
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "pred_vars": {
+    "method": "Average (marginal) estimates",
+    "groups": [
+      {
+        "name": "hp",
+        "groups": [
+          {
+            "name": "90",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 22.39954,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 20.212906,
+                "upper": 24.586175
+              },
+              {
+                "name": "SE",
+                "value": 1.11565
+              },
+              {
+                "name": "statistic",
+                "symbol": "z",
+                "value": 20.077563
+              },
+              {
+                "name": "p",
+                "value": 1.159447e-89
+              }
+            ]
+          },
+          {
+            "name": "110",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 21.023993,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 19.093284,
+                "upper": 22.954702
+              },
+              {
+                "name": "SE",
+                "value": 0.985074
+              },
+              {
+                "name": "statistic",
+                "symbol": "z",
+                "value": 21.342556
+              },
+              {
+                "name": "p",
+                "value": 4.572535e-101
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "pred_hypothesis": {
+    "method": "Average (marginal) estimates",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "b",
+        "value": 4.78289,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 3.22073,
+        "upper": 6.345051
+      },
+      {
+        "name": "SE",
+        "value": 0.797035
+      },
+      {
+        "name": "statistic",
+        "symbol": "z",
+        "value": 6.000851
+      },
+      {
+        "name": "p",
+        "value": 1.962855e-09
+      }
+    ]
+  },
+  "pred_hypothesis_two": {
+    "method": "Average (marginal) estimates",
+    "groups": [
+      {
+        "name": "mpg",
+        "groups": [
+          {
+            "name": "20.090625",
+            "groups": [
+              {
+                "name": "drat",
+                "groups": [
+                  {
+                    "name": "3.5965625",
+                    "groups": [
+                      {
+                        "name": "wt",
+                        "groups": [
+                          {
+                            "name": "2",
+                            "statistics": [
+                              {
+                                "name": "estimate",
+                                "symbol": "b",
+                                "value": 4.78289,
+                                "interval": "CI",
+                                "level": 0.95,
+                                "lower": 3.22073,
+                                "upper": 6.345051
+                              },
+                              {
+                                "name": "SE",
+                                "value": 0.797035
+                              },
+                              {
+                                "name": "statistic",
+                                "symbol": "z",
+                                "value": 6.000851
+                              },
+                              {
+                                "name": "p",
+                                "value": 1.962855e-09
+                              }
+                            ]
+                          },
+                          {
+                            "name": "3",
+                            "statistics": [
+                              {
+                                "name": "estimate",
+                                "symbol": "b",
+                                "value": 115.21432,
+                                "interval": "CI",
+                                "level": 0.95,
+                                "lower": 108.065385,
+                                "upper": 122.363255
+                              },
+                              {
+                                "name": "SE",
+                                "value": 3.647483
+                              },
+                              {
+                                "name": "statistic",
+                                "symbol": "z",
+                                "value": 31.587352
+                              },
+                              {
+                                "name": "p",
+                                "value": 5.5079e-219
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "pred_nom": {
+    "method": "Average (marginal) estimates",
+    "groups": [
+      {
+        "name": "group",
+        "groups": [
+          {
+            "name": "3",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 0.468752,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.389519,
+                "upper": 0.547985
+              },
+              {
+                "name": "SE",
+                "value": 0.040426
+              },
+              {
+                "name": "statistic",
+                "symbol": "z",
+                "value": 11.595425
+              },
+              {
+                "name": "p",
+                "value": 4.347005e-31
+              }
+            ]
+          },
+          {
+            "name": "4",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 0.375001,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.254627,
+                "upper": 0.495375
+              },
+              {
+                "name": "SE",
+                "value": 0.061416
+              },
+              {
+                "name": "statistic",
+                "symbol": "z",
+                "value": 6.10588
+              },
+              {
+                "name": "p",
+                "value": 1.022356e-09
+              }
+            ]
+          },
+          {
+            "name": "5",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 0.156247,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.065616,
+                "upper": 0.246877
+              },
+              {
+                "name": "SE",
+                "value": 0.046241
+              },
+              {
+                "name": "statistic",
+                "symbol": "z",
+                "value": 3.378975
+              },
+              {
+                "name": "p",
+                "value": 0.000728
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "pred_nom_by": {
+    "method": "Average (marginal) estimates",
+    "groups": [
+      {
+        "name": "by",
+        "groups": [
+          {
+            "name": "4,6",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 0.915843,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.677986,
+                "upper": 1.1537
+              },
+              {
+                "name": "SE",
+                "value": 0.121358
+              },
+              {
+                "name": "statistic",
+                "symbol": "z",
+                "value": 7.546631
+              },
+              {
+                "name": "p",
+                "value": 4.466603e-14
+              }
+            ]
+          },
+          {
+            "name": "8",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 0.084157,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.1537,
+                "upper": 0.322014
+              },
+              {
+                "name": "SE",
+                "value": 0.121358
+              },
+              {
+                "name": "statistic",
+                "symbol": "z",
+                "value": 0.693458
+              },
+              {
+                "name": "p",
+                "value": 0.488022
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -76,11 +76,9 @@
 #' names(list_sleep_test)
 #' str(list_sleep_test)
 #'
-#' @export
 tidy_stats <- function(x, args = NULL) UseMethod("tidy_stats")
 
 #' @describeIn tidy_stats tidy_stats method for class 'htest'
-#' @export
 tidy_stats.htest <- function(x, args = NULL) {
   analysis <- list()
 
@@ -310,7 +308,6 @@ tidy_stats.htest <- function(x, args = NULL) {
 }
 
 #' @describeIn tidy_stats tidy_stats method for class 'pairwise.htest'
-#' @export
 tidy_stats.pairwise.htest <- function(x, args = NULL) {
   # Create the analysis list and set the name
   analysis <- list(name = x$data.name)
@@ -362,7 +359,6 @@ tidy_stats.pairwise.htest <- function(x, args = NULL) {
 
 
 #' @describeIn tidy_stats tidy_stats method for class 'lm'
-#' @export
 tidy_stats.lm <- function(x, args = NULL) {
   analysis <- list(
     name = deparse(x$call[[2]]),
@@ -438,7 +434,6 @@ tidy_stats.lm <- function(x, args = NULL) {
 }
 
 #' @describeIn tidy_stats tidy_stats method for class 'glm'
-#' @export
 tidy_stats.glm <- function(x, args = NULL) {
   # Create the analysis list and set the name and method
   analysis <- list(
@@ -537,7 +532,6 @@ tidy_stats.glm <- function(x, args = NULL) {
 }
 
 #' @describeIn tidy_stats tidy_stats method for class 'anova'
-#' @export
 tidy_stats.anova <- function(x, args = NULL) {
   analysis <- list()
 
@@ -660,7 +654,6 @@ tidy_stats.anova <- function(x, args = NULL) {
 }
 
 #' @describeIn tidy_stats tidy_stats method for class 'aov'
-#' @export
 tidy_stats.aov <- function(x, args = NULL) {
   # Create the analysis list and set the name and method
   analysis <- list(
@@ -722,7 +715,6 @@ tidy_stats.aov <- function(x, args = NULL) {
 }
 
 #' @describeIn tidy_stats tidy_stats method for class 'aovlist'
-#' @export
 tidy_stats.aovlist <- function(x, args = NULL) {
   # Create the analysis list and set the name and method
   analysis <- list(
@@ -803,7 +795,6 @@ tidy_stats.aovlist <- function(x, args = NULL) {
 }
 
 #' @describeIn tidy_stats tidy_stats method for class 'confint'
-#' @export
 tidy_stats.confint <- function(x, args = NULL) {
   analysis <- list()
 

@@ -1,5 +1,4 @@
 #' @describeIn tidy_stats tidy_stats method for class 'icclist'
-#' @export
 tidy_stats.icclist <- function(x, args = NULL) {
   analysis <- list(method = "ICC")
 

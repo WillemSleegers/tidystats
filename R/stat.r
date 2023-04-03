@@ -17,7 +17,30 @@
 #' @param upper The numeric value of the upper bound of the statistic.
 #'
 #' @examples
+#' # Example: Number of observations
 #' stat(name = "N", value = nrow(sleep))
+#'
+#' # Example: Mean and standard error
+#' # (Note that you can use the describe_data() function to calculate these 
+#'   statistics more easily)
+#' sample <- rnorm(1000, mean = 4, sd = 1)
+#' mean <- mean(sample)
+#' se <- sd(sample) / sqrt(length(sample))
+#'
+#' stat(name = "mean", value = mean, symbol = "M")
+#' stat(name = "standard error", value = se, symbol = "SE")
+#'
+#' # Example: Mean with a 95% confidence interval
+#' CI <- c(mean - 1.96 * se, mean + 1.96 * se)
+#' stat(
+#'   name = "mean",
+#'   value = mean,
+#'   symbol = "M",
+#'   interval = "CI",
+#'   level = .95,
+#'   lower = CI[1],
+#'   upper = CI[2]
+#' )
 #'
 #' @export
 stat <- function(name, value, symbol = NULL, subscript = NULL,

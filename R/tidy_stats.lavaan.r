@@ -8,18 +8,6 @@ tidy_stats.lavaan <- function(x, args = NULL) {
     analysis$method <- "Structual equation model"
   }
 
-  # Model Test User Model
-  group <- list(name = "Model Test User Model")
-
-  group$statistics <- list() |>
-    add_statistic("k", x@Fit@npar) |>
-    add_statistic("n", sum(unlist(x@Data@nobs))) |>
-    add_statistic("statistic", x@test$standard$stat, "χ²") |>
-    add_statistic("df", x@test$standard$df) |>
-    add_statistic("p", x@test$standard$pvalue)
-
-  analysis$groups <- append(analysis$groups, list(group))
-
   fit_measures <- TRUE
   standardized <- TRUE
   if (!is.null(args)) {
@@ -36,6 +24,36 @@ tidy_stats.lavaan <- function(x, args = NULL) {
     x,
     fit.measures = fit_measures, standardized = standardized
   )
+
+  # Model Test User Model
+  group <- list(name = "Model Test User Model")
+
+  statistics <- add_statistic(list(), "k", x@Fit@npar)
+
+  if (slot(x@Model, "multilevel")) {
+    statistics <- statistics |>
+      add_statistic(
+        "observations", x@Data@Lp[[1]]$nclusters[[1]],
+        symbol = "n"
+      ) |>
+      add_statistic("clusters", x@Data@Lp[[1]]$nclusters[[2]],
+        symbol = "n", subscript = "cluster"
+      )
+  } else {
+    statistics <- add_statistic(
+      statistics,
+      "observations", sum(unlist(x@Data@nobs)), "n"
+    )
+  }
+
+  statistics <- statistics |>
+    add_statistic("statistic", x@test$standard$stat, "χ²") |>
+    add_statistic("df", x@test$standard$df) |>
+    add_statistic("p", x@test$standard$pvalue)
+
+  group$statistics <- statistics
+
+  analysis$groups <- append(analysis$groups, list(group))
 
   # Fit measures
   if (fit_measures) {
@@ -74,12 +92,13 @@ tidy_stats.lavaan <- function(x, args = NULL) {
         lower = fit[["rmsea.ci.lower"]], upper = fit[["rmsea.ci.upper"]]
       ) |>
       add_statistic(
-        "p", fit[["rmsea.pvalue"]],
+        "p (RMSEA <= 0.050)", fit[["rmsea.pvalue"]],
+        symbol = "p",
         subscript = "RMSEA <= 0.050"
       ) |>
       add_statistic(
-        "p", fit[["rmsea.notclose.pvalue"]],
-        subscript = "RMSEA >= 0.080"
+        "p (RMSEA >= 0.080)", fit[["rmsea.notclose.pvalue"]],
+        symbol = "p", subscript = "RMSEA >= 0.080"
       ) |>
       add_statistic(
         "Standardized root mean square residual", fit[["srmr"]],
@@ -89,29 +108,28 @@ tidy_stats.lavaan <- function(x, args = NULL) {
     analysis$groups <- append(analysis$groups, list(group))
   }
 
-  if (x@Data@ngroups > 1) {
-    group_groups <- list(name = "Groups")
+  if (slot(x@Model, "multilevel")) {
+    group_levels <- list(name = "Levels")
 
-    for (g in 1:x@Data@ngroups) {
-      group <- list(name = x@Data@group.label[g])
+    for (l in 1:x@Data@nlevels) {
+      group <- list(name = x@Data@block.label[l])
 
-      # Model test user model
-      group_model <- list(name = "Model Test User Model")
+      level_pe <- dplyr::filter(summary$pe, level == l)
 
-      group_model$statistics <- list() |>
-        add_statistic("n", x@Data@nobs[[g]]) |>
-        add_statistic("statistic", x@test$standard$stat.group[[g]], "χ²")
-
-      group$groups <- append(group$groups, list(group_model))
-
-      # Parameter estimates
-      group <- add_parameter_estimates(group, summary$pe)
-      group_groups$groups <- append(group_groups$groups, list(group))
+      if (x@Data@ngroups > 1) {
+        group <- add_group(group, x, level_pe)
+      } else {
+        group <- add_parameter_estimates(group, level_pe)
+      }
+      group_levels$groups <- append(group_levels$groups, list(group))
     }
-
-    analysis$groups <- append(analysis$groups, list(group_groups))
+    analysis$groups <- append(analysis$groups, list(group_levels))
   } else {
-    analysis <- add_parameter_estimates(analysis, summary$pe)
+    if (x@Data@ngroups > 1) {
+      analysis <- add_group(analysis, x, summary$pe)
+    } else {
+      analysis <- add_parameter_estimates(analysis, summary$pe)
+    }
   }
 
   # Additional information
@@ -120,112 +138,242 @@ tidy_stats.lavaan <- function(x, args = NULL) {
   return(analysis)
 }
 
+add_group <- function(list, x, pe) {
+  group_groups <- list(name = "Groups")
+
+  for (g in 1:x@Data@ngroups) {
+    group <- list(name = x@Data@group.label[g])
+
+    # Model test user model
+    group_model <- list(name = "Model Test User Model")
+
+    group_model$statistics <- list() |>
+      add_statistic("n", x@Data@nobs[[g]]) |>
+      add_statistic("statistic", x@test$standard$stat.group[[g]], "χ²")
+
+    group$groups <- append(group$groups, list(group_model))
+
+    # Parameter estimates
+    group_pe <- dplyr::filter(pe, group == g)
+    group <- add_parameter_estimates(group, group_pe)
+    group_groups$groups <- append(group_groups$groups, list(group))
+  }
+
+  list$groups <- append(list$groups, list(group_groups))
+
+  return(list)
+}
+
 add_parameter_estimates <- function(list, pe) {
-  # Latent Variables
-  group_latent_vars <- list(name = "Latent variables")
+  # Latent variables
   latent_vars <- dplyr::filter(pe, op == "=~")
 
-  for (i in seq_len(nrow(latent_vars))) {
-    group <- list(name = paste(latent_vars$lhs[i], "=~", latent_vars$rhs[i]))
-
-    group$statistics <- list() |>
-      add_statistic("estimate", latent_vars$est[i], "b") |>
-      add_statistic("standard error", latent_vars$se[i], "SE") |>
-      add_statistic("statistic", latent_vars$z[i], "z") |>
-      add_statistic("p", latent_vars$p[i]) |>
-      add_statistic(
-        "estimate", latent_vars$std.lv[i],
-        symbol = "β", subscript = "lv"
-      ) |>
-      add_statistic(
-        "estimate", latent_vars$std.all[i],
-        symbol = "β", subscript = "all"
-      )
-
-    group_latent_vars$groups <- append(group_latent_vars$groups, list(group))
+  if (nrow(latent_vars) > 0) {
+    list <- add_latent_vars(list, latent_vars)
   }
 
-  list$groups <- append(list$groups, list(group_latent_vars))
+  # Regressions
+  regressions <- dplyr::filter(pe, op == "~")
+
+  if (nrow(regressions) > 0) {
+    list <- add_regressions(list, regressions)
+  }
 
   # Covariances
-  group_covariances <- list(name = "Covariances")
   covariances <- dplyr::filter(pe, lhs != rhs & op == "~~")
 
-  for (i in seq_len(nrow(covariances))) {
-    group <- list(name = paste(covariances$lhs[i], "=~", covariances$rhs[i]))
-
-    group$statistics <- list() |>
-      add_statistic("estimate", covariances$est[i], "b") |>
-      add_statistic("standard error", covariances$se[i], "SE") |>
-      add_statistic("statistic", covariances$z[i], "z") |>
-      add_statistic("p", covariances$p[i]) |>
-      add_statistic(
-        "estimate", covariances$std.lv[i],
-        symbol = "β", subscript = "lv"
-      ) |>
-      add_statistic(
-        "estimate", covariances$std.all[i],
-        symbol = "β", subscript = "all"
-      )
-
-    group_covariances$groups <- append(group_covariances$groups, list(group))
+  if (nrow(covariances) > 0) {
+    list <- add_covariances(list, covariances)
   }
 
-  list$groups <- append(list$groups, list(group_covariances))
-
   # Intercepts
-  if ("~1" %in% pe$op) {
-    group_intercepts <- list(name = "Intercepts")
-    intercepts <- dplyr::filter(pe, op == "~1")
+  intercepts <- dplyr::filter(pe, op == "~1")
 
-    for (i in seq_len(nrow(intercepts))) {
-      group <- list(name = paste(intercepts$lhs[i]))
-
-      group$statistics <- list() |>
-        add_statistic("estimate", intercepts$est[i], "b") |>
-        add_statistic("standard error", intercepts$se[i], "SE") |>
-        add_statistic("statistic", intercepts$z[i], "z") |>
-        add_statistic("p", intercepts$p[i]) |>
-        add_statistic(
-          "estimate", intercepts$std.lv[i],
-          symbol = "β", subscript = "lv"
-        ) |>
-        add_statistic(
-          "estimate", intercepts$std.all[i],
-          symbol = "β", subscript = "all"
-        )
-
-      group_intercepts$groups <- append(group_intercepts$groups, list(group))
-    }
-
-    list$groups <- append(list$groups, list(group_intercepts))
+  if (nrow(intercepts) > 0) {
+    list <- add_intercepts(list, intercepts)
   }
 
   # Variances
-  group_variances <- list(name = "Variances")
   variances <- dplyr::filter(pe, lhs == rhs & op == "~~")
 
-  for (i in seq_len(nrow(variances))) {
-    group <- list(name = paste(variances$lhs[i]))
+  if (nrow(variances) > 0) {
+    list <- add_variances(list, variances)
+  }
+
+  # Defined parameters
+  def_pars <- dplyr::filter(pe, op == ":=")
+
+  if (nrow(def_pars) > 0) {
+    list <- add_defined_parameters(list, def_pars)
+  }
+
+  return(list)
+}
+
+add_latent_vars <- function(list, pe) {
+  groups <- list(name = "Latent variables")
+
+  for (i in seq_len(nrow(pe))) {
+    group <- list(name = paste(pe$lhs[i], "=~", pe$rhs[i]))
 
     group$statistics <- list() |>
-      add_statistic("estimate", variances$est[i], "b") |>
-      add_statistic("standard error", variances$se[i], "SE") |>
-      add_statistic("statistic", variances$z[i], "z") |>
-      add_statistic("p", variances$p[i]) |>
+      add_statistic("estimate", pe$est[i], "b") |>
+      add_statistic("standard error", pe$se[i], "SE") |>
+      add_statistic("statistic", pe$z[i], "z") |>
+      add_statistic("p", pe$p[i]) |>
       add_statistic(
-        "estimate", variances$std.lv[i],
+        "standardized estimate (lv)", pe$std.lv[i],
         symbol = "β", subscript = "lv"
       ) |>
       add_statistic(
-        "estimate", variances$std.all[i],
+        "standardized estimate (all)", pe$std.all[i],
         symbol = "β", subscript = "all"
       )
 
-    group_variances$groups <- append(group_variances$groups, list(group))
+    groups$groups <- append(groups$groups, list(group))
   }
 
-  list$groups <- append(list$groups, list(group_variances))
+  list$groups <- append(list$groups, list(groups))
+
+  return(list)
+}
+
+add_regressions <- function(list, pe) {
+  groups <- list(name = "Regressions")
+
+  for (i in seq_len(nrow(pe))) {
+    group <- list(name = paste(pe$lhs[i], "~", pe$rhs[i]))
+
+    group$statistics <- list() |>
+      add_statistic("estimate", pe$est[i], "b") |>
+      add_statistic("standard error", pe$se[i], "SE") |>
+      add_statistic("statistic", pe$z[i], "z") |>
+      add_statistic("p", pe$p[i]) |>
+      add_statistic(
+        "standardized estimate (lv)", pe$std.lv[i],
+        symbol = "β", subscript = "lv"
+      ) |>
+      add_statistic(
+        "standardized estimate (all)", pe$std.all[i],
+        symbol = "β", subscript = "all"
+      )
+
+    groups$groups <- append(groups$groups, list(group))
+  }
+
+  list$groups <- append(list$groups, list(groups))
+
+  return(list)
+}
+
+add_covariances <- function(list, pe) {
+  groups <- list(name = "Covariances")
+
+  for (i in seq_len(nrow(pe))) {
+    group <- list(name = paste(pe$lhs[i], "~~", pe$rhs[i]))
+
+    group$statistics <- list() |>
+      add_statistic("estimate", pe$est[i], "b") |>
+      add_statistic("standard error", pe$se[i], "SE") |>
+      add_statistic("statistic", pe$z[i], "z") |>
+      add_statistic("p", pe$p[i]) |>
+      add_statistic(
+        "standardized estimate (lv)", pe$std.lv[i],
+        symbol = "β", subscript = "lv"
+      ) |>
+      add_statistic(
+        "standardized estimate (all)", pe$std.all[i],
+        symbol = "β", subscript = "all"
+      )
+
+    groups$groups <- append(groups$groups, list(group))
+  }
+
+  list$groups <- append(list$groups, list(groups))
+
+  return(list)
+}
+
+add_intercepts <- function(list, pe) {
+  groups <- list(name = "Intercepts")
+
+  for (i in seq_len(nrow(pe))) {
+    group <- list(name = paste(pe$lhs[i]))
+
+    group$statistics <- list() |>
+      add_statistic("estimate", pe$est[i], "b") |>
+      add_statistic("standard error", pe$se[i], "SE") |>
+      add_statistic("statistic", pe$z[i], "z") |>
+      add_statistic("p", pe$p[i]) |>
+      add_statistic(
+        "standardized estimate (lv)", pe$std.lv[i],
+        symbol = "β", subscript = "lv"
+      ) |>
+      add_statistic(
+        "standardized estimate (all)", pe$std.all[i],
+        symbol = "β", subscript = "all"
+      )
+
+    groups$groups <- append(groups$groups, list(group))
+  }
+
+  list$groups <- append(list$groups, list(groups))
+
+  return(list)
+}
+
+add_variances <- function(list, pe) {
+  groups <- list(name = "Variances")
+
+  for (i in seq_len(nrow(pe))) {
+    group <- list(name = paste(pe$lhs[i]))
+
+    group$statistics <- list() |>
+      add_statistic("estimate", pe$est[i], "b") |>
+      add_statistic("standard error", pe$se[i], "SE") |>
+      add_statistic("statistic", pe$z[i], "z") |>
+      add_statistic("p", pe$p[i]) |>
+      add_statistic(
+        "standardized estimate (lv)", pe$std.lv[i],
+        symbol = "β", subscript = "lv"
+      ) |>
+      add_statistic(
+        "standardized estimate (all)", pe$std.all[i],
+        symbol = "β", subscript = "all"
+      )
+
+    groups$groups <- append(groups$groups, list(group))
+  }
+
+  list$groups <- append(list$groups, list(groups))
+
+  return(list)
+}
+
+add_defined_parameters <- function(list, pe) {
+  groups <- list(name = "Defined parameters")
+
+  for (i in seq_len(nrow(pe))) {
+    group <- list(name = paste(pe$lhs[i], "~", pe$rhs[i]))
+
+    group$statistics <- list() |>
+      add_statistic("estimate", pe$est[i], "b") |>
+      add_statistic("standard error", pe$se[i], "SE") |>
+      add_statistic("statistic", pe$z[i], "z") |>
+      add_statistic("p", pe$p[i]) |>
+      add_statistic(
+        "standardized estimate (lv)", pe$std.lv[i],
+        symbol = "β", subscript = "lv"
+      ) |>
+      add_statistic(
+        "standardized estimate (all)", pe$std.all[i],
+        symbol = "β", subscript = "all"
+      )
+
+    groups$groups <- append(groups$groups, list(group))
+  }
+
+  list$groups <- append(list$groups, list(groups))
 
   return(list)
 }

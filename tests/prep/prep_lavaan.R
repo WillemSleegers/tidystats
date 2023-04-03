@@ -1,17 +1,3 @@
-# Todo --------------------------------------------------------------------
-
-# - sem(): added defined parameter (mediation), multilevel, ESEM
-# - Added growth() for latent growth curve models
-# - lavTestLRT() for measurement invariance returns an object with fit
-#   statistics
-# - fitted values and residuals need the fit instead of summary object,
-# but maybe not relevant for tidystats
-
-# fitted covariance matrix (maybe not needed for tidystats)
-# fitted.values(fit_cfa)
-# unstandardized residual (maybe not needed for tidystats)
-# resid(fit_cfa)
-
 # Setup -------------------------------------------------------------------
 
 library(lavaan)
@@ -89,10 +75,11 @@ sem_model <- "
 sem <- sem(sem_model, data = PoliticalDemocracy)
 
 set.seed(1234)
-X <- rnorm(100)
-M <- 0.5 * X + rnorm(100)
-Y <- 0.7 * M + rnorm(100)
-data <- data.frame(X = X, Y = Y, M = M)
+data <- tibble::tibble(
+  X = rnorm(100),
+  M = 0.5 * X + rnorm(100),
+  Y = 0.7 * M + rnorm(100)
+)
 
 sem_mediation_model <- "
     # direct effect
@@ -106,7 +93,7 @@ sem_mediation_model <- "
     total := c + (a*b)
 "
 
-mediation <- sem(sem_mediation_model, data = data)
+sem_mediation <- sem(sem_mediation_model, data = data)
 
 sem_multilevel_model <- "
     level: 1
@@ -125,7 +112,7 @@ sem_multilevel <- sem(
 ex5_25 <- read.table("http://statmodel.com/usersguide/chap5/ex5.25.dat")
 names(ex5_25) <- paste0("y", 1:12)
 
-model.esem <- '
+sem_esem_model <- '
     # efa block
     efa("efa1")*f1 +
     efa("efa1")*f2 =~ y1 + y2 + y3 + y4 + y5 + y6
@@ -138,8 +125,8 @@ model.esem <- '
     f3 ~ f1 + f2
     f4 ~ f3
 '
-fit_esem <- sem(
-  model = model.esem,
+sem_esem <- sem(
+  model = sem_esem_model,
   data = ex5_25,
   rotation = "geomin",
   information = "observed",
@@ -151,39 +138,39 @@ fit_esem <- sem(
     geomin.epsilon = 0.0001
   )
 )
-summary_esem <- summary(
-  fit_esem,
+
+statistics <- statistics |>
+  add_stats(sem) |>
+  add_stats(sem_mediation) |>
+  add_stats(sem_multilevel) |>
+  add_stats(sem_esem)
+
+summary(sem, standardized = TRUE, fit.measures = TRUE)
+summary(sem_mediation)
+summary(sem_multilevel, standardized = TRUE, fit.measures = TRUE)
+summary(
+  sem_esem,
   standardized = TRUE,
   fit.measures = TRUE
 )
-
-statistics <- statistics |>
-  add_stats(summary_sem) |>
-  add_stats(summary_definied_parameters) |>
-  add_stats(summary_multilevel) |>
-  add_stats(summary_esem)
-
-summary(sem, standardized = TRUE, fit.measures = TRUE)
-summary(mediation)
-summary(multilevel, standardized = TRUE, fit.measures = TRUE)
 
 # lavaan() ----------------------------------------------------------------
 
-fit_lavaan <- lavaan(
-  HS.model,
-  data = HolzingerSwineford1939, auto.var = TRUE,
-  auto.fix.first = TRUE, auto.cov.lv.x = TRUE
+HS_model <- "
+    visual  =~ x1 + x2 + x3
+    textual =~ x4 + x5 + x6
+    speed   =~ x7 + x8 + x9
+"
+
+lavaan <- lavaan(
+  HS_model,
+  data = HolzingerSwineford1939,
+  auto.var = TRUE, auto.fix.first = TRUE, auto.cov.lv.x = TRUE
 )
 
-summary_lavaan <- summary(
-  fit_lavaan,
-  standardized = TRUE,
-  fit.measures = TRUE
-)
+statistics <- add_stats(statistics, lavaan)
 
-statistics <- statistics |>
-  add_stats(summary_lavaan)
-
+summary(lavaan, standardized = TRUE, fit.measures = TRUE)
 
 # lavTestLRT() ------------------------------------------------------------
 
@@ -193,26 +180,30 @@ HS_model <- "
     speed   =~ x7 + x8 + x9
 "
 
-fit1 <- cfa(
+fit_1 <- cfa(
   HS_model,
   data = HolzingerSwineford1939,
   group = "school"
 )
 
-fit2 <- cfa(
+fit_2 <- cfa(
   HS_model,
   data = HolzingerSwineford1939,
   group = "school",
   group.equal = "loadings"
 )
-fit3 <- cfa(
+
+fit_3 <- cfa(
   HS_model,
   data = HolzingerSwineford1939,
   group = "school",
   group.equal = c("intercepts", "loadings")
 )
 
-lrt <- lavTestLRT(fit1, fit2, fit3)
+lrt <- lavTestLRT(fit_1, fit_2, fit_3)
+
+statistics <- add_stats(statistics, lrt)
+
 lrt
 
 # growth() ----------------------------------------------------------------
@@ -239,12 +230,8 @@ write_test_stats(statistics, "tests/data/lavaan.json")
 # Cleanup -----------------------------------------------------------------
 
 rm(
-  statistics, summary_cfa, summary_intercepts, summary_efa,
-  summary_invariance, summary_sem, summary_definied_parameters,
-  summary_multilevel, summary_esem, summary_growth,
-  summary_lavaan, fit_cfa, fit_intercepts, fit_groups, fit_efa,
-  fit1, fit2, fit3, fit_sem, fit_defined_parameters, ex5_25,
-  fit_esem, fit_multilevel, fit_growth, fith_lavaan, HS.model,
-  HS.model.intercepts, efa.model, model, model.mediation,
-  model.multilevel, model.esem, model.growth, df
+  data, lrt, cfa, cfa_efa, cfa_groups, cfa_intercepts, efa_model, fit_1, fit_2,
+  fit_3, growth, HS_model, HS_model_intercepts, lavaan, model_growth,
+  sem, sem_esem, sem_esem_model, sem_mediation, sem_mediation_model,
+  sem_model, sem_multilevel, sem_multilevel_model, statistics, df, ex5_25
 )
