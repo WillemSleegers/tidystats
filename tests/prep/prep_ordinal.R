@@ -18,11 +18,11 @@ summary(fm1)
 # anova() -----------------------------------------------------------------
 
 fm1 <- clm(rating ~ temp * contact, data = wine)
-fm2 <- update(fm1, ~.-temp:contact)
+fm2 <- update(fm1, ~ . - temp:contact)
 
 anova <- anova(fm1, fm2)
 
-statistics <- statistics |> 
+statistics <- statistics |>
   add_stats(anova)
 
 anova
@@ -37,9 +37,9 @@ fm1_symmetric <- update(fm1, threshold = "symmetric")
 fm1_equidistant <- update(fm1, threshold = "equidistant")
 
 statistics <- statistics |>
-  add_stats(fm1_prt) |> 
+  add_stats(fm1_prt) |>
   add_stats(fm1_ll) |>
-  add_stats(fm1_cll) |> 
+  add_stats(fm1_cll) |>
   add_stats(fm1_cct) |>
   add_stats(fm1_symmetric) |>
   add_stats(fm1_equidistant)
@@ -62,9 +62,6 @@ write_test_stats(statistics, "tests/data/ordinal.json")
 # Cleanup -----------------------------------------------------------------
 
 rm(
-  fm1, fm2,  anova, fm1_prt, fm1_cll, fm1_ll, fm1_cct, fm1_symmetric,
+  fm1, fm2, anova, fm1_prt, fm1_cll, fm1_ll, fm1_cct, fm1_symmetric,
   fm1_equidistant, df, statistics, wine
 )
-
-  
-  
