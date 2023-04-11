@@ -69,6 +69,70 @@ pred_nom_by
 
 # avg_comparisons() -------------------------------------------------------
 
+tmp <- mtcars
+tmp$am <- as.logical(tmp$am)
+mod <- lm(mpg ~ am + factor(cyl), tmp)
+comp <- avg_comparisons(mod, variables = list(cyl = "reference"))
+
+comp
+
+statistics <- statistics |>
+  add_stats(comp)
+
+mod <- lm(mpg ~ hp, data = mtcars)
+comp_one <- avg_comparisons(mod, variables = list(hp = 1))
+comp_one
+
+statistics <- statistics |>
+  add_stats(comp_one)
+
+mod <- lm(mpg ~ factor(cyl) * factor(gear) + hp, data = mtcars)
+comp_cross <- avg_comparisons(mod, variables = c("cyl", "gear"), cross = TRUE)
+comp_cross
+
+statistics <- statistics |>
+  add_stats(comp_cross)
+
+# variable-specific contrasts
+avg_comparisons(mod, variables = list(gear = "sequential", hp = 10))
+
+# hypothesis test: is the `hp` marginal effect at the mean equal to the `drat` marginal effect
+mod <- lm(mpg ~ wt + drat, data = mtcars)
+
+# same hypothesis test using row indices
+avg_comparisons(
+  mod,
+  newdata = "mean",
+  hypothesis = "b1 - b2 = 0"
+)
+
+# two custom contrasts using a matrix of weights
+lc <- matrix(
+  c(
+    1, -1,
+    2, 3
+  ),
+  ncol = 2
+)
+avg_comparisons(
+  mod,
+  newdata = "mean",
+  hypothesis = lc
+)
+
+# `by` argument
+mod <- lm(mpg ~ hp * am * vs, data = mtcars)
+avg_comparisons(mod, by = TRUE)
+avg_comparisons(mod, variables = "hp", by = c("vs", "am"))
+
+library(nnet)
+mod <- multinom(factor(gear) ~ mpg + am * vs, data = mtcars, trace = FALSE)
+by <- data.frame(
+  group = c("3", "4", "5"),
+  by = c("3,4", "3,4", "5")
+)
+avg_comparisons(mod, type = "probs", by = by)
+
 # avg_slopes() ------------------------------------------------------------
 
 mod <- glm(am ~ hp * wt, data = mtcars, family = binomial)

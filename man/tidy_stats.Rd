@@ -28,7 +28,8 @@
 \alias{tidy_stats.lavaan}
 \alias{tidy_stats.lmerMod}
 \alias{tidy_stats.lmerModLmerTest}
-\alias{tidy_stats.marginaleffects}
+\alias{tidy_stats.predictions}
+\alias{tidy_stats.comparisons}
 \alias{tidy_stats.rma.uni}
 \alias{tidy_stats.rma.mh}
 \alias{tidy_stats.rma.peto}
@@ -99,7 +100,9 @@ tidy_stats(x, args = NULL)
 
 \method{tidy_stats}{lmerModLmerTest}(x, args = NULL)
 
-\method{tidy_stats}{marginaleffects}(x, args = NULL)
+\method{tidy_stats}{predictions}(x, args = NULL)
+
+\method{tidy_stats}{comparisons}(x, args = NULL)
 
 \method{tidy_stats}{rma.uni}(x, args = NULL)
 
@@ -247,7 +250,9 @@ Currently supported functions:
 
 \item \code{tidy_stats(lmerModLmerTest)}: tidy_stats method for class 'lmerModLmerTest'
 
-\item \code{tidy_stats(marginaleffects)}: tidy_stats method for class 'marginaleffects'
+\item \code{tidy_stats(predictions)}: tidy_stats method for class 'predictions'
+
+\item \code{tidy_stats(comparisons)}: tidy_stats method for class 'comparisons'
 
 \item \code{tidy_stats(rma.uni)}: tidy_stats method for class 'rma.uni'
 

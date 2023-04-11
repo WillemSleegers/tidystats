@@ -27,6 +27,37 @@ tidy_stats.predictions <- function(x, args = NULL) {
   return(analysis)
 }
 
+#' @describeIn tidy_stats tidy_stats method for class 'comparisons'
+tidy_stats.comparisons <- function(x, args = NULL) {
+  analysis <- list(method = "Average (marginal) estimates")
+
+  x <- as.data.frame(x)
+
+  names(x)[which(names(x) == "contrast")] <- unique(x$term)
+  names(x) <- gsub("contrast_", "", names(x))
+
+  vars <- names(x)[
+    !grepl(
+      paste(
+        c(
+          "rowid", "term", "estimate", "std.error", "statistic", "p.value",
+          "conf.low", "conf.high"
+        ),
+        collapse = "|"
+      ),
+      names(x)
+    )
+  ]
+
+  if (nrow(x) > 1) {
+    analysis <- add_group(analysis, vars, x)
+  } else {
+    analysis <- add_statistics(analysis, x)
+  }
+
+  return(analysis)
+}
+
 add_statistics <- function(list, x) {
   list$statistics <- list() |>
     add_statistic(
