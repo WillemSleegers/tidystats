@@ -105,35 +105,35 @@ Currently supported functions:
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{htest}: tidy_stats method for class 'htest'
+\item \code{tidy_stats(htest)}: tidy_stats method for class 'htest'
 
-\item \code{lm}: tidy_stats method for class 'lm'
+\item \code{tidy_stats(lm)}: tidy_stats method for class 'lm'
 
-\item \code{glm}: tidy_stats method for class 'glm'
+\item \code{tidy_stats(glm)}: tidy_stats method for class 'glm'
 
-\item \code{anova}: tidy_stats method for class 'anova'
+\item \code{tidy_stats(anova)}: tidy_stats method for class 'anova'
 
-\item \code{aov}: tidy_stats method for class 'aov'
+\item \code{tidy_stats(aov)}: tidy_stats method for class 'aov'
 
-\item \code{aovlist}: tidy_stats method for class 'aovlist'
+\item \code{tidy_stats(aovlist)}: tidy_stats method for class 'aovlist'
 
-\item \code{tidystats_descriptives}: tidy_stats method for class 'tidystats_descriptives'
+\item \code{tidy_stats(tidystats_descriptives)}: tidy_stats method for class 'tidystats_descriptives'
 
-\item \code{tidystats_counts}: tidy_stats method for class 'tidystats_counts'
+\item \code{tidy_stats(tidystats_counts)}: tidy_stats method for class 'tidystats_counts'
 
-\item \code{lmerMod}: tidy_stats method for class 'lmerMod'
+\item \code{tidy_stats(lmerMod)}: tidy_stats method for class 'lmerMod'
 
-\item \code{lmerModLmerTest}: tidy_stats method for class 'lmerModLmerTest'
+\item \code{tidy_stats(lmerModLmerTest)}: tidy_stats method for class 'lmerModLmerTest'
 
-\item \code{BFBayesFactor}: tidy_stats method for class 'BayesFactor'
+\item \code{tidy_stats(BFBayesFactor)}: tidy_stats method for class 'BayesFactor'
 
-\item \code{afex_aov}: tidy_stats method for class 'afex_aov'
+\item \code{tidy_stats(afex_aov)}: tidy_stats method for class 'afex_aov'
 
-\item \code{emmGrid}: tidy_stats method for class 'emmGrid'
+\item \code{tidy_stats(emmGrid)}: tidy_stats method for class 'emmGrid'
 
-\item \code{emm_list}: tidy_stats method for class 'emm_list'
+\item \code{tidy_stats(emm_list)}: tidy_stats method for class 'emm_list'
+
 }}
-
 \examples{
 # Conduct statistical tests
 # t-test:

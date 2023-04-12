@@ -1,3 +1,6 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -11,10 +14,10 @@
 [![](https://www.r-pkg.org/badges/version/tidystats?color=green)](https://cran.r-project.org/package=tidystats) [![](http://cranlogs.r-pkg.org/badges/grand-total/tidystats?color=green)](https://cran.r-project.org/package=tidystats) [![](http://cranlogs.r-pkg.org/badges/last-month/tidystats?color=green)](https://cran.r-project.org/package=tidystats) [![](http://cranlogs.r-pkg.org/badges/last-week/tidystats?color=green)](https://cran.r-project.org/package=tidystats) [![](https://img.shields.io/badge/doi-10.5281/zenodo.4041859-blue.svg)](https://doi.org/10.5281/zenodo.4041859)
 <!-- badges: end -->
 
-**Author:** [Willem Sleegers](https://www.willemsleegers.com/)
-**License:** [MIT](https://opensource.org/licenses/MIT)
+**Author:** [Willem Sleegers](https://willemsleegers.com/)
+**License:** [MIT](https://opensource.org/license/mit/)
 
-`tidystats` is an R package aimed at sharing and reporting the output of statistical models. `tidystats` extracts the output of statistical models (e.g., *t*-tests, regression models) and combines them into a structured file. This file can then be used to report the statistics in a manuscript or shared with others so that they can extract the statistics (e.g., for meta-analyses).
+`tidystats` is an R package aimed at sharing the output of statistical models. `tidystats` extracts the output of statistical models (e.g., *t*-tests, regression models) and combines them into a structured file. This file can then be used to report the statistics in a manuscript or shared with others so that they can extract the statistics (e.g., for meta-analyses).
 
 Please see below for instructions on how to install and use this package. **Do note that the package is currently in development. This means the package may contain bugs and is subject to significant changes.** If you find any bugs or if you have any feedback, please let me know by creating an issue here on Github (it's really easy to do!).
 

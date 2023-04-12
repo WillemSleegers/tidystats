@@ -1,9 +1,8 @@
-
 # Todos -------------------------------------------------------------------
 
-#TODO: Rename certain terms to contrasts?
-#TODO: # Call deviance dfs df numerator and df denominator?
-#TODO: Replace some of the statistics extraction code with loops over all 
+# TODO: Rename certain terms to contrasts?
+# TODO: # Call deviance dfs df numerator and df denominator?
+# TODO: Replace some of the statistics extraction code with loops over all
 #      columns and then fix the names after
 
 # Update ------------------------------------------------------------------
@@ -36,7 +35,7 @@ usethis::use_pkgdown()
 devtools::test()
 
 # Test specific tests
-testthat::test_file("tests/testthat/test_htest.R")
+testthat::test_file("tests/testthat/test_glm.R")
 
 # Create a vignette -------------------------------------------------------
 
@@ -71,8 +70,8 @@ devtools::test()
 # Check package
 # devtools::load_all()
 devtools::check()
-devtools::check(args = c('--run-donttest')) # Without examples test
-devtools::check(args = c('--as-cran'))
+devtools::check(args = c("--run-donttest")) # Without examples test
+devtools::check(args = c("--as-cran"))
 
 # run R CMD check on CRAN’s servers
 devtools::check_win_devel()

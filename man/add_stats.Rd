@@ -21,19 +21,19 @@ add_stats(
 \item{identifier}{A character string identifying the model. Automatically
 created if not provided.}
 
-\item{type}{A character string specifying the type of analysis: primary, 
+\item{type}{A character string specifying the type of analysis: primary,
 secondary, or exploratory.}
 
-\item{preregistered}{A boolean specifying whether the analysis was 
+\item{preregistered}{A boolean specifying whether the analysis was
 preregistered or not.}
 
 \item{notes}{A character string specifying additional information.}
 }
 \description{
-\code{add_stats} is used to add the output of a statistical test to a 
-tidystats list. While adding the output, additional information about the 
-test can be added, including the type of test (primary, secondary, or 
-exploratory), whether the test was preregistered, and additional notes. 
+\code{add_stats} is used to add the output of a statistical test to a
+tidystats list. While adding the output, additional information about the
+test can be added, including the type of test (primary, secondary, or
+exploratory), whether the test was preregistered, and additional notes.
 Please note that not all statistical tests are supported. See 'Details' below
 for a list of supported statistical tests.
 }
@@ -79,8 +79,6 @@ Currently supported functions:
 }
 }
 \examples{
-# Load dplyr for access to the piping operator
-library(dplyr)
 
 # Conduct statistical tests
 # t-test:
@@ -94,15 +92,15 @@ weight <- c(ctl, trt)
 lm_D9 <- lm(weight ~ group)
 
 # ANOVA:
-npk_aov <- aov(yield ~ block + N*P*K, npk)
+npk_aov <- aov(yield ~ block + N * P * K, npk)
 
 #' # Create an empty list
 results <- list()
 
 # Add output to the results list
-results <- results \%>\%
-  add_stats(sleep_test) \%>\%
-  add_stats(lm_D9, type = "primary", preregistered = TRUE) \%>\%
+results <- results |>
+  add_stats(sleep_test) |>
+  add_stats(lm_D9, type = "primary", preregistered = TRUE) |>
   add_stats(npk_aov, notes = "An ANOVA example")
 
 }

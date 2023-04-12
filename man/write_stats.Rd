@@ -17,9 +17,6 @@ write_stats(x, path, digits = 6)
 \code{write_stats} writes a tidystats list to a .json file.
 }
 \examples{
-# Load dplyr for access to the piping operator
-library(dplyr)
-
 # Conduct statistical tests
 # t-test:
 sleep_test <- t.test(extra ~ group, data = sleep, paired = TRUE)
@@ -32,15 +29,15 @@ weight <- c(ctl, trt)
 lm_D9 <- lm(weight ~ group)
 
 # ANOVA:
-npk_aov <- aov(yield ~ block + N*P*K, npk)
+npk_aov <- aov(yield ~ block + N * P * K, npk)
 
 #' # Create an empty list
 results <- list()
 
 # Add output to the results list
-results <- results \%>\%
-  add_stats(sleep_test) \%>\%
-  add_stats(lm_D9, type = "primary", preregistered = TRUE) \%>\%
+results <- results |>
+  add_stats(sleep_test) |>
+  add_stats(lm_D9, type = "primary", preregistered = TRUE) |>
   add_stats(npk_aov, notes = "An ANOVA example")
 
 # Save the results

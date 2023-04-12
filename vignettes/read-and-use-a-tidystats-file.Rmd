@@ -65,6 +65,6 @@ sig_p_values %>%
   kable(format = "markdown")
 ```
 
-This could be useful if you want to conduct a [p-curve analysis](https://journals.sagepub.com/doi/abs/10.1177/1745691614553988). Although do note that you should not blindly select all *p*-values. You should select only the *p*-values that are relevant to a particular hypothesis. If researchers provide the correct meta-information for each test (e.g., by indicating whether it is a primary analysis), this could help meta-researchers make correct decisions about which statistics to include in their analyses.
+This could be useful if you want to conduct a [p-curve analysis](https://doi.org/10.1177/1745691614553988). Although do note that you should not blindly select all *p*-values. You should select only the *p*-values that are relevant to a particular hypothesis. If researchers provide the correct meta-information for each test (e.g., by indicating whether it is a primary analysis), this could help meta-researchers make correct decisions about which statistics to include in their analyses.
 
 In short, by reading a `tidystats`-produced file of statistics, you can convert the statistics to a data frame using the `tidy_stats_to_data_frame` function and apply common data transformation functions to extract specific statistics.
