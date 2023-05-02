@@ -7,63 +7,87 @@ statistics <- list()
 # brm() -------------------------------------------------------------------
 
 poisson_regression <- brm(
-  count ~ zAge + zBase * Trt + (1|patient),
-  data = epilepsy, 
-  family = poisson(), 
-  prior = prior(normal(0,10), class = b) + 
-    prior(cauchy(0,2), class = sd)
-  )
+  count ~ zAge + zBase * Trt + (1 | patient),
+  data = epilepsy,
+  family = poisson(),
+  prior = c(
+    prior(normal(0, 10), class = b),
+    prior(cauchy(0, 2), class = sd)
+  ),
+  seed = 1,
+  file = "./tests/models/brms-poisson-regression"
+)
 
 ordinal_regression <- brm(
   rating ~ period + carry + cs(treat),
-  data = inhaler, 
+  data = inhaler,
   family = sratio("logit"),
-  prior = set_prior("normal(0,5)"), 
-  chains = 2
-  )
+  prior = set_prior("normal(0,5)"),
+  seed = 1,
+  file = "./tests/models/brms-ordinal-regression"
+)
 
 survival_regression <- brm(
-  time | cens(censored) ~ age * sex + disease + (1|patient),
-  data = kidney, 
-  family = lognormal()
-  )
+  time | cens(censored) ~ age * sex + disease + (1 | patient),
+  data = kidney,
+  family = lognormal(),
+  seed = 1,
+  file = "./tests/models/brms-survival-regression"
+)
 
+set.seed(1)
 ntrials <- sample(1:10, 100, TRUE)
 success <- rbinom(100, size = ntrials, prob = 0.4)
 x <- rnorm(100)
 data4 <- data.frame(ntrials, success, x)
 probit_regression <- brm(
-  success | trials(ntrials) ~ x, 
+  success | trials(ntrials) ~ x,
   data = data4,
-  family = binomial("probit")
-  )
+  family = binomial("probit"),
+  file = "./tests/models/brms-probit-regression"
+)
 
 nonlinear_gaussian <- brm(
-  bf(cum ~ ult * (1 - exp(-(dev/theta)^omega)),
-     ult ~ 1 + (1|AY), omega ~ 1, theta ~ 1,
-     nl = TRUE),
+  bf(
+    cum ~ ult * (1 - exp(-(dev / theta)^omega)),
+    ult ~ 1 + (1 | AY),
+    omega ~ 1,
+    theta ~ 1,
+    nl = TRUE
+  ),
   data = loss, family = gaussian(),
   prior = c(
     prior(normal(5000, 1000), nlpar = "ult"),
     prior(normal(1, 2), nlpar = "omega"),
     prior(normal(45, 10), nlpar = "theta")
   ),
-  control = list(adapt_delta = 0.9)
-  )
+  control = list(adapt_delta = 0.9),
+  seed = 1,
+  file = "./tests/models/brms-nonlinear-gaussian"
+)
 
-data_het <- data.frame(
-  y = c(rnorm(50), rnorm(50, 1, 2)),
-  x = factor(rep(c("a", "b"), each = 50))
-  )
+set.seed(1)
 heterogeneous_variances <- brm(
-  bf(y ~ x, sigma ~ 0 + x), 
-  data = data_het
-  )
+  bf(y ~ x, sigma ~ 0 + x),
+  data = data.frame(
+    y = c(rnorm(50), rnorm(50, 1, 2)),
+    x = factor(rep(c("a", "b"), each = 50))
+  ),
+  file = "./tests/models/brms-heterogeneous-variances"
+)
+heterogeneous_variances
 
+set.seed(1)
 quantile_regression <- brm(
-  bf(y ~ x, quantile = 0.25), data = data_het,
-  family = asym_laplace()
-  )
+  bf(y ~ x, quantile = 0.25),
+  data = data.frame(
+    y = c(rnorm(50), rnorm(50, 1, 2)),
+    x = factor(rep(c("a", "b"), each = 50))
+  ),
+  family = asym_laplace(),
+  seed = 1,
+  file = "./tests/models/brms-quantile-regression"
+)
 
 statistics <- statistics |>
   add_stats(poisson_regression) |>
@@ -75,7 +99,7 @@ statistics <- statistics |>
 
 summary(poisson_regression)
 summary(ordinal_regression)
-summary(survival_regression) 
+summary(survival_regression)
 summary(nonlinear_gaussian)
 summary(heterogeneous_variances)
 summary(quantile_regression)
@@ -85,23 +109,23 @@ summary(quantile_regression)
 fit1 <- brm(
   rating ~ treat + period + carry,
   data = inhaler
-  )
+)
 loo1 <- loo(fit1)
 
 fit2 <- brm(
-  rating ~ treat + period + carry + (1|subject),
+  rating ~ treat + period + carry + (1 | subject),
   data = inhaler
-  )
+)
 loo2 <- loo(fit2)
 
 loo_compare <- loo_compare(
-  loo1, 
+  loo1,
   loo2
-  )
+)
 
 statistics <- statistics |>
   add_stats(loo1) |>
-  add_stats(loo2) |> 
+  add_stats(loo2) |>
   add_stats(loo_compare)
 
 summary(loo1)
@@ -119,8 +143,8 @@ write_test_stats(statistics, "tests/data/brms.json")
 # Cleanup -----------------------------------------------------------------
 
 rm(
-  poisson_regression, ordinal_regression, survival_regression, 
+  poisson_regression, ordinal_regression, survival_regression,
   nonlinear_gaussian, heterogeneous_variances, quantile_regression, fit1,
-  fit2, loo1, loo2, loo_compare, ntrials, success, x, data4, data_het, df, 
+  fit2, loo1, loo2, loo_compare, ntrials, success, x, data4, data_het, df,
   statistics
 )
