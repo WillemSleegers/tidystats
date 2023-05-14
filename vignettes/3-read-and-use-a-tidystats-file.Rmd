@@ -39,7 +39,7 @@ statistics <- read_stats("statistics.json") |>
 
 p_values <- filter(statistics, statistic == "p")
 
-options(knitr.kable.NA = '')
+options(knitr.kable.NA = "")
 
 p_values |>
   kable(format = "markdown")

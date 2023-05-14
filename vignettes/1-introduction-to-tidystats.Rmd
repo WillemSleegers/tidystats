@@ -95,10 +95,14 @@ results <- list()
 
 # Add the analyses
 results <- results %>%
-  add_stats(t_test, preregistered = TRUE, type = "primary", 
-    notes = "A t-test comparing the effect of source on the quote rating.") %>%
-  add_stats(lm_us_or_not, preregistered = FALSE, type = "exploratory", 
-    notes = "Interaction effect with being from the U.S. or not.") %>%
+  add_stats(t_test,
+    preregistered = TRUE, type = "primary",
+    notes = "A t-test comparing the effect of source on the quote rating."
+  ) %>%
+  add_stats(lm_us_or_not,
+    preregistered = FALSE, type = "exploratory",
+    notes = "Interaction effect with being from the U.S. or not."
+  ) %>%
   add_stats(lm_age)
 ```
 

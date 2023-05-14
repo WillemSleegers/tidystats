@@ -1,32 +1,48 @@
 ---
-title: "Manually tidy statistics"
+title: "Custom statistics"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Manually tidy statistics}
+  %\VignetteIndexEntry{Custom statistics}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: references.bib
 ---
 
 ```{r setup, include=FALSE}
-# Load packages
 library(tidystats)
-library(dplyr)
 
-# Set knitr options
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-The normal `tidystats` workflow consists of running analyses (e.g., using `lm()`), saving the output into variables, and then using the `add_stats()` function to add them to a list. This works as long as `tidystats` has built-in support for the analyses you ran. So what should you do when this is not the case?
+The normal `tidystats` workflow consists of running analyses 
+(e.g., using `lm()`), saving the output into variables, and then using the 
+`add_stats()` function to add them to a list. This works as long as `tidystats`
+has built-in support for the analyses you ran. So what should you do when this 
+is not the case?
 
-The first thing would be to let me know that there's a function you would like `tidystats` to support. There are various ways to contact me. You can go to the Github [page](https://github.com/WillemSleegers/tidystats) and create an [issue](https://github.com/WillemSleegers/tidystats/issues). This is the preferred method because it is easy to paste code snippets and to ask follow-up questions. Alternatively, you can also contact me on [Twitter](https://twitter.com/willemsleegers).
+The first thing would be to let me know that there's a function you would like 
+`tidystats` to support. There are various ways to contact me. You can go to the 
+Github [page](https://github.com/WillemSleegers/tidystats) and create an 
+[issue](https://github.com/WillemSleegers/tidystats/issues). This is the 
+preferred method because it is easy to paste code snippets and to ask follow-up 
+questions. Alternatively, you can also contact me on 
+[Twitter](https://twitter.com/willemsleegers).
 
-But if you're in a rush, this does not help you. Nor is it always possible for me to add support for a specific analysis. This can happen when the statistic you want to report is not part of an analysis (for example, the result of `confint()` returns a standard matrix, which does not contain any information about it being a matrix containing confidence intervals).
+But if you're in a rush, this does not help you. Nor is it always possible for 
+me to add support for a specific analysis. This can happen when the statistic 
+you want to report is not part of an analysis (for example, the result of 
+`confint()` returns a standard matrix, which does not contain any information 
+about it being a matrix containing confidence intervals).
 
-For these reasons, it is sometimes nice if you can manually create your own list of statistics, so let's demonstrate how to do this.
+For these reasons, it is sometimes nice if you can manually create your own 
+list of statistics, so let's demonstrate how to do this.
 
-To manually tidy statistics you have to do what `tidystats` normally does for you. That is, you need to provide the `add_stats()` function a list of statistics in a specific structure. I am currently working on a vignette that explains this structure. For now, you can use the examples below to figure out how to create a custom list of statistics and how to use it.
+To manually tidy statistics you have to do what `tidystats` normally does for 
+you. That is, you need to provide the `add_stats()` function a list of 
+statistics in a specific structure. I am currently working on a vignette that 
+explains this structure. For now, you can use the examples below to figure out 
+how to create a custom list of statistics and how to use it.
 
 ## Example 1
 
@@ -43,7 +59,7 @@ intercept_data <- data.frame(score = scale(rnorm(40), center = 0.72))
 full_lm <- lm(score ~ 1, intercept_data)
 null_lm <- lm(score ~ 0, intercept_data)
 
-BF_BIC <- exp((BIC(null_lm) - BIC(full_lm))/2)
+BF_BIC <- exp((BIC(null_lm) - BIC(full_lm)) / 2)
 ```
 
 This produces a BIC of `r round(BF_BIC, 2)`. Now, how do you add this value to a tidystats list? If we try it the standard way, we'll see that it fails.
@@ -85,17 +101,15 @@ Now we don't get an error. `tidystats` sees that it is a list and assumes that y
 
 You can save the `results` list using `write_stats()` and load the resulting JSON file into the Word add-in to reproducibly report the BIC value.
 
-![Example 1: Word add-in](manually-tidy-statistics-example-1.png "Example 1: Word add-in"){width="321"}
-
 ## Example 2
 
 Let's look at a more complex example next. Say we want to calculate the confidence intervals for several parameters in a linear model, using the `confint()` function.
 
 ```{r, eval = FALSE}
 # Run a linear model
-fit <- lm(100/mpg ~ disp, data = mtcars)
+fit <- lm(100 / mpg ~ disp, data = mtcars)
 
-# Compute the confidence intervals 
+# Compute the confidence intervals
 fit_CIs <- confint(fit)
 
 # Create an empty list
@@ -155,8 +169,6 @@ write_stats(results, "results.json")
 ```
 
 And, as before, you can load it up into the Word add-in to report the statistics.
-
-![Example 2: Word add-in](manually-tidy-statistics-example-2.png "Example 2: Word add-in"){width="321"}
 
 ## Summary
 

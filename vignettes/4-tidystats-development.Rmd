@@ -1,8 +1,8 @@
 ---
-title: "tidystats development: Adding new analyses"
+title: "tidystats development"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{tidystats-development-adding-new-analyses}
+  %\VignetteIndexEntry{tidystats development}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

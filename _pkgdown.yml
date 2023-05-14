@@ -8,7 +8,7 @@ reference:
       - add_stats
       - write_stats
       - read_stats
-      - stat
+      - custom_stat
       - custom_stats
       - tidy_stats_to_data_frame
   - title: Analysis functions

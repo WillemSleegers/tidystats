@@ -2,39 +2,37 @@
 % Please edit documentation in R/custom_stats.r
 \name{custom_stats}
 \alias{custom_stats}
-\title{Create a custom statistics object}
+\title{Create a collection of custom statistics}
 \usage{
 custom_stats(method, statistics)
 }
 \arguments{
-\item{method}{A string; specifying the method used to obtain the statistics.}
+\item{method}{A string specifying the method used to obtain the statistics.}
 
-\item{statistics}{A vector of statistics created with \code{stat()}.}
+\item{statistics}{A vector of statistics created with \code{\link[=custom_stat]{custom_stat()}}.}
 }
 \description{
-\code{custom_stats} can be used to create your own statistics object to add
-to a statistics list via \code{add_stats()}. This can be used to add a single
-statistic or a group of statistics. Note that multiple groups of statistics
-are not supported.
+\code{custom_stats()} is used to create a collection of custom statistics
+to add to a statistics list via \code{\link[=add_stats]{add_stats()}}. This can be used to add a
+single statistic or a group of statistics. Note that multiple groups of
+statistics are not supported.
 }
 \examples{
-# Example of a calculating a custom statistic and adding it to a tidystats
-# list
+# Example 1: BIC Bayes factor (approx.)
 lm1 <- lm(Fertility ~ ., data = swiss)
 lm2 <- update(lm1, . ~ . - Examination)
 
 BF10 <- 1 / exp((BIC(lm2) - BIC(lm1)) / 2)
 
 BIC_BFs <- custom_stats(
-  method = "Wagenmakers (2007) method for calculating Bayes factors",
+  method = "BIC Bayes factor",
   statistics = c(
-    stat(name = "BF", value = BF10, subscript = "10"),
-    stat(name = "BF", value = 1 / BF10, subscript = "01")
+    custom_stat(name = "BF", value = BF10, subscript = "10"),
+    custom_stat(name = "BF", value = 1 / BF10, subscript = "01")
   )
 )
 
 statistics <- list()
-
 statistics <- add_stats(statistics, BIC_BFs)
 
 }

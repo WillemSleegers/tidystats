@@ -43,12 +43,11 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="articles/introduction-to-tidystats.html">Introduction to tidystats</a>
-    <a class="dropdown-item" href="articles/manually-tidy-statistics.html">Manually tidy statistics</a>
-    <a class="dropdown-item" href="articles/read-and-use-a-tidystats-file.html">Read and use a tidystats file</a>
-    <a class="dropdown-item" href="articles/statistics-symbols.html">statistics symbols</a>
-    <a class="dropdown-item" href="articles/tidystats-development-adding-new-analyses.html">tidystats development: Adding new analyses</a>
-    <a class="dropdown-item" href="articles/tidystats-taxonomy.html">tidystats taxonomy</a>
+    <a class="dropdown-item" href="articles/1-introduction-to-tidystats.html">Introduction to tidystats</a>
+    <a class="dropdown-item" href="articles/2-custom-statistics.html">Custom statistics</a>
+    <a class="dropdown-item" href="articles/3-read-and-use-a-tidystats-file.html">Read and use a tidystats file</a>
+    <a class="dropdown-item" href="articles/4-tidystats-development.html">tidystats development</a>
+    <a class="dropdown-item" href="articles/5-statistics-symbols.html">statistics symbols</a>
   </div>
 </li>
 <li class="nav-item">
@@ -79,23 +78,18 @@
 <!-- badges: start -->
 
 <p><strong>Author:</strong> <a href="https://www.willemsleegers.com/" class="external-link">Willem Sleegers</a> <strong>License:</strong> <a href="https://opensource.org/licenses/MIT" class="external-link">MIT</a></p>
-<p><code>tidystats</code> is an R package aimed at sharing the output of statistical models. <code>tidystats</code> extracts the output (e.g., <em>t</em>-values, <em>p</em>-values) of statistical models (e.g., <em>t</em>-tests, regression models) and combines them into a structured file. This file can then be used to report the statistics in a manuscript or shared with others so that they can extract the statistics (e.g., for meta-analyses).</p>
-<p>Please see below for instructions on how to install and use this package. <strong>Do note that the package is currently in development. This means the package may contain bugs and is subject to significant changes.</strong> If you find any bugs or if you have any feedback, please let me know by creating an issue here on Github (it’s really easy to do!).</p>
+<p>tidystats is an R package for sharing and reporting statistics. tidystats extracts statistics from the output of statistical functions (e.g., <code><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test()</a></code>, <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code>) and stores them in a structured format. The resulting file can be shared with others and used in popular text editors to reproducibly report the statistics.</p>
+<p>Please see below for instructions on how to install and use this package.</p>
+<p><strong>Do note that the package is currently in development. This means the package may contain bugs and is subject to significant changes.</strong> If you find any bugs or if you have any feedback, please let me know by creating an issue here on Github (it’s really easy to do!).</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p><code>tidystats</code> can be installed from CRAN and the latest version can be installed from Github using <a href="https://github.com/r-lib/devtools" class="external-link">devtools</a>.</p>
+<p>tidystats can be installed from CRAN.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"willemsleegers/tidystats"</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
-</h2>
-<p>Load the package and start by creating an empty list to store the results of statistical models. You can name the list whatever you want (in the example below I create an empty list called <code>results</code>).</p>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"tidystats"</span><span class="op">)</span></span></code></pre></div>
+<p>You can also install the development version from GitHub using the <a href="https://github.com/r-lib/remotes" class="external-link"><code>remotes</code></a> package.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://willemsleegers.github.io/tidystats/" class="external-link">tidystats</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"willemsleegers/tidystats"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
@@ -103,98 +97,84 @@
 <p>The main function is <code><a href="reference/add_stats.html">add_stats()</a></code>. The function has 2 necessary arguments:</p>
 <ul>
 <li>
-<code>results</code>: The list you want to add the statistical output to.</li>
+<code>list</code>: The list you want to add the statistical output to.</li>
 <li>
-<code>output</code>: The output of a statistical test you want to add to the list (e.g., the output of <code><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test()</a></code> or <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code>)</li>
+<code>output</code>: The output of a statistics function you want to add to the list (e.g., the output of <code><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test()</a></code> or <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code>)</li>
 </ul>
-<p>Optionally you can also specify an <code>identifier</code>, the <code>type</code> of analysis, whether the analysis was <code>preregistered</code>, and/or additional <code>notes</code>.</p>
-<p>The <code>identifier</code> is used to identify the model (e.g., ‘weight_height_correlation’). If you do not provide one, one is automatically created for you.</p>
-<p>The <code>type</code> argument specifies the type of analysis as primary, secondary, or exploratory.</p>
-<p>The <code>preregistered</code> argument is used to indicate whether the analysis was preregistered or not.</p>
-<p>Finally the <code>notes</code> argument is used to add additional information which you may find fruitful.</p>
-</div>
-<div class="section level2">
-<h2 id="supported-statistical-functions">Supported statistical functions<a class="anchor" aria-label="anchor" href="#supported-statistical-functions"></a>
-</h2>
-<p><strong>Package:</strong> stats</p>
+<p>Optionally, you can also specify meta-information:</p>
 <ul>
-<li><code><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test()</a></code></li>
-<li><code><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test()</a></code></li>
-<li><code><a href="https://rdrr.io/r/stats/chisq.test.html" class="external-link">chisq.test()</a></code></li>
-<li><code><a href="https://rdrr.io/r/stats/wilcox.test.html" class="external-link">wilcox.test()</a></code></li>
-<li><code><a href="https://rdrr.io/r/stats/fisher.test.html" class="external-link">fisher.test()</a></code></li>
-<li><code><a href="https://rdrr.io/r/stats/oneway.test.html" class="external-link">oneway.test()</a></code></li>
-<li><code><a href="https://rdrr.io/r/stats/aov.html" class="external-link">aov()</a></code></li>
-<li><code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code></li>
-<li><code><a href="https://rdrr.io/r/stats/anova.html" class="external-link">anova()</a></code></li>
+<li>
+<code>identifier</code>: A unique identifier to identify the model (e.g., ‘weight_height_correlation’). If you do not provide one, one is automatically created for you.</li>
+<li>
+<code>type</code>: A type that specifies the type of analysis as primary, secondary, or exploratory.</li>
+<li>
+<code>preregistered</code>: Whether the analysis was preregistered or not.</li>
+<li>
+<code>notes</code>: Additional information you think is useful to record.</li>
 </ul>
-<p><strong>Package:</strong> lme4</p>
-<ul>
-<li><code>lmer()</code></li>
-</ul>
-<p><strong>Package:</strong> lmerTest</p>
-<ul>
-<li><code>lmer()</code></li>
-</ul>
-<p><strong>Package:</strong> BayesFactor</p>
-<ul>
-<li><code>generalTestBF()</code></li>
-<li><code>lmBF()</code></li>
-<li><code>regressionBF()</code></li>
-<li><code>ttestBF()</code></li>
-<li><code>anovaBF()</code></li>
-<li><code>correlationBF()</code></li>
-<li><code>contingencyTableBF()</code></li>
-<li><code>proportionBF()</code></li>
-<li><code>meta.ttestBF()</code></li>
-</ul>
-<p><strong>Package:</strong> tidystats</p>
-<ul>
-<li><code><a href="reference/describe_data.html">describe_data()</a></code></li>
-<li><code><a href="reference/count_data.html">count_data()</a></code></li>
-</ul>
+<p>Once you have added all statistics to a list, you can write the contents to a file using the <code><a href="reference/write_stats.html">write_stats()</a></code> function.</p>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
-<p>In the following example we perform several tests, add them to a list, and save the list to a file.</p>
+<p>The following example shows how to combine and save the statistics from three different statistical tests.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Conduct three different analyses</span></span>
-<span><span class="co"># t-test:</span></span>
+<code class="sourceCode R"><span><span class="co"># Conduct a t-test, regression, and an ANOVA</span></span>
 <span><span class="va">sleep_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">extra</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">sleep</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># lm:</span></span>
-<span><span class="va">ctl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4.17</span>,<span class="fl">5.58</span>,<span class="fl">5.18</span>,<span class="fl">6.11</span>,<span class="fl">4.50</span>,<span class="fl">4.61</span>,<span class="fl">5.17</span>,<span class="fl">4.53</span>,<span class="fl">5.33</span>,<span class="fl">5.14</span><span class="op">)</span></span>
-<span><span class="va">trt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4.81</span>,<span class="fl">4.17</span>,<span class="fl">4.41</span>,<span class="fl">3.59</span>,<span class="fl">5.87</span>,<span class="fl">3.83</span>,<span class="fl">6.03</span>,<span class="fl">4.89</span>,<span class="fl">4.32</span>,<span class="fl">4.69</span><span class="op">)</span></span>
-<span><span class="va">group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/gl.html" class="external-link">gl</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">10</span>, <span class="fl">20</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Ctl"</span>,<span class="st">"Trt"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">ctl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4.17</span>, <span class="fl">5.58</span>, <span class="fl">5.18</span>, <span class="fl">6.11</span>, <span class="fl">4.50</span>, <span class="fl">4.61</span>, <span class="fl">5.17</span>, <span class="fl">4.53</span>, <span class="fl">5.33</span>, <span class="fl">5.14</span><span class="op">)</span></span>
+<span><span class="va">trt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4.81</span>, <span class="fl">4.17</span>, <span class="fl">4.41</span>, <span class="fl">3.59</span>, <span class="fl">5.87</span>, <span class="fl">3.83</span>, <span class="fl">6.03</span>, <span class="fl">4.89</span>, <span class="fl">4.32</span>, <span class="fl">4.69</span><span class="op">)</span></span>
+<span><span class="va">group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/gl.html" class="external-link">gl</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">10</span>, <span class="fl">20</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Ctl"</span>, <span class="st">"Trt"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">weight</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">ctl</span>, <span class="va">trt</span><span class="op">)</span></span>
 <span><span class="va">lm_D9</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">group</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># ANOVA:</span></span>
-<span><span class="va">npk_aov</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html" class="external-link">aov</a></span><span class="op">(</span><span class="va">yield</span> <span class="op">~</span> <span class="va">block</span> <span class="op">+</span> <span class="va">N</span><span class="op">*</span><span class="va">P</span><span class="op">*</span><span class="va">K</span>, <span class="va">npk</span><span class="op">)</span></span>
+<span><span class="va">npk_aov</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html" class="external-link">aov</a></span><span class="op">(</span><span class="va">yield</span> <span class="op">~</span> <span class="va">block</span> <span class="op">+</span> <span class="va">N</span> <span class="op">*</span> <span class="va">P</span> <span class="op">*</span> <span class="va">K</span>, <span class="va">npk</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Create an empty list</span></span>
-<span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co"># Create an empty list to add the statistics to</span></span>
+<span><span class="va">statistics</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Add the analyses to the empty list</span></span>
-<span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">results</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">sleep_test</span>, type <span class="op">=</span> <span class="st">"primary"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">lm_D9</span>, preregistered <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="co"># Add the statistics, as well as some meta-information</span></span>
+<span><span class="va">statistics</span> <span class="op">&lt;-</span> <span class="va">statistics</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">sleep_test</span>, type <span class="op">=</span> <span class="st">"primary"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">lm_D9</span>, preregistered <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">npk_aov</span>, notes <span class="op">=</span> <span class="st">"An ANOVA example"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Save the results to a file</span></span>
-<span><span class="fu"><a href="reference/write_stats.html">write_stats</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"results.json"</span><span class="op">)</span></span></code></pre></div>
-<p>This results in a .json file that contains all the statistics from the three models. If you want to see what this file looks like, you can inspect it <a href="https://github.com/WillemSleegers/tidystats/blob/master/inst/results.json" class="external-link">here</a>.</p>
+<span><span class="co"># Save the statistics to a file</span></span>
+<span><span class="fu"><a href="reference/write_stats.html">write_stats</a></span><span class="op">(</span><span class="va">statistics</span>, <span class="st">"statistics.json"</span><span class="op">)</span></span></code></pre></div>
+<p>The result is a .json file that contains all the statistics from the three statistical tests. If you want to see what this file looks like, you can inspect it <a href="https://github.com/WillemSleegers/tidystats/blob/master/tests/data/main.json" class="external-link">here</a>.</p>
+</div>
+<div class="section level2">
+<h2 id="supported-statistical-functions">Supported statistical functions<a class="anchor" aria-label="anchor" href="#supported-statistical-functions"></a>
+</h2>
+<p>tidystats supports functions from the following packages:</p>
+<ul>
+<li><code>stats</code></li>
+<li><code>lme4</code></li>
+<li><code>lmerTest</code></li>
+<li><code>BayesFactor</code></li>
+<li><code>tidystats</code></li>
+</ul>
+<p>In some cases you need to provide extra information to the <code><a href="reference/add_stats.html">add_stats()</a></code> function in order for tidystats to correctly extract the statistics. You can see a list of functions that require the <code>class</code> argument in the documentation of the <code><a href="reference/add_stats.html">add_stats()</a></code> function (<code><a href="reference/add_stats.html">?add_stats</a></code>).</p>
+<p>If you want to use tidystats on an unsupported function, there are two things you can do:</p>
+<ol style="list-style-type: decimal">
+<li>Request support for the new function by creating an Issue. For more information on what it means to add support for a function, see the <a href="https://willemsleegers.github.io/tidystats/articles/tidystats-development.html" class="external-link">tidystats development</a> vignette.</li>
+<li>Manually extract the statistics and add them via <code><a href="reference/add_stats.html">add_stats()</a></code> using the <code><a href="reference/custom_stats.html">custom_stats()</a></code> function. See the vignette on adding <a href="https://willemsleegers.github.io/tidystats/articles/custom-statistics.html" class="external-link">custom statistics</a> for more information.</li>
+</ol>
 </div>
 <div class="section level2">
 <h2 id="reporting-statistics">Reporting statistics<a class="anchor" aria-label="anchor" href="#reporting-statistics"></a>
 </h2>
-<p>If you want to report the statistics in a manuscript, you can do so with a Word add-in that is currently in development <a href="https://github.com/WillemSleegers/tidystats-Word-add-in" class="external-link">here</a>.</p>
+<p>The file created with the <code><a href="reference/write_stats.html">write_stats()</a></code> function can be used in several text editor add-ins to reproducibly report the statistics. For more information on these add-ins, please see the <a href="https://www.tidystats.io" class="external-link">tidystats website</a> or their GitHub pages:</p>
+<ul>
+<li><a href="https://github.com/WillemSleegers/tidystats-Word-add-in" class="external-link">Microsoft Word add-in</a></li>
+<li><a href="https://github.com/WillemSleegers/tidystats-Google-Docs-add-in" class="external-link">Google Docs add-in</a></li>
+</ul>
 </div>
 <div class="section level2">
-<h2 id="more-resources">More resources<a class="anchor" aria-label="anchor" href="#more-resources"></a>
+<h2 id="more-information">More information<a class="anchor" aria-label="anchor" href="#more-information"></a>
 </h2>
-<p>Do you have questions or comments about <code>tidystats</code>? Create an issue here on Github or contact me via <a href="https://twitter.com/willemsleegers" class="external-link">Twitter</a>.</p>
+<p>See the <a href="https://www.tidystats.io" class="external-link">tidystats website</a> for more information, such as a FAQ, tips and tricks, as well as how to receive (and give) support.</p>
+<p>If you have any questions or comments, feel free to create an <a href="https://github.com/WillemSleegers/tidystats/issues" class="external-link">issue</a> here on GitHub or see the website for ways to contact me.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
