@@ -15,21 +15,16 @@ knitr::opts_chunk$set(
 )
 ```
 
-Besides using `tidystats` in combination with Microsoft Word to report statistics, you can also use `tidystats` to convert a list of statistics into a data frame. This enables researchers to then easily extract specific statistics to perform additional analyses with (e.g., meta-analyses). Below is an example of how to convert a list of statistics to a data frame and several simple operations.
+Besides using `tidystats` in combination with a text editor add-in to report statistics, you can also use `tidystats` to convert a list of statistics into a data frame. This enables researchers to then easily extract specific statistics to perform additional analyses with (e.g., meta-analyses). Below is an example of how to convert a list of statistics to a data frame and several simple operations.
 
 ```{r example1_eval, eval = FALSE, message = FALSE}
-# Load packages
 library(tidystats)
 library(dplyr)
 
-# Read in a tidystats-produced .json file
-results <- read_stats("results.json")
+statistics <- read_stats("statistics.json") |>
+  tidy_stats_to_data_frame()
 
-# Convert the list to a data frame
-results_df <- tidy_stats_to_data_frame(results)
-
-# Select the p-values
-p_values <- filter(results_df, statistic == "p")
+p_values <- filter(statistics, statistic == "p")
 ```
 
 With the current example, this results in the following data frame:
@@ -39,29 +34,27 @@ library(tidystats)
 library(dplyr)
 library(knitr)
 
-results <-read_stats(system.file("results.json", package = "tidystats"))
-results_df <- tidy_stats_to_data_frame(results)
+statistics <- read_stats("statistics.json") |>
+  tidy_stats_to_data_frame()
 
-p_values <- filter(results_df, statistic == "p")
+p_values <- filter(statistics, statistic == "p")
 
 options(knitr.kable.NA = '')
 
-p_values %>%
-  select(-extra) %>%
+p_values |>
   kable(format = "markdown")
 ```
 
 Alternatively, you can select all the significant p-values:
 
 ```{r example2_no_eval, eval = FALSE}
-sig_p_values <- filter(results_df, statistic == "p" & value < .05)
+sig_p_values <- filter(statistics, statistic == "p" & value < .05)
 ```
 
 ```{r example2_eval, echo = FALSE}
-sig_p_values <- filter(results_df, statistic == "p" & value < .05)
+sig_p_values <- filter(statistics, statistic == "p" & value < .05)
 
-sig_p_values %>%
-  select(-extra) %>%
+sig_p_values |>
   kable(format = "markdown")
 ```
 

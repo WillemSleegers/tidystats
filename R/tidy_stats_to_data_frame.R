@@ -41,15 +41,12 @@
 #'
 #' @export
 tidy_stats_to_data_frame <- function(x) {
-  # Convert statistics to a data frame
   df <- purrr::map2_df(x, names(x), analysis_to_data_frame)
 
-  # Rename name to statistic_name
-  df <- dplyr::rename(df, statistic_name = name)
+  df <- dplyr::rename(df, statistic = name)
 
-  # Reorder the columns
   df <- dplyr::relocate(df, identifier, sort(tidyselect::peek_vars()))
-  df <- dplyr::relocate(df, dplyr::any_of("symbol"), .after = statistic_name)
+  df <- dplyr::relocate(df, dplyr::any_of("symbol"), .after = statistic)
   df <- dplyr::relocate(df, dplyr::any_of("lower"), .before = value)
   df <- dplyr::relocate(df, dplyr::any_of("upper"), .after = value)
   df <- dplyr::relocate(
@@ -62,16 +59,8 @@ tidy_stats_to_data_frame <- function(x) {
 }
 
 analysis_to_data_frame <- function(x, y) {
-  # Create a data frame with the identifier of the analysis
   df <- tibble::tibble(identifier = y)
 
-  # Check if there is a name for the analysis, if so, add it to the data frame
-  if ("name" %in% names(x)) {
-    df <- dplyr::mutate(df, analysis_name = x$name)
-  }
-
-  # Check if there are statistics, if so, convert them to a data frame and add
-  # them to the data frame of the analysis
   if ("statistics" %in% names(x)) {
     df <- dplyr::bind_cols(
       df,
@@ -96,17 +85,14 @@ analysis_to_data_frame <- function(x, y) {
 }
 
 groups_to_data_frame <- function(x, level) {
-  # Increment the level
   level <- level + 1
 
-  # Check if there are statistics, if so, convert them to a data frame
   if ("statistics" %in% names(x)) {
     df <- purrr::map_df(x$statistics, function(x) {
       return(x)
     })
   }
 
-  # Check if there are groups, if so, convert them to a data frame (recursively)
   if ("groups" %in% names(x)) {
     df <- purrr::map_df(x$groups, groups_to_data_frame, level)
   }
@@ -114,14 +100,14 @@ groups_to_data_frame <- function(x, level) {
   # Check if there's one or more names, if so, add them to the data frame and
   # append the level to the name
   if ("name" %in% names(x)) {
-    df <- dplyr::mutate(df, "group_name_{level}" := as.character(x$name))
+    df <- dplyr::mutate(df, "group_{level}" := as.character(x$name))
   }
 
   if ("names" %in% names(x)) {
     df <- dplyr::mutate(
       df,
-      "group_name_{level}_1" := x$names[[1]]$name,
-      "group_name_{level}_2" := x$names[[2]]$name,
+      "group_{level}_1" := x$names[[1]]$name,
+      "group_{level}_2" := x$names[[2]]$name,
     )
   }
 

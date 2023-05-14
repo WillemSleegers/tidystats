@@ -177,9 +177,9 @@
 <span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Add the analyses to the empty list</span></span>
-<span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">results</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu"><a href="reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">sleep_test</span>, type <span class="op">=</span> <span class="st">"primary"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu"><a href="reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">lm_D9</span>, preregistered <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">results</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">sleep_test</span>, type <span class="op">=</span> <span class="st">"primary"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">lm_D9</span>, preregistered <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">npk_aov</span>, notes <span class="op">=</span> <span class="st">"An ANOVA example"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Save the results to a file</span></span>

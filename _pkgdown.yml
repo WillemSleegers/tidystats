@@ -8,7 +8,8 @@ reference:
       - add_stats
       - write_stats
       - read_stats
-      - tidy_stats
+      - stat
+      - custom_stats
       - tidy_stats_to_data_frame
   - title: Analysis functions
     desc: Functions for performing analyses such as calculating descriptives
@@ -18,6 +19,7 @@ reference:
   - title: Helper functions
     desc: Functions used under the hood
     contents:
+      - tidy_stats
       - tidy_matrix
   - title: Data sets
     desc: Data sets that come with the package
