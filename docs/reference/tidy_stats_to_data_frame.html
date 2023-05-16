@@ -28,11 +28,12 @@ subsetting functions (e.g., dplyr::filter())."><!-- mathjax --><script src="http
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/1-introduction-to-tidystats.html">Introduction to tidystats</a>
-    <a class="dropdown-item" href="../articles/2-custom-statistics.html">Custom statistics</a>
-    <a class="dropdown-item" href="../articles/3-read-and-use-a-tidystats-file.html">Read and use a tidystats file</a>
-    <a class="dropdown-item" href="../articles/4-tidystats-development.html">tidystats development</a>
-    <a class="dropdown-item" href="../articles/5-statistics-symbols.html">statistics symbols</a>
+    <a class="dropdown-item" href="../articles/introduction-to-tidystats.html">Introduction to tidystats</a>
+    <a class="dropdown-item" href="../articles/supported-functions.html">Supported functions</a>
+    <a class="dropdown-item" href="../articles/custom-statistics.html">Custom statistics</a>
+    <a class="dropdown-item" href="../articles/read-and-use-a-tidystats-file.html">Read and use a tidystats file</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/index.html">More articles...</a>
   </div>
 </li>
 <li class="nav-item">
@@ -104,21 +105,7 @@ subsetting functions (e.g., <code><a href="https://dplyr.tidyverse.org/reference
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Select all the p-values</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">statistic</span> <span class="op">==</span> <span class="st">"p"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 11 × 11</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    identifier group_1    group_2 statistic symbol subscript lower    value upper</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> sleep_test <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>      p         <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span> 2.83<span style="color: #949494;">e</span><span style="color: #BB0000;">- 3</span>    <span style="color: #BB0000;">NA</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> lm_D9      Model      <span style="color: #BB0000;">NA</span>      p         <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span> 2.49<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span>    <span style="color: #BB0000;">NA</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> lm_D9      Coefficie… (Inter… p         <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span> 9.55<span style="color: #949494;">e</span><span style="color: #BB0000;">-15</span>    <span style="color: #BB0000;">NA</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> lm_D9      Coefficie… groupT… p         <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span> 2.49<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span>    <span style="color: #BB0000;">NA</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> npk_aov    Terms      block   p         <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span> 1.59<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span>    <span style="color: #BB0000;">NA</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> npk_aov    Terms      N       p         <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span> 4.37<span style="color: #949494;">e</span><span style="color: #BB0000;">- 3</span>    <span style="color: #BB0000;">NA</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> npk_aov    Terms      P       p         <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span> 4.75<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span>    <span style="color: #BB0000;">NA</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> npk_aov    Terms      K       p         <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span> 2.88<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span>    <span style="color: #BB0000;">NA</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> npk_aov    Terms      N:P     p         <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span> 2.63<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span>    <span style="color: #BB0000;">NA</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> npk_aov    Terms      N:K     p         <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span> 1.69<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span>    <span style="color: #BB0000;">NA</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> npk_aov    Terms      P:K     p         <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span> 8.63<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span>    <span style="color: #BB0000;">NA</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2 more variables: interval &lt;chr&gt;, level &lt;dbl&gt;</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'statistic' not found</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

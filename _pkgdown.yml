@@ -26,5 +26,18 @@ reference:
     contents:
       - quote_source
 
+articles:
+  - title: Vignettes
+    navbar: ~
+    contents:
+      - introduction-to-tidystats
+      - supported-functions
+      - custom-statistics
+      - read-and-use-a-tidystats-file
+  - title: Development
+    desc: Vignettes aimed at package developers
+    contents:
+      - tidystats-development
+
 template:
   bootstrap: 5

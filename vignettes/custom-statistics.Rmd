@@ -9,12 +9,6 @@ vignette: >
 bibliography: references.bib
 ---
 
-```{r setup, include=FALSE}
-library(tidystats)
-
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 The normal `tidystats` workflow consists of running analyses 
 (e.g., using `lm()`), saving the output into variables, and then using the 
 `add_stats()` function to add them to a list. This works as long as `tidystats`

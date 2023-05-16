@@ -1,0 +1,99 @@
+[
+  {
+    "package": "afex",
+    "functions": ["aov_ez()", "aov_car()", "aov_4()", "mixed()"]
+  },
+  {
+    "package": "BayesFactor",
+    "functions": [
+      "generalTestBF()",
+      "lmBF()",
+      "regressionBF()",
+      "ttestBF()",
+      "anovaBF()",
+      "correlationBF()",
+      "contingencyTableBF()",
+      "proportionBF()",
+      "meta.ttestBF()"
+    ]
+  },
+  {
+    "package": "effectsize",
+    "functions": ["cohens_d()", "hedges_g()", "glass_delta()"]
+  },
+  {
+    "package": "effsize",
+    "functions": ["cohen.d()", "VD.A()", "cliff.delta()"]
+  },
+  {
+    "package": "emmeans",
+    "functions": [
+      "emmeans()",
+      "contrast()",
+      "test()",
+      "mvcontrast()",
+      "eff_size()",
+      "emtrends()",
+      "joint_tests()",
+      "ref_grid()"
+    ]
+  },
+  {
+    "package": "Hmisc",
+    "functions": ["rcorr()"]
+  },
+  {
+    "package": "irr",
+    "functions": ["icc()"]
+  },
+  {
+    "package": "lme4",
+    "functions": ["lmer()", "anova()"]
+  },
+  {
+    "package": "lmerTest",
+    "functions": ["lmer()", "anova()"]
+  },
+  {
+    "package": "tidystats",
+    "functions": ["count_data()", "describe_data()"]
+  },
+  {
+    "package": "stats",
+    "functions": [
+      "anova()",
+      "ansari.test()",
+      "aov()",
+      "bartlett.test()",
+      "binom.test()",
+      "Box.test()",
+      "chisq.test()",
+      "confint()",
+      "cor.test()",
+      "fisher.test()",
+      "fligner.test()",
+      "friedman.test()",
+      "glm()",
+      "kruskal.test()",
+      "ks.test()",
+      "lm()",
+      "mantelhaen.test()",
+      "mauchly.test()",
+      "mcnemar.test()",
+      "mood.test()",
+      "oneway.test()",
+      "pairwise.t.test()",
+      "pairwise.prop.test()",
+      "pairwise.wilcox.test()",
+      "poisson.test()",
+      "PP.test()",
+      "prop.test()",
+      "prop.trend.test()",
+      "quade.test()",
+      "shapiro.test()",
+      "t.test()",
+      "var.test()",
+      "wilcox.test()"
+    ]
+  }
+]

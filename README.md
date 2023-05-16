@@ -46,21 +46,21 @@ remotes::install_github("willemsleegers/tidystats")
 
 The main function is `add_stats()`. The function has 2 necessary arguments:
 
-- `list`: The list you want to add the statistical output to. 
+- `list`: A list you want to add the statistical output to. 
 - `output`: The output of a statistics function you want to add to the list 
   (e.g., the output of `t.test()` or `lm()`)
 
 Optionally, you can also specify meta-information: 
 
-- `identifier`: A unique identifier to identify the model 
-  (e.g., 'weight_height_correlation'). If you do not provide one, one is 
-  automatically created for you.
+- `identifier`: A unique identifier to identify the output from a statistical 
+  function (e.g., 'weight_height_correlation'). If you do not provide an 
+  identifer, one is automatically created for you.
 - `type`: A type that specifies the type of analysis as primary, secondary, or 
   exploratory.
 - `preregistered`: Whether the analysis was preregistered or not.
 - `notes`: Additional information you think is useful to record.
 
-Once you have added all statistics to a list, you can write the contents to a 
+Once all statistics are added to the list, you can write the contents to a 
 file using the `write_stats()` function.
 
 ## Example
@@ -87,7 +87,7 @@ statistics <- list()
 # Add the statistics, as well as some meta-information
 statistics <- statistics |>
   add_stats(sleep_test, type = "primary") |>
-  add_stats(lm_D9, preregistered = FALSE) |>
+  add_stats(lm_D9, preregistered = TRUE) |>
   add_stats(npk_aov, notes = "An ANOVA example")
 
 # Save the statistics to a file
@@ -97,6 +97,8 @@ write_stats(statistics, "statistics.json")
 The result is a .json file that contains all the statistics from the three 
 statistical tests. If you want to see what this file looks like, you can inspect
 it [here](https://github.com/WillemSleegers/tidystats/blob/master/tests/data/main.json).
+
+For a fully worked out example, see `vignette("introduction-to-tidystats")`.
 
 ## Supported statistical functions
 
@@ -108,7 +110,10 @@ tidystats supports functions from the following packages:
 - `BayesFactor`
 - `tidystats`
 
-In some cases you need to provide extra information to the `add_stats()` 
+For a full list of supported packages and their functions, see 
+`vignette("supported-functions")`. 
+
+In some cases you need provide a `class` to the `add_stats()` 
 function in order for tidystats to correctly extract the statistics. You can 
 see a list of functions that require the `class` argument in the documentation
 of the `add_stats()` function (`?add_stats`).
@@ -117,12 +122,10 @@ If you want to use tidystats on an unsupported function, there are two things
 you can do:
 
 1. Request support for the new function by creating an Issue. For more 
-   information on what it means to add support for a function, see the 
-   [tidystats development](https://willemsleegers.github.io/tidystats/articles/tidystats-development.html) 
-   vignette.
+   information on what it means to add support for a function, read the
+   `vignette("tidystats-development")`.
 2. Manually extract the statistics and add them via `add_stats()` using the 
-   `custom_stats()` function. See the vignette on adding 
-   [custom statistics](https://willemsleegers.github.io/tidystats/articles/custom-statistics.html)
+   `custom_stats()` function. See the `vignette("custom-statistics")`
    for more information.
 
 ## Reporting statistics
