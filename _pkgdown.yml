@@ -33,7 +33,7 @@ articles:
       - introduction-to-tidystats
       - supported-functions
       - custom-statistics
-      - read-and-use-a-tidystats-file
+      - reusing-statistics
   - title: Development
     desc: Vignettes aimed at package developers
     contents:

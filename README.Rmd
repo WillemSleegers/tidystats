@@ -61,16 +61,17 @@ remotes::install_github("willemsleegers/tidystats")
 
 The main function is `add_stats()`. The function has 2 necessary arguments:
 
-- `list`: A list you want to add the statistical output to. 
-- `output`: The output of a statistics function you want to add to the list 
-  (e.g., the output of `t.test()` or `lm()`)
+- `list`: A list you want to add the statistics to. 
+- `output`: The output of a statistics function (e.g., the output of `t.test()` 
+  or `lm()`)
 
-Optionally, you can also specify meta-information: 
+You also need an identifier to uniquely identify the output of a statistics
+function. You can provide an identifier (e.g., 'weight_height_correlation') with
+the `identifier` argument. If you do not provide an identifer, one is 
+automatically created for you.
 
-- `identifier`: A unique identifier to identify the output from a statistical 
-  function (e.g., 'weight_height_correlation'). If you do not provide an 
-  identifer, one is automatically created for you.
-- `type`: A type that specifies the type of analysis as primary, secondary, or 
+Optionally, you can also specify some additional meta-information: 
+- `type`: A type that specifies the analysis as primary, secondary, or 
   exploratory.
 - `preregistered`: Whether the analysis was preregistered or not.
 - `notes`: Additional information you think is useful to record.
@@ -99,7 +100,7 @@ npk_aov <- aov(yield ~ block + N * P * K, npk)
 # Create an empty list to add the statistics to
 statistics <- list()
 
-# Add the statistics, as well as some meta-information
+# Add the statistics and specify some meta-information
 statistics <- statistics |>
   add_stats(sleep_test, type = "primary") |>
   add_stats(lm_D9, preregistered = TRUE) |>
@@ -136,7 +137,8 @@ of the `add_stats()` function (`?add_stats`).
 If you want to use tidystats on an unsupported function, there are two things
 you can do:
 
-1. Request support for the new function by creating an Issue. For more 
+1. Request support for the new function by creating an 
+   [issue](https://github.com/WillemSleegers/tidystats/issues). For more 
    information on what it means to add support for a function, read the
    `vignette("tidystats-development")`.
 2. Manually extract the statistics and add them via `add_stats()` using the 

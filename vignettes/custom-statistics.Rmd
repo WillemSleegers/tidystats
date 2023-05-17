@@ -9,38 +9,110 @@ vignette: >
 bibliography: references.bib
 ---
 
-The normal `tidystats` workflow consists of running analyses 
-(e.g., using `lm()`), saving the output into variables, and then using the 
-`add_stats()` function to add them to a list. This works as long as `tidystats`
-has built-in support for the analyses you ran. So what should you do when this 
-is not the case?
+The normal tidystats workflow consists of running statistics functions such as
+`lm()`, saving the output into variables, and then using the `add_stats()` 
+function to add the statistics to a list. This works as long as tidystats
+has built-in support for the statistics functions you ran. So what should you do
+when this is not the case?
 
 The first thing would be to let me know that there's a function you would like 
-`tidystats` to support. There are various ways to contact me. You can go to the 
+tidystats to support. There are various ways to contact me. You can go to the 
 Github [page](https://github.com/WillemSleegers/tidystats) and create an 
 [issue](https://github.com/WillemSleegers/tidystats/issues). This is the 
 preferred method because it is easy to paste code snippets and to ask follow-up 
-questions. Alternatively, you can also contact me on 
-[Twitter](https://twitter.com/willemsleegers).
+questions. For alternative ways to contact me, see the tidystats 
+[website](https://www.tidystats.io).
 
-But if you're in a rush, this does not help you. Nor is it always possible for 
-me to add support for a specific analysis. This can happen when the statistic 
-you want to report is not part of an analysis (for example, the result of 
-`confint()` returns a standard matrix, which does not contain any information 
+Of course, it's not always possible to wait for me to add support for the 
+function to tidystats. Nor is it always possible for me to add support for the 
+function. This can happen when the statistic  you want to report is not 
+identifiable as belonging to a particular type of analysis (for example, the 
+result of `confint()` returns a matrix, which does not contain any information 
 about it being a matrix containing confidence intervals).
 
-For these reasons, it is sometimes nice if you can manually create your own 
-list of statistics, so let's demonstrate how to do this.
+For these reasons, it is useful to know that there are two possible solutions.
 
-To manually tidy statistics you have to do what `tidystats` normally does for 
-you. That is, you need to provide the `add_stats()` function a list of 
-statistics in a specific structure. I am currently working on a vignette that 
-explains this structure. For now, you can use the examples below to figure out 
-how to create a custom list of statistics and how to use it.
+The first solution is that I can still add support for functions that return 
+objects without sufficient information. You can tell `add_stats()` what kind of 
+object it is using the `class` argument. This only works if I explicitly coded 
+support for a specific class. You can see which classes are supported in the 
+help document of `add_stats()` (`?add_stats`).
 
-## Example 1
+The second solution is to manually extract the statistics yourself and create
+an object to add to `add_stats()`. I've created a few helper functions to help 
+you do this: `custom_stats()` and `custom_stat()`. These two functions work 
+together to help you store the statistics in a format needed for tidystats to 
+function.
 
-Say you want to calculate a Bayes Factor using the BIC approach ([Wagenmakers, 2007](https://doi.org/10.3758/BF03194105)). An example of this approach can be found [here](https://rstudio-pubs-static.s3.amazonaws.com/358672_09291d0b37ce43f08cf001cfd25c16c2.html); which I'll repeat down below.
+`custom_stats()` has two arguments: `method` and `statistics`. The method should
+contain a description of the type of method you used. The `statistics` argument
+requires a vector of statistics created with the `custom_stat()` function.
+
+The `custom_stat()` function serves to create a statistic, along with the 
+necessary information to report the statistic. At a minimum, it requires 
+specifying the `name` and `value` of the statistic. Optionally you can also 
+specify a symbol and a subscript so that the text editor add-ins can correctly 
+report the statistic. Finally, it's also possible that the statistic is a ranged
+statistic, i.e., it has a lower and upper bound. These statistics require that 
+you specify the type of `interval` (e.g., "CI", "HDI"), `level` (e.g., .95), 
+`lower` and `upper` bound. 
+
+Below I show a few examples of adding custom statistics.
+
+## Example 1: Using the `class` argument
+
+Say we want to calculate the confidence intervals for several parameters in a 
+linear model, using the `confint()` function.
+
+```{r, eval = FALSE}
+# Run a linear model
+fit <- lm(100 / mpg ~ disp, data = mtcars)
+
+# Compute the confidence intervals
+fit_confint <- confint(fit)
+
+# Create an empty list
+statistics <- list()
+
+# Add linear model and confidence intervals to the list
+statistics <- statistics %>%
+  add_stats(fit) %>%
+  add_stats(fit_confint)
+```
+
+Unfortunately, we get an error:
+
+> Error in UseMethod("tidy_stats") : 
+  no applicable method for 'tidy_stats' applied to an object of class 
+  "c('matrix', 'array', 'double', 'numeric')"
+
+ That's because `confint()` return a standard matrix, rather than an object 
+ specific to the `confint()` function. You can check this yourself by running
+ the `class()` function on the output of `confint()` 
+ (e.g., `class(fit_confint)`). You'll see that it simply says 
+ `"matrix" "array"`. That's not enough for tidystats to work with. Ideally it
+ would say something like `"confint"` so that tidystats knows what it is working
+ with and extract the statistics. 
+
+Thankfully, we can still add statistics from `confint()` to a list via 
+`add_stats()`, using the `class` argument. We can specify that the statistics
+are from the `confint()` function by saying `class = "confint"`. 
+
+```{r, eval = FALSE}
+statistics <- statistics %>%
+  add_stats(fit) %>%
+  add_stats(fit_confint, class = "confint")
+```
+
+We don't get an error this time, indicating that it worked.
+
+## Example 2: Using `custom_stats()`
+
+Say you want to calculate a Bayes Factor using the BIC approach 
+([Wagenmakers, 2007](https://doi.org/10.3758/BF03194105)). An example of this 
+approach can be found 
+[here](https://rstudio-pubs-static.s3.amazonaws.com/358672_09291d0b37ce43f08cf001cfd25c16c2.html); 
+which I'll repeat down below.
 
 ```{r}
 # Set seed for reproducibility
@@ -56,120 +128,62 @@ null_lm <- lm(score ~ 0, intercept_data)
 BF_BIC <- exp((BIC(null_lm) - BIC(full_lm)) / 2)
 ```
 
-This produces a BIC of `r round(BF_BIC, 2)`. Now, how do you add this value to a tidystats list? If we try it the standard way, we'll see that it fails.
+The Bayes Factor is `r round(BF_BIC, 2)`. Now, how do you add this value to a 
+tidystats list? If we try it the standard way, we'll see that it fails.
 
 ```{r, eval = FALSE}
 # Load the tidystats package
 library(tidystats)
 
 # Create an empty list
-results <- list()
+statistics <- list()
 
 # Add BIC to the list using add_stats()
-results <- add_stats(results, BF_BIC)
+statistics <- add_stats(statistics, BF_BIC)
 ```
 
 This produces an error message that says:
 
-> Error in UseMethod("tidy_stats") : no applicable method for 'tidy_stats' applied to an object of class "c('double', 'numeric')"
+> Error in UseMethod("tidy_stats") : no applicable method for 'tidy_stats' 
+  applied to an object of class "c('double', 'numeric')"
 
-This is because `BF_BIC` is simply a number and not the output of a statistical test. Statistical tests often return an object with a specific class. `tidystats` checks the class of an object to figure out how to extract the statistics. But if the object is simply a number, tidystats doesn't know how to parse it. So let's do it manually.
+It's because `BF_BIC` is simply a number and not the output of a statistics 
+function, so tidystats doesn't know how to store this number. Let's fix this 
+using `custom_stats()` and `custom_stat()`.
 
 ```{r, eval = FALSE}
-# Create an empty list
-results <- list()
-
-# Create a list containing the BIC
-BIC <- list(
+# Create a list of custom statistics
+BIC <- custom_stats(
   method = "BIC",
-  statistics = list(
-    BIC = BF_BIC
+  statistics = custom_stat(
+    name = "BIC Bayes Factor",
+    value = BF_BIC,
+    symbol = "BF",
+    subscript = "10"
   )
 )
 
-# Add the BIC to the list
-results <- add_stats(results, BIC)
+# Add the statistics to the list
+statistics <- add_stats(statistics, BIC)
 ```
 
-Now we don't get an error. `tidystats` sees that it is a list and assumes that you structured it correctly. That structure, in this case, consists of a list that contains an element called `statistics`, which is itself a list that contains an element called `BIC`, which has the BIC value we want to store.
-
-You can save the `results` list using `write_stats()` and load the resulting JSON file into the Word add-in to reproducibly report the BIC value.
-
-## Example 2
-
-Let's look at a more complex example next. Say we want to calculate the confidence intervals for several parameters in a linear model, using the `confint()` function.
-
-```{r, eval = FALSE}
-# Run a linear model
-fit <- lm(100 / mpg ~ disp, data = mtcars)
-
-# Compute the confidence intervals
-fit_CIs <- confint(fit)
-
-# Create an empty list
-results <- list()
-
-# Add linear model and confidence intervals to the list
-results <- results %>%
-  add_stats(fit) %>%
-  add_stats(fit_CIs)
-```
-
-Unfortunately, we again get an error. That's because `confint()` return a standard matrix, rather than an object specific to the `confint()` function. This means we need to manually tidy the confidence interval values.
-
-```{r, eval = FALSE}
-fit_CIs_list <- list(
-  method = "Confidence intervals",
-  terms = list(
-    list(
-      name = "(Intercept)",
-      statistics = list(
-        CI = list(
-          CI_level = .95,
-          CI_lower = fit_CIs[1, 1],
-          CI_upper = fit_CIs[1, 2]
-        )
-      )
-    ),
-    list(
-      name = "disp",
-      statistics = list(
-        CI = list(
-          CI_level = .95,
-          CI_lower = fit_CIs[2, 1],
-          CI_upper = fit_CIs[2, 2]
-        )
-      )
-    )
-  )
-)
-```
-
-This is a lot more complicated than in the previous example. That's because this particular case involves multiple terms that each contain statistics, which consist of confidence intervals, which consist of three elements: the level, the upper value, and the lower value. I am including this example to show you that it is possible to also tidy relatively complex structures, but ideally you have `tidystats` do this automatically for you.
-
-Having done the custom tidying, it is now possible to add it to the list using `add_stats()`.
-
-```{r, eval = FALSE}
-# Create an empty list
-results <- list()
-
-# Add linear model and confidence intervals to the list
-results <- results %>%
-  add_stats(fit) %>%
-  add_stats(fit_CIs_list)
-
-# Save stats
-write_stats(results, "results.json")
-```
-
-And, as before, you can load it up into the Word add-in to report the statistics.
+Now we don't get an error. Thanks to `custom_stats()` and `custom_stat()` we 
+correctly structured the statistic so it can be added to the list via 
+`add_stats()`. 
 
 ## Summary
 
-`tidystats` works by taking the output of statistical tests, extracting the statistics, and reorganizing them into a particular structure. This works if 1) `tidystats` has built-in support for the function and 2) if the function used to run the statistical test returns an object that `tidystats` can use to identify the test.
+tidystats works by taking the output of statistical tests, extracting the 
+statistics, and reorganizing them into a particular structure. This works if 1
+tidystats has built-in support for the function and 2) if the function used to 
+run the statistical test returns an object that tidystats can use to identify 
+the test.
 
-If you want to use `tidystats` on a function that is not supported yet, please contact me to let me know that I should add support for it.
+If you want to use tidystats on a function that is not supported yet, please 
+contact me to let me know that I should add support for it.
 
-Alternatively, you can manually create a list of statistics and supply it to the `add_stats()` function. Note that this list should have a specific structure.
+Alternatively, you can manually create a list of statistics and supply it to 
+the `add_stats()` function using `custom_stats()` and `custom_stat()`. 
 
-The goal is to have `tidystats` support as many tests as possible, so that you rarely have to resort to this solution.
+The goal is to have tidystats support as many tests as possible, so that you 
+rarely have to resort to this solution.
