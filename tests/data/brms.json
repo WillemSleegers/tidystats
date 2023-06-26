@@ -14,16 +14,21 @@
                   {
                     "name": "estimate",
                     "symbol": "b",
-                    "value": 0.584862,
+                    "value": 0.578939,
                     "interval": "CI",
                     "level": 0.95,
                     "lower": 0.466574,
                     "upper": 0.739665
                   },
                   {
+                    "name": "Monte Carlo standard error",
+                    "symbol": "MCSE",
+                    "value": 0.002124
+                  },
+                  {
                     "name": "estimate error",
                     "symbol": "EE",
-                    "value": 0.069286
+                    "value": 0.067309
                   },
                   {
                     "name": "R-hat",
@@ -56,16 +61,21 @@
               {
                 "name": "estimate",
                 "symbol": "b",
-                "value": 1.774209,
+                "value": 1.77325,
                 "interval": "CI",
                 "level": 0.95,
                 "lower": 1.529833,
                 "upper": 2.014941
               },
               {
+                "name": "Monte Carlo standard error",
+                "symbol": "MCSE",
+                "value": 0.005587
+              },
+              {
                 "name": "estimate error",
                 "symbol": "EE",
-                "value": 0.120303
+                "value": 0.115675
               },
               {
                 "name": "R-hat",
@@ -91,16 +101,21 @@
               {
                 "name": "estimate",
                 "symbol": "b",
-                "value": 0.093703,
+                "value": 0.092008,
                 "interval": "CI",
                 "level": 0.95,
                 "lower": -0.086199,
                 "upper": 0.273749
               },
               {
+                "name": "Monte Carlo standard error",
+                "symbol": "MCSE",
+                "value": 0.003911
+              },
+              {
                 "name": "estimate error",
                 "symbol": "EE",
-                "value": 0.091458
+                "value": 0.090616
               },
               {
                 "name": "R-hat",
@@ -126,16 +141,21 @@
               {
                 "name": "estimate",
                 "symbol": "b",
-                "value": 0.70233,
+                "value": 0.698859,
                 "interval": "CI",
                 "level": 0.95,
                 "lower": 0.457535,
                 "upper": 0.946607
               },
               {
+                "name": "Monte Carlo standard error",
+                "symbol": "MCSE",
+                "value": 0.005516
+              },
+              {
                 "name": "estimate error",
                 "symbol": "EE",
-                "value": 0.123055
+                "value": 0.123511
               },
               {
                 "name": "R-hat",
@@ -161,16 +181,21 @@
               {
                 "name": "estimate",
                 "symbol": "b",
-                "value": -0.280749,
+                "value": -0.283786,
                 "interval": "CI",
                 "level": 0.95,
                 "lower": -0.59177,
                 "upper": 0.039278
               },
               {
+                "name": "Monte Carlo standard error",
+                "symbol": "MCSE",
+                "value": 0.006304
+              },
+              {
                 "name": "estimate error",
                 "symbol": "EE",
-                "value": 0.162627
+                "value": 0.159161
               },
               {
                 "name": "R-hat",
@@ -196,16 +221,21 @@
               {
                 "name": "estimate",
                 "symbol": "b",
-                "value": 0.048775,
+                "value": 0.047646,
                 "interval": "CI",
                 "level": 0.95,
                 "lower": -0.269926,
                 "upper": 0.378817
               },
               {
+                "name": "Monte Carlo standard error",
+                "symbol": "MCSE",
+                "value": 0.005611
+              },
+              {
                 "name": "estimate error",
                 "symbol": "EE",
-                "value": 0.165184
+                "value": 0.167371
               },
               {
                 "name": "R-hat",
@@ -231,7 +261,8 @@
     "package": {
       "name": "brms",
       "version": "2.19.0"
-    }
+    },
+    "robust": true
   },
   "ordinal_regression": {
     "method": "Bayesian regression model",
@@ -520,12 +551,37 @@
             ]
           }
         ]
+      },
+      {
+        "name": "Family Specific Parameters",
+        "groups": [
+          {
+            "name": "disc",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 1,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 1,
+                "upper": 1
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 0
+              }
+            ]
+          }
+        ]
       }
     ],
     "package": {
       "name": "brms",
       "version": "2.19.0"
-    }
+    },
+    "robust": false
   },
   "survival_regression": {
     "method": "Bayesian regression model",
@@ -824,12 +880,53 @@
             ]
           }
         ]
+      },
+      {
+        "name": "Family Specific Parameters",
+        "groups": [
+          {
+            "name": "sigma",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 1.156593,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.927162,
+                "upper": 1.417295
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 0.126973
+              },
+              {
+                "name": "R-hat",
+                "value": 1.004106
+              },
+              {
+                "name": "effective sample size (bulk)",
+                "symbol": "ESS",
+                "subscript": "bulk",
+                "value": 2331.506712
+              },
+              {
+                "name": "effective sample size (tail)",
+                "symbol": "ESS",
+                "subscript": "tail",
+                "value": 2193.694193
+              }
+            ]
+          }
+        ]
       }
     ],
     "package": {
       "name": "brms",
       "version": "2.19.0"
-    }
+    },
+    "robust": false
   },
   "nonlinear_gaussian": {
     "method": "Bayesian regression model",
@@ -988,12 +1085,53 @@
             ]
           }
         ]
+      },
+      {
+        "name": "Family Specific Parameters",
+        "groups": [
+          {
+            "name": "sigma",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 140.122571,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 113.689063,
+                "upper": 175.862871
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 15.879305
+              },
+              {
+                "name": "R-hat",
+                "value": 1.003666
+              },
+              {
+                "name": "effective sample size (bulk)",
+                "symbol": "ESS",
+                "subscript": "bulk",
+                "value": 3045.991931
+              },
+              {
+                "name": "effective sample size (tail)",
+                "symbol": "ESS",
+                "subscript": "tail",
+                "value": 2412.776798
+              }
+            ]
+          }
+        ]
       }
     ],
     "package": {
       "name": "brms",
       "version": "2.19.0"
-    }
+    },
+    "robust": false
   },
   "heterogeneous_variances": {
     "method": "Bayesian regression model",
@@ -1147,7 +1285,8 @@
     "package": {
       "name": "brms",
       "version": "2.19.0"
-    }
+    },
+    "robust": false
   },
   "quantile_regression": {
     "method": "Bayesian regression model",
@@ -1226,11 +1365,71 @@
             ]
           }
         ]
+      },
+      {
+        "name": "Family Specific Parameters",
+        "groups": [
+          {
+            "name": "sigma",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 0.442082,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.363356,
+                "upper": 0.534171
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 0.044094
+              },
+              {
+                "name": "R-hat",
+                "value": 1.000329
+              },
+              {
+                "name": "effective sample size (bulk)",
+                "symbol": "ESS",
+                "subscript": "bulk",
+                "value": 3564.059788
+              },
+              {
+                "name": "effective sample size (tail)",
+                "symbol": "ESS",
+                "subscript": "tail",
+                "value": 3125.884409
+              }
+            ]
+          },
+          {
+            "name": "quantile",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 0.25,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.25,
+                "upper": 0.25
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 0
+              }
+            ]
+          }
+        ]
       }
     ],
     "package": {
       "name": "brms",
       "version": "2.19.0"
-    }
+    },
+    "robust": false
   }
 }

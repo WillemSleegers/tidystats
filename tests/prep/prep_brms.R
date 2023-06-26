@@ -35,18 +35,6 @@ survival_regression <- brm(
   file = "./tests/models/brms-survival-regression"
 )
 
-set.seed(1)
-ntrials <- sample(1:10, 100, TRUE)
-success <- rbinom(100, size = ntrials, prob = 0.4)
-x <- rnorm(100)
-data4 <- data.frame(ntrials, success, x)
-probit_regression <- brm(
-  success | trials(ntrials) ~ x,
-  data = data4,
-  family = binomial("probit"),
-  file = "./tests/models/brms-probit-regression"
-)
-
 nonlinear_gaussian <- brm(
   bf(
     cum ~ ult * (1 - exp(-(dev / theta)^omega)),
@@ -75,7 +63,6 @@ heterogeneous_variances <- brm(
   ),
   file = "./tests/models/brms-heterogeneous-variances"
 )
-heterogeneous_variances
 
 set.seed(1)
 quantile_regression <- brm(
@@ -90,14 +77,14 @@ quantile_regression <- brm(
 )
 
 statistics <- statistics |>
-  add_stats(poisson_regression) |>
+  add_stats(poisson_regression, args = list(robust = TRUE, mc_se = TRUE)) |>
   add_stats(ordinal_regression) |>
   add_stats(survival_regression) |>
   add_stats(nonlinear_gaussian) |>
   add_stats(heterogeneous_variances) |>
   add_stats(quantile_regression)
 
-summary(poisson_regression)
+summary(poisson_regression, robust = TRUE, mc_se = TRUE)
 summary(ordinal_regression)
 summary(survival_regression)
 summary(nonlinear_gaussian)
