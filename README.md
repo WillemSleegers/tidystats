@@ -5,8 +5,14 @@
 
 <!-- badges: start -->
 
+```
+## Error in library(badger): there is no package called 'badger'
+```
 
-[![](https://www.r-pkg.org/badges/version/tidystats?color=green)](https://cran.r-project.org/package=tidystats) [![](http://cranlogs.r-pkg.org/badges/grand-total/tidystats?color=green)](https://cran.r-project.org/package=tidystats) [![](http://cranlogs.r-pkg.org/badges/last-month/tidystats?color=green)](https://cran.r-project.org/package=tidystats) [![](http://cranlogs.r-pkg.org/badges/last-week/tidystats?color=green)](https://cran.r-project.org/package=tidystats) [![](https://img.shields.io/badge/doi-10.5281/zenodo.4041859-blue.svg)](https://doi.org/10.5281/zenodo.4041859)
+
+```
+## Error in badge_cran_release("tidystats", "green"): could not find function "badge_cran_release"
+```
 <!-- badges: end -->
 
 **Author:** [Willem Sleegers](https://www.willemsleegers.com/)

@@ -1,6 +1,5 @@
 # Setup -------------------------------------------------------------------
 
-library(dplyr)
 library(marginaleffects)
 library(nnet)
 
@@ -15,7 +14,7 @@ pred_grid <- avg_predictions(
   newdata = datagrid(hp = c(100, 120), cyl = 4)
 )
 
-mod <- lm(mpg ~ hp * am * vs, mtcars)
+mod <- lm(mpg ~ hp * am * vs, data = mtcars)
 pred_by <- avg_predictions(mod, by = "am")
 pred_by_two <- avg_predictions(mod, by = c("am", "vs"))
 pred_vars <- avg_predictions(mod, variables = list(hp = c(90, 110)))
@@ -69,44 +68,43 @@ pred_nom_by
 
 # avg_comparisons() -------------------------------------------------------
 
+# Linear model
 tmp <- mtcars
 tmp$am <- as.logical(tmp$am)
 mod <- lm(mpg ~ am + factor(cyl), tmp)
 comp <- avg_comparisons(mod, variables = list(cyl = "reference"))
 
-comp
-
-statistics <- statistics |>
-  add_stats(comp)
-
+# Numeric contrasts
 mod <- lm(mpg ~ hp, data = mtcars)
-comp_one <- avg_comparisons(mod, variables = list(hp = 1))
-comp_one
+comp_num <- avg_comparisons(mod, variables = list(hp = 1))
 
-statistics <- statistics |>
-  add_stats(comp_one)
+# Custom difference
+dat <- mtcars
+dat$new_hp <- 49 * (dat$hp - min(dat$hp)) / (max(dat$hp) - min(dat$hp)) + 1
+modlog <- lm(mpg ~ log(new_hp) + factor(cyl), data = dat)
+fdiff <- \(x) data.frame(x, x + 10)
+comp_custom <- avg_comparisons(modlog, variables = list(new_hp = fdiff))
 
+# Adjusted Risk Ratio: see the contrasts vignette
+mod <- glm(vs ~ mpg, data = mtcars, family = binomial)
+comp_rr <- avg_comparisons(mod, comparison = "lnratioavg", transform = exp)
+
+# Cross contrasts
 mod <- lm(mpg ~ factor(cyl) * factor(gear) + hp, data = mtcars)
 comp_cross <- avg_comparisons(mod, variables = c("cyl", "gear"), cross = TRUE)
-comp_cross
 
-statistics <- statistics |>
-  add_stats(comp_cross)
+# Variable-specific contrasts
+comp_var <- avg_comparisons(mod, variables = list(gear = "sequential", hp = 10))
 
-# variable-specific contrasts
-avg_comparisons(mod, variables = list(gear = "sequential", hp = 10))
-
-# hypothesis test: is the `hp` marginal effect at the mean equal to the `drat` marginal effect
+# Hypothesis test
 mod <- lm(mpg ~ wt + drat, data = mtcars)
-
-# same hypothesis test using row indices
-avg_comparisons(
+comp_hypothesis <- comparisons(
   mod,
   newdata = "mean",
-  hypothesis = "b1 - b2 = 0"
+  hypothesis = "wt = drat"
 )
 
-# two custom contrasts using a matrix of weights
+# Two custom contrasts using a matrix of weights
 lc <- matrix(
   c(
     1, -1,
@@ -114,7 +112,7 @@ lc <- matrix(
   ),
   ncol = 2
 )
-avg_comparisons(
+comp_matrix <- comparisons(
   mod,
   newdata = "mean",
   hypothesis = lc
@@ -122,16 +120,43 @@ avg_comparisons(
 
 # `by` argument
 mod <- lm(mpg ~ hp * am * vs, data = mtcars)
-avg_comparisons(mod, by = TRUE)
-avg_comparisons(mod, variables = "hp", by = c("vs", "am"))
+comp_by <- comparisons(mod, by = TRUE)
 
-library(nnet)
+mod <- lm(mpg ~ hp * am * vs, data = mtcars)
+comp_by_2 <- avg_comparisons(mod, variables = "hp", by = c("vs", "am"))
+
+# multinom
 mod <- multinom(factor(gear) ~ mpg + am * vs, data = mtcars, trace = FALSE)
 by <- data.frame(
   group = c("3", "4", "5"),
   by = c("3,4", "3,4", "5")
 )
-avg_comparisons(mod, type = "probs", by = by)
+comp_multinom <- comparisons(mod, type = "probs", by = by)
+
+statistics <- statistics |>
+  add_stats(comp) |>
+  add_stats(comp_num) |>
+  add_stats(comp_custom) |>
+  add_stats(comp_rr) |>
+  add_stats(comp_cross) |>
+  add_stats(comp_var) |>
+  add_stats(comp_hypothesis) |>
+  add_stats(comp_matrix) |>
+  add_stats(comp_by) |>
+  add_stats(comp_by_2) |>
+  add_stats(comp_multinom)
+
+comp
+comp_num
+comp_custom
+comp_rr
+comp_cross
+comp_var
+comp_hypothesis
+comp_matrix
+comp_by
+comp_by_2
+comp_multinom
 
 # avg_slopes() ------------------------------------------------------------
 

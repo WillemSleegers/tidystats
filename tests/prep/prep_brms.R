@@ -104,34 +104,6 @@ summary(nonlinear_gaussian)
 summary(heterogeneous_variances)
 summary(quantile_regression)
 
-# loo() -----------------------------------------------------------------
-# leave-one-out cross-validation
-fit1 <- brm(
-  rating ~ treat + period + carry,
-  data = inhaler
-)
-loo1 <- loo(fit1)
-
-fit2 <- brm(
-  rating ~ treat + period + carry + (1 | subject),
-  data = inhaler
-)
-loo2 <- loo(fit2)
-
-loo_compare <- loo_compare(
-  loo1,
-  loo2
-)
-
-statistics <- statistics |>
-  add_stats(loo1) |>
-  add_stats(loo2) |>
-  add_stats(loo_compare)
-
-summary(loo1)
-summary(loo2)
-loo_compare
-
 # tidy_stats_to_data_frame() ----------------------------------------------
 
 df <- tidy_stats_to_data_frame(statistics)

@@ -28,7 +28,7 @@ devtools::install()
 
 # Add dependency ----------------------------------------------------------
 
-usethis::use_package("lavaan", "Suggests")
+# usethis::use_package("lavaan", "Suggests")
 
 # Testing -----------------------------------------------------------------
 
@@ -44,7 +44,7 @@ testthat::test_dir(path = "tests/testthat/tests/")
 
 # Create a vignette -------------------------------------------------------
 
-usethis::use_vignette("supported-functions")
+# usethis::use_vignette("supported-functions")
 
 # Add a data set ----------------------------------------------------------
 

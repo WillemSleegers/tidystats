@@ -2,6 +2,18 @@
 tidy_stats.predictions <- function(x, args = NULL) {
   analysis <- list(method = "Average (marginal) estimates")
 
+  # Check whether the output is the result of functions like avg_predictions()
+  # by comparing the rows in the data frame to the rows of the model
+  if (nrow(x) == nrow(attr(x, "model")$model)) {
+    stop(
+      paste(
+        "Unsupported data. Support is limited to results from functions that",
+        "return statistics for groups (e.g., avg_predictions()) and not for",
+        "each row in the data."
+      )
+    )
+  }
+
   # Figure out the grouping variables; we can't use attr(x, "by") because it
   # can return more groups than there are rows in the output (see the 2nd
   # example with multinom())
@@ -33,8 +45,8 @@ tidy_stats.comparisons <- function(x, args = NULL) {
 
   x <- as.data.frame(x)
 
-  names(x)[which(names(x) == "contrast")] <- unique(x$term)
-  names(x) <- gsub("contrast_", "", names(x))
+  terms <- unique(x$term)
+  contrasts <- unique(x$contrast)
 
   vars <- names(x)[
     !grepl(

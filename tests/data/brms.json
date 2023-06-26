@@ -1,0 +1,1236 @@
+{
+  "poisson_regression": {
+    "method": "Bayesian regression model",
+    "groups": [
+      {
+        "name": "Group-Level Effects",
+        "groups": [
+          {
+            "name": "patient",
+            "groups": [
+              {
+                "name": "sd(Intercept)",
+                "statistics": [
+                  {
+                    "name": "estimate",
+                    "symbol": "b",
+                    "value": 0.584862,
+                    "interval": "CI",
+                    "level": 0.95,
+                    "lower": 0.466574,
+                    "upper": 0.739665
+                  },
+                  {
+                    "name": "estimate error",
+                    "symbol": "EE",
+                    "value": 0.069286
+                  },
+                  {
+                    "name": "R-hat",
+                    "value": 1.003767
+                  },
+                  {
+                    "name": "effective sample size (bulk)",
+                    "symbol": "ESS",
+                    "subscript": "bulk",
+                    "value": 967.10984
+                  },
+                  {
+                    "name": "effective sample size (tail)",
+                    "symbol": "ESS",
+                    "subscript": "tail",
+                    "value": 1855.486146
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Population-Level Effects",
+        "groups": [
+          {
+            "name": "Intercept",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 1.774209,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 1.529833,
+                "upper": 2.014941
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 0.120303
+              },
+              {
+                "name": "R-hat",
+                "value": 1.003943
+              },
+              {
+                "name": "effective sample size (bulk)",
+                "symbol": "ESS",
+                "subscript": "bulk",
+                "value": 715.890505
+              },
+              {
+                "name": "effective sample size (tail)",
+                "symbol": "ESS",
+                "subscript": "tail",
+                "value": 1215.295242
+              }
+            ]
+          },
+          {
+            "name": "zAge",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 0.093703,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.086199,
+                "upper": 0.273749
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 0.091458
+              },
+              {
+                "name": "R-hat",
+                "value": 1.003848
+              },
+              {
+                "name": "effective sample size (bulk)",
+                "symbol": "ESS",
+                "subscript": "bulk",
+                "value": 721.847086
+              },
+              {
+                "name": "effective sample size (tail)",
+                "symbol": "ESS",
+                "subscript": "tail",
+                "value": 1384.840455
+              }
+            ]
+          },
+          {
+            "name": "zBase",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 0.70233,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.457535,
+                "upper": 0.946607
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 0.123055
+              },
+              {
+                "name": "R-hat",
+                "value": 1.002887
+              },
+              {
+                "name": "effective sample size (bulk)",
+                "symbol": "ESS",
+                "subscript": "bulk",
+                "value": 894.778937
+              },
+              {
+                "name": "effective sample size (tail)",
+                "symbol": "ESS",
+                "subscript": "tail",
+                "value": 1466.780325
+              }
+            ]
+          },
+          {
+            "name": "Trt1",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": -0.280749,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.59177,
+                "upper": 0.039278
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 0.162627
+              },
+              {
+                "name": "R-hat",
+                "value": 1.004221
+              },
+              {
+                "name": "effective sample size (bulk)",
+                "symbol": "ESS",
+                "subscript": "bulk",
+                "value": 800.057442
+              },
+              {
+                "name": "effective sample size (tail)",
+                "symbol": "ESS",
+                "subscript": "tail",
+                "value": 1255.104183
+              }
+            ]
+          },
+          {
+            "name": "zBase:Trt1",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 0.048775,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.269926,
+                "upper": 0.378817
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 0.165184
+              },
+              {
+                "name": "R-hat",
+                "value": 1.003168
+              },
+              {
+                "name": "effective sample size (bulk)",
+                "symbol": "ESS",
+                "subscript": "bulk",
+                "value": 935.037884
+              },
+              {
+                "name": "effective sample size (tail)",
+                "symbol": "ESS",
+                "subscript": "tail",
+                "value": 1606.462451
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "brms",
+      "version": "2.19.0"
+    }
+  },
+  "ordinal_regression": {
+    "method": "Bayesian regression model",
+    "groups": [
+      {
+        "name": "Population-Level Effects",
+        "groups": [
+          {
+            "name": "Intercept[1]",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 0.553254,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.374532,
+                "upper": 0.731455
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 0.090872
+              },
+              {
+                "name": "R-hat",
+                "value": 1.001029
+              },
+              {
+                "name": "effective sample size (bulk)",
+                "symbol": "ESS",
+                "subscript": "bulk",
+                "value": 4670.680005
+              },
+              {
+                "name": "effective sample size (tail)",
+                "symbol": "ESS",
+                "subscript": "tail",
+                "value": 2701.224717
+              }
+            ]
+          },
+          {
+            "name": "Intercept[2]",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 2.371742,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 1.818712,
+                "upper": 2.970507
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 0.28992
+              },
+              {
+                "name": "R-hat",
+                "value": 1.000972
+              },
+              {
+                "name": "effective sample size (bulk)",
+                "symbol": "ESS",
+                "subscript": "bulk",
+                "value": 3243.988795
+              },
+              {
+                "name": "effective sample size (tail)",
+                "symbol": "ESS",
+                "subscript": "tail",
+                "value": 3061.438654
+              }
+            ]
+          },
+          {
+            "name": "Intercept[3]",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 0.476343,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.674301,
+                "upper": 1.600567
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 0.573287
+              },
+              {
+                "name": "R-hat",
+                "value": 0.999758
+              },
+              {
+                "name": "effective sample size (bulk)",
+                "symbol": "ESS",
+                "subscript": "bulk",
+                "value": 3410.893052
+              },
+              {
+                "name": "effective sample size (tail)",
+                "symbol": "ESS",
+                "subscript": "tail",
+                "value": 3118.207926
+              }
+            ]
+          },
+          {
+            "name": "period",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 0.221752,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.104082,
+                "upper": 0.558868
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 0.167237
+              },
+              {
+                "name": "R-hat",
+                "value": 1.003119
+              },
+              {
+                "name": "effective sample size (bulk)",
+                "symbol": "ESS",
+                "subscript": "bulk",
+                "value": 4702.434585
+              },
+              {
+                "name": "effective sample size (tail)",
+                "symbol": "ESS",
+                "subscript": "tail",
+                "value": 2627.89934
+              }
+            ]
+          },
+          {
+            "name": "carry",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": -0.223465,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.553035,
+                "upper": 0.110026
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 0.169158
+              },
+              {
+                "name": "R-hat",
+                "value": 1.000717
+              },
+              {
+                "name": "effective sample size (bulk)",
+                "symbol": "ESS",
+                "subscript": "bulk",
+                "value": 2862.045427
+              },
+              {
+                "name": "effective sample size (tail)",
+                "symbol": "ESS",
+                "subscript": "tail",
+                "value": 2750.754329
+              }
+            ]
+          },
+          {
+            "name": "treat[1]",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": -0.772345,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -1.255082,
+                "upper": -0.289727
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 0.242844
+              },
+              {
+                "name": "R-hat",
+                "value": 1.00051
+              },
+              {
+                "name": "effective sample size (bulk)",
+                "symbol": "ESS",
+                "subscript": "bulk",
+                "value": 3007.43211
+              },
+              {
+                "name": "effective sample size (tail)",
+                "symbol": "ESS",
+                "subscript": "tail",
+                "value": 3110.352018
+              }
+            ]
+          },
+          {
+            "name": "treat[2]",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": -1.037818,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -2.273356,
+                "upper": 0.068214
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 0.589769
+              },
+              {
+                "name": "R-hat",
+                "value": 1.000217
+              },
+              {
+                "name": "effective sample size (bulk)",
+                "symbol": "ESS",
+                "subscript": "bulk",
+                "value": 3242.326181
+              },
+              {
+                "name": "effective sample size (tail)",
+                "symbol": "ESS",
+                "subscript": "tail",
+                "value": 2781.472504
+              }
+            ]
+          },
+          {
+            "name": "treat[3]",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 1.161629,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -1.223591,
+                "upper": 3.466026
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 1.179531
+              },
+              {
+                "name": "R-hat",
+                "value": 0.999994
+              },
+              {
+                "name": "effective sample size (bulk)",
+                "symbol": "ESS",
+                "subscript": "bulk",
+                "value": 3616.908334
+              },
+              {
+                "name": "effective sample size (tail)",
+                "symbol": "ESS",
+                "subscript": "tail",
+                "value": 2688.959984
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "brms",
+      "version": "2.19.0"
+    }
+  },
+  "survival_regression": {
+    "method": "Bayesian regression model",
+    "groups": [
+      {
+        "name": "Group-Level Effects",
+        "groups": [
+          {
+            "name": "patient",
+            "groups": [
+              {
+                "name": "sd(Intercept)",
+                "statistics": [
+                  {
+                    "name": "estimate",
+                    "symbol": "b",
+                    "value": 0.405818,
+                    "interval": "CI",
+                    "level": 0.95,
+                    "lower": 0.019139,
+                    "upper": 0.934802
+                  },
+                  {
+                    "name": "estimate error",
+                    "symbol": "EE",
+                    "value": 0.253935
+                  },
+                  {
+                    "name": "R-hat",
+                    "value": 1.005758
+                  },
+                  {
+                    "name": "effective sample size (bulk)",
+                    "symbol": "ESS",
+                    "subscript": "bulk",
+                    "value": 1102.108215
+                  },
+                  {
+                    "name": "effective sample size (tail)",
+                    "symbol": "ESS",
+                    "subscript": "tail",
+                    "value": 1831.749918
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Population-Level Effects",
+        "groups": [
+          {
+            "name": "Intercept",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 2.62871,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.731722,
+                "upper": 4.572521
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 0.964989
+              },
+              {
+                "name": "R-hat",
+                "value": 1.003434
+              },
+              {
+                "name": "effective sample size (bulk)",
+                "symbol": "ESS",
+                "subscript": "bulk",
+                "value": 2887.50611
+              },
+              {
+                "name": "effective sample size (tail)",
+                "symbol": "ESS",
+                "subscript": "tail",
+                "value": 2691.172404
+              }
+            ]
+          },
+          {
+            "name": "age",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 0.017307,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.030534,
+                "upper": 0.064238
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 0.024318
+              },
+              {
+                "name": "R-hat",
+                "value": 1.00416
+              },
+              {
+                "name": "effective sample size (bulk)",
+                "symbol": "ESS",
+                "subscript": "bulk",
+                "value": 2515.167408
+              },
+              {
+                "name": "effective sample size (tail)",
+                "symbol": "ESS",
+                "subscript": "tail",
+                "value": 2717.770856
+              }
+            ]
+          },
+          {
+            "name": "sexfemale",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 2.569292,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.323858,
+                "upper": 4.815764
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 1.14898
+              },
+              {
+                "name": "R-hat",
+                "value": 1.00195
+              },
+              {
+                "name": "effective sample size (bulk)",
+                "symbol": "ESS",
+                "subscript": "bulk",
+                "value": 2821.749636
+              },
+              {
+                "name": "effective sample size (tail)",
+                "symbol": "ESS",
+                "subscript": "tail",
+                "value": 2483.49599
+              }
+            ]
+          },
+          {
+            "name": "diseaseGN",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": -0.443753,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -1.470986,
+                "upper": 0.556959
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 0.511823
+              },
+              {
+                "name": "R-hat",
+                "value": 1.001109
+              },
+              {
+                "name": "effective sample size (bulk)",
+                "symbol": "ESS",
+                "subscript": "bulk",
+                "value": 3047.661353
+              },
+              {
+                "name": "effective sample size (tail)",
+                "symbol": "ESS",
+                "subscript": "tail",
+                "value": 2730.828214
+              }
+            ]
+          },
+          {
+            "name": "diseaseAN",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": -0.548008,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -1.528555,
+                "upper": 0.419959
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 0.493341
+              },
+              {
+                "name": "R-hat",
+                "value": 1.000737
+              },
+              {
+                "name": "effective sample size (bulk)",
+                "symbol": "ESS",
+                "subscript": "bulk",
+                "value": 3444.121782
+              },
+              {
+                "name": "effective sample size (tail)",
+                "symbol": "ESS",
+                "subscript": "tail",
+                "value": 2720.989917
+              }
+            ]
+          },
+          {
+            "name": "diseasePKD",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 0.557359,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.795033,
+                "upper": 1.87828
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 0.674952
+              },
+              {
+                "name": "R-hat",
+                "value": 1.001513
+              },
+              {
+                "name": "effective sample size (bulk)",
+                "symbol": "ESS",
+                "subscript": "bulk",
+                "value": 3513.972794
+              },
+              {
+                "name": "effective sample size (tail)",
+                "symbol": "ESS",
+                "subscript": "tail",
+                "value": 2960.564958
+              }
+            ]
+          },
+          {
+            "name": "age:sexfemale",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": -0.024821,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.07383,
+                "upper": 0.024859
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 0.025742
+              },
+              {
+                "name": "R-hat",
+                "value": 1.002203
+              },
+              {
+                "name": "effective sample size (bulk)",
+                "symbol": "ESS",
+                "subscript": "bulk",
+                "value": 2598.581487
+              },
+              {
+                "name": "effective sample size (tail)",
+                "symbol": "ESS",
+                "subscript": "tail",
+                "value": 2333.867233
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "brms",
+      "version": "2.19.0"
+    }
+  },
+  "nonlinear_gaussian": {
+    "method": "Bayesian regression model",
+    "groups": [
+      {
+        "name": "Group-Level Effects",
+        "groups": [
+          {
+            "name": "AY",
+            "groups": [
+              {
+                "name": "sd(ult_Intercept)",
+                "statistics": [
+                  {
+                    "name": "estimate",
+                    "symbol": "b",
+                    "value": 745.236957,
+                    "interval": "CI",
+                    "level": 0.95,
+                    "lower": 431.27134,
+                    "upper": 1291.612344
+                  },
+                  {
+                    "name": "estimate error",
+                    "symbol": "EE",
+                    "value": 225.419695
+                  },
+                  {
+                    "name": "R-hat",
+                    "value": 1.0016
+                  },
+                  {
+                    "name": "effective sample size (bulk)",
+                    "symbol": "ESS",
+                    "subscript": "bulk",
+                    "value": 1195.221984
+                  },
+                  {
+                    "name": "effective sample size (tail)",
+                    "symbol": "ESS",
+                    "subscript": "tail",
+                    "value": 1819.41568
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Population-Level Effects",
+        "groups": [
+          {
+            "name": "ult_Intercept",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 5310.854726,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 4739.450544,
+                "upper": 5908.583704
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 295.979272
+              },
+              {
+                "name": "R-hat",
+                "value": 1.002086
+              },
+              {
+                "name": "effective sample size (bulk)",
+                "symbol": "ESS",
+                "subscript": "bulk",
+                "value": 1138.028702
+              },
+              {
+                "name": "effective sample size (tail)",
+                "symbol": "ESS",
+                "subscript": "tail",
+                "value": 1822.670451
+              }
+            ]
+          },
+          {
+            "name": "omega_Intercept",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 1.335026,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 1.237581,
+                "upper": 1.43107
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 0.048713
+              },
+              {
+                "name": "R-hat",
+                "value": 1.001646
+              },
+              {
+                "name": "effective sample size (bulk)",
+                "symbol": "ESS",
+                "subscript": "bulk",
+                "value": 2410.396955
+              },
+              {
+                "name": "effective sample size (tail)",
+                "symbol": "ESS",
+                "subscript": "tail",
+                "value": 2159.13719
+              }
+            ]
+          },
+          {
+            "name": "theta_Intercept",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 46.280266,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 42.443091,
+                "upper": 51.105047
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 2.165666
+              },
+              {
+                "name": "R-hat",
+                "value": 1.001429
+              },
+              {
+                "name": "effective sample size (bulk)",
+                "symbol": "ESS",
+                "subscript": "bulk",
+                "value": 2294.355968
+              },
+              {
+                "name": "effective sample size (tail)",
+                "symbol": "ESS",
+                "subscript": "tail",
+                "value": 1799.213423
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "brms",
+      "version": "2.19.0"
+    }
+  },
+  "heterogeneous_variances": {
+    "method": "Bayesian regression model",
+    "groups": [
+      {
+        "name": "Population-Level Effects",
+        "groups": [
+          {
+            "name": "Intercept",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 0.127374,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.120205,
+                "upper": 0.373918
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 0.125464
+              },
+              {
+                "name": "R-hat",
+                "value": 1.000424
+              },
+              {
+                "name": "effective sample size (bulk)",
+                "symbol": "ESS",
+                "subscript": "bulk",
+                "value": 5926.936185
+              },
+              {
+                "name": "effective sample size (tail)",
+                "symbol": "ESS",
+                "subscript": "tail",
+                "value": 3148.568625
+              }
+            ]
+          },
+          {
+            "name": "xb",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 0.341093,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.222308,
+                "upper": 0.906328
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 0.286215
+              },
+              {
+                "name": "R-hat",
+                "value": 1.000041
+              },
+              {
+                "name": "effective sample size (bulk)",
+                "symbol": "ESS",
+                "subscript": "bulk",
+                "value": 2947.809681
+              },
+              {
+                "name": "effective sample size (tail)",
+                "symbol": "ESS",
+                "subscript": "tail",
+                "value": 2787.21656
+              }
+            ]
+          },
+          {
+            "name": "sigma_xa",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": -0.138378,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.323343,
+                "upper": 0.067704
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 0.101674
+              },
+              {
+                "name": "R-hat",
+                "value": 1.000813
+              },
+              {
+                "name": "effective sample size (bulk)",
+                "symbol": "ESS",
+                "subscript": "bulk",
+                "value": 3628.128226
+              },
+              {
+                "name": "effective sample size (tail)",
+                "symbol": "ESS",
+                "subscript": "tail",
+                "value": 2628.721641
+              }
+            ]
+          },
+          {
+            "name": "sigma_xb",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 0.579324,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": 0.380505,
+                "upper": 0.795547
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 0.1045
+              },
+              {
+                "name": "R-hat",
+                "value": 1.001376
+              },
+              {
+                "name": "effective sample size (bulk)",
+                "symbol": "ESS",
+                "subscript": "bulk",
+                "value": 3554.283503
+              },
+              {
+                "name": "effective sample size (tail)",
+                "symbol": "ESS",
+                "subscript": "tail",
+                "value": 2595.221892
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "brms",
+      "version": "2.19.0"
+    }
+  },
+  "quantile_regression": {
+    "method": "Bayesian regression model",
+    "groups": [
+      {
+        "name": "Population-Level Effects",
+        "groups": [
+          {
+            "name": "Intercept",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": -0.379219,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.697149,
+                "upper": -0.078316
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 0.159502
+              },
+              {
+                "name": "R-hat",
+                "value": 1.001266
+              },
+              {
+                "name": "effective sample size (bulk)",
+                "symbol": "ESS",
+                "subscript": "bulk",
+                "value": 3744.295333
+              },
+              {
+                "name": "effective sample size (tail)",
+                "symbol": "ESS",
+                "subscript": "tail",
+                "value": 2721.383269
+              }
+            ]
+          },
+          {
+            "name": "xb",
+            "statistics": [
+              {
+                "name": "estimate",
+                "symbol": "b",
+                "value": 0.220265,
+                "interval": "CI",
+                "level": 0.95,
+                "lower": -0.26294,
+                "upper": 0.705426
+              },
+              {
+                "name": "estimate error",
+                "symbol": "EE",
+                "value": 0.239776
+              },
+              {
+                "name": "R-hat",
+                "value": 1.00015
+              },
+              {
+                "name": "effective sample size (bulk)",
+                "symbol": "ESS",
+                "subscript": "bulk",
+                "value": 3188.072614
+              },
+              {
+                "name": "effective sample size (tail)",
+                "symbol": "ESS",
+                "subscript": "tail",
+                "value": 2558.66172
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "package": {
+      "name": "brms",
+      "version": "2.19.0"
+    }
+  }
+}

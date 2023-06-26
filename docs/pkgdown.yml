@@ -1,4 +1,4 @@
-pandoc: 3.1.2
+pandoc: 3.0.1
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
@@ -7,7 +7,7 @@ articles:
   reusing-statistics: reusing-statistics.html
   supported-functions: supported-functions.html
   tidystats-development: tidystats-development.html
-last_built: 2023-05-17T23:18Z
+last_built: 2023-05-19T04:46Z
 urls:
   reference: https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/reference
   article: https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/articles
