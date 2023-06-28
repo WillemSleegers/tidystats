@@ -35,7 +35,7 @@ nom <- multinom(factor(gear) ~ mpg + am * vs, data = mtcars, trace = FALSE)
 pred_nom <- avg_predictions(nom, type = "probs", by = "group")
 
 mod <- multinom(factor(cyl) ~ mpg + am, data = mtcars, trace = FALSE)
-pred_nom_by <- predictions(
+pred_nom_by <- avg_predictions(
   mod,
   newdata = "mean",
   byfun = sum,
