@@ -4,6 +4,7 @@
 # TODO: Store all sample estimates in the case of a 4-sample chi-squared test?
 # TODO: Simplify the method name of Kolmogorov-Smirnov tests?
 # TODO: Rename the name of degrees of freedom and related values to 'parameter'?
+# TODO: Use the checkmate package
 
 # Load functions ----------------------------------------------------------
 
