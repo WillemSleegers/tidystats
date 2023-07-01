@@ -5,6 +5,8 @@
 # TODO: Simplify the method name of Kolmogorov-Smirnov tests?
 # TODO: Rename the name of degrees of freedom and related values to 'parameter'?
 # TODO: Use the checkmate package
+# TODO: Create a vignette to describe the development process of adding support
+#       for an analysis
 
 # Load functions ----------------------------------------------------------
 
@@ -51,12 +53,10 @@ testthat::test_dir(path = "tests/testthat/tests/")
 
 # usethis::use_data(quote_source, overwrite = TRUE)
 
-# README ------------------------------------------------------------------
+# Build website -----------------------------------------------------------
 
 # Update README
 knitr::knit(input = "README.Rmd")
-
-# Build website -----------------------------------------------------------
 
 # Run to build the website
 pkgdown::build_site_github_pages()

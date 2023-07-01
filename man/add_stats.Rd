@@ -40,14 +40,23 @@ classes that are supported.}
 }
 \description{
 \code{add_stats()} is used to add the output of a statistical test to a
-tidystats list. While adding the output, additional information about the
-test can be added, including the type of test (primary, secondary, or
-exploratory), whether the test was preregistered, and additional notes.
-Please note that not all statistical tests are supported. See 'Details' below
-for a list of supported statistical tests.
+tidystats list.
 }
 \details{
-Supported functions:\tabular{ll}{
+Many functions to perform statistical tests (e.g., \code{\link[=t.test]{t.test()}}, \code{\link[=lm]{lm()}} return
+an object containing the statistics. These objects can be stored in variables
+and used with \code{add_stats()} to extract the statistics and add them to a
+list that can be saved with the \code{\link[=write_stats]{write_stats()}} function.
+
+Additional information about the statistical test can be added, including the
+type of test (primary, secondary, or exploratory), whether the test was
+preregistered, and additional notes.
+
+Please note that not all statistical tests are supported. See 'Details' below
+for a list of supported statistical tests.
+
+The followings functions are supported so that the statistics contained in
+the output of these functions can automatically be extracted.\tabular{ll}{
    Package \tab Functions \cr
    \code{stats} \tab \code{\link[=t.test]{t.test()}}, \code{\link[=cor.test]{cor.test()}}, \code{\link[=chisq.test]{chisq.test()}}, \cr
     \tab \code{\link[=wilcox.test]{wilcox.test()}}, \code{\link[=fisher.test]{fisher.test()}}, \code{\link[=oneway.test]{oneway.test()}}, \cr
@@ -61,10 +70,11 @@ Supported functions:\tabular{ll}{
 }
 
 
-Supported classes:\tabular{lll}{
-   Package \tab Function \tab Class name \cr
-   \code{stats} \tab \code{\link[=confint]{confint()}} \tab confint \cr
-   \code{emmeans} \tab \link{mvcontrast(show.ests = TRUE)} \tab emm_list \cr
+The following functions are supported when their class is explicitly
+specified using the \code{class} argument.\tabular{llll}{
+   Package \tab Function \tab Class name \tab Notes \cr
+   \code{stats} \tab \code{\link[=confint]{confint()}} \tab confint \tab  \cr
+   \code{emmeans} \tab \code{\link[=mvcontrast]{mvcontrast()}} \tab emm_list \tab If \code{show.ests} = \code{TRUE} \cr
 }
 }
 \examples{

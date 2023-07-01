@@ -1,4 +1,5 @@
 #' @describeIn tidy_stats tidy_stats method for class 'rcorr'
+#' @keywords internal
 tidy_stats.rcorr <- function(x, args = NULL) {
   message(
     paste(

@@ -16,11 +16,6 @@ reference:
     contents:
       - count_data
       - describe_data
-  - title: Helper functions
-    desc: Functions used under the hood
-    contents:
-      - tidy_stats
-      - tidy_matrix
   - title: Data sets
     desc: Data sets that come with the package
     contents:
@@ -34,10 +29,10 @@ articles:
       - supported-functions
       - custom-statistics
       - reusing-statistics
-  - title: Development
-    desc: Vignettes aimed at package developers
-    contents:
-      - tidystats-development
+  # - title: Development
+  #  desc: Vignettes aimed at package developers
+  #  contents:
+  #    - tidystats-development
 
 template:
   bootstrap: 5

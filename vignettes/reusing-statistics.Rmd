@@ -23,7 +23,8 @@ options(knitr.kable.NA = "-")
 Besides using tidystats in combination with a text editor add-in to report 
 statistics, you can also use tidystats to read and use the statistics for other
 purposes. For example, researchers can extract specific statistics 
-to perform analyses on such as meta-analyses or a p-curve analysis.
+and perform analyses such as meta-analyses or a p-curve analysis on the 
+extracted statistics.
 
 One particular useful function that was created for this purpose is 
 `tidy_stats_to_data_frame()`. This function converts a tidystats list of 
@@ -31,12 +32,15 @@ statistics to a standard data frame. That means you can use common data
 manipulation functions such as `filter()` on the data to retrieve the statistics
 of interest.
 
+## An example
+
 Below is an example of how to convert a list of statistics to a data frame and 
 perform several simple operations.
 
-In the first example we read the tidystats list and select all the p-values.
+In the example below we read the tidystats list and select all the p-values.
 
 ```{r, results = "hide", message = FALSE}
+# Load packages
 library(tidystats)
 library(dplyr)
 
@@ -55,7 +59,7 @@ p_values
 kable(p_values, format = "markdown")
 ```
 
-In the next example we select all the significant p-values.
+Alternatively, we can can also easily select all significant p-values.
 
 ```{r}
 sig_p_values <- filter(statistics, statistic == "p" & value < .05)
@@ -74,6 +78,14 @@ researchers provide the correct meta-information for each test
 meta-researchers make correct decisions about which statistics to include in 
 their analyses.
 
-In short, by reading a `tidystats`-produced file of statistics, you can convert 
+## Summary
+
+By importing a tidystats-produced file of statistics, you can convert 
 the statistics to a data frame using the `tidy_stats_to_data_frame` function and 
-apply common data transformation functions to extract specific statistics.
+apply common data transformation functions to extract specific statistics. These
+statistics can then be used in analyses such as meta-analyses, p-curve analyses,
+or other analyses.
+
+## References
+
+Simonsohn, U., Nelson, L. D., & Simmons, J. P. (2014). p-curve and effect size: Correcting for publication bias using only significant results. *Perspectives on Psychological Science*, *9*(6), 666-681. https://doi.org/10.1177/1745691614553988

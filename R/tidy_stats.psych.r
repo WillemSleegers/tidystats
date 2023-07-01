@@ -1,4 +1,5 @@
 #' @describeIn tidy_stats tidy_stats method for class 'psych'
+#' @keywords internal
 tidy_stats.psych <- function(x, args = NULL) {
   if ("alpha" %in% class(x)) {
     analysis <- tidy_stats.psych.alpha(x)

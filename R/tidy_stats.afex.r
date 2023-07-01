@@ -1,4 +1,5 @@
 #' @describeIn tidy_stats tidy_stats method for class 'afex_aov'
+#' @keywords internal
 tidy_stats.afex_aov <- function(x, args = NULL) {
   analysis <- list(method = "ANOVA")
 

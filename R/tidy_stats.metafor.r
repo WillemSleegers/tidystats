@@ -1,4 +1,5 @@
 #' @describeIn tidy_stats tidy_stats method for class 'rma.uni'
+#' @keywords internal
 tidy_stats.rma.uni <- function(x, args = NULL) {
   method <- "Meta-Analysis via Linear Models"
 

@@ -45,8 +45,6 @@
     <a class="dropdown-item" href="../articles/supported-functions.html">Supported functions</a>
     <a class="dropdown-item" href="../articles/custom-statistics.html">Custom statistics</a>
     <a class="dropdown-item" href="../articles/reusing-statistics.html">Reusing statistics</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="../articles/index.html">More articles...</a>
   </div>
 </li>
 <li class="nav-item">
@@ -78,7 +76,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Reusing statistics</h1>
             
-            <h4 data-toc-skip class="date">2023-06-30</h4>
+            <h4 data-toc-skip class="date">2023-07-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/WillemSleegers/tidystats/blob/HEAD/vignettes/reusing-statistics.Rmd" class="external-link"><code>vignettes/reusing-statistics.Rmd</code></a></small>
       <div class="d-none name"><code>reusing-statistics.Rmd</code></div>
@@ -89,19 +87,23 @@
 <p>Besides using tidystats in combination with a text editor add-in to
 report statistics, you can also use tidystats to read and use the
 statistics for other purposes. For example, researchers can extract
-specific statistics to perform analyses on such as meta-analyses or a
-p-curve analysis.</p>
+specific statistics and perform analyses such as meta-analyses or a
+p-curve analysis on the extracted statistics.</p>
 <p>One particular useful function that was created for this purpose is
 <code><a href="../reference/tidy_stats_to_data_frame.html">tidy_stats_to_data_frame()</a></code>. This function converts a
 tidystats list of statistics to a standard data frame. That means you
 can use common data manipulation functions such as <code><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter()</a></code>
 on the data to retrieve the statistics of interest.</p>
+<div class="section level2">
+<h2 id="an-example">An example<a class="anchor" aria-label="anchor" href="#an-example"></a>
+</h2>
 <p>Below is an example of how to convert a list of statistics to a data
 frame and perform several simple operations.</p>
-<p>In the first example we read the tidystats list and select all the
+<p>In the example below we read the tidystats list and select all the
 p-values.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://willemsleegers.github.io/tidystats/" class="external-link">tidystats</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co"># Load packages</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://willemsleegers.github.io/tidystats/" class="external-link">tidystats</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Read the .json file containing the statistics and immediately convert it to</span></span>
@@ -286,7 +288,8 @@ p-values.</p>
 </tr>
 </tbody>
 </table>
-<p>In the next example we select all the significant p-values.</p>
+<p>Alternatively, we can can also easily select all significant
+p-values.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sig_p_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">statistics</span>, <span class="va">statistic</span> <span class="op">==</span> <span class="st">"p"</span> <span class="op">&amp;</span> <span class="va">value</span> <span class="op">&lt;</span> <span class="fl">.05</span><span class="op">)</span></span></code></pre></div>
 <table style="width:100%;" class="table">
@@ -391,11 +394,27 @@ relevant to a particular hypothesis. If researchers provide the correct
 meta-information for each test (e.g., by indicating whether it is a
 primary analysis), this could help meta-researchers make correct
 decisions about which statistics to include in their analyses.</p>
-<p>In short, by reading a <code>tidystats</code>-produced file of
-statistics, you can convert the statistics to a data frame using the
+</div>
+<div class="section level2">
+<h2 id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
+</h2>
+<p>By importing a tidystats-produced file of statistics, you can convert
+the statistics to a data frame using the
 <code>tidy_stats_to_data_frame</code> function and apply common data
-transformation functions to extract specific statistics.</p>
-  </main>
+transformation functions to extract specific statistics. These
+statistics can then be used in analyses such as meta-analyses, p-curve
+analyses, or other analyses.</p>
+</div>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
+<p>Simonsohn, U., Nelson, L. D., &amp; Simmons, J. P. (2014). p-curve
+and effect size: Correcting for publication bias using only significant
+results. <em>Perspectives on Psychological Science</em>, <em>9</em>(6),
+666-681. <a href="https://doi.org/10.1177/1745691614553988" class="external-link uri">https://doi.org/10.1177/1745691614553988</a></p>
+</div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 

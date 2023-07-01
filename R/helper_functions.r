@@ -6,8 +6,8 @@
 #' Function to convert matrix objects to a tidy data frame.
 #'
 #' @param m A matrix.
-
-# Matrices ----------------------------------------------------------------
+#'
+#' @keywords internal
 
 tidy_matrix <- function(m, symmetric = TRUE) {
   if (!length(rownames(m)) > 0) {
@@ -43,6 +43,8 @@ tidy_matrix <- function(m, symmetric = TRUE) {
 #' @describeIn helper_functions
 #' Function to add a statistic to list. It helps create the list and ignores
 #' NULL values.
+#'
+#' @keywords internal
 
 add_statistic <- function(list, name, value, symbol = NULL, subscript = NULL,
                           interval = NULL, level = NULL, lower = NULL,
@@ -103,6 +105,11 @@ add_package_info <- function(list, package) {
 
 # Testing -----------------------------------------------------------------
 
+#' @describeIn helper_functions
+#' Function to compare tidied models during testing.
+#'
+#' @keywords internal
+
 expect_equal_models <- function(model, expected_tidy_model, tolerance = 0.001) {
   # Convert model output to a tidystats list
   tidy_model <- tidy_stats(model)
@@ -115,6 +122,13 @@ expect_equal_models <- function(model, expected_tidy_model, tolerance = 0.001) {
   # Test whether the two lists are equal
   testthat::expect_equal(tidy_model, expected_tidy_model, tolerance = tolerance)
 }
+
+#' @describeIn helper_functions
+#' Function to save tidied statistics to a file. Since these files are used
+#' during testing, it's important to only store files with correctly tidied
+#' statistics, hence the prompt.
+#'
+#' @keywords internal
 
 write_test_stats <- function(x, path, digits = 6) {
   choice <- menu(

@@ -76,9 +76,11 @@
 #' names(list_sleep_test)
 #' str(list_sleep_test)
 #'
+#' @keywords internal
 tidy_stats <- function(x, args = NULL) UseMethod("tidy_stats")
 
 #' @describeIn tidy_stats tidy_stats method for class 'htest'
+#' @keywords internal
 tidy_stats.htest <- function(x, args = NULL) {
   analysis <- list()
 
@@ -359,6 +361,7 @@ tidy_stats.pairwise.htest <- function(x, args = NULL) {
 
 
 #' @describeIn tidy_stats tidy_stats method for class 'lm'
+#' @keywords internal
 tidy_stats.lm <- function(x, args = NULL) {
   analysis <- list(
     name = deparse(x$call[[2]]),
@@ -654,6 +657,7 @@ tidy_stats.anova <- function(x, args = NULL) {
 }
 
 #' @describeIn tidy_stats tidy_stats method for class 'aov'
+#' @keywords internal
 tidy_stats.aov <- function(x, args = NULL) {
   # Create the analysis list and set the name and method
   analysis <- list(
@@ -715,6 +719,7 @@ tidy_stats.aov <- function(x, args = NULL) {
 }
 
 #' @describeIn tidy_stats tidy_stats method for class 'aovlist'
+#' @keywords internal
 tidy_stats.aovlist <- function(x, args = NULL) {
   # Create the analysis list and set the name and method
   analysis <- list(
@@ -795,6 +800,7 @@ tidy_stats.aovlist <- function(x, args = NULL) {
 }
 
 #' @describeIn tidy_stats tidy_stats method for class 'confint'
+#' @keywords internal
 tidy_stats.confint <- function(x, args = NULL) {
   analysis <- list()
 

@@ -45,8 +45,6 @@
     <a class="dropdown-item" href="../articles/supported-functions.html">Supported functions</a>
     <a class="dropdown-item" href="../articles/custom-statistics.html">Custom statistics</a>
     <a class="dropdown-item" href="../articles/reusing-statistics.html">Reusing statistics</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="../articles/index.html">More articles...</a>
   </div>
 </li>
 <li class="nav-item">
@@ -78,7 +76,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Custom statistics</h1>
             
-            <h4 data-toc-skip class="date">2023-06-30</h4>
+            <h4 data-toc-skip class="date">2023-07-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/WillemSleegers/tidystats/blob/HEAD/vignettes/custom-statistics.Rmd" class="external-link"><code>vignettes/custom-statistics.Rmd</code></a></small>
       <div class="d-none name"><code>custom-statistics.Rmd</code></div>
@@ -154,8 +152,8 @@ function.</p>
 <span><span class="va">statistics</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Add linear model and confidence intervals to the list</span></span>
-<span><span class="va">statistics</span> <span class="op">&lt;-</span> <span class="va">statistics</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span><span class="va">statistics</span> <span class="op">&lt;-</span> <span class="va">statistics</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">fit_confint</span><span class="op">)</span></span></code></pre></div>
 <p>Unfortunately, we get an error:</p>
 <blockquote>
@@ -177,8 +175,8 @@ argument. We can specify that the statistics are from the
 <code><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint()</a></code> function by saying
 <code>class = "confint"</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">statistics</span> <span class="op">&lt;-</span> <span class="va">statistics</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<code class="sourceCode R"><span><span class="va">statistics</span> <span class="op">&lt;-</span> <span class="va">statistics</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">fit_confint</span>, class <span class="op">=</span> <span class="st">"confint"</span><span class="op">)</span></span></code></pre></div>
 <p>We don’t get an error this time, indicating that it worked.</p>
 </div>
@@ -244,8 +242,8 @@ can be added to the list via <code><a href="../reference/add_stats.html">add_sta
 </h2>
 <p>tidystats works by taking the output of statistical tests, extracting
 the statistics, and reorganizing them into a particular structure. This
-works if 1 tidystats has built-in support for the function and 2) if the
-function used to run the statistical test returns an object that
+works if 1) tidystats has built-in support for the function and 2) if
+the function used to run the statistical test returns an object that
 tidystats can use to identify the test.</p>
 <p>If you want to use tidystats on a function that is not supported yet,
 please contact me to let me know that I should add support for it.</p>

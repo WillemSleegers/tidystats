@@ -32,8 +32,6 @@ subsetting functions (e.g., dplyr::filter())."><!-- mathjax --><script src="http
     <a class="dropdown-item" href="../articles/supported-functions.html">Supported functions</a>
     <a class="dropdown-item" href="../articles/custom-statistics.html">Custom statistics</a>
     <a class="dropdown-item" href="../articles/reusing-statistics.html">Reusing statistics</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="../articles/index.html">More articles...</a>
   </div>
 </li>
 <li class="nav-item">
@@ -104,7 +102,7 @@ subsetting functions (e.g., <code><a href="https://dplyr.tidyverse.org/reference
 <span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">tidy_stats_to_data_frame</span><span class="op">(</span><span class="va">statistics</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Select all the p-values</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">statistic</span> <span class="op">==</span> <span class="st">"p"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">statistic</span> <span class="op">==</span> <span class="st">"p"</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'statistic' not found</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

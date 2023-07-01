@@ -174,7 +174,7 @@ correctly structured the statistic so it can be added to the list via
 ## Summary
 
 tidystats works by taking the output of statistical tests, extracting the 
-statistics, and reorganizing them into a particular structure. This works if 1
+statistics, and reorganizing them into a particular structure. This works if 1)
 tidystats has built-in support for the function and 2) if the function used to 
 run the statistical test returns an object that tidystats can use to identify 
 the test.

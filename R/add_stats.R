@@ -1,9 +1,17 @@
 #' Add statistical output to a tidystats list
 #'
 #' `add_stats()` is used to add the output of a statistical test to a
-#' tidystats list. While adding the output, additional information about the
-#' test can be added, including the type of test (primary, secondary, or
-#' exploratory), whether the test was preregistered, and additional notes.
+#' tidystats list.
+#'
+#' Many functions to perform statistical tests (e.g., [t.test()], [lm()] return
+#' an object containing the statistics. These objects can be stored in variables
+#' and used with `add_stats()` to extract the statistics and add them to a
+#' list that can be saved with the [write_stats()] function.
+#'
+#' Additional information about the statistical test can be added, including the
+#' type of test (primary, secondary, or exploratory), whether the test was
+#' preregistered, and additional notes.
+#'
 #' Please note that not all statistical tests are supported. See 'Details' below
 #' for a list of supported statistical tests.
 #'
@@ -23,7 +31,8 @@
 #' classes that are supported.
 #'
 #' @details
-#' Supported functions:
+#' The followings functions are supported so that the statistics contained in
+#' the output of these functions can automatically be extracted.
 #'
 #' | Package           | Functions                                             |
 #' |-------------------|-------------------------------------------------------|
@@ -37,11 +46,13 @@
 #' |                   | [meta.ttestBF()]                                      |
 #' | `tidystats`       | [describe_data()], [count_data()]                     |
 #'
-#' Supported classes:
-#' | Package   | Function                       | Class name  |
-#' | ----------| -------------------------------| ------------|
-#' | `stats`   | [confint()]                    | confint     |
-#' | `emmeans` | [mvcontrast(show.ests = TRUE)] | emm_list    |
+#' The following functions are supported when their class is explicitly
+#' specified using the `class` argument.
+#'
+#' | Package   | Function       | Class name  | Notes                   |
+#' | ----------| ---------------| ------------|-------------------------|
+#' | `stats`   | [confint()]    | confint     |                         |
+#' | `emmeans` | [mvcontrast()] | emm_list    | If `show.ests` = `TRUE` |
 #'
 #' @examples
 #' # Conduct several analyses

@@ -3,6 +3,8 @@
 \name{tidy_matrix}
 \alias{tidy_matrix}
 \alias{add_statistic}
+\alias{expect_equal_models}
+\alias{write_test_stats}
 \title{Helper functions in tidystats}
 \usage{
 tidy_matrix(m, symmetric = TRUE)
@@ -18,6 +20,10 @@ add_statistic(
   lower = NULL,
   upper = NULL
 )
+
+expect_equal_models(model, expected_tidy_model, tolerance = 0.001)
+
+write_test_stats(x, path, digits = 6)
 }
 \arguments{
 \item{m}{A matrix.}
@@ -32,4 +38,11 @@ Functions used under the hood in the \link{tidystats} package.
 \item \code{add_statistic()}: Function to add a statistic to list. It helps create the list and ignores
 NULL values.
 
+\item \code{expect_equal_models()}: Function to compare tidied models during testing.
+
+\item \code{write_test_stats()}: Function to save tidied statistics to a file. Since these files are used
+during testing, it's important to only store files with correctly tidied
+statistics, hence the prompt.
+
 }}
+\keyword{internal}

@@ -7,13 +7,22 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+This page contains a list of all functions supported by tidystats. 
+
+Note that if a function is not yet supported, you can request support for it by
+creating an [issue](https://github.com/WillemSleegers/tidystats/issues) on 
+GitHub or by using the `custom_stats()` function.  See the 
+`vignette("custom-statistics")` for more information.
+
+## Packages and supported functions
+
 ```{r, echo = FALSE, results = "asis"}
 functions <- jsonlite::read_json("supported-functions.json")
 
 purrr::walk(
   functions,
   function(x) {
-    cat(paste("##", x$package))
+    cat(paste("###", x$package))
     cat("\n")
 
     purrr::walk(

@@ -45,8 +45,6 @@
     <a class="dropdown-item" href="../articles/supported-functions.html">Supported functions</a>
     <a class="dropdown-item" href="../articles/custom-statistics.html">Custom statistics</a>
     <a class="dropdown-item" href="../articles/reusing-statistics.html">Reusing statistics</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="../articles/index.html">More articles...</a>
   </div>
 </li>
 <li class="nav-item">
@@ -85,9 +83,18 @@
 
     
     
+<p>This page contains a list of all functions supported by
+tidystats.</p>
+<p>Note that if a function is not yet supported, you can request support
+for it by creating an <a href="https://github.com/WillemSleegers/tidystats/issues" class="external-link">issue</a> on
+GitHub or by using the <code><a href="../reference/custom_stats.html">custom_stats()</a></code> function. See the
+<code><a href="../articles/custom-statistics.html">vignette("custom-statistics")</a></code> for more information.</p>
 <div class="section level2">
-<h2 id="afex">afex<a class="anchor" aria-label="anchor" href="#afex"></a>
+<h2 id="packages-and-supported-functions">Packages and supported functions<a class="anchor" aria-label="anchor" href="#packages-and-supported-functions"></a>
 </h2>
+<div class="section level3">
+<h3 id="afex">afex<a class="anchor" aria-label="anchor" href="#afex"></a>
+</h3>
 <ul>
 <li>aov_ez()</li>
 <li>aov_car()</li>
@@ -95,9 +102,9 @@
 <li>mixed()</li>
 </ul>
 </div>
-<div class="section level2">
-<h2 id="bayesfactor">BayesFactor<a class="anchor" aria-label="anchor" href="#bayesfactor"></a>
-</h2>
+<div class="section level3">
+<h3 id="bayesfactor">BayesFactor<a class="anchor" aria-label="anchor" href="#bayesfactor"></a>
+</h3>
 <ul>
 <li>generalTestBF()</li>
 <li>lmBF()</li>
@@ -110,27 +117,27 @@
 <li>meta.ttestBF()</li>
 </ul>
 </div>
-<div class="section level2">
-<h2 id="effectsize">effectsize<a class="anchor" aria-label="anchor" href="#effectsize"></a>
-</h2>
+<div class="section level3">
+<h3 id="effectsize">effectsize<a class="anchor" aria-label="anchor" href="#effectsize"></a>
+</h3>
 <ul>
 <li>cohens_d()</li>
 <li>hedges_g()</li>
 <li>glass_delta()</li>
 </ul>
 </div>
-<div class="section level2">
-<h2 id="effsize">effsize<a class="anchor" aria-label="anchor" href="#effsize"></a>
-</h2>
+<div class="section level3">
+<h3 id="effsize">effsize<a class="anchor" aria-label="anchor" href="#effsize"></a>
+</h3>
 <ul>
 <li>cohen.d()</li>
 <li>VD.A()</li>
 <li>cliff.delta()</li>
 </ul>
 </div>
-<div class="section level2">
-<h2 id="emmeans">emmeans<a class="anchor" aria-label="anchor" href="#emmeans"></a>
-</h2>
+<div class="section level3">
+<h3 id="emmeans">emmeans<a class="anchor" aria-label="anchor" href="#emmeans"></a>
+</h3>
 <ul>
 <li>emmeans()</li>
 <li>contrast()</li>
@@ -142,47 +149,47 @@
 <li>ref_grid()</li>
 </ul>
 </div>
-<div class="section level2">
-<h2 id="hmisc">Hmisc<a class="anchor" aria-label="anchor" href="#hmisc"></a>
-</h2>
+<div class="section level3">
+<h3 id="hmisc">Hmisc<a class="anchor" aria-label="anchor" href="#hmisc"></a>
+</h3>
 <ul>
 <li>rcorr()</li>
 </ul>
 </div>
-<div class="section level2">
-<h2 id="irr">irr<a class="anchor" aria-label="anchor" href="#irr"></a>
-</h2>
+<div class="section level3">
+<h3 id="irr">irr<a class="anchor" aria-label="anchor" href="#irr"></a>
+</h3>
 <ul>
 <li>icc()</li>
 </ul>
 </div>
-<div class="section level2">
-<h2 id="lme4">lme4<a class="anchor" aria-label="anchor" href="#lme4"></a>
-</h2>
+<div class="section level3">
+<h3 id="lme4">lme4<a class="anchor" aria-label="anchor" href="#lme4"></a>
+</h3>
 <ul>
 <li>lmer()</li>
 <li>anova()</li>
 </ul>
 </div>
-<div class="section level2">
-<h2 id="lmertest">lmerTest<a class="anchor" aria-label="anchor" href="#lmertest"></a>
-</h2>
+<div class="section level3">
+<h3 id="lmertest">lmerTest<a class="anchor" aria-label="anchor" href="#lmertest"></a>
+</h3>
 <ul>
 <li>lmer()</li>
 <li>anova()</li>
 </ul>
 </div>
-<div class="section level2">
-<h2 id="tidystats">tidystats<a class="anchor" aria-label="anchor" href="#tidystats"></a>
-</h2>
+<div class="section level3">
+<h3 id="tidystats">tidystats<a class="anchor" aria-label="anchor" href="#tidystats"></a>
+</h3>
 <ul>
 <li>count_data()</li>
 <li>describe_data()</li>
 </ul>
 </div>
-<div class="section level2">
-<h2 id="stats">stats<a class="anchor" aria-label="anchor" href="#stats"></a>
-</h2>
+<div class="section level3">
+<h3 id="stats">stats<a class="anchor" aria-label="anchor" href="#stats"></a>
+</h3>
 <ul>
 <li>anova()</li>
 <li>ansari.test()</li>
@@ -218,6 +225,7 @@
 <li>var.test()</li>
 <li>wilcox.test()</li>
 </ul>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
