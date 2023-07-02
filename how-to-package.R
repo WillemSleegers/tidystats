@@ -7,6 +7,7 @@
 # TODO: Use the checkmate package
 # TODO: Create a vignette to describe the development process of adding support
 #       for an analysis
+# TODO: Improve tidystats count function (redo the loop function)
 
 # Load functions ----------------------------------------------------------
 
