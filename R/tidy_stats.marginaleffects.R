@@ -170,7 +170,7 @@ add_marginaleffects_group <- function(list, vars, x) {
     if (length(vars) > 1) {
       group_level <- add_group(group_level, vars[-1], x_level)
     } else {
-      group_level <- add_statistics(group_level, x_level)
+      group_level <- add_marginaleffects_statistics(group_level, x_level)
     }
 
     group$groups <- append(group$groups, list(group_level))
