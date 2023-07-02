@@ -9,9 +9,9 @@
 * Renamed the `results` argument in `add_stats()` to `list`
 * Removed the multiplication by 100 in `count_data()`'s `pct` column to make it
   easier to present the numbers as percentages (e.g., using
-  `scales::label_percent()`)
-* Added a new argument to `describe_data()` and `count_data()` to obtain
-  percentages instead of proportions.
+  `scales::label_percent()`). You can still obtain percentages using the new
+  `pct` argument.
+* Removed the `pct` column from the output of `describe_data()`.
 * Improved names in `anova()` tests.
 
 ## New
@@ -30,13 +30,13 @@
 * Added support for the `effsize` package.
 * Added a `pct` argument to `count_data()` to return proportions instead of percentages.
 
-## Miscellaneous
-
-* Removed info message that is displayed when the package is loaded.
-
 # tidystats 0.5.2
 
 * A minor bug fix update to keep the package on CRAN.
+
+## Miscellaneous
+
+* Removed info message that is displayed when the package is loaded.
 
 # tidystats 0.5.1
 

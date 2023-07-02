@@ -1,19 +1,21 @@
-#' Read a .json file that was produced with \code{write_stats}
+#' Read a .json file that was produced with [write_stats()]
 #'
-#' `read_stats()` can read in a .json file containing the statistical output
-#' that was produced with [write_stats()]. It returns a list containing the
-#' results, with the identifier as the name for each list element.
+#' [read_stats()] can read a .json file containing statistics that was produced
+#' using tidystats. It returns a list containing the statistics, with the
+#' identifier as the name for each list element.
 #'
-#' @param file A string; specifying the path to the tidystats data file.
+#' @param file A string specifying the path to the tidystats data file.
 #'
 #' @examples
-#' # A simple example, assuming there is a file called 'results.json'
+#' # A simple example, assuming there is a file called 'statistics.json'
 #' \dontrun{
-#' results <- read_stats("results.json")
+#' statistics <- read_stats("statistics.json")
 #' }
 #'
 #' # A working example
-#' results <- read_stats(system.file("results.json", package = "tidystats"))
+#' statistics <- read_stats(
+#'   file = system.file("statistics.json", package = "tidystats")
+#' )
 #'
 #' @export
 read_stats <- function(file) {

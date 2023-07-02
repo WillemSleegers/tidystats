@@ -10,12 +10,12 @@ tidy_stats_to_data_frame(x)
 \item{x}{A tidystats list.}
 }
 \description{
-\code{tidy_stats_to_data_frame()} converts a tidystats list to a data frame,
+\code{\link[=tidy_stats_to_data_frame]{tidy_stats_to_data_frame()}} converts a tidystats list to a data frame,
 which can then be used to extract specific statistics using standard
 subsetting functions (e.g., \code{\link[dplyr:filter]{dplyr::filter()}}).
 }
 \examples{
-# Conduct statistical tests
+# Conduct analyses
 sleep_test <- t.test(extra ~ group, data = sleep, paired = TRUE)
 
 ctl <- c(4.17, 5.58, 5.18, 6.11, 4.50, 4.61, 5.17, 4.53, 5.33, 5.14)
@@ -26,19 +26,19 @@ lm_D9 <- lm(weight ~ group)
 
 npk_aov <- aov(yield ~ block + N * P * K, npk)
 
-# Create an empty list
+# Create an empty list to store the statistics in
 statistics <- list()
 
 # Add statistics
 statistics <- statistics |>
-  add_stats(sleep_test) |>
-  add_stats(lm_D9, type = "primary", preregistered = TRUE) |>
+  add_stats(sleep_test, type = "primary", preregistered = TRUE) |>
+  add_stats(lm_D9) |>
   add_stats(npk_aov, notes = "An ANOVA example")
 
 # Convert the list to a data frame
 df <- tidy_stats_to_data_frame(statistics)
 
 # Select all the p-values
-filter(df, statistic == "p")
+dplyr::filter(df, statistic == "p")
 
 }

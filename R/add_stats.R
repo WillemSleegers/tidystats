@@ -1,60 +1,82 @@
 #' Add statistical output to a tidystats list
 #'
-#' `add_stats()` is used to add the output of a statistical test to a
+#' [add_stats()] is used to add the output of a statistical test to a
 #' tidystats list.
-#'
-#' Many functions to perform statistical tests (e.g., [t.test()], [lm()] return
-#' an object containing the statistics. These objects can be stored in variables
-#' and used with `add_stats()` to extract the statistics and add them to a
-#' list.
-#'
-#' Additional information about the statistical test can be added, including the
-#' type of test (primary, secondary, or exploratory), whether the test was
-#' preregistered, and additional notes.
-#'
-#' Please note that not all statistical tests are supported. See 'Details' below
-#' for a list of supported statistical tests.
-#'
-#' The list can be saved to a file using the [write_stats()] function.
 #'
 #' @param list A tidystats list.
 #' @param output Output of a statistical test.
-#' @param identifier A character string identifying the model. Automatically
-#' created if not provided.
-#' @param type A character string specifying the type of analysis: primary,
+#' @param identifier A string identifying the model. Automatically created if
+#' not provided.
+#' @param type A string specifying the type of analysis: primary,
 #' secondary, or exploratory.
 #' @param preregistered A boolean specifying whether the analysis was
 #' preregistered or not.
-#' @param notes A character string specifying additional information.
-#' @param args A list of additional arguments to customize which statistics
-#' should be extracted. See 'Details' for a list of supported analyses.
-#' @param class A character string to manually specify the class of the object
-#' so that tidystats knows how to extract the statistics. See details for a list
+#' @param notes A string specifying additional information.
+#' @param class A string to manually specify the class of the object so that
+#' tidystats knows how to extract the statistics. See 'Details' for a list of
 #' classes that are supported.
+#' @param args A list of additional arguments to customize which statistics
+#' should be extracted. See 'Details' for a list of supported functions and
+#' their arguments.
 #'
 #' @details
-#' The followings functions are supported so that the statistics contained in
-#' the output of these functions can automatically be extracted.
+#' Many functions to perform statistical tests (e.g., [t.test()], [lm()]) return
+#' an object containing the statistics. These objects can be stored in variables
+#' and used with [add_stats()] to extract the statistics and add them to a
+#' list.
+#'
+#' The list can be saved to a file using the [write_stats()] function.
+#'
+#' The followings functions are supported so that the statistics can be
+#' automatically extracted using [add_stats()].
 #'
 #' | **Package**       | **Functions**                                         |
 #' |-------------------|-------------------------------------------------------|
-#' |`stats`            | [t.test()], [cor.test()], [chisq.test()],             |
-#' |                   | [wilcox.test()], [fisher.test()], [oneway.test()],    |
-#' |                   | [lm()], [glm()], [aov()], [anova()]                   |
-#' | `lme4`/`lmerTest` | [lmer()]                                              |
-#' | `BayesFactor`     | [generalTestBF()], [lmBF()], [regressionBF()],        |
+#' | afex              | [aov_ez()], [aov_car()], [aov_4()], [mixed()]         |
+#' | BayesFactor       | [generalTestBF()], [lmBF()], [regressionBF()],        |
 #' |                   | [ttestBF()], [anovaBF()], [correlationBF()],          |
 #' |                   | [contingencyTableBF()], [proportionBF()],             |
 #' |                   | [meta.ttestBF()]                                      |
-#' | `tidystats`       | [describe_data()], [count_data()]                     |
+#' | effectsize        | [cohens_d()], [hedges_g()], [glass_delta()]           |
+#' | effsize           | [cohen.d()], [VD.A()], [cliff.delta()]                |
+#' | emmeans           | [emmeans()], [contrast()], [test()], [mvcontrast()],  |
+#' |                   | [eff_size()], [emtrends()], [joint_tests()],          |
+#' |                   | [ref_grid()]                                          |
+#' | Hmisc             | [rcorr()]                                             |
+#' | irr               | [icc()]                                               |
+#' | lme4/lmerTest     | [lmer()], [anova()]                                   |
+#' | tidystats         | [describe_data()], [count_data()]                     |
+#' | stats             | [anova()], [ansari.test()], [aov()],                  |
+#' |                   | [bartlett.test()], [binom.test()], [Box.test()],      |
+#' |                   | [chisq.test()], [confint()], [cor.test()],            |
+#' |                   | [fisher.test()], [fligner.test()], [friedman.test()], |
+#' |                   | [glm()], [kruskal.test()], [ks.test()], [lm()],       |
+#' |                   | [mantelhaen.test()], [mauchly.test()],                |
+#' |                   | [mcnemar.test()], [mood.test()], [oneway.test()],     |
+#' |                   | [pairwise.t.test()], [pairwise.prop.test()],          |
+#' |                   | [pairwise.wilcox.test()], [poisson.test()],           |
+#' |                   | [PP.test()], [prop.test()], [prop.trend.test()],      |
+#' |                   | [quade.test()], [shapiro.test()], [t.test()],         |
+#' |                   | [var.test()], [wilcox.test()]                         |
 #'
 #' The following functions are supported when their class is explicitly
 #' specified using the `class` argument.
 #'
 #' | **Package** | **Function**   | **Class name** | **Notes**               |
 #' | ------------| ---------------| ---------------|-------------------------|
-#' | `stats`     | [confint()]    | confint        |                         |
-#' | `emmeans`   | [mvcontrast()] | emm_list       | If `show.ests` = `TRUE` |
+#' | stats       | [confint()]    | confint        |                         |
+#' | emmeans     | [mvcontrast()] | emm_list       | If `show.ests` = `TRUE` |
+#'
+#' The following functions support customizations regarding which statistics
+#' are extracted via the `args` argument.
+#'
+#' | **Package** | **Function**        | **Arguments**                         |
+#' | ------------| --------------------| --------------------------------------|
+#' | brms        | [brm()]             | `prob`, `robust`, `mc_se`             |
+#' | lavaan      | [lavaan()], [sem()],| `fit.measures`, `standardized`        |
+#' |             | [cfa()]             |                                       |
+#'
+#' See the function's documentation for more information about each argument.
 #'
 #' @examples
 #' # Conduct analyses
@@ -69,13 +91,14 @@
 #'
 #' npk_aov <- aov(yield ~ block + N * P * K, npk)
 #'
-#' # Create an empty list
+#' # Create an empty list to store the statistics in
 #' statistics <- list()
 #'
 #' # Add statistics to the list
 #' statistics <- statistics |>
-#'   add_stats(sleep_test) |>
-#'   add_stats(lm_D9, type = "primary", preregistered = TRUE) |>
+#'   add_stats(sleep_test, type = "primary", preregistered = TRUE) |>
+#'   add_stats(lm_D9) |>
+#'   add_stats(lm_D9_confint, class = "confint") |>
 #'   add_stats(npk_aov, notes = "An ANOVA example")
 #'
 #' @export

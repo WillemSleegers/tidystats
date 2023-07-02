@@ -4,7 +4,7 @@
 \alias{describe_data}
 \title{Calculate common descriptive statistics}
 \usage{
-describe_data(data, ..., na.rm = TRUE, prop = FALSE, short = FALSE)
+describe_data(data, ..., na.rm = TRUE, short = FALSE)
 }
 \arguments{
 \item{data}{A data frame.}
@@ -14,30 +14,20 @@ describe_data(data, ..., na.rm = TRUE, prop = FALSE, short = FALSE)
 \item{na.rm}{A boolean indicating whether missing values (including NaN)
 should be excluded in calculating the descriptives? The default is TRUE.}
 
-\item{prop}{A boolean indicating whether to calculate proportions instead of
-percentages. The default is FALSE.}
-
 \item{short}{A boolean indicating whether only a subset of descriptives
-should be reported? If set to TRUE, only the N, M, and SD will be returned.
-The default is FALSE.}
+should be reported? If set to \verb{TRUE``, only the N, M, and SD will be returned. The default is }FALSE`.}
 }
 \description{
-\code{describe_data} returns a set of common descriptive statistics
-(e.g., n, mean, sd) for numeric variables.
+\code{\link[=describe_data]{describe_data()}} returns a set of common descriptive statistics
+(e.g., number of observations, mean, standard deviation) for one or more
+numeric variables.
 }
 \details{
 The data can be grouped using \code{\link[dplyr:group_by]{dplyr::group_by()}} so that
 descriptives will be calculated for each group level.
 
-When na.rm is set to FALSE, a percentage column will be added to the output
-that contains the percentage of non-missing data.
-
-Skew and kurtosis are based on the \code{\link[=skewness]{skewness()}} and
-\code{\link[=kurtosis]{kurtosis()}} functions (Komsta & Novomestky, 2015).
-
-Percentages are calculated based on the total of non-missing observations.
-When na.rm is set to FALSE, percentages are based on the total of missing and
-non-missing observations.
+Skew and kurtosis are based on the \code{\link[=skewness]{skewness()}} and \code{\link[=kurtosis]{kurtosis()}} functions
+(Komsta & Novomestky, 2015).
 }
 \examples{
 describe_data(quote_source, response)

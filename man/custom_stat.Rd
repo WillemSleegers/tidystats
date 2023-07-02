@@ -37,9 +37,9 @@ interval.}
 \item{upper}{The numeric value of the upper bound of the statistic.}
 }
 \description{
-\code{custom_stat()} is used together with the \code{\link[=custom_stats]{custom_stats()}} function to add
-custom statistics via \code{\link[=add_stats]{add_stats()}}. See the \code{\link[=custom_stats]{custom_stats()}} function for
-more information.
+\code{\link[=custom_stat]{custom_stat()}} is used together with the \code{\link[=custom_stats]{custom_stats()}} function to add
+statistics from unsupported functions via \code{\link[=add_stats]{add_stats()}}. See the
+\code{\link[=custom_stats]{custom_stats()}} function for more information.
 }
 \examples{
 # Example 1: A single mean value

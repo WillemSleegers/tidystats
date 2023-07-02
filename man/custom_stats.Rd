@@ -12,18 +12,22 @@ custom_stats(method, statistics)
 \item{statistics}{A vector of statistics created with \code{\link[=custom_stat]{custom_stat()}}.}
 }
 \description{
-\code{custom_stats()} is used to create a collection of custom statistics
-to add to a statistics list via \code{\link[=add_stats]{add_stats()}}. This can be used to add a
-single statistic or a group of statistics. Note that multiple groups of
-statistics are not supported.
+\code{\link[=custom_stats]{custom_stats()}} is used to create a collection of statistics from
+unsupported functions to add to a list via \code{\link[=add_stats]{add_stats()}}.
+}
+\details{
+\code{\link[=custom_stats]{custom_stats()}} supports adding a single statistic or a group of statistics.
+Multiple groups of statistics are not (yet) supported.
 }
 \examples{
-# Example 1: BIC Bayes factor (approx.)
+# Example: BIC Bayes factor (approx.)
+# Run the analysis
 lm1 <- lm(Fertility ~ ., data = swiss)
 lm2 <- update(lm1, . ~ . - Examination)
 
 BF10 <- 1 / exp((BIC(lm2) - BIC(lm1)) / 2)
 
+# Create the custom statistics
 BIC_BFs <- custom_stats(
   method = "BIC Bayes factor",
   statistics = c(
@@ -32,7 +36,10 @@ BIC_BFs <- custom_stats(
   )
 )
 
+# Create an empty list
 statistics <- list()
+
+# Add the custom statistics to the list
 statistics <- add_stats(statistics, BIC_BFs)
 
 }

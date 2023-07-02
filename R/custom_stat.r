@@ -1,8 +1,8 @@
 #' Create a custom statistic
 #'
-#' `custom_stat()` is used together with the [custom_stats()] function to add
-#' custom statistics via [add_stats()]. See the [custom_stats()] function for
-#' more information.
+#' [custom_stat()] is used together with the [custom_stats()] function to add
+#' statistics from unsupported functions via [add_stats()]. See the
+#' [custom_stats()] function for more information.
 #'
 #' @param name A string specifying the name of the statistic.
 #' @param value The numeric value of the statistic.

@@ -16,10 +16,10 @@ frame, separated by commas.}
 should be removed.}
 
 \item{pct}{A boolean indicating whether to calculate percentages instead of
-proportions. The default is FALSE.}
+proportions. The default is \code{FALSE}.}
 }
 \description{
-\code{count_data} returns the number and percentage of observations for
+\code{\link[=count_data]{count_data()}} returns the number and proportion of observations for
 categorical variables.
 }
 \details{

@@ -1,6 +1,6 @@
 #' Count the number of observations
 #'
-#' `count_data` returns the number and percentage of observations for
+#' [count_data()] returns the number and proportion of observations for
 #' categorical variables.
 #'
 #' @param data A data frame.
@@ -9,7 +9,7 @@
 #' @param na.rm A boolean specifying whether missing values (including NaN)
 #'   should be removed.
 #' @param pct A boolean indicating whether to calculate percentages instead of
-#'   proportions. The default is FALSE.
+#'   proportions. The default is `FALSE`.
 #'
 #' @details The data frame can be grouped using [dplyr::group_by()]
 #' so that the number of observations will be calculated within each group

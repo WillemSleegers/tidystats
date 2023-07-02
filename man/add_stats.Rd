@@ -20,64 +20,87 @@ add_stats(
 
 \item{output}{Output of a statistical test.}
 
-\item{identifier}{A character string identifying the model. Automatically
-created if not provided.}
+\item{identifier}{A string identifying the model. Automatically created if
+not provided.}
 
-\item{type}{A character string specifying the type of analysis: primary,
+\item{type}{A string specifying the type of analysis: primary,
 secondary, or exploratory.}
 
 \item{preregistered}{A boolean specifying whether the analysis was
 preregistered or not.}
 
-\item{notes}{A character string specifying additional information.}
+\item{notes}{A string specifying additional information.}
 
 \item{args}{A list of additional arguments to customize which statistics
-should be extracted. See 'Details' for a list of supported analyses.}
+should be extracted. See 'Details' for a list of supported functions and
+their arguments.}
 
-\item{class}{A character string to manually specify the class of the object
-so that tidystats knows how to extract the statistics. See details for a list
+\item{class}{A string to manually specify the class of the object so that
+tidystats knows how to extract the statistics. See 'Details' for a list of
 classes that are supported.}
 }
 \description{
-\code{add_stats()} is used to add the output of a statistical test to a
+\code{\link[=add_stats]{add_stats()}} is used to add the output of a statistical test to a
 tidystats list.
 }
 \details{
-Many functions to perform statistical tests (e.g., \code{\link[=t.test]{t.test()}}, \code{\link[=lm]{lm()}} return
+Many functions to perform statistical tests (e.g., \code{\link[=t.test]{t.test()}}, \code{\link[=lm]{lm()}}) return
 an object containing the statistics. These objects can be stored in variables
-and used with \code{add_stats()} to extract the statistics and add them to a
+and used with \code{\link[=add_stats]{add_stats()}} to extract the statistics and add them to a
 list.
-
-Additional information about the statistical test can be added, including the
-type of test (primary, secondary, or exploratory), whether the test was
-preregistered, and additional notes.
-
-Please note that not all statistical tests are supported. See 'Details' below
-for a list of supported statistical tests.
 
 The list can be saved to a file using the \code{\link[=write_stats]{write_stats()}} function.
 
-The followings functions are supported so that the statistics contained in
-the output of these functions can automatically be extracted.\tabular{ll}{
+The followings functions are supported so that the statistics can be
+automatically extracted using \code{\link[=add_stats]{add_stats()}}.\tabular{ll}{
    \strong{Package} \tab \strong{Functions} \cr
-   \code{stats} \tab \code{\link[=t.test]{t.test()}}, \code{\link[=cor.test]{cor.test()}}, \code{\link[=chisq.test]{chisq.test()}}, \cr
-    \tab \code{\link[=wilcox.test]{wilcox.test()}}, \code{\link[=fisher.test]{fisher.test()}}, \code{\link[=oneway.test]{oneway.test()}}, \cr
-    \tab \code{\link[=lm]{lm()}}, \code{\link[=glm]{glm()}}, \code{\link[=aov]{aov()}}, \code{\link[=anova]{anova()}} \cr
-   \code{lme4}/\code{lmerTest} \tab \code{\link[=lmer]{lmer()}} \cr
-   \code{BayesFactor} \tab \code{\link[=generalTestBF]{generalTestBF()}}, \code{\link[=lmBF]{lmBF()}}, \code{\link[=regressionBF]{regressionBF()}}, \cr
+   afex \tab \code{\link[=aov_ez]{aov_ez()}}, \code{\link[=aov_car]{aov_car()}}, \code{\link[=aov_4]{aov_4()}}, \code{\link[=mixed]{mixed()}} \cr
+   BayesFactor \tab \code{\link[=generalTestBF]{generalTestBF()}}, \code{\link[=lmBF]{lmBF()}}, \code{\link[=regressionBF]{regressionBF()}}, \cr
     \tab \code{\link[=ttestBF]{ttestBF()}}, \code{\link[=anovaBF]{anovaBF()}}, \code{\link[=correlationBF]{correlationBF()}}, \cr
     \tab \code{\link[=contingencyTableBF]{contingencyTableBF()}}, \code{\link[=proportionBF]{proportionBF()}}, \cr
     \tab \code{\link[=meta.ttestBF]{meta.ttestBF()}} \cr
-   \code{tidystats} \tab \code{\link[=describe_data]{describe_data()}}, \code{\link[=count_data]{count_data()}} \cr
+   effectsize \tab \code{\link[=cohens_d]{cohens_d()}}, \code{\link[=hedges_g]{hedges_g()}}, \code{\link[=glass_delta]{glass_delta()}} \cr
+   effsize \tab \code{\link[=cohen.d]{cohen.d()}}, \code{\link[=VD.A]{VD.A()}}, \code{\link[=cliff.delta]{cliff.delta()}} \cr
+   emmeans \tab \code{\link[=emmeans]{emmeans()}}, \code{\link[=contrast]{contrast()}}, \code{\link[=test]{test()}}, \code{\link[=mvcontrast]{mvcontrast()}}, \cr
+    \tab \code{\link[=eff_size]{eff_size()}}, \code{\link[=emtrends]{emtrends()}}, \code{\link[=joint_tests]{joint_tests()}}, \cr
+    \tab \code{\link[=ref_grid]{ref_grid()}} \cr
+   Hmisc \tab \code{\link[=rcorr]{rcorr()}} \cr
+   irr \tab \code{\link[=icc]{icc()}} \cr
+   lme4/lmerTest \tab \code{\link[=lmer]{lmer()}}, \code{\link[=anova]{anova()}} \cr
+   tidystats \tab \code{\link[=describe_data]{describe_data()}}, \code{\link[=count_data]{count_data()}} \cr
+   stats \tab \code{\link[=anova]{anova()}}, \code{\link[=ansari.test]{ansari.test()}}, \code{\link[=aov]{aov()}}, \cr
+    \tab \code{\link[=bartlett.test]{bartlett.test()}}, \code{\link[=binom.test]{binom.test()}}, \code{\link[=Box.test]{Box.test()}}, \cr
+    \tab \code{\link[=chisq.test]{chisq.test()}}, \code{\link[=confint]{confint()}}, \code{\link[=cor.test]{cor.test()}}, \cr
+    \tab \code{\link[=fisher.test]{fisher.test()}}, \code{\link[=fligner.test]{fligner.test()}}, \code{\link[=friedman.test]{friedman.test()}}, \cr
+    \tab \code{\link[=glm]{glm()}}, \code{\link[=kruskal.test]{kruskal.test()}}, \code{\link[=ks.test]{ks.test()}}, \code{\link[=lm]{lm()}}, \cr
+    \tab \code{\link[=mantelhaen.test]{mantelhaen.test()}}, \code{\link[=mauchly.test]{mauchly.test()}}, \cr
+    \tab \code{\link[=mcnemar.test]{mcnemar.test()}}, \code{\link[=mood.test]{mood.test()}}, \code{\link[=oneway.test]{oneway.test()}}, \cr
+    \tab \code{\link[=pairwise.t.test]{pairwise.t.test()}}, \code{\link[=pairwise.prop.test]{pairwise.prop.test()}}, \cr
+    \tab \code{\link[=pairwise.wilcox.test]{pairwise.wilcox.test()}}, \code{\link[=poisson.test]{poisson.test()}}, \cr
+    \tab \code{\link[=PP.test]{PP.test()}}, \code{\link[=prop.test]{prop.test()}}, \code{\link[=prop.trend.test]{prop.trend.test()}}, \cr
+    \tab \code{\link[=quade.test]{quade.test()}}, \code{\link[=shapiro.test]{shapiro.test()}}, \code{\link[=t.test]{t.test()}}, \cr
+    \tab \code{\link[=var.test]{var.test()}}, \code{\link[=wilcox.test]{wilcox.test()}} \cr
 }
 
 
 The following functions are supported when their class is explicitly
 specified using the \code{class} argument.\tabular{llll}{
    \strong{Package} \tab \strong{Function} \tab \strong{Class name} \tab \strong{Notes} \cr
-   \code{stats} \tab \code{\link[=confint]{confint()}} \tab confint \tab  \cr
-   \code{emmeans} \tab \code{\link[=mvcontrast]{mvcontrast()}} \tab emm_list \tab If \code{show.ests} = \code{TRUE} \cr
+   stats \tab \code{\link[=confint]{confint()}} \tab confint \tab  \cr
+   emmeans \tab \code{\link[=mvcontrast]{mvcontrast()}} \tab emm_list \tab If \code{show.ests} = \code{TRUE} \cr
 }
+
+
+The following functions support customizations regarding which statistics
+are extracted via the \code{args} argument.\tabular{lll}{
+   \strong{Package} \tab \strong{Function} \tab \strong{Arguments} \cr
+   brms \tab \code{\link[=brm]{brm()}} \tab \code{prob}, \code{robust}, \code{mc_se} \cr
+   lavaan \tab \code{\link[=lavaan]{lavaan()}}, \code{\link[=sem]{sem()}}, \tab \code{fit.measures}, \code{standardized} \cr
+    \tab \code{\link[=cfa]{cfa()}} \tab  \cr
+}
+
+
+See the function's documentation for more information about each argument.
 }
 \examples{
 # Conduct analyses
@@ -92,13 +115,14 @@ lm_D9_confint <- confint(lm_D9)
 
 npk_aov <- aov(yield ~ block + N * P * K, npk)
 
-# Create an empty list
+# Create an empty list to store the statistics in
 statistics <- list()
 
 # Add statistics to the list
 statistics <- statistics |>
-  add_stats(sleep_test) |>
-  add_stats(lm_D9, type = "primary", preregistered = TRUE) |>
+  add_stats(sleep_test, type = "primary", preregistered = TRUE) |>
+  add_stats(lm_D9) |>
+  add_stats(lm_D9_confint, class = "confint") |>
   add_stats(npk_aov, notes = "An ANOVA example")
 
 }
