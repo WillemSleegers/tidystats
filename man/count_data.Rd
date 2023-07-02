@@ -4,7 +4,7 @@
 \alias{count_data}
 \title{Count the number of observations}
 \usage{
-count_data(data, ..., na.rm = FALSE, prop = FALSE)
+count_data(data, ..., na.rm = FALSE, pct = FALSE)
 }
 \arguments{
 \item{data}{A data frame.}
@@ -15,8 +15,8 @@ frame, separated by commas.}
 \item{na.rm}{A boolean specifying whether missing values (including NaN)
 should be removed.}
 
-\item{prop}{A boolean indicating whether to calculate proportions instead of
-percentages. The default is FALSE.}
+\item{pct}{A boolean indicating whether to calculate percentages instead of
+proportions. The default is FALSE.}
 }
 \description{
 \code{count_data} returns the number and percentage of observations for
@@ -31,6 +31,7 @@ level.
 count_data(quote_source, source)
 count_data(quote_source, source, sex)
 count_data(quote_source, source, sex, na.rm = TRUE)
+count_data(quote_source, source, sex, na.rm = TRUE, pct = TRUE)
 
 # Use dplyr::group_by() to calculate proportions within a group
 quote_source |>
