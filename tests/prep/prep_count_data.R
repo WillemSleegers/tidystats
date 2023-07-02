@@ -6,7 +6,7 @@ statistics <- list()
 
 no_group <- count_data(quote_source)
 single_group <- count_data(quote_source, source)
-two_groups <- count_data(quote_source, source, sex, prop = TRUE)
+two_groups <- count_data(quote_source, source, sex, pct = TRUE)
 
 grouped_group <- quote_source |>
   dplyr::group_by(source) |>

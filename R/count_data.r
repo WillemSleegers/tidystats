@@ -8,8 +8,8 @@
 #'   frame, separated by commas.
 #' @param na.rm A boolean specifying whether missing values (including NaN)
 #'   should be removed.
-#' @param prop A boolean indicating whether to calculate proportions instead of
-#'   percentages. The default is FALSE.
+#' @param pct A boolean indicating whether to calculate percentages instead of
+#'   proportions. The default is FALSE.
 #'
 #' @details The data frame can be grouped using [dplyr::group_by()]
 #' so that the number of observations will be calculated within each group
@@ -19,6 +19,7 @@
 #' count_data(quote_source, source)
 #' count_data(quote_source, source, sex)
 #' count_data(quote_source, source, sex, na.rm = TRUE)
+#' count_data(quote_source, source, sex, na.rm = TRUE, pct = TRUE)
 #'
 #' # Use dplyr::group_by() to calculate proportions within a group
 #' quote_source |>
@@ -26,10 +27,8 @@
 #'   count_data(sex)
 #'
 #' @export
-count_data <- function(data, ..., na.rm = FALSE, prop = FALSE) {
-  if (!"data.frame" %in% class(data)) {
-    stop("'data' is not a data frame.")
-  }
+count_data <- function(data, ..., na.rm = FALSE, pct = FALSE) {
+  checkmate::assert_data_frame(data)
 
   output <- dplyr::count(data, ...)
 
@@ -42,10 +41,10 @@ count_data <- function(data, ..., na.rm = FALSE, prop = FALSE) {
   }
 
   # Calculate proportion or percentage of each group per var
-  if (prop) {
-    output <- dplyr::mutate(output, prop = n / sum(n))
-  } else {
+  if (pct) {
     output <- dplyr::mutate(output, pct = n / sum(n) * 100)
+  } else {
+    output <- dplyr::mutate(output, prop = n / sum(n))
   }
 
 

@@ -7,9 +7,9 @@
         "value": 6343
       },
       {
-        "name": "pct",
-        "symbol": "%",
-        "value": 100
+        "name": "proportion",
+        "symbol": "p",
+        "value": 1
       }
     ],
     "package": {
@@ -31,9 +31,9 @@
                 "value": 3101
               },
               {
-                "name": "pct",
-                "symbol": "%",
-                "value": 48.888539
+                "name": "proportion",
+                "symbol": "p",
+                "value": 0.488885
               }
             ]
           },
@@ -45,9 +45,9 @@
                 "value": 3242
               },
               {
-                "name": "pct",
-                "symbol": "%",
-                "value": 51.111461
+                "name": "proportion",
+                "symbol": "p",
+                "value": 0.511115
               }
             ]
           }
@@ -79,9 +79,9 @@
                         "value": 2067
                       },
                       {
-                        "name": "proportion",
-                        "symbol": "p",
-                        "value": 0.325871
+                        "name": "pct",
+                        "symbol": "%",
+                        "value": 32.587104
                       }
                     ]
                   },
@@ -93,9 +93,9 @@
                         "value": 1029
                       },
                       {
-                        "name": "proportion",
-                        "symbol": "p",
-                        "value": 0.162226
+                        "name": "pct",
+                        "symbol": "%",
+                        "value": 16.222608
                       }
                     ]
                   },
@@ -107,9 +107,9 @@
                         "value": 5
                       },
                       {
-                        "name": "proportion",
-                        "symbol": "p",
-                        "value": 0.000788
+                        "name": "pct",
+                        "symbol": "%",
+                        "value": 0.078827
                       }
                     ]
                   }
@@ -131,9 +131,9 @@
                         "value": 2206
                       },
                       {
-                        "name": "proportion",
-                        "symbol": "p",
-                        "value": 0.347785
+                        "name": "pct",
+                        "symbol": "%",
+                        "value": 34.778496
                       }
                     ]
                   },
@@ -145,9 +145,9 @@
                         "value": 1031
                       },
                       {
-                        "name": "proportion",
-                        "symbol": "p",
-                        "value": 0.162541
+                        "name": "pct",
+                        "symbol": "%",
+                        "value": 16.254138
                       }
                     ]
                   },
@@ -159,9 +159,9 @@
                         "value": 5
                       },
                       {
-                        "name": "proportion",
-                        "symbol": "p",
-                        "value": 0.000788
+                        "name": "pct",
+                        "symbol": "%",
+                        "value": 0.078827
                       }
                     ]
                   }
@@ -197,9 +197,9 @@
                         "value": 2067
                       },
                       {
-                        "name": "pct",
-                        "symbol": "%",
-                        "value": 66.655917
+                        "name": "proportion",
+                        "symbol": "p",
+                        "value": 0.666559
                       }
                     ]
                   },
@@ -211,9 +211,9 @@
                         "value": 1029
                       },
                       {
-                        "name": "pct",
-                        "symbol": "%",
-                        "value": 33.182844
+                        "name": "proportion",
+                        "symbol": "p",
+                        "value": 0.331828
                       }
                     ]
                   },
@@ -225,9 +225,9 @@
                         "value": 5
                       },
                       {
-                        "name": "pct",
-                        "symbol": "%",
-                        "value": 0.161238
+                        "name": "proportion",
+                        "symbol": "p",
+                        "value": 0.001612
                       }
                     ]
                   }
@@ -249,9 +249,9 @@
                         "value": 2206
                       },
                       {
-                        "name": "pct",
-                        "symbol": "%",
-                        "value": 68.044417
+                        "name": "proportion",
+                        "symbol": "p",
+                        "value": 0.680444
                       }
                     ]
                   },
@@ -263,9 +263,9 @@
                         "value": 1031
                       },
                       {
-                        "name": "pct",
-                        "symbol": "%",
-                        "value": 31.801357
+                        "name": "proportion",
+                        "symbol": "p",
+                        "value": 0.318014
                       }
                     ]
                   },
@@ -277,9 +277,9 @@
                         "value": 5
                       },
                       {
-                        "name": "pct",
-                        "symbol": "%",
-                        "value": 0.154226
+                        "name": "proportion",
+                        "symbol": "p",
+                        "value": 0.001542
                       }
                     ]
                   }
@@ -315,9 +315,9 @@
                         "value": 2067
                       },
                       {
-                        "name": "pct",
-                        "symbol": "%",
-                        "value": 66.763566
+                        "name": "proportion",
+                        "symbol": "p",
+                        "value": 0.667636
                       }
                     ]
                   },
@@ -329,9 +329,9 @@
                         "value": 1029
                       },
                       {
-                        "name": "pct",
-                        "symbol": "%",
-                        "value": 33.236434
+                        "name": "proportion",
+                        "symbol": "p",
+                        "value": 0.332364
                       }
                     ]
                   }
@@ -353,9 +353,9 @@
                         "value": 2206
                       },
                       {
-                        "name": "pct",
-                        "symbol": "%",
-                        "value": 68.149521
+                        "name": "proportion",
+                        "symbol": "p",
+                        "value": 0.681495
                       }
                     ]
                   },
@@ -367,9 +367,9 @@
                         "value": 1031
                       },
                       {
-                        "name": "pct",
-                        "symbol": "%",
-                        "value": 31.850479
+                        "name": "proportion",
+                        "symbol": "p",
+                        "value": 0.318505
                       }
                     ]
                   }

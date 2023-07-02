@@ -24,7 +24,7 @@ test_that("count data with one group works", {
 })
 
 test_that("count data with two groups works", {
-  model <- count_data(quote_source, source, sex)
+  model <- count_data(quote_source, source, sex, pct = TRUE)
 
   expect_equal_models(
     model = model,
