@@ -221,7 +221,7 @@ test_that("mixed simple model with random-slopes works", {
 
   model <- mixed(
     score ~ Machine + (Machine | Worker),
-    data = Machines
+    data = Machines, progress = FALSE
   )
 
   expect_equal_models(
@@ -235,7 +235,7 @@ test_that("mixed with expanded random effects terms works", {
 
   model <- mixed(
     score ~ Machine + (Machine || Worker),
-    data = Machines, expand_re = TRUE
+    data = Machines, expand_re = TRUE, progress = FALSE
   )
 
   expect_equal_models(
@@ -249,7 +249,7 @@ test_that("mixed with random intercept plus random slope works", {
 
   model <- mixed(
     iq ~ timecat + (1 + time | id),
-    data = md_15.1
+    data = md_15.1, progress = FALSE
   )
 
   expect_equal_models(
@@ -263,8 +263,7 @@ test_that("mixed with treatment contrasts checked works", {
 
   model <- mixed(
     severity ~ sex + (1 | id),
-    data = md_16.1,
-    check_contrasts = FALSE
+    data = md_16.1, check_contrasts = FALSE, progress = FALSE
   )
 
   expect_equal_models(
