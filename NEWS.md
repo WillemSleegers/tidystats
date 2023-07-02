@@ -30,6 +30,7 @@
 * Added support for the `pairwise.t.test()`, `pairwise.prop.test()`, and `pairwise.wilcox.test()` from the `stats` package.
 * Added support for the `effectsize` package.
 * Added support for the `effsize` package.
+* Added a `pct` argument to `count_data()` to return proportions instead of percentages.
 
 ### Miscellaneous
 
