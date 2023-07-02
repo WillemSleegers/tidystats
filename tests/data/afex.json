@@ -103,7 +103,7 @@
     "sphericity_correction_method": "none",
     "package": {
       "name": "afex",
-      "version": "1.2-1"
+      "version": "1.3-0"
     }
   },
   "aov_ez_default": {
@@ -228,7 +228,7 @@
     "sphericity_correction_method": "GG",
     "package": {
       "name": "afex",
-      "version": "1.2-1"
+      "version": "1.3-0"
     }
   },
   "aov_ez_covariate": {
@@ -929,7 +929,7 @@
     "sphericity_correction_method": "GG",
     "package": {
       "name": "afex",
-      "version": "1.2-1"
+      "version": "1.3-0"
     }
   },
   "aov_ez_aggregate": {
@@ -1198,7 +1198,7 @@
     "sphericity_correction_method": "GG",
     "package": {
       "name": "afex",
-      "version": "1.2-1"
+      "version": "1.3-0"
     }
   },
   "aov_ez_aggregate_both": {
@@ -1323,7 +1323,7 @@
     "sphericity_correction_method": "none",
     "package": {
       "name": "afex",
-      "version": "1.2-1"
+      "version": "1.3-0"
     }
   },
   "aov_ez_p": {
@@ -1592,7 +1592,7 @@
     "sphericity_correction_method": "GG",
     "package": {
       "name": "afex",
-      "version": "1.2-1"
+      "version": "1.3-0"
     }
   },
   "aov_car": {
@@ -2149,7 +2149,7 @@
     "sphericity_correction_method": "GG",
     "package": {
       "name": "afex",
-      "version": "1.2-1"
+      "version": "1.3-0"
     }
   },
   "aov_car_covariate": {
@@ -2850,7 +2850,7 @@
     "sphericity_correction_method": "GG",
     "package": {
       "name": "afex",
-      "version": "1.2-1"
+      "version": "1.3-0"
     }
   },
   "aov_car_aggregate": {
@@ -3119,7 +3119,7 @@
     "sphericity_correction_method": "GG",
     "package": {
       "name": "afex",
-      "version": "1.2-1"
+      "version": "1.3-0"
     }
   },
   "aov_car_aggregate_both": {
@@ -3244,7 +3244,7 @@
     "sphericity_correction_method": "none",
     "package": {
       "name": "afex",
-      "version": "1.2-1"
+      "version": "1.3-0"
     }
   },
   "aov_car_within": {
@@ -3369,7 +3369,7 @@
     "sphericity_correction_method": "GG",
     "package": {
       "name": "afex",
-      "version": "1.2-1"
+      "version": "1.3-0"
     }
   },
   "aov_car_no_df_pes": {
@@ -3926,7 +3926,7 @@
     "sphericity_correction_method": "none",
     "package": {
       "name": "afex",
-      "version": "1.2-1"
+      "version": "1.3-0"
     }
   },
   "aov_car_no_df_no_MSE": {
@@ -4423,7 +4423,7 @@
     "sphericity_correction_method": "none",
     "package": {
       "name": "afex",
-      "version": "1.2-1"
+      "version": "1.3-0"
     }
   },
   "aov_4": {
@@ -4980,7 +4980,7 @@
     "sphericity_correction_method": "GG",
     "package": {
       "name": "afex",
-      "version": "1.2-1"
+      "version": "1.3-0"
     }
   },
   "aov_4_covariate": {
@@ -5681,7 +5681,7 @@
     "sphericity_correction_method": "GG",
     "package": {
       "name": "afex",
-      "version": "1.2-1"
+      "version": "1.3-0"
     }
   },
   "aov_4_aggregate_both": {
@@ -5806,7 +5806,7 @@
     "sphericity_correction_method": "none",
     "package": {
       "name": "afex",
-      "version": "1.2-1"
+      "version": "1.3-0"
     }
   },
   "aov_4_within": {
@@ -5931,7 +5931,171 @@
     "sphericity_correction_method": "GG",
     "package": {
       "name": "afex",
-      "version": "1.2-1"
+      "version": "1.3-0"
+    }
+  },
+  "mixed": {
+    "method": "Mixed Model ANOVA",
+    "groups": [
+      {
+        "name": "Terms",
+        "groups": [
+          {
+            "name": "Machine",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 5.001229
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 41.003913
+              },
+              {
+                "name": "p",
+                "value": 0.000791
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "anova_type": 3,
+    "package": {
+      "name": "afex",
+      "version": "1.3-0"
+    }
+  },
+  "mixed_expand_RE": {
+    "method": "Mixed Model ANOVA",
+    "groups": [
+      {
+        "name": "Terms",
+        "groups": [
+          {
+            "name": "Machine",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 2
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 6.413186
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 23.252105
+              },
+              {
+                "name": "p",
+                "value": 0.001151
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "anova_type": 3,
+    "package": {
+      "name": "afex",
+      "version": "1.3-0"
+    }
+  },
+  "mixed_random_interecept": {
+    "method": "Mixed Model ANOVA",
+    "groups": [
+      {
+        "name": "Terms",
+        "groups": [
+          {
+            "name": "timecat",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 3
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 16.736112
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 1.78141
+              },
+              {
+                "name": "p",
+                "value": 0.189442
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "anova_type": 3,
+    "package": {
+      "name": "afex",
+      "version": "1.3-0"
+    }
+  },
+  "mixed_contrast": {
+    "method": "Mixed Model ANOVA",
+    "groups": [
+      {
+        "name": "Terms",
+        "groups": [
+          {
+            "name": "sex",
+            "statistics": [
+              {
+                "name": "df numerator",
+                "symbol": "df",
+                "subscript": "num.",
+                "value": 1
+              },
+              {
+                "name": "df denominator",
+                "symbol": "df",
+                "subscript": "den.",
+                "value": 4
+              },
+              {
+                "name": "statistic",
+                "symbol": "F",
+                "value": 9.966101
+              },
+              {
+                "name": "p",
+                "value": 0.034286
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "anova_type": 3,
+    "package": {
+      "name": "afex",
+      "version": "1.3-0"
     }
   }
 }
