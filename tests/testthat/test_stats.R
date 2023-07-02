@@ -13,11 +13,11 @@ test_that("BF stats works", {
 
   BF10 <- 1 / exp((BIC(lm2) - BIC(lm1)) / 2)
 
-  BF_stats <- stats(
+  BF_stats <- custom_stats(
     method = "BF BIC method",
     statistics = c(
-      stat(name = "BF", value = BF10, subscript = "10"),
-      stat(name = "BF", value = 1 / BF10, subscript = "01")
+      custom_stat(name = "BF", value = BF10, subscript = "10"),
+      custom_stat(name = "BF", value = 1 / BF10, subscript = "01")
     )
   )
 
