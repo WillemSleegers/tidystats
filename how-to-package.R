@@ -39,12 +39,12 @@ devtools::install()
 # Add a test
 # usethis::use_test("add_stats")
 
-# Test a specific test
-testthat::test_file("tests/testthat/test_irr.R")
-
 # Test all tests
 devtools::test()
 testthat::test_dir(path = "tests/testthat/tests/")
+
+# Test a specific test
+testthat::test_file("tests/testthat/test_irr.R")
 
 # Create a vignette -------------------------------------------------------
 

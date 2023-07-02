@@ -63,7 +63,7 @@ categorical variables.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">count_data</span><span class="op">(</span><span class="va">data</span>, <span class="va">...</span>, na.rm <span class="op">=</span> <span class="cn">FALSE</span>, prop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">count_data</span><span class="op">(</span><span class="va">data</span>, <span class="va">...</span>, na.rm <span class="op">=</span> <span class="cn">FALSE</span>, pct <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -82,9 +82,9 @@ frame, separated by commas.</p></dd>
 should be removed.</p></dd>
 
 
-<dt>prop</dt>
-<dd><p>A boolean indicating whether to calculate proportions instead of
-percentages. The default is FALSE.</p></dd>
+<dt>pct</dt>
+<dd><p>A boolean indicating whether to calculate percentages instead of
+proportions. The default is FALSE.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -98,21 +98,29 @@ level.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">count_data</span><span class="op">(</span><span class="va">quote_source</span>, <span class="va">source</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 3</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   source         n   pct</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   source         n  prop</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Bin Laden   <span style="text-decoration: underline;">3</span>101  48.9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Washington  <span style="text-decoration: underline;">3</span>242  51.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Bin Laden   <span style="text-decoration: underline;">3</span>101 0.489</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Washington  <span style="text-decoration: underline;">3</span>242 0.511</span>
 <span class="r-in"><span><span class="fu">count_data</span><span class="op">(</span><span class="va">quote_source</span>, <span class="va">source</span>, <span class="va">sex</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   source     sex        n     pct</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Bin Laden  female  <span style="text-decoration: underline;">2</span>067 32.6   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Bin Laden  male    <span style="text-decoration: underline;">1</span>029 16.2   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Bin Laden  <span style="color: #BB0000;">NA</span>         5  0.078<span style="text-decoration: underline;">8</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Washington female  <span style="text-decoration: underline;">2</span>206 34.8   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Washington male    <span style="text-decoration: underline;">1</span>031 16.3   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> Washington <span style="color: #BB0000;">NA</span>         5  0.078<span style="text-decoration: underline;">8</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   source     sex        n     prop</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Bin Laden  female  <span style="text-decoration: underline;">2</span>067 0.326   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Bin Laden  male    <span style="text-decoration: underline;">1</span>029 0.162   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Bin Laden  <span style="color: #BB0000;">NA</span>         5 0.000<span style="text-decoration: underline;">788</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Washington female  <span style="text-decoration: underline;">2</span>206 0.348   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Washington male    <span style="text-decoration: underline;">1</span>031 0.163   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> Washington <span style="color: #BB0000;">NA</span>         5 0.000<span style="text-decoration: underline;">788</span></span>
 <span class="r-in"><span><span class="fu">count_data</span><span class="op">(</span><span class="va">quote_source</span>, <span class="va">source</span>, <span class="va">sex</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   source     sex        n  prop</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Bin Laden  female  <span style="text-decoration: underline;">2</span>067 0.326</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Bin Laden  male    <span style="text-decoration: underline;">1</span>029 0.162</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Washington female  <span style="text-decoration: underline;">2</span>206 0.348</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Washington male    <span style="text-decoration: underline;">1</span>031 0.163</span>
+<span class="r-in"><span><span class="fu">count_data</span><span class="op">(</span><span class="va">quote_source</span>, <span class="va">source</span>, <span class="va">sex</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span>, pct <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   source     sex        n   pct</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
@@ -127,14 +135,14 @@ level.</p>
 <span class="r-in"><span>  <span class="fu">count_data</span><span class="op">(</span><span class="va">sex</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   source [2]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   source     sex        n    pct</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Bin Laden  female  <span style="text-decoration: underline;">2</span>067 66.7  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Bin Laden  male    <span style="text-decoration: underline;">1</span>029 33.2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Bin Laden  <span style="color: #BB0000;">NA</span>         5  0.161</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Washington female  <span style="text-decoration: underline;">2</span>206 68.0  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Washington male    <span style="text-decoration: underline;">1</span>031 31.8  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> Washington <span style="color: #BB0000;">NA</span>         5  0.154</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   source     sex        n    prop</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Bin Laden  female  <span style="text-decoration: underline;">2</span>067 0.667  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Bin Laden  male    <span style="text-decoration: underline;">1</span>029 0.332  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Bin Laden  <span style="color: #BB0000;">NA</span>         5 0.001<span style="text-decoration: underline;">61</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Washington female  <span style="text-decoration: underline;">2</span>206 0.680  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Washington male    <span style="text-decoration: underline;">1</span>031 0.318  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> Washington <span style="color: #BB0000;">NA</span>         5 0.001<span style="text-decoration: underline;">54</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
