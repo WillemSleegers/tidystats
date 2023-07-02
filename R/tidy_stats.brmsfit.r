@@ -1,5 +1,4 @@
 #' @describeIn tidy_stats tidy_stats method for class 'brmsfit'
-#' @keywords internal
 tidy_stats.brmsfit <- function(x, args = NULL) {
   analysis <- list(method = "Bayesian regression model")
 

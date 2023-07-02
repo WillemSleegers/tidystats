@@ -1,5 +1,4 @@
 #' @describeIn tidy_stats tidy_stats method for class 'lme'
-#' @keywords internal
 tidy_stats.lme <- function(x, args = NULL) {
   analysis <- list(
     method = "Linear mixed-effects model"

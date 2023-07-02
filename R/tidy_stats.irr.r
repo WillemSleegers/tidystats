@@ -1,5 +1,4 @@
 #' @describeIn tidy_stats tidy_stats method for class 'icclist'
-#' @keywords internal
 tidy_stats.icclist <- function(x, args = NULL) {
   analysis <- list(method = "ICC")
 

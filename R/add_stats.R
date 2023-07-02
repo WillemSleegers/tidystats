@@ -6,7 +6,7 @@
 #' Many functions to perform statistical tests (e.g., [t.test()], [lm()] return
 #' an object containing the statistics. These objects can be stored in variables
 #' and used with `add_stats()` to extract the statistics and add them to a
-#' list that can be saved with the [write_stats()] function.
+#' list.
 #'
 #' Additional information about the statistical test can be added, including the
 #' type of test (primary, secondary, or exploratory), whether the test was
@@ -14,6 +14,8 @@
 #'
 #' Please note that not all statistical tests are supported. See 'Details' below
 #' for a list of supported statistical tests.
+#'
+#' The list can be saved to a file using the [write_stats()] function.
 #'
 #' @param list A tidystats list.
 #' @param output Output of a statistical test.
@@ -34,7 +36,7 @@
 #' The followings functions are supported so that the statistics contained in
 #' the output of these functions can automatically be extracted.
 #'
-#' | Package           | Functions                                             |
+#' | **Package**       | **Functions**                                         |
 #' |-------------------|-------------------------------------------------------|
 #' |`stats`            | [t.test()], [cor.test()], [chisq.test()],             |
 #' |                   | [wilcox.test()], [fisher.test()], [oneway.test()],    |
@@ -49,13 +51,13 @@
 #' The following functions are supported when their class is explicitly
 #' specified using the `class` argument.
 #'
-#' | Package   | Function       | Class name  | Notes                   |
-#' | ----------| ---------------| ------------|-------------------------|
-#' | `stats`   | [confint()]    | confint     |                         |
-#' | `emmeans` | [mvcontrast()] | emm_list    | If `show.ests` = `TRUE` |
+#' | **Package** | **Function**   | **Class name** | **Notes**               |
+#' | ------------| ---------------| ---------------|-------------------------|
+#' | `stats`     | [confint()]    | confint        |                         |
+#' | `emmeans`   | [mvcontrast()] | emm_list       | If `show.ests` = `TRUE` |
 #'
 #' @examples
-#' # Conduct several analyses
+#' # Conduct analyses
 #' sleep_test <- t.test(extra ~ group, data = sleep, paired = TRUE)
 #'
 #' ctl <- c(4.17, 5.58, 5.18, 6.11, 4.50, 4.61, 5.17, 4.53, 5.33, 5.14)
@@ -63,6 +65,7 @@
 #' group <- gl(2, 10, 20, labels = c("Ctl", "Trt"))
 #' weight <- c(ctl, trt)
 #' lm_D9 <- lm(weight ~ group)
+#' lm_D9_confint <- confint(lm_D9)
 #'
 #' npk_aov <- aov(yield ~ block + N * P * K, npk)
 #'

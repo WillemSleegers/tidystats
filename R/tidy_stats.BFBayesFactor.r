@@ -1,5 +1,4 @@
 #' @describeIn tidy_stats tidy_stats method for class 'BayesFactor'
-#' @keywords internal
 tidy_stats.BFBayesFactor <- function(x, args = NULL) {
   # Create the analysis list
   analysis <- list()

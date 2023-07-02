@@ -1,5 +1,4 @@
 #' @describeIn tidy_stats tidy_stats method for class 'rma.uni'
-#' @keywords internal
 tidy_stats.rma.uni <- function(x, args = NULL) {
   method <- "Meta-Analysis via Linear Models"
 
@@ -329,7 +328,6 @@ tidy_stats.rma.uni <- function(x, args = NULL) {
 }
 
 #' @describeIn tidy_stats tidy_stats method for class 'rma.mh'
-#' @export
 tidy_stats.rma.mh <- function(x, args = NULL) {
   # Create the analysis list and set the name and method
   analysis <- list(
@@ -508,7 +506,6 @@ tidy_stats.rma.mh <- function(x, args = NULL) {
 
 
 #' @describeIn tidy_stats tidy_stats method for class 'rma.peto'
-#' @export
 tidy_stats.rma.peto <- function(x, args = NULL) {
   # Create the analysis list and set the name and method
   analysis <- list(
@@ -611,7 +608,6 @@ tidy_stats.rma.peto <- function(x, args = NULL) {
 
 
 #' @describeIn tidy_stats tidy_stats method for class 'rma.glmm'
-#' @export
 tidy_stats.rma.glmm <- function(x, args = NULL) {
   # Create the analysis list and set the name and method
   if (is.element(x$method, c("FE", "EE", "CE"))) {
@@ -788,7 +784,6 @@ tidy_stats.rma.glmm <- function(x, args = NULL) {
 
 
 #' @describeIn tidy_stats tidy_stats method for class 'rma.mv'
-#' @export
 tidy_stats.rma.mv <- function(x, args = NULL) {
   # Create the analysis list and set the name and method
   analysis <- list(
@@ -1237,7 +1232,6 @@ tidy_stats.rma.mv <- function(x, args = NULL) {
 }
 
 #' @describeIn tidy_stats tidy_stats method for class 'confint.rma'
-#' @export
 tidy_stats.confint.rma <- function(x, args = NULL) {
   # Create the analysis list
   analysis <- list()
@@ -1273,7 +1267,6 @@ tidy_stats.confint.rma <- function(x, args = NULL) {
 
 
 #' @describeIn tidy_stats tidy_stats method for class 'list.confint.rma'
-#' @export
 tidy_stats.list.confint.rma <- function(x, args = NULL) {
   # Create the analysis list
   analysis <- list()
@@ -1310,7 +1303,6 @@ tidy_stats.list.confint.rma <- function(x, args = NULL) {
 
 
 #' @describeIn tidy_stats tidy_stats method for class 'anova.rma'
-#' @export
 tidy_stats.anova.rma <- function(x, args = NULL) {
   if (x$type == "LRT") {
     method <- "Likelihood Ratio Tests for 'rma' Objects"
@@ -1554,7 +1546,6 @@ tidy_stats.anova.rma <- function(x, args = NULL) {
 }
 
 #' @describeIn tidy_stats tidy_stats method for class 'permutest.rma.uni'
-#' @export
 tidy_stats.permutest.rma.uni <- function(x, args = NULL) {
   # Create the analysis list
   analysis <- list()
@@ -1703,7 +1694,6 @@ tidy_stats.permutest.rma.uni <- function(x, args = NULL) {
 
 
 #' @describeIn tidy_stats tidy_stats method for class 'tes'
-#' @export
 tidy_stats.tes <- function(x, args = NULL) {
   # Create the analysis list
   analysis <- list(
@@ -1784,7 +1774,6 @@ tidy_stats.tes <- function(x, args = NULL) {
 
 
 #' @describeIn tidy_stats tidy_stats method for class 'matreg'
-#' @export
 tidy_stats.matreg <- function(x, args = NULL) {
   # Create the analysis list
   analysis <- list()
@@ -1838,7 +1827,6 @@ tidy_stats.matreg <- function(x, args = NULL) {
 
 
 #' @describeIn tidy_stats tidy_stats method for class 'ranktest'
-#' @export
 tidy_stats.ranktest <- function(x, args = NULL) {
   # Create the analysis list
   analysis <-
@@ -1859,7 +1847,6 @@ tidy_stats.ranktest <- function(x, args = NULL) {
 }
 
 #' @describeIn tidy_stats tidy_stats method for class 'regtest'
-#' @export
 tidy_stats.regtest <- function(x, args = NULL) {
   # Create the analysis list
   analysis <-
@@ -1935,7 +1922,6 @@ tidy_stats.regtest <- function(x, args = NULL) {
 }
 
 #' @describeIn tidy_stats tidy_stats method for class 'fsn'
-#' @export
 tidy_stats.fsn <- function(x, args = NULL) {
   # Create the analysis list
   analysis <-
@@ -2028,7 +2014,6 @@ tidy_stats.hc.rma.uni <- function(x, args = NULL) {
 
 
 #' @describeIn tidy_stats tidy_stats method for class 'list.rma'
-#' @export
 tidy_stats.list.rma <- function(x, args = NULL) {
   # Create the analysis list
   analysis <-

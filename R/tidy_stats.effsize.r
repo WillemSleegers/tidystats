@@ -1,5 +1,4 @@
 #' @describeIn tidy_stats tidy_stats method for class 'effsize'
-#' @keywords internal
 tidy_stats.effsize <- function(x, args = NULL) {
   analysis <- list(method = paste(x$method, "effect size"))
   statistics <- list()

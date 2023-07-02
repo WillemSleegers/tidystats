@@ -1,5 +1,4 @@
 #' @describeIn tidy_stats tidy_stats method for class 'lavaan'
-#' @keywords internal
 tidy_stats.lavaan <- function(x, args = NULL) {
   analysis <- list()
 

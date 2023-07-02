@@ -46,7 +46,7 @@ tidystats list.
 Many functions to perform statistical tests (e.g., \code{\link[=t.test]{t.test()}}, \code{\link[=lm]{lm()}} return
 an object containing the statistics. These objects can be stored in variables
 and used with \code{add_stats()} to extract the statistics and add them to a
-list that can be saved with the \code{\link[=write_stats]{write_stats()}} function.
+list.
 
 Additional information about the statistical test can be added, including the
 type of test (primary, secondary, or exploratory), whether the test was
@@ -55,9 +55,11 @@ preregistered, and additional notes.
 Please note that not all statistical tests are supported. See 'Details' below
 for a list of supported statistical tests.
 
+The list can be saved to a file using the \code{\link[=write_stats]{write_stats()}} function.
+
 The followings functions are supported so that the statistics contained in
 the output of these functions can automatically be extracted.\tabular{ll}{
-   Package \tab Functions \cr
+   \strong{Package} \tab \strong{Functions} \cr
    \code{stats} \tab \code{\link[=t.test]{t.test()}}, \code{\link[=cor.test]{cor.test()}}, \code{\link[=chisq.test]{chisq.test()}}, \cr
     \tab \code{\link[=wilcox.test]{wilcox.test()}}, \code{\link[=fisher.test]{fisher.test()}}, \code{\link[=oneway.test]{oneway.test()}}, \cr
     \tab \code{\link[=lm]{lm()}}, \code{\link[=glm]{glm()}}, \code{\link[=aov]{aov()}}, \code{\link[=anova]{anova()}} \cr
@@ -72,13 +74,13 @@ the output of these functions can automatically be extracted.\tabular{ll}{
 
 The following functions are supported when their class is explicitly
 specified using the \code{class} argument.\tabular{llll}{
-   Package \tab Function \tab Class name \tab Notes \cr
+   \strong{Package} \tab \strong{Function} \tab \strong{Class name} \tab \strong{Notes} \cr
    \code{stats} \tab \code{\link[=confint]{confint()}} \tab confint \tab  \cr
    \code{emmeans} \tab \code{\link[=mvcontrast]{mvcontrast()}} \tab emm_list \tab If \code{show.ests} = \code{TRUE} \cr
 }
 }
 \examples{
-# Conduct several analyses
+# Conduct analyses
 sleep_test <- t.test(extra ~ group, data = sleep, paired = TRUE)
 
 ctl <- c(4.17, 5.58, 5.18, 6.11, 4.50, 4.61, 5.17, 4.53, 5.33, 5.14)
@@ -86,6 +88,7 @@ trt <- c(4.81, 4.17, 4.41, 3.59, 5.87, 3.83, 6.03, 4.89, 4.32, 4.69)
 group <- gl(2, 10, 20, labels = c("Ctl", "Trt"))
 weight <- c(ctl, trt)
 lm_D9 <- lm(weight ~ group)
+lm_D9_confint <- confint(lm_D9)
 
 npk_aov <- aov(yield ~ block + N * P * K, npk)
 

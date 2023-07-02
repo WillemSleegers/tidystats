@@ -1,5 +1,4 @@
 #' @describeIn tidy_stats tidy_stats method for class 'predictions'
-#' @keywords internal
 tidy_stats.predictions <- function(x, args = NULL) {
   analysis <- list(method = "Average (marginal) estimates")
 

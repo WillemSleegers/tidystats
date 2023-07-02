@@ -55,6 +55,9 @@ testthat::test_dir(path = "tests/testthat/tests/")
 
 # Build website -----------------------------------------------------------
 
+# Update documentation
+devtools::document()
+
 # Update README
 knitr::knit(input = "README.Rmd")
 

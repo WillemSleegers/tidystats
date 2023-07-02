@@ -226,34 +226,6 @@ specific analysis will be organized.</p>
 
 </dl></div>
     <div class="section level2">
-    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>Please note that not all statistical tests are supported. See 'Details'
-below for a list of supported statistical tests.</p>
-<p>Currently supported functions:</p>
-<p><code>stats</code>:</p><ul><li><p><code><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test()</a></code></p></li>
-<li><p><code><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test()</a></code></p></li>
-<li><p><code><a href="https://rdrr.io/r/stats/chisq.test.html" class="external-link">chisq.test()</a></code></p></li>
-<li><p><code><a href="https://rdrr.io/r/stats/wilcox.test.html" class="external-link">wilcox.test()</a></code></p></li>
-<li><p><code><a href="https://rdrr.io/r/stats/fisher.test.html" class="external-link">fisher.test()</a></code></p></li>
-<li><p><code><a href="https://rdrr.io/r/stats/oneway.test.html" class="external-link">oneway.test()</a></code></p></li>
-<li><p><code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code></p></li>
-<li><p><code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code></p></li>
-<li><p><code><a href="https://rdrr.io/r/stats/aov.html" class="external-link">aov()</a></code></p></li>
-<li><p><code><a href="https://rdrr.io/r/stats/anova.html" class="external-link">anova()</a></code></p></li>
-</ul><p><code>lme4</code>/<code>lmerTest</code>:</p><ul><li><p><code>lmer()</code></p></li>
-</ul><p><code>BayesFactor</code>:</p><ul><li><p><code>generalTestBF()</code></p></li>
-<li><p><code>lmBF()</code></p></li>
-<li><p><code>regressionBF()</code></p></li>
-<li><p><code>ttestBF()</code></p></li>
-<li><p><code>anovaBF()</code></p></li>
-<li><p><code>correlationBF()</code></p></li>
-<li><p><code>contingencyTableBF()</code></p></li>
-<li><p><code>proportionBF()</code></p></li>
-<li><p><code>meta.ttestBF()</code></p></li>
-</ul><p><code>tidystats</code>:</p><ul><li><p><code><a href="describe_data.html">describe_data()</a></code></p></li>
-<li><p><code><a href="count_data.html">count_data()</a></code></p></li>
-</ul></div>
-    <div class="section level2">
     <h2 id="methods-by-class-">Methods (by class)<a class="anchor" aria-label="anchor" href="#methods-by-class-"></a></h2>
     
 <ul><li><p><code>tidy_stats(BFBayesFactor)</code>: tidy_stats method for class 'BayesFactor'</p></li>
@@ -306,38 +278,6 @@ below for a list of supported statistical tests.</p>
 <li><p><code>tidy_stats(tidystats_counts)</code>: tidy_stats method for class 'tidystats_counts'</p></li>
 </ul></div>
 
-    <div class="section level2">
-    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Conduct statistical tests</span></span></span>
-<span class="r-in"><span><span class="co"># t-test:</span></span></span>
-<span class="r-in"><span><span class="va">sleep_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">extra</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">sleep</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># lm:</span></span></span>
-<span class="r-in"><span><span class="va">ctl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4.17</span>, <span class="fl">5.58</span>, <span class="fl">5.18</span>, <span class="fl">6.11</span>, <span class="fl">4.50</span>, <span class="fl">4.61</span>, <span class="fl">5.17</span>, <span class="fl">4.53</span>, <span class="fl">5.33</span>, <span class="fl">5.14</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">trt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4.81</span>, <span class="fl">4.17</span>, <span class="fl">4.41</span>, <span class="fl">3.59</span>, <span class="fl">5.87</span>, <span class="fl">3.83</span>, <span class="fl">6.03</span>, <span class="fl">4.89</span>, <span class="fl">4.32</span>, <span class="fl">4.69</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/gl.html" class="external-link">gl</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">10</span>, <span class="fl">20</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Ctl"</span>, <span class="st">"Trt"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">weight</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">ctl</span>, <span class="va">trt</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">lm_D9</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">group</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># ANOVA:</span></span></span>
-<span class="r-in"><span><span class="va">npk_aov</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html" class="external-link">aov</a></span><span class="op">(</span><span class="va">yield</span> <span class="op">~</span> <span class="va">block</span> <span class="op">+</span> <span class="va">N</span> <span class="op">*</span> <span class="va">P</span> <span class="op">*</span> <span class="va">K</span>, <span class="va">npk</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Tidy the statistics and store each analysis in a separate variable</span></span></span>
-<span class="r-in"><span><span class="va">list_sleep_test</span> <span class="op">&lt;-</span> <span class="fu">tidy_stats</span><span class="op">(</span><span class="va">sleep_test</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in UseMethod("tidy_stats"):</span> no applicable method for 'tidy_stats' applied to an object of class "htest"</span>
-<span class="r-in"><span><span class="va">list_lm_D9</span> <span class="op">&lt;-</span> <span class="fu">tidy_stats</span><span class="op">(</span><span class="va">lm_D9</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in UseMethod("tidy_stats"):</span> no applicable method for 'tidy_stats' applied to an object of class "lm"</span>
-<span class="r-in"><span><span class="va">list_npk_aov</span> <span class="op">&lt;-</span> <span class="fu">tidy_stats</span><span class="op">(</span><span class="va">npk_aov</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in UseMethod("tidy_stats"):</span> no applicable method for 'tidy_stats' applied to an object of class "c('aov', 'lm')"</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Now you can inspect each of these variables, e.g.,:</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">list_sleep_test</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'list_sleep_test' not found</span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">list_sleep_test</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'list_sleep_test' not found</span>
-<span class="r-in"><span></span></span>
-</code></pre></div>
-    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
