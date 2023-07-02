@@ -37,7 +37,7 @@
     },
     "package": {
       "name": "stats",
-      "version": "4.2.2"
+      "version": "4.3.0"
     },
     "type": "primary"
   },
@@ -150,7 +150,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.2"
+      "version": "4.3.0"
     },
     "preregistered": "no"
   },
@@ -421,7 +421,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.2"
+      "version": "4.3.0"
     },
     "notes": "An ANOVA example"
   }
