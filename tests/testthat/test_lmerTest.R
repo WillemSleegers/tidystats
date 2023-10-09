@@ -16,8 +16,11 @@ test_that("lmerTest 1 works", {
 })
 
 test_that("lmerTest 2 works", {
-  model <- lmerTest::lmer(Informed.liking ~ Gender + Information *
-    Product + (1 | Consumer) + (1 | Consumer:Product), data = lmerTest::ham)
+  model <- lmerTest::lmer(
+    Informed.liking ~ Gender + Information * Product + (1 | Consumer) +
+      (1 | Consumer:Product),
+    data = lmerTest::ham
+  )
 
   expect_equal_models(
     model = model,

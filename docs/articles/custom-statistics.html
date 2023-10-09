@@ -152,8 +152,8 @@ function.</p>
 <span><span class="va">statistics</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Add linear model and confidence intervals to the list</span></span>
-<span><span class="va">statistics</span> <span class="op">&lt;-</span> <span class="va">statistics</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span><span class="va">statistics</span> <span class="op">&lt;-</span> <span class="va">statistics</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">fit_confint</span><span class="op">)</span></span></code></pre></div>
 <p>Unfortunately, we get an error:</p>
 <blockquote>
@@ -175,8 +175,8 @@ argument. We can specify that the statistics are from the
 <code><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint()</a></code> function by saying
 <code>class = "confint"</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">statistics</span> <span class="op">&lt;-</span> <span class="va">statistics</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<code class="sourceCode R"><span><span class="va">statistics</span> <span class="op">&lt;-</span> <span class="va">statistics</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">fit_confint</span>, class <span class="op">=</span> <span class="st">"confint"</span><span class="op">)</span></span></code></pre></div>
 <p>We don’t get an error this time, indicating that it worked.</p>
 </div>
