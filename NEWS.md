@@ -2,7 +2,7 @@
 
 ## Breaking changes
 
-* Redesigned the tidystats structure to be more expandable. This breaks compatibility with the Microsoft Word add-in, so make sure to update that software to continue to use tidystats.
+* Redesigned the tidystats structure to be more expandable. This breaks compatibility with the Microsoft Word add-in. An update for the Microsoft Word add-in is in the works and will be released soon.
 
 ## Changes
 
@@ -17,17 +17,17 @@
 ## New
 
 * Added two new arguments to `add_stats()`: `args` and `class`. The `args` argument can be used to supply additional arguments to customize which statistics are extracted from a particular analysis. For a list of supported functions, see the "Details" section in the help document of `add_stats()`. The `class` argument can be used to explicitly indicate the class of the analysis you want to add. Sometimes the output of a particular analysis returns an object with insufficient information for tidystats to know how to extract the statistics. By using the `class` argument, you can tell tidystats what kind of object it is so that it can nevertheless extract the statistics. For a list of supported classes, see the Details section of the help document of `add_stats()`.
-* Added support for the `confint()` function from the `stats` package using the new `class` argument in `add_stats().
-* Added support for the `alpha()` function from the `psych` package.
-* Added support for the `corr.test()` function from the `psych` package.
-* Added support for the `icc()` function from the `irr` package.
-* Added support for the `cohen.d()` function from the `effsize` package.
-* Added support for the `emmeans()` function from the `emmeans` package.
-* Added support for the `test()` function on the result of `contrast()` on the result of `emmeans()` from the `emmeans` package.
-* Added support for `lme()`, `nlme()`, `gls()`, and `anova()` from the `nlme` package.
-* Added support for the `pairwise.t.test()`, `pairwise.prop.test()`, and `pairwise.wilcox.test()` from the `stats` package.
-* Added support for the `effectsize` package.
-* Added support for the `effsize` package.
+* Added support for the `confint()` function from the stats package using the new `class` argument in `add_stats().
+* Added support for the `alpha()`, `corr.test()`, `mardia()`, and `ICC()` functions from the psych package.
+* Added support for the `icc()` function from the irr package.
+* Added support for the `cohen.d()` function from the effsize package.
+* Added support for the `emmeans()` function from the emmeans package.
+* Added support for the `test()` function on the result of `contrast()` on the result of `emmeans()` from the emmeans package.
+* Added support for `lme()`, `nlme()`, `gls()`, and `anova()` from the nlme package.
+* Added support for many more functions from the stats package.
+* Added support for the effectsize package.
+* Added support for the effsize package.
+* Added support for the afex package.
 * Added a `pct` argument to `count_data()` to return proportions instead of percentages.
 
 # tidystats 0.5.2
@@ -64,15 +64,15 @@
 
 ## New
 
-* Added support for generic tests. If `tidystats` does not support a particular analysis, you can create your own generic test by providing a list of statistics.
+* Added support for generic tests. If tidystats does not support a particular analysis, you can create your own generic test by providing a list of statistics.
 * Improved support for `anova()`.
-* Added support for more `BayesFactor` functions.
-* Added a `pkgdown` website for the package.
-* Added several vignettes, including an introduction to tidystats, how to use the `tidy_stats_to_data_frame` function, and a description of the `tidystats` taxonomy.
+* Added support for more BayesFactor functions.
+* Added a pkgdown website for the package.
+* Added several vignettes, including an introduction to tidystats, how to use the `tidy_stats_to_data_frame()` function, and a description of the tidystats taxonomy.
 
 ## Miscellaneous
 
-* Removed the `cox` dataset.
+* Removed the cox dataset.
 
 # tidystats 0.4.1
 
@@ -88,7 +88,7 @@
 
 ## Bug fixes
 
-* Fixed a bug in `describe_data()` caused by the `dplyr` 1.0.0 update. 
+* Fixed a bug in `describe_data()` caused by the dplyr 1.0.0 update. 
 
 ## Miscellaneous
 
@@ -99,9 +99,9 @@
 
 ## Breaking changes
 
-* `tidystats` has been completely redesigned in terms of how statistics are combined together. While previously the output of statistical models was converted to a tidy data frame, the output is now converted to a list, with an entirely different structure. The reason for this change is that lists are more machine-readable, enabling more interesting features down the line. It is still possible to convert the list of statistics to a single data frame with a new function called `tidy_stats_to_data_frame()`.
-* The significant changes made to `tidystats` has resulted in the loss of some previously supported statistical functions. For a list of currently supported statistical functions, see the help document of `add_stats()` or the README.
-* All `report` functions have been removed for now. These may return (if I get the impression these are liked) but for now I am focusing my development time on creating a Word add-in that will enable researchers to use a `tidystats`-produced file for reporting statistics in Microsoft Word.
+* tidystats has been completely redesigned in terms of how statistics are combined together. While previously the output of statistical models was converted to a tidy data frame, the output is now converted to a list, with an entirely different structure. The reason for this change is that lists are more machine-readable, enabling more interesting features down the line. It is still possible to convert the list of statistics to a single data frame with a new function called `tidy_stats_to_data_frame()`.
+* The significant changes made to tidystats has resulted in the loss of some previously supported statistical functions. For a list of currently supported statistical functions, see the help document of `add_stats()` or the README.
+* All `report()` functions have been removed for now. These may return (if I get the impression these are liked) but for now I am focusing my development time on creating a Word add-in that will enable researchers to use a tidystats-produced file for reporting statistics in Microsoft Word.
 * `describe_data()` no longer accepts multiple column names. The goal of the function is now to calculate the descriptives of a single column (which can still be grouped to calculate the descriptives for each group level).
 * `count_data()` has been removed.
 
@@ -140,7 +140,7 @@
 ## Bug fixes
 
 * Fixed a bug that would incorrectly classify ANOVAs as One-way ANOVAs when character variables were used rather than factors.
-* Prepared for `dplyr` 0.8.
+* Prepared for dplyr 0.8.
 
 ## Miscellaneous
 
@@ -165,7 +165,7 @@
 * Reporting regression results will now include a check for whether confidence intervals are included, and report them.
 * Added skewness and kurtosis to `describe_data()`
 * Added new `count_data()` function to calculate count descriptives of categorical data. Also added a `tidy_count_data()` function to tidy the output of this new function.
-* Added support for `chisq.test` and `wilcox.test`.
+* Added support for `chisq.test()` and `wilcox.test()`.
 * Added a better default `identifier` to `add_stats()`. If you supply a variable to be added to the tidystats list, and no identifier is provided, it will take the variable name as the identifier. If you pipe the results into `add_stats()` then the old default identifier will be used (e.g., "M1"). 
 * Added identifier check to `report()`. The function will now throw an error when the identifier does not exist.
 * Added statistic check to all report functions. The function will now throw an error when the statistic does not exist.
@@ -174,7 +174,7 @@
 
 ## Bug fixes
 
-* Fixed bug that it was assumed that confidence intervals in `htests` were always 95% confidence intervals.
+* Fixed bug that it was assumed that confidence intervals in `htest` objects were always 95% confidence intervals.
 * Fixed bug in report functions that would occur when no statistic argument was provided.
 * Removed spaces from terms in `aov()` output.
 * Removed a leading space from the method information of a Two Sample t-test.

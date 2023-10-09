@@ -3,8 +3,7 @@
 %   R/tidy_stats.Hmisc.r, R/tidy_stats.R, R/tidy_stats.afex.r,
 %   R/tidy_stats.brmsfit.r, R/tidy_stats.effectsize.r, R/tidy_stats.effsize.r,
 %   R/tidy_stats.emmeans.R, R/tidy_stats.irr.r, R/tidy_stats.lavaan.r,
-%   R/tidy_stats.lmerMod.r, R/tidy_stats.marginaleffects.R,
-%   R/tidy_stats.metafor.r, R/tidy_stats.nlme.r, R/tidy_stats.psych.r,
+%   R/tidy_stats.lmerMod.r, R/tidy_stats.nlme.r, R/tidy_stats.psych.r,
 %   R/tidy_stats.tidystats.r
 \name{tidy_stats.BFBayesFactor}
 \alias{tidy_stats.BFBayesFactor}
@@ -30,24 +29,6 @@
 \alias{tidy_stats.lavaan}
 \alias{tidy_stats.lmerMod}
 \alias{tidy_stats.lmerModLmerTest}
-\alias{tidy_stats.predictions}
-\alias{tidy_stats.comparisons}
-\alias{tidy_stats.rma.uni}
-\alias{tidy_stats.rma.mh}
-\alias{tidy_stats.rma.peto}
-\alias{tidy_stats.rma.glmm}
-\alias{tidy_stats.rma.mv}
-\alias{tidy_stats.confint.rma}
-\alias{tidy_stats.list.confint.rma}
-\alias{tidy_stats.anova.rma}
-\alias{tidy_stats.permutest.rma.uni}
-\alias{tidy_stats.tes}
-\alias{tidy_stats.matreg}
-\alias{tidy_stats.ranktest}
-\alias{tidy_stats.regtest}
-\alias{tidy_stats.fsn}
-\alias{tidy_stats.hc.rma.uni}
-\alias{tidy_stats.list.rma}
 \alias{tidy_stats.lme}
 \alias{tidy_stats.nlme}
 \alias{tidy_stats.anova.lme}
@@ -103,42 +84,6 @@ tidy_stats(x, args = NULL)
 \method{tidy_stats}{lmerMod}(x, args = NULL)
 
 \method{tidy_stats}{lmerModLmerTest}(x, args = NULL)
-
-\method{tidy_stats}{predictions}(x, args = NULL)
-
-\method{tidy_stats}{comparisons}(x, args = NULL)
-
-\method{tidy_stats}{rma.uni}(x, args = NULL)
-
-\method{tidy_stats}{rma.mh}(x, args = NULL)
-
-\method{tidy_stats}{rma.peto}(x, args = NULL)
-
-\method{tidy_stats}{rma.glmm}(x, args = NULL)
-
-\method{tidy_stats}{rma.mv}(x, args = NULL)
-
-\method{tidy_stats}{confint.rma}(x, args = NULL)
-
-\method{tidy_stats}{list.confint.rma}(x, args = NULL)
-
-\method{tidy_stats}{anova.rma}(x, args = NULL)
-
-\method{tidy_stats}{permutest.rma.uni}(x, args = NULL)
-
-\method{tidy_stats}{tes}(x, args = NULL)
-
-\method{tidy_stats}{matreg}(x, args = NULL)
-
-\method{tidy_stats}{ranktest}(x, args = NULL)
-
-\method{tidy_stats}{regtest}(x, args = NULL)
-
-\method{tidy_stats}{fsn}(x, args = NULL)
-
-\method{tidy_stats}{hc.rma.uni}(x, args = NULL)
-
-\method{tidy_stats}{list.rma}(x, args = NULL)
 
 \method{tidy_stats}{lme}(x, args = NULL)
 
@@ -211,42 +156,6 @@ specific analysis will be organized.
 \item \code{tidy_stats(lmerMod)}: tidy_stats method for class 'lmerMod'
 
 \item \code{tidy_stats(lmerModLmerTest)}: tidy_stats method for class 'lmerModLmerTest'
-
-\item \code{tidy_stats(predictions)}: tidy_stats method for class 'predictions'
-
-\item \code{tidy_stats(comparisons)}: tidy_stats method for class 'comparisons'
-
-\item \code{tidy_stats(rma.uni)}: tidy_stats method for class 'rma.uni'
-
-\item \code{tidy_stats(rma.mh)}: tidy_stats method for class 'rma.mh'
-
-\item \code{tidy_stats(rma.peto)}: tidy_stats method for class 'rma.peto'
-
-\item \code{tidy_stats(rma.glmm)}: tidy_stats method for class 'rma.glmm'
-
-\item \code{tidy_stats(rma.mv)}: tidy_stats method for class 'rma.mv'
-
-\item \code{tidy_stats(confint.rma)}: tidy_stats method for class 'confint.rma'
-
-\item \code{tidy_stats(list.confint.rma)}: tidy_stats method for class 'list.confint.rma'
-
-\item \code{tidy_stats(anova.rma)}: tidy_stats method for class 'anova.rma'
-
-\item \code{tidy_stats(permutest.rma.uni)}: tidy_stats method for class 'permutest.rma.uni'
-
-\item \code{tidy_stats(tes)}: tidy_stats method for class 'tes'
-
-\item \code{tidy_stats(matreg)}: tidy_stats method for class 'matreg'
-
-\item \code{tidy_stats(ranktest)}: tidy_stats method for class 'ranktest'
-
-\item \code{tidy_stats(regtest)}: tidy_stats method for class 'regtest'
-
-\item \code{tidy_stats(fsn)}: tidy_stats method for class 'fsn'
-
-\item \code{tidy_stats(hc.rma.uni)}: tidy_stats method for class 'hc.rma.uni'
-
-\item \code{tidy_stats(list.rma)}: tidy_stats method for class 'list.rma'
 
 \item \code{tidy_stats(lme)}: tidy_stats method for class 'lme'
 

@@ -1,6 +1,6 @@
 #' Helper functions in tidystats
 #'
-#' Functions used under the hood in the [tidystats] package.
+#' Functions used under the hood in the tidystats package.
 
 #' @describeIn helper_functions
 #' Function to convert matrix objects to a tidy data frame.
@@ -29,10 +29,10 @@ tidy_matrix <- function(m, symmetric = TRUE) {
     m[lower.tri(m, diag = TRUE)] <- NA
   }
 
-  df <- m %>%
-    as.matrix() %>%
-    tibble::as_tibble(rownames = "name1") %>%
-    tidyr::pivot_longer(-name1, names_to = "name2", values_to = "value") %>%
+  df <- m |>
+    as.matrix() |>
+    tibble::as_tibble(rownames = "name1") |>
+    tidyr::pivot_longer(-name1, names_to = "name2", values_to = "value") |>
     dplyr::filter(!is.na(value))
 
   return(df)
@@ -103,6 +103,43 @@ add_package_info <- function(list, package) {
   return(list)
 }
 
+# Symbols -----------------------------------------------------------------
+
+#' @describeIn helper_functions
+#' Function to return symbols in ASCII.
+#'
+#' @keywords internal
+
+symbol <- function(
+    x = c(
+      "alpha",
+      "chi_squared",
+      "delta",
+      "guttmans_lambda",
+      "K_squared",
+      "lambda",
+      "p_hat",
+      "R_squared",
+      "sigma",
+      "t_squared",
+      "tau"
+    )) {
+  dplyr::case_match(
+    x,
+    "alpha" ~ intToUtf8(0x03b1),
+    "chi_squared" ~ paste0(intToUtf8(0x03c7), intToUtf8(0x00b2)),
+    "delta" ~ intToUtf8(0x03b4),
+    "guttmans_lambda" ~ paste("Guttman's", intToUtf8(0x03bb)),
+    "K_squared" ~ paste0("K", intToUtf8(0x00b2)),
+    "lambda" ~ intToUtf8(0x03bb),
+    "p_hat" ~ paste0("p", intToUtf8(0x0302)),
+    "R_squared" ~ paste0("R", intToUtf8(0x00b2)),
+    "sigma" ~ intToUtf8(0x03a3),
+    "t_squared" ~ paste0("t", intToUtf8(0x00b2)),
+    "tau" ~ intToUtf8(0x03c4)
+  )
+}
+
 # Testing -----------------------------------------------------------------
 
 #' @describeIn helper_functions
@@ -131,7 +168,7 @@ expect_equal_models <- function(model, expected_tidy_model, tolerance = 0.001) {
 #' @keywords internal
 
 write_test_stats <- function(x, path, digits = 6) {
-  choice <- menu(
+  choice <- utils::menu(
     title = "Are you sure you want to save these (test) statistics?",
     choices = c("Yes", "No")
   )

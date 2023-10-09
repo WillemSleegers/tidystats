@@ -24,17 +24,17 @@ tidy_stats.psych.alpha <- function(x) {
     add_statistic(
       name = "unstandardized alpha",
       value = x$total$raw_alpha,
-      symbol = "α", subscript = "Σ"
+      symbol = symbol("alpha"), subscript = intToUtf8(0x03b1)
     ) |>
     add_statistic(
       name = "standardized alpha",
       value = x$total$std.alpha,
-      symbol = "α", subscript = "R"
+      symbol = symbol("alpha"), subscript = "R"
     ) |>
     add_statistic(
       name = "Guttman's Lambda 6 reliability",
       value = x$total$`G6(smc)`,
-      symbol = "Guttman's λ", subscript = "6"
+      symbol = symbol("guttmans_lambda"), subscript = "6"
     ) |>
     add_statistic(
       name = "mean interitem correlation",
@@ -78,7 +78,7 @@ tidy_stats.psych.alpha <- function(x) {
       statistics <- list()
 
       statistics <- add_statistic(statistics, "alpha", x$total$raw_alpha,
-        symbol = "α", interval = "CI", level = .95,
+        symbol = symbol("alpha"), interval = "CI", level = .95,
         lower = x$feldt$lower.ci[[1]], upper = x$feldt$upper.ci[[1]]
       )
 
@@ -91,7 +91,7 @@ tidy_stats.psych.alpha <- function(x) {
       statistics <- list()
 
       statistics <- add_statistic(statistics, "alpha", x$total$raw_alpha,
-        symbol = "α", interval = "CI", level = .95,
+        symbol = symbol("alpha"), interval = "CI", level = .95,
         lower = x$total$raw_alpha - 1.96 * x$total$ase,
         upper = x$total$raw_alpha + 1.96 * x$total$ase
       )
@@ -104,8 +104,9 @@ tidy_stats.psych.alpha <- function(x) {
       group_bootstrapped <- list(name = "bootstrapped")
       statistics <- list()
 
-      statistics <- add_statistic(statistics, "alpha", x$boot.ci[2],
-        symbol = "α", interval = "CI", level = .95,
+      statistics <- add_statistic(
+        statistics, "alpha", x$boot.ci[2],
+        symbol = symbol("alpha"), interval = "CI", level = .95,
         lower = x$boot.ci[1], upper = x$boot.ci[3]
       )
 
@@ -129,15 +130,15 @@ tidy_stats.psych.alpha <- function(x) {
 
     statistics <- add_statistic(statistics, "unstandardized alpha",
       x$total$raw_alpha[i],
-      symbol = "α", subscript = "Σ"
+      symbol = symbol("alpha"), subscript = symbol("sigma")
     )
     statistics <- add_statistic(statistics, "standardized alpha",
       x$total$std.alpha[i],
-      symbol = "α", subscript = "R"
+      symbol = symbol("alpha"), subscript = "R"
     )
     statistics <- add_statistic(statistics, "Guttman's Lambda 6 reliability",
       x$total$`G6(smc)`,
-      symbol = "Guttman's λ", subscript = "6"
+      symbol = symbol("guttmans_lambda"), subscript = "6"
     )
     statistics <- add_statistic(statistics, "mean interitem correlation",
       x$total$average_r[i],

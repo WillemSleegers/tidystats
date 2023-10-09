@@ -96,9 +96,9 @@ tidy_stats.lme <- function(x, args = NULL) {
       group_corrs <- dplyr::filter(corrs, group == group_name)
 
       # Tidy the data frame so that each row is a correlation pair
-      pairs <- group_corrs %>%
-        dplyr::rename(name2 = name) %>%
-        pivot_longer(cols = c(-group, -name2), names_to = "name1")
+      pairs <- group_corrs |>
+        dplyr::rename(name2 = name) |>
+        tidyr::pivot_longer(cols = c(-group, -name2), names_to = "name1")
 
       # Loop over the pairs
       for (i in 1:nrow(pairs)) {
@@ -246,30 +246,30 @@ tidy_stats.nlme <- function(x, args = NULL) {
   group_RE_pairs <- list(name = "Correlations")
 
   # Get variance-covariance matrix
-  varcor <- VarCorr(x)
+  varcor <- nlme::VarCorr(x)
 
   # Convert the matrix to a data frame with the variances and one with the
   # correlations
-  coefs <- tibble()
-  corrs <- tibble()
+  coefs <- tibble::tibble()
+  corrs <- tibble::tibble()
   group_row <- 0
   for (i in 1:nrow(varcor)) {
     rowname <- rownames(varcor)[i]
 
     if (x$dims$Q == 1) {
       group <- attr(varcor, "title")
-    } else if (str_detect(rowname, " =")) {
+    } else if (stringr::str_detect(rowname, " =")) {
       group <- paste(rowname, varcor[i, "Variance"])
       group_row <- i
     }
 
     if (rowname == "Residual") {
-      coefs <- bind_rows(coefs, tibble(
+      coefs <- dplyr::bind_rows(coefs, tibble::tibble(
         group = "Residual",
         var = varcor[i, "Variance"], sd = varcor[i, "StdDev"]
       ))
     } else {
-      coefs <- bind_rows(coefs, tibble(
+      coefs <- dplyr::bind_rows(coefs, tibble::tibble(
         group = group, coef = rowname,
         var = varcor[i, "Variance"], sd = varcor[i, "StdDev"]
       ))
@@ -377,9 +377,9 @@ tidy_stats.nlme <- function(x, args = NULL) {
       group_corrs <- dplyr::filter(corrs, group == group_name)
 
       # Tidy the data frame so that each row is a correlation pair
-      pairs <- group_corrs %>%
-        dplyr::rename(name2 = name) %>%
-        pivot_longer(cols = c(-group, -name2), names_to = "name1")
+      pairs <- group_corrs |>
+        dplyr::rename(name2 = name) |>
+        tidyr::pivot_longer(cols = c(-group, -name2), names_to = "name1")
 
       # Loop over the pairs
       for (i in 1:nrow(pairs)) {

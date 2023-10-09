@@ -3,6 +3,7 @@
 \name{tidy_matrix}
 \alias{tidy_matrix}
 \alias{add_statistic}
+\alias{symbol}
 \alias{expect_equal_models}
 \alias{write_test_stats}
 \title{Helper functions in tidystats}
@@ -21,6 +22,11 @@ add_statistic(
   upper = NULL
 )
 
+symbol(
+  x = c("alpha", "chi_squared", "delta", "guttmans_lambda", "K_squared", "lambda",
+    "p_hat", "R_squared", "sigma", "t_squared", "tau")
+)
+
 expect_equal_models(model, expected_tidy_model, tolerance = 0.001)
 
 write_test_stats(x, path, digits = 6)
@@ -29,7 +35,7 @@ write_test_stats(x, path, digits = 6)
 \item{m}{A matrix.}
 }
 \description{
-Functions used under the hood in the \link{tidystats} package.
+Functions used under the hood in the tidystats package.
 }
 \section{Functions}{
 \itemize{
@@ -37,6 +43,8 @@ Functions used under the hood in the \link{tidystats} package.
 
 \item \code{add_statistic()}: Function to add a statistic to list. It helps create the list and ignores
 NULL values.
+
+\item \code{symbol()}: Function to return symbols in ASCII.
 
 \item \code{expect_equal_models()}: Function to compare tidied models during testing.
 

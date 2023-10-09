@@ -1,7 +1,6 @@
 # Setup -------------------------------------------------------------------
 
-path <- system.file("tests/data/effectsize.json", package = "tidystats")
-expected_statistics <- read_stats(path)
+expected_statistics <- read_stats("../data/effectsize.json")
 
 # cohens_d() --------------------------------------------------------------
 

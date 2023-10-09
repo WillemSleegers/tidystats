@@ -13,7 +13,7 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 LazyData: true
-Depends: R (>= 3.2.0)
+Depends: R (>= 3.5.0)
 Imports: 
     dplyr,
     tidyr,
@@ -21,11 +21,25 @@ Imports:
     stringr,
     readr,
     jsonlite,
-    tibble
+    tibble,
+    checkmate
 Suggests: 
     BayesFactor,
     knitr,
     lme4,
     lmerTest,
-    rmarkdown
+    rmarkdown,
+    effectsize,
+    effsize,
+    Hmisc,
+    afex,
+    emmeans,
+    irr,
+    testthat,
+    MEMSS,
+    lavaan,
+    methods,
+    nlme,
+    rlang,
+    tidyselect
 VignetteBuilder: knitr

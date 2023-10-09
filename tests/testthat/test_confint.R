@@ -1,7 +1,6 @@
 # Setup -------------------------------------------------------------------
 
-path <- system.file("tests/data/confint.json", package = "tidystats")
-expected_statistics <- read_stats(path)
+expected_statistics <- read_stats("../data/confint.json")
 
 # lm() --------------------------------------------------------------------
 

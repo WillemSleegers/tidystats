@@ -2,9 +2,9 @@
 tidy_stats.icclist <- function(x, args = NULL) {
   analysis <- list(method = "ICC")
 
-  statistics <- list() %>%
-    add_statistic("N subjects", x$subjects, "N", "subjects") %>%
-    add_statistic("N raters", x$raters, "N", "raters") %>%
+  statistics <- list() |>
+    add_statistic("N subjects", x$subjects, "N", "subjects") |>
+    add_statistic("N raters", x$raters, "N", "raters") |>
     add_statistic(
       name = x$icc.name,
       value = x$value,
@@ -12,10 +12,10 @@ tidy_stats.icclist <- function(x, args = NULL) {
       level = x$conf.level,
       lower = x$lbound,
       upper = x$ubound
-    ) %>%
-    add_statistic("statistic", x$Fvalue, "F") %>%
-    add_statistic("df numerator", x$df1, "df", "num.") %>%
-    add_statistic("df denominator", x$df2, "df", "den.") %>%
+    ) |>
+    add_statistic("statistic", x$Fvalue, "F") |>
+    add_statistic("df numerator", x$df1, "df", "num.") |>
+    add_statistic("df denominator", x$df2, "df", "den.") |>
     add_statistic("p", x$p.value)
 
   analysis$statistics <- statistics

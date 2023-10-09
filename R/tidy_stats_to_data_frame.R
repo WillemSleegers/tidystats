@@ -31,7 +31,7 @@
 #' df <- tidy_stats_to_data_frame(statistics)
 #'
 #' # Select all the p-values
-#' dplyr::filter(df, statistic == "p")
+#' dplyr::filter(df, statistic_name == "p")
 #'
 #' @export
 tidy_stats_to_data_frame <- function(x) {

@@ -34,13 +34,13 @@ tidy_stats.afex_aov <- function(x, args = NULL) {
       add_statistic(
         name = "ges",
         value = terms$ges[i],
-        symbol = "η²",
+        symbol = paste0(intToUtf8(0x03b7), intToUtf8(0x00b2)),
         subscript = "G"
       ) |>
       add_statistic(
         name = "pes",
         value = terms$pes[i],
-        symbol = "η²",
+        symbol = paste0(intToUtf8(0x03b7), intToUtf8(0x00b2)),
         subscript = "p"
       ) |>
       add_statistic(
@@ -100,13 +100,13 @@ tidy_stats.mixed <- function(x, args = NULL) {
       add_statistic(
         name = "ges",
         value = terms$ges[i],
-        symbol = "η²",
+        symbol = paste0(intToUtf8(0x03b7), intToUtf8(0x00b2)),
         subscript = "G"
       ) |>
       add_statistic(
         name = "pes",
         value = terms$pes[i],
-        symbol = "η²",
+        symbol = paste0(intToUtf8(0x03b7), intToUtf8(0x00b2)),
         subscript = "p"
       ) |>
       add_statistic(

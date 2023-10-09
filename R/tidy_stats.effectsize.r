@@ -13,7 +13,7 @@ tidy_stats.effectsize_difference <- function(x, args = NULL) {
   } else {
     method <- "Glass' delta effect size"
     name <- "Glass' delta"
-    symbol <- "δ"
+    symbol <- symbol("delta")
   }
 
   analysis$method <- method

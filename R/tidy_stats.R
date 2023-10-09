@@ -70,12 +70,12 @@ tidy_stats.htest <- function(x, args = NULL) {
       names(x$estimate)[1] == "tau" ~ "r",
       names(x$estimate)[1] == "rho" ~ "r",
       names(x$estimate)[1] == "odds ratio" ~ "OR",
-      names(x$estimate)[1] == "p" ~ "p̂",
+      names(x$estimate)[1] == "p" ~ symbol("p_hat"),
       names(x$estimate)[1] == "difference in location" ~ "Mdn",
       names(x$estimate)[1] == "ratio of variances" ~ "VR",
       names(x$estimate)[1] == "probability of success" ~ "p",
       names(x$estimate)[1] == "ratio of scales" ~ "s",
-      names(x$estimate)[1] == "event rate" ~ "λ",
+      names(x$estimate)[1] == "event rate" ~ symbol("lambda"),
       names(x$estimate)[1] == "rate ratio" ~ "RR",
       names(x$estimate)[1] == "common odds ratio" ~ "OR",
       stringr::str_detect(method, "t-test") ~ "M"
@@ -84,7 +84,7 @@ tidy_stats.htest <- function(x, args = NULL) {
     subscript <- dplyr::case_when(
       stringr::str_detect(method, "Two Sample t-test") |
         method == "Paired t-test" ~ "diff.",
-      names(x$estimate)[1] == "tau" ~ "τ",
+      names(x$estimate)[1] == "tau" ~ symbol("tau"),
       names(x$estimate)[1] == "rho" ~ "S",
       names(x$estimate)[1] == "difference in location" ~ "diff.",
       names(x$estimate)[1] == "probability of success" ~ "success"
@@ -106,26 +106,29 @@ tidy_stats.htest <- function(x, args = NULL) {
     value <- x$statistic[[1]]
 
     symbol <- dplyr::case_when(
-      names(x$statistic) == "X-squared" ~ "χ²",
-      names(x$statistic) == "Kruskal-Wallis chi-squared" ~ "χ²",
+      names(x$statistic) == "X-squared" ~ symbol("chi_squared"),
+      names(x$statistic) == "Kruskal-Wallis chi-squared" ~
+        symbol("chi_squared"),
       names(x$statistic) == "D^+" ~ "D",
       names(x$statistic) == "D^-" ~ "D",
-      stringr::str_detect(names(x$statistic), "McNemar") ~ "χ²",
+      stringr::str_detect(names(x$statistic), "McNemar") ~
+        symbol("chi_squared"),
       names(x$statistic) == "Quade F" ~ "F",
-      names(x$statistic) == "Bartlett's K-squared" ~ "K²",
-      names(x$statistic) == "Fligner-Killeen:med chi-squared" ~ "χ²",
+      names(x$statistic) == "Bartlett's K-squared" ~ symbol("K_squared"),
+      names(x$statistic) == "Fligner-Killeen:med chi-squared" ~
+        symbol("chi_squared"),
       names(x$statistic) == "number of successes" ~ "k",
       names(x$statistic) == "number of events" ~ "n",
       names(x$statistic) == "count1" ~ "n",
-      names(x$statistic) == "Friedman chi-squared" ~ "χ²",
+      names(x$statistic) == "Friedman chi-squared" ~ symbol("chi_squared"),
       names(x$statistic) == "Cochran-Mantel-Haenszel M^2" ~ "CMH",
-      names(x$statistic) == "Mantel-Haenszel X-squared" ~ "χ²",
+      names(x$statistic) == "Mantel-Haenszel X-squared" ~ symbol("chi_squared"),
       names(x$statistic) == "Dickey-Fuller" ~ "DF",
       TRUE ~ names(x$statistic)
     )
 
     if (names(x$statistic) == "Dickey-Fuller") {
-      subscript <- "τ"
+      subscript <- symbol("tau")
     } else {
       subscript <- NA
     }
@@ -304,8 +307,17 @@ tidy_stats.lm <- function(x, args = NULL) {
   # Model fit
   group <- list(name = "Model")
   group$statistics <- list() |>
-    add_statistic("R squared", summary$r.squared, "R²") |>
-    add_statistic("adj. R squared", summary$adj.r.squared, "R²", "adj.") |>
+    add_statistic(
+      "R squared",
+      summary$r.squared,
+      symbol("R_squared")
+    ) |>
+    add_statistic(
+      "adj. R squared",
+      summary$adj.r.squared,
+      symbol("R_squared"),
+      "adj."
+    ) |>
     add_statistic("statistic", summary$fstatistic[[1]], "F") |>
     add_statistic("df numerator", summary$fstatistic[[2]], "df", "num.") |>
     add_statistic("df denominator", summary$fstatistic[[3]], "df", "den.") |>
@@ -546,7 +558,7 @@ tidy_stats.anova <- function(x, args = NULL) {
       add_statistic("SS", x$`Sum Sq`[i]) |>
       add_statistic("SS", x$`Sum of Sq`[i]) |>
       add_statistic("MS", x$`Mean Sq`[i]) |>
-      add_statistic("statistic", x$Chisq[i], "χ²") |>
+      add_statistic("statistic", x$Chisq[i], symbol("chi_squared")) |>
       add_statistic("statistic", x[i, "F"], "F") |>
       add_statistic("statistic", x$`F value`[i], "F")
 

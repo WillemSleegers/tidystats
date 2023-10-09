@@ -2,8 +2,7 @@
 
 library(afex)
 
-path <- system.file("tests/data/afex.json", package = "tidystats")
-expected_statistics <- read_stats(path)
+expected_statistics <- read_stats("../data/afex.json")
 
 # aov_ez() ----------------------------------------------------------------
 

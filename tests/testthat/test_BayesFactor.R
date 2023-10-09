@@ -2,8 +2,7 @@
 
 library(BayesFactor)
 
-path <- system.file("tests/data/BayesFactor.json", package = "tidystats")
-expected_statistics <- read_stats(path)
+expected_statistics <- read_stats("../data/BayesFactor.json")
 
 # generalTestBF() --------------------------------------------------------
 

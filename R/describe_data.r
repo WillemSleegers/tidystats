@@ -15,8 +15,8 @@
 #' @details The data can be grouped using [dplyr::group_by()] so that
 #' descriptives will be calculated for each group level.
 #'
-#' Skew and kurtosis are based on the [skewness()] and [kurtosis()] functions
-#' (Komsta & Novomestky, 2015).
+#' Skew and kurtosis are based on the [datawizard::skewness()] and
+#' [datawizard::kurtosis()] functions (Komsta & Novomestky, 2015).
 #'
 #' @examples
 #' describe_data(quote_source, response)
@@ -34,10 +34,7 @@
 #' @export
 describe_data <- function(
     data, ..., na.rm = TRUE, short = FALSE) {
-  # Check if 'data' is actually a data frame
-  if (!"data.frame" %in% class(data)) {
-    stop("'data' is not a data frame.")
-  }
+  checkmate::check_data_frame(data)
 
   # Check if the user provided any columns.
   if (length(rlang::enquos(...)) == 0) {
@@ -61,8 +58,11 @@ describe_data <- function(
     stop(
       paste(
         "The following columns are not numeric:",
-        paste(column_names[!purrr::map_chr(columns, class) %in%
-          c("numeric", "integer")])
+        paste(
+          column_names[
+            !purrr::map_chr(columns, class) %in% c("numeric", "integer")
+          ]
+        )
       )
     )
   }
@@ -80,7 +80,7 @@ describe_data <- function(
   data <- dplyr::group_by(data, var, .add = TRUE)
 
   # Calculate descriptives
-  output <- data %>%
+  output <- data |>
     dplyr::summarize(
       missing = sum(is.na(value)),
       N = dplyr::n() - missing,
@@ -95,16 +95,14 @@ describe_data <- function(
         value,
         unique(value)
       )))],
-      skew = (sum((value - mean(value, na.rm = na.rm))^3,
-        na.rm = na.rm
-      ) / N) / (sum((value - mean(value, na.rm = na.rm))^2,
-        na.rm = na.rm
-      ) / N)^(3 / 2),
+      skew = (
+        sum((value - mean(value, na.rm = na.rm))^3, na.rm = na.rm) / N
+      ) / (
+        sum((value - mean(value, na.rm = na.rm))^2, na.rm = na.rm) / N
+      )^(3 / 2),
       kurtosis = N * sum((value - mean(value, na.rm = na.rm))^4,
         na.rm = na.rm
-      ) / (sum((value - mean(value, na.rm = na.rm))^2,
-        na.rm = na.rm
-      )^2)
+      ) / (sum((value - mean(value, na.rm = na.rm))^2, na.rm = na.rm)^2)
     )
 
   # Reorder the columns and return only a subset if short was set to TRUE

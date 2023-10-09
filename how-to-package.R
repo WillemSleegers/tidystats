@@ -88,7 +88,7 @@ devtools::test()
 # Check package
 # devtools::load_all()
 devtools::check()
-devtools::check(args = c("--run-donttest")) # Without examples test
+devtools::check(args = c("--no-tests")) # Without tests
 devtools::check(args = c("--as-cran"))
 
 # run R CMD check on CRAN’s servers

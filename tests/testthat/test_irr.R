@@ -2,8 +2,7 @@
 
 library(irr)
 
-path <- system.file("tests/data/irr.json", package = "tidystats")
-expected_statistics <- read_stats(path)
+expected_statistics <- read_stats("../data/irr.json")
 
 # aov() -------------------------------------------------------------------
 

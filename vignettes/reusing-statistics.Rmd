@@ -50,7 +50,7 @@ statistics <- read_stats("statistics.json") |>
   tidy_stats_to_data_frame()
 
 # Extract all the p-values
-p_values <- filter(statistics, statistic == "p")
+p_values <- filter(statistics, statistic_name == "p")
 
 p_values
 ```
@@ -62,7 +62,7 @@ kable(p_values, format = "markdown")
 Alternatively, we can can also easily select all significant p-values.
 
 ```{r}
-sig_p_values <- filter(statistics, statistic == "p" & value < .05)
+sig_p_values <- filter(statistics, statistic_name == "p" & value < .05)
 ```
 
 ```{r example2_eval, echo = FALSE}

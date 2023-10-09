@@ -87,7 +87,7 @@ tidy_stats.summary_emm <- function(x, args = NULL) {
           add_statistic(
             "estimate",
             group_df$T.square,
-            symbol = "t²"
+            symbol = symbol("t_squared")
           ) |>
           add_statistic(
             "estimate",

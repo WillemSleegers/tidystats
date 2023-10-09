@@ -30,7 +30,7 @@ tidy_stats.lavaan <- function(x, args = NULL) {
 
   statistics <- add_statistic(list(), "k", x@Fit@npar)
 
-  if (slot(x@Model, "multilevel")) {
+  if (methods::slot(x@Model, "multilevel")) {
     statistics <- statistics |>
       add_statistic(
         "observations", x@Data@Lp[[1]]$nclusters[[1]],
@@ -47,7 +47,11 @@ tidy_stats.lavaan <- function(x, args = NULL) {
   }
 
   statistics <- statistics |>
-    add_statistic("statistic", x@test$standard$stat, "χ²") |>
+    add_statistic(
+      "statistic",
+      x@test$standard$stat,
+      paste0(intToUtf8(0x03c7), intToUtf8(0x00b2))
+    ) |>
     add_statistic("df", x@test$standard$df) |>
     add_statistic("p", x@test$standard$pvalue)
 
@@ -108,7 +112,7 @@ tidy_stats.lavaan <- function(x, args = NULL) {
     analysis$groups <- append(analysis$groups, list(group))
   }
 
-  if (slot(x@Model, "multilevel")) {
+  if (methods::slot(x@Model, "multilevel")) {
     group_levels <- list(name = "Levels")
 
     for (l in 1:x@Data@nlevels) {
@@ -149,7 +153,11 @@ add_group <- function(list, x, pe) {
 
     group_model$statistics <- list() |>
       add_statistic("n", x@Data@nobs[[g]]) |>
-      add_statistic("statistic", x@test$standard$stat.group[[g]], "χ²")
+      add_statistic(
+        "statistic",
+        x@test$standard$stat.group[[g]],
+        paste0(intToUtf8(0x03c7), intToUtf8(0x00b2))
+      )
 
     group$groups <- append(group$groups, list(group_model))
 
@@ -223,11 +231,11 @@ add_latent_vars <- function(list, pe) {
       add_statistic("p", pe$p[i]) |>
       add_statistic(
         "standardized estimate (lv)", pe$std.lv[i],
-        symbol = "β", subscript = "lv"
+        symbol = intToUtf8(0x03b2), subscript = "lv"
       ) |>
       add_statistic(
         "standardized estimate (all)", pe$std.all[i],
-        symbol = "β", subscript = "all"
+        symbol = intToUtf8(0x03b2), subscript = "all"
       )
 
     groups$groups <- append(groups$groups, list(group))
@@ -251,11 +259,11 @@ add_regressions <- function(list, pe) {
       add_statistic("p", pe$p[i]) |>
       add_statistic(
         "standardized estimate (lv)", pe$std.lv[i],
-        symbol = "β", subscript = "lv"
+        symbol = intToUtf8(0x03b2), subscript = "lv"
       ) |>
       add_statistic(
         "standardized estimate (all)", pe$std.all[i],
-        symbol = "β", subscript = "all"
+        symbol = intToUtf8(0x03b2), subscript = "all"
       )
 
     groups$groups <- append(groups$groups, list(group))
@@ -279,11 +287,11 @@ add_covariances <- function(list, pe) {
       add_statistic("p", pe$p[i]) |>
       add_statistic(
         "standardized estimate (lv)", pe$std.lv[i],
-        symbol = "β", subscript = "lv"
+        symbol = intToUtf8(0x03b2), subscript = "lv"
       ) |>
       add_statistic(
         "standardized estimate (all)", pe$std.all[i],
-        symbol = "β", subscript = "all"
+        symbol = intToUtf8(0x03b2), subscript = "all"
       )
 
     groups$groups <- append(groups$groups, list(group))
@@ -307,11 +315,11 @@ add_intercepts <- function(list, pe) {
       add_statistic("p", pe$p[i]) |>
       add_statistic(
         "standardized estimate (lv)", pe$std.lv[i],
-        symbol = "β", subscript = "lv"
+        symbol = intToUtf8(0x03b2), subscript = "lv"
       ) |>
       add_statistic(
         "standardized estimate (all)", pe$std.all[i],
-        symbol = "β", subscript = "all"
+        symbol = intToUtf8(0x03b2), subscript = "all"
       )
 
     groups$groups <- append(groups$groups, list(group))
@@ -335,11 +343,11 @@ add_variances <- function(list, pe) {
       add_statistic("p", pe$p[i]) |>
       add_statistic(
         "standardized estimate (lv)", pe$std.lv[i],
-        symbol = "β", subscript = "lv"
+        symbol = intToUtf8(0x03b2), subscript = "lv"
       ) |>
       add_statistic(
         "standardized estimate (all)", pe$std.all[i],
-        symbol = "β", subscript = "all"
+        symbol = intToUtf8(0x03b2), subscript = "all"
       )
 
     groups$groups <- append(groups$groups, list(group))
@@ -363,11 +371,11 @@ add_defined_parameters <- function(list, pe) {
       add_statistic("p", pe$p[i]) |>
       add_statistic(
         "standardized estimate (lv)", pe$std.lv[i],
-        symbol = "β", subscript = "lv"
+        symbol = intToUtf8(0x03b2), subscript = "lv"
       ) |>
       add_statistic(
         "standardized estimate (all)", pe$std.all[i],
-        symbol = "β", subscript = "all"
+        symbol = intToUtf8(0x03b2), subscript = "all"
       )
 
     groups$groups <- append(groups$groups, list(group))

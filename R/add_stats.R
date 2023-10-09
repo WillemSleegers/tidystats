@@ -27,56 +27,8 @@
 #'
 #' The list can be saved to a file using the [write_stats()] function.
 #'
-#' The followings functions are supported so that the statistics can be
-#' automatically extracted using [add_stats()].
-#'
-#' | **Package**       | **Functions**                                         |
-#' |-------------------|-------------------------------------------------------|
-#' | afex              | [aov_ez()], [aov_car()], [aov_4()], [mixed()]         |
-#' | BayesFactor       | [generalTestBF()], [lmBF()], [regressionBF()],        |
-#' |                   | [ttestBF()], [anovaBF()], [correlationBF()],          |
-#' |                   | [contingencyTableBF()], [proportionBF()],             |
-#' |                   | [meta.ttestBF()]                                      |
-#' | effectsize        | [cohens_d()], [hedges_g()], [glass_delta()]           |
-#' | effsize           | [cohen.d()], [VD.A()], [cliff.delta()]                |
-#' | emmeans           | [emmeans()], [contrast()], [test()], [mvcontrast()],  |
-#' |                   | [eff_size()], [emtrends()], [joint_tests()],          |
-#' |                   | [ref_grid()]                                          |
-#' | Hmisc             | [rcorr()]                                             |
-#' | irr               | [icc()]                                               |
-#' | lme4/lmerTest     | [lmer()], [anova()]                                   |
-#' | tidystats         | [describe_data()], [count_data()]                     |
-#' | stats             | [anova()], [ansari.test()], [aov()],                  |
-#' |                   | [bartlett.test()], [binom.test()], [Box.test()],      |
-#' |                   | [chisq.test()], [confint()], [cor.test()],            |
-#' |                   | [fisher.test()], [fligner.test()], [friedman.test()], |
-#' |                   | [glm()], [kruskal.test()], [ks.test()], [lm()],       |
-#' |                   | [mantelhaen.test()], [mauchly.test()],                |
-#' |                   | [mcnemar.test()], [mood.test()], [oneway.test()],     |
-#' |                   | [pairwise.t.test()], [pairwise.prop.test()],          |
-#' |                   | [pairwise.wilcox.test()], [poisson.test()],           |
-#' |                   | [PP.test()], [prop.test()], [prop.trend.test()],      |
-#' |                   | [quade.test()], [shapiro.test()], [t.test()],         |
-#' |                   | [var.test()], [wilcox.test()]                         |
-#'
-#' The following functions are supported when their class is explicitly
-#' specified using the `class` argument.
-#'
-#' | **Package** | **Function**   | **Class name** | **Notes**               |
-#' | ------------| ---------------| ---------------|-------------------------|
-#' | stats       | [confint()]    | confint        |                         |
-#' | emmeans     | [mvcontrast()] | emm_list       | If `show.ests` = `TRUE` |
-#'
-#' The following functions support customizations regarding which statistics
-#' are extracted via the `args` argument.
-#'
-#' | **Package** | **Function**        | **Arguments**                         |
-#' | ------------| --------------------| --------------------------------------|
-#' | brms        | [brm()]             | `prob`, `robust`, `mc_se`             |
-#' | lavaan      | [lavaan()], [sem()],| `fit.measures`, `standardized`        |
-#' |             | [cfa()]             |                                       |
-#'
-#' See the function's documentation for more information about each argument.
+#' For a list of supported functions, see `vignette("supported-functions",
+#' package = "tidystats")`.
 #'
 #' @examples
 #' # Conduct analyses

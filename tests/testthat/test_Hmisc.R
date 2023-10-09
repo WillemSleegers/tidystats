@@ -2,8 +2,7 @@
 
 library(Hmisc)
 
-path <- system.file("tests/data/Hmisc.json", package = "tidystats")
-expected_statistics <- read_stats(path)
+expected_statistics <- read_stats("../data/Hmisc.json")
 
 # aov() -------------------------------------------------------------------
 
