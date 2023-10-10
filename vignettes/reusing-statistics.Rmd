@@ -70,7 +70,7 @@ kable(sig_p_values, format = "markdown")
 ```
 
 This could be useful if you want to conduct a 
-[p-curve analysis](https://journals.sagepub.com/doi/abs/10.1177/1745691614553988). 
+[p-curve analysis](https://doi.org/10.1177/1745691614553988). 
 Although do note that you should not blindly select all *p*-values. You should 
 select only the *p*-values that are relevant to a particular hypothesis. If 
 researchers provide the correct meta-information for each test 
