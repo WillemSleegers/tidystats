@@ -73,7 +73,14 @@ different statistical tests.
 
 ```r
 # Conduct a t-test, regression, and an ANOVA
-sleep_test <- t.test(extra ~ group, data = sleep, paired = TRUE)
+sleep_wide <- reshape(
+  sleep, 
+  direction = "wide", 
+  idvar = "ID", 
+  timevar = "group",
+  sep = "_"
+)
+sleep_test <-  t.test(sleep_wide$extra_1, sleep_wide$extra_2, paired = TRUE)
 
 ctl <- c(4.17, 5.58, 5.18, 6.11, 4.50, 4.61, 5.17, 4.53, 5.33, 5.14)
 trt <- c(4.81, 4.17, 4.41, 3.59, 5.87, 3.83, 6.03, 4.89, 4.32, 4.69)

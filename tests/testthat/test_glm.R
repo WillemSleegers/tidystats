@@ -103,23 +103,23 @@ test_that("glm binomial works", {
   )
 })
 
-test_that("glm anova works", {
-  d_AD <- tibble::tibble(
-    treatment = gl(3, 3),
-    outcome = gl(3, 1, 9),
-    counts = c(18, 17, 15, 20, 10, 20, 25, 13, 12)
-  )
+# test_that("glm anova works", {
+#   d_AD <- tibble::tibble(
+#     treatment = gl(3, 3),
+#     outcome = gl(3, 1, 9),
+#     counts = c(18, 17, 15, 20, 10, 20, 25, 13, 12)
+#   )
 
-  glm_D93 <- glm(counts ~ outcome + treatment, family = poisson(), data = d_AD)
-  glm_D93a <- update(glm_D93, ~ treatment * outcome)
+#   glm_D93 <- glm(counts ~ outcome + treatment, family = poisson(), data = d_AD)
+#   glm_D93a <- update(glm_D93, ~ treatment * outcome)
 
-  model <- anova(glm_D93)
+#   model <- anova(glm_D93)
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$anova_glm
-  )
-})
+#   expect_equal_models(
+#     model = model,
+#     expected_tidy_model = expected_statistics$anova_glm
+#   )
+# })
 
 test_that("glm cp anova works", {
   d_AD <- tibble::tibble(

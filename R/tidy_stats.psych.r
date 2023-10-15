@@ -1,13 +1,14 @@
 #' @describeIn tidy_stats tidy_stats method for class 'psych'
+#' @export
 tidy_stats.psych <- function(x, args = NULL) {
   if ("alpha" %in% class(x)) {
-    analysis <- tidy_stats.psych.alpha(x)
+    analysis <- tidy_stats_psych_alpha(x)
   } else if ("corr.test" %in% class(x)) {
-    analysis <- tidy_stats.psych.corr.test(x)
+    analysis <- tidy_stats_psych_corr_test(x)
   } else if ("mardia" %in% class(x)) {
-    analysis <- tidy_stats.psych.mardia(x)
+    analysis <- tidy_stats_psych_mardia(x)
   } else if ("ICC" %in% class(x)) {
-    analysis <- tidy_stats.psych.ICC(x)
+    analysis <- tidy_stats_psych_icc(x)
   }
 
   analysis <- add_package_info(analysis, "psych")
@@ -15,7 +16,7 @@ tidy_stats.psych <- function(x, args = NULL) {
   return(analysis)
 }
 
-tidy_stats.psych.alpha <- function(x) {
+tidy_stats_psych_alpha <- function(x) {
   analysis <- list(method = "Reliability analysis")
 
   group <- list(name = "Reliability analysis")
@@ -234,7 +235,7 @@ tidy_stats.psych.alpha <- function(x) {
   return(analysis)
 }
 
-tidy_stats.psych.corr.test <- function(x) {
+tidy_stats_psych_corr_test <- function(x) {
   # TODO detect kendall or spearman
   analysis <- list(method = "Correlation")
 
@@ -339,7 +340,7 @@ tidy_stats.psych.corr.test <- function(x) {
   return(analysis)
 }
 
-tidy_stats.psych.mardia <- function(x) {
+tidy_stats_psych_mardia <- function(x) {
   analysis <- list(method = "Mardia's test")
 
   # Create a group for the skew statistics
@@ -379,7 +380,7 @@ tidy_stats.psych.mardia <- function(x) {
   return(analysis)
 }
 
-tidy_stats.psych.ICC <- function(x) {
+tidy_stats_psych_icc <- function(x) {
   analysis <- list(method = "Intraclass Correlations")
 
   results <- x$results

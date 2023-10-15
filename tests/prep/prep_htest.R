@@ -4,10 +4,18 @@ statistics <- list()
 
 # t.test() ----------------------------------------------------------------
 
+sleep_wide <- reshape(
+  sleep,
+  direction = "wide",
+  idvar = "ID",
+  timevar = "group",
+  sep = "_"
+)
+
 t_test_one_sample <- t.test(extra ~ 1, data = sleep)
 t_test_two_sample <- t.test(extra ~ group, data = sleep, var.equal = TRUE)
 t_test_welch <- t.test(extra ~ group, data = sleep)
-t_test_paired <- t.test(extra ~ group, data = sleep, paired = TRUE)
+t_test_paired <- t.test(sleep_wide$extra_1, sleep_wide$extra_2, paired = TRUE)
 
 statistics <- statistics |>
   add_stats(t_test_one_sample) |>
@@ -564,5 +572,5 @@ rm(
   t_test_paired, t_test_two_sample, t_test_welch, TeaTasting, var_test,
   wilcoxon_rank_sum, wilcoxon_rank_sum_conf, wilcoxon_rank_sum_continuity,
   wilcoxon_signed_rank, heads, jung_parekh, M, patients, Rabbits, ramsay,
-  Satisfaction, smokers, x, y, z
+  Satisfaction, smokers, x, y, z, sleep_wide
 )

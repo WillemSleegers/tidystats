@@ -32,7 +32,14 @@ test_that("Welch t-test works", {
 })
 
 test_that("paired t-test works", {
-  model <- t.test(extra ~ group, data = sleep, paired = TRUE)
+  sleep_wide <- reshape(
+    sleep,
+    direction = "wide",
+    idvar = "ID",
+    timevar = "group",
+    sep = "_"
+  )
+  model <- t.test(sleep_wide$extra_1, sleep_wide$extra_2, paired = TRUE)
 
   expect_equal_models(
     model = model,
