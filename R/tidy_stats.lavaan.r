@@ -1,4 +1,5 @@
 #' @describeIn tidy_stats tidy_stats method for class 'lavaan'
+#' @export
 tidy_stats.lavaan <- function(x, args = NULL) {
   analysis <- list()
 

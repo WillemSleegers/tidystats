@@ -28,7 +28,7 @@
     
     <a class="navbar-brand me-2" href="index.html">tidystats</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,7 +76,7 @@
 </h1></div>
 <!-- badges: start -->
 
-<p><strong>Author:</strong> <a href="https://www.willemsleegers.com/" class="external-link">Willem Sleegers</a> <strong>License:</strong> <a href="https://opensource.org/licenses/MIT" class="external-link">MIT</a></p>
+<p><strong>Author:</strong> <a href="https://willemsleegers.com/" class="external-link">Willem Sleegers</a> <strong>License:</strong> <a href="https://opensource.org/license/mit/" class="external-link">MIT</a></p>
 <p>tidystats is an R package for sharing and reporting statistics. tidystats extracts statistics from the output of statistical functions (e.g., <code><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test()</a></code>, <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code>) and stores them in a structured format. The resulting file can be shared with others and used in popular text editors to reproducibly report the statistics.</p>
 <p>Please see below for instructions on how to install and use this package.</p>
 <p><strong>Do note that the package is currently in development. This means the package may contain bugs and is subject to significant changes.</strong> If you find any bugs or if you have any feedback, please let me know by creating an issue here on Github.</p>
@@ -118,7 +118,14 @@
 <p>The following example shows how to combine and save the statistics from three different statistical tests.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Conduct a t-test, regression, and an ANOVA</span></span>
-<span><span class="va">sleep_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">extra</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">sleep</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">sleep_wide</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/reshape.html" class="external-link">reshape</a></span><span class="op">(</span></span>
+<span>  <span class="va">sleep</span>,</span>
+<span>  direction <span class="op">=</span> <span class="st">"wide"</span>,</span>
+<span>  idvar <span class="op">=</span> <span class="st">"ID"</span>,</span>
+<span>  timevar <span class="op">=</span> <span class="st">"group"</span>,</span>
+<span>  sep <span class="op">=</span> <span class="st">"_"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">sleep_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">sleep_wide</span><span class="op">$</span><span class="va">extra_1</span>, <span class="va">sleep_wide</span><span class="op">$</span><span class="va">extra_2</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">ctl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4.17</span>, <span class="fl">5.58</span>, <span class="fl">5.18</span>, <span class="fl">6.11</span>, <span class="fl">4.50</span>, <span class="fl">4.61</span>, <span class="fl">5.17</span>, <span class="fl">4.53</span>, <span class="fl">5.33</span>, <span class="fl">5.14</span><span class="op">)</span></span>
 <span><span class="va">trt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4.81</span>, <span class="fl">4.17</span>, <span class="fl">4.41</span>, <span class="fl">3.59</span>, <span class="fl">5.87</span>, <span class="fl">3.83</span>, <span class="fl">6.03</span>, <span class="fl">4.89</span>, <span class="fl">4.32</span>, <span class="fl">4.69</span><span class="op">)</span></span>

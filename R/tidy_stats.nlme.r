@@ -1,4 +1,5 @@
 #' @describeIn tidy_stats tidy_stats method for class 'lme'
+#' @export
 tidy_stats.lme <- function(x, args = NULL) {
   analysis <- list(
     method = "Linear mixed-effects model"
@@ -213,6 +214,7 @@ tidy_stats.lme <- function(x, args = NULL) {
 }
 
 #' @describeIn tidy_stats tidy_stats method for class 'nlme'
+#' @export
 tidy_stats.nlme <- function(x, args = NULL) {
   # Create a list to store the analysis in and set the method
   analysis <- list(
@@ -494,6 +496,7 @@ tidy_stats.nlme <- function(x, args = NULL) {
 }
 
 #' @describeIn tidy_stats tidy_stats method for class 'anova.lme'
+#' @export
 tidy_stats.anova.lme <- function(x, args = NULL) {
   # Create the analysis list
   analysis <- list()
@@ -550,6 +553,7 @@ tidy_stats.anova.lme <- function(x, args = NULL) {
 }
 
 #' @describeIn tidy_stats tidy_stats method for class 'gls'
+#' @export
 tidy_stats.gls <- function(x, args = NULL) {
   # Create the analysis list and set the method
   analysis <- list(method = "Linear model using generalized least squares")

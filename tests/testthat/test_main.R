@@ -7,7 +7,14 @@ tolerance <- 0.001
 # add_stats() -------------------------------------------------------------
 
 test_that("the t-test in main works", {
-  sleep_t_test <- t.test(extra ~ group, data = sleep, paired = TRUE)
+  sleep_wide <- reshape(
+    sleep,
+    direction = "wide",
+    idvar = "ID",
+    timevar = "group",
+    sep = "_"
+  )
+  sleep_t_test <- t.test(sleep_wide$extra_1, sleep_wide$extra_2, paired = TRUE)
 
   statistics <- add_stats(list(), sleep_t_test, type = "primary")
 

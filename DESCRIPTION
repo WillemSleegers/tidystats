@@ -1,7 +1,7 @@
 Package: tidystats
 Type: Package
 Title: Save Output of Statistical Tests 
-Version: 0.6
+Version: 0.6.0
 Author: Willem Sleegers
 Maintainer: Willem Sleegers <w.sleegers@me.com>
 Description: Save the output of statistical tests in an organized file that can 

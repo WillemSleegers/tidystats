@@ -1,9 +1,11 @@
 #' @describeIn tidy_stats tidy_stats method for class 'tidystats'
+#' @export
 tidy_stats.tidystats <- function(x, args = NULL) {
   return(x)
 }
 
 #' @describeIn tidy_stats tidy_stats method for class 'tidystats_descriptives'
+#' @export
 tidy_stats.tidystats_descriptives <- function(x, args = NULL) {
   analysis <- list()
 
@@ -118,6 +120,7 @@ tidy_stats.tidystats_descriptives <- function(x, args = NULL) {
 }
 
 #' @describeIn tidy_stats tidy_stats method for class 'tidystats_counts'
+#' @export
 tidy_stats.tidystats_counts <- function(x, args = NULL) {
   analysis <- list(method = "Counts")
 

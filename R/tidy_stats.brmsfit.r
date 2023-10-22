@@ -1,4 +1,5 @@
 #' @describeIn tidy_stats tidy_stats method for class 'brmsfit'
+#' @export
 tidy_stats.brmsfit <- function(x, args = NULL) {
   analysis <- list(method = "Bayesian regression model")
 

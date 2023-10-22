@@ -8,7 +8,14 @@
 #'
 #' @examples
 #' # Conduct a statistical test
-#' sleep_test <- t.test(extra ~ group, data = sleep, paired = TRUE)
+#' sleep_wide <- reshape(
+#'   sleep,
+#'   direction = "wide",
+#'   idvar = "ID",
+#'   timevar = "group",
+#'   sep = "_"
+#' )
+#' sleep_test <- t.test(sleep_wide$extra_1, sleep_wide$extra_2, paired = TRUE)
 #'
 #' # Create an empty list
 #' statistics <- list()

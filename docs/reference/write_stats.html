@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidystats</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -81,7 +81,14 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Conduct a statistical test</span></span></span>
-<span class="r-in"><span><span class="va">sleep_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">extra</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">sleep</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sleep_wide</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/reshape.html" class="external-link">reshape</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">sleep</span>,</span></span>
+<span class="r-in"><span>  direction <span class="op">=</span> <span class="st">"wide"</span>,</span></span>
+<span class="r-in"><span>  idvar <span class="op">=</span> <span class="st">"ID"</span>,</span></span>
+<span class="r-in"><span>  timevar <span class="op">=</span> <span class="st">"group"</span>,</span></span>
+<span class="r-in"><span>  sep <span class="op">=</span> <span class="st">"_"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sleep_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">sleep_wide</span><span class="op">$</span><span class="va">extra_1</span>, <span class="va">sleep_wide</span><span class="op">$</span><span class="va">extra_2</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Create an empty list</span></span></span>
 <span class="r-in"><span><span class="va">statistics</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span></span>

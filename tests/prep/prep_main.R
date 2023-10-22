@@ -4,6 +4,14 @@ statistics <- list()
 
 # t.test(), lm(), and aov() -----------------------------------------------
 
+sleep_wide <- reshape(
+  sleep,
+  direction = "wide",
+  idvar = "ID",
+  timevar = "group",
+  sep = "_"
+)
+
 D9 <- tibble::tibble(
   group = gl(2, 10, 20, labels = c("Ctl", "Trt")),
   weight = c(
@@ -12,7 +20,7 @@ D9 <- tibble::tibble(
   )
 )
 
-sleep_t_test <- t.test(extra ~ group, data = sleep, paired = TRUE)
+sleep_t_test <- t.test(sleep_wide$extra_1, sleep_wide$extra_2, paired = TRUE)
 D9_lm <- lm(weight ~ group, data = D9)
 npk_aov <- aov(yield ~ block + N * P * K, npk)
 
@@ -28,7 +36,7 @@ summary(npk_aov)
 # tidy_stats_to_data_frame() ----------------------------------------------
 
 df <- tidy_stats_to_data_frame(statistics)
-write_csv(df, "tests/data/main_df.csv")
+readr::write_csv(df, "tests/data/main_df.csv")
 
 # write_stats() -----------------------------------------------------------
 
@@ -36,4 +44,4 @@ write_test_stats(statistics, "tests/data/main.json")
 
 # Cleanup -----------------------------------------------------------------
 
-rm(sleep_t_test, D9, D9_lm, npk_aov, df, statistics)
+rm(sleep_wide, sleep_t_test, D9, D9_lm, npk_aov, df, statistics)
