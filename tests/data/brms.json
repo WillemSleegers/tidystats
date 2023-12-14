@@ -32,6 +32,7 @@
                   },
                   {
                     "name": "R-hat",
+                    "symbol": "R̂",
                     "value": 1.003767
                   },
                   {
@@ -79,6 +80,7 @@
               },
               {
                 "name": "R-hat",
+                "symbol": "R̂",
                 "value": 1.003943
               },
               {
@@ -119,6 +121,7 @@
               },
               {
                 "name": "R-hat",
+                "symbol": "R̂",
                 "value": 1.003848
               },
               {
@@ -159,6 +162,7 @@
               },
               {
                 "name": "R-hat",
+                "symbol": "R̂",
                 "value": 1.002887
               },
               {
@@ -199,6 +203,7 @@
               },
               {
                 "name": "R-hat",
+                "symbol": "R̂",
                 "value": 1.004221
               },
               {
@@ -239,6 +244,7 @@
               },
               {
                 "name": "R-hat",
+                "symbol": "R̂",
                 "value": 1.003168
               },
               {
@@ -260,7 +266,7 @@
     ],
     "package": {
       "name": "brms",
-      "version": "2.19.0"
+      "version": "2.20.4"
     },
     "robust": true
   },
@@ -289,6 +295,7 @@
               },
               {
                 "name": "R-hat",
+                "symbol": "R̂",
                 "value": 1.001029
               },
               {
@@ -324,6 +331,7 @@
               },
               {
                 "name": "R-hat",
+                "symbol": "R̂",
                 "value": 1.000972
               },
               {
@@ -359,6 +367,7 @@
               },
               {
                 "name": "R-hat",
+                "symbol": "R̂",
                 "value": 0.999758
               },
               {
@@ -394,6 +403,7 @@
               },
               {
                 "name": "R-hat",
+                "symbol": "R̂",
                 "value": 1.003119
               },
               {
@@ -429,6 +439,7 @@
               },
               {
                 "name": "R-hat",
+                "symbol": "R̂",
                 "value": 1.000717
               },
               {
@@ -464,6 +475,7 @@
               },
               {
                 "name": "R-hat",
+                "symbol": "R̂",
                 "value": 1.00051
               },
               {
@@ -499,6 +511,7 @@
               },
               {
                 "name": "R-hat",
+                "symbol": "R̂",
                 "value": 1.000217
               },
               {
@@ -534,6 +547,7 @@
               },
               {
                 "name": "R-hat",
+                "symbol": "R̂",
                 "value": 0.999994
               },
               {
@@ -579,7 +593,7 @@
     ],
     "package": {
       "name": "brms",
-      "version": "2.19.0"
+      "version": "2.20.4"
     },
     "robust": false
   },
@@ -611,6 +625,7 @@
                   },
                   {
                     "name": "R-hat",
+                    "symbol": "R̂",
                     "value": 1.005758
                   },
                   {
@@ -653,6 +668,7 @@
               },
               {
                 "name": "R-hat",
+                "symbol": "R̂",
                 "value": 1.003434
               },
               {
@@ -688,6 +704,7 @@
               },
               {
                 "name": "R-hat",
+                "symbol": "R̂",
                 "value": 1.00416
               },
               {
@@ -723,6 +740,7 @@
               },
               {
                 "name": "R-hat",
+                "symbol": "R̂",
                 "value": 1.00195
               },
               {
@@ -758,6 +776,7 @@
               },
               {
                 "name": "R-hat",
+                "symbol": "R̂",
                 "value": 1.001109
               },
               {
@@ -793,6 +812,7 @@
               },
               {
                 "name": "R-hat",
+                "symbol": "R̂",
                 "value": 1.000737
               },
               {
@@ -828,6 +848,7 @@
               },
               {
                 "name": "R-hat",
+                "symbol": "R̂",
                 "value": 1.001513
               },
               {
@@ -863,6 +884,7 @@
               },
               {
                 "name": "R-hat",
+                "symbol": "R̂",
                 "value": 1.002203
               },
               {
@@ -903,6 +925,7 @@
               },
               {
                 "name": "R-hat",
+                "symbol": "R̂",
                 "value": 1.004106
               },
               {
@@ -924,7 +947,7 @@
     ],
     "package": {
       "name": "brms",
-      "version": "2.19.0"
+      "version": "2.20.4"
     },
     "robust": false
   },
@@ -956,6 +979,7 @@
                   },
                   {
                     "name": "R-hat",
+                    "symbol": "R̂",
                     "value": 1.0016
                   },
                   {
@@ -998,6 +1022,7 @@
               },
               {
                 "name": "R-hat",
+                "symbol": "R̂",
                 "value": 1.002086
               },
               {
@@ -1033,6 +1058,7 @@
               },
               {
                 "name": "R-hat",
+                "symbol": "R̂",
                 "value": 1.001646
               },
               {
@@ -1068,6 +1094,7 @@
               },
               {
                 "name": "R-hat",
+                "symbol": "R̂",
                 "value": 1.001429
               },
               {
@@ -1108,6 +1135,7 @@
               },
               {
                 "name": "R-hat",
+                "symbol": "R̂",
                 "value": 1.003666
               },
               {
@@ -1129,7 +1157,7 @@
     ],
     "package": {
       "name": "brms",
-      "version": "2.19.0"
+      "version": "2.20.4"
     },
     "robust": false
   },
@@ -1158,6 +1186,7 @@
               },
               {
                 "name": "R-hat",
+                "symbol": "R̂",
                 "value": 1.000424
               },
               {
@@ -1193,6 +1222,7 @@
               },
               {
                 "name": "R-hat",
+                "symbol": "R̂",
                 "value": 1.000041
               },
               {
@@ -1228,6 +1258,7 @@
               },
               {
                 "name": "R-hat",
+                "symbol": "R̂",
                 "value": 1.000813
               },
               {
@@ -1263,6 +1294,7 @@
               },
               {
                 "name": "R-hat",
+                "symbol": "R̂",
                 "value": 1.001376
               },
               {
@@ -1284,7 +1316,7 @@
     ],
     "package": {
       "name": "brms",
-      "version": "2.19.0"
+      "version": "2.20.4"
     },
     "robust": false
   },
@@ -1313,6 +1345,7 @@
               },
               {
                 "name": "R-hat",
+                "symbol": "R̂",
                 "value": 1.001266
               },
               {
@@ -1348,6 +1381,7 @@
               },
               {
                 "name": "R-hat",
+                "symbol": "R̂",
                 "value": 1.00015
               },
               {
@@ -1388,6 +1422,7 @@
               },
               {
                 "name": "R-hat",
+                "symbol": "R̂",
                 "value": 1.000329
               },
               {
@@ -1428,7 +1463,7 @@
     ],
     "package": {
       "name": "brms",
-      "version": "2.19.0"
+      "version": "2.20.4"
     },
     "robust": false
   }

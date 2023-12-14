@@ -75,7 +75,7 @@ add_brms_statistics <- function(x, list, prob) {
       ) |>
       add_statistic("Monte Carlo standard error", x$MCSE[i], "MCSE") |>
       add_statistic("estimate error", x$Est.Error[i], "EE") |>
-      add_statistic("R-hat", x$Rhat[i]) |>
+      add_statistic("R-hat", x$Rhat[i], symbol = symbol("R_hat")) |>
       add_statistic(
         "effective sample size (bulk)",
         x$Bulk_ESS[i],
