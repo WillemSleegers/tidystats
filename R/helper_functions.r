@@ -8,7 +8,6 @@
 #' @param m A matrix.
 #'
 #' @keywords internal
-
 tidy_matrix <- function(m, symmetric = TRUE) {
   if (!length(rownames(m)) > 0) {
     stop("Matrix has no row names.")
@@ -45,42 +44,34 @@ tidy_matrix <- function(m, symmetric = TRUE) {
 #' NULL values.
 #'
 #' @keywords internal
-
 add_statistic <- function(list, name, value, symbol = NULL, subscript = NULL,
                           interval = NULL, level = NULL, lower = NULL,
                           upper = NULL) {
-  if (!is.null(value)) {
-    if (!is.na(value)) {
-      new_list <- list()
-      new_list$name <- name
-
-      if (!is.null(symbol)) {
-        if (!is.na(symbol)) new_list$symbol <- symbol
-      }
-
-      if (!is.null(subscript)) {
-        if (!is.na(subscript)) new_list$subscript <- subscript
-      }
-
-      new_list$value <- value
-
-      if (
-        !is.null(level) &&
-          !is.null(interval) &&
-          !is.null(lower) &&
-          !is.null(upper)
-      ) {
-        if (!is.na(level)) {
-          new_list$interval <- interval
-          new_list$level <- level
-          new_list$lower <- lower
-          new_list$upper <- upper
-        }
-      }
-
-      list <- append(list, list(new_list))
-    }
+  if (is_blank(value)) {
+    return(list)
   }
+
+  new_list <- list()
+  new_list$name <- name
+
+  if (!is_blank(symbol)) new_list$symbol <- symbol
+  if (!is_blank(subscript)) new_list$subscript <- subscript
+
+  new_list$value <- value
+
+  if (
+    !is_blank(level) &&
+      !is_blank(interval) &&
+      !is_blank(lower) &&
+      !is_blank(upper)
+  ) {
+    new_list$interval <- interval
+    new_list$level <- level
+    new_list$lower <- lower
+    new_list$upper <- upper
+  }
+
+  list <- append(list, list(new_list))
 
   return(list)
 }
@@ -103,13 +94,18 @@ add_package_info <- function(list, package) {
   return(list)
 }
 
+is_blank <- function(x) {
+  return(
+    is.null(x) || is.na(x)
+  )
+}
+
 # Symbols -----------------------------------------------------------------
 
 #' @describeIn helper_functions
 #' Function to return symbols in ASCII.
 #'
 #' @keywords internal
-
 symbol <- function(
     x = c(
       "alpha",
@@ -133,6 +129,7 @@ symbol <- function(
     "K_squared" ~ paste0("K", intToUtf8(0x00b2)),
     "lambda" ~ intToUtf8(0x03bb),
     "p_hat" ~ paste0("p", intToUtf8(0x0302)),
+    "R_hat" ~ paste0("R", intToUtf8(0x0302)),
     "R_squared" ~ paste0("R", intToUtf8(0x00b2)),
     "sigma" ~ intToUtf8(0x03a3),
     "t_squared" ~ paste0("t", intToUtf8(0x00b2)),
@@ -146,7 +143,6 @@ symbol <- function(
 #' Function to compare tidied models during testing.
 #'
 #' @keywords internal
-
 expect_equal_models <- function(model, expected_tidy_model, tolerance = 0.001) {
   # Convert model output to a tidystats list
   tidy_model <- tidy_stats(model)
@@ -166,7 +162,6 @@ expect_equal_models <- function(model, expected_tidy_model, tolerance = 0.001) {
 #' statistics, hence the prompt.
 #'
 #' @keywords internal
-
 write_test_stats <- function(x, path, digits = 6) {
   choice <- utils::menu(
     title = "Are you sure you want to save these (test) statistics?",
