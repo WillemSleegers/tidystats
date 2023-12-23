@@ -1,3 +1,9 @@
+# tidystats 0.6.1
+
+## New
+
+* Added CITATION file. Use `citation("tidystats")` to see how to cite tidystats.
+
 # tidystats 0.6
 
 ## Breaking changes
