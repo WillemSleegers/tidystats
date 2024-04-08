@@ -79,8 +79,14 @@ knitr::knit(input = "README.Rmd")
 # Update website
 pkgdown::build_site_github_pages()
 
+# Spellcheck
+devtools::spell_check()
+
 # Check examples
 devtools::run_examples()
+
+# CRAN comments
+usethis::use_cran_comments()
 
 # Check tests
 devtools::test()
@@ -94,6 +100,9 @@ devtools::check(args = c("--as-cran"))
 # run R CMD check on CRAN’s servers
 devtools::check_win_devel()
 devtools::check_win_release()
+
+# R-hub
+devtools::check_rhub()
 
 # Submit
 devtools::release()
