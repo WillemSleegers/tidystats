@@ -21,7 +21,7 @@ Github [page](https://github.com/WillemSleegers/tidystats) and create an
 [issue](https://github.com/WillemSleegers/tidystats/issues). This is the 
 preferred method because it is easy to paste code snippets and to ask follow-up 
 questions. For alternative ways to contact me, see the tidystats 
-[website](https://www.tidystats.io).
+[website](https://tidystats.io/).
 
 Of course, it's not always possible to wait for me to add support for the 
 function to tidystats. Nor is it always possible for me to add support for the 

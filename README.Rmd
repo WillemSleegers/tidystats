@@ -24,8 +24,8 @@ cat(
 ```
 <!-- badges: end -->
 
-**Author:** [Willem Sleegers](https://willemsleegers.com/)
-**License:** [MIT](https://opensource.org/license/mit/)
+**Author:** [Willem Sleegers](https://willemsleegers.com)
+**License:** [MIT](https://opensource.org/license/mit)
 
 tidystats is an R package for sharing and reporting statistics. tidystats 
 extracts statistics from the output of statistical functions 
