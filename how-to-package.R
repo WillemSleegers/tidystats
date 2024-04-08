@@ -44,7 +44,7 @@ devtools::test()
 testthat::test_dir(path = "tests/testthat/tests/")
 
 # Test a specific test
-testthat::test_file("tests/testthat/test_irr.R")
+testthat::test_file("tests/testthat/test_effectsize.R")
 
 # Create a vignette -------------------------------------------------------
 

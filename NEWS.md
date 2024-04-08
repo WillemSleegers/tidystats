@@ -4,6 +4,10 @@
 
 * Added CITATION file. Use `citation("tidystats")` to see how to cite tidystats.
 
+## Changes
+
+* Updated the package to maintain support for all currently supported statistical functions.
+
 # tidystats 0.6
 
 ## Breaking changes
