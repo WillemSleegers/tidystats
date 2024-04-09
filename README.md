@@ -133,7 +133,7 @@ you can do:
 
 The file created with the `write_stats()` function can be used in several text
 editor add-ins to reproducibly report the statistics. For more information on 
-these add-ins, please see the [tidystats website](https://www.tidystats.io) or 
+these add-ins, please see the [tidystats website](https://tidystats.io/) or 
 their GitHub pages:
 
 - [Microsoft Word add-in](https://github.com/WillemSleegers/tidystats-Word-add-in)
