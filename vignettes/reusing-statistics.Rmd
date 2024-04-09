@@ -40,7 +40,6 @@ perform several simple operations.
 In the example below we read the tidystats list and select all the p-values.
 
 ```{r, results = "hide", message = FALSE}
-# Load packages
 library(tidystats)
 library(dplyr)
 

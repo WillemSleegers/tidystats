@@ -9,8 +9,8 @@
 [![](https://www.r-pkg.org/badges/version/tidystats?color=green)](https://cran.r-project.org/package=tidystats) [![](http://cranlogs.r-pkg.org/badges/grand-total/tidystats?color=green)](https://cran.r-project.org/package=tidystats) [![](http://cranlogs.r-pkg.org/badges/last-month/tidystats?color=green)](https://cran.r-project.org/package=tidystats) [![](http://cranlogs.r-pkg.org/badges/last-week/tidystats?color=green)](https://cran.r-project.org/package=tidystats) [![](https://img.shields.io/badge/doi-10.5281/zenodo.4041859-blue.svg)](https://doi.org/10.5281/zenodo.4041859)
 <!-- badges: end -->
 
-**Author:** [Willem Sleegers](https://willemsleegers.com/)
-**License:** [MIT](https://opensource.org/license/mit/)
+**Author:** [Willem Sleegers](https://willemsleegers.com)
+**License:** [MIT](https://opensource.org/license/mit)
 
 tidystats is an R package for sharing and reporting statistics. tidystats 
 extracts statistics from the output of statistical functions 
@@ -133,7 +133,7 @@ you can do:
 
 The file created with the `write_stats()` function can be used in several text
 editor add-ins to reproducibly report the statistics. For more information on 
-these add-ins, please see the [tidystats website](https://www.tidystats.io) or 
+these add-ins, please see the [tidystats website](https://tidystats.io/) or 
 their GitHub pages:
 
 - [Microsoft Word add-in](https://github.com/WillemSleegers/tidystats-Word-add-in)
@@ -141,7 +141,7 @@ their GitHub pages:
 
 ## More information
 
-See the [tidystats website](https://www.tidystats.io) for more information, 
+See the [tidystats website](https://tidystats.io/) for more information, 
 such as a FAQ, tips and tricks, as well as how to receive (and give) support. 
 
 If you have any questions or comments, feel free to create an 

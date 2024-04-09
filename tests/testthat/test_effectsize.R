@@ -1,11 +1,12 @@
 # Setup -------------------------------------------------------------------
 
+library(effectsize)
 expected_statistics <- read_stats("../data/effectsize.json")
 
 # cohens_d() --------------------------------------------------------------
 
 test_that("effectsize's Cohen's d works", {
-  model <- effectsize::cohens_d(mpg ~ am, data = mtcars)
+  model <- cohens_d(mpg ~ am, data = mtcars)
 
   expect_equal_models(
     model = model,
@@ -14,7 +15,7 @@ test_that("effectsize's Cohen's d works", {
 })
 
 test_that("effectsize's Cohen's d not pooled works", {
-  model <- effectsize::cohens_d(mpg ~ am, data = mtcars, pooled_sd = FALSE)
+  model <- cohens_d(mpg ~ am, data = mtcars, pooled_sd = FALSE)
 
   expect_equal_models(
     model = model,
@@ -23,7 +24,7 @@ test_that("effectsize's Cohen's d not pooled works", {
 })
 
 test_that("effectsize's Cohen's d mu works", {
-  model <- effectsize::cohens_d(mpg ~ am, data = mtcars, mu = -5)
+  model <- cohens_d(mpg ~ am, data = mtcars, mu = -5)
 
   expect_equal_models(
     model = model,
@@ -32,7 +33,7 @@ test_that("effectsize's Cohen's d mu works", {
 })
 
 test_that("effectsize's Cohen's d less works", {
-  model <- effectsize::cohens_d(mpg ~ am, data = mtcars, alternative = "less")
+  model <- cohens_d(mpg ~ am, data = mtcars, alternative = "less")
 
   expect_equal_models(
     model = model,
@@ -41,7 +42,7 @@ test_that("effectsize's Cohen's d less works", {
 })
 
 test_that("effectsize's Cohen's d one sample works", {
-  model <- effectsize::cohens_d(wt ~ 1, data = mtcars)
+  model <- cohens_d(wt ~ 1, data = mtcars)
 
   expect_equal_models(
     model = model,
@@ -50,7 +51,7 @@ test_that("effectsize's Cohen's d one sample works", {
 })
 
 test_that("effectsize's Cohen's d paired works", {
-  model <- effectsize::cohens_d(
+  model <- cohens_d(
     Pair(extra[group == 1], extra[group == 2]) ~ 1,
     data = sleep
   )
@@ -64,7 +65,7 @@ test_that("effectsize's Cohen's d paired works", {
 # hedges_g() --------------------------------------------------------------
 
 test_that("effectsize's Hedges' g works", {
-  model <- effectsize::hedges_g(mpg ~ am, data = mtcars)
+  model <- hedges_g(mpg ~ am, data = mtcars)
 
   expect_equal_models(
     model = model,
@@ -73,7 +74,7 @@ test_that("effectsize's Hedges' g works", {
 })
 
 test_that("effectsize's Hedges' g not pooled works", {
-  model <- effectsize::hedges_g(mpg ~ am, data = mtcars, pooled_sd = FALSE)
+  model <- hedges_g(mpg ~ am, data = mtcars, pooled_sd = FALSE)
 
   expect_equal_models(
     model = model,
@@ -82,7 +83,7 @@ test_that("effectsize's Hedges' g not pooled works", {
 })
 
 test_that("effectsize's Hedges' g mu works", {
-  model <- effectsize::hedges_g(mpg ~ am, data = mtcars, mu = -5)
+  model <- hedges_g(mpg ~ am, data = mtcars, mu = -5)
 
   expect_equal_models(
     model = model,
@@ -91,7 +92,7 @@ test_that("effectsize's Hedges' g mu works", {
 })
 
 test_that("effectsize's Hedges' g less works", {
-  model <- effectsize::hedges_g(mpg ~ am, data = mtcars, alternative = "less")
+  model <- hedges_g(mpg ~ am, data = mtcars, alternative = "less")
 
   expect_equal_models(
     model = model,
@@ -100,7 +101,7 @@ test_that("effectsize's Hedges' g less works", {
 })
 
 test_that("effectsize's Hedges' g one sample works", {
-  model <- effectsize::hedges_g(wt ~ 1, data = mtcars)
+  model <- hedges_g(wt ~ 1, data = mtcars)
 
   expect_equal_models(
     model = model,
@@ -109,7 +110,7 @@ test_that("effectsize's Hedges' g one sample works", {
 })
 
 test_that("effectsize's Hedges' g one sample works", {
-  model <- effectsize::hedges_g(
+  model <- hedges_g(
     Pair(extra[group == 1], extra[group == 2]) ~ 1,
     data = sleep
   )
@@ -123,7 +124,7 @@ test_that("effectsize's Hedges' g one sample works", {
 # glass_delta() --------------------------------------------------------------
 
 test_that("effectsize's Glass's delta works", {
-  model <- effectsize::glass_delta(mpg ~ am, data = mtcars)
+  model <- glass_delta(mpg ~ am, data = mtcars)
 
   expect_equal_models(
     model = model,
@@ -132,7 +133,7 @@ test_that("effectsize's Glass's delta works", {
 })
 
 test_that("effectsize's Glass's delta mu works", {
-  model <- effectsize::glass_delta(mpg ~ am, data = mtcars, mu = -5)
+  model <- glass_delta(mpg ~ am, data = mtcars, mu = -5)
 
   expect_equal_models(
     model = model,
@@ -141,7 +142,7 @@ test_that("effectsize's Glass's delta mu works", {
 })
 
 test_that("effectsize's Glass's delta less works", {
-  model <- effectsize::glass_delta(
+  model <- glass_delta(
     mpg ~ am,
     data = mtcars, alternative = "less"
   )
