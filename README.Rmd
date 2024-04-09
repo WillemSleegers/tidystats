@@ -156,7 +156,7 @@ their GitHub pages:
 
 ## More information
 
-See the [tidystats website](https://www.tidystats.io) for more information, 
+See the [tidystats website](https://tidystats.io/) for more information, 
 such as a FAQ, tips and tricks, as well as how to receive (and give) support. 
 
 If you have any questions or comments, feel free to create an 
