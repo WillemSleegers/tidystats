@@ -1,3 +1,9 @@
+# tidystats 0.6.2
+
+## Changes
+
+* Updated the package to maintain support for all currently supported statistical functions.
+
 # tidystats 0.6.1
 
 ## New

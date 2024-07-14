@@ -21,7 +21,7 @@
     "proximate": false,
     "package": {
       "name": "effectsize",
-      "version": "0.8.7"
+      "version": "0.8.9"
     }
   },
   "cohens_d_not_pooled": {
@@ -46,7 +46,7 @@
     "proximate": false,
     "package": {
       "name": "effectsize",
-      "version": "0.8.7"
+      "version": "0.8.9"
     }
   },
   "cohens_d_mu": {
@@ -71,7 +71,7 @@
     "proximate": false,
     "package": {
       "name": "effectsize",
-      "version": "0.8.7"
+      "version": "0.8.9"
     }
   },
   "cohens_d_less": {
@@ -96,7 +96,7 @@
     "proximate": false,
     "package": {
       "name": "effectsize",
-      "version": "0.8.7"
+      "version": "0.8.9"
     }
   },
   "cohens_d_one_sample": {
@@ -116,11 +116,11 @@
       "direction": "two.sided",
       "null_value": 0
     },
-    "paired": true,
+    "paired": false,
     "proximate": false,
     "package": {
       "name": "effectsize",
-      "version": "0.8.7"
+      "version": "0.8.9"
     }
   },
   "cohens_d_paired": {
@@ -144,7 +144,7 @@
     "proximate": false,
     "package": {
       "name": "effectsize",
-      "version": "0.8.7"
+      "version": "0.8.9"
     }
   },
   "hedges_g": {
@@ -169,7 +169,7 @@
     "proximate": false,
     "package": {
       "name": "effectsize",
-      "version": "0.8.7"
+      "version": "0.8.9"
     }
   },
   "hedges_g_not_pooled": {
@@ -194,7 +194,7 @@
     "proximate": false,
     "package": {
       "name": "effectsize",
-      "version": "0.8.7"
+      "version": "0.8.9"
     }
   },
   "hedges_g_mu": {
@@ -219,7 +219,7 @@
     "proximate": false,
     "package": {
       "name": "effectsize",
-      "version": "0.8.7"
+      "version": "0.8.9"
     }
   },
   "hedges_g_less": {
@@ -244,7 +244,7 @@
     "proximate": false,
     "package": {
       "name": "effectsize",
-      "version": "0.8.7"
+      "version": "0.8.9"
     }
   },
   "hedges_g_one_sample": {
@@ -264,11 +264,11 @@
       "direction": "two.sided",
       "null_value": 0
     },
-    "paired": true,
+    "paired": false,
     "proximate": false,
     "package": {
       "name": "effectsize",
-      "version": "0.8.7"
+      "version": "0.8.9"
     }
   },
   "hedges_g_paired": {
@@ -292,7 +292,7 @@
     "proximate": false,
     "package": {
       "name": "effectsize",
-      "version": "0.8.7"
+      "version": "0.8.9"
     }
   },
   "glass_delta": {
@@ -316,7 +316,7 @@
     "proximate": false,
     "package": {
       "name": "effectsize",
-      "version": "0.8.7"
+      "version": "0.8.9"
     }
   },
   "glass_delta_mu": {
@@ -340,7 +340,7 @@
     "proximate": false,
     "package": {
       "name": "effectsize",
-      "version": "0.8.7"
+      "version": "0.8.9"
     }
   },
   "glass_delta_less": {
@@ -364,7 +364,7 @@
     "proximate": false,
     "package": {
       "name": "effectsize",
-      "version": "0.8.7"
+      "version": "0.8.9"
     }
   }
 }

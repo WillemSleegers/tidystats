@@ -30,7 +30,7 @@ Github.
 tidystats can be installed from CRAN.
 
 
-```r
+``` r
 install.packages("tidystats")
 ```
 
@@ -38,7 +38,7 @@ You can also install the development version from GitHub using the
 [`remotes`](https://github.com/r-lib/remotes) package.
 
 
-```r
+``` r
 remotes::install_github("willemsleegers/tidystats")
 ```
 
@@ -71,7 +71,7 @@ The following example shows how to combine and save the statistics from three
 different statistical tests.
 
 
-```r
+``` r
 # Conduct a t-test, regression, and an ANOVA
 sleep_wide <- reshape(
   sleep,
