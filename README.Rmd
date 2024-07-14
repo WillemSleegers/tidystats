@@ -19,7 +19,7 @@ cat(
   badge_cran_download("tidystats", "grand-total", "green"),
   badge_cran_download("tidystats", "last-month", "green"),
   badge_cran_download("tidystats", "last-week", "green"),
-  badge_doi("10.5281/zenodo.4041859", "blue")
+  badge_doi("10.5281/zenodo.4041858", "blue")
 )
 ```
 <!-- badges: end -->
