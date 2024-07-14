@@ -126,7 +126,7 @@
               {
                 "name": "estimate",
                 "symbol": "b",
-                "value": -3.241947e-16
+                "value": 1.217511e-15
               },
               {
                 "name": "SE",
@@ -135,7 +135,7 @@
               {
                 "name": "statistic",
                 "symbol": "z",
-                "value": -1.620973e-15
+                "value": 6.087553e-15
               },
               {
                 "name": "df",
@@ -153,7 +153,7 @@
               {
                 "name": "estimate",
                 "symbol": "b",
-                "value": -2.147866e-16
+                "value": 8.437695e-16
               },
               {
                 "name": "SE",
@@ -162,7 +162,7 @@
               {
                 "name": "statistic",
                 "symbol": "z",
-                "value": -1.073933e-15
+                "value": 4.218847e-15
               },
               {
                 "name": "df",
@@ -182,7 +182,7 @@
     "dispersion": 1,
     "package": {
       "name": "stats",
-      "version": "4.2.2"
+      "version": "4.4.1"
     }
   },
   "glm_gaussian": {
@@ -341,7 +341,7 @@
     "dispersion": 48.695039,
     "package": {
       "name": "stats",
-      "version": "4.2.2"
+      "version": "4.4.1"
     }
   },
   "glm_gamma": {
@@ -446,7 +446,7 @@
     "dispersion": 0.002446,
     "package": {
       "name": "stats",
-      "version": "4.2.2"
+      "version": "4.4.1"
     }
   },
   "glm_gamma_fs": {
@@ -551,7 +551,7 @@
     "dispersion": 0.001813,
     "package": {
       "name": "stats",
-      "version": "4.2.2"
+      "version": "4.4.1"
     }
   },
   "glm_binomial": {
@@ -710,7 +710,7 @@
     "dispersion": 1,
     "package": {
       "name": "stats",
-      "version": "4.2.2"
+      "version": "4.4.1"
     }
   },
   "anova_glm": {
@@ -760,6 +760,10 @@
                 "symbol": "df",
                 "subscript": "res.",
                 "value": 6
+              },
+              {
+                "name": "p",
+                "value": 0.065471
               }
             ]
           },
@@ -769,7 +773,7 @@
               {
                 "name": "deviance",
                 "symbol": "D",
-                "value": 0
+                "value": 6.217249e-15
               },
               {
                 "name": "residual deviance",
@@ -786,6 +790,10 @@
                 "symbol": "df",
                 "subscript": "res.",
                 "value": 4
+              },
+              {
+                "name": "p",
+                "value": 1
               }
             ]
           }
@@ -794,7 +802,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.2"
+      "version": "4.4.1"
     }
   },
   "anova_glm_cp": {
@@ -861,7 +869,7 @@
               {
                 "name": "deviance",
                 "symbol": "D",
-                "value": 0
+                "value": 6.217249e-15
               },
               {
                 "name": "residual deviance",
@@ -890,7 +898,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.2"
+      "version": "4.4.1"
     }
   },
   "anova_glm_chisq": {
@@ -953,7 +961,7 @@
               {
                 "name": "deviance",
                 "symbol": "D",
-                "value": 0
+                "value": 6.217249e-15
               },
               {
                 "name": "residual deviance",
@@ -982,7 +990,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.2"
+      "version": "4.4.1"
     }
   },
   "anova_glm_rao": {
@@ -1020,7 +1028,7 @@
                 "name": "residual deviance",
                 "symbol": "D",
                 "subscript": "res.",
-                "value": 8.437695e-15
+                "value": 1.332268e-15
               },
               {
                 "name": "df",
@@ -1047,7 +1055,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.2"
+      "version": "4.4.1"
     }
   }
 }
