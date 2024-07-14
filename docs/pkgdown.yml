@@ -6,7 +6,7 @@ articles:
   introduction-to-tidystats: introduction-to-tidystats.html
   reusing-statistics: reusing-statistics.html
   supported-functions: supported-functions.html
-last_built: 2024-07-14T18:22Z
+last_built: 2024-07-14T18:32Z
 urls:
   reference: https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/reference
   article: https://willemsleegers.github.io/tidystats/, https://github.com/WillemSleegers/tidystats/articles
