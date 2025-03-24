@@ -5,6 +5,7 @@ expected_statistics <- read_stats("../data/lme4.json")
 # lmer() ------------------------------------------------------------------
 
 test_that("lme4 works", {
+  skip_if(packageVersion("lme4") < "1.1.37")
   model <- lme4::lmer(Reaction ~ Days + (1 | Subject), lme4::sleepstudy)
 
   expect_equal_models(
@@ -14,6 +15,7 @@ test_that("lme4 works", {
 })
 
 test_that("lme4 ML works", {
+  skip_if(packageVersion("lme4") < "1.1.37")
   model <- lme4::lmer(Reaction ~ Days + (1 | Subject), lme4::sleepstudy,
     REML = FALSE
   )
@@ -25,6 +27,7 @@ test_that("lme4 ML works", {
 })
 
 test_that("lme4 slopes works", {
+  skip_if(packageVersion("lme4") < "1.1.37")
   model <- lme4::lmer(Reaction ~ Days + (Days || Subject), lme4::sleepstudy)
 
   expect_equal_models(
@@ -36,6 +39,7 @@ test_that("lme4 slopes works", {
 # anova.merMod() ----------------------------------------------------------
 
 test_that("lme4 anova works", {
+  skip_if(packageVersion("lme4") < "1.1.37")
   lme4 <- lme4::lmer(Reaction ~ Days + (1 | Subject), lme4::sleepstudy)
   model <- anova(lme4)
 
@@ -46,6 +50,7 @@ test_that("lme4 anova works", {
 })
 
 test_that("lme4 anova model comparison works", {
+  skip_if(packageVersion("lme4") < "1.1.37")
   lme4 <- lme4::lmer(Reaction ~ Days + (1 | Subject), lme4::sleepstudy)
   lme4_slopes <- lme4::lmer(
     Reaction ~ Days + (Days || Subject),

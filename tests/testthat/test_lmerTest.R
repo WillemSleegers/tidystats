@@ -5,6 +5,7 @@ expected_statistics <- read_stats("../data/lmerTest.json")
 # lmer() ------------------------------------------------------------------
 
 test_that("lmerTest 1 works", {
+  skip_if(packageVersion("lme4") < "1.1.37")
   model <- lmerTest::lmer(
     Reaction ~ Days + (Days | Subject), lme4::sleepstudy
   )
@@ -16,6 +17,7 @@ test_that("lmerTest 1 works", {
 })
 
 test_that("lmerTest 2 works", {
+  skip_if(packageVersion("lme4") < "1.1.37")
   model <- lmerTest::lmer(
     Informed.liking ~ Gender + Information * Product + (1 | Consumer) +
       (1 | Consumer:Product),
@@ -29,6 +31,7 @@ test_that("lmerTest 2 works", {
 })
 
 test_that("lmerTest ML works", {
+  skip_if(packageVersion("lme4") < "1.1.37")
   model <- lmerTest::lmer(
     Reaction ~ Days + (Days | Subject), sleepstudy,
     REML = FALSE
@@ -43,6 +46,7 @@ test_that("lmerTest ML works", {
 # anova.merMod() ----------------------------------------------------------
 
 test_that("lmerTest anova works", {
+  skip_if(packageVersion("lme4") < "1.1.37")
   m <- lmerTest::lmer(Reaction ~ Days + (Days | Subject), lme4::sleepstudy)
   model <- anova(m)
 
@@ -53,6 +57,7 @@ test_that("lmerTest anova works", {
 })
 
 test_that("lmerTest anova lme4 works", {
+  skip_if(packageVersion("lme4") < "1.1.37")
   m <- lmerTest::lmer(Reaction ~ Days + (Days | Subject), lme4::sleepstudy)
   model <- anova(m, ddf = "lme4")
 
@@ -63,6 +68,7 @@ test_that("lmerTest anova lme4 works", {
 })
 
 test_that("lmerTest anova fit works", {
+  skip_if(packageVersion("lme4") < "1.1.37")
   m0 <- lmerTest::lmer(Reaction ~ Days + (1 | Subject), sleepstudy)
   m <- lmerTest::lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
   model <- anova(m0, m)

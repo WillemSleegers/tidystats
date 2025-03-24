@@ -162,7 +162,7 @@
             "value": -897.039322
           },
           {
-            "name": "deviance",
+            "name": "-2*log(L)",
             "symbol": "D",
             "value": 1794.078643
           },
@@ -513,7 +513,7 @@
                 "value": -897.039322
               },
               {
-                "name": "deviance",
+                "name": "-2*log(L)",
                 "symbol": "D",
                 "value": 1794.078643
               }
@@ -541,7 +541,7 @@
                 "value": -876.001628
               },
               {
-                "name": "deviance",
+                "name": "-2*log(L)",
                 "symbol": "D",
                 "value": 1752.003255
               },

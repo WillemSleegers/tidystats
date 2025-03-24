@@ -20,8 +20,8 @@ tidy_stats.lmerMod <- function(x, args = NULL) {
       summary$AICtab[["logLik"]], "l"
     )
     statistics <- add_statistic(
-      statistics, "deviance",
-      summary$AICtab[["deviance"]], "D"
+      statistics, "-2*log(L)",
+      summary$AICtab[["-2*log(L)"]], "D"
     )
     statistics <- add_statistic(
       statistics, "residual df",
@@ -282,7 +282,7 @@ tidy_stats.lmerModLmerTest <- function(x, args = NULL) {
       add_statistic("AIC", summary$AICtab[["AIC"]]) |>
       add_statistic("BIC", summary$AICtab[["BIC"]]) |>
       add_statistic("log likelihood", summary$AICtab[["logLik"]], "l") |>
-      add_statistic("deviance", summary$AICtab[["deviance"]], "D") |>
+      add_statistic("-2*log(L)", summary$AICtab[["-2*log(L)"]], "D") |>
       add_statistic("residual df", summary$AICtab[["df.resid"]], "df", "res.")
   }
 
