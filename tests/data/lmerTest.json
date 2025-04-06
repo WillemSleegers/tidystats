@@ -294,7 +294,7 @@
                   },
                   {
                     "name": "df",
-                    "value": 322.336407
+                    "value": 322.336405
                   },
                   {
                     "name": "statistic",
@@ -375,7 +375,7 @@
                   },
                   {
                     "name": "df",
-                    "value": 339.51232
+                    "value": 339.512321
                   },
                   {
                     "name": "statistic",
@@ -402,7 +402,7 @@
                   },
                   {
                     "name": "df",
-                    "value": 339.51232
+                    "value": 339.512321
                   },
                   {
                     "name": "statistic",
@@ -429,7 +429,7 @@
                   },
                   {
                     "name": "df",
-                    "value": 339.51232
+                    "value": 339.512321
                   },
                   {
                     "name": "statistic",
@@ -677,7 +677,7 @@
                   {
                     "name": "correlation",
                     "symbol": "r",
-                    "value": 4.715156e-31
+                    "value": -1.041981e-15
                   }
                 ]
               },
@@ -694,7 +694,7 @@
                   {
                     "name": "correlation",
                     "symbol": "r",
-                    "value": -1.649618e-14
+                    "value": -3.002616e-15
                   }
                 ]
               },
@@ -711,7 +711,7 @@
                   {
                     "name": "correlation",
                     "symbol": "r",
-                    "value": -1.649618e-14
+                    "value": -3.002616e-15
                   }
                 ]
               },
@@ -728,7 +728,7 @@
                   {
                     "name": "correlation",
                     "symbol": "r",
-                    "value": -1.649618e-14
+                    "value": -3.275646e-15
                   }
                 ]
               },
@@ -745,7 +745,7 @@
                   {
                     "name": "correlation",
                     "symbol": "r",
-                    "value": -3.334118e-31
+                    "value": 7.367915e-16
                   }
                 ]
               },
@@ -762,7 +762,7 @@
                   {
                     "name": "correlation",
                     "symbol": "r",
-                    "value": 5.774863e-31
+                    "value": 7.367915e-16
                   }
                 ]
               },
@@ -779,7 +779,7 @@
                   {
                     "name": "correlation",
                     "symbol": "r",
-                    "value": -1.577722e-30
+                    "value": 1.39393e-15
                   }
                 ]
               },
@@ -1173,8 +1173,7 @@
             "value": -875.969672
           },
           {
-            "name": "deviance",
-            "symbol": "D",
+            "name": "-2*log(L)",
             "value": 1751.939344
           },
           {
@@ -1400,7 +1399,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.2"
+      "version": "4.4.3"
     }
   },
   "anova_lmerTest_lme4": {
@@ -1437,7 +1436,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.2"
+      "version": "4.4.3"
     }
   },
   "anova_lmerTest_fit": {
@@ -1468,8 +1467,7 @@
                 "value": -897.039322
               },
               {
-                "name": "deviance",
-                "symbol": "D",
+                "name": "-2*log(L)",
                 "value": 1794.078643
               }
             ]
@@ -1496,8 +1494,7 @@
                 "value": -875.969672
               },
               {
-                "name": "deviance",
-                "symbol": "D",
+                "name": "-2*log(L)",
                 "value": 1751.939344
               },
               {
@@ -1520,7 +1517,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.2"
+      "version": "4.4.3"
     }
   }
 }

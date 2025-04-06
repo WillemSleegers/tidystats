@@ -60,6 +60,7 @@ testthat::test_file("tests/testthat/test_effectsize.R")
 devtools::document()
 
 # Update README
+#devtools::build_readme()
 knitr::knit(input = "README.Rmd")
 
 # Run to build the website

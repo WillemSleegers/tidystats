@@ -84,7 +84,8 @@ tidy_stats.htest <- function(x, args = NULL) {
 
     subscript <- dplyr::case_when(
       stringr::str_detect(method, "Two Sample t-test") |
-        method == "Paired t-test" ~ "diff.",
+        method == "Paired t-test" ~
+        "diff.",
       names(x$estimate)[1] == "tau" ~ symbol("tau"),
       names(x$estimate)[1] == "rho" ~ "S",
       names(x$estimate)[1] == "difference in location" ~ "diff.",
@@ -93,8 +94,14 @@ tidy_stats.htest <- function(x, args = NULL) {
 
     # Add the estimate
     statistics <- add_statistic(
-      statistics, "estimate", value, symbol,
-      subscript, "CI", attr(x$conf.int, "conf.level"), x$conf.int[1],
+      statistics,
+      "estimate",
+      value,
+      symbol,
+      subscript,
+      "CI",
+      attr(x$conf.int, "conf.level"),
+      x$conf.int[1],
       x$conf.int[2]
     )
   }
@@ -232,10 +239,12 @@ tidy_stats.htest <- function(x, args = NULL) {
     analysis$var_equal <- TRUE
   } else if (x$method == "One-way analysis of means") {
     analysis$var_equal <- TRUE
-  } else if (stringr::str_detect(
-    x$method,
-    "\\(not assuming equal variances\\)"
-  )) {
+  } else if (
+    stringr::str_detect(
+      x$method,
+      "\\(not assuming equal variances\\)"
+    )
+  ) {
     analysis$var_equal <- FALSE
   }
 
@@ -354,12 +363,16 @@ tidy_stats.lm <- function(x, args = NULL) {
     statistics <- list()
 
     statistics <- add_statistic(
-      statistics, "estimate", coefs[i, "Estimate"],
+      statistics,
+      "estimate",
+      coefs[i, "Estimate"],
       "b"
     )
     statistics <- add_statistic(statistics, "SE", coefs[i, "Std. Error"])
     statistics <- add_statistic(
-      statistics, "statistic", coefs[i, "t value"],
+      statistics,
+      "statistic",
+      coefs[i, "t value"],
       "t"
     )
     statistics <- add_statistic(statistics, "df", summary$df[2])
@@ -400,20 +413,32 @@ tidy_stats.glm <- function(x, args = NULL) {
 
   # Extract and add statistics to the statistics list
   statistics <- add_statistic(
-    statistics, "null deviance",
-    summary$null.deviance, "D", "null"
-  )
-  statistics <- add_statistic(
-    statistics, "residual deviance", summary$deviance,
-    "D", "res."
-  )
-  statistics <- add_statistic(
-    statistics, "null df", summary$df.null, "df",
+    statistics,
+    "null deviance",
+    summary$null.deviance,
+    "D",
     "null"
   )
   statistics <- add_statistic(
-    statistics, "residual df", summary$df.residual,
-    "df", "res."
+    statistics,
+    "residual deviance",
+    summary$deviance,
+    "D",
+    "res."
+  )
+  statistics <- add_statistic(
+    statistics,
+    "null df",
+    summary$df.null,
+    "df",
+    "null"
+  )
+  statistics <- add_statistic(
+    statistics,
+    "residual df",
+    summary$df.residual,
+    "df",
+    "res."
   )
   statistics <- add_statistic(statistics, "AIC", summary$aic)
 
@@ -441,12 +466,16 @@ tidy_stats.glm <- function(x, args = NULL) {
     statistics <- list()
 
     statistics <- add_statistic(
-      statistics, "estimate", coefs[i, "Estimate"],
+      statistics,
+      "estimate",
+      coefs[i, "Estimate"],
       "b"
     )
     statistics <- add_statistic(statistics, "SE", coefs[i, "Std. Error"])
     statistics <- add_statistic(
-      statistics, "statistic", coefs[i, 3],
+      statistics,
+      "statistic",
+      coefs[i, 3],
       dplyr::if_else(colnames(coefs)[3] == "z value", "z", "t")
     )
     statistics <- add_statistic(statistics, "df", summary$df[2])
@@ -498,12 +527,14 @@ tidy_stats.anova <- function(x, args = NULL) {
   if (sum(stringr::str_detect(heading, "Response: ")) > 0) {
     if (length(heading) == 1) {
       analysis$name <- paste(
-        stringr::str_extract(heading, "(?<=Response: ).*"), " ~ ",
+        stringr::str_extract(heading, "(?<=Response: ).*"),
+        " ~ ",
         paste(rownames(x)[-1], collapse = " + ")
       )
     } else {
       analysis$name <- paste(
-        stringr::str_extract(heading[2], "(?<=Response: ).*"), " ~ ",
+        stringr::str_extract(heading[2], "(?<=Response: ).*"),
+        " ~ ",
         paste(rownames(x)[-length(x)], collapse = " + ")
       )
     }
@@ -527,8 +558,10 @@ tidy_stats.anova <- function(x, args = NULL) {
   if (model_comparison) {
     x$name <- stringr::str_remove(
       unlist(stringr::str_split(
-        heading[2], "\n"
-      )), "Model [0-9+]: "
+        heading[2],
+        "\n"
+      )),
+      "Model [0-9+]: "
     )
   }
 
@@ -557,6 +590,7 @@ tidy_stats.anova <- function(x, args = NULL) {
       add_statistic("log likelihood", x$logLik[i], "l") |>
       add_statistic("deviance", x$deviance[i], "D") |>
       add_statistic("deviance", x$Deviance[i], "D") |>
+      add_statistic("-2*log(L)", x$`-2*log(L)`[i]) |>
       add_statistic("residual deviance", x$`Resid. Dev`[i], "D", "res.") |>
       add_statistic("RSS", x$RSS[i]) |>
       add_statistic("SS", x$`Sum Sq`[i]) |>
@@ -642,7 +676,8 @@ tidy_stats.aov <- function(x, args = NULL) {
         add_statistic(
           "df denominator",
           terms$Df[[nrow(terms)]],
-          "df", "den."
+          "df",
+          "den."
         ) |>
         add_statistic("p", terms$`Pr(>F)`[i])
     } else {
@@ -706,16 +741,24 @@ tidy_stats.aovlist <- function(x, args = NULL) {
       # is the Residuals term or not
       if (j != nrow(terms)) {
         statistics <- add_statistic(
-          statistics, "statistic", terms$`F value`[j],
+          statistics,
+          "statistic",
+          terms$`F value`[j],
           "F"
         )
         statistics <- add_statistic(
-          statistics, "df numerator", terms$Df[j],
-          "df", "num."
+          statistics,
+          "df numerator",
+          terms$Df[j],
+          "df",
+          "num."
         )
         statistics <- add_statistic(
-          statistics, "df denominator",
-          terms$Df[[nrow(terms)]], "df", "den."
+          statistics,
+          "df denominator",
+          terms$Df[[nrow(terms)]],
+          "df",
+          "den."
         )
 
         statistics <- add_statistic(statistics, "p", terms$`Pr(>F)`[j])

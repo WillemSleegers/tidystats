@@ -16,16 +16,22 @@ tidy_stats.lmerMod <- function(x, args = NULL) {
     statistics <- add_statistic(statistics, "AIC", summary$AICtab[["AIC"]])
     statistics <- add_statistic(statistics, "BIC", summary$AICtab[["BIC"]])
     statistics <- add_statistic(
-      statistics, "log likelihood",
-      summary$AICtab[["logLik"]], "l"
+      statistics,
+      "log likelihood",
+      summary$AICtab[["logLik"]],
+      "l"
     )
     statistics <- add_statistic(
-      statistics, "deviance",
-      summary$AICtab[["deviance"]], "D"
+      statistics,
+      "-2*log(L)",
+      summary$AICtab[["-2*log(L)"]]
     )
     statistics <- add_statistic(
-      statistics, "residual df",
-      summary$AICtab[["df.resid"]], "df", "res."
+      statistics,
+      "residual df",
+      summary$AICtab[["df.resid"]],
+      "df",
+      "res."
     )
   }
 
@@ -54,7 +60,8 @@ tidy_stats.lmerMod <- function(x, args = NULL) {
     if (names(varcor)[i] %in% names(summary$ngrps)) {
       statistics <- list()
       statistics <- add_statistic(
-        statistics, "N",
+        statistics,
+        "N",
         summary$ngrps[names(summary$ngrps) == names(varcor)[i]][[1]]
       )
 
@@ -72,7 +79,9 @@ tidy_stats.lmerMod <- function(x, args = NULL) {
       statistics <- list()
 
       statistics <- add_statistic(
-        statistics, "standard deviation", SDs[[j]],
+        statistics,
+        "standard deviation",
+        SDs[[j]],
         "SD"
       )
       statistics <- add_statistic(statistics, "variance", SDs[[j]]^2, "var")
@@ -114,7 +123,9 @@ tidy_stats.lmerMod <- function(x, args = NULL) {
 
         statistics <- list()
         statistics <- add_statistic(
-          statistics, "correlation", cors$value[j],
+          statistics,
+          "correlation",
+          cors$value[j],
           "r"
         )
 
@@ -145,11 +156,15 @@ tidy_stats.lmerMod <- function(x, args = NULL) {
 
   statistics <- list()
   statistics <- add_statistic(
-    statistics, "standard deviation",
-    attr(varcor, "sc"), "SD"
+    statistics,
+    "standard deviation",
+    attr(varcor, "sc"),
+    "SD"
   )
   statistics <- add_statistic(
-    statistics, "variance", attr(varcor, "sc")^2,
+    statistics,
+    "variance",
+    attr(varcor, "sc")^2,
     "var"
   )
 
@@ -181,12 +196,16 @@ tidy_stats.lmerMod <- function(x, args = NULL) {
     statistics <- list()
 
     statistics <- add_statistic(
-      statistics, "estimate", coefs[i, "Estimate"],
+      statistics,
+      "estimate",
+      coefs[i, "Estimate"],
       "b"
     )
     statistics <- add_statistic(statistics, "SE", coefs[i, "Std. Error"])
     statistics <- add_statistic(
-      statistics, "statistic", coefs[i, "t value"],
+      statistics,
+      "statistic",
+      coefs[i, "t value"],
       "t"
     )
 
@@ -221,8 +240,10 @@ tidy_stats.lmerMod <- function(x, args = NULL) {
 
       statistics <- list()
       statistics <- add_statistic(
-        statistics, "correlation",
-        fixed_cors$value[i], "r"
+        statistics,
+        "correlation",
+        fixed_cors$value[i],
+        "r"
       )
 
       group_FE_pair$statistics <- statistics
@@ -282,7 +303,7 @@ tidy_stats.lmerModLmerTest <- function(x, args = NULL) {
       add_statistic("AIC", summary$AICtab[["AIC"]]) |>
       add_statistic("BIC", summary$AICtab[["BIC"]]) |>
       add_statistic("log likelihood", summary$AICtab[["logLik"]], "l") |>
-      add_statistic("deviance", summary$AICtab[["deviance"]], "D") |>
+      add_statistic("-2*log(L)", summary$AICtab[["-2*log(L)"]]) |>
       add_statistic("residual df", summary$AICtab[["df.resid"]], "df", "res.")
   }
 
@@ -305,7 +326,8 @@ tidy_stats.lmerModLmerTest <- function(x, args = NULL) {
     if (names(varcor)[i] %in% names(summary$ngrps)) {
       statistics <- list()
       statistics <- add_statistic(
-        statistics, "N",
+        statistics,
+        "N",
         summary$ngrps[names(summary$ngrps) == names(varcor)[i]][[1]]
       )
 
@@ -351,7 +373,9 @@ tidy_stats.lmerModLmerTest <- function(x, args = NULL) {
 
         statistics <- list()
         statistics <- add_statistic(
-          statistics, "correlation", cors$value[j],
+          statistics,
+          "correlation",
+          cors$value[j],
           "r"
         )
 
@@ -381,11 +405,15 @@ tidy_stats.lmerModLmerTest <- function(x, args = NULL) {
 
   statistics <- list()
   statistics <- add_statistic(
-    statistics, "standard deviation",
-    attr(varcor, "sc"), "SD"
+    statistics,
+    "standard deviation",
+    attr(varcor, "sc"),
+    "SD"
   )
   statistics <- add_statistic(
-    statistics, "variance", attr(varcor, "sc")^2,
+    statistics,
+    "variance",
+    attr(varcor, "sc")^2,
     "var"
   )
 
@@ -417,13 +445,17 @@ tidy_stats.lmerModLmerTest <- function(x, args = NULL) {
     statistics <- list()
 
     statistics <- add_statistic(
-      statistics, "estimate", coefs[i, "Estimate"],
+      statistics,
+      "estimate",
+      coefs[i, "Estimate"],
       "b"
     )
     statistics <- add_statistic(statistics, "SE", coefs[i, "Std. Error"])
     statistics <- add_statistic(statistics, "df", coefs[i, "df"])
     statistics <- add_statistic(
-      statistics, "statistic", coefs[i, "t value"],
+      statistics,
+      "statistic",
+      coefs[i, "t value"],
       "t"
     )
     statistics <- add_statistic(statistics, "p", coefs[i, "Pr(>|t|)"])
@@ -459,8 +491,10 @@ tidy_stats.lmerModLmerTest <- function(x, args = NULL) {
 
       statistics <- list()
       statistics <- add_statistic(
-        statistics, "correlation",
-        fixed_cors$value[i], "r"
+        statistics,
+        "correlation",
+        fixed_cors$value[i],
+        "r"
       )
 
       group_FE_pair$statistics <- statistics

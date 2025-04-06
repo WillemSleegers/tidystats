@@ -1,27 +1,14 @@
 
+---
+output: github_document
+---
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # tidystats
 
 <!-- badges: start -->
-```{r}
-#| echo: false
-#| results: hide
-#| message: false
-library(badger)
-```
-
-```{r}
-#| echo: false
-#| results: asis
-cat(
-  badge_cran_release("tidystats", "green"),
-  badge_cran_download("tidystats", "grand-total", "green"),
-  badge_cran_download("tidystats", "last-month", "green"),
-  badge_cran_download("tidystats", "last-week", "green"),
-  badge_doi("10.5281/zenodo.4041858", "blue")
-)
-```
+[![CRAN status](https://www.r-pkg.org/badges/version/tidystats)](https://CRAN.R-project.org/package=tidystats)
 <!-- badges: end -->
 
 **Author:** [Willem Sleegers](https://willemsleegers.com)
@@ -44,7 +31,7 @@ Github.
 
 tidystats can be installed from CRAN.
 
-```{r}
+```{r, cran-installation}
 #| eval: false
 install.packages("tidystats")
 ```
@@ -52,7 +39,7 @@ install.packages("tidystats")
 You can also install the development version from GitHub using the 
 [`remotes`](https://github.com/r-lib/remotes) package.
 
-```{r}
+```{r, dev-installation}
 #| eval: false
 remotes::install_github("willemsleegers/tidystats")
 ```
@@ -85,7 +72,7 @@ file using the `write_stats()` function.
 The following example shows how to combine and save the statistics from three
 different statistical tests.
 
-```{r}
+```{r, example}
 #| eval: false
 # Conduct a t-test, regression, and an ANOVA
 sleep_wide <- reshape(

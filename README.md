@@ -1,12 +1,14 @@
 
+---
+output: github_document
+---
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # tidystats
 
 <!-- badges: start -->
-
-
-[![](https://www.r-pkg.org/badges/version/tidystats?color=green)](https://cran.r-project.org/package=tidystats) [![](http://cranlogs.r-pkg.org/badges/grand-total/tidystats?color=green)](https://cran.r-project.org/package=tidystats) [![](http://cranlogs.r-pkg.org/badges/last-month/tidystats?color=green)](https://cran.r-project.org/package=tidystats) [![](http://cranlogs.r-pkg.org/badges/last-week/tidystats?color=green)](https://cran.r-project.org/package=tidystats) [![](https://img.shields.io/badge/doi-10.5281/zenodo.4041858-blue.svg)](https://doi.org/10.5281/zenodo.4041858)
+[![CRAN status](https://www.r-pkg.org/badges/version/tidystats)](https://CRAN.R-project.org/package=tidystats)
 <!-- badges: end -->
 
 **Author:** [Willem Sleegers](https://willemsleegers.com)

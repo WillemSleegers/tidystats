@@ -1,3 +1,10 @@
+# tidystats 0.6.3
+
+## Changes
+
+* Updated to maintain support with the lme4 package, which renamed the deviance statistic to -2*log(L).
+* Updated the README.
+
 # tidystats 0.6.2
 
 ## Changes

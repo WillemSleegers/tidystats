@@ -6,7 +6,8 @@ statistics <- list()
 
 lme4 <- lme4::lmer(Reaction ~ Days + (1 | Subject), lme4::sleepstudy)
 lme4_ML <- lme4::lmer(
-  Reaction ~ Days + (1 | Subject), lme4::sleepstudy,
+  Reaction ~ Days + (1 | Subject),
+  lme4::sleepstudy,
   REML = FALSE
 )
 lme4_slopes <- lme4::lmer(Reaction ~ Days + (Days || Subject), lme4::sleepstudy)

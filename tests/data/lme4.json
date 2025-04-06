@@ -138,7 +138,7 @@
     "convergence_code": 0,
     "package": {
       "name": "lme4",
-      "version": "1.1-32"
+      "version": "1.1-37"
     }
   },
   "lme4_ML": {
@@ -162,8 +162,7 @@
             "value": -897.039322
           },
           {
-            "name": "deviance",
-            "symbol": "D",
+            "name": "-2*log(L)",
             "value": 1794.078643
           },
           {
@@ -303,7 +302,7 @@
     "convergence_code": 0,
     "package": {
       "name": "lme4",
-      "version": "1.1-32"
+      "version": "1.1-37"
     }
   },
   "lme4_slopes": {
@@ -445,7 +444,7 @@
     "convergence_code": 0,
     "package": {
       "name": "lme4",
-      "version": "1.1-32"
+      "version": "1.1-37"
     }
   },
   "anova_lme4": {
@@ -482,7 +481,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.2"
+      "version": "4.4.2"
     }
   },
   "anova_models": {
@@ -513,8 +512,7 @@
                 "value": -897.039322
               },
               {
-                "name": "deviance",
-                "symbol": "D",
+                "name": "-2*log(L)",
                 "value": 1794.078643
               }
             ]
@@ -541,8 +539,7 @@
                 "value": -876.001628
               },
               {
-                "name": "deviance",
-                "symbol": "D",
+                "name": "-2*log(L)",
                 "value": 1752.003255
               },
               {
@@ -565,7 +562,7 @@
     ],
     "package": {
       "name": "stats",
-      "version": "4.2.2"
+      "version": "4.4.2"
     }
   }
 }
