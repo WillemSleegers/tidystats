@@ -2,7 +2,10 @@ Package: tidystats
 Type: Package
 Title: Save Output of Statistical Tests 
 Version: 0.6.3
-Author: Willem Sleegers
+Authors@R: person(given = "Willem",
+                  family = "Sleegers",
+                  role = c("aut", "cre"),
+                  email = "w.sleegers@me.com")
 Maintainer: Willem Sleegers <w.sleegers@me.com>
 Description: Save the output of statistical tests in an organized file that can 
   be shared with others or used to report statistics in scientific papers.
@@ -13,7 +16,7 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 LazyData: true
-Depends: R (>= 3.5.0)
+Depends: R (>= 4.1.0)
 Imports: 
     dplyr,
     tidyr,
