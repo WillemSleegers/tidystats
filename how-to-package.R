@@ -4,7 +4,6 @@
 # TODO: Store all sample estimates in the case of a 4-sample chi-squared test?
 # TODO: Simplify the method name of Kolmogorov-Smirnov tests?
 # TODO: Rename the name of degrees of freedom and related values to 'parameter'?
-# TODO: Use the checkmate package
 # TODO: Create a vignette to describe the development process of adding support
 #       for an analysis
 # TODO: Improve tidystats count function (redo the loop function)
@@ -23,12 +22,12 @@ devtools::document()
 
 # Inspect documentation
 pkgload::dev_help("add_stats")
+pkgload::dev_help("describe_data")
 
 # Installation ------------------------------------------------------------
 
 # Install the dev version
 devtools::install()
-# .rs.restartR()
 
 # Add dependency ----------------------------------------------------------
 
@@ -41,10 +40,10 @@ devtools::install()
 
 # Test all tests
 devtools::test()
-testthat::test_dir(path = "tests/testthat/tests/")
+testthat::test_dir(path = "tests/testthat/")
 
 # Test a specific test
-testthat::test_file("tests/testthat/test_effectsize.R")
+testthat::test_file("tests/testthat/test_Hmisc.R")
 
 # Create a vignette -------------------------------------------------------
 
@@ -102,8 +101,8 @@ devtools::check(args = c("--as-cran"))
 devtools::check_win_devel()
 devtools::check_win_release()
 
-# R-hub
-devtools::check_rhub()
+# R-hub (v2: run rhub::rhub_setup() once first)
+rhub::rhub_check()
 
 # Submit
 devtools::release()
@@ -111,7 +110,7 @@ devtools::release()
 # Setup -------------------------------------------------------------------
 
 # Create README file
-usethis::use_readme_rmd(open = rlang::is_interactive())
+usethis::use_readme_rmd(open = interactive())
 
 # Create pkgdown website
 usethis::use_pkgdown()

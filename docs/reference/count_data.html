@@ -9,7 +9,7 @@ categorical variables."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">tidystats</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,42 +95,44 @@ level.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   source     sex        n     prop</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Bin Laden  female  <span style="text-decoration: underline;">2</span>067 0.326   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Bin Laden  male    <span style="text-decoration: underline;">1</span>029 0.162   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Bin Laden  <span style="color: #BB0000;">NA</span>         5 0.000<span style="text-decoration: underline;">788</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Washington female  <span style="text-decoration: underline;">2</span>206 0.348   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Washington male    <span style="text-decoration: underline;">1</span>031 0.163   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> Washington <span style="color: #BB0000;">NA</span>         5 0.000<span style="text-decoration: underline;">788</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Washington female  <span style="text-decoration: underline;">2</span>206 0.348   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Bin Laden  male    <span style="text-decoration: underline;">1</span>029 0.162   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Washington male    <span style="text-decoration: underline;">1</span>031 0.163   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Washington <span style="color: #BB0000;">NA</span>         5 0.000<span style="text-decoration: underline;">788</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> Bin Laden  <span style="color: #BB0000;">NA</span>         5 0.000<span style="text-decoration: underline;">788</span></span>
 <span class="r-in"><span><span class="fu">count_data</span><span class="op">(</span><span class="va">quote_source</span>, <span class="va">source</span>, <span class="va">sex</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   source     sex        n  prop</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Bin Laden  female  <span style="text-decoration: underline;">2</span>067 0.326</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Bin Laden  male    <span style="text-decoration: underline;">1</span>029 0.162</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Washington female  <span style="text-decoration: underline;">2</span>206 0.348</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Washington female  <span style="text-decoration: underline;">2</span>206 0.348</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Bin Laden  male    <span style="text-decoration: underline;">1</span>029 0.162</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Washington male    <span style="text-decoration: underline;">1</span>031 0.163</span>
 <span class="r-in"><span><span class="fu">count_data</span><span class="op">(</span><span class="va">quote_source</span>, <span class="va">source</span>, <span class="va">sex</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span>, pct <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   source     sex        n   pct</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Bin Laden  female  <span style="text-decoration: underline;">2</span>067  32.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Bin Laden  male    <span style="text-decoration: underline;">1</span>029  16.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Washington female  <span style="text-decoration: underline;">2</span>206  34.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Washington female  <span style="text-decoration: underline;">2</span>206  34.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Bin Laden  male    <span style="text-decoration: underline;">1</span>029  16.2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Washington male    <span style="text-decoration: underline;">1</span>031  16.3</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Use dplyr::group_by() to calculate proportions within a group</span></span></span>
-<span class="r-in"><span><span class="va">quote_source</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">source</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>  <span class="fu">count_data</span><span class="op">(</span><span class="va">sex</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"dplyr"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">quote_source</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">source</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>    <span class="fu">count_data</span><span class="op">(</span><span class="va">sex</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   source [2]</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   source     sex        n    prop</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Bin Laden  female  <span style="text-decoration: underline;">2</span>067 0.667  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Bin Laden  male    <span style="text-decoration: underline;">1</span>029 0.332  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Bin Laden  <span style="color: #BB0000;">NA</span>         5 0.001<span style="text-decoration: underline;">61</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Washington female  <span style="text-decoration: underline;">2</span>206 0.680  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Washington male    <span style="text-decoration: underline;">1</span>031 0.318  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> Washington <span style="color: #BB0000;">NA</span>         5 0.001<span style="text-decoration: underline;">54</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Washington female  <span style="text-decoration: underline;">2</span>206 0.680  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Bin Laden  male    <span style="text-decoration: underline;">1</span>029 0.332  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Washington male    <span style="text-decoration: underline;">1</span>031 0.318  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Washington <span style="color: #BB0000;">NA</span>         5 0.001<span style="text-decoration: underline;">54</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> Bin Laden  <span style="color: #BB0000;">NA</span>         5 0.001<span style="text-decoration: underline;">61</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
@@ -143,7 +145,7 @@ level.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tidystats</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,7 +40,19 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.6.3" id="tidystats-063">tidystats 0.6.3<a class="anchor" aria-label="anchor" href="#tidystats-063"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.7" id="tidystats-07">tidystats 0.7<a class="anchor" aria-label="anchor" href="#tidystats-07"></a></h2>
+<div class="section level3">
+<h3 id="changes-0-7">Changes<a class="anchor" aria-label="anchor" href="#changes-0-7"></a></h3>
+<ul><li>Removed the <code>rlang</code>, <code>checkmate</code>, <code>stringr</code>, <code>readr</code>, <code>purrr</code>, <code>tibble</code>, <code>dplyr</code>, and <code>tidyr</code> dependencies.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="internal-changes-0-7">Internal changes<a class="anchor" aria-label="anchor" href="#internal-changes-0-7"></a></h3>
+<ul><li>Added internal string helper functions (<code>remove_string</code>, <code>detect_string</code>, <code>extract_string</code>) to replace <code>stringr</code> functionality.</li>
+<li>Added internal data frame helper functions (<code>dots_to_names</code>, <code>group_names</code>, <code>stack_rows</code>) to replace <code>dplyr</code>, <code>tidyr</code>, and <code>purrr</code> functionality.</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.6.3" id="tidystats-063">tidystats 0.6.3<a class="anchor" aria-label="anchor" href="#tidystats-063"></a></h2><p class="text-muted">CRAN release: 2025-04-06</p>
 <div class="section level3">
 <h3 id="changes-0-6-3">Changes<a class="anchor" aria-label="anchor" href="#changes-0-6-3"></a></h3>
 <ul><li>Updated to maintain support with the lme4 package, which renamed the deviance statistic to -2*log(L).</li>
@@ -274,7 +286,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

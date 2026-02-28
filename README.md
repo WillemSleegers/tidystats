@@ -16,12 +16,9 @@ extracts statistics from the output of statistical functions
 file can be shared with others and used in popular text editors to reproducibly 
 report the statistics.
 
-Please see below for instructions on how to install and use this package. 
-
-**Do note that the package is currently in development. This means the package 
-may contain bugs and is subject to significant changes.** If you find any bugs 
-or if you have any feedback, please let me know by creating an issue here on 
-Github.
+Please see below for instructions on how to install and use this package. If you
+find any bugs or have any feedback, please let me know by creating an issue here
+on Github.
 
 ## Installation
 

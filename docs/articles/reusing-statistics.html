@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tidystats</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,7 +61,7 @@
 
       <h1>Reusing statistics</h1>
             
-            <h4 data-toc-skip class="date">2025-04-06</h4>
+            <h4 data-toc-skip class="date">2026-02-28</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/WillemSleegers/tidystats/blob/HEAD/vignettes/reusing-statistics.Rmd" class="external-link"><code>vignettes/reusing-statistics.Rmd</code></a></small>
       <div class="d-none name"><code>reusing-statistics.Rmd</code></div>
@@ -99,15 +99,16 @@ p-values.</p>
 <span><span class="va">p_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">statistics</span>, <span class="va">statistic_name</span> <span class="op">==</span> <span class="st">"p"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">p_values</span></span></code></pre></div>
-<table style="width:100%;" class="table">
+<table class="table">
 <colgroup>
-<col width="9%">
-<col width="19%">
-<col width="9%">
-<col width="9%">
-<col width="11%">
-<col width="5%">
-<col width="7%">
+<col width="10%">
+<col width="8%">
+<col width="17%">
+<col width="8%">
+<col width="8%">
+<col width="10%">
+<col width="4%">
+<col width="6%">
 <col width="4%">
 <col width="6%">
 <col width="4%">
@@ -115,6 +116,7 @@ p-values.</p>
 <col width="4%">
 </colgroup>
 <thead><tr class="header">
+<th align="left"></th>
 <th align="left">identifier</th>
 <th align="left">analysis_name</th>
 <th align="left">group_name_1</th>
@@ -130,6 +132,7 @@ p-values.</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
+<td align="left">sleep_t_test.5</td>
 <td align="left">sleep_t_test</td>
 <td align="left">extra by group</td>
 <td align="left">-</td>
@@ -144,6 +147,7 @@ p-values.</p>
 <td align="right">-</td>
 </tr>
 <tr class="even">
+<td align="left">D9_lm.6</td>
 <td align="left">D9_lm</td>
 <td align="left">weight ~ group</td>
 <td align="left">Model</td>
@@ -158,6 +162,7 @@ p-values.</p>
 <td align="right">-</td>
 </tr>
 <tr class="odd">
+<td align="left">D9_lm.12</td>
 <td align="left">D9_lm</td>
 <td align="left">weight ~ group</td>
 <td align="left">Coefficients</td>
@@ -172,6 +177,7 @@ p-values.</p>
 <td align="right">-</td>
 </tr>
 <tr class="even">
+<td align="left">D9_lm.17</td>
 <td align="left">D9_lm</td>
 <td align="left">weight ~ group</td>
 <td align="left">Coefficients</td>
@@ -186,6 +192,7 @@ p-values.</p>
 <td align="right">-</td>
 </tr>
 <tr class="odd">
+<td align="left">npk_aov.6</td>
 <td align="left">npk_aov</td>
 <td align="left">yield ~ block + N * P * K</td>
 <td align="left">Terms</td>
@@ -200,6 +207,7 @@ p-values.</p>
 <td align="right">-</td>
 </tr>
 <tr class="even">
+<td align="left">npk_aov.12</td>
 <td align="left">npk_aov</td>
 <td align="left">yield ~ block + N * P * K</td>
 <td align="left">Terms</td>
@@ -214,6 +222,7 @@ p-values.</p>
 <td align="right">-</td>
 </tr>
 <tr class="odd">
+<td align="left">npk_aov.18</td>
 <td align="left">npk_aov</td>
 <td align="left">yield ~ block + N * P * K</td>
 <td align="left">Terms</td>
@@ -228,6 +237,7 @@ p-values.</p>
 <td align="right">-</td>
 </tr>
 <tr class="even">
+<td align="left">npk_aov.24</td>
 <td align="left">npk_aov</td>
 <td align="left">yield ~ block + N * P * K</td>
 <td align="left">Terms</td>
@@ -242,6 +252,7 @@ p-values.</p>
 <td align="right">-</td>
 </tr>
 <tr class="odd">
+<td align="left">npk_aov.30</td>
 <td align="left">npk_aov</td>
 <td align="left">yield ~ block + N * P * K</td>
 <td align="left">Terms</td>
@@ -256,6 +267,7 @@ p-values.</p>
 <td align="right">-</td>
 </tr>
 <tr class="even">
+<td align="left">npk_aov.36</td>
 <td align="left">npk_aov</td>
 <td align="left">yield ~ block + N * P * K</td>
 <td align="left">Terms</td>
@@ -270,6 +282,7 @@ p-values.</p>
 <td align="right">-</td>
 </tr>
 <tr class="odd">
+<td align="left">npk_aov.42</td>
 <td align="left">npk_aov</td>
 <td align="left">yield ~ block + N * P * K</td>
 <td align="left">Terms</td>
@@ -289,15 +302,16 @@ p-values.</p>
 p-values.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sig_p_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">statistics</span>, <span class="va">statistic_name</span> <span class="op">==</span> <span class="st">"p"</span> <span class="op">&amp;</span> <span class="va">value</span> <span class="op">&lt;</span> <span class="fl">.05</span><span class="op">)</span></span></code></pre></div>
-<table style="width:100%;" class="table">
+<table class="table">
 <colgroup>
-<col width="9%">
-<col width="19%">
-<col width="9%">
-<col width="9%">
-<col width="11%">
-<col width="5%">
-<col width="7%">
+<col width="10%">
+<col width="8%">
+<col width="17%">
+<col width="8%">
+<col width="8%">
+<col width="10%">
+<col width="4%">
+<col width="6%">
 <col width="4%">
 <col width="6%">
 <col width="4%">
@@ -305,6 +319,7 @@ p-values.</p>
 <col width="4%">
 </colgroup>
 <thead><tr class="header">
+<th align="left"></th>
 <th align="left">identifier</th>
 <th align="left">analysis_name</th>
 <th align="left">group_name_1</th>
@@ -320,6 +335,7 @@ p-values.</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
+<td align="left">sleep_t_test.5</td>
 <td align="left">sleep_t_test</td>
 <td align="left">extra by group</td>
 <td align="left">-</td>
@@ -334,6 +350,7 @@ p-values.</p>
 <td align="right">-</td>
 </tr>
 <tr class="even">
+<td align="left">D9_lm.12</td>
 <td align="left">D9_lm</td>
 <td align="left">weight ~ group</td>
 <td align="left">Coefficients</td>
@@ -348,6 +365,7 @@ p-values.</p>
 <td align="right">-</td>
 </tr>
 <tr class="odd">
+<td align="left">npk_aov.6</td>
 <td align="left">npk_aov</td>
 <td align="left">yield ~ block + N * P * K</td>
 <td align="left">Terms</td>
@@ -362,6 +380,7 @@ p-values.</p>
 <td align="right">-</td>
 </tr>
 <tr class="even">
+<td align="left">npk_aov.12</td>
 <td align="left">npk_aov</td>
 <td align="left">yield ~ block + N * P * K</td>
 <td align="left">Terms</td>
@@ -376,6 +395,7 @@ p-values.</p>
 <td align="right">-</td>
 </tr>
 <tr class="odd">
+<td align="left">npk_aov.24</td>
 <td align="left">npk_aov</td>
 <td align="left">yield ~ block + N * P * K</td>
 <td align="left">Terms</td>
@@ -428,7 +448,7 @@ results. <em>Perspectives on Psychological Science</em>, <em>9</em>(6),
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
