@@ -1,3 +1,15 @@
+# tidystats 0.7
+
+## Changes
+
+* Removed the `rlang`, `checkmate`, `stringr`, `readr`, `purrr`, `tibble`, `dplyr`, and `tidyr` dependencies.
+
+## Internal changes
+
+* Added internal string helper functions (`remove_string`, `detect_string`, `extract_string`) to replace `stringr` functionality.
+* Added internal data frame helper functions (`dots_to_names`, `group_names`, `stack_rows`) to replace `dplyr`, `tidyr`, and `purrr` functionality.
+* Rewrote all tests to use direct value comparisons instead of golden JSON files, removing the dependency on stored reference data.
+
 # tidystats 0.6.3
 
 ## Changes

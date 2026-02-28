@@ -6,14 +6,15 @@ tidy_stats.BFBayesFactor <- function(x, args = NULL) {
 
   # Determine and set the method
   class <- class(x@numerator[[1]])[1]
-  analysis$method <- dplyr::case_when(
-    class == "BFoneSample" ~ "Bayesian t-test",
-    class == "BFlinearModel" ~ "Bayesian linear regression",
-    class == "BFcorrelation" ~ "Bayesian correlation",
-    class == "BFcontingencyTable" ~ "Bayesian contingency table",
-    class == "BFproportion" ~ "Bayesian analysis of proportions",
-    class == "BFmetat" ~ "Bayesian meta-analysis"
+  methods <- c(
+    "BFoneSample"        = "Bayesian t-test",
+    "BFlinearModel"      = "Bayesian linear regression",
+    "BFcorrelation"      = "Bayesian correlation",
+    "BFcontingencyTable" = "Bayesian contingency table",
+    "BFproportion"       = "Bayesian analysis of proportions",
+    "BFmetat"            = "Bayesian meta-analysis"
   )
+  analysis$method <- unname(methods[class])
 
   # Extract bayes factors
   bayes_factors <- BayesFactor::extractBF(x)

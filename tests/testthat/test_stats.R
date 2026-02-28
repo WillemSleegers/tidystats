@@ -1,12 +1,6 @@
-# Setup -------------------------------------------------------------------
-
-expected_statistics <- read_stats("../data/stats.json")
-
-# stat() and stats() ------------------------------------------------------
+# custom_stats() ----------------------------------------------------------
 
 test_that("BF stats works", {
-  statistics <- list()
-
   lm1 <- lm(Fertility ~ ., data = swiss)
   lm2 <- update(lm1, . ~ . - Examination)
 
@@ -21,16 +15,12 @@ test_that("BF stats works", {
   )
 
   statistics <- add_stats(
-    list = statistics,
+    list = list(),
     output = BF_stats,
     notes = "Wagenmakers (2007) method for calculating Bayes factors"
   )
-  statistics$BF_stats$statistics[[1]]
-  expected_statistics$BF_stats$statistics[[1]]
 
-  expect_equivalent(
-    statistics$BF_stats,
-    expected_statistics$BF_stats,
-    tolerance = 0.00001
-  )
+  expect_equal(statistics$BF_stats$method, "BF BIC method")
+  expect_equal(statistics$BF_stats$statistics[[1]]$value, 3.820709,  tolerance = 1e-4) # BF10
+  expect_equal(statistics$BF_stats$statistics[[2]]$value, 0.2617315, tolerance = 1e-4) # BF01
 })

@@ -1,34 +1,30 @@
-# Setup -------------------------------------------------------------------
-
-expected_statistics <- read_stats("../data/htest.json")
-
 # t.test() ----------------------------------------------------------------
 
 test_that("one sample t-test works", {
-  model <- t.test(extra ~ 1, data = sleep)
+  result <- tidy_stats(t.test(extra ~ 1, data = sleep))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$t_test_one_sample
-  )
+  expect_equal(result$method, "One Sample t-test")
+  expect_equal(result$statistics[[3]]$value, 3.412965,   tolerance = 1e-4) # t
+  expect_equal(result$statistics[[4]]$value, 19,          tolerance = 1e-6) # df
+  expect_equal(result$statistics[[5]]$value, 0.00291762, tolerance = 1e-4) # p
 })
 
 test_that("two sample t-test works", {
-  model <- t.test(extra ~ group, data = sleep, var.equal = TRUE)
+  result <- tidy_stats(t.test(extra ~ group, data = sleep, var.equal = TRUE))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$t_test_two_sample
-  )
+  expect_equal(result$method, "Two Sample t-test")
+  expect_equal(result$statistics[[3]]$value, -1.860813,  tolerance = 1e-4) # t
+  expect_equal(result$statistics[[4]]$value, 18,          tolerance = 1e-6) # df
+  expect_equal(result$statistics[[5]]$value, 0.07918671, tolerance = 1e-4) # p
 })
 
 test_that("Welch t-test works", {
-  model <- t.test(extra ~ group, data = sleep)
+  result <- tidy_stats(t.test(extra ~ group, data = sleep))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$t_test_welch
-  )
+  expect_equal(result$method, "Welch Two Sample t-test")
+  expect_equal(result$statistics[[3]]$value, -1.860813,  tolerance = 1e-4) # t
+  expect_equal(result$statistics[[4]]$value, 17.77647,   tolerance = 1e-4) # df
+  expect_equal(result$statistics[[5]]$value, 0.07939414, tolerance = 1e-4) # p
 })
 
 test_that("paired t-test works", {
@@ -39,12 +35,12 @@ test_that("paired t-test works", {
     timevar = "group",
     sep = "_"
   )
-  model <- t.test(sleep_wide$extra_1, sleep_wide$extra_2, paired = TRUE)
+  result <- tidy_stats(t.test(sleep_wide$extra_1, sleep_wide$extra_2, paired = TRUE))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$t_test_paired
-  )
+  expect_equal(result$method, "Paired t-test")
+  expect_equal(result$statistics[[3]]$value, -4.062128,  tolerance = 1e-4) # t
+  expect_equal(result$statistics[[4]]$value, 9,           tolerance = 1e-6) # df
+  expect_equal(result$statistics[[5]]$value, 0.00283289, tolerance = 1e-4) # p
 })
 
 # cor.test() --------------------------------------------------------------
@@ -53,36 +49,33 @@ test_that("pearson correlation works", {
   x <- c(44.4, 45.9, 41.9, 53.3, 44.7, 44.1, 50.7, 45.2, 60.1)
   y <- c(2.6, 3.1, 2.5, 5.0, 3.6, 4.0, 5.2, 2.8, 3.8)
 
-  model <- cor.test(x, y, method = "pearson")
+  result <- tidy_stats(cor.test(x, y, method = "pearson"))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$correlation_pearson
-  )
+  expect_equal(result$statistics[[1]]$value, 0.5711816,  tolerance = 1e-4) # r
+  expect_equal(result$statistics[[3]]$value, 7,           tolerance = 1e-6) # df
+  expect_equal(result$statistics[[4]]$value, 0.1081731,  tolerance = 1e-4) # p
 })
 
 test_that("spearman correlation works", {
   x <- c(44.4, 45.9, 41.9, 53.3, 44.7, 44.1, 50.7, 45.2, 60.1)
   y <- c(2.6, 3.1, 2.5, 5.0, 3.6, 4.0, 5.2, 2.8, 3.8)
 
-  model <- cor.test(x, y, method = "spearman")
+  result <- tidy_stats(cor.test(x, y, method = "spearman"))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$correlation_spearman
-  )
+  expect_equal(result$statistics[[1]]$value, 0.6,         tolerance = 1e-4) # rho
+  expect_equal(result$statistics[[2]]$value, 48,          tolerance = 1e-6) # S
+  expect_equal(result$statistics[[3]]$value, 0.09679784, tolerance = 1e-4) # p
 })
 
 test_that("kendall correlation works", {
   x <- c(44.4, 45.9, 41.9, 53.3, 44.7, 44.1, 50.7, 45.2, 60.1)
   y <- c(2.6, 3.1, 2.5, 5.0, 3.6, 4.0, 5.2, 2.8, 3.8)
 
-  model <- cor.test(x, y, method = "kendall")
+  result <- tidy_stats(cor.test(x, y, method = "kendall"))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$correlation_kendall
-  )
+  expect_equal(result$statistics[[1]]$value, 0.4444444, tolerance = 1e-4) # tau
+  expect_equal(result$statistics[[2]]$value, 26,         tolerance = 1e-6) # T
+  expect_equal(result$statistics[[3]]$value, 0.1194389, tolerance = 1e-4) # p
 })
 
 # chisq.test() ------------------------------------------------------------
@@ -100,34 +93,32 @@ test_that("pearson's chi-squared test works", {
     party = c("Democrat", "Independent", "Republican")
   )
 
-  model <- chisq.test(M)
+  result <- tidy_stats(chisq.test(M))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$chi_squared
-  )
+  expect_equal(result$method, "Pearson's Chi-squared test")
+  expect_equal(result$statistics[[1]]$value, 30.07015,      tolerance = 1e-4) # X2
+  expect_equal(result$statistics[[2]]$value, 2,              tolerance = 1e-6) # df
+  expect_equal(result$statistics[[3]]$value, 2.953589e-07,  tolerance = 1e-4) # p
 })
 
 test_that("pearson's chi-squared test with yates' correction works", {
   x <- matrix(c(12, 5, 7, 7), ncol = 2)
 
-  model <- chisq.test(x)
+  result <- tidy_stats(chisq.test(x))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$chi_squared_yates
-  )
+  expect_equal(result$statistics[[1]]$value, 0.6411203, tolerance = 1e-4) # X2
+  expect_equal(result$statistics[[2]]$value, 1,          tolerance = 1e-6) # df
+  expect_equal(result$statistics[[3]]$value, 0.4233054, tolerance = 1e-4) # p
 })
 
 test_that("chi-squared test with for given probabilities works", {
   y <- c(A = 20, B = 15, C = 25)
 
-  model <- chisq.test(y)
+  result <- tidy_stats(chisq.test(y))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$chi_squared_prob
-  )
+  expect_equal(result$statistics[[1]]$value, 2.5,       tolerance = 1e-6) # X2
+  expect_equal(result$statistics[[2]]$value, 2,          tolerance = 1e-6) # df
+  expect_equal(result$statistics[[3]]$value, 0.2865048, tolerance = 1e-4) # p
 })
 
 # prop.test() -------------------------------------------------------------
@@ -137,12 +128,11 @@ test_that("1-sample proportion test works", {
 
   heads <- rbinom(1, size = 100, prob = .5)
 
-  model <- prop.test(heads, 100)
+  result <- tidy_stats(prop.test(heads, 100))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$prop_test
-  )
+  expect_equal(result$statistics[[2]]$value, 0.09,      tolerance = 1e-6) # X2
+  expect_equal(result$statistics[[3]]$value, 1,          tolerance = 1e-6) # df
+  expect_equal(result$statistics[[4]]$value, 0.7641772, tolerance = 1e-4) # p
 })
 
 test_that("1-sample proportion test without continuity correction works", {
@@ -150,38 +140,34 @@ test_that("1-sample proportion test without continuity correction works", {
 
   heads <- rbinom(1, size = 100, prob = .5)
 
-  model <- prop.test(heads, 100, correct = FALSE)
+  result <- tidy_stats(prop.test(heads, 100, correct = FALSE))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$prop_test_correct
-  )
+  expect_equal(result$statistics[[2]]$value, 0.16,      tolerance = 1e-6) # X2
+  expect_equal(result$statistics[[4]]$value, 0.6891565, tolerance = 1e-4) # p
 })
 
 test_that("4-sample proportion test works", {
   smokers <- c(83, 90, 129, 70)
   patients <- c(86, 93, 136, 82)
 
-  model <- prop.test(smokers, patients)
+  result <- tidy_stats(prop.test(smokers, patients))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$prop_test_smokers
-  )
+  expect_equal(result$statistics[[1]]$value, 12.60041,    tolerance = 1e-4) # X2
+  expect_equal(result$statistics[[2]]$value, 3,            tolerance = 1e-6) # df
+  expect_equal(result$statistics[[3]]$value, 0.005585477, tolerance = 1e-4) # p
 })
 
-# prop.test() -------------------------------------------------------------
+# prop.trend.test() -------------------------------------------------------
 
 test_that("Chi-squared test for trend in proportions works", {
   smokers <- c(83, 90, 129, 70)
   patients <- c(86, 93, 136, 82)
 
-  model <- prop.trend.test(smokers, patients)
+  result <- tidy_stats(prop.trend.test(smokers, patients))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$prop_trend_test,
-  )
+  expect_equal(result$statistics[[1]]$value, 8.224922,   tolerance = 1e-4) # X2
+  expect_equal(result$statistics[[2]]$value, 1,           tolerance = 1e-6) # df
+  expect_equal(result$statistics[[3]]$value, 0.004131897, tolerance = 1e-4) # p
 })
 
 test_that(
@@ -193,12 +179,10 @@ test_that(
     smokers <- c(83, 90, 129, 70)
     patients <- c(86, 93, 136, 82)
 
-    model <- prop.trend.test(smokers, patients, c(0, 0, 0, 1))
+    result <- tidy_stats(prop.trend.test(smokers, patients, c(0, 0, 0, 1)))
 
-    expect_equal_models(
-      model = model,
-      expected_tidy_model = expected_statistics$prop_trend_test_scores
-    )
+    expect_equal(result$statistics[[1]]$value, 12.17315,     tolerance = 1e-4) # X2
+    expect_equal(result$statistics[[3]]$value, 0.0004848246, tolerance = 1e-4) # p
   }
 )
 
@@ -208,50 +192,44 @@ test_that("wilcoxon signed rank exact test works", {
   x <- c(1.83, 0.50, 1.62, 2.48, 1.68, 1.88, 1.55, 3.06, 1.30)
   y <- c(0.878, 0.647, 0.598, 2.05, 1.06, 1.29, 1.06, 3.14, 1.29)
 
-  model <- wilcox.test(x, y, paired = TRUE, alternative = "greater")
+  result <- tidy_stats(wilcox.test(x, y, paired = TRUE, alternative = "greater"))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$wilcoxon_signed_rank
-  )
+  expect_equal(result$method, "Wilcoxon signed rank exact test")
+  expect_equal(result$statistics[[1]]$value, 40,          tolerance = 1e-6) # W
+  expect_equal(result$statistics[[2]]$value, 0.01953125, tolerance = 1e-4) # p
 })
 
 test_that("wilcoxon rank sum tests with continuity correction works", {
-  model <- suppressWarnings(
+  result <- tidy_stats(suppressWarnings(
     wilcox.test(Ozone ~ Month, data = airquality, subset = Month %in% c(5, 8))
-  )
+  ))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$wilcoxon_rank_sum_continuity
-  )
+  expect_equal(result$statistics[[1]]$value, 127.5,        tolerance = 1e-6) # W
+  expect_equal(result$statistics[[2]]$value, 0.0001208078, tolerance = 1e-4) # p
 })
 
 test_that("wilcoxon rank sum tests works", {
   x <- c(0.80, 0.83, 1.89, 1.04, 1.45, 1.38, 1.91, 1.64, 0.73, 1.46)
   y <- c(1.15, 0.88, 0.90, 0.74, 1.21)
 
-  model <- wilcox.test(x, y,
+  result <- tidy_stats(wilcox.test(x, y,
     alternative = "greater", exact = FALSE,
     correct = FALSE
-  )
+  ))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$wilcoxon_rank_sum
-  )
+  expect_equal(result$statistics[[1]]$value, 35,       tolerance = 1e-6) # W
+  expect_equal(result$statistics[[2]]$value, 0.1103357, tolerance = 1e-4) # p
 })
 
-test_that("wilcoxon rank sum tests works", {
+test_that("wilcoxon rank sum tests with confidence interval works", {
   x <- c(0.80, 0.83, 1.89, 1.04, 1.45, 1.38, 1.91, 1.64, 0.73, 1.46)
   y <- c(1.15, 0.88, 0.90, 0.74, 1.21)
 
-  model <- wilcox.test(x, y, conf.int = TRUE, conf.level = .9)
+  result <- tidy_stats(wilcox.test(x, y, conf.int = TRUE, conf.level = .9))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$wilcoxon_rank_sum_conf
-  )
+  expect_equal(result$statistics[[1]]$value, 0.305,     tolerance = 1e-4) # estimate
+  expect_equal(result$statistics[[2]]$value, 35,         tolerance = 1e-6) # W
+  expect_equal(result$statistics[[3]]$value, 0.2544123, tolerance = 1e-4) # p
 })
 
 # kruskal.test() ----------------------------------------------------------
@@ -261,21 +239,20 @@ test_that("kruskal-wallis rank sum test works", {
   y <- c(3.8, 2.7, 4.0, 2.4)
   z <- c(2.8, 3.4, 3.7, 2.2, 2.0)
 
-  model <- kruskal.test(list(x, y, z))
+  result <- tidy_stats(kruskal.test(list(x, y, z)))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$kruskal
-  )
+  expect_equal(result$method, "Kruskal-Wallis rank sum test")
+  expect_equal(result$statistics[[1]]$value, 0.7714286, tolerance = 1e-4) # H
+  expect_equal(result$statistics[[2]]$value, 2,          tolerance = 1e-6) # df
+  expect_equal(result$statistics[[3]]$value, 0.6799648, tolerance = 1e-4) # p
 })
 
 test_that("kruskal-wallis rank sum test with formula notation works", {
-  model <- kruskal.test(Ozone ~ Month, data = airquality)
+  result <- tidy_stats(kruskal.test(Ozone ~ Month, data = airquality))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$kruskal_formula
-  )
+  expect_equal(result$statistics[[1]]$value, 29.26658,     tolerance = 1e-4) # H
+  expect_equal(result$statistics[[2]]$value, 4,             tolerance = 1e-6) # df
+  expect_equal(result$statistics[[3]]$value, 6.900714e-06, tolerance = 1e-4) # p
 })
 
 # fisher.test() -----------------------------------------------------------
@@ -283,34 +260,27 @@ test_that("kruskal-wallis rank sum test with formula notation works", {
 test_that("fisher's exact tests works", {
   TeaTasting <- matrix(c(3, 1, 1, 3), nrow = 2)
 
-  model <- fisher.test(TeaTasting, alternative = "greater")
+  result <- tidy_stats(fisher.test(TeaTasting, alternative = "greater"))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$fisher_test
-  )
+  expect_equal(result$statistics[[1]]$value, 6.408309,  tolerance = 1e-4) # OR
+  expect_equal(result$statistics[[2]]$value, 0.2428571, tolerance = 1e-4) # p
 })
 
 test_that("fisher's exact tests without a confidence interval works", {
   Convictions <- matrix(c(2, 10, 15, 3), nrow = 2)
 
-  model <- fisher.test(Convictions, conf.int = FALSE)
+  result <- tidy_stats(fisher.test(Convictions, conf.int = FALSE))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$fisher_test_no_CI
-  )
+  expect_equal(result$statistics[[1]]$value, 0.04693661,   tolerance = 1e-4) # OR
+  expect_equal(result$statistics[[2]]$value, 0.0005367241, tolerance = 1e-4) # p
 })
 
 test_that("fisher's exact tests on r x c tables works", {
   Job <- matrix(c(1, 2, 1, 0, 3, 3, 6, 1, 10, 10, 14, 9, 6, 7, 12, 11), 4, 4)
 
-  model <- fisher.test(Job)
+  result <- tidy_stats(fisher.test(Job))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$fisher_test_r_by_c
-  )
+  expect_equal(result$statistics[[1]]$value, 0.7826849, tolerance = 1e-4) # p
 })
 
 test_that("fisher's exact tests with simulated p-value works", {
@@ -318,12 +288,9 @@ test_that("fisher's exact tests with simulated p-value works", {
 
   Job <- matrix(c(1, 2, 1, 0, 3, 3, 6, 1, 10, 10, 14, 9, 6, 7, 12, 11), 4, 4)
 
-  model <- fisher.test(Job, simulate.p.value = TRUE, B = 1e5)
+  result <- tidy_stats(fisher.test(Job, simulate.p.value = TRUE, B = 1e5))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$fisher_test_simulated_p
-  )
+  expect_equal(result$statistics[[1]]$value, 0.7833222, tolerance = 1e-4) # p
 })
 
 test_that("fisher's exact tests hybrid works", {
@@ -335,12 +302,9 @@ test_that("fisher's exact tests hybrid works", {
     c(0, 1, 1, 1, 1, 0, 0)
   )
 
-  model <- fisher.test(MP6, hybrid = TRUE)
+  result <- tidy_stats(fisher.test(MP6, hybrid = TRUE))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$fisher_test_hybrid
-  )
+  expect_equal(result$statistics[[1]]$value, 0.03928964, tolerance = 1e-4) # p
 })
 
 # ks.test() ---------------------------------------------------------------
@@ -351,74 +315,61 @@ test_that("two-sample kolmogorov-smirnov test works", {
   x <- rnorm(50)
   y <- runif(30)
 
-  model <- ks.test(x, y)
+  result <- tidy_stats(ks.test(x, y))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$ks_test_two
-  )
+  expect_equal(result$statistics[[1]]$value, 0.48,       tolerance = 1e-6) # D
+  expect_equal(result$statistics[[2]]$value, 0.000203307, tolerance = 1e-4) # p
 })
 
 test_that("one-sample kolmogorov-smirnov test works", {
   set.seed(1)
 
   x <- rnorm(50)
-  y <- runif(30)
 
-  model <- ks.test(x + 2, "pgamma", 3, 2)
+  result <- tidy_stats(ks.test(x + 2, "pgamma", 3, 2))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$ks_test_one
-  )
+  expect_equal(result$statistics[[1]]$value, 0.4096183,   tolerance = 1e-4) # D
+  expect_equal(result$statistics[[2]]$value, 4.226692e-08, tolerance = 1e-4) # p
 })
 
 test_that("inexact kolmogorov-smirnov test works", {
   set.seed(1)
 
   x <- rnorm(50)
-  y <- runif(30)
 
-  model <- ks.test(x + 2, "pgamma", 3, 2, exact = FALSE)
+  result <- tidy_stats(ks.test(x + 2, "pgamma", 3, 2, exact = FALSE))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$ks_test_inexact
-  )
+  expect_equal(result$statistics[[1]]$value, 0.4096183,   tolerance = 1e-4) # D
+  expect_equal(result$statistics[[2]]$value, 1.033062e-07, tolerance = 1e-4) # p
 })
 
 test_that("greater alternative kolmogorov-smirnov test works", {
   set.seed(1)
 
   x <- rnorm(50)
-  y <- runif(30)
 
-  model <- ks.test(x + 2, "pgamma", 3, 2, alternative = "greater")
+  result <- tidy_stats(ks.test(x + 2, "pgamma", 3, 2, alternative = "greater"))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$ks_test_greater
-  )
+  expect_equal(result$statistics[[1]]$value, 0.03999842, tolerance = 1e-4) # D
+  expect_equal(result$statistics[[2]]$value, 0.8301601,  tolerance = 1e-4) # p
 })
 
 # oneway.test() -----------------------------------------------------------
 
 test_that("one-way analysis of means (not assuming equal variances) works", {
-  model <- oneway.test(extra ~ group, data = sleep)
+  result <- tidy_stats(oneway.test(extra ~ group, data = sleep))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$oneway_test
-  )
+  expect_equal(result$statistics[[1]]$value, 3.462627,  tolerance = 1e-4) # F
+  expect_equal(result$statistics[[3]]$value, 17.77647,  tolerance = 1e-4) # df denominator
+  expect_equal(result$statistics[[4]]$value, 0.07939414, tolerance = 1e-4) # p
 })
 
 test_that("one-way analysis of means (assuming equal variances) works", {
-  model <- oneway.test(extra ~ group, data = sleep, var.equal = TRUE)
+  result <- tidy_stats(oneway.test(extra ~ group, data = sleep, var.equal = TRUE))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$oneway_test_equal_var
-  )
+  expect_equal(result$statistics[[1]]$value, 3.462627,  tolerance = 1e-4) # F
+  expect_equal(result$statistics[[3]]$value, 18,         tolerance = 1e-6) # df denominator
+  expect_equal(result$statistics[[4]]$value, 0.07918671, tolerance = 1e-4) # p
 })
 
 # var.test() --------------------------------------------------------------
@@ -429,12 +380,12 @@ test_that("F test to compare two variances works", {
   x <- rnorm(50, mean = 0, sd = 2)
   y <- rnorm(30, mean = 1, sd = 1)
 
-  model <- var.test(x, y)
+  result <- tidy_stats(var.test(x, y))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$var_test
-  )
+  expect_equal(result$statistics[[2]]$value, 2.652168,  tolerance = 1e-4) # F
+  expect_equal(result$statistics[[3]]$value, 49,         tolerance = 1e-6) # df numerator
+  expect_equal(result$statistics[[4]]$value, 29,         tolerance = 1e-6) # df denominator
+  expect_equal(result$statistics[[5]]$value, 0.00623206, tolerance = 1e-4) # p
 })
 
 # mauchly.test() ----------------------------------------------------------
@@ -442,12 +393,10 @@ test_that("F test to compare two variances works", {
 test_that("Mauchly's test of sphericity (traditional) works", {
   invisible(capture.output(utils::example(SSD)))
 
-  model <- mauchly.test(mlmfit, X = ~1)
+  result <- tidy_stats(mauchly.test(mlmfit, X = ~1))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$mauchly_test
-  )
+  expect_equal(result$statistics[[1]]$value, 0.03108446, tolerance = 1e-4) # W
+  expect_equal(result$statistics[[2]]$value, 0.04765187, tolerance = 1e-4) # p
 })
 
 test_that("Mauchly's test of sphericity (inner projection) works", {
@@ -458,12 +407,10 @@ test_that("Mauchly's test of sphericity (inner projection) works", {
     noise = gl(2, 3, 6, labels = c("A", "P"))
   )
 
-  model <- mauchly.test(mlmfit, X = ~ deg + noise, idata = idata)
+  result <- tidy_stats(mauchly.test(mlmfit, X = ~ deg + noise, idata = idata))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$mauchly_test_orthogonal
-  )
+  expect_equal(result$statistics[[1]]$value, 0.8937772, tolerance = 1e-4) # W
+  expect_equal(result$statistics[[2]]$value, 0.6381418, tolerance = 1e-4) # p
 })
 
 test_that("Mauchly's test of sphericity (outer projection) works", {
@@ -474,12 +421,10 @@ test_that("Mauchly's test of sphericity (outer projection) works", {
     noise = gl(2, 3, 6, labels = c("A", "P"))
   )
 
-  model <- mauchly.test(mlmfit, M = ~ deg + noise, X = ~noise, idata = idata)
+  result <- tidy_stats(mauchly.test(mlmfit, M = ~ deg + noise, X = ~noise, idata = idata))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$mauchly_test_spanned
-  )
+  expect_equal(result$statistics[[1]]$value, 0.960106,  tolerance = 1e-4) # W
+  expect_equal(result$statistics[[2]]$value, 0.8497219, tolerance = 1e-4) # p
 })
 
 # mcnemar.test() ----------------------------------------------------------
@@ -494,12 +439,12 @@ test_that("McNemar's Chi-squared test (with continuity correction) works", {
     )
   )
 
-  model <- mcnemar.test(Performance)
+  result <- tidy_stats(mcnemar.test(Performance))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$mcnemar_test
-  )
+  expect_equal(result$method, "McNemar's Chi-squared test")
+  expect_equal(result$statistics[[1]]$value, 16.8178,      tolerance = 1e-4) # X2
+  expect_equal(result$statistics[[2]]$value, 1,             tolerance = 1e-6) # df
+  expect_equal(result$statistics[[3]]$value, 4.114562e-05, tolerance = 1e-4) # p
 })
 
 test_that("McNemar's Chi-squared test (without continuity correction) works", {
@@ -512,32 +457,28 @@ test_that("McNemar's Chi-squared test (without continuity correction) works", {
     )
   )
 
-  model <- mcnemar.test(Performance, correct = FALSE)
+  result <- tidy_stats(mcnemar.test(Performance, correct = FALSE))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$mcnemar_test_nocorrect
-  )
+  expect_equal(result$statistics[[1]]$value, 17.35593,     tolerance = 1e-4) # X2
+  expect_equal(result$statistics[[2]]$value, 1,             tolerance = 1e-6) # df
+  expect_equal(result$statistics[[3]]$value, 3.099293e-05, tolerance = 1e-4) # p
 })
 
 # binom.test() ------------------------------------------------------------
 
 test_that("Exact binomial test works", {
-  model <- binom.test(c(682, 243))
+  result <- tidy_stats(binom.test(c(682, 243)))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$binom_test
-  )
+  expect_equal(result$statistics[[1]]$value, 0.7372973,   tolerance = 1e-4) # estimate
+  expect_equal(result$statistics[[2]]$value, 682,          tolerance = 1e-6) # x
+  expect_equal(result$statistics[[3]]$value, 925,          tolerance = 1e-6) # n
+  expect_equal(result$statistics[[4]]$value, 7.087291e-49, tolerance = 1e-4) # p
 })
 
 test_that("Exact binomial test (one-sided) works", {
-  model <- binom.test(c(682, 243), p = 3 / 4, alternative = "less")
+  result <- tidy_stats(binom.test(c(682, 243), p = 3 / 4, alternative = "less"))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$binom_test_params
-  )
+  expect_equal(result$statistics[[4]]$value, 0.1960093, tolerance = 1e-4) # p
 })
 
 # PP.test() ---------------------------------------------------------------
@@ -546,14 +487,12 @@ test_that("Phillips-Perron unit root test works", {
   set.seed(1)
 
   x <- rnorm(1000)
-  y <- cumsum(x)
 
-  model <- PP.test(x)
+  result <- tidy_stats(PP.test(x))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$pp_test
-  )
+  expect_equal(result$statistics[[1]]$value, -33.05668, tolerance = 1e-4) # statistic
+  expect_equal(result$statistics[[2]]$value, 7,          tolerance = 1e-6) # truncation lag
+  expect_equal(result$statistics[[3]]$value, 0.01,       tolerance = 1e-6) # p
 })
 
 test_that("Phillips-Perron unit root test (long truncation parameter) works", {
@@ -562,12 +501,11 @@ test_that("Phillips-Perron unit root test (long truncation parameter) works", {
   x <- rnorm(1000)
   y <- cumsum(x)
 
-  model <- PP.test(y, lshort = FALSE)
+  result <- tidy_stats(PP.test(y, lshort = FALSE))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$pp_test_long
-  )
+  expect_equal(result$statistics[[1]]$value, -2.724437, tolerance = 1e-4) # statistic
+  expect_equal(result$statistics[[2]]$value, 21,         tolerance = 1e-6) # truncation lag
+  expect_equal(result$statistics[[3]]$value, 0.2716547, tolerance = 1e-4) # p
 })
 
 # Box.test() --------------------------------------------------------------
@@ -577,12 +515,11 @@ test_that("Box-Pierce works", {
 
   x <- rnorm(100)
 
-  model <- Box.test(x, lag = 1)
+  result <- tidy_stats(Box.test(x, lag = 1))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$box_test
-  )
+  expect_equal(result$statistics[[1]]$value, 0.001333163, tolerance = 1e-4) # X2
+  expect_equal(result$statistics[[2]]$value, 1,            tolerance = 1e-6) # df
+  expect_equal(result$statistics[[3]]$value, 0.9708737,   tolerance = 1e-4) # p
 })
 
 test_that("Ljung-Pierce works", {
@@ -590,12 +527,11 @@ test_that("Ljung-Pierce works", {
 
   x <- rnorm(100)
 
-  model <- Box.test(x, lag = 2, type = "Ljung")
+  result <- tidy_stats(Box.test(x, lag = 2, type = "Ljung"))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$box_test_ljung
-  )
+  expect_equal(result$statistics[[1]]$value, 0.07736707, tolerance = 1e-4) # X2
+  expect_equal(result$statistics[[2]]$value, 2,           tolerance = 1e-6) # df
+  expect_equal(result$statistics[[3]]$value, 0.9620551,  tolerance = 1e-4) # p
 })
 
 # ansari.test() -----------------------------------------------------------
@@ -610,23 +546,20 @@ test_that("Ansari-Bradley test works", {
     103, 104, 114, 114, 113, 108, 106, 99
   )
 
-  model <- suppressWarnings(ansari.test(ramsay, jung_parekh))
+  result <- tidy_stats(suppressWarnings(ansari.test(ramsay, jung_parekh)))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$ansari_test
-  )
+  expect_equal(result$statistics[[1]]$value, 185.5,     tolerance = 1e-4) # C
+  expect_equal(result$statistics[[2]]$value, 0.1814582, tolerance = 1e-4) # p
 })
 
 test_that("Ansari-Bradley test (with CI) works", {
   set.seed(1)
 
-  model <- ansari.test(rnorm(100), rnorm(100, 0, 2), conf.int = TRUE)
+  result <- tidy_stats(ansari.test(rnorm(100), rnorm(100, 0, 2), conf.int = TRUE))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$ansari_test_ci
-  )
+  expect_equal(result$statistics[[1]]$value, 0.4615525,  tolerance = 1e-4) # estimate
+  expect_equal(result$statistics[[2]]$value, 6100,        tolerance = 1e-6) # AB
+  expect_equal(result$statistics[[3]]$value, 2.87734e-07, tolerance = 1e-4) # p
 })
 
 # mood.test() -------------------------------------------------------------
@@ -641,12 +574,10 @@ test_that("Mood two-sample test of scale works", {
     103, 104, 114, 114, 113, 108, 106, 99
   )
 
-  model <- mood.test(ramsay, jung_parekh)
+  result <- tidy_stats(mood.test(ramsay, jung_parekh))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$mood_test
-  )
+  expect_equal(result$statistics[[1]]$value, 1.037128, tolerance = 1e-4) # z
+  expect_equal(result$statistics[[2]]$value, 0.2996764, tolerance = 1e-4) # p
 })
 
 # quade.test() ------------------------------------------------------------
@@ -667,54 +598,50 @@ test_that("Quade test works", {
     dimnames = list(Store = as.character(1:7), Brand = LETTERS[1:5])
   )
 
-  model <- quade.test(dataFreq)
+  result <- tidy_stats(quade.test(dataFreq))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$quade_test
-  )
+  expect_equal(result$statistics[[1]]$value, 3.829252,  tolerance = 1e-4) # F
+  expect_equal(result$statistics[[2]]$value, 4,          tolerance = 1e-6) # df numerator
+  expect_equal(result$statistics[[3]]$value, 24,         tolerance = 1e-6) # df denominator
+  expect_equal(result$statistics[[4]]$value, 0.01518902, tolerance = 1e-4) # p
 })
 
 # bartlett.test() ---------------------------------------------------------
 
 test_that("Bartlett test of homogeneity of variances works", {
-  model <- bartlett.test(InsectSprays$count, InsectSprays$spray)
+  result <- tidy_stats(bartlett.test(InsectSprays$count, InsectSprays$spray))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$bartlett_test
-  )
+  expect_equal(result$statistics[[1]]$value, 25.95983,    tolerance = 1e-4) # K2
+  expect_equal(result$statistics[[2]]$value, 5,            tolerance = 1e-6) # df
+  expect_equal(result$statistics[[3]]$value, 9.085122e-05, tolerance = 1e-4) # p
 })
 
 # fligner.test() ----------------------------------------------------------
 
 test_that("Fligner-Killeen test of homogeneity of variances works", {
-  model <- fligner.test(InsectSprays$count, InsectSprays$spray)
+  result <- tidy_stats(fligner.test(InsectSprays$count, InsectSprays$spray))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$fligner_test
-  )
+  expect_equal(result$statistics[[1]]$value, 14.48278,  tolerance = 1e-4) # statistic
+  expect_equal(result$statistics[[2]]$value, 5,          tolerance = 1e-6) # df
+  expect_equal(result$statistics[[3]]$value, 0.01281678, tolerance = 1e-4) # p
 })
 
 # poisson.test() ----------------------------------------------------------
 
 test_that("Exact Poisson test works", {
-  model <- poisson.test(137, 24.19893)
+  result <- tidy_stats(poisson.test(137, 24.19893))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$poisson_test
-  )
+  expect_equal(result$statistics[[1]]$value, 5.661407,    tolerance = 1e-4) # lambda
+  expect_equal(result$statistics[[2]]$value, 137,          tolerance = 1e-6) # x
+  expect_equal(result$statistics[[4]]$value, 2.845227e-56, tolerance = 1e-4) # p
 })
 
 test_that("Comparison of Poisson rates", {
-  model <- poisson.test(c(11, 6 + 8 + 7), c(800, 1083 + 1050 + 878))
+  result <- tidy_stats(poisson.test(c(11, 6 + 8 + 7), c(800, 1083 + 1050 + 878)))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$poisson_test_comparison
-  )
+  expect_equal(result$statistics[[1]]$value, 1.971488,  tolerance = 1e-4) # rate ratio
+  expect_equal(result$statistics[[2]]$value, 11,         tolerance = 1e-6) # x
+  expect_equal(result$statistics[[4]]$value, 0.07966863, tolerance = 1e-4) # p
 })
 
 # shapiro.test() ----------------------------------------------------------
@@ -722,12 +649,10 @@ test_that("Comparison of Poisson rates", {
 test_that("Shapiro-Wilk normality test works", {
   set.seed(1)
 
-  model <- shapiro.test(runif(100, min = 2, max = 4))
+  result <- tidy_stats(shapiro.test(runif(100, min = 2, max = 4)))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$shapiro_test
-  )
+  expect_equal(result$statistics[[1]]$value, 0.9593461,  tolerance = 1e-4) # W
+  expect_equal(result$statistics[[2]]$value, 0.003612854, tolerance = 1e-4) # p
 })
 
 # friedman.test() ---------------------------------------------------------
@@ -763,12 +688,11 @@ test_that("Friedman rank sum test works", {
     dimnames = list(1:22, c("Round Out", "Narrow Angle", "Wide Angle"))
   )
 
-  model <- friedman.test(rounding_times)
+  result <- tidy_stats(friedman.test(rounding_times))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$friedman_test
-  )
+  expect_equal(result$statistics[[1]]$value, 11.14286,   tolerance = 1e-4) # chi-squared
+  expect_equal(result$statistics[[2]]$value, 2,           tolerance = 1e-6) # df
+  expect_equal(result$statistics[[3]]$value, 0.003805041, tolerance = 1e-4) # p
 })
 
 # mantelhaen.test() -------------------------------------------------------
@@ -791,12 +715,11 @@ test_that("Cochran-Mantel-Haenszel test works", {
     )
   )
 
-  model <- mantelhaen.test(Satisfaction)
+  result <- tidy_stats(mantelhaen.test(Satisfaction))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$mantelhaen_test
-  )
+  expect_equal(result$statistics[[1]]$value, 10.20009,  tolerance = 1e-4) # X2
+  expect_equal(result$statistics[[2]]$value, 9,          tolerance = 1e-6) # df
+  expect_equal(result$statistics[[3]]$value, 0.3345312, tolerance = 1e-4) # p
 })
 
 test_that("Mantel-Haenszel test (with continuity correction) works", {
@@ -816,12 +739,12 @@ test_that("Mantel-Haenszel test (with continuity correction) works", {
     )
   )
 
-  model <- mantelhaen.test(Rabbits)
+  result <- tidy_stats(mantelhaen.test(Rabbits))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$mantelhaen_test_2by2
-  )
+  expect_equal(result$statistics[[1]]$value, 7,          tolerance = 1e-6) # OR
+  expect_equal(result$statistics[[2]]$value, 3.928571,  tolerance = 1e-4) # X2
+  expect_equal(result$statistics[[3]]$value, 1,          tolerance = 1e-6) # df
+  expect_equal(result$statistics[[4]]$value, 0.04747226, tolerance = 1e-4) # p
 })
 
 test_that("Exact conditional test of independence in 2 x 2 x k tables works", {
@@ -841,10 +764,9 @@ test_that("Exact conditional test of independence in 2 x 2 x k tables works", {
     )
   )
 
-  model <- mantelhaen.test(Rabbits, exact = TRUE)
+  result <- tidy_stats(mantelhaen.test(Rabbits, exact = TRUE))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$mantelhaen_test_2by2_exact
-  )
+  expect_equal(result$statistics[[1]]$value, 10.36102,  tolerance = 1e-4) # OR
+  expect_equal(result$statistics[[2]]$value, 16,         tolerance = 1e-6) # M
+  expect_equal(result$statistics[[3]]$value, 0.0399449, tolerance = 1e-4) # p
 })

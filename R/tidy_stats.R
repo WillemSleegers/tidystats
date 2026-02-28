@@ -22,9 +22,9 @@ tidy_stats.htest <- function(x, args = NULL) {
   # store them separately
   name <- x$data.name
 
-  name <- stringr::str_remove(name, pattern = " ,\n using scores: .*")
-  name <- stringr::str_remove(name, pattern = ", null probability .*")
-  name <- stringr::str_remove(name, pattern = " time base: .*")
+  name <- remove_string(name, " ,\n using scores: .*")
+  name <- remove_string(name, ", null probability .*")
+  name <- remove_string(name, " time base: .*")
 
   analysis <- list(name = as.character(name))
 
@@ -34,14 +34,14 @@ tidy_stats.htest <- function(x, args = NULL) {
   method <- x$method
 
   method <- trimws(method) # To remove a space in the Two Sample t-test
-  method <- stringr::str_remove(method, " with Yates' continuity correction")
-  method <- stringr::str_remove(method, " for given probabilities")
-  method <- stringr::str_remove(method, " with continuity correction")
-  method <- stringr::str_remove(method, " without continuity correction")
-  method <- stringr::str_remove(method, " with simulated p-value\n.*")
-  method <- stringr::str_remove(method, " hybrid using asym\\.chisq\\. iff .*")
-  method <- stringr::str_remove(method, " \\(not assuming equal variances\\)")
-  method <- stringr::str_remove(method, " in [0-9]+ x [0-9] x k tables")
+  method <- remove_string(method, " with Yates' continuity correction")
+  method <- remove_string(method, " for given probabilities")
+  method <- remove_string(method, " with continuity correction")
+  method <- remove_string(method, " without continuity correction")
+  method <- remove_string(method, " with simulated p-value\n.*")
+  method <- remove_string(method, " hybrid using asym\\.chisq\\. iff .*")
+  method <- remove_string(method, " \\(not assuming equal variances\\)")
+  method <- remove_string(method, " in [0-9]+ x [0-9] x k tables")
 
   analysis$method <- method
 
@@ -55,7 +55,7 @@ tidy_stats.htest <- function(x, args = NULL) {
     #   a two sample t-test
     # - Special case: If there is more than 1 estimate, set the value to NA
     if (length(x$estimate) > 1) {
-      if (stringr::str_detect(method, "Two Sample t-test")) {
+      if (detect_string(method, "Two Sample t-test")) {
         value <- x$estimate[[1]] - x$estimate[[2]]
       } else {
         value <- NA
@@ -65,32 +65,41 @@ tidy_stats.htest <- function(x, args = NULL) {
     }
 
     # Explicitly ask for the first element because sometimes there are more, in
-    # which case case_when() returns multiple values
-    symbol <- dplyr::case_when(
-      names(x$estimate)[1] == "cor" ~ "r",
-      names(x$estimate)[1] == "tau" ~ "r",
-      names(x$estimate)[1] == "rho" ~ "r",
-      names(x$estimate)[1] == "odds ratio" ~ "OR",
-      names(x$estimate)[1] == "p" ~ symbol("p_hat"),
-      names(x$estimate)[1] == "difference in location" ~ "Mdn",
-      names(x$estimate)[1] == "ratio of variances" ~ "VR",
-      names(x$estimate)[1] == "probability of success" ~ "p",
-      names(x$estimate)[1] == "ratio of scales" ~ "s",
-      names(x$estimate)[1] == "event rate" ~ symbol("lambda"),
-      names(x$estimate)[1] == "rate ratio" ~ "RR",
-      names(x$estimate)[1] == "common odds ratio" ~ "OR",
-      stringr::str_detect(method, "t-test") ~ "M"
+    # which case a lookup would return multiple values
+    estimate_name <- names(x$estimate)[1]
+    estimate_symbols <- c(
+      "cor" = "r", "tau" = "r", "rho" = "r",
+      "odds ratio" = "OR", "common odds ratio" = "OR",
+      "p" = symbol("p_hat"),
+      "difference in location" = "Mdn",
+      "ratio of variances" = "VR",
+      "probability of success" = "p",
+      "ratio of scales" = "s",
+      "event rate" = symbol("lambda"),
+      "rate ratio" = "RR"
     )
+    symbol <- if (estimate_name %in% names(estimate_symbols)) {
+      unname(estimate_symbols[estimate_name])
+    } else if (detect_string(method, "t-test")) {
+      "M"
+    } else {
+      NA_character_
+    }
 
-    subscript <- dplyr::case_when(
-      stringr::str_detect(method, "Two Sample t-test") |
-        method == "Paired t-test" ~
-        "diff.",
-      names(x$estimate)[1] == "tau" ~ symbol("tau"),
-      names(x$estimate)[1] == "rho" ~ "S",
-      names(x$estimate)[1] == "difference in location" ~ "diff.",
-      names(x$estimate)[1] == "probability of success" ~ "success"
-    )
+    subscript <- if (detect_string(method, "Two Sample t-test") ||
+      method == "Paired t-test") {
+      "diff."
+    } else if (estimate_name == "tau") {
+      symbol("tau")
+    } else if (estimate_name == "rho") {
+      "S"
+    } else if (estimate_name == "difference in location") {
+      "diff."
+    } else if (estimate_name == "probability of success") {
+      "success"
+    } else {
+      NA_character_
+    }
 
     # Add the estimate
     statistics <- add_statistic(
@@ -113,27 +122,29 @@ tidy_stats.htest <- function(x, args = NULL) {
   if (!is.null(names(x$statistic))) {
     value <- x$statistic[[1]]
 
-    symbol <- dplyr::case_when(
-      names(x$statistic) == "X-squared" ~ symbol("chi_squared"),
-      names(x$statistic) == "Kruskal-Wallis chi-squared" ~
-        symbol("chi_squared"),
-      names(x$statistic) == "D^+" ~ "D",
-      names(x$statistic) == "D^-" ~ "D",
-      stringr::str_detect(names(x$statistic), "McNemar") ~
-        symbol("chi_squared"),
-      names(x$statistic) == "Quade F" ~ "F",
-      names(x$statistic) == "Bartlett's K-squared" ~ symbol("K_squared"),
-      names(x$statistic) == "Fligner-Killeen:med chi-squared" ~
-        symbol("chi_squared"),
-      names(x$statistic) == "number of successes" ~ "k",
-      names(x$statistic) == "number of events" ~ "n",
-      names(x$statistic) == "count1" ~ "n",
-      names(x$statistic) == "Friedman chi-squared" ~ symbol("chi_squared"),
-      names(x$statistic) == "Cochran-Mantel-Haenszel M^2" ~ "CMH",
-      names(x$statistic) == "Mantel-Haenszel X-squared" ~ symbol("chi_squared"),
-      names(x$statistic) == "Dickey-Fuller" ~ "DF",
-      TRUE ~ names(x$statistic)
+    statistic_name <- names(x$statistic)
+    statistic_symbols <- c(
+      "X-squared" = symbol("chi_squared"),
+      "Kruskal-Wallis chi-squared" = symbol("chi_squared"),
+      "D^+" = "D", "D^-" = "D",
+      "Quade F" = "F",
+      "Bartlett's K-squared" = symbol("K_squared"),
+      "Fligner-Killeen:med chi-squared" = symbol("chi_squared"),
+      "number of successes" = "k",
+      "number of events" = "n",
+      "count1" = "n",
+      "Friedman chi-squared" = symbol("chi_squared"),
+      "Cochran-Mantel-Haenszel M^2" = "CMH",
+      "Mantel-Haenszel X-squared" = symbol("chi_squared"),
+      "Dickey-Fuller" = "DF"
     )
+    symbol <- if (detect_string(statistic_name, "McNemar")) {
+      symbol("chi_squared")
+    } else if (statistic_name %in% names(statistic_symbols)) {
+      unname(statistic_symbols[statistic_name])
+    } else {
+      statistic_name
+    }
 
     if (names(x$statistic) == "Dickey-Fuller") {
       subscript <- symbol("tau")
@@ -211,24 +222,19 @@ tidy_stats.htest <- function(x, args = NULL) {
   }
 
   # Number of simulations if the p-value was simulated
-  if (stringr::str_detect(x$method, "simulated p-value")) {
-    analysis$sim <- as.numeric(stringr::str_extract(
+  if (detect_string(x$method, "simulated p-value")) {
+    analysis$sim <- as.numeric(extract_string(
       x$method,
       "[0-9](e\\+)?([0-9].)?"
     ))
   }
 
   # Hybrid parameters
-  if (stringr::str_detect(x$method, "hybrid")) {
+  if (detect_string(x$method, "hybrid")) {
     analysis$hybrid_parameters <- list(
-      expect = readr::parse_number(
-        stringr::str_extract(x$method, "exp=[0-9+]")
-      ),
-      percent = readr::parse_number(stringr::str_extract(
-        x$method,
-        "perc=[0-9]+"
-      )),
-      Emin = readr::parse_number(stringr::str_extract(x$method, "Emin=[0-9+]"))
+      expect = as.numeric(gsub("[^0-9]", "", extract_string(x$method, "exp=[0-9]+"))),
+      percent = as.numeric(gsub("[^0-9]", "", extract_string(x$method, "perc=[0-9]+"))),
+      Emin = as.numeric(gsub("[^0-9]", "", extract_string(x$method, "Emin=[0-9]+")))
     )
   }
 
@@ -239,12 +245,7 @@ tidy_stats.htest <- function(x, args = NULL) {
     analysis$var_equal <- TRUE
   } else if (x$method == "One-way analysis of means") {
     analysis$var_equal <- TRUE
-  } else if (
-    stringr::str_detect(
-      x$method,
-      "\\(not assuming equal variances\\)"
-    )
-  ) {
+  } else if (detect_string(x$method, "\\(not assuming equal variances\\)")) {
     analysis$var_equal <- FALSE
   }
 
@@ -261,8 +262,8 @@ tidy_stats.pairwise.htest <- function(x, args = NULL) {
   analysis <- list(name = x$data.name)
 
   # Add method to the analysis
-  analysis$method <- dplyr::if_else(
-    stringr::str_starts(x$method, "Pairwise"),
+  analysis$method <- ifelse(
+    startsWith(x$method, "Pairwise"),
     x$method,
     paste("Pairwise", x$method)
   )
@@ -476,7 +477,7 @@ tidy_stats.glm <- function(x, args = NULL) {
       statistics,
       "statistic",
       coefs[i, 3],
-      dplyr::if_else(colnames(coefs)[3] == "z value", "z", "t")
+      ifelse(colnames(coefs)[3] == "z value", "z", "t")
     )
     statistics <- add_statistic(statistics, "df", summary$df[2])
     statistics <- add_statistic(statistics, "p", coefs[i, 4])
@@ -517,23 +518,23 @@ tidy_stats.anova <- function(x, args = NULL) {
   # Extract the heading to figure out the type of ANOVA and name
   heading <- attr(x, "heading")
 
-  if (stringr::str_detect(heading[1], "Analysis of Deviance")) {
+  if (detect_string(heading[1], "Analysis of Deviance")) {
     method <- "ANODE"
   } else {
     method <- "ANOVA"
   }
 
   # Determine and set the name, if there is one
-  if (sum(stringr::str_detect(heading, "Response: ")) > 0) {
+  if (sum(detect_string(heading, "Response: ")) > 0) {
     if (length(heading) == 1) {
       analysis$name <- paste(
-        stringr::str_extract(heading, "(?<=Response: ).*"),
+        extract_string(heading, "(?<=Response: ).*"),
         " ~ ",
         paste(rownames(x)[-1], collapse = " + ")
       )
     } else {
       analysis$name <- paste(
-        stringr::str_extract(heading[2], "(?<=Response: ).*"),
+        extract_string(heading[2], "(?<=Response: ).*"),
         " ~ ",
         paste(rownames(x)[-length(x)], collapse = " + ")
       )
@@ -541,7 +542,7 @@ tidy_stats.anova <- function(x, args = NULL) {
   }
 
   # Check whether multiple models are being compared
-  if (sum(stringr::str_detect(heading, "Models:|Model 1:")) > 0) {
+  if (sum(detect_string(heading, "Models:|Model 1:")) > 0) {
     model_comparison <- TRUE
   } else {
     model_comparison <- FALSE
@@ -551,22 +552,19 @@ tidy_stats.anova <- function(x, args = NULL) {
   analysis$method <- method
 
   # Trim spaces from the rownames
-  rownames(x) <- stringr::str_trim(rownames(x))
+  rownames(x) <- trimws(rownames(x))
 
   # Replace the numeric names with model names in case of a model comparison
   # ANOVA
   if (model_comparison) {
-    x$name <- stringr::str_remove(
-      unlist(stringr::str_split(
-        heading[2],
-        "\n"
-      )),
+    x$name <- remove_string(
+      unlist(strsplit(heading[2], "\n")),
       "Model [0-9+]: "
     )
   }
 
   # Create an empty groups list to add model or term statistics to
-  groups <- list(name = dplyr::if_else(model_comparison, "Models", "Terms"))
+  groups <- list(name = ifelse(model_comparison, "Models", "Terms"))
 
   # Loop over each row
   for (i in seq_len(nrow(x))) {
@@ -650,7 +648,7 @@ tidy_stats.aov <- function(x, args = NULL) {
   terms <- summary(x)[[1]]
 
   # Trim spaces from the names of the terms
-  rownames(terms) <- stringr::str_trim(rownames(terms))
+  rownames(terms) <- trimws(rownames(terms))
 
   # Create an empty groups list to add term statistics to
   groups <- list(name = "Terms")
@@ -721,7 +719,7 @@ tidy_stats.aovlist <- function(x, args = NULL) {
     terms <- summary(x)[[i]][[1]]
 
     # Trim spaces from the names of the terms
-    rownames(terms) <- stringr::str_trim(rownames(terms))
+    rownames(terms) <- trimws(rownames(terms))
 
     # Create an empty groups list to add term statistics to
     groups <- list(name = "Terms")
@@ -810,7 +808,7 @@ tidy_stats.confint <- function(x, args = NULL) {
 
   analysis$groups <- append(analysis$groups, list(groups))
 
-  bounds <- readr::parse_number(colnames(x))
+  bounds <- as.numeric(gsub("[^0-9.]", "", colnames(x)))
   analysis$level <- diff(bounds) / 100
 
   analysis <- add_package_info(analysis, "stats")

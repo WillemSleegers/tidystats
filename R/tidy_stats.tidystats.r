@@ -10,7 +10,7 @@ tidy_stats.tidystats_descriptives <- function(x, args = NULL) {
   analysis <- list()
 
   # Extract variable information
-  var_names <- unique(dplyr::pull(x, var))
+  var_names <- unique(x[["var"]])
 
   # Set the name if there is only 1 variable
   if (length(var_names) == 1) {
@@ -51,26 +51,17 @@ tidy_stats.tidystats_descriptives <- function(x, args = NULL) {
       groups <- list(name = group_names[depth])
 
       # Loop over the groups
-      for (group_name in unique(dplyr::pull(df, groups$name))) {
-        # Subset the data so it only has data of the current group
-        df_group <- df[df[, depth + 1] == group_name, ]
-
+      for (group_name in unique(df[[groups$name]])) {
         if (!is.na(group_name)) {
-          df_group <- dplyr::filter(
-            df,
-            dplyr::if_all(dplyr::all_of(groups$name), ~ . == group_name)
-          )
+          df_group <- df[which(df[[groups$name]] == group_name), ]
         } else {
-          df_group <- dplyr::filter(
-            df,
-            dplyr::if_all(dplyr::all_of(groups$name), is.na)
-          )
+          df_group <- df[is.na(df[[groups$name]]), ]
         }
 
         # Create a group list
         # Special case: Convert to character in case the group name is NA
         group <- list(
-          name = dplyr::if_else(is.na(group_name), "NA", group_name)
+          name = ifelse(is.na(group_name), "NA", group_name)
         )
 
         # Loop again
@@ -88,7 +79,7 @@ tidy_stats.tidystats_descriptives <- function(x, args = NULL) {
   }
 
   # Extract grouping information
-  group_names <- dplyr::group_vars(x)
+  grouping <- group_names(x)
 
   # Convert the data frame to a base data frame to disable warnings
   df <- as.data.frame(x)
@@ -96,17 +87,17 @@ tidy_stats.tidystats_descriptives <- function(x, args = NULL) {
   # Get the groups and statistics and loop over the variables if there are
   # more than one
   if (length(var_names) == 1) {
-    analysis <- loop(df, analysis, group_names, 0)
+    analysis <- loop(df, analysis, grouping, 0)
   } else {
     for (var_name in var_names) {
       # Filter the data frame to have only the rows belonging to this variable
-      df_var <- dplyr::filter(df, var == var_name)
+      df_var <- df[df$var == var_name, ]
 
       # Create a list for the variable
       group <- list(name = var_name)
 
       # Loop
-      group <- loop(df_var, group, group_names, 0)
+      group <- loop(df_var, group, grouping, 0)
 
       # Add the lists to the groups element of the analysis
       analysis$groups <- append(analysis$groups, list(group))
@@ -135,19 +126,11 @@ tidy_stats.tidystats_counts <- function(x, args = NULL) {
 
       groups <- list(name = group_names[depth])
 
-      for (group_name in unique(dplyr::pull(df, groups$name))) {
-        df_group <- df[df[, depth + 1] == group_name, ]
-
+      for (group_name in unique(df[[groups$name]])) {
         if (!is.na(group_name)) {
-          df_group <- dplyr::filter(
-            df,
-            dplyr::if_all(groups$name, ~ . == group_name)
-          )
+          df_group <- df[which(df[[groups$name]] == group_name), ]
         } else {
-          df_group <- dplyr::filter(
-            df,
-            dplyr::if_all(groups$name, is.na)
-          )
+          df_group <- df[is.na(df[[groups$name]]), ]
         }
 
         group <- list()

@@ -12,7 +12,7 @@ tidy_stats_to_data_frame(x)
 \description{
 \code{\link[=tidy_stats_to_data_frame]{tidy_stats_to_data_frame()}} converts a tidystats list to a data frame,
 which can then be used to extract specific statistics using standard
-subsetting functions (e.g., \code{\link[dplyr:filter]{dplyr::filter()}}).
+subsetting functions (e.g., \code{\link[=subset]{subset()}}).
 }
 \examples{
 # Conduct analyses
@@ -46,6 +46,6 @@ statistics <- statistics |>
 df <- tidy_stats_to_data_frame(statistics)
 
 # Select all the p-values
-dplyr::filter(df, statistic_name == "p")
+subset(df, statistic_name == "p")
 
 }

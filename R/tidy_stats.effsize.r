@@ -6,11 +6,7 @@ tidy_stats.effsize <- function(x, args = NULL) {
 
   # Determine the symbol, which is different from what is stored in the name
   # attribute in the case of a Cliff's Delta
-  symbol <- dplyr::if_else(
-    x$name == "delta",
-    intToUtf8(0x03b4),
-    x$name
-  )
+  symbol <- ifelse(x$name == "delta", intToUtf8(0x03b4), x$name)
 
   statistics <- add_statistic(
     list = statistics,

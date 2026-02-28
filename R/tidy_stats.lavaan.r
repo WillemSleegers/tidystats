@@ -119,7 +119,7 @@ tidy_stats.lavaan <- function(x, args = NULL) {
     for (l in 1:x@Data@nlevels) {
       group <- list(name = x@Data@block.label[l])
 
-      level_pe <- dplyr::filter(summary$pe, level == l)
+      level_pe <- summary$pe[summary$pe$level == l, ]
 
       if (x@Data@ngroups > 1) {
         group <- add_group(group, x, level_pe)
@@ -163,7 +163,7 @@ add_group <- function(list, x, pe) {
     group$groups <- append(group$groups, list(group_model))
 
     # Parameter estimates
-    group_pe <- dplyr::filter(pe, group == g)
+    group_pe <- pe[pe$group == g, ]
     group <- add_parameter_estimates(group, group_pe)
     group_groups$groups <- append(group_groups$groups, list(group))
   }
@@ -175,42 +175,42 @@ add_group <- function(list, x, pe) {
 
 add_parameter_estimates <- function(list, pe) {
   # Latent variables
-  latent_vars <- dplyr::filter(pe, op == "=~")
+  latent_vars <- pe[pe$op == "=~", ]
 
   if (nrow(latent_vars) > 0) {
     list <- add_latent_vars(list, latent_vars)
   }
 
   # Regressions
-  regressions <- dplyr::filter(pe, op == "~")
+  regressions <- pe[pe$op == "~", ]
 
   if (nrow(regressions) > 0) {
     list <- add_regressions(list, regressions)
   }
 
   # Covariances
-  covariances <- dplyr::filter(pe, lhs != rhs & op == "~~")
+  covariances <- pe[pe$lhs != pe$rhs & pe$op == "~~", ]
 
   if (nrow(covariances) > 0) {
     list <- add_covariances(list, covariances)
   }
 
   # Intercepts
-  intercepts <- dplyr::filter(pe, op == "~1")
+  intercepts <- pe[pe$op == "~1", ]
 
   if (nrow(intercepts) > 0) {
     list <- add_intercepts(list, intercepts)
   }
 
   # Variances
-  variances <- dplyr::filter(pe, lhs == rhs & op == "~~")
+  variances <- pe[pe$lhs == pe$rhs & pe$op == "~~", ]
 
   if (nrow(variances) > 0) {
     list <- add_variances(list, variances)
   }
 
   # Defined parameters
-  def_pars <- dplyr::filter(pe, op == ":=")
+  def_pars <- pe[pe$op == ":=", ]
 
   if (nrow(def_pars) > 0) {
     list <- add_defined_parameters(list, def_pars)

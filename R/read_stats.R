@@ -17,9 +17,10 @@
 #'   file = system.file("statistics.json", package = "tidystats")
 #' )
 #'
+#' @importFrom tools file_ext
 #' @export
 read_stats <- function(file) {
-  if (tools::file_ext(file) != "json") {
+  if (file_ext(file) != "json") {
     warning(
       paste(
         "The file does not have a .json file extension;",

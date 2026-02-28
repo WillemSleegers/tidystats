@@ -281,11 +281,7 @@ tidy_stats.lmerMod <- function(x, args = NULL) {
 tidy_stats.lmerModLmerTest <- function(x, args = NULL) {
   analysis <- list(
     name = paste(
-      stringr::str_replace_all(
-        string = deparse(attr(x@frame, "formula")),
-        pattern = "^ +",
-        replacement = ""
-      ),
+      remove_string(deparse(attr(x@frame, "formula")), "^ +"),
       collapse = ""
     ),
     method = "Linear mixed model"

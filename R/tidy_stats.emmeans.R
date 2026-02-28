@@ -9,12 +9,13 @@ tidy_stats.emmGrid <- function(x, args = NULL) {
 tidy_stats.summary_emm <- function(x, args = NULL) {
   analysis <- list()
 
-  method <- dplyr::case_when(
-    "contrast" %in% names(x) ~ "Contrasts",
-    stringr::str_detect(attr(x, "estName"), "\\.trend") ~
-      "Estimated marginal means of linear trends",
-    TRUE ~ "Estimated marginal means"
-  )
+  method <- if ("contrast" %in% names(x)) {
+    "Contrasts"
+  } else if (detect_string(attr(x, "estName"), "\\.trend")) {
+    "Estimated marginal means of linear trends"
+  } else {
+    "Estimated marginal means"
+  }
 
   analysis$method <- method
 
@@ -24,7 +25,7 @@ tidy_stats.summary_emm <- function(x, args = NULL) {
   # We can't use the by.vars and pri.vars attributes because they're not always
   # provided (e.g., in the case of contrasts from mvcontrast())
   vars <- names(x)[
-    !stringr::str_detect(names(x), paste(
+    !detect_string(names(x), paste(
       c(
         "emmean", "estimate", "T.square", "response", "effect.size",
         ".+\\.trend", "prediction",
@@ -41,10 +42,10 @@ tidy_stats.summary_emm <- function(x, args = NULL) {
   ]
 
   cl_names <- attr(x, "clNames")
-  cl_level <- attr(x, "mesg") |>
-    paste(collapse = "") |>
-    stringr::str_extract("(?<=Confidence level used: )0.[0-9]+") |>
-    as.numeric()
+  cl_level <- as.numeric(extract_string(
+    paste(attr(x, "mesg"), collapse = ""),
+    "(?<=Confidence level used: )0.[0-9]+"
+  ))
 
   group_statistics <- function(vars, df) {
     var <- vars[1]
@@ -172,11 +173,13 @@ tidy_stats.emm_list <- function(x, args = NULL) {
 
   for (name in names) {
     group <- list(
-      name = dplyr::case_when(
-        name == "emmeans" ~ "Estimated marginal means",
-        name == "contrasts" ~ "Contrasts",
-        TRUE ~ name
-      )
+      name = if (name == "emmeans") {
+        "Estimated marginal means"
+      } else if (name == "contrasts") {
+        "Contrasts"
+      } else {
+        name
+      }
     )
 
     group <- append(group, tidy_stats(x[[name]]))

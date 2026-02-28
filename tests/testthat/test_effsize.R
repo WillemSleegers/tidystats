@@ -1,10 +1,7 @@
-# Setup -------------------------------------------------------------------
-
-expected_statistics <- read_stats("../data/effsize.json")
-
 # cohen.d() ---------------------------------------------------------------
 
 test_that("effsize's Cohen's d works", {
+  skip_if_not_installed("effsize")
   set.seed(1)
 
   treatment <- rnorm(100, mean = 10)
@@ -12,15 +9,14 @@ test_that("effsize's Cohen's d works", {
   d <- c(treatment, control)
   f <- rep(c("Treatment", "Control"), each = 100)
 
-  model <- effsize::cohen.d(d ~ f)
+  result <- tidy_stats(effsize::cohen.d(d ~ f))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$cohen_d
-  )
+  expect_equal(result$method, "Cohen's d effect size")
+  expect_equal(result$statistics[[1]]$value, 1.99598, tolerance = 1e-4) # d
 })
 
 test_that("effsize's Hedges' g works", {
+  skip_if_not_installed("effsize")
   set.seed(1)
 
   treatment <- rnorm(100, mean = 10)
@@ -28,15 +24,13 @@ test_that("effsize's Hedges' g works", {
   d <- c(treatment, control)
   f <- rep(c("Treatment", "Control"), each = 100)
 
-  model <- effsize::cohen.d(d ~ f, hedges.correction = TRUE)
+  result <- tidy_stats(effsize::cohen.d(d ~ f, hedges.correction = TRUE))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$hedges_g
-  )
+  expect_equal(result$statistics[[1]]$value, 1.988409, tolerance = 1e-4) # g
 })
 
 test_that("effsize's VDA works", {
+  skip_if_not_installed("effsize")
   set.seed(1)
 
   treatment <- rnorm(100, mean = 10)
@@ -44,22 +38,17 @@ test_that("effsize's VDA works", {
   d <- c(treatment, control)
   f <- rep(c("Treatment", "Control"), each = 100)
 
-  model <- effsize::VD.A(d ~ f)
+  result <- tidy_stats(effsize::VD.A(d ~ f))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$vda
-  )
+  expect_equal(result$statistics[[1]]$value, 0.9286, tolerance = 1e-4) # A
 })
 
 test_that("effsize's Cliff's delta works", {
+  skip_if_not_installed("effsize")
   treatment <- c(10, 10, 20, 20, 20, 30, 30, 30, 40, 50)
   control <- c(10, 20, 30, 40, 40, 50)
 
-  model <- effsize::cliff.delta(treatment, control, return.dm = TRUE)
+  result <- tidy_stats(effsize::cliff.delta(treatment, control, return.dm = TRUE))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$cliffs_delta
-  )
+  expect_equal(result$statistics[[1]]$value, -0.25, tolerance = 1e-4) # delta
 })

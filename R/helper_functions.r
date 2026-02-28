@@ -28,11 +28,18 @@ tidy_matrix <- function(m, symmetric = TRUE) {
     m[lower.tri(m, diag = TRUE)] <- NA
   }
 
-  df <- m |>
-    as.matrix() |>
-    tibble::as_tibble(rownames = "name1") |>
-    tidyr::pivot_longer(-name1, names_to = "name2", values_to = "value") |>
-    dplyr::filter(!is.na(value))
+  m_mat <- as.matrix(m)
+  df_wide <- data.frame(name1 = rownames(m_mat), as.data.frame(m_mat),
+    check.names = FALSE, row.names = NULL
+  )
+  col_names <- setdiff(names(df_wide), "name1")
+  rows <- lapply(col_names, function(cn) {
+    data.frame(name1 = df_wide$name1, name2 = cn, value = df_wide[[cn]],
+      stringsAsFactors = FALSE
+    )
+  })
+  df <- do.call(rbind, rows)
+  df <- df[!is.na(df$value), ]
 
   return(df)
 }
@@ -100,6 +107,32 @@ is_blank <- function(x) {
   )
 }
 
+# String helpers ----------------------------------------------------------
+
+remove_string <- function(x, pattern) sub(pattern, "", x, perl = TRUE)
+
+detect_string <- function(x, pattern) grepl(pattern, x, perl = TRUE)
+
+extract_string <- function(x, pattern) {
+  m <- regexpr(pattern, x, perl = TRUE)
+  ifelse(m == -1L, NA_character_, regmatches(x, m))
+}
+
+# Data frame helpers ------------------------------------------------------
+
+dots_to_names <- function(...) as.character(substitute(list(...))[-1])
+
+group_names <- function(data) setdiff(names(attr(data, "groups")), ".rows")
+
+stack_rows <- function(lst) {
+  all_names <- unique(unlist(lapply(lst, names)))
+  rows <- lapply(lst, function(x) {
+    x[setdiff(all_names, names(x))] <- NA
+    as.data.frame(x[all_names], stringsAsFactors = FALSE)
+  })
+  do.call(rbind, rows)
+}
+
 # Symbols -----------------------------------------------------------------
 
 #' @describeIn helper_functions
@@ -120,21 +153,21 @@ symbol <- function(
       "t_squared",
       "tau"
     )) {
-  dplyr::case_match(
-    x,
-    "alpha" ~ intToUtf8(0x03b1),
-    "chi_squared" ~ paste0(intToUtf8(0x03c7), intToUtf8(0x00b2)),
-    "delta" ~ intToUtf8(0x03b4),
-    "guttmans_lambda" ~ paste("Guttman's", intToUtf8(0x03bb)),
-    "K_squared" ~ paste0("K", intToUtf8(0x00b2)),
-    "lambda" ~ intToUtf8(0x03bb),
-    "p_hat" ~ paste0("p", intToUtf8(0x0302)),
-    "R_hat" ~ paste0("R", intToUtf8(0x0302)),
-    "R_squared" ~ paste0("R", intToUtf8(0x00b2)),
-    "sigma" ~ intToUtf8(0x03a3),
-    "t_squared" ~ paste0("t", intToUtf8(0x00b2)),
-    "tau" ~ intToUtf8(0x03c4)
+  symbols <- c(
+    "alpha"          = intToUtf8(0x03b1),
+    "chi_squared"    = paste0(intToUtf8(0x03c7), intToUtf8(0x00b2)),
+    "delta"          = intToUtf8(0x03b4),
+    "guttmans_lambda" = paste("Guttman's", intToUtf8(0x03bb)),
+    "K_squared"      = paste0("K", intToUtf8(0x00b2)),
+    "lambda"         = intToUtf8(0x03bb),
+    "p_hat"          = paste0("p", intToUtf8(0x0302)),
+    "R_hat"          = paste0("R", intToUtf8(0x0302)),
+    "R_squared"      = paste0("R", intToUtf8(0x00b2)),
+    "sigma"          = intToUtf8(0x03a3),
+    "t_squared"      = paste0("t", intToUtf8(0x00b2)),
+    "tau"            = intToUtf8(0x03c4)
   )
+  unname(symbols[x])
 }
 
 # Testing -----------------------------------------------------------------

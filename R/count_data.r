@@ -22,31 +22,55 @@
 #' count_data(quote_source, source, sex, na.rm = TRUE, pct = TRUE)
 #'
 #' # Use dplyr::group_by() to calculate proportions within a group
-#' quote_source |>
-#'   dplyr::group_by(source) |>
-#'   count_data(sex)
+#' if (requireNamespace("dplyr", quietly = TRUE)) {
+#'   quote_source |>
+#'     dplyr::group_by(source) |>
+#'     count_data(sex)
+#' }
 #'
 #' @export
 count_data <- function(data, ..., na.rm = FALSE, pct = FALSE) {
-  checkmate::assert_data_frame(data)
+  if (!is.data.frame(data)) {
+    stop("'data' must be a data frame.")
+  }
 
-  output <- dplyr::count(data, ...)
+  cols <- dots_to_names(...)
+  existing_groups <- group_names(data)
+  group_cols <- c(existing_groups, cols)
+
+  sub <- data[, group_cols, drop = FALSE]
 
   # Remove missing observations if na.rm is set to TRUE
   if (na.rm) {
-    output <- dplyr::filter(
-      output,
-      dplyr::if_all(dplyr::everything(), ~ !is.na(.))
-    )
+    sub <- sub[complete.cases(sub), , drop = FALSE]
   }
 
-  # Calculate proportion or percentage of each group per var
-  if (pct) {
-    output <- dplyr::mutate(output, pct = n / sum(n) * 100)
+  # Create row keys to identify unique combinations
+  if (length(group_cols) == 0) {
+    output <- data.frame(n = nrow(sub))
   } else {
-    output <- dplyr::mutate(output, prop = n / sum(n))
+    keys <- do.call(paste, c(lapply(sub, function(col) match(col, unique(col))), sep = ","))
+    unique_keys <- unique(keys)
+    output <- sub[match(unique_keys, keys), , drop = FALSE]
+    rownames(output) <- NULL # Reset row names left over from subsetting
+    output$n <- tabulate(match(keys, unique_keys))
   }
 
+  # Calculate denominators: within each group if grouped, overall otherwise
+  if (length(existing_groups) > 0) {
+    group_keys <- do.call(paste, c(lapply(output[, existing_groups, drop = FALSE],
+      function(col) match(col, unique(col))), sep = ","))
+    totals <- as.numeric(tapply(output$n, group_keys, sum)[group_keys])
+  } else {
+    totals <- sum(output$n)
+  }
+
+  # Calculate proportion or percentage
+  if (pct) {
+    output$pct <- output$n / totals * 100
+  } else {
+    output$prop <- output$n / totals
+  }
 
   # Add a tidystats class so we can use the tidy_stats() function to parse the
   # the output

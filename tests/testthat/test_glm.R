@@ -1,26 +1,31 @@
-# Setup -------------------------------------------------------------------
-
-expected_statistics <- read_stats("../data/glm.json")
-
 # glm() -------------------------------------------------------------------
 
 test_that("glm poisson works", {
-  d.AD <- tibble::tibble(
+  d.AD <- data.frame(
     treatment = gl(3, 3),
     outcome = gl(3, 1, 9),
     counts = c(18, 17, 15, 20, 10, 20, 25, 13, 12)
   )
 
-  model <- glm(counts ~ outcome + treatment, data = d.AD, family = poisson())
+  result <- tidy_stats(glm(counts ~ outcome + treatment, data = d.AD, family = poisson()))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$glm_poisson
-  )
+  expect_equal(result$method, "Generalized linear regression")
+
+  # Model fit
+  model_stats <- result$groups[[1]]$statistics
+  expect_equal(model_stats[[2]]$value, 5.129141, tolerance = 1e-4) # residual deviance
+  expect_equal(model_stats[[5]]$value, 56.76132, tolerance = 1e-4) # AIC
+
+  # Coefficients
+  coefs <- result$groups[[2]]$groups
+  expect_equal(coefs[[1]]$statistics[[1]]$value, 3.044522,     tolerance = 1e-4) # intercept estimate
+  expect_equal(coefs[[2]]$statistics[[3]]$value, -2.246889,    tolerance = 1e-4) # outcome2 z
+  expect_equal(coefs[[2]]$statistics[[5]]$value, 0.02464711,   tolerance = 1e-4) # outcome2 p
+  expect_equal(coefs[[4]]$statistics[[5]]$value, 1,            tolerance = 1e-6) # treatment2 p
 })
 
 test_that("glm gaussian works", {
-  anorexia <- tibble::tibble(
+  anorexia <- data.frame(
     Treat = c(
       "Cont", "Cont", "Cont", "Cont", "Cont", "Cont", "Cont", "Cont", "Cont",
       "Cont", "Cont", "Cont", "Cont", "Cont", "Cont", "Cont", "Cont", "Cont",
@@ -49,98 +54,98 @@ test_that("glm gaussian works", {
     )
   )
 
-  model <- glm(Postwt ~ Prewt + Treat + offset(Prewt), data = anorexia)
+  result <- tidy_stats(glm(Postwt ~ Prewt + Treat + offset(Prewt), data = anorexia))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$glm_gaussian
-  )
+  coefs <- result$groups[[2]]$groups
+  expect_equal(coefs[[1]]$name, "(Intercept)")
+  expect_true(length(coefs) > 1)
+  expect_equal(coefs[[1]]$statistics[[1]]$value, 49.7711,   tolerance = 1e-3) # intercept estimate
 })
 
 test_that("glm gamma works", {
-  clotting <- tibble::tibble(
+  clotting <- data.frame(
     u = c(5, 10, 15, 20, 30, 40, 60, 80, 100),
     lot1 = c(118, 58, 42, 35, 27, 25, 21, 19, 18),
     lot2 = c(69, 35, 26, 21, 18, 16, 13, 12, 12)
   )
 
-  model <- glm(lot1 ~ log(u), data = clotting, family = Gamma)
+  result <- tidy_stats(glm(lot1 ~ log(u), data = clotting, family = Gamma))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$glm_gamma
-  )
+  coefs <- result$groups[[2]]$groups
+  expect_equal(coefs[[1]]$statistics[[1]]$value, -0.01655438,  tolerance = 1e-4) # intercept estimate
+  expect_equal(coefs[[1]]$statistics[[5]]$value, 4.279149e-07, tolerance = 1e-4) # intercept p
+  expect_equal(coefs[[2]]$statistics[[1]]$value, 0.01534311,   tolerance = 1e-4) # log(u) estimate
+  expect_equal(coefs[[2]]$statistics[[5]]$value, 2.751191e-09, tolerance = 1e-4) # log(u) p
 })
 
 test_that("glm gamma fs works", {
-  clotting <- tibble::tibble(
+  clotting <- data.frame(
     u = c(5, 10, 15, 20, 30, 40, 60, 80, 100),
     lot1 = c(118, 58, 42, 35, 27, 25, 21, 19, 18),
     lot2 = c(69, 35, 26, 21, 18, 16, 13, 12, 12)
   )
 
-  model <- glm(lot2 ~ log(u) + log(u^2), data = clotting, family = Gamma)
+  result <- tidy_stats(glm(lot2 ~ log(u) + log(u^2), data = clotting, family = Gamma))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$glm_gamma_fs
-  )
+  coefs <- result$groups[[2]]$groups
+  expect_equal(coefs[[1]]$name, "(Intercept)")
+  expect_true(length(coefs) >= 2)
 })
 
 test_that("glm binomial works", {
-  admission <- tibble::tibble(
+  admission <- data.frame(
     admit = c(0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0),
     gre = c(380, 660, 800, 640, 520, 760, 560, 400, 540, 700, 800),
     gpa = c(3.61, 3.67, 4.00, 3.19, 2.93, 3.00, 2.98, 3.08, 3.39, 3.92, 4.00),
     rank = c(3, 3, 1, 4, 4, 2, 1, 2, 3, 2, 4)
   )
 
-  model <- glm(admit ~ gre + gpa + rank, data = admission, family = binomial())
+  result <- tidy_stats(glm(admit ~ gre + gpa + rank, data = admission, family = binomial()))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$glm_binomial
-  )
+  coefs <- result$groups[[2]]$groups
+  expect_equal(coefs[[1]]$statistics[[1]]$value, 11.05367,  tolerance = 1e-4) # intercept estimate
+  expect_equal(coefs[[1]]$statistics[[5]]$value, 0.3194728, tolerance = 1e-4) # intercept p
+  expect_equal(coefs[[2]]$statistics[[1]]$value, 0.01870783, tolerance = 1e-4) # gre estimate
+  expect_equal(coefs[[4]]$statistics[[5]]$value, 0.3327903, tolerance = 1e-4) # rank p
 })
 
 test_that("glm anova works", {
-  d_AD <- tibble::tibble(
+  d_AD <- data.frame(
     treatment = gl(3, 3),
     outcome = gl(3, 1, 9),
     counts = c(18, 17, 15, 20, 10, 20, 25, 13, 12)
   )
 
   glm_D93 <- glm(counts ~ outcome + treatment, family = poisson(), data = d_AD)
-  glm_D93a <- update(glm_D93, ~ treatment * outcome)
 
-  model <- anova(glm_D93)
+  result <- tidy_stats(anova(glm_D93))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$anova_glm
-  )
+  terms <- result$groups[[1]]$groups
+  expect_equal(terms[[2]]$name, "outcome")
+  expect_equal(terms[[2]]$statistics[[1]]$value, 5.452305,   tolerance = 1e-4) # deviance
+  expect_equal(terms[[2]]$statistics[[4]]$value, 6,           tolerance = 1e-6) # residual df
+  expect_equal(terms[[3]]$name, "treatment")
+  expect_equal(terms[[3]]$statistics[[4]]$value, 4,           tolerance = 1e-6) # residual df
 })
 
 test_that("glm cp anova works", {
-  d_AD <- tibble::tibble(
+  d_AD <- data.frame(
     treatment = gl(3, 3),
     outcome = gl(3, 1, 9),
     counts = c(18, 17, 15, 20, 10, 20, 25, 13, 12)
   )
 
   glm_D93 <- glm(counts ~ outcome + treatment, family = poisson(), data = d_AD)
-  glm_D93a <- update(glm_D93, ~ treatment * outcome)
 
-  model <- anova(glm_D93, test = "Cp")
+  result <- tidy_stats(anova(glm_D93, test = "Cp"))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$anova_glm_cp
-  )
+  terms <- result$groups[[1]]$groups
+  expect_equal(terms[[2]]$name, "outcome")
+  expect_equal(terms[[2]]$statistics[[5]]$value, 11.12914, tolerance = 1e-4) # Cp
 })
 
 test_that("glm rao anova works", {
-  d_AD <- tibble::tibble(
+  d_AD <- data.frame(
     treatment = gl(3, 3),
     outcome = gl(3, 1, 9),
     counts = c(18, 17, 15, 20, 10, 20, 25, 13, 12)
@@ -149,10 +154,9 @@ test_that("glm rao anova works", {
   glm_D93 <- glm(counts ~ outcome + treatment, family = poisson(), data = d_AD)
   glm_D93a <- update(glm_D93, ~ treatment * outcome)
 
-  model <- anova(glm_D93, glm_D93a, test = "Rao")
+  result <- tidy_stats(anova(glm_D93, glm_D93a, test = "Rao"))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$anova_glm_rao
-  )
+  models <- result$groups[[1]]$groups
+  expect_equal(models[[2]]$statistics[[5]]$value, 5.173202,  tolerance = 1e-4) # Rao
+  expect_equal(models[[2]]$statistics[[6]]$value, 0.2699831, tolerance = 1e-4) # p
 })

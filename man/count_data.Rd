@@ -34,8 +34,10 @@ count_data(quote_source, source, sex, na.rm = TRUE)
 count_data(quote_source, source, sex, na.rm = TRUE, pct = TRUE)
 
 # Use dplyr::group_by() to calculate proportions within a group
-quote_source |>
-  dplyr::group_by(source) |>
-  count_data(sex)
+if (requireNamespace("dplyr", quietly = TRUE)) {
+  quote_source |>
+    dplyr::group_by(source) |>
+    count_data(sex)
+}
 
 }

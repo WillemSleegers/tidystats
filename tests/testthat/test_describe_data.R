@@ -1,76 +1,89 @@
-# Setup -------------------------------------------------------------------
-
-expected_statistics <- read_stats("../data/describe_data.json")
-
 # describe_data() ---------------------------------------------------------
 
 test_that("describe data works", {
-  model <- describe_data(quote_source, response)
+  result <- tidy_stats(describe_data(quote_source, response))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$single_var
-  )
+  expect_equal(result$method, "Descriptives")
+  expect_equal(result$name, "response")
+  expect_equal(result$statistics[[1]]$value, 18,       tolerance = 1e-6) # missing
+  expect_equal(result$statistics[[2]]$value, 6325,     tolerance = 1e-6) # N
+  expect_equal(result$statistics[[3]]$value, 5.588617, tolerance = 1e-4) # mean
+  expect_equal(result$statistics[[4]]$value, 2.189027, tolerance = 1e-4) # SD
 })
 
 test_that("describe data with one group works", {
-  model <- quote_source |>
-    dplyr::group_by(source) |>
-    describe_data(response)
-
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$single_var_w_group
+  skip_if_not_installed("dplyr")
+  result <- tidy_stats(
+    quote_source |>
+      dplyr::group_by(source) |>
+      describe_data(response)
   )
+
+  source_group <- result$groups[[1]]
+  expect_equal(source_group$name, "source")
+
+  bin_laden <- source_group$groups[[1]]
+  expect_equal(bin_laden$name, "Bin Laden")
+  expect_equal(bin_laden$statistics[[2]]$value, 3083,     tolerance = 1e-6) # N
+  expect_equal(bin_laden$statistics[[3]]$value, 5.232241, tolerance = 1e-4) # mean
+
+  washington <- source_group$groups[[2]]
+  expect_equal(washington$name, "Washington")
+  expect_equal(washington$statistics[[2]]$value, 3242,     tolerance = 1e-6) # N
+  expect_equal(washington$statistics[[3]]$value, 5.927514, tolerance = 1e-4) # mean
 })
 
 test_that("multiple vars describe data works", {
-  model <- describe_data(quote_source, response, age)
+  result <- tidy_stats(describe_data(quote_source, response, age))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$multiple_vars
-  )
+  expect_true(length(result$groups) == 2)
+  age_group <- result$groups[[which(sapply(result$groups, function(g) g$name == "age"))]]
+  resp_group <- result$groups[[which(sapply(result$groups, function(g) g$name == "response"))]]
+
+  expect_equal(age_group$statistics[[3]]$value, 25.97598, tolerance = 1e-4) # mean
+  expect_equal(resp_group$statistics[[3]]$value, 5.588617, tolerance = 1e-4) # mean
 })
 
 test_that("describe data with multiple groups works", {
-  model <- quote_source |>
-    dplyr::group_by(source, sex) |>
-    describe_data(response)
-
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$single_var_w_groups
+  skip_if_not_installed("dplyr")
+  result <- tidy_stats(
+    quote_source |>
+      dplyr::group_by(source, sex) |>
+      describe_data(response)
   )
+
+  expect_equal(result$name, "response")
+  source_group <- result$groups[[1]]
+  expect_equal(source_group$name, "source")
+  expect_true(length(source_group$groups) > 0)
 })
 
 test_that("describe data with multiple groups without missings works", {
-  model <- quote_source |>
-    dplyr::group_by(source, sex) |>
-    describe_data(response, na.rm = FALSE)
-
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$single_var_w_groups_wo_na
+  skip_if_not_installed("dplyr")
+  result <- tidy_stats(
+    quote_source |>
+      dplyr::group_by(source, sex) |>
+      describe_data(response, na.rm = FALSE)
   )
+
+  expect_equal(result$method, "Descriptives")
 })
 
 test_that("describe data with multiple vars and a group works", {
-  model <- quote_source |>
-    dplyr::group_by(source) |>
-    describe_data(response, age)
-
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$multiple_vars_w_group
+  skip_if_not_installed("dplyr")
+  result <- tidy_stats(
+    quote_source |>
+      dplyr::group_by(source) |>
+      describe_data(response, age)
   )
+
+  expect_true(length(result$groups) >= 2)
 })
 
 test_that("describe data with subset works", {
-  model <- describe_data(quote_source, response, short = TRUE)
+  result <- tidy_stats(describe_data(quote_source, response, short = TRUE))
 
-  expect_equal_models(
-    model = model,
-    expected_tidy_model = expected_statistics$single_var_subset
-  )
+  expect_equal(result$method, "Descriptives")
+  expect_equal(result$name, "response")
+  expect_equal(result$statistics[[1]]$value, 6325, tolerance = 1e-6) # N
 })

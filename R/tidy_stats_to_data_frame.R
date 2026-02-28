@@ -2,7 +2,7 @@
 #'
 #' [tidy_stats_to_data_frame()] converts a tidystats list to a data frame,
 #' which can then be used to extract specific statistics using standard
-#' subsetting functions (e.g., [dplyr::filter()]).
+#' subsetting functions (e.g., [subset()]).
 #'
 #' @param x A tidystats list.
 #'
@@ -38,37 +38,38 @@
 #' df <- tidy_stats_to_data_frame(statistics)
 #'
 #' # Select all the p-values
-#' dplyr::filter(df, statistic_name == "p")
+#' subset(df, statistic_name == "p")
 #'
 #' @export
 tidy_stats_to_data_frame <- function(x) {
-  df <- purrr::map2_df(x, names(x), analysis_to_data_frame)
+  df <- stack_rows(Map(analysis_to_data_frame, x, names(x)))
 
-  df <- dplyr::rename(df, statistic_name = name)
+  names(df)[names(df) == "name"] <- "statistic_name"
 
-  df <- dplyr::relocate(df, identifier, sort(tidyselect::peek_vars()))
-  df <- dplyr::relocate(df, dplyr::any_of("symbol"), .after = statistic_name)
-  df <- dplyr::relocate(df, dplyr::any_of("lower"), .before = value)
-  df <- dplyr::relocate(df, dplyr::any_of("upper"), .after = value)
-  df <- dplyr::relocate(
-    df,
-    dplyr::any_of(c("interval", "level")),
-    .after = dplyr::last_col()
+  # Reorder columns: identifier first, then sorted group/analysis cols,
+  # then statistics cols in a fixed order
+  fixed_cols <- c(
+    "statistic_name",
+    "symbol",
+    "subscript",
+    "lower",
+    "value",
+    "upper",
+    "interval",
+    "level"
   )
+  prefix_cols <- setdiff(names(df), fixed_cols)
+  sorted_prefix <- c("identifier", sort(setdiff(prefix_cols, "identifier")))
+  df <- df[, c(sorted_prefix, intersect(fixed_cols, names(df)))]
 
   return(df)
 }
 
 analysis_to_data_frame <- function(x, y) {
-  df <- tibble::tibble(identifier = y)
+  df <- data.frame(identifier = y)
 
   if ("statistics" %in% names(x)) {
-    df <- dplyr::bind_cols(
-      df,
-      purrr::map_df(x$statistics, function(x) {
-        return(x)
-      })
-    )
+    df <- cbind(df, stack_rows(x$statistics))
   }
 
   # Check if there are groups, if so, recursively loop through them and convert
@@ -76,14 +77,15 @@ analysis_to_data_frame <- function(x, y) {
   # group name
   if ("groups" %in% names(x)) {
     level <- 0
-    df <- dplyr::bind_cols(
-      df,
-      purrr::map_df(x$groups, groups_to_data_frame, level)
-    )
+    df <- cbind(df, stack_rows(lapply(x$groups, groups_to_data_frame, level)))
   }
 
   if (!is.null(x$name)) {
-    df <- dplyr::mutate(df, analysis_name = x$name, .after = identifier)
+    df <- cbind(
+      df["identifier"],
+      data.frame(analysis_name = x$name),
+      df[setdiff(names(df), "identifier")]
+    )
   }
 
   return(df)
@@ -93,27 +95,22 @@ groups_to_data_frame <- function(x, level) {
   level <- level + 1
 
   if ("statistics" %in% names(x)) {
-    df <- purrr::map_df(x$statistics, function(x) {
-      return(x)
-    })
+    df <- stack_rows(x$statistics)
   }
 
   if ("groups" %in% names(x)) {
-    df <- purrr::map_df(x$groups, groups_to_data_frame, level)
+    df <- stack_rows(lapply(x$groups, groups_to_data_frame, level))
   }
 
   # Check if there's one or more names, if so, add them to the data frame and
   # append the level to the name
   if ("name" %in% names(x)) {
-    df <- dplyr::mutate(df, "group_name_{level}" := as.character(x$name))
+    df[[paste0("group_name_", level)]] <- as.character(x$name)
   }
 
   if ("names" %in% names(x)) {
-    df <- dplyr::mutate(
-      df,
-      "group_name_{level}_1" := x$names[[1]]$name,
-      "group_name_{level}_2" := x$names[[2]]$name,
-    )
+    df[[paste0("group_name_", level, "_1")]] <- x$names[[1]]$name
+    df[[paste0("group_name_", level, "_2")]] <- x$names[[2]]$name
   }
 
   return(df)

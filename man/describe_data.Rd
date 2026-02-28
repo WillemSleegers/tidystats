@@ -25,21 +25,20 @@ numeric variables.
 \details{
 The data can be grouped using \code{\link[dplyr:group_by]{dplyr::group_by()}} so that
 descriptives will be calculated for each group level.
-
-Skew and kurtosis are based on the \code{\link[datawizard:skewness]{datawizard::skewness()}} and
-\code{\link[datawizard:skewness]{datawizard::kurtosis()}} functions (Komsta & Novomestky, 2015).
 }
 \examples{
 describe_data(quote_source, response)
 
 describe_data(quote_source, response, na.rm = FALSE)
 
-quote_source |>
-  dplyr::group_by(source) |>
-  describe_data(response)
+if (requireNamespace("dplyr", quietly = TRUE)) {
+  quote_source |>
+    dplyr::group_by(source) |>
+    describe_data(response)
 
-quote_source |>
-  dplyr::group_by(source) |>
-  describe_data(response, short = TRUE)
+  quote_source |>
+    dplyr::group_by(source) |>
+    describe_data(response, short = TRUE)
+}
 
 }

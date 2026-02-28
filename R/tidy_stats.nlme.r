@@ -89,17 +89,23 @@ tidy_stats.lme <- function(x, args = NULL) {
   # Extract correlations, if there are any
   if (nrow(corrs) > 0) {
     # Loop over the groups
-    for (group_name in unique(dplyr::pull(corrs, group))) {
+    for (group_name in unique(corrs[["group"]])) {
       # Create a list for the group
       group_RE_pairs <- list(name = group_name)
 
       # Subset the corrs data from to only the current group
-      group_corrs <- dplyr::filter(corrs, group == group_name)
+      group_corrs <- corrs[corrs$group == group_name, ]
 
       # Tidy the data frame so that each row is a correlation pair
-      pairs <- group_corrs |>
-        dplyr::rename(name2 = name) |>
-        tidyr::pivot_longer(cols = c(-group, -name2), names_to = "name1")
+      names(group_corrs)[names(group_corrs) == "name"] <- "name2"
+      col_names <- setdiff(names(group_corrs), c("group", "name2"))
+      pairs_list <- lapply(col_names, function(cn) {
+        data.frame(
+          group = group_corrs$group, name2 = group_corrs$name2,
+          name1 = cn, value = group_corrs[[cn]], stringsAsFactors = FALSE
+        )
+      })
+      pairs <- do.call(rbind, pairs_list)
 
       # Loop over the pairs
       for (i in 1:nrow(pairs)) {
@@ -252,26 +258,26 @@ tidy_stats.nlme <- function(x, args = NULL) {
 
   # Convert the matrix to a data frame with the variances and one with the
   # correlations
-  coefs <- tibble::tibble()
-  corrs <- tibble::tibble()
+  coefs <- data.frame()
+  corrs <- data.frame()
   group_row <- 0
   for (i in 1:nrow(varcor)) {
     rowname <- rownames(varcor)[i]
 
     if (x$dims$Q == 1) {
       group <- attr(varcor, "title")
-    } else if (stringr::str_detect(rowname, " =")) {
+    } else if (detect_string(rowname, " =")) {
       group <- paste(rowname, varcor[i, "Variance"])
       group_row <- i
     }
 
     if (rowname == "Residual") {
-      coefs <- dplyr::bind_rows(coefs, tibble::tibble(
-        group = "Residual",
+      coefs <- rbind(coefs, data.frame(
+        group = "Residual", coef = NA,
         var = varcor[i, "Variance"], sd = varcor[i, "StdDev"]
       ))
     } else {
-      coefs <- dplyr::bind_rows(coefs, tibble::tibble(
+      coefs <- rbind(coefs, data.frame(
         group = group, coef = rowname,
         var = varcor[i, "Variance"], sd = varcor[i, "StdDev"]
       ))
@@ -302,7 +308,7 @@ tidy_stats.nlme <- function(x, args = NULL) {
   colnames(corrs) <- c("group", "name", colnames)
 
   # Loop over the coefficient groups
-  for (group_name in unique(dplyr::pull(coefs, group))) {
+  for (group_name in unique(coefs[["group"]])) {
     # Create a list for the group
     group_RE_group <- list(name = group_name)
 
@@ -313,13 +319,13 @@ tidy_stats.nlme <- function(x, args = NULL) {
 
       statistics <- add_statistic(
         statistics, "N",
-        x$dims$ngrps[stringr::str_detect(group_name, names(x$dims$ngrps))][[1]]
+        x$dims$ngrps[detect_string(group_name, names(x$dims$ngrps))][[1]]
       )
 
       group_RE_group$statistics <- statistics
 
       # Subset the coefs data from to only the current group
-      group_coefs <- dplyr::filter(coefs, group == group_name)
+      group_coefs <- coefs[coefs$group == group_name, ]
 
       for (i in 1:nrow(group_coefs)) {
         group_RE_group_coefficient <- list(name = group_coefs$coef[i])
@@ -371,17 +377,23 @@ tidy_stats.nlme <- function(x, args = NULL) {
   # Extract correlations, if there are any
   if (nrow(corrs) > 0) {
     # Loop over the groups
-    for (group_name in unique(dplyr::pull(corrs, group))) {
+    for (group_name in unique(corrs[["group"]])) {
       # Create a list for the group
       group_RE_pairs <- list(name = group_name)
 
       # Subset the corrs data from to only the current group
-      group_corrs <- dplyr::filter(corrs, group == group_name)
+      group_corrs <- corrs[corrs$group == group_name, ]
 
       # Tidy the data frame so that each row is a correlation pair
-      pairs <- group_corrs |>
-        dplyr::rename(name2 = name) |>
-        tidyr::pivot_longer(cols = c(-group, -name2), names_to = "name1")
+      names(group_corrs)[names(group_corrs) == "name"] <- "name2"
+      col_names <- setdiff(names(group_corrs), c("group", "name2"))
+      pairs_list <- lapply(col_names, function(cn) {
+        data.frame(
+          group = group_corrs$group, name2 = group_corrs$name2,
+          name1 = cn, value = group_corrs[[cn]], stringsAsFactors = FALSE
+        )
+      })
+      pairs <- do.call(rbind, pairs_list)
 
       # Loop over the pairs
       for (i in 1:nrow(pairs)) {
@@ -505,9 +517,7 @@ tidy_stats.anova.lme <- function(x, args = NULL) {
   analysis$method <- "ANOVA"
 
   # Create a groups list to add model or term statistics to
-  groups <- list(name = dplyr::if_else("Model" %in% colnames(x), "Models",
-    "Terms"
-  ))
+  groups <- list(name = ifelse("Model" %in% colnames(x), "Models", "Terms"))
 
   # Loop over the models or terms
   for (i in 1:length(rownames(x))) {
