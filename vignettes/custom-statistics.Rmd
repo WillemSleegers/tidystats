@@ -20,8 +20,8 @@ tidystats to support. There are various ways to contact me. You can go to the
 Github [page](https://github.com/WillemSleegers/tidystats) and create an 
 [issue](https://github.com/WillemSleegers/tidystats/issues). This is the 
 preferred method because it is easy to paste code snippets and to ask follow-up 
-questions. For alternative ways to contact me, see the tidystats 
-[website](https://tidystats.io/).
+questions. For alternative ways to contact me, see the tidystats
+[website](https://willemsleegers.github.io/tidystats/).
 
 Of course, it's not always possible to wait for me to add support for the 
 function to tidystats. Nor is it always possible for me to add support for the 

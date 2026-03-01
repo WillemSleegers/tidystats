@@ -68,14 +68,11 @@ different statistical tests.
 ```{r, example}
 #| eval: false
 # Conduct a t-test, regression, and an ANOVA
-sleep_wide <- reshape(
-  sleep,
-  direction = "wide",
-  idvar = "ID",
-  timevar = "group",
-  sep = "_"
+sleep_test <- t.test(
+  sleep$extra[sleep$group == 1],
+  sleep$extra[sleep$group == 2],
+  paired = TRUE
 )
-sleep_test <- t.test(sleep_wide$extra_1, sleep_wide$extra_2, paired = TRUE)
 
 ctl <- c(4.17, 5.58, 5.18, 6.11, 4.50, 4.61, 5.17, 4.53, 5.33, 5.14)
 trt <- c(4.81, 4.17, 4.41, 3.59, 5.87, 3.83, 6.03, 4.89, 4.32, 4.69)
@@ -98,9 +95,9 @@ statistics <- statistics |>
 write_stats(statistics, "statistics.json")
 ```
 
-The result is a .json file that contains all the statistics from the three 
+The result is a .json file that contains all the statistics from the three
 statistical tests. If you want to see what this file looks like, you can inspect
-it [here](https://github.com/WillemSleegers/tidystats/blob/master/tests/data/main.json).
+it [here](https://github.com/WillemSleegers/tidystats/blob/master/inst/extdata/statistics.json).
 
 For a fully worked out example, see `vignette("introduction-to-tidystats")`.
 
@@ -128,7 +125,7 @@ you can do:
 
 The file created with the `write_stats()` function can be used in several text
 editor add-ins to reproducibly report the statistics. For more information on 
-these add-ins, please see the [tidystats website](https://tidystats.io/) or 
+these add-ins, please see the [tidystats website](https://willemsleegers.github.io/tidystats/) or 
 their GitHub pages:
 
 - [Microsoft Word add-in](https://github.com/WillemSleegers/tidystats-Word-add-in)
@@ -136,7 +133,7 @@ their GitHub pages:
 
 ## More information
 
-See the [tidystats website](https://tidystats.io/) for more information, 
+See the [tidystats website](https://willemsleegers.github.io/tidystats/) for more information, 
 such as a FAQ, tips and tricks, as well as how to receive (and give) support. 
 
 If you have any questions or comments, feel free to create an 
