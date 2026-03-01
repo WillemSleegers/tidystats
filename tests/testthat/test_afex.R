@@ -201,7 +201,7 @@ test_that("aov_car no df-correction and no MSE works", {
 
 test_that("mixed simple model with random-slopes works", {
   skip_if_not_installed("afex")
-  data("Machines", package = "MEMSS")
+  data("Machines", package = "nlme")
 
   result <- tidy_stats(suppressMessages(mixed(
     score ~ Machine + (Machine | Worker),
@@ -217,7 +217,7 @@ test_that("mixed simple model with random-slopes works", {
 
 test_that("mixed with expanded random effects terms works", {
   skip_if_not_installed("afex")
-  data("Machines", package = "MEMSS")
+  data("Machines", package = "nlme")
 
   result <- tidy_stats(suppressMessages(mixed(
     score ~ Machine + (Machine || Worker),

@@ -14,6 +14,8 @@
 - Added internal data frame helper functions (`dots_to_names`,
   `group_names`, `stack_rows`) to replace `dplyr`, `tidyr`, and `purrr`
   functionality.
+- Rewrote all tests to use direct value comparisons instead of golden
+  JSON files, removing the dependency on stored reference data.
 
 ## tidystats 0.6.3
 

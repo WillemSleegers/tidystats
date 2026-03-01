@@ -18,9 +18,11 @@ RoxygenNote: 7.3.3
 LazyData: true
 Depends: R (>= 4.1.0)
 Imports:
-    jsonlite
+    jsonlite,
+    methods
 Suggests:
     BayesFactor,
+    brms,
     dplyr,
     knitr,
     lme4,
@@ -32,6 +34,7 @@ Suggests:
     afex,
     emmeans,
     irr,
+    psych,
     testthat,
     lavaan,
     nlme

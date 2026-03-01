@@ -49,6 +49,7 @@
 <h3 id="internal-changes-0-7">Internal changes<a class="anchor" aria-label="anchor" href="#internal-changes-0-7"></a></h3>
 <ul><li>Added internal string helper functions (<code>remove_string</code>, <code>detect_string</code>, <code>extract_string</code>) to replace <code>stringr</code> functionality.</li>
 <li>Added internal data frame helper functions (<code>dots_to_names</code>, <code>group_names</code>, <code>stack_rows</code>) to replace <code>dplyr</code>, <code>tidyr</code>, and <code>purrr</code> functionality.</li>
+<li>Rewrote all tests to use direct value comparisons instead of golden JSON files, removing the dependency on stored reference data.</li>
 </ul></div>
 </div>
     <div class="section level2">

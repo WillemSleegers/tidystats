@@ -170,7 +170,7 @@ Essential functionality
   :
 
   Read a .json file that was produced with
-  [`write_stats()`](https://willemsleegers.github.io/tidystats/reference/write_stats.md)
+  [`write_stats()`](https://willemsleegers.github.io/tidystats/reference/write_stats.html)
 
 - [`custom_stat()`](https://willemsleegers.github.io/tidystats/reference/custom_stat.md)
   : Create a custom statistic

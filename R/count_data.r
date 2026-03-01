@@ -42,7 +42,7 @@ count_data <- function(data, ..., na.rm = FALSE, pct = FALSE) {
 
   # Remove missing observations if na.rm is set to TRUE
   if (na.rm) {
-    sub <- sub[complete.cases(sub), , drop = FALSE]
+    sub <- sub[stats::complete.cases(sub), , drop = FALSE]
   }
 
   # Create row keys to identify unique combinations
