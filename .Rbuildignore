@@ -1,0 +1,10 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^CRAN-SUBMISSION$
+^cran-comments\.md$
+^_pkgdown.yml
+^docs$
+^README\.Rmd$
+^how-to-package\.r$
+^tests/testthat/.*\.rds$
+^\.claude
