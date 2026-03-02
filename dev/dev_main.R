@@ -36,11 +36,11 @@ summary(npk_aov)
 # tidy_stats_to_data_frame() ----------------------------------------------
 
 df <- tidy_stats_to_data_frame(statistics)
-readr::write_csv(df, "tests/data/main_df.csv")
+readr::write_csv(df, "dev/data/main_df.csv")
 
 # write_stats() -----------------------------------------------------------
 
-write_test_stats(statistics, "tests/data/main.json")
+write_stats(statistics, "dev/data/main.json")
 
 # Cleanup -----------------------------------------------------------------
 

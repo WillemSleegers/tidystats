@@ -35,7 +35,7 @@ df <- tidy_stats_to_data_frame(statistics)
 
 # write_stats() -----------------------------------------------------------
 
-write_test_stats(results, "tests/data/confint.json")
+write_stats(results, "dev/data/confint.json")
 
 # Cleanup -----------------------------------------------------------------
 

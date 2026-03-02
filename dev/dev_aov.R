@@ -28,7 +28,7 @@ df <- tidy_stats_to_data_frame(statistics)
 
 # write_stats() -----------------------------------------------------------
 
-write_test_stats(statistics, "tests/data/aov.json")
+write_stats(statistics, "dev/data/aov.json")
 
 # Cleanup -----------------------------------------------------------------
 

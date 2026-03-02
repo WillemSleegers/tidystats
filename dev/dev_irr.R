@@ -33,7 +33,7 @@ df <- tidy_stats_to_data_frame(statistics)
 
 # write_stats() -----------------------------------------------------------
 
-write_test_stats(statistics, "tests/data/irr.json")
+write_stats(statistics, "dev/data/irr.json")
 
 # Cleanup -----------------------------------------------------------------
 

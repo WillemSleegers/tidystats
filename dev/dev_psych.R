@@ -112,7 +112,7 @@ df <- tidy_stats_to_data_frame(statistics)
 
 # Save stats --------------------------------------------------------------
 
-write_test_stats(statistics, "tests/data/psych.json")
+write_stats(statistics, "dev/data/psych.json")
 
 # Cleanup -----------------------------------------------------------------
 

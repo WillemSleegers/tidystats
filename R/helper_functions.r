@@ -169,39 +169,3 @@ symbol <- function(
   )
   unname(symbols[x])
 }
-
-# Testing -----------------------------------------------------------------
-
-#' @describeIn helper_functions
-#' Function to compare tidied models during testing.
-#'
-#' @keywords internal
-expect_equal_models <- function(model, expected_tidy_model, tolerance = 0.001) {
-  # Convert model output to a tidystats list
-  tidy_model <- tidy_stats(model)
-
-  # Set package information to NULL because this may have changed since the
-  # data was last saved
-  tidy_model$package <- NULL
-  expected_tidy_model$package <- NULL
-
-  # Test whether the two lists are equal
-  testthat::expect_equal(tidy_model, expected_tidy_model, tolerance = tolerance)
-}
-
-#' @describeIn helper_functions
-#' Function to save tidied statistics to a file. Since these files are used
-#' during testing, it's important to only store files with correctly tidied
-#' statistics, hence the prompt.
-#'
-#' @keywords internal
-write_test_stats <- function(x, path, digits = 6) {
-  choice <- utils::menu(
-    title = "Are you sure you want to save these (test) statistics?",
-    choices = c("Yes", "No")
-  )
-
-  if (choice == 1) {
-    write_stats(x = x, path = path, digits = digits)
-  }
-}

@@ -7,5 +7,5 @@
 ^README\.Rmd$
 ^how-to-package\.r$
 ^tests/testthat/.*\.rds$
-^tests/prep$
+^dev$
 ^\.claude

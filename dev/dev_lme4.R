@@ -39,7 +39,7 @@ df <- tidy_stats_to_data_frame(statistics)
 
 # write_stats() -----------------------------------------------------------
 
-write_test_stats(statistics, "tests/data/lme4.json")
+write_stats(statistics, "dev/data/lme4.json")
 
 # Cleanup -----------------------------------------------------------------
 
