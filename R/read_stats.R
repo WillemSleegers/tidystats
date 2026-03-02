@@ -14,7 +14,7 @@
 #'
 #' # A working example
 #' statistics <- read_stats(
-#'   file = system.file("statistics.json", package = "tidystats")
+#'   file = system.file("extdata", "statistics.json", package = "tidystats")
 #' )
 #'
 #' @importFrom tools file_ext
