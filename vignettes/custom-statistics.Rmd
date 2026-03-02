@@ -15,17 +15,16 @@ function to add the statistics to a list. This works as long as tidystats
 has built-in support for the statistics functions you ran. So what should you do
 when this is not the case?
 
-The first thing would be to let me know that there's a function you would like 
-tidystats to support. There are various ways to contact me. You can go to the 
-Github [page](https://github.com/WillemSleegers/tidystats) and create an 
-[issue](https://github.com/WillemSleegers/tidystats/issues). This is the 
-preferred method because it is easy to paste code snippets and to ask follow-up 
-questions. For alternative ways to contact me, see the tidystats
-[website](https://willemsleegers.github.io/tidystats/).
+The first thing would be to let me know that there's a function you would like
+tidystats to support. You can do so by creating a GitHub
+[issue](https://github.com/WillemSleegers/tidystats/issues). In the issue,
+please include a code example that runs the function and, if possible, an
+example of how the statistics should be reported in APA style. This helps me
+understand which statistics to extract and how to label them.
 
 Of course, it's not always possible to wait for me to add support for the 
 function to tidystats. Nor is it always possible for me to add support for the 
-function. This can happen when the statistic  you want to report is not 
+function. This can happen when the statistic you want to report is not 
 identifiable as belonging to a particular type of analysis (for example, the 
 result of `confint()` returns a matrix, which does not contain any information 
 about it being a matrix containing confidence intervals).
@@ -86,17 +85,16 @@ Unfortunately, we get an error:
   no applicable method for 'tidy_stats' applied to an object of class 
   "c('matrix', 'array', 'double', 'numeric')"
 
- That's because `confint()` return a standard matrix, rather than an object 
- specific to the `confint()` function. You can check this yourself by running
- the `class()` function on the output of `confint()` 
- (e.g., `class(fit_confint)`). You'll see that it simply says 
- `"matrix" "array"`. That's not enough for tidystats to work with. Ideally it
- would say something like `"confint"` so that tidystats knows what it is working
- with and extract the statistics. 
+That's because `confint()` returns a standard matrix, rather than an object
+specific to the `confint()` function. You can check this yourself by running
+the `class()` function on the output of `confint()`
+(e.g., `class(fit_confint)`). You'll see that it simply says
+`"matrix" "array"`. That's not enough for tidystats to work with. Ideally it
+would say something like `"confint"` so that tidystats knows what it is working
+with and can extract the statistics.
 
-Thankfully, we can still add statistics from `confint()` to a list via 
-`add_stats()`, using the `class` argument. We can specify that the statistics
-are from the `confint()` function by saying `class = "confint"`. 
+Thankfully, we can still add statistics from `confint()` to a list via
+`add_stats()` by setting `class = "confint"`.
 
 ```{r, eval = FALSE}
 statistics <- statistics %>%
@@ -179,8 +177,9 @@ tidystats has built-in support for the function and 2) if the function used to
 run the statistical test returns an object that tidystats can use to identify 
 the test.
 
-If you want to use tidystats on a function that is not supported yet, please 
-contact me to let me know that I should add support for it.
+If you want to use tidystats on a function that is not supported yet, please
+open a [GitHub issue](https://github.com/WillemSleegers/tidystats/issues) to
+request support for it.
 
 Alternatively, you can manually create a list of statistics and supply it to 
 the `add_stats()` function using `custom_stats()` and `custom_stat()`. 
