@@ -19,11 +19,11 @@ LazyData: true
 Depends: R (>= 4.1.0)
 Imports:
     jsonlite,
-    methods
+    methods,
+    tools
 Suggests:
     BayesFactor,
     brms,
-    dplyr,
     knitr,
     lme4,
     lmerTest,

@@ -28,9 +28,8 @@ extracted statistics.
 
 One particular useful function that was created for this purpose is 
 `tidy_stats_to_data_frame()`. This function converts a tidystats list of 
-statistics to a standard data frame. That means you can use common data 
-manipulation functions such as `filter()` on the data to retrieve the statistics
-of interest.
+statistics to a standard data frame. That means you can use standard subsetting functions such as `subset()` on the
+data to retrieve the statistics of interest.
 
 ## An example
 
@@ -41,15 +40,16 @@ In the example below we read the tidystats list and select all the p-values.
 
 ```{r, results = "hide", message = FALSE}
 library(tidystats)
-library(dplyr)
 
 # Read the .json file containing the statistics and immediately convert it to
 # a data frame
-statistics <- read_stats("statistics.json") |>
+statistics <- read_stats(
+  system.file("extdata", "statistics.json", package = "tidystats")
+) |>
   tidy_stats_to_data_frame()
 
 # Extract all the p-values
-p_values <- filter(statistics, statistic_name == "p")
+p_values <- subset(statistics, statistic_name == "p")
 
 p_values
 ```
@@ -61,7 +61,7 @@ kable(p_values, format = "markdown")
 Alternatively, we can can also easily select all significant p-values.
 
 ```{r}
-sig_p_values <- filter(statistics, statistic_name == "p" & value < .05)
+sig_p_values <- subset(statistics, statistic_name == "p" & value < .05)
 ```
 
 ```{r example2_eval, echo = FALSE}
