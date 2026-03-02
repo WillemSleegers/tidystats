@@ -28,14 +28,11 @@ test_that("Welch t-test works", {
 })
 
 test_that("paired t-test works", {
-  sleep_wide <- reshape(
-    sleep,
-    direction = "wide",
-    idvar = "ID",
-    timevar = "group",
-    sep = "_"
-  )
-  result <- tidy_stats(t.test(sleep_wide$extra_1, sleep_wide$extra_2, paired = TRUE))
+  result <- tidy_stats(t.test(
+    sleep$extra[sleep$group == 1],
+    sleep$extra[sleep$group == 2],
+    paired = TRUE
+  ))
 
   expect_equal(result$method, "Paired t-test")
   expect_equal(result$statistics[[3]]$value, -4.062128,  tolerance = 1e-4) # t

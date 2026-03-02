@@ -18,14 +18,11 @@ write_stats(x, path, digits = 6)
 }
 \examples{
 # Conduct a statistical test
-sleep_wide <- reshape(
-  sleep,
-  direction = "wide",
-  idvar = "ID",
-  timevar = "group",
-  sep = "_"
+sleep_test <- t.test(
+  sleep$extra[sleep$group == 1],
+  sleep$extra[sleep$group == 2],
+  paired = TRUE
 )
-sleep_test <- t.test(sleep_wide$extra_1, sleep_wide$extra_2, paired = TRUE)
 
 # Create an empty list
 statistics <- list()
