@@ -4,6 +4,11 @@
 
 * Removed the `rlang`, `checkmate`, `stringr`, `readr`, `purrr`, `tibble`, `dplyr`, and `tidyr` dependencies.
 
+## Documentation
+
+* Added a Word add-in article and a privacy statement article to the pkgdown website.
+* Renamed the "Reusing statistics" vignette to "Converting statistics to a data frame".
+
 ## Internal changes
 
 * Added internal string helper functions (`remove_string`, `detect_string`, `extract_string`) to replace `stringr` functionality.

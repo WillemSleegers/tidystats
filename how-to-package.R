@@ -64,6 +64,7 @@ knitr::knit(input = "README.Rmd")
 
 # Run to build the website
 pkgdown::build_site_github_pages()
+pkgdown::build_articles()
 
 # Preview the site
 pkgdown::preview_site()

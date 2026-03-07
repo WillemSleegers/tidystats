@@ -2,13 +2,13 @@ pandoc: 3.6.3
 pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
+  converting-statistics-to-a-data-frame: converting-statistics-to-a-data-frame.html
   custom-statistics: custom-statistics.html
   introduction-to-tidystats: introduction-to-tidystats.html
   articles/privacy-statement: privacy-statement.html
-  reusing-statistics: reusing-statistics.html
   supported-functions: supported-functions.html
   articles/word-add-in: word-add-in.html
-last_built: 2026-03-07T18:01Z
+last_built: 2026-03-07T18:12Z
 urls:
   reference: https://willemsleegers.github.io/tidystats/reference
   article: https://willemsleegers.github.io/tidystats/articles

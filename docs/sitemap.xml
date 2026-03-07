@@ -1,0 +1,27 @@
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://willemsleegers.github.io/tidystats/404.html</loc></url>
+<url><loc>https://willemsleegers.github.io/tidystats/LICENSE-text.html</loc></url>
+<url><loc>https://willemsleegers.github.io/tidystats/articles/converting-statistics-to-a-data-frame.html</loc></url>
+<url><loc>https://willemsleegers.github.io/tidystats/articles/custom-statistics.html</loc></url>
+<url><loc>https://willemsleegers.github.io/tidystats/articles/index.html</loc></url>
+<url><loc>https://willemsleegers.github.io/tidystats/articles/introduction-to-tidystats.html</loc></url>
+<url><loc>https://willemsleegers.github.io/tidystats/articles/privacy-statement.html</loc></url>
+<url><loc>https://willemsleegers.github.io/tidystats/articles/supported-functions.html</loc></url>
+<url><loc>https://willemsleegers.github.io/tidystats/articles/word-add-in.html</loc></url>
+<url><loc>https://willemsleegers.github.io/tidystats/authors.html</loc></url>
+<url><loc>https://willemsleegers.github.io/tidystats/index.html</loc></url>
+<url><loc>https://willemsleegers.github.io/tidystats/news/index.html</loc></url>
+<url><loc>https://willemsleegers.github.io/tidystats/reference/add_stats.html</loc></url>
+<url><loc>https://willemsleegers.github.io/tidystats/reference/count_data.html</loc></url>
+<url><loc>https://willemsleegers.github.io/tidystats/reference/custom_stat.html</loc></url>
+<url><loc>https://willemsleegers.github.io/tidystats/reference/custom_stats.html</loc></url>
+<url><loc>https://willemsleegers.github.io/tidystats/reference/describe_data.html</loc></url>
+<url><loc>https://willemsleegers.github.io/tidystats/reference/helper_functions.html</loc></url>
+<url><loc>https://willemsleegers.github.io/tidystats/reference/index.html</loc></url>
+<url><loc>https://willemsleegers.github.io/tidystats/reference/quote_source.html</loc></url>
+<url><loc>https://willemsleegers.github.io/tidystats/reference/read_stats.html</loc></url>
+<url><loc>https://willemsleegers.github.io/tidystats/reference/tidy_stats.html</loc></url>
+<url><loc>https://willemsleegers.github.io/tidystats/reference/tidy_stats_to_data_frame.html</loc></url>
+<url><loc>https://willemsleegers.github.io/tidystats/reference/write_stats.html</loc></url>
+</urlset>
+

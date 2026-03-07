@@ -14,8 +14,8 @@ navbar:
           href: articles/supported-functions.html
         - text: Custom statistics
           href: articles/custom-statistics.html
-        - text: Reusing statistics
-          href: articles/reusing-statistics.html
+        - text: Converting statistics to a data frame
+          href: articles/converting-statistics-to-a-data-frame.html
         - text: "-------"
         - text: Word add-in
           href: articles/word-add-in.html
@@ -47,7 +47,7 @@ articles:
       - introduction-to-tidystats
       - supported-functions
       - custom-statistics
-      - reusing-statistics
+      - converting-statistics-to-a-data-frame
   - title: Word add-in
     navbar: ~
     contents:

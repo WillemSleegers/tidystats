@@ -1,0 +1,215 @@
+# Custom statistics
+
+The normal tidystats workflow consists of running statistics functions
+such as [`lm()`](https://rdrr.io/r/stats/lm.html), saving the output
+into variables, and then using the
+[`add_stats()`](https://willemsleegers.github.io/tidystats/reference/add_stats.md)
+function to add the statistics to a list. This works as long as
+tidystats has built-in support for the statistics functions you ran. So
+what should you do when this is not the case?
+
+The first thing would be to let me know that there’s a function you
+would like tidystats to support. You can do so by creating a GitHub
+[issue](https://github.com/WillemSleegers/tidystats/issues). In the
+issue, please include a code example that runs the function and, if
+possible, an example of how the statistics should be reported in APA
+style. This helps me understand which statistics to extract and how to
+label them.
+
+Of course, it’s not always possible to wait for me to add support for
+the function to tidystats. Nor is it always possible for me to add
+support for the function. This can happen when the statistic you want to
+report is not identifiable as belonging to a particular type of analysis
+(for example, the result of
+[`confint()`](https://rdrr.io/r/stats/confint.html) returns a matrix,
+which does not contain any information about it being a matrix
+containing confidence intervals).
+
+For these reasons, it is useful to know that there are two possible
+solutions.
+
+The first solution is that I can still add support for functions that
+return objects without sufficient information. You can tell
+[`add_stats()`](https://willemsleegers.github.io/tidystats/reference/add_stats.md)
+what kind of object it is using the `class` argument. This only works if
+I explicitly coded support for a specific class. You can see which
+classes are supported in the help document of
+[`add_stats()`](https://willemsleegers.github.io/tidystats/reference/add_stats.md)
+([`?add_stats`](https://willemsleegers.github.io/tidystats/reference/add_stats.md)).
+
+The second solution is to manually extract the statistics yourself and
+create an object to add to
+[`add_stats()`](https://willemsleegers.github.io/tidystats/reference/add_stats.md).
+I’ve created a few helper functions to help you do this:
+[`custom_stats()`](https://willemsleegers.github.io/tidystats/reference/custom_stats.md)
+and
+[`custom_stat()`](https://willemsleegers.github.io/tidystats/reference/custom_stat.md).
+These two functions work together to help you store the statistics in a
+format needed for tidystats to function.
+
+[`custom_stats()`](https://willemsleegers.github.io/tidystats/reference/custom_stats.md)
+has two arguments: `method` and `statistics`. The method should contain
+a description of the type of method you used. The `statistics` argument
+requires a vector of statistics created with the
+[`custom_stat()`](https://willemsleegers.github.io/tidystats/reference/custom_stat.md)
+function.
+
+The
+[`custom_stat()`](https://willemsleegers.github.io/tidystats/reference/custom_stat.md)
+function serves to create a statistic, along with the necessary
+information to report the statistic. At a minimum, it requires
+specifying the `name` and `value` of the statistic. Optionally you can
+also specify a symbol and a subscript so that the text editor add-ins
+can correctly report the statistic. Finally, it’s also possible that the
+statistic is a ranged statistic, i.e., it has a lower and upper bound.
+These statistics require that you specify the type of `interval` (e.g.,
+“CI”, “HDI”), `level` (e.g., .95), `lower` and `upper` bound.
+
+Below I show a few examples of adding custom statistics.
+
+## Example 1: Using the `class` argument
+
+Say we want to calculate the confidence intervals for several parameters
+in a linear model, using the
+[`confint()`](https://rdrr.io/r/stats/confint.html) function.
+
+``` r
+# Run a linear model
+fit <- lm(100 / mpg ~ disp, data = mtcars)
+
+# Compute the confidence intervals
+fit_confint <- confint(fit)
+
+# Create an empty list
+statistics <- list()
+
+# Add linear model and confidence intervals to the list
+statistics <- statistics %>%
+  add_stats(fit) %>%
+  add_stats(fit_confint)
+```
+
+Unfortunately, we get an error:
+
+> Error in UseMethod(“tidy_stats”) : no applicable method for
+> ‘tidy_stats’ applied to an object of class “c(‘matrix’, ‘array’,
+> ‘double’, ‘numeric’)”
+
+That’s because [`confint()`](https://rdrr.io/r/stats/confint.html)
+returns a standard matrix, rather than an object specific to the
+[`confint()`](https://rdrr.io/r/stats/confint.html) function. You can
+check this yourself by running the
+[`class()`](https://rdrr.io/r/base/class.html) function on the output of
+[`confint()`](https://rdrr.io/r/stats/confint.html) (e.g.,
+`class(fit_confint)`). You’ll see that it simply says
+`"matrix" "array"`. That’s not enough for tidystats to work with.
+Ideally it would say something like `"confint"` so that tidystats knows
+what it is working with and can extract the statistics.
+
+Thankfully, we can still add statistics from
+[`confint()`](https://rdrr.io/r/stats/confint.html) to a list via
+[`add_stats()`](https://willemsleegers.github.io/tidystats/reference/add_stats.md)
+by setting `class = "confint"`.
+
+``` r
+statistics <- statistics %>%
+  add_stats(fit) %>%
+  add_stats(fit_confint, class = "confint")
+```
+
+We don’t get an error this time, indicating that it worked.
+
+## Example 2: Using `custom_stats()`
+
+Say you want to calculate a Bayes Factor using the BIC approach
+([Wagenmakers, 2007](https://doi.org/10.3758/BF03194105)). An example of
+this approach can be found
+[here](https://rstudio-pubs-static.s3.amazonaws.com/358672_09291d0b37ce43f08cf001cfd25c16c2.html);
+which I’ll repeat down below.
+
+``` r
+# Set seed for reproducibility
+set.seed(14)
+
+# Simulate some data
+intercept_data <- data.frame(score = scale(rnorm(40), center = 0.72))
+
+# Run two models and calculate the BIC
+full_lm <- lm(score ~ 1, intercept_data)
+null_lm <- lm(score ~ 0, intercept_data)
+
+BF_BIC <- exp((BIC(null_lm) - BIC(full_lm)) / 2)
+```
+
+The Bayes Factor is 5.05. Now, how do you add this value to a tidystats
+list? If we try it the standard way, we’ll see that it fails.
+
+``` r
+# Load the tidystats package
+library(tidystats)
+
+# Create an empty list
+statistics <- list()
+
+# Add BIC to the list using add_stats()
+statistics <- add_stats(statistics, BF_BIC)
+```
+
+This produces an error message that says:
+
+> Error in UseMethod(“tidy_stats”) : no applicable method for
+> ‘tidy_stats’ applied to an object of class “c(‘double’, ‘numeric’)”
+
+It’s because `BF_BIC` is simply a number and not the output of a
+statistics function, so tidystats doesn’t know how to store this number.
+Let’s fix this using
+[`custom_stats()`](https://willemsleegers.github.io/tidystats/reference/custom_stats.md)
+and
+[`custom_stat()`](https://willemsleegers.github.io/tidystats/reference/custom_stat.md).
+
+``` r
+# Create a list of custom statistics
+BIC <- custom_stats(
+  method = "BIC",
+  statistics = custom_stat(
+    name = "BIC Bayes Factor",
+    value = BF_BIC,
+    symbol = "BF",
+    subscript = "10"
+  )
+)
+
+# Add the statistics to the list
+statistics <- add_stats(statistics, BIC)
+```
+
+Now we don’t get an error. Thanks to
+[`custom_stats()`](https://willemsleegers.github.io/tidystats/reference/custom_stats.md)
+and
+[`custom_stat()`](https://willemsleegers.github.io/tidystats/reference/custom_stat.md)
+we correctly structured the statistic so it can be added to the list via
+[`add_stats()`](https://willemsleegers.github.io/tidystats/reference/add_stats.md).
+
+## Summary
+
+tidystats works by taking the output of statistical tests, extracting
+the statistics, and reorganizing them into a particular structure. This
+works if 1) tidystats has built-in support for the function and 2) if
+the function used to run the statistical test returns an object that
+tidystats can use to identify the test.
+
+If you want to use tidystats on a function that is not supported yet,
+please open a [GitHub
+issue](https://github.com/WillemSleegers/tidystats/issues) to request
+support for it.
+
+Alternatively, you can manually create a list of statistics and supply
+it to the
+[`add_stats()`](https://willemsleegers.github.io/tidystats/reference/add_stats.md)
+function using
+[`custom_stats()`](https://willemsleegers.github.io/tidystats/reference/custom_stats.md)
+and
+[`custom_stat()`](https://willemsleegers.github.io/tidystats/reference/custom_stat.md).
+
+The goal is to have tidystats support as many tests as possible, so that
+you rarely have to resort to this solution.

@@ -1,6 +1,8 @@
 ---
 title: "Word add-in"
 output: rmarkdown::html_vignette
+resource_files:
+  - example.mp4
 vignette: >
   %\VignetteIndexEntry{Word add-in}
   %\VignetteEngine{knitr::rmarkdown}
@@ -54,7 +56,7 @@ automatically update all reported statistics that share the same identifier.
 
 Below is an example of how to use several features of the tidystats add-in.
 
-<video controls style="width:100%">
+<video controls style="width:100%; border-radius: 8px;">
   <source src="example.mp4" type="video/mp4">
 </video>
 

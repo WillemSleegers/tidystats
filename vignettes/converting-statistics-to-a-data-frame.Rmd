@@ -1,9 +1,9 @@
 ---
-title: "Reusing statistics"
+title: "Converting statistics to a data frame"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Reusing statistics}
+  %\VignetteIndexEntry{Converting statistics to a data frame}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
