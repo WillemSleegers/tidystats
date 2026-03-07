@@ -9,8 +9,8 @@
 
 ### Documentation
 
-- Added a Word add-in article and a privacy statement article to the
-  pkgdown website.
+- Added a Microsoft Word add-in article and a privacy statement article
+  to the pkgdown website.
 - Renamed the “Reusing statistics” vignette to “Converting statistics to
   a data frame”.
 

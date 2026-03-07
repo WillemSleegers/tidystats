@@ -4,10 +4,10 @@ tidystats software does not collect or transmit user information, and
 does not rely on external services except for hosting the necessary
 files.
 
-The tidystats Word add-in requires an internet connection, but this is
-only used to retrieve the files needed to perform its functions of
-parsing and inserting statistics into your Word document. All processing
-is done directly on your machine.
+The tidystats Microsoft Word add-in requires an internet connection, but
+this is only used to retrieve the files needed to perform its functions
+of parsing and inserting statistics into your Word document. All
+processing is done directly on your machine.
 
 tidystats software does not contain any user analytics. In other words,
 I do not track anything you do when using tidystats. If you like using

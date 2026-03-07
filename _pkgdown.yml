@@ -48,7 +48,7 @@ articles:
       - supported-functions
       - custom-statistics
       - converting-statistics-to-a-data-frame
-  - title: Word add-in
+  - title: Microsoft Word add-in
     navbar: ~
     contents:
       - articles/word-add-in

@@ -11,9 +11,9 @@
 - [Converting statistics to a data
   frame](https://willemsleegers.github.io/tidystats/articles/converting-statistics-to-a-data-frame.md):
 
-### Word add-in
+### Microsoft Word add-in
 
-- [Word
+- [Microsoft Word
   add-in](https://willemsleegers.github.io/tidystats/articles/word-add-in.md):
 - [Privacy
   Statement](https://willemsleegers.github.io/tidystats/articles/privacy-statement.md):

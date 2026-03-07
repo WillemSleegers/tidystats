@@ -1,15 +1,15 @@
 ---
-title: "Word add-in"
+title: "Microsoft Word add-in"
 output: rmarkdown::html_vignette
 resource_files:
   - example.mp4
 vignette: >
-  %\VignetteIndexEntry{Word add-in}
+  %\VignetteIndexEntry{Microsoft Word add-in}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-The tidystats Word add-in can be used to report statistics in a Microsoft Word
+The tidystats Microsoft Word add-in can be used to report statistics in a Microsoft Word
 document, using a file created with the tidystats R package.
 
 ## Main features
@@ -21,7 +21,7 @@ document, using a file created with the tidystats R package.
 
 ## Installation
 
-The tidystats Word add-in is available in the Office Add-in store. You can find
+The tidystats Microsoft Word add-in is available in the Office Add-in store. You can find
 this store in your Word document by going to the Add-in section of the Insert
 tab. Simply search for 'tidystats' and you should find the add-in.
 
@@ -36,7 +36,7 @@ statistics' to select the file created with the tidystats R package. This will
 reveal a list of analyses. Click on the dropdown arrows to reveal the statistics
 of each analysis.
 
-![Screenshot of the tidystats Word add-in showing a list of analyses with statistics](screenshot.png)
+![Screenshot of the tidystats Microsoft Word add-in showing a list of analyses with statistics](screenshot.png)
 
 Click on the plus icon next to an individual statistic to insert that statistic,
 or click on the plus icon next to 'Statistics:' to insert multiple statistics

@@ -14,7 +14,7 @@ Essential functionality
   :
 
   Read a .json file that was produced with
-  [`write_stats()`](https://willemsleegers.github.io/tidystats/reference/write_stats.html)
+  [`write_stats()`](https://willemsleegers.github.io/tidystats/reference/write_stats.md)
 
 - [`custom_stat()`](https://willemsleegers.github.io/tidystats/reference/custom_stat.md)
   : Create a custom statistic

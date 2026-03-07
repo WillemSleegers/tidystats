@@ -132,15 +132,11 @@ things you can do:
 
 The file created with the
 [`write_stats()`](https://willemsleegers.github.io/tidystats/reference/write_stats.md)
-function can be used in several text editor add-ins to reproducibly
-report the statistics. For more information on these add-ins, please see
-the [tidystats website](https://willemsleegers.github.io/tidystats/) or
-their GitHub pages:
-
-- [Microsoft Word
-  add-in](https://github.com/WillemSleegers/tidystats-Word-add-in)
-- [Google Docs
-  add-in](https://github.com/WillemSleegers/tidystats-Google-Docs-add-in)
+function can be used in the tidystats Microsoft Word add-in to report
+statistics in a Microsoft Word document. For more information, see the
+[Word
+add-in](https://willemsleegers.github.io/tidystats/articles/word-add-in.html)
+page on the tidystats website.
 
 ## More information
 
