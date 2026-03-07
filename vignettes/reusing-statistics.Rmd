@@ -43,9 +43,10 @@ library(tidystats)
 
 # Read the .json file containing the statistics and immediately convert it to
 # a data frame
-statistics <- read_stats(
-  system.file("extdata", "statistics.json", package = "tidystats")
-) |>
+stats_file <- system.file("extdata", "statistics.json", package = "tidystats")
+if (!nzchar(stats_file)) stats_file <- "../inst/extdata/statistics.json"
+
+statistics <- read_stats(stats_file) |>
   tidy_stats_to_data_frame()
 
 # Extract all the p-values

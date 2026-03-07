@@ -8,4 +8,6 @@
 ^how-to-package\.r$
 ^tests/testthat/.*\.rds$
 ^dev$
+^vignettes/articles$
+^vignettes/temp$
 ^\.claude

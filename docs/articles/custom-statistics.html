@@ -29,14 +29,16 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
+<li class="nav-item"><a class="nav-link" href="../articles/introduction-to-tidystats.html">Get started</a></li>
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/introduction-to-tidystats.html">Introduction to tidystats</a></li>
-    <li><a class="dropdown-item" href="../articles/supported-functions.html">Supported functions</a></li>
+<li><a class="dropdown-item" href="../articles/supported-functions.html">Supported functions</a></li>
     <li><a class="dropdown-item" href="../articles/custom-statistics.html">Custom statistics</a></li>
     <li><a class="dropdown-item" href="../articles/reusing-statistics.html">Reusing statistics</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" href="../articles/word-add-in.html">Word add-in</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -61,7 +63,7 @@
 
       <h1>Custom statistics</h1>
             
-            <h4 data-toc-skip class="date">2026-02-28</h4>
+            <h4 data-toc-skip class="date">2026-03-07</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/WillemSleegers/tidystats/blob/HEAD/vignettes/custom-statistics.Rmd" class="external-link"><code>vignettes/custom-statistics.Rmd</code></a></small>
       <div class="d-none name"><code>custom-statistics.Rmd</code></div>
@@ -76,12 +78,11 @@ statistics to a list. This works as long as tidystats has built-in
 support for the statistics functions you ran. So what should you do when
 this is not the case?</p>
 <p>The first thing would be to let me know that there’s a function you
-would like tidystats to support. There are various ways to contact me.
-You can go to the Github <a href="https://github.com/WillemSleegers/tidystats" class="external-link">page</a> and create
-an <a href="https://github.com/WillemSleegers/tidystats/issues" class="external-link">issue</a>.
-This is the preferred method because it is easy to paste code snippets
-and to ask follow-up questions. For alternative ways to contact me, see
-the tidystats <a href="https://tidystats.io/" class="external-link">website</a>.</p>
+would like tidystats to support. You can do so by creating a GitHub <a href="https://github.com/WillemSleegers/tidystats/issues" class="external-link">issue</a>. In
+the issue, please include a code example that runs the function and, if
+possible, an example of how the statistics should be reported in APA
+style. This helps me understand which statistics to extract and how to
+label them.</p>
 <p>Of course, it’s not always possible to wait for me to add support for
 the function to tidystats. Nor is it always possible for me to add
 support for the function. This can happen when the statistic you want to
@@ -137,8 +138,8 @@ function.</p>
 <span><span class="va">statistics</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Add linear model and confidence intervals to the list</span></span>
-<span><span class="va">statistics</span> <span class="op">&lt;-</span> <span class="va">statistics</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">statistics</span> <span class="op">&lt;-</span> <span class="va">statistics</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">fit_confint</span><span class="op">)</span></span></code></pre></div>
 <p>Unfortunately, we get an error:</p>
 <blockquote>
@@ -146,22 +147,21 @@ function.</p>
 ‘tidy_stats’ applied to an object of class “c(‘matrix’, ‘array’,
 ‘double’, ‘numeric’)”</p>
 </blockquote>
-<p>That’s because <code><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint()</a></code> return a standard matrix,
+<p>That’s because <code><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint()</a></code> returns a standard matrix,
 rather than an object specific to the <code><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint()</a></code> function.
 You can check this yourself by running the <code><a href="https://rdrr.io/r/base/class.html" class="external-link">class()</a></code> function
 on the output of <code><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint()</a></code> (e.g.,
 <code>class(fit_confint)</code>). You’ll see that it simply says
 <code>"matrix" "array"</code>. That’s not enough for tidystats to work
 with. Ideally it would say something like <code>"confint"</code> so that
-tidystats knows what it is working with and extract the statistics.</p>
+tidystats knows what it is working with and can extract the
+statistics.</p>
 <p>Thankfully, we can still add statistics from <code><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint()</a></code>
-to a list via <code><a href="../reference/add_stats.html">add_stats()</a></code>, using the <code>class</code>
-argument. We can specify that the statistics are from the
-<code><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint()</a></code> function by saying
+to a list via <code><a href="../reference/add_stats.html">add_stats()</a></code> by setting
 <code>class = "confint"</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">statistics</span> <span class="op">&lt;-</span> <span class="va">statistics</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">statistics</span> <span class="op">&lt;-</span> <span class="va">statistics</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="../reference/add_stats.html">add_stats</a></span><span class="op">(</span><span class="va">fit_confint</span>, class <span class="op">=</span> <span class="st">"confint"</span><span class="op">)</span></span></code></pre></div>
 <p>We don’t get an error this time, indicating that it worked.</p>
 </div>
@@ -231,7 +231,8 @@ works if 1) tidystats has built-in support for the function and 2) if
 the function used to run the statistical test returns an object that
 tidystats can use to identify the test.</p>
 <p>If you want to use tidystats on a function that is not supported yet,
-please contact me to let me know that I should add support for it.</p>
+please open a <a href="https://github.com/WillemSleegers/tidystats/issues" class="external-link">GitHub
+issue</a> to request support for it.</p>
 <p>Alternatively, you can manually create a list of statistics and
 supply it to the <code><a href="../reference/add_stats.html">add_stats()</a></code> function using
 <code><a href="../reference/custom_stats.html">custom_stats()</a></code> and <code><a href="../reference/custom_stat.html">custom_stat()</a></code>.</p>

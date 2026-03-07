@@ -19,13 +19,15 @@ subsetting functions (e.g., subset())."></head><body>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/introduction-to-tidystats.html">Get started</a></li>
+<li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/introduction-to-tidystats.html">Introduction to tidystats</a></li>
-    <li><a class="dropdown-item" href="../articles/supported-functions.html">Supported functions</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/supported-functions.html">Supported functions</a></li>
     <li><a class="dropdown-item" href="../articles/custom-statistics.html">Custom statistics</a></li>
     <li><a class="dropdown-item" href="../articles/reusing-statistics.html">Reusing statistics</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" href="../articles/word-add-in.html">Word add-in</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -67,14 +69,11 @@ subsetting functions (e.g., <code><a href="https://rdrr.io/r/base/subset.html" c
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Conduct analyses</span></span></span>
-<span class="r-in"><span><span class="va">sleep_wide</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/reshape.html" class="external-link">reshape</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="va">sleep</span>,</span></span>
-<span class="r-in"><span>  direction <span class="op">=</span> <span class="st">"wide"</span>,</span></span>
-<span class="r-in"><span>  idvar <span class="op">=</span> <span class="st">"ID"</span>,</span></span>
-<span class="r-in"><span>  timevar <span class="op">=</span> <span class="st">"group"</span>,</span></span>
-<span class="r-in"><span>  sep <span class="op">=</span> <span class="st">"_"</span></span></span>
+<span class="r-in"><span><span class="va">sleep_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">sleep</span><span class="op">$</span><span class="va">extra</span><span class="op">[</span><span class="va">sleep</span><span class="op">$</span><span class="va">group</span> <span class="op">==</span> <span class="fl">1</span><span class="op">]</span>,</span></span>
+<span class="r-in"><span>  <span class="va">sleep</span><span class="op">$</span><span class="va">extra</span><span class="op">[</span><span class="va">sleep</span><span class="op">$</span><span class="va">group</span> <span class="op">==</span> <span class="fl">2</span><span class="op">]</span>,</span></span>
+<span class="r-in"><span>  paired <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">sleep_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">sleep_wide</span><span class="op">$</span><span class="va">extra_1</span>, <span class="va">sleep_wide</span><span class="op">$</span><span class="va">extra_2</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">ctl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4.17</span>, <span class="fl">5.58</span>, <span class="fl">5.18</span>, <span class="fl">6.11</span>, <span class="fl">4.50</span>, <span class="fl">4.61</span>, <span class="fl">5.17</span>, <span class="fl">4.53</span>, <span class="fl">5.33</span>, <span class="fl">5.14</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">trt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4.81</span>, <span class="fl">4.17</span>, <span class="fl">4.41</span>, <span class="fl">3.59</span>, <span class="fl">5.87</span>, <span class="fl">3.83</span>, <span class="fl">6.03</span>, <span class="fl">4.89</span>, <span class="fl">4.32</span>, <span class="fl">4.69</span><span class="op">)</span></span></span>
@@ -98,42 +97,54 @@ subsetting functions (e.g., <code><a href="https://rdrr.io/r/base/subset.html" c
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Select all the p-values</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">statistic_name</span> <span class="op">==</span> <span class="st">"p"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              identifier                             analysis_name group_name_1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sleep_test.5 sleep_test sleep_wide$extra_1 and sleep_wide$extra_2         &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> lm_D9.6           lm_D9                            weight ~ group        Model</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> lm_D9.12          lm_D9                            weight ~ group Coefficients</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> lm_D9.17          lm_D9                            weight ~ group Coefficients</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.6       npk_aov                 yield ~ block + N * P * K        Terms</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.12      npk_aov                 yield ~ block + N * P * K        Terms</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.18      npk_aov                 yield ~ block + N * P * K        Terms</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.24      npk_aov                 yield ~ block + N * P * K        Terms</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.30      npk_aov                 yield ~ block + N * P * K        Terms</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.36      npk_aov                 yield ~ block + N * P * K        Terms</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.42      npk_aov                 yield ~ block + N * P * K        Terms</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              group_name_2 statistic_name symbol subscript lower        value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sleep_test.5         &lt;NA&gt;              p   &lt;NA&gt;      &lt;NA&gt;    NA 2.832890e-03</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> lm_D9.6              &lt;NA&gt;              p   &lt;NA&gt;      &lt;NA&gt;    NA 2.490232e-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> lm_D9.12      (Intercept)              p   &lt;NA&gt;      &lt;NA&gt;    NA 9.547128e-15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> lm_D9.17         groupTrt              p   &lt;NA&gt;      &lt;NA&gt;    NA 2.490232e-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.6           block              p   &lt;NA&gt;      &lt;NA&gt;    NA 1.593879e-02</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.12              N              p   &lt;NA&gt;      &lt;NA&gt;    NA 4.371812e-03</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.18              P              p   &lt;NA&gt;      &lt;NA&gt;    NA 4.749041e-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.24              K              p   &lt;NA&gt;      &lt;NA&gt;    NA 2.879505e-02</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.30            N:P              p   &lt;NA&gt;      &lt;NA&gt;    NA 2.631653e-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.36            N:K              p   &lt;NA&gt;      &lt;NA&gt;    NA 1.686479e-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.42            P:K              p   &lt;NA&gt;      &lt;NA&gt;    NA 8.627521e-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              upper interval level</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sleep_test.5    NA     &lt;NA&gt;    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> lm_D9.6         NA     &lt;NA&gt;    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> lm_D9.12        NA     &lt;NA&gt;    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> lm_D9.17        NA     &lt;NA&gt;    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.6       NA     &lt;NA&gt;    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.12      NA     &lt;NA&gt;    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.18      NA     &lt;NA&gt;    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.24      NA     &lt;NA&gt;    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.30      NA     &lt;NA&gt;    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.36      NA     &lt;NA&gt;    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.42      NA     &lt;NA&gt;    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              identifier</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sleep_test.5 sleep_test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lm_D9.6           lm_D9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lm_D9.12          lm_D9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lm_D9.17          lm_D9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.6       npk_aov</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.12      npk_aov</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.18      npk_aov</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.24      npk_aov</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.30      npk_aov</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.36      npk_aov</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.42      npk_aov</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                analysis_name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sleep_test.5 sleep$extra[sleep$group == 1] and sleep$extra[sleep$group == 2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lm_D9.6                                                       weight ~ group</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lm_D9.12                                                      weight ~ group</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lm_D9.17                                                      weight ~ group</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.6                                          yield ~ block + N * P * K</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.12                                         yield ~ block + N * P * K</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.18                                         yield ~ block + N * P * K</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.24                                         yield ~ block + N * P * K</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.30                                         yield ~ block + N * P * K</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.36                                         yield ~ block + N * P * K</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.42                                         yield ~ block + N * P * K</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              group_name_1 group_name_2 statistic_name symbol subscript lower</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sleep_test.5         &lt;NA&gt;         &lt;NA&gt;              p   &lt;NA&gt;      &lt;NA&gt;    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lm_D9.6             Model         &lt;NA&gt;              p   &lt;NA&gt;      &lt;NA&gt;    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lm_D9.12     Coefficients  (Intercept)              p   &lt;NA&gt;      &lt;NA&gt;    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lm_D9.17     Coefficients     groupTrt              p   &lt;NA&gt;      &lt;NA&gt;    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.6           Terms        block              p   &lt;NA&gt;      &lt;NA&gt;    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.12          Terms            N              p   &lt;NA&gt;      &lt;NA&gt;    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.18          Terms            P              p   &lt;NA&gt;      &lt;NA&gt;    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.24          Terms            K              p   &lt;NA&gt;      &lt;NA&gt;    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.30          Terms          N:P              p   &lt;NA&gt;      &lt;NA&gt;    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.36          Terms          N:K              p   &lt;NA&gt;      &lt;NA&gt;    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.42          Terms          P:K              p   &lt;NA&gt;      &lt;NA&gt;    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     value upper interval level</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sleep_test.5 2.832890e-03    NA     &lt;NA&gt;    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lm_D9.6      2.490232e-01    NA     &lt;NA&gt;    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lm_D9.12     9.547128e-15    NA     &lt;NA&gt;    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lm_D9.17     2.490232e-01    NA     &lt;NA&gt;    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.6    1.593879e-02    NA     &lt;NA&gt;    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.12   4.371812e-03    NA     &lt;NA&gt;    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.18   4.749041e-01    NA     &lt;NA&gt;    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.24   2.879505e-02    NA     &lt;NA&gt;    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.30   2.631653e-01    NA     &lt;NA&gt;    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.36   1.686479e-01    NA     &lt;NA&gt;    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> npk_aov.42   8.627521e-01    NA     &lt;NA&gt;    NA</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

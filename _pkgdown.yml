@@ -1,5 +1,25 @@
 url: https://willemsleegers.github.io/tidystats/
 
+navbar:
+  structure:
+    left: [intro, reference, articles, news]
+  components:
+    intro:
+      text: Get started
+      href: articles/introduction-to-tidystats.html
+    articles:
+      text: Articles
+      menu:
+        - text: Supported functions
+          href: articles/supported-functions.html
+        - text: Custom statistics
+          href: articles/custom-statistics.html
+        - text: Reusing statistics
+          href: articles/reusing-statistics.html
+        - text: "-------"
+        - text: Word add-in
+          href: articles/word-add-in.html
+
 reference:
   - title: Main functions
     desc: Essential functionality
@@ -21,17 +41,18 @@ reference:
       - quote_source
 
 articles:
-  - title: Vignettes
+  - title: R package
     navbar: ~
     contents:
       - introduction-to-tidystats
       - supported-functions
       - custom-statistics
       - reusing-statistics
-  # - title: Development
-  #  desc: Vignettes aimed at package developers
-  #  contents:
-  #    - tidystats-development
+  - title: Word add-in
+    navbar: ~
+    contents:
+      - articles/word-add-in
+      - articles/privacy-statement
 
 template:
   bootstrap: 5
