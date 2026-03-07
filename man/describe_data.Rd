@@ -4,12 +4,14 @@
 \alias{describe_data}
 \title{Calculate common descriptive statistics}
 \usage{
-describe_data(data, ..., na.rm = TRUE, short = FALSE)
+describe_data(data, ..., by = NULL, na.rm = TRUE, short = FALSE)
 }
 \arguments{
 \item{data}{A data frame.}
 
 \item{...}{One or more unquoted column names from the data frame.}
+
+\item{by}{An optional character vector of column names to group by.}
 
 \item{na.rm}{A boolean indicating whether missing values (including NaN)
 should be excluded in calculating the descriptives? The default is TRUE.}
@@ -23,22 +25,16 @@ should be reported? If set to \verb{TRUE``, only the N, M, and SD will be return
 numeric variables.
 }
 \details{
-The data can be grouped using \code{\link[dplyr:group_by]{dplyr::group_by()}} so that
-descriptives will be calculated for each group level.
+Use the \code{by} argument to group the data, or alternatively pipe
+grouped data created with \code{\link[dplyr:group_by]{dplyr::group_by()}}.
 }
 \examples{
 describe_data(quote_source, response)
 
 describe_data(quote_source, response, na.rm = FALSE)
 
-if (requireNamespace("dplyr", quietly = TRUE)) {
-  quote_source |>
-    dplyr::group_by(source) |>
-    describe_data(response)
+describe_data(quote_source, response, by = "source")
 
-  quote_source |>
-    dplyr::group_by(source) |>
-    describe_data(response, short = TRUE)
-}
+describe_data(quote_source, response, by = "source", short = TRUE)
 
 }

@@ -27,24 +27,14 @@ test_that("count data with two groups works", {
 })
 
 test_that("grouped count data with one group works", {
-  skip_if_not_installed("dplyr")
-  result <- tidy_stats(
-    quote_source |>
-      dplyr::group_by(source) |>
-      count_data(sex)
-  )
+  result <- tidy_stats(count_data(quote_source, sex, by = "source"))
 
   expect_equal(result$method, "Counts")
   expect_true(length(result$groups) > 0)
 })
 
 test_that("grouped count data with one group without missings works", {
-  skip_if_not_installed("dplyr")
-  result <- tidy_stats(
-    quote_source |>
-      dplyr::group_by(source) |>
-      count_data(sex, na.rm = TRUE)
-  )
+  result <- tidy_stats(count_data(quote_source, sex, by = "source", na.rm = TRUE))
 
   expect_equal(result$method, "Counts")
 })
@@ -81,14 +71,11 @@ test_that("multiple columns produce correct combinations", {
 })
 
 test_that("grouped counts and proportions are correct", {
-  skip_if_not_installed("dplyr")
   df <- data.frame(
     group = c("a", "a", "b", "b"),
     x     = c("1", "1", "1", "2")
   )
-  result <- df |>
-    dplyr::group_by(group) |>
-    count_data(x)
+  result <- count_data(df, x, by = "group")
 
   expect_equal(result$n[result$group == "a" & result$x == "1"], 2)
   expect_equal(result$prop[result$group == "a" & result$x == "1"], 1)
@@ -133,10 +120,7 @@ test_that("ungrouped proportions sum to 1", {
 })
 
 test_that("grouped proportions sum to 1 within each group", {
-  skip_if_not_installed("dplyr")
-  result <- quote_source |>
-    dplyr::group_by(source) |>
-    count_data(sex)
+  result <- count_data(quote_source, sex, by = "source")
 
   group_sums <- tapply(result$prop, result$source, sum)
   expect_true(all(abs(group_sums - 1) < 1e-10))
@@ -148,10 +132,7 @@ test_that("ungrouped percentages sum to 100", {
 })
 
 test_that("grouped percentages sum to 100 within each group", {
-  skip_if_not_installed("dplyr")
-  result <- quote_source |>
-    dplyr::group_by(source) |>
-    count_data(sex, pct = TRUE)
+  result <- count_data(quote_source, sex, by = "source", pct = TRUE)
 
   group_sums <- tapply(result$pct, result$source, sum)
   expect_true(all(abs(group_sums - 100) < 1e-10))

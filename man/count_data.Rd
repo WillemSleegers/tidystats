@@ -4,13 +4,15 @@
 \alias{count_data}
 \title{Count the number of observations}
 \usage{
-count_data(data, ..., na.rm = FALSE, pct = FALSE)
+count_data(data, ..., by = NULL, na.rm = FALSE, pct = FALSE)
 }
 \arguments{
 \item{data}{A data frame.}
 
 \item{...}{One or more unquoted (categorical) column names from the data
 frame, separated by commas.}
+
+\item{by}{An optional character vector of column names to group by.}
 
 \item{na.rm}{A boolean specifying whether missing values (including NaN)
 should be removed.}
@@ -23,9 +25,8 @@ proportions. The default is \code{FALSE}.}
 categorical variables.
 }
 \details{
-The data frame can be grouped using \code{\link[dplyr:group_by]{dplyr::group_by()}}
-so that the number of observations will be calculated within each group
-level.
+Use the \code{by} argument to group the data, or alternatively pipe
+grouped data created with \code{\link[dplyr:group_by]{dplyr::group_by()}}.
 }
 \examples{
 count_data(quote_source, source)
@@ -33,11 +34,7 @@ count_data(quote_source, source, sex)
 count_data(quote_source, source, sex, na.rm = TRUE)
 count_data(quote_source, source, sex, na.rm = TRUE, pct = TRUE)
 
-# Use dplyr::group_by() to calculate proportions within a group
-if (requireNamespace("dplyr", quietly = TRUE)) {
-  quote_source |>
-    dplyr::group_by(source) |>
-    count_data(sex)
-}
+# Use the by argument to calculate proportions within a group
+count_data(quote_source, sex, by = "source")
 
 }

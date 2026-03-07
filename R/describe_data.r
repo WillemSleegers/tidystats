@@ -6,32 +6,27 @@
 #'
 #' @param data A data frame.
 #' @param ... One or more unquoted column names from the data frame.
+#' @param by An optional character vector of column names to group by.
 #' @param na.rm A boolean indicating whether missing values (including NaN)
 #'   should be excluded in calculating the descriptives? The default is TRUE.
+#'
+#' @details Use the `by` argument to group the data, or alternatively pipe
+#' grouped data created with [dplyr::group_by()].
 #' @param short A boolean indicating whether only a subset of descriptives
 #'   should be reported? If set to `TRUE``, only the N, M, and SD will be
 #'   returned. The default is `FALSE`.
-#'
-#' @details The data can be grouped using [dplyr::group_by()] so that
-#' descriptives will be calculated for each group level.
 #'
 #' @examples
 #' describe_data(quote_source, response)
 #'
 #' describe_data(quote_source, response, na.rm = FALSE)
 #'
-#' if (requireNamespace("dplyr", quietly = TRUE)) {
-#'   quote_source |>
-#'     dplyr::group_by(source) |>
-#'     describe_data(response)
+#' describe_data(quote_source, response, by = "source")
 #'
-#'   quote_source |>
-#'     dplyr::group_by(source) |>
-#'     describe_data(response, short = TRUE)
-#' }
+#' describe_data(quote_source, response, by = "source", short = TRUE)
 #'
 #' @export
-describe_data <- function(data, ..., na.rm = TRUE, short = FALSE) {
+describe_data <- function(data, ..., by = NULL, na.rm = TRUE, short = FALSE) {
   if (!is.data.frame(data)) stop("'data' must be a data frame.")
 
   # Check if the user provided any columns.
@@ -63,7 +58,7 @@ describe_data <- function(data, ..., na.rm = TRUE, short = FALSE) {
     )
   }
 
-  grouping <- group_names(data)
+  grouping <- if (!is.null(by)) by else group_names(data)
 
   # Select only the relevant columns
   data_plain <- data_plain[, c(grouping, column_names), drop = FALSE]

@@ -4,8 +4,6 @@
 \alias{tidy_matrix}
 \alias{add_statistic}
 \alias{symbol}
-\alias{expect_equal_models}
-\alias{write_test_stats}
 \title{Helper functions in tidystats}
 \usage{
 tidy_matrix(m, symmetric = TRUE)
@@ -26,10 +24,6 @@ symbol(
   x = c("alpha", "chi_squared", "delta", "guttmans_lambda", "K_squared", "lambda",
     "p_hat", "R_squared", "sigma", "t_squared", "tau")
 )
-
-expect_equal_models(model, expected_tidy_model, tolerance = 0.001)
-
-write_test_stats(x, path, digits = 6)
 }
 \arguments{
 \item{m}{A matrix.}
@@ -45,12 +39,6 @@ Functions used under the hood in the tidystats package.
 NULL values.
 
 \item \code{symbol()}: Function to return symbols in ASCII.
-
-\item \code{expect_equal_models()}: Function to compare tidied models during testing.
-
-\item \code{write_test_stats()}: Function to save tidied statistics to a file. Since these files are used
-during testing, it's important to only store files with correctly tidied
-statistics, hence the prompt.
 
 }}
 \keyword{internal}

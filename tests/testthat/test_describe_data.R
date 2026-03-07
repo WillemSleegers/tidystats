@@ -12,12 +12,7 @@ test_that("describe data works", {
 })
 
 test_that("describe data with one group works", {
-  skip_if_not_installed("dplyr")
-  result <- tidy_stats(
-    quote_source |>
-      dplyr::group_by(source) |>
-      describe_data(response)
-  )
+  result <- tidy_stats(describe_data(quote_source, response, by = "source"))
 
   source_group <- result$groups[[1]]
   expect_equal(source_group$name, "source")
@@ -45,12 +40,7 @@ test_that("multiple vars describe data works", {
 })
 
 test_that("describe data with multiple groups works", {
-  skip_if_not_installed("dplyr")
-  result <- tidy_stats(
-    quote_source |>
-      dplyr::group_by(source, sex) |>
-      describe_data(response)
-  )
+  result <- tidy_stats(describe_data(quote_source, response, by = c("source", "sex")))
 
   expect_equal(result$name, "response")
   source_group <- result$groups[[1]]
@@ -59,23 +49,13 @@ test_that("describe data with multiple groups works", {
 })
 
 test_that("describe data with multiple groups without missings works", {
-  skip_if_not_installed("dplyr")
-  result <- tidy_stats(
-    quote_source |>
-      dplyr::group_by(source, sex) |>
-      describe_data(response, na.rm = FALSE)
-  )
+  result <- tidy_stats(describe_data(quote_source, response, by = c("source", "sex"), na.rm = FALSE))
 
   expect_equal(result$method, "Descriptives")
 })
 
 test_that("describe data with multiple vars and a group works", {
-  skip_if_not_installed("dplyr")
-  result <- tidy_stats(
-    quote_source |>
-      dplyr::group_by(source) |>
-      describe_data(response, age)
-  )
+  result <- tidy_stats(describe_data(quote_source, response, age, by = "source"))
 
   expect_true(length(result$groups) >= 2)
 })

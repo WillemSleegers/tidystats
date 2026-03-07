@@ -6,14 +6,14 @@
 #' @param data A data frame.
 #' @param ... One or more unquoted (categorical) column names from the data
 #'   frame, separated by commas.
+#' @param by An optional character vector of column names to group by.
 #' @param na.rm A boolean specifying whether missing values (including NaN)
 #'   should be removed.
+#'
+#' @details Use the `by` argument to group the data, or alternatively pipe
+#' grouped data created with [dplyr::group_by()].
 #' @param pct A boolean indicating whether to calculate percentages instead of
 #'   proportions. The default is `FALSE`.
-#'
-#' @details The data frame can be grouped using [dplyr::group_by()]
-#' so that the number of observations will be calculated within each group
-#' level.
 #'
 #' @examples
 #' count_data(quote_source, source)
@@ -21,21 +21,17 @@
 #' count_data(quote_source, source, sex, na.rm = TRUE)
 #' count_data(quote_source, source, sex, na.rm = TRUE, pct = TRUE)
 #'
-#' # Use dplyr::group_by() to calculate proportions within a group
-#' if (requireNamespace("dplyr", quietly = TRUE)) {
-#'   quote_source |>
-#'     dplyr::group_by(source) |>
-#'     count_data(sex)
-#' }
+#' # Use the by argument to calculate proportions within a group
+#' count_data(quote_source, sex, by = "source")
 #'
 #' @export
-count_data <- function(data, ..., na.rm = FALSE, pct = FALSE) {
+count_data <- function(data, ..., by = NULL, na.rm = FALSE, pct = FALSE) {
   if (!is.data.frame(data)) {
     stop("'data' must be a data frame.")
   }
 
   cols <- dots_to_names(...)
-  existing_groups <- group_names(data)
+  existing_groups <- if (!is.null(by)) by else group_names(data)
   group_cols <- c(existing_groups, cols)
 
   sub <- data[, group_cols, drop = FALSE]

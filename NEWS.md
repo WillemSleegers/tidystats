@@ -3,6 +3,7 @@
 ## Changes
 
 * Removed the `rlang`, `checkmate`, `stringr`, `readr`, `purrr`, `tibble`, `dplyr`, and `tidyr` dependencies.
+* Added a `by` argument to `describe_data()` and `count_data()` for grouping data by one or more variables.
 
 ## Documentation
 
