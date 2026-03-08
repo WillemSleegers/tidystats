@@ -6,7 +6,7 @@ categorical variables.
 ## Usage
 
 ``` r
-count_data(data, ..., na.rm = FALSE, pct = FALSE)
+count_data(data, ..., by = NULL, na.rm = FALSE, pct = FALSE)
 ```
 
 ## Arguments
@@ -20,6 +20,10 @@ count_data(data, ..., na.rm = FALSE, pct = FALSE)
   One or more unquoted (categorical) column names from the data frame,
   separated by commas.
 
+- by:
+
+  An optional character vector of column names to group by.
+
 - na.rm:
 
   A boolean specifying whether missing values (including NaN) should be
@@ -32,10 +36,9 @@ count_data(data, ..., na.rm = FALSE, pct = FALSE)
 
 ## Details
 
-The data frame can be grouped using
-[`dplyr::group_by()`](https://dplyr.tidyverse.org/reference/group_by.html)
-so that the number of observations will be calculated within each group
-level.
+Use the `by` argument to group the data, or alternatively pipe grouped
+data created with
+[`dplyr::group_by()`](https://dplyr.tidyverse.org/reference/group_by.html).
 
 ## Examples
 
@@ -73,14 +76,9 @@ count_data(quote_source, source, sex, na.rm = TRUE, pct = TRUE)
 #> 3 Bin Laden  male    1029  16.2
 #> 4 Washington male    1031  16.3
 
-# Use dplyr::group_by() to calculate proportions within a group
-if (requireNamespace("dplyr", quietly = TRUE)) {
-  quote_source |>
-    dplyr::group_by(source) |>
-    count_data(sex)
-}
+# Use the by argument to calculate proportions within a group
+count_data(quote_source, sex, by = "source")
 #> # A tibble: 6 × 4
-#> # Groups:   source [2]
 #>   source     sex        n    prop
 #>   <chr>      <chr>  <int>   <dbl>
 #> 1 Bin Laden  female  2067 0.667  

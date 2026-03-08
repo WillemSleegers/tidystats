@@ -7,6 +7,9 @@
 # TODO: Create a vignette to describe the development process of adding support
 #       for an analysis
 # TODO: Improve tidystats count function (redo the loop function)
+# TODO: Tighten tolerance on mood.test() z and p tests once R release catches up
+#       to the bug fix in R devel (r89561) that corrected the tie-correction
+#       formula: (N - t)^2 → (N - 2 * cumsum(t) + t)^2 per Mielke (1967)
 
 # Load functions ----------------------------------------------------------
 

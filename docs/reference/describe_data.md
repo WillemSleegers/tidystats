@@ -7,7 +7,7 @@ numeric variables.
 ## Usage
 
 ``` r
-describe_data(data, ..., na.rm = TRUE, short = FALSE)
+describe_data(data, ..., by = NULL, na.rm = TRUE, short = FALSE)
 ```
 
 ## Arguments
@@ -19,6 +19,10 @@ describe_data(data, ..., na.rm = TRUE, short = FALSE)
 - ...:
 
   One or more unquoted column names from the data frame.
+
+- by:
+
+  An optional character vector of column names to group by.
 
 - na.rm:
 
@@ -33,9 +37,9 @@ describe_data(data, ..., na.rm = TRUE, short = FALSE)
 
 ## Details
 
-The data can be grouped using
-[`dplyr::group_by()`](https://dplyr.tidyverse.org/reference/group_by.html)
-so that descriptives will be calculated for each group level.
+Use the `by` argument to group the data, or alternatively pipe grouped
+data created with
+[`dplyr::group_by()`](https://dplyr.tidyverse.org/reference/group_by.html).
 
 ## Examples
 
@@ -50,15 +54,15 @@ describe_data(quote_source, response, na.rm = FALSE)
 #>        var missing    N  M SD SE min max range median mode skew kurtosis
 #> 1 response      18 6325 NA NA NA  NA  NA    NA     NA    5   NA       NA
 
-if (requireNamespace("dplyr", quietly = TRUE)) {
-  quote_source |>
-    dplyr::group_by(source) |>
-    describe_data(response)
+describe_data(quote_source, response, by = "source")
+#>        var     source missing    N        M       SD         SE min max range
+#> 1 response  Bin Laden      18 3083 5.232241 2.112639 0.03804858   1   9     8
+#> 2 response Washington       0 3242 5.927514 2.206828 0.03875806   1   9     8
+#>   median mode       skew kurtosis
+#> 1      5    5 -0.0781437 2.585193
+#> 2      6    5 -0.2341109 2.180309
 
-  quote_source |>
-    dplyr::group_by(source) |>
-    describe_data(response, short = TRUE)
-}
+describe_data(quote_source, response, by = "source", short = TRUE)
 #>        var     source    N        M       SD
 #> 1 response  Bin Laden 3083 5.232241 2.112639
 #> 2 response Washington 3242 5.927514 2.206828

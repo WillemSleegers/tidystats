@@ -140,10 +140,6 @@ page on the tidystats website.
 
 ## More information
 
-See the [tidystats website](https://willemsleegers.github.io/tidystats/)
-for more information, such as a FAQ, tips and tricks, as well as how to
-receive (and give) support.
-
-If you have any questions or comments, feel free to create an
+If you have any questions or comments, please create an
 [issue](https://github.com/WillemSleegers/tidystats/issues) here on
-GitHub or see the website for ways to contact me.
+GitHub.

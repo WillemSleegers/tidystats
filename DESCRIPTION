@@ -1,7 +1,7 @@
 Package: tidystats
 Type: Package
 Title: Save Output of Statistical Tests 
-Version: 0.7
+Version: 0.7.0
 Authors@R: person(given = "Willem",
                   family = "Sleegers",
                   role = c("aut", "cre"),

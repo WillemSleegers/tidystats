@@ -6,6 +6,11 @@
 
 - Removed the `rlang`, `checkmate`, `stringr`, `readr`, `purrr`,
   `tibble`, `dplyr`, and `tidyr` dependencies.
+- Added a `by` argument to
+  [`describe_data()`](https://willemsleegers.github.io/tidystats/reference/describe_data.md)
+  and
+  [`count_data()`](https://willemsleegers.github.io/tidystats/reference/count_data.md)
+  for grouping data by one or more variables.
 
 ### Documentation
 
