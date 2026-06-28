@@ -1,3 +1,10 @@
+# tidystats 0.7.1
+
+## Internal changes
+
+* Fixed CRAN check failures caused by the `irr::icc()` tests comparing against hard-coded constants. The `irr` package computes the denominator degrees of freedom and p-value differently across versions, so the tests failed on check machines running a different `irr` version.
+* Hardened the tests for all statistics that come from suggested packages (`irr`, `BayesFactor`, `effectsize`, `effsize`, `Hmisc`, `lme4`, `lmerTest`, `afex`, and `emmeans`) to compare `tidy_stats()` output against the source object's own values rather than hard-coded constants, so they no longer break when those packages change how they compute or label statistics across versions.
+
 # tidystats 0.7
 
 ## Changes

@@ -1,3 +1,7 @@
+# Compare against the effsize object's own estimate rather than hard-coded
+# constants, so the tests stay correct if effsize changes how it computes the
+# effect size across versions.
+
 # cohen.d() ---------------------------------------------------------------
 
 test_that("effsize's Cohen's d works", {
@@ -9,10 +13,11 @@ test_that("effsize's Cohen's d works", {
   d <- c(treatment, control)
   f <- rep(c("Treatment", "Control"), each = 100)
 
-  result <- tidy_stats(effsize::cohen.d(d ~ f))
+  es <- effsize::cohen.d(d ~ f)
+  result <- tidy_stats(es)
 
   expect_equal(result$method, "Cohen's d effect size")
-  expect_equal(result$statistics[[1]]$value, 1.99598, tolerance = 1e-4) # d
+  expect_equal(result$statistics[[1]]$value, es$estimate) # d
 })
 
 test_that("effsize's Hedges' g works", {
@@ -24,9 +29,10 @@ test_that("effsize's Hedges' g works", {
   d <- c(treatment, control)
   f <- rep(c("Treatment", "Control"), each = 100)
 
-  result <- tidy_stats(effsize::cohen.d(d ~ f, hedges.correction = TRUE))
+  es <- effsize::cohen.d(d ~ f, hedges.correction = TRUE)
+  result <- tidy_stats(es)
 
-  expect_equal(result$statistics[[1]]$value, 1.988409, tolerance = 1e-4) # g
+  expect_equal(result$statistics[[1]]$value, es$estimate) # g
 })
 
 test_that("effsize's VDA works", {
@@ -38,9 +44,10 @@ test_that("effsize's VDA works", {
   d <- c(treatment, control)
   f <- rep(c("Treatment", "Control"), each = 100)
 
-  result <- tidy_stats(effsize::VD.A(d ~ f))
+  es <- effsize::VD.A(d ~ f)
+  result <- tidy_stats(es)
 
-  expect_equal(result$statistics[[1]]$value, 0.9286, tolerance = 1e-4) # A
+  expect_equal(result$statistics[[1]]$value, es$estimate) # A
 })
 
 test_that("effsize's Cliff's delta works", {
@@ -48,7 +55,8 @@ test_that("effsize's Cliff's delta works", {
   treatment <- c(10, 10, 20, 20, 20, 30, 30, 30, 40, 50)
   control <- c(10, 20, 30, 40, 40, 50)
 
-  result <- tidy_stats(effsize::cliff.delta(treatment, control, return.dm = TRUE))
+  es <- effsize::cliff.delta(treatment, control, return.dm = TRUE)
+  result <- tidy_stats(es)
 
-  expect_equal(result$statistics[[1]]$value, -0.25, tolerance = 1e-4) # delta
+  expect_equal(result$statistics[[1]]$value, es$estimate) # delta
 })

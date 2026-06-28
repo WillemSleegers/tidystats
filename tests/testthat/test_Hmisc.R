@@ -2,10 +2,21 @@
 
 if (requireNamespace("Hmisc", quietly = TRUE)) library(Hmisc)
 
+# Compare against the rcorr object's own r/n/P matrices (looked up by variable
+# name) rather than hard-coded constants, so the tests verify tidy_stats's
+# extraction independent of the Hmisc version.
+
 # rcorr() -----------------------------------------------------------------
 
-get_pair_stat <- function(result, pair, stat) {
-  result$groups[[1]]$groups[[pair]]$statistics[[stat]]$value
+check_pairs <- function(result, rc) {
+  groups <- result$groups[[1]]$groups
+  for (g in groups) {
+    n1 <- g$names[[1]]$name
+    n2 <- g$names[[2]]$name
+    expect_equal(g$statistics[[1]]$value, rc$r[n1, n2]) # r
+    expect_equal(g$statistics[[2]]$value, rc$n[n1, n2]) # n
+    expect_equal(g$statistics[[3]]$value, rc$P[n1, n2]) # p
+  }
 }
 
 test_that("rcorr (Pearson) extracts correct correlation values", {
@@ -15,36 +26,12 @@ test_that("rcorr (Pearson) extracts correct correlation values", {
   z <- c(1, 2, 3, 4, NA)
   v <- c(1, 2, 3, 4, 5)
 
-  result <- tidy_stats(rcorr(cbind(x, y, z, v)))
+  rc <- rcorr(cbind(x, y, z, v))
+  result <- tidy_stats(rc)
 
   expect_equal(result$method, "Correlation")
   expect_equal(length(result$groups[[1]]$groups), 6) # 4 choose 2
-
-  # x vs y: r, n, p
-  expect_equal(get_pair_stat(result, 1, 1), 0,         tolerance = 1e-6)
-  expect_equal(get_pair_stat(result, 1, 2), 5,         tolerance = 1e-6)
-  expect_equal(get_pair_stat(result, 1, 3), 1,         tolerance = 1e-6)
-
-  # x vs z: r=1, n=4, p=0
-  expect_equal(get_pair_stat(result, 2, 1), 1,         tolerance = 1e-6)
-  expect_equal(get_pair_stat(result, 2, 2), 4,         tolerance = 1e-6)
-  expect_equal(get_pair_stat(result, 2, 3), 0,         tolerance = 1e-6)
-
-  # y vs z: r=-0.745356, n=4, p=0.254644
-  expect_equal(get_pair_stat(result, 3, 1), -0.745356, tolerance = 1e-4)
-  expect_equal(get_pair_stat(result, 3, 2), 4,         tolerance = 1e-6)
-  expect_equal(get_pair_stat(result, 3, 3), 0.254644,  tolerance = 1e-4)
-
-  # x vs v: r=1, n=5, p=0
-  expect_equal(get_pair_stat(result, 4, 1), 1,         tolerance = 1e-6)
-
-  # y vs v: r=0, n=5, p=1
-  expect_equal(get_pair_stat(result, 5, 1), 0,         tolerance = 1e-6)
-  expect_equal(get_pair_stat(result, 5, 3), 1,         tolerance = 1e-6)
-
-  # z vs v: r=1, n=4, p=0
-  expect_equal(get_pair_stat(result, 6, 1), 1,         tolerance = 1e-6)
-  expect_equal(get_pair_stat(result, 6, 2), 4,         tolerance = 1e-6)
+  check_pairs(result, rc)
 })
 
 test_that("rcorr (Spearman) extracts correct correlation values", {
@@ -54,20 +41,10 @@ test_that("rcorr (Spearman) extracts correct correlation values", {
   z <- c(1, 2, 3, 4, NA)
   v <- c(1, 2, 3, 4, 5)
 
-  result <- tidy_stats(rcorr(cbind(x, y, z, v), type = "spearman"))
+  rc <- rcorr(cbind(x, y, z, v), type = "spearman")
+  result <- tidy_stats(rc)
 
   expect_equal(result$method, "Correlation")
   expect_equal(length(result$groups[[1]]$groups), 6)
-
-  # x vs y: r=0, n=5, p=1
-  expect_equal(get_pair_stat(result, 1, 1), 0,          tolerance = 1e-6)
-  expect_equal(get_pair_stat(result, 1, 3), 1,          tolerance = 1e-6)
-
-  # y vs z: r=-0.6324555, n=4, p=0.3675445
-  expect_equal(get_pair_stat(result, 3, 1), -0.6324555, tolerance = 1e-4)
-  expect_equal(get_pair_stat(result, 3, 2), 4,          tolerance = 1e-6)
-  expect_equal(get_pair_stat(result, 3, 3), 0.3675445,  tolerance = 1e-4)
-
-  # x vs v: r=1
-  expect_equal(get_pair_stat(result, 4, 1), 1,          tolerance = 1e-6)
+  check_pairs(result, rc)
 })

@@ -1,45 +1,53 @@
 if (requireNamespace("afex", quietly = TRUE)) library(afex)
 
+# Compare against the afex object's own anova_table rather than hard-coded
+# constants, so the tests verify tidy_stats's extraction independent of how
+# afex (and the packages it wraps) compute the statistics across versions.
+
 # aov_ez() ----------------------------------------------------------------
 
 test_that("aov_ez works", {
   skip_if_not_installed("afex")
   data(md_12.1)
 
-  result <- tidy_stats(suppressMessages(aov_ez(
+  fit <- suppressMessages(aov_ez(
     "id",
     "rt",
     md_12.1,
     within = c("angle", "noise"),
     anova_table = list(correction = "none", es = "none")
-  )))
+  ))
+  result <- tidy_stats(fit)
+  at <- fit$anova_table
 
   terms <- result$groups[[1]]$groups
   expect_equal(terms[[1]]$name, "angle")
-  expect_equal(terms[[1]]$statistics[[4]]$value, 40.7191,      tolerance = 1e-3) # F
-  expect_equal(terms[[1]]$statistics[[5]]$value, 2.086763e-07, tolerance = 1e-4) # p
+  expect_equal(terms[[1]]$statistics[[4]]$value, at["angle", "F"])       # F
+  expect_equal(terms[[1]]$statistics[[5]]$value, at["angle", "Pr(>F)"])  # p
   expect_equal(terms[[2]]$name, "noise")
-  expect_equal(terms[[2]]$statistics[[4]]$value, 33.76596,     tolerance = 1e-3) # F
+  expect_equal(terms[[2]]$statistics[[4]]$value, at["noise", "F"])       # F
   expect_equal(terms[[3]]$name, "angle:noise")
-  expect_equal(terms[[3]]$statistics[[4]]$value, 45.31034,     tolerance = 1e-3) # F
+  expect_equal(terms[[3]]$statistics[[4]]$value, at["angle:noise", "F"]) # F
 })
 
 test_that("aov_ez default works", {
   skip_if_not_installed("afex")
   data(md_12.1)
 
-  result <- tidy_stats(suppressMessages(aov_ez(
+  fit <- suppressMessages(aov_ez(
     "id",
     "rt",
     md_12.1,
     within = c("angle", "noise")
-  )))
+  ))
+  result <- tidy_stats(fit)
+  at <- fit$anova_table
 
   terms <- result$groups[[1]]$groups
   expect_equal(terms[[1]]$name, "angle")
-  expect_equal(terms[[1]]$statistics[[1]]$value, 1.923273, tolerance = 1e-4) # GG df num
-  expect_equal(terms[[1]]$statistics[[4]]$value, 40.7191,  tolerance = 1e-3) # F
-  expect_equal(terms[[1]]$statistics[[5]]$value, 0.3901179, tolerance = 1e-4) # ges
+  expect_equal(terms[[1]]$statistics[[1]]$value, at["angle", "num Df"]) # GG df num
+  expect_equal(terms[[1]]$statistics[[4]]$value, at["angle", "F"])      # F
+  expect_equal(terms[[1]]$statistics[[5]]$value, at["angle", "ges"])    # ges
 })
 
 test_that("aov_ez covariate works", {
@@ -203,16 +211,18 @@ test_that("mixed simple model with random-slopes works", {
   skip_if_not_installed("afex")
   data("Machines", package = "nlme")
 
-  result <- tidy_stats(suppressMessages(mixed(
+  fit <- suppressMessages(mixed(
     score ~ Machine + (Machine | Worker),
     data = Machines, progress = FALSE
-  )))
+  ))
+  result <- tidy_stats(fit)
+  at <- fit$anova_table
 
   expect_equal(result$method, "Mixed Model ANOVA")
   terms <- result$groups[[1]]$groups
   expect_equal(terms[[1]]$name, "Machine")
-  expect_equal(terms[[1]]$statistics[[3]]$value, 40.98922,     tolerance = 1e-3) # F
-  expect_equal(terms[[1]]$statistics[[4]]$value, 0.0007933269, tolerance = 1e-4) # p
+  expect_equal(terms[[1]]$statistics[[3]]$value, at["Machine", "F"])      # F
+  expect_equal(terms[[1]]$statistics[[4]]$value, at["Machine", "Pr(>F)"]) # p
 })
 
 test_that("mixed with expanded random effects terms works", {
