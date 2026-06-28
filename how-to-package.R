@@ -109,7 +109,7 @@ devtools::check_win_release()
 rhub::rhub_check()
 
 # Submit
-usethis::use_release_issue()
+devtools::release()
 
 # Setup -------------------------------------------------------------------
 
